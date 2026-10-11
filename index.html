@@ -83,6 +83,7 @@ main h2:focus, .panel h2:focus { outline: none; }
 .field[hidden] { display: none !important; }
 .field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .field label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.field .lbl { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
 input, select { font: inherit; font-family: var(--font-data); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; min-width: 0; }
 input[type="number"] { width: 8.5rem; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -197,8 +198,9 @@ a { color: var(--accent); }
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
     </div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 6 000 kWh)</option><option value="b1" selected>B1 (6 000 à 30 000 kWh)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
-    <div class="field" id="f-cp"><label for="cp">Code postal (facultatif)</label><input id="cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="cp-info" role="status" aria-live="polite"></span></div>
-    <div class="field" id="f-ville" hidden><label for="ville">Commune</label><select id="ville"></select></div>
+    <div id="f-cp" hidden><input id="cp" type="hidden"><span id="cp-info"></span></div>
+    <div class="field" id="f-loc" hidden><span class="lbl">Localisation</span><span id="eau-loc"></span><button type="button" class="linkbtn" id="eau-loc-edit">Modifier le code postal (accueil)</button></div>
+    <div id="f-ville" hidden><select id="ville"></select></div>
     <select id="dept" hidden aria-hidden="true" tabindex="-1"></select>
     <div class="field" id="f-prixeau"><label for="prixeau">Prix de l'eau (€/m³, seulement si vous le connaissez)</label><input id="prixeau" type="number" min="0" max="20" step="0.01" placeholder="selon votre facture"></div>
     
@@ -207,10 +209,19 @@ a { color: var(--accent); }
   <main id="main" tabindex="-1">
   <section class="panel" id="p-home" role="tabpanel" aria-labelledby="tab-home">
     <h2>Bienvenue</h2>
-    <p class="lede">Ce site compare les prix de l'électricité et du gaz, estime votre facture d'eau, et affiche les primes de parrainage de chaque fournisseur. Pour une estimation proche de chez vous, commencez par décrire votre logement : la consommation se remplit ensuite toute seule dans les autres onglets.</p>
+    <p class="lede">Ce site compare les prix de l'électricité et du gaz, estime votre facture d'eau, et affiche les primes de parrainage de chaque fournisseur. Pour une estimation proche de chez vous, commencez par votre code postal ; décrire votre logement, c'est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
 
     <div class="callout" id="stale" hidden></div>
-    <div><button type="button" class="cta" data-go="logt">Décrire mon logement</button></div>
+    <div class="card" id="h-box">
+      <h3>Où habitez-vous ?</h3>
+      <div class="grid2">
+        <div class="field"><label for="h-cp">Code postal</label><input id="h-cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 59264"><span class="offer" id="h-cp-info" role="status" aria-live="polite"></span></div>
+        <div class="field" id="h-ville-f" hidden><label for="h-ville">Commune</label><select id="h-ville"></select></div>
+      </div>
+      <select id="h-dept" hidden aria-hidden="true" tabindex="-1"></select>
+      <p id="h-eau" class="note" role="status" aria-live="polite"></p>
+      <p class="note">Le code postal reste dans votre navigateur. Il sert à estimer le prix de l'eau, et le tarif réglementé de l'électricité est le même partout en métropole. Pour un calcul plus précis de votre consommation, vous pouvez aussi <button type="button" class="linkbtn" data-go="logt">décrire votre logement</button>.</p>
+    </div>
 
     <h3>Les chiffres du moment</h3>
     <section class="summary" id="summary" aria-label="Résumé"></section>
@@ -227,7 +238,7 @@ a { color: var(--accent); }
 
     <h3>Comment ça marche</h3>
     <ol class="steps">
-      <li><strong>Décrivez votre logement</strong> dans l'onglet Mon logement, ou saisissez directement votre consommation.</li>
+      <li><strong>Entrez votre code postal</strong> ci-dessus, puis, si vous voulez, décrivez votre logement dans l'onglet Mon logement, ou saisissez directement votre consommation.</li>
       <li><strong>Consultez les tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
       <li><strong>Repérez les primes</strong> de parrainage dans l'onglet Parrainages. Ce site n'envoie vers aucun lien pour l'instant : il indique seulement les montants.</li>
     </ol>
@@ -840,15 +851,16 @@ function buildLogt() {
     + fld("Eau chaude", "l-ecs", selectEl("l-ecs", [["elec", "Ballon électrique"], ["thermo", "Chauffe-eau thermodynamique"], ["gaz", "Gaz"], ["autre", "Autre"]], "elec"))
     + fld("Cuisson", "l-cuisson", selectEl("l-cuisson", [["elec", "Électrique ou induction"], ["gaz", "Gaz"]], "elec"))
     + '</div><p class="note" id="l-hint"></p></div>';
-  h += '<div class="card"><h3>Localisation et eau</h3><div class="grid2">'
-    + fld("Code postal", "l-cp", '<input id="l-cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="l-cp-info" role="status" aria-live="polite"></span>')
-    + '<div class="field" id="l-ville-f" hidden><label for="l-ville">Commune</label><select id="l-ville"></select></div>'
-    + '<select id="l-dept" hidden aria-hidden="true" tabindex="-1">' + deptOpts().map(function (o) { return '<option value="' + o[0] + '">' + esc(o[1]) + "</option>"; }).join("") + "</select>"
+  h += '<div class="card"><h3>Localisation et eau</h3>'
+    + '<p class="note"><strong>Localisation :</strong> <span id="l-loc"></span> <button type="button" class="linkbtn" id="l-loc-edit">Modifier le code postal (accueil)</button></p>'
+    + '<div hidden><input id="l-cp" type="hidden"><span id="l-cp-info"></span><div id="l-ville-f"><select id="l-ville"></select></div>'
+    + '<select id="l-dept" aria-hidden="true" tabindex="-1">' + deptOpts().map(function (o) { return '<option value="' + o[0] + '">' + esc(o[1]) + "</option>"; }).join("") + "</select></div>"
+    + '<div class="grid2">'
     + fld("Prix de l'eau, seulement si vous le connaissez (€/m³ TTC)", "l-prixeau", numInput("l-prixeau", "", 0, 20, 0.01))
     + fld("Douches par personne et par semaine", "l-douches", numInput("l-douches", 7, 0, 30, 1))
     + fld("Bains par personne et par semaine", "l-bains", numInput("l-bains", 0, 0, 30, 1))
     + fld("Jardin, piscine, voiture (m³ par an)", "l-jardin", numInput("l-jardin", 0, 0, 500, 1))
-    + '</div><p class="note">Le code postal sert surtout à estimer le prix de l\'eau, qui varie beaucoup d\'une commune à l\'autre. Il reste dans votre navigateur. Le tarif réglementé de l\'électricité est le même partout en métropole. Pour le gaz, il existe 6 zones tarifaires (de la zone 1, la moins chère, à la zone 6) : pour l\'option B1, le prix repère de la CRE ne change pas selon la zone, mais certaines offres varient de quelques millièmes d\'euro par kWh (exemple EDF Avantage Gaz : 0,1265 € en zone 1 et 0,1300 € en zone 6). Je n\'ai pas de liste des zones par commune : <a href="https://particuliers.engie.fr/gaz-naturel/conseils-gaz-naturel/conseils-tarifs-gaz-naturel/connaitre-zone-tarifaire-gaz.html" target="_blank" rel="noopener">trouvez votre zone chez ENGIE</a>. Les lave-linge et lave-vaisselle du tableau des appareils comptent aussi dans la consommation d\'eau.</p></div>';
+    + '</div><p class="note">La localisation (code postal saisi sur l\'accueil) sert surtout à estimer le prix de l\'eau, qui varie beaucoup d\'une commune à l\'autre. Elle reste dans votre navigateur. Le tarif réglementé de l\'électricité est le même partout en métropole. Pour le gaz, il existe 6 zones tarifaires (de la zone 1, la moins chère, à la zone 6) : pour l\'option B1, le prix repère de la CRE ne change pas selon la zone, mais certaines offres varient de quelques millièmes d\'euro par kWh (exemple EDF Avantage Gaz : 0,1265 € en zone 1 et 0,1300 € en zone 6). Je n\'ai pas de liste des zones par commune : <a href="https://particuliers.engie.fr/gaz-naturel/conseils-gaz-naturel/conseils-tarifs-gaz-naturel/connaitre-zone-tarifaire-gaz.html" target="_blank" rel="noopener">trouvez votre zone chez ENGIE</a>. Les lave-linge et lave-vaisselle du tableau des appareils comptent aussi dans la consommation d\'eau.</p></div>';
   h += '<div class="card"><h3>Pièces</h3><div class="grid2">'
     + ROOMS.map(function (r) { return fld(r.label, "r-" + r.id, numInput("r-" + r.id, r.n, 0, 20, 1)); }).join("")
     + '</div><p class="note">Le nombre de pièces sert à estimer l\'éclairage (LED de 8 W, 3 heures par jour) et à suggérer le nombre de points de chauffage.</p></div>';
@@ -973,17 +985,43 @@ function renderLogt() {
   }
   var ep = eauPrice(s.dept, s.ville, s.prixEau);
   if ($("l-prixeau")) $("l-prixeau").placeholder = eauHint(s.dept, s.ville);
+  homeEauLine(eauPrice(s.dept, s.ville, 0));
   h += '<div class="card"><span class="label stampy">Eau estimée</span><span class="big">' + fmtInt.format(r.eau.m3) + ' m³ par an</span>' + bars(POSTES_EAU, r.eau.det, "m³")
     + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>' + (eauSplit(ep) ? eauSplit(ep).replace('<p class="note">', "").replace("</p>", "") + "<br>" : "") + 'Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3, ep.abo)) + ' €</strong></p>'
     + '<button class="btn" id="apply-eau" type="button">Voir l\'eau dans le comparateur</button></div>';
   $("logt-res").innerHTML = h;
 }
 
+// Accueil : le code postal saisi ici est celui de l'onglet Mon logement (une seule saisie)
+function syncHomeFromLogt() {
+  if (!$("h-cp") || !$("l-cp")) return;
+  $("h-cp").value = $("l-cp").value;
+  applyCP("h-", $("l-ville").value);
+}
+function homeEauLine(ep) {
+  var el = $("h-eau");
+  if (!el) return;
+  if (!$("l-cp").value) { el.textContent = ""; return; }
+  var sp = eauSplit(ep);
+  el.innerHTML = "<strong>Prix de l'eau chez vous : " + fmtNum2.format(ep.p) + " €/m³</strong> (" + esc(ep.kind === "commune" ? "prix de la commune" : ep.kind === "region" ? "moyenne de la région, commune inconnue" : ep.kind === "national" ? "moyenne nationale, commune inconnue" : ep.src) + ")."
+    + (sp ? "<br>" + sp.replace('<p class="note">', "").replace("</p>", "") : "");
+}
+function initHome() {
+  $("h-cp").addEventListener("input", function () {
+    $("l-cp").value = $("h-cp").value; applyCP("l-"); applyCP("h-");
+    saveLogt(); renderLogt(); refresh();
+  });
+  $("h-ville").addEventListener("change", function () {
+    $("l-ville").value = $("h-ville").value; saveLogt(); renderLogt(); refresh();
+  });
+  syncHomeFromLogt();
+}
 function initLogt() {
   buildLogt();
-  $("logt-form").addEventListener("input", function (ev) { if (ev.target && ev.target.id === "l-cp") applyCP("l-"); saveLogt(); renderLogt(); });
+  $("l-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });
+  $("logt-form").addEventListener("input", function (ev) { if (ev.target && ev.target.id === "l-cp") { applyCP("l-"); } saveLogt(); renderLogt(); syncHomeFromLogt(); });
   $("logt-form").addEventListener("change", function (ev) {
-    saveLogt(); renderLogt();
+    saveLogt(); renderLogt(); syncHomeFromLogt();
   });
   $("logt-res").addEventListener("click", function (ev) {
     var id = ev.target && ev.target.id;
@@ -1077,7 +1115,7 @@ function loadCPPlaces() {
         });
       });
       CP_ENT = ent;
-      if ($("l-cp") && $("l-cp").value) applyCP("l-", $("l-ville").value);
+      if ($("l-cp") && $("l-cp").value) { applyCP("l-", $("l-ville").value); syncHomeFromLogt(); }
       if ($("cp") && $("cp").value) applyCP("", $("ville").value);
       refresh(); renderLogt();
     }).catch(function () { /* repli : liste de 77 communes */ });
@@ -1094,7 +1132,7 @@ function resolveCP(raw) {
     if (!ents.length) return { dept: d, ville: "", opts: [], msg: deptLabel(d) + ". Code postal introuvable dans la base officielle : moyenne de la région utilisée." };
     var opts = ents.map(function (e) { return [e.i, e.n]; });
     var def = ents.filter(function (e) { return e.p > 0; })[0] || ents[0];
-    var msg = ents.length > 1 ? ents.length + " communes pour ce code postal (" + deptLabel(d) + ") : choisissez la vôtre ci-dessous."
+    var msg = ents.length > 1 ? ents.length + " communes pour ce code postal (" + deptLabel(d) + ") : choisissez la vôtre dans la liste."
       : ents[0].n + " (" + deptLabel(d) + ").";
     return { dept: d, ville: def.i, opts: opts, msg: msg };
   }
@@ -1102,7 +1140,7 @@ function resolveCP(raw) {
   var v = CP_CITY[cp] || "";
   var priced = v && CITIES.some(function (c) { return c.d === d && c.n === v; });
   if (priced) return { dept: d, ville: v, opts: [[v, v]], msg: v + " (" + deptLabel(d) + "). Prix utilisé : celui de " + v + "." };
-  return { dept: d, ville: "", opts: [], msg: deptLabel(d) + ". Commune absente de ma liste : moyenne de la région utilisée." + (hasCities(d) ? " Vous pouvez choisir une commune ci-dessous." : "") };
+  return { dept: d, ville: "", opts: [], msg: deptLabel(d) + ". Commune absente de ma liste : moyenne de la région utilisée." + (hasCities(d) ? " Vous pouvez choisir une commune dans la liste." : "") };
 }
 // prefix "" = barre de l'onglet Eau ; "l-" = onglet Mon logement
 function applyCP(prefix, selectedVille) {
@@ -1111,9 +1149,19 @@ function applyCP(prefix, selectedVille) {
   fillVilles(prefix + "ville", r.dept, selectedVille || r.ville, r.opts);
   var info = $(prefix + "cp-info");
   if (info) info.textContent = r.msg;
-  var show = r.opts.length > 0 || hasCities(r.dept);
-  if (prefix === "l-") $("l-ville-f").hidden = !show;
-  else $("f-ville").hidden = $("f-cp").hidden || !show;
+  var show = r.opts.length > 1 || (r.opts.length === 0 && hasCities(r.dept));
+  var vf = $(prefix + "ville-f");
+  if (vf) vf.hidden = !show;
+  var sel = $(prefix + "ville"), nm = sel && sel.selectedIndex >= 0 && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].textContent : "";
+  var loc = r.opts.length && nm ? nm + " (" + deptLabel(r.dept) + ")" : r.msg;
+  if ($("l-loc")) $("l-loc").textContent = loc;
+  if ($("eau-loc")) $("eau-loc").textContent = loc;
+}
+// L'onglet Eau reprend toujours la localisation saisie sur l'accueil
+function loadLocFromHome() {
+  var L = lastLogt.eau;
+  $("cp").value = L.cp || "";
+  applyCP("", L.ville);
 }
 
 function fillVilles(selId, dept, selected, pairs) {
@@ -1236,7 +1284,7 @@ function syncAuto() {
   $("conso").disabled = eff;
   if (t === "elec") $("kva").disabled = eff;
   if (t === "gaz") $("gopt").disabled = eff;
-  if (t === "eau") { $("cp").disabled = eff; $("prixeau").disabled = eff; }
+  if (t === "eau") { $("prixeau").disabled = eff; loadLocFromHome(); }
   if (eff) {
     if (t === "elec") {
       $("conso").value = lastLogt.conso;
@@ -1249,15 +1297,13 @@ function syncAuto() {
     } else {
       var L = lastLogt.eau;
       $("conso").value = L.m3;
-      $("cp").value = L.cp || "";
-      applyCP("", L.ville);
       $("prixeau").value = L.prix > 0 ? L.prix : "";
       $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + (PRIX_INSEE[L.ville] ? PRIX_INSEE[L.ville].n : L.ville) : "") : ", aucun code postal valide") + ".";
     }
   } else {
     var typed = parseFloat($("conso").value) || 0;
     if (t === "gaz") $("auto-hint").textContent = on && !avail ? "Mon logement n'utilise pas de gaz : la valeur saisie ici est utilisée." : "Mode manuel. Pour " + fmtInt.format(typed) + " kWh par an, l'option habituelle est " + GAS_OPT_LABEL[gasOptionFor(typed)] + ".";
-    else if (t === "eau") $("auto-hint").textContent = "Mode manuel : saisissez votre consommation d'eau en m³ et votre localisation.";
+    else if (t === "eau") $("auto-hint").textContent = "Mode manuel : saisissez votre consommation d'eau en m³ et, si vous le connaissez, le prix de l'eau. La localisation vient du code postal de l'accueil.";
     else $("auto-hint").textContent = "Mode manuel : saisissez votre consommation.";
   }
   if (t === "eau") $("ville").disabled = eff;
@@ -1415,7 +1461,8 @@ function setTab(t) {
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz";
-  $("f-cp").hidden = t !== "eau";
+  $("f-cp").hidden = true;
+  $("f-loc").hidden = t !== "eau";
   $("f-ville").hidden = true;
   $("f-prixeau").hidden = t !== "eau";
   var eau = t === "eau";
@@ -1427,8 +1474,7 @@ function setTab(t) {
   if (t === "eau") {
     $("conso").value = state.eauConso;
     $("conso-label").textContent = "Consommation d'eau (m³ par an)";
-    $("cp").value = state.eauCp;
-    applyCP("", state.eauVille);
+    loadLocFromHome();
     $("prixeau").value = state.eauPrix > 0 ? state.eauPrix : "";
   }
   a11yTabs();
@@ -1445,7 +1491,7 @@ $("conso").addEventListener("input", refresh);
   });
 });
 $("kva").addEventListener("change", refresh);
-$("cp").addEventListener("input", function () { applyCP(""); refresh(); });
+$("eau-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });
 $("ville").addEventListener("change", refresh);
 $("prixeau").addEventListener("input", refresh);
 $("auto").addEventListener("change", function () {
@@ -1461,6 +1507,7 @@ renderPrimes();
 loadAuto();
 initReg(); initEau();
 initLogt();
+initHome();
 loadCPPlaces();
 setTab("home");
 initA11y();
