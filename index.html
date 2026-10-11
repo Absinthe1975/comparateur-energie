@@ -182,7 +182,7 @@ a { color: var(--accent); }
       <button role="tab" id="tab-gaz" aria-selected="false" tabindex="-1" aria-controls="p-gaz">Gaz</button>
       <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
-      <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Primes</button>
+      <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Parrainages</button>
       <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
       <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Légal</button>
       <button role="tab" id="tab-reg" aria-selected="false" tabindex="-1" aria-controls="p-reg">Réglages</button>
@@ -221,14 +221,14 @@ a { color: var(--accent); }
       <button type="button" class="tile" data-go="gaz"><strong>Gaz</strong><span>Options Base, B0, B1 et B2i, avec le prix repère de la CRE.</span></button>
       <button type="button" class="tile" data-go="eau"><strong>Eau</strong><span>Prix par m³ selon votre département et votre ville.</span></button>
       <button type="button" class="tile" data-go="abo"><strong>Abonnement</strong><span>Le détail de l'abonnement et des frais ponctuels.</span></button>
-      <button type="button" class="tile" data-go="prime"><strong>Primes</strong><span>Ce que reçoivent le parrain et le filleul chez chaque fournisseur.</span></button>
+      <button type="button" class="tile" data-go="prime"><strong>Parrainages</strong><span>Ce que reçoivent le parrain et le filleul chez chaque fournisseur.</span></button>
     </div>
 
     <h3>Comment ça marche</h3>
     <ol class="steps">
       <li><strong>Décrivez votre logement</strong> dans l'onglet Mon logement, ou saisissez directement votre consommation.</li>
       <li><strong>Consultez les tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
-      <li><strong>Repérez les primes</strong> de parrainage dans l'onglet Primes. Ce site n'envoie vers aucun lien pour l'instant : il indique seulement les montants.</li>
+      <li><strong>Repérez les primes</strong> de parrainage dans l'onglet Parrainages. Ce site n'envoie vers aucun lien pour l'instant : il indique seulement les montants.</li>
     </ol>
 
     <p class="note" id="updated"></p>
@@ -619,7 +619,7 @@ var ABO_D = {};
 var ABO_G = { edf: 341.40, ohm: 359.52, gdb: 360.72, total: 360.72, engie: 360.79, mint: 360.84, octo: 360.84, plen: 387.43, happe: 387.84, alterna: 389.64, ilek: 438.36, dyneff: 469.32, geg: 499.44, ekw: 517.44 };
 
 /* ---------- Sources et dates ---------- */
-var DATA_DATE = "2026-10-10", DATA_LABEL = "10 oct. 2026";
+var DATA_DATE = "2026-10-10", DATA_LABEL = "10 oct. 2026", DATA_TIME = "";
 var SRC = {
   elec: ["Selectra", "https://www.fournisseurs-electricite.com/contrat-electricite/prix"],
   gaz: ["Selectra", "https://www.fournisseurs-electricite.com/contrat-gaz/prix"],
@@ -1201,14 +1201,17 @@ function applyData(d) {
   GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes;
   if (d.updated) DATA_DATE = d.updated;
   if (d.updated_label) DATA_LABEL = d.updated_label;
+  DATA_TIME = (typeof d.updated_time === "string" && /^\d\d:\d\d$/.test(d.updated_time)) ? d.updated_time : "";
   return true;
 }
 function showDates() {
   var M = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
   var p = String(DATA_DATE).split("-"), t = p.length === 3 ? (parseInt(p[2], 10) === 1 ? "1er" : parseInt(p[2], 10)) + " " + M[parseInt(p[1], 10) - 1] + " " + p[0] : DATA_LABEL;
+  var hh = DATA_TIME ? " à " + DATA_TIME.replace(":", " h ") : "";
+  t += hh;
   var els = document.querySelectorAll(".dlong");
   for (var i = 0; i < els.length; i++) els[i].textContent = t;
-  var u = $("updated"); if (u) u.textContent = "Données mises à jour le " + DATA_LABEL + ".";
+  var u = $("updated"); if (u) u.textContent = "Données mises à jour le " + DATA_LABEL + hh + ".";
 }
 function loadData() {
   if (!window.fetch || location.protocol === "file:") return;
@@ -1266,7 +1269,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", eau: "Eau", abo: "Abonnement", prime: "Primes", memo: "Mémo", reg: "Réglages", legal: "Légal" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", reg: "Réglages", legal: "Légal" };
 function a11yTabs() {
   TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
 }
