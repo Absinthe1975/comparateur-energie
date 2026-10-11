@@ -8,7 +8,7 @@ Entrées (dossier passé en argument, par défaut "eau-sources") :
   - detail_AEP_<année>.csv, detail_AC_<année>.csv   feuille « Détail tarifaire » des mêmes fichiers (part fixe = abonnement :
                               variables VP.190 délégataire + VP.191 collectivité, en € HT par an, TVA = VP.213)
   - zones_gn.json (optionnel) noms de communes avec accents par code postal (GeoNames)
-Sortie : communes-cp.json  {code_postal: "insee~nom~prix~flag~abonnement|..."}
+Sortie : communes-cp.json  {code_postal: "insee~nom~prix~flag~abonnement~eau_potable~assainissement|..."}
   abonnement = part fixe annuelle TTC eau potable + assainissement (€ par an), vide si inconnu
   prix = eau potable + assainissement collectif, € TTC par m³, pour 120 m³ (indicateur « tarif » du SISPEA)
   flag "e" = assainissement non renseigné, estimé par la médiane du département (communes de 2 000 habitants et plus)
@@ -109,7 +109,7 @@ def main():
             if not nom:
                 cands = [g for g in gn.get(cp, "").split("|") if fold(g) == fold(nom0)]
                 nom = cands[0] if cands else nom0.title()
-            price = ""; flag = ""; abo = ""
+            price = ""; flag = ""; abo = ""; pe = ""; pa = ""
             if ins in ep:
                 a = ac.get(ins)
                 if a is None:
@@ -117,12 +117,13 @@ def main():
                     # sinon eau potable seule (petites communes souvent en assainissement individuel)
                     if pops.get(ins, 0) >= 2000 and ins[:2] in med: a = med[ins[:2]]; flag = "e"
                     else: a = 0.0; flag = "s"
+                pe = "%.2f" % ep[ins]; pa = "" if flag == "s" else "%.2f" % a
                 price = "%.2f" % (ep[ins] + a); n_p += 1; n_e += flag == "e"; n_s += flag == "s"
                 ae = commune_abo(svc_ep.get(ins, []), abo_ep, ep[ins])
                 if ae is not None:
                     aa = ca.get(ins) if flag == "" else (med_abo.get(ins[:2], all_abo) if flag == "e" else 0)
                     if aa is not None and 10 <= ae + aa < 0.6 * 120 * (ep[ins] + a): abo = "%.0f" % (ae + aa); n_a += 1
-            ent = "~".join([ins, nom.replace("~", " ").replace("|", " "), price, flag, abo]).rstrip("~")
+            ent = "~".join([ins, nom.replace("~", " ").replace("|", " "), price, flag, abo, pe, pa]).rstrip("~")
             lst = out.setdefault(cp, [])
             if ent not in lst and not any(e.startswith(ins + "~") for e in lst): lst.append(ent)
     js = {cp: "|".join(v) for cp, v in sorted(out.items())}
