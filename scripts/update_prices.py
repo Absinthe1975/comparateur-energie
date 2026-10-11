@@ -12,7 +12,7 @@ Rien n'est publié sans relecture : le workflow ouvre une demande de fusion (pul
 Usage : python scripts/update_prices.py [--dry-run] [--only elec,gaz,primes,refs]
 Variables : GEMINI_API_KEY (par défaut, gratuit), ou MISTRAL_API_KEY / ANTHROPIC_API_KEY selon PROVIDER ; MODEL et CONTACT facultatifs.
 """
-import argparse, datetime, hashlib, html.parser, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request, urllib.robotparser
+import argparse, unicodedata, datetime, hashlib, html.parser, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request, urllib.robotparser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data.json")
@@ -38,6 +38,10 @@ class _Text(html.parser.HTMLParser):
 def norm(t):
     t = t.replace(" ", " ").replace(" ", " ").replace("’", "'")
     return re.sub(r"\s+", " ", t).strip().lower()
+
+def fold(t):
+    """Minuscules sans accents, pour comparer « Électricité » et « Electricité »."""
+    return "".join(c for c in unicodedata.normalize("NFD", norm(t)) if unicodedata.category(c) != "Mn")
 
 def html_to_text(raw):
     p = _Text(); p.feed(raw)
@@ -224,6 +228,8 @@ def update_offers(data, src, state, rep, kinds, cache):
         if kind not in kinds: continue
         for r in rows:
             url = src["tarifs_pages"].get(r["k"]); label = f"{kind} · {r['name']} ({r['offer']})"
+            raison = src.get("manuel", {}).get(kind, {}).get(r["k"])
+            if raison: rep.same.append(f"{label} : à vérifier à la main ({raison})"); continue
             if not url: rep.failed.append(f"{label} : aucune page dans sources.json"); continue
             text = pagetext(url, cache, state, rep, label)
             if not text: continue
@@ -238,12 +244,14 @@ def update_offers(data, src, state, rep, kinds, cache):
             if got is None: continue
             pn = norm(text)
             q = (got.get("offre") or {}).get("quote")
-            if not q or norm(q) not in pn or norm(r["offer"]).split(" ")[0] not in norm(q): rep.failed.append(f"{label} : offre non retrouvée dans la page"); continue
+            if not q or norm(q) not in pn or fold(r["offer"]).split(" ")[0] not in fold(q): rep.failed.append(f"{label} : offre non retrouvée dans la page"); continue
             lk, la = ("elec_kwh", "elec_abo") if kind == "elec" else ("gas_kwh", "gas_abo")
             kwh, e1 = check_field(got.get("kwh"), pn, *BOUNDS[lk])
             if kind == "gaz": abo, e2 = r.get("abo_skip", True), None  # abonnement gaz : non lu (les pages mélangent B0/B1), valeur conservée
             else: abo, e2 = check_field(got.get("abo"), pn, *BOUNDS[la])
             changed = []
+            if kwh is None and e1 == "non trouvé dans la page":
+                i = text.lower().find(r["offer"].lower().split(",")[0][:12]); print(f"[diagnostic] {label} : texte lu autour de l'offre : " + repr(text[max(0, i): i + 700] if i >= 0 else "(nom de l'offre absent du texte)"), file=sys.stderr)
             if kwh is None: rep.review.append(f"{label} : kWh refusé ({e1})")
             elif too_far(kwh, r["a"], rel["kwh"]): rep.review.append(f"{label} : kWh {r['a']} → {kwh} (écart > {int(rel['kwh']*100)} %, non appliqué)")
             elif abs(kwh - r["a"]) > 1e-9:
