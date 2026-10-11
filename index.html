@@ -200,7 +200,7 @@ a { color: var(--accent); }
     <div class="field" id="f-cp"><label for="cp">Code postal (facultatif)</label><input id="cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="cp-info" role="status" aria-live="polite"></span></div>
     <div class="field" id="f-ville" hidden><label for="ville">Commune</label><select id="ville"></select></div>
     <select id="dept" hidden aria-hidden="true" tabindex="-1"></select>
-    <div class="field" id="f-prixeau"><label for="prixeau">Prix de l'eau (€/m³, facultatif)</label><input id="prixeau" type="number" min="0" max="20" step="0.01" placeholder="selon votre facture"></div>
+    <div class="field" id="f-prixeau"><label for="prixeau">Prix de l'eau (€/m³, seulement si vous le connaissez)</label><input id="prixeau" type="number" min="0" max="20" step="0.01" placeholder="selon votre facture"></div>
     
   </div>
 
@@ -844,7 +844,7 @@ function buildLogt() {
     + fld("Code postal", "l-cp", '<input id="l-cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="l-cp-info" role="status" aria-live="polite"></span>')
     + '<div class="field" id="l-ville-f" hidden><label for="l-ville">Commune</label><select id="l-ville"></select></div>'
     + '<select id="l-dept" hidden aria-hidden="true" tabindex="-1">' + deptOpts().map(function (o) { return '<option value="' + o[0] + '">' + esc(o[1]) + "</option>"; }).join("") + "</select>"
-    + fld("Prix de l'eau si vous le connaissez (€/m³ TTC)", "l-prixeau", numInput("l-prixeau", "", 0, 20, 0.01))
+    + fld("Prix de l'eau, seulement si vous le connaissez (€/m³ TTC)", "l-prixeau", numInput("l-prixeau", "", 0, 20, 0.01))
     + fld("Douches par personne et par semaine", "l-douches", numInput("l-douches", 7, 0, 30, 1))
     + fld("Bains par personne et par semaine", "l-bains", numInput("l-bains", 0, 0, 30, 1))
     + fld("Jardin, piscine, voiture (m³ par an)", "l-jardin", numInput("l-jardin", 0, 0, 500, 1))
@@ -972,8 +972,9 @@ function renderLogt() {
     h += '<button class="btn" id="apply-gaz" type="button">Voir le gaz dans le comparateur</button></div>';
   }
   var ep = eauPrice(s.dept, s.ville, s.prixEau);
+  if ($("l-prixeau")) $("l-prixeau").placeholder = eauHint(s.dept, s.ville);
   h += '<div class="card"><span class="label stampy">Eau estimée</span><span class="big">' + fmtInt.format(r.eau.m3) + ' m³ par an</span>' + bars(POSTES_EAU, r.eau.det, "m³")
-    + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3, ep.abo)) + ' €</strong></p>'
+    + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>' + (eauSplit(ep) ? eauSplit(ep).replace('<p class="note">', "").replace("</p>", "") + "<br>" : "") + 'Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3, ep.abo)) + ' €</strong></p>'
     + '<button class="btn" id="apply-eau" type="button">Voir l\'eau dans le comparateur</button></div>';
   $("logt-res").innerHTML = h;
 }
@@ -1071,7 +1072,7 @@ function loadCPPlaces() {
       var ent = {};
       Object.keys(j).forEach(function (cp) {
         ent[cp] = j[cp].split("|").map(function (x) {
-          var a = x.split("~"), o = { i: a[0], n: a[1], p: a[2] ? parseFloat(a[2]) : 0, f: a[3] || "", a: a[4] ? parseFloat(a[4]) : 0 };
+          var a = x.split("~"), o = { i: a[0], n: a[1], p: a[2] ? parseFloat(a[2]) : 0, f: a[3] || "", a: a[4] ? parseFloat(a[4]) : 0, e: a[5] ? parseFloat(a[5]) : 0, s: a[6] ? parseFloat(a[6]) : 0 };
           PRIX_INSEE[o.i] = o; return o;
         });
       });
@@ -1132,23 +1133,36 @@ function fillVilles(selId, dept, selected, pairs) {
 }
 
 function eauPrice(dept, ville, over) {
-  if (over > 0) return { p: over, src: "prix saisi d'après votre facture", exact: true };
+  if (over > 0) return { p: over, src: "prix saisi d'après votre facture", exact: true, kind: "saisi" };
   var sp = PRIX_INSEE[ville];
   if (sp && sp.p > 0) {
     var note = sp.f === "e" ? ", assainissement estimé (médiane du département)" : sp.f === "s" ? ", eau potable seule (assainissement non renseigné)" : ", eau potable + assainissement";
-    return { p: sp.p, src: "commune de " + sp.n + " (SISPEA, exercice 2025" + note + ")" + (sp.p < 2 ? " · valeur inhabituellement basse, à vérifier" : ""), exact: sp.f === "", est: sp.f !== "", abo: sp.a };
+    return { p: sp.p, src: "commune de " + sp.n + " (SISPEA, exercice 2025" + note + ")" + (sp.p < 2 ? " · valeur inhabituellement basse, à vérifier" : ""), exact: sp.f === "", est: sp.f !== "", abo: sp.a, kind: "commune", pe: sp.e, pa: sp.s, fl: sp.f };
   }
   if (dept && ville) {
     for (var i = 0; i < CITIES.length; i++) {
-      if (CITIES[i].d === dept && CITIES[i].n === ville) return { p: CITIES[i].p, src: "commune de " + ville, exact: true };
+      if (CITIES[i].d === dept && CITIES[i].n === ville) return { p: CITIES[i].p, src: "commune de " + ville, exact: true, kind: "liste" };
     }
   }
   if (dept && DEPT_BY[dept]) {
     var reg = REGIONS[DEPT_BY[dept].r];
-    if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", faute de prix connu pour votre commune", exact: false };
-    return { p: EAU_NAT, src: "moyenne nationale, car la moyenne de la région " + reg[0] + " est peu fiable", exact: false };
+    if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", faute de prix connu pour votre commune", exact: false, kind: "region" };
+    return { p: EAU_NAT, src: "moyenne nationale, car la moyenne de la région " + reg[0] + " est peu fiable", exact: false, kind: "national" };
   }
-  return { p: EAU_NAT, src: "moyenne nationale, aucun code postal valide", exact: false };
+  return { p: EAU_NAT, src: "moyenne nationale, aucun code postal valide", exact: false, kind: "national" };
+}
+function eauHint(dept, ville) {
+  var e = eauPrice(dept, ville, 0), n = fmtNum2.format(e.p) + " €/m³";
+  if (e.kind === "commune" || e.kind === "liste") return n + (e.fl === "s" ? " (eau potable seule)" : e.est ? " (en partie estimé)" : "") + " : prix de votre commune";
+  return "Prix de votre commune inconnu : " + (e.kind === "region" ? "moyenne de la région, " : "moyenne nationale, ") + n;
+}
+// Détail eau potable / assainissement, quand le SISPEA les donne séparément
+function eauSplit(ep) {
+  if (ep.kind !== "commune" || !(ep.pe > 0)) return "";
+  var t = '<strong>Eau potable</strong> : ' + fmtNum2.format(ep.pe) + ' €/m³ · <strong>Assainissement</strong> : ';
+  if (ep.fl === "s") t += 'non renseigné (non compté)';
+  else t += fmtNum2.format(ep.pa) + ' €/m³' + (ep.fl === "e" ? " (estimé d'après la médiane du département)" : "");
+  return '<p class="note">' + t + '</p>';
 }
 function eauCost(p, v, abo) { var a = abo > 0 ? abo : EAU_ABO; return a + Math.max(0, p - a / 120) * v; }
 
@@ -1173,12 +1187,14 @@ function eauSummary(V, ep) {
   return '<div class="card"><span class="label stampy">Votre facture d\'eau estimée</span><span class="big">' + fmtInt.format(total) + ' € par an</span>'
     + '<p class="note">' + fmtInt.format(V) + ' m³ par an à ' + fmtNum2.format(ep.p) + ' €/m³ (' + esc(ep.src) + '). Le total comprend un ' + abTxt + ' de ' + fmtInt.format(ab) + ' € par an et '
     + fmtNum2.format(Math.max(0, ep.p - ab / 120)) + ' € par m³ consommé.</p>'
+    + eauSplit(ep)
     + '<p>Avec le prix moyen national (' + fmtNum2.format(EAU_NAT) + ' €/m³) : <strong>' + fmtInt.format(nat) + ' €</strong> par an. Écart : <span class="' + cls + '">' + d + '</span></p></div>';
 }
 
 function renderEau() {
   var V = state.eauConso, ep = eauPrice(state.eauDept, state.eauVille, state.eauPrix);
   var me = eauCost(ep.p, V, ep.abo);
+  $("prixeau").placeholder = eauHint(state.eauDept, state.eauVille);
   $("eau-res").innerHTML = eauSummary(V, ep);
   var rows = CITIES.slice().sort(function (a, b) { return a.p - b.p; });
   var h = '<thead><tr><th>Commune</th><th>Département</th><th class="num">Prix par m³ TTC</th><th class="num">Total par an</th><th class="num">Écart avec vous</th></tr></thead><tbody>';
