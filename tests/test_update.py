@@ -65,6 +65,25 @@ class T(unittest.TestCase):
     def test_offre_a_verifier_a_la_main_ignoree(self):
         up.main(["--only", "gaz"]); rap = open(up.REPORT, encoding="utf-8").read()
         self.assertIn("à vérifier à la main", rap)
+    def test_page_inchangee_date_du_jour(self):
+        self.run_engie()                      # première lecture : empreinte mémorisée
+        d = json.load(open(up.DATA, encoding="utf-8"))
+        for r in d["elec"]:
+            if r["k"] == "engie": r["d"] = "1 janv. 2020"
+        d["abo_d"]["engie"] = "1 janv. 2020"; json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        r, d = self.run_engie()               # page inchangée : la date du jour est posée sans nouvel appel
+        self.assertEqual(r["d"], d["updated_label"]); self.assertEqual(d["abo_d"]["engie"], d["updated_label"])
+    def test_variation_prix_repere(self):
+        import datetime
+        d = json.load(open(up.DATA, encoding="utf-8")); src = json.load(open(up.SOURCES, encoding="utf-8"))
+        up.fetch_text = lambda url: "Octobre 2026. Le prix repère du gaz augmente de 6,3 % TTC en octobre."
+        self.reply = {"fields": {"variation": {"value": 6.3, "quote": "Le prix repère du gaz augmente de 6,3 % TTC en octobre"}}}
+        old = d["gas_b1"]["a"]; d["gas_b1"]["a"] = round(old * 1.063, 4)
+        rep = up.Report(); up.update_trend(d, src, {}, rep, {}, old, datetime.datetime(2026, 10, 5))
+        self.assertTrue(any("cohérent" in x for x in rep.same), rep.same)
+        d["gas_b1"]["a"] = round(old * 0.9, 4)       # nous baissons alors que le médiateur annonce une hausse
+        rep = up.Report(); up.update_trend(d, src, {}, rep, {}, old, datetime.datetime(2026, 10, 5))
+        self.assertTrue(any("écart à vérifier" in x for x in rep.review), rep.review)
     def test_source_en_echec_ne_casse_rien(self):
         up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 18)
 
