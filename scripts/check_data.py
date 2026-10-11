@@ -7,6 +7,7 @@ def need(c, m):
     if not c: err.append(m)
 need(d.get("schema") == 1, "schema doit valoir 1")
 need(isinstance(d.get("updated"), str) and len(d["updated"]) == 10, "updated doit être une date AAAA-MM-JJ")
+need("updated_time" not in d or (isinstance(d["updated_time"], str) and len(d["updated_time"]) == 5 and d["updated_time"][2] == ":"), "updated_time doit être HH:MM")
 for r in d["elec"]:
     need(0.10 <= r["a"] <= 0.45 and 0.10 <= r["b"] <= 0.45, f"kWh électricité hors fourchette : {r['name']}")
     need(isinstance(d["abo_e"].get(r["k"]), (int, float)) and 100 <= d["abo_e"][r["k"]] <= 450, f"abonnement électricité manquant ou hors fourchette : {r['name']}")

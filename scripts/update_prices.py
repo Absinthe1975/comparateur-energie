@@ -325,11 +325,20 @@ def update_refs(data, src, state, rep, cache):
                     rep.applied.append(f"{label} : {fld} {tgt[key]} → {v}"); tgt[key] = v
                     if fld == "b1_kwh": data["gas_ref"]["a"] = v
 
+def maintenant():
+    """Date et heure de Paris (le serveur GitHub est en heure UTC)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Paris"))
+    except Exception:
+        return datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs")
     a = ap.parse_args(argv); kinds = set(a.only.split(","))
     data, src = load(DATA), load(SOURCES); state = load(STATE, {}) or {}
-    now = datetime.date.today(); data["updated"] = now.isoformat(); data["updated_label"] = f"{now.day} {MONTHS[now.month-1]} {now.year}"
+    now = maintenant(); data["updated"] = now.date().isoformat(); data["updated_label"] = f"{now.day} {MONTHS[now.month-1]} {now.year}"; data["updated_time"] = now.strftime("%H:%M")
     rep, cache = Report(), {}
     if kinds & {"elec", "gaz"}: update_offers(data, src, state, rep, kinds, cache)
     if "primes" in kinds: update_primes(data, src, state, rep, cache)
@@ -337,7 +346,10 @@ def main(argv=None):
     md = rep.md(data["updated_label"]); print(md)
     if not a.dry_run:
         # la date globale ne change que si au moins une valeur a été vérifiée avec succès
-        if not (rep.applied or rep.same): data["updated"], data["updated_label"] = load(DATA)["updated"], load(DATA)["updated_label"]
+        if not (rep.applied or rep.same):
+            old = load(DATA); data["updated"], data["updated_label"] = old["updated"], old["updated_label"]
+            if "updated_time" in old: data["updated_time"] = old["updated_time"]
+            else: data.pop("updated_time", None)
         save(DATA, data); save(STATE, state)
         with open(REPORT, "w", encoding="utf-8") as fh: fh.write(md)
     return 0 if (rep.applied or rep.same) else 1
