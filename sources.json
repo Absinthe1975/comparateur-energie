@@ -40,5 +40,11 @@
     "happe": "https://prix-elec.com/fournisseurs/happ-e/parrainage",
     "llum": "https://prix-elec.com/fournisseurs/llum/parrainage",
     "ilek": "https://prix-elec.com/fournisseurs/ilek/parrainage"
+  },
+  "manuel": {
+    "gaz": {
+      "geg": "la page source ne publie pas le prix du kWh de cette offre",
+      "total": "la page source ne publie pas le prix du kWh de cette offre"
+    }
   }
 }
