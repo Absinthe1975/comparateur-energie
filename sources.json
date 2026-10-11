@@ -5,7 +5,7 @@
     "kwh": 0.12,
     "abo": 0.15
   },
-  "note": "Pages lues par le script de mise à jour. Seules les pages dont le robots.txt autorise la lecture automatique sont lues (Selectra, Kelwatt, CRE, leparrain et comparonslenergie l'interdisent). Corrigez une adresse ici si elle change. L'abonnement gaz n'est pas lu automatiquement.",
+  "note": "Pages lues par le script de mise à jour. Seules les pages dont le robots.txt autorise la lecture automatique sont lues (Selectra, Kelwatt, CRE, leparrain et comparonslenergie l'interdisent). Corrigez une adresse ici si elle change. L'abonnement gaz n'est pas lu automatiquement. Les abonnements du tarif réglementé et du prix repère du gaz sont à mettre à jour à la main.",
   "tarifs_pages": {
     "ekw": "https://prix-elec.com/fournisseurs/ekwateur/offres",
     "total": "https://prix-elec.com/fournisseurs/totalenergies/offres",
@@ -45,6 +45,15 @@
     "gaz": {
       "geg": "la page source ne publie pas le prix du kWh de cette offre",
       "total": "la page source ne publie pas le prix du kWh de cette offre"
+    },
+    "elec": {
+      "alpiq": "la grille de prix de la page source n'est pas lisible par le script"
+    },
+    "primes": {
+      "ekw": "le règlement n'indique pas de montant en euros pour le parrain",
+      "happe": "prime en carte cadeau, pas un montant fixe en euros",
+      "llum": "montant non confirmé par la source",
+      "ilek": "prime variable, sans montant fixe en euros"
     }
   }
 }
