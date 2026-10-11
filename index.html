@@ -277,7 +277,7 @@ a { color: var(--accent); }
     <div class="tablewrap"><table id="t-eau"></table></div>
     <h3>Moyenne par région</h3>
     <div class="tablewrap"><table id="t-reg"></table></div>
-    <p class="note">Prix en €/m³ TTC, eau potable et assainissement collectif compris, au 1er janvier 2026 (Kelwatt, d'après les données d'eaufrance). La moyenne nationale est de 4,69 €/m³ selon cette source, et de 4,89 €/m³ selon Selectra pour 2025. Le total par an se calcule ainsi : un abonnement estimé à 84 € (valeur moyenne de Selectra, car je n'ai pas l'abonnement de chaque commune) plus (prix par m³ − 0,70 €) × vos m³. Pour 120 m³, on retrouve le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Ma liste ne couvre que 77 communes : pour une autre commune, la page déduit le département de votre code postal et utilise la moyenne de la région, ou saisissez le prix de votre facture. * Valeur inhabituellement basse pour Antibes, à vérifier. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
+    <p class="note">Prix en €/m³ TTC pour 120 m³ par an, eau potable et assainissement collectif additionnés, d'après l'Observatoire national des services d'eau et d'assainissement (SISPEA, Office français de la biodiversité, licence ouverte), exercice 2025. Beaucoup de prix 2025 sont encore « publiés non vérifiés » par les services. Pour les communes où l'assainissement n'est pas renseigné, le prix est celui de l'eau potable seule (petites communes, souvent en assainissement individuel) ou, à partir de 2 000 habitants, complété par la médiane du département : l'origine est indiquée dans le tableau. La moyenne nationale utilisée en dernier recours est de 4,69 €/m³ (Kelwatt, janvier 2026) ; Selectra donne 4,89 € pour 2025. Le total par an se calcule ainsi : un abonnement estimé à 84 € (valeur moyenne de Selectra, car je n'ai pas l'abonnement de chaque commune) plus (prix par m³ − 0,70 €) × vos m³. Pour 120 m³, on retrouve le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Le prix de votre commune est repris du fichier SISPEA quand il existe ; sinon la page utilise la moyenne de la région, ou saisissez le prix de votre facture. Valeurs inhabituellement basses (moins de 2 €/m³, comme Antibes) : à vérifier sur votre facture. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
   </section>
 
 <section class="panel" id="p-abo" role="tabpanel" aria-labelledby="tab-abo" hidden>
@@ -365,14 +365,15 @@ a { color: var(--accent); }
     </div>
 
     <div class="card">
-      <h3>2. Choisir plus de villes <span class="badge check">Réalisable, à relever commune par commune</span></h3>
-      <p>Aujourd'hui, la liste contient 77 communes. Pour le Nord, seules 5 villes sur environ 650 communes sont proposées. Les autres reçoivent la moyenne de la région, qui peut être éloignée de leur vrai prix.</p>
+      <h3>2. Prix de l'eau par commune <span class="badge ok">En place, à fiabiliser</span></h3>
+      <p>Le site utilise maintenant le fichier officiel SISPEA : un prix pour environ 26 000 communes, choisies par code postal. Il reste à fiabiliser les cas où l'assainissement n'est pas renseigné, et à renouveler le fichier chaque année.</p>
       <ul>
-        <li><strong>Ajouter des communes :</strong> par exemple les préfectures et les villes de plus de 20 000 habitants (environ 400 communes), à relever une par une avec le prix par m³ et, si possible, l'abonnement.</li>
-        <li><strong>Code postal :</strong> en place. Le département se déduit du code postal et les 77 communes sont reconnues. Pour les autres, la moyenne de la région s'applique. La précision augmentera avec le nombre de communes ajoutées.</li>
+        <li><strong>Renouvellement annuel :</strong> quand l'exercice 2026 sera saisi (le fichier était encore vide en octobre 2026), relancer scripts/build_eau.py avec les nouveaux fichiers SISPEA (tarifs eau potable et assainissement) et la base des codes postaux.</li>
+        <li><strong>Communes sans prix :</strong> environ 8 000 communes de la base des codes postaux n'ont aucun prix dans SISPEA ; elles reçoivent la moyenne de la région. À améliorer avec une autre source si elle apparaît.</li>
+        <li><strong>Abonnement :</strong> toujours estimé à 84 € pour tout le monde. Les fichiers SISPEA contiennent l'abonnement de chaque service : à exploiter.</li>
+        <li><strong>Code postal :</strong> en place, avec la base officielle de La Poste : toutes les communes d'un code postal sont proposées et on choisit la sienne.</li>
         <li><strong>Saisie du prix de la facture :</strong> déjà possible, à mettre davantage en avant pour les communes absentes de la liste.</li>
-        <li><strong>Source officielle :</strong> aucun téléchargement du prix de l'eau par commune (SISPEA, services.eaufrance.fr) n'a été trouvé à ce jour. À rechercher.</li>
-        <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui. Avec le code postal, il suffira d'une table « code postal → zone » pour que le gaz en tienne compte.</li>
+                <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui. Avec le code postal, il suffira d'une table « code postal → zone » pour que le gaz en tienne compte.</li>
       </ul>
     </div>
 
@@ -535,7 +536,7 @@ a { color: var(--accent); }
     <strong>Sources</strong>
     <ul>
       <li><a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffage" target="_blank" rel="noopener">Consommation du chauffage électrique par m² (Selectra, d'après l'ADEME)</a> · <a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffe-eau" target="_blank" rel="noopener">Consommation du chauffe-eau (Selectra)</a> · <a href="https://ekwateur.fr/blog/ma-consommation-d-energie/consommation-electrique-maison/" target="_blank" rel="noopener">Consommation d'une maison (Ekwateur)</a></li>
-      <li><a href="https://www.geonames.org/" target="_blank" rel="noopener">Noms des communes par code postal (GeoNames, licence CC BY 4.0)</a> · <a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
+      <li><a href="https://www.services.eaufrance.fr/pro/telechargement" target="_blank" rel="noopener">Prix de l'eau par commune (SISPEA, Office français de la biodiversité, licence ouverte)</a> · <a href="https://www.data.gouv.fr/datasets/base-officielle-des-codes-postaux" target="_blank" rel="noopener">Base officielle des codes postaux (La Poste)</a> · <a href="https://www.geonames.org/" target="_blank" rel="noopener">Orthographe des communes (GeoNames, licence CC BY 4.0)</a> · <a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/prix" target="_blank" rel="noopener">Prix du kWh d'électricité, octobre 2026 (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/abonnement" target="_blank" rel="noopener">Abonnement d'électricité par fournisseur et composition (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement" target="_blank" rel="noopener">Abonnement de gaz (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-gaz/prix" target="_blank" rel="noopener">Prix du gaz par fournisseur (Selectra)</a></li>
@@ -553,8 +554,8 @@ a { color: var(--accent); }
 // Primes : p = parrain, f = filleul, pn/fn = montants numériques pour le tri, st = ok | check | none
 var PRIMES = {
   edf:   { name: "EDF", en: "Électricité et gaz", p: "20 €", f: "40 €", pn: 20, fn: 40, valid: "Jusqu'au 31/12/2026", st: "ok", s: ["prix-elec.com", "https://prix-elec.com/fournisseurs/edf/parrainage"], d: "relevé le 9 oct. 2026" },
-  total: { name: "TotalEnergies", en: "Électricité et gaz", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "Montant standard. L'opération à 50 € s'est terminée le 30/09/2026", st: "ok", s: ["Leparrain.com", "https://leparrain.com/blog/meilleurs-parrainages-energie-comparatif"], d: "relevé le 9 oct. 2026" },
-  engie: { name: "ENGIE", en: "Électricité et gaz", p: "20 €", f: "20 € (+5 € avec option verte)", pn: 20, fn: 25, valid: "Une prime par souscription, y compris pour une offre duo", st: "ok", s: ["Comparonslenergie.com", "https://www.comparonslenergie.com/fournisseurs/engie/code-parrainage/"], d: "relevé le 9 oct. 2026" },
+  total: { name: "TotalEnergies", en: "Électricité et gaz", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "Montant standard, sans date de fin indiquée. Bonus de 10, 20 ou 30 € pour 2, 4 ou 6 filleuls", st: "ok", s: ["Site officiel TotalEnergies", "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches"], d: "relevé le 11 oct. 2026" },
+  engie: { name: "ENGIE", en: "Électricité et gaz", p: "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)", f: "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)", pn: 25, fn: 25, valid: "Jusqu'à 10 parrainages par an. Prime versée environ 2 mois après l'activation du contrat du filleul", st: "ok", s: ["Site officiel ENGIE", "https://particuliers.engie.fr/parrainage.html"], d: "relevé le 11 oct. 2026" },
   gdb:   { name: "Gaz de Bordeaux", en: "Électricité et gaz", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "En cours en octobre 2026", st: "ok", s: ["prix-elec.com", "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"], d: "relevé le 9 oct. 2026" },
   octo:  { name: "Octopus Energy", en: "Électricité et gaz", p: "40 €", f: "40 €", pn: 40, fn: 40, valid: "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus", st: "ok", s: ["Kelwatt", "https://www.kelwatt.fr/fournisseurs/octopus-energy/code-promo"], d: "page du 12 mai 2026, relevé le 10 oct. 2026" },
   plen:  { name: "Plenitude", en: "Électricité et gaz", p: "50 €", f: "40 €", pn: 50, fn: 40, valid: "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
@@ -1060,71 +1061,83 @@ function deptFromCP(cp) {
   return DEPT_BY[p] ? p : "";
 }
 function hasCities(dept) { return CITIES.some(function (c) { return c.d === dept; }); }
-// Noms des communes par code postal : fichier codes-postaux.json (GeoNames, CC BY 4.0), chargé à part.
-// Sans serveur (fichier ouvert directement), seules les 77 communes de la liste sont reconnues.
-var CP_PLACES = null;
+// Communes par code postal et prix de l'eau : fichier communes-cp.json (base officielle des codes postaux de La Poste,
+// prix SISPEA/OFB), chargé à part. Sans serveur (fichier ouvert directement), seules les 77 communes de la liste sont reconnues.
+// Chaque entrée : code INSEE ~ nom ~ prix €/m³ (eau potable + assainissement) ~ drapeau ("e" assainissement estimé, "s" eau potable seule)
+var CP_ENT = null, PRIX_INSEE = {};
 function loadCPPlaces() {
   try {
-    fetch("codes-postaux.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
-      CP_PLACES = j;
+    fetch("communes-cp.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+      var ent = {};
+      Object.keys(j).forEach(function (cp) {
+        ent[cp] = j[cp].split("|").map(function (x) {
+          var a = x.split("~"), o = { i: a[0], n: a[1], p: a[2] ? parseFloat(a[2]) : 0, f: a[3] || "" };
+          PRIX_INSEE[o.i] = o; return o;
+        });
+      });
+      CP_ENT = ent;
       if ($("l-cp") && $("l-cp").value) applyCP("l-", $("l-ville").value);
       if ($("cp") && $("cp").value) applyCP("", $("ville").value);
       refresh(); renderLogt();
     }).catch(function () { /* repli : liste de 77 communes */ });
   } catch (e) { /* repli */ }
 }
-function foldName(n) { var t = n.normalize ? n.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : n; return t.toLowerCase(); }
 function resolveCP(raw) {
   var cp = (raw || "").replace(/\s/g, "");
-  if (!cp) return { dept: "", ville: "", names: [], msg: "Facultatif. Sans code postal, la moyenne nationale est utilisée." };
-  if (!/^[0-9]{5}$/.test(cp)) return { dept: "", ville: "", names: [], msg: "Un code postal compte 5 chiffres." };
+  if (!cp) return { dept: "", ville: "", opts: [], msg: "Facultatif. Sans code postal, la moyenne nationale est utilisée." };
+  if (!/^[0-9]{5}$/.test(cp)) return { dept: "", ville: "", opts: [], msg: "Un code postal compte 5 chiffres." };
   var d = deptFromCP(cp);
-  if (!d) return { dept: "", ville: "", names: [], msg: "Code postal non reconnu (métropole uniquement) : moyenne nationale utilisée." };
-  var names = CP_PLACES && CP_PLACES[cp] ? CP_PLACES[cp].split("|") : [];
-  var v = CP_CITY[cp] || "";
-  if (!v) names.forEach(function (n) { if (!v && CITIES.some(function (c) { return c.d === d && c.n === n; })) v = n; });
-  if (v) { // la commune de ma liste prend la place de ses variantes d'orthographe
-    names = names.filter(function (n) { return foldName(n) !== foldName(v); });
-    names.unshift(v);
+  if (!d) return { dept: "", ville: "", opts: [], msg: "Code postal non reconnu (métropole uniquement) : moyenne nationale utilisée." };
+  if (CP_ENT) {
+    var ents = CP_ENT[cp] || [];
+    if (!ents.length) return { dept: d, ville: "", opts: [], msg: deptLabel(d) + ". Code postal introuvable dans la base officielle : moyenne de la région utilisée." };
+    var opts = ents.map(function (e) { return [e.i, e.n]; });
+    var def = ents.filter(function (e) { return e.p > 0; })[0] || ents[0];
+    var msg = ents.length > 1 ? ents.length + " communes pour ce code postal (" + deptLabel(d) + ") : choisissez la vôtre ci-dessous."
+      : ents[0].n + " (" + deptLabel(d) + ").";
+    return { dept: d, ville: def.i, opts: opts, msg: msg };
   }
+  // repli sans fichier : liste de 77 communes
+  var v = CP_CITY[cp] || "";
   var priced = v && CITIES.some(function (c) { return c.d === d && c.n === v; });
-  var first = priced ? v : (names[0] || "");
-  var lab = names.join(", ");
-  if (priced) return { dept: d, ville: v, names: names, msg: lab + " (" + deptLabel(d) + "). Prix utilisé : celui de " + v + "." };
-  var tail = "moyenne de la région utilisée, car aucune de ces communes n'est dans ma liste de prix.";
-  if (names.length > 1) return { dept: d, ville: first, names: names, msg: lab + " (" + deptLabel(d) + "). Choisissez votre commune ci-dessous. Prix de l'eau : " + tail };
-  if (names.length) return { dept: d, ville: first, names: names, msg: lab + " (" + deptLabel(d) + "). Prix de l'eau : " + tail };
-  return { dept: d, ville: "", names: [], msg: deptLabel(d) + (CP_PLACES ? ". Code postal introuvable dans la liste des communes : " : ". ") + "moyenne de la région utilisée." };
+  if (priced) return { dept: d, ville: v, opts: [[v, v]], msg: v + " (" + deptLabel(d) + "). Prix utilisé : celui de " + v + "." };
+  return { dept: d, ville: "", opts: [], msg: deptLabel(d) + ". Commune absente de ma liste : moyenne de la région utilisée." + (hasCities(d) ? " Vous pouvez choisir une commune ci-dessous." : "") };
 }
 // prefix "" = barre de l'onglet Eau ; "l-" = onglet Mon logement
 function applyCP(prefix, selectedVille) {
   var r = resolveCP($(prefix + "cp").value);
   $(prefix + "dept").value = r.dept;
-  fillVilles(prefix + "ville", r.dept, selectedVille || r.ville, r.names);
+  fillVilles(prefix + "ville", r.dept, selectedVille || r.ville, r.opts);
   var info = $(prefix + "cp-info");
   if (info) info.textContent = r.msg;
-  var show = r.names.length > 0 || hasCities(r.dept);
+  var show = r.opts.length > 0 || hasCities(r.dept);
   if (prefix === "l-") $("l-ville-f").hidden = !show;
   else $("f-ville").hidden = $("f-cp").hidden || !show;
 }
 
-function fillVilles(selId, dept, selected, names) {
+function fillVilles(selId, dept, selected, pairs) {
   var el = $(selId);
   if (!el) return;
   var opts;
   if (!dept) opts = [["", "Saisissez d'abord un code postal"]];
-  else if (names && names.length) opts = names.map(function (n) { return [n, n]; });
+  else if (pairs && pairs.length) opts = pairs;
   else {
     opts = [["", "Autre commune (moyenne de la région)"]];
     CITIES.filter(function (c) { return c.d === dept; }).forEach(function (c) { opts.push([c.n, c.n]); });
   }
   el.innerHTML = opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
-  var ok = selected && opts.some(function (o) { return o[0] === selected; });
-  el.value = ok ? selected : (names && names.length ? names[0] : "");
+  var hit = null;
+  if (selected) opts.forEach(function (o) { if (!hit && (o[0] === selected || o[1] === selected)) hit = o[0]; });
+  el.value = hit !== null ? hit : (pairs && pairs.length ? pairs[0][0] : "");
 }
 
 function eauPrice(dept, ville, over) {
   if (over > 0) return { p: over, src: "prix saisi d'après votre facture", exact: true };
+  var sp = PRIX_INSEE[ville];
+  if (sp && sp.p > 0) {
+    var note = sp.f === "e" ? ", assainissement estimé (médiane du département)" : sp.f === "s" ? ", eau potable seule (assainissement non renseigné)" : ", eau potable + assainissement";
+    return { p: sp.p, src: "commune de " + sp.n + " (SISPEA, exercice 2025" + note + ")" + (sp.p < 2 ? " · valeur inhabituellement basse, à vérifier" : ""), exact: sp.f === "", est: sp.f !== "" };
+  }
   if (dept && ville) {
     for (var i = 0; i < CITIES.length; i++) {
       if (CITIES[i].d === dept && CITIES[i].n === ville) return { p: CITIES[i].p, src: "commune de " + ville, exact: true };
@@ -1132,7 +1145,7 @@ function eauPrice(dept, ville, over) {
   }
   if (dept && DEPT_BY[dept]) {
     var reg = REGIONS[DEPT_BY[dept].r];
-    if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", car votre commune n'est pas dans la liste", exact: false };
+    if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", faute de prix connu pour votre commune", exact: false };
     return { p: EAU_NAT, src: "moyenne nationale, car la moyenne de la région " + reg[0] + " est peu fiable", exact: false };
   }
   return { p: EAU_NAT, src: "moyenne nationale, aucun code postal valide", exact: false };
@@ -1222,7 +1235,7 @@ function syncAuto() {
       $("cp").value = L.cp || "";
       applyCP("", L.ville);
       $("prixeau").value = L.prix > 0 ? L.prix : "";
-      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + L.ville : "") : ", aucun code postal valide") + ".";
+      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + (PRIX_INSEE[L.ville] ? PRIX_INSEE[L.ville].n : L.ville) : "") : ", aucun code postal valide") + ".";
     }
   } else {
     var typed = parseFloat($("conso").value) || 0;

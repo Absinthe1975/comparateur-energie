@@ -40,3 +40,13 @@ GEMINI_API_KEY=... python scripts/update_prices.py --dry-run
 - **Changer de fournisseur :** dans `sources.json`, `provider` peut valoir `gemini` (gratuit), `mistral` (offre gratuite, clé `MISTRAL_API_KEY`) ou `anthropic` (payant, clé `ANTHROPIC_API_KEY`). Le nom du modèle se règle dans `model`. Adaptez aussi la ligne `env` du fichier `.github/workflows/maj-prix.yml`.
 - GitHub Models, autre offre gratuite, est arrêté depuis le 30 juillet 2026.
 - Vérifiez les conditions d'utilisation de chaque site lu. Le programme respecte `robots.txt` et se présente sous le nom « ComparateurEnergieBot ».
+
+
+## Prix de l'eau par commune (une fois par an)
+
+Le fichier `communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
+- la base officielle des codes postaux (data.gouv.fr, fichier `019HexaSmal.csv`),
+- les fichiers SISPEA « tarifs eau potable » et « tarifs assainissement collectif » (services.eaufrance.fr/pro/telechargement), feuille « Zones tarifaires » exportée en CSV UTF-8 sous les noms `tarifs_AEP_<année>.csv` et `tarifs_AC_<année>.csv`,
+- éventuellement `zones_gn.json` (orthographe des communes).
+
+Commande : `python3 scripts/build_eau.py eau-sources communes-cp.json 2025`

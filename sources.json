@@ -32,7 +32,7 @@
     "gas_trend_template": "https://www.energie-info.fr/{mois}-{annee}-publication-du-prix-repere-du-gaz-par-la-cre/"
   },
   "primes_pages": {
-    "total": "https://prix-elec.com/fournisseurs/totalenergies/parrainage",
+    "total": "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches",
     "engie": "https://prix-elec.com/fournisseurs/engie/parrainage",
     "octo": "https://prix-elec.com/fournisseurs/octopus-energy/parrainage",
     "plen": "https://prix-elec.com/fournisseurs/plenitude/parrainage",
@@ -51,6 +51,7 @@
       "alpiq": "la grille de prix de la page source n'est pas lisible par le script"
     },
     "primes": {
+      "engie": "prime à deux niveaux (20 € + 5 € avec option verte) : relevée à la main sur la page officielle",
       "ekw": "le règlement n'indique pas de montant en euros pour le parrain",
       "happe": "prime en carte cadeau, pas un montant fixe en euros",
       "llum": "montant non confirmé par la source",
