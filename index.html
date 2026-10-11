@@ -197,8 +197,9 @@ a { color: var(--accent); }
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
     </div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 6 000 kWh)</option><option value="b1" selected>B1 (6 000 à 30 000 kWh)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
-    <div class="field" id="f-dept"><label for="dept">Département</label><select id="dept"></select></div>
-    <div class="field" id="f-ville"><label for="ville">Ville</label><select id="ville"></select></div>
+    <div class="field" id="f-cp"><label for="cp">Code postal (facultatif)</label><input id="cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="cp-info" role="status" aria-live="polite"></span></div>
+    <div class="field" id="f-ville" hidden><label for="ville">Commune</label><select id="ville"></select></div>
+    <select id="dept" hidden aria-hidden="true" tabindex="-1"></select>
     <div class="field" id="f-prixeau"><label for="prixeau">Prix de l'eau (€/m³, facultatif)</label><input id="prixeau" type="number" min="0" max="20" step="0.01" placeholder="selon votre facture"></div>
     
   </div>
@@ -219,7 +220,7 @@ a { color: var(--accent); }
       <button type="button" class="tile" data-go="logt"><strong>Mon logement</strong><span>Surface, chauffage, appareils, eau : la page estime votre consommation et la puissance de compteur utile.</span></button>
       <button type="button" class="tile" data-go="elec"><strong>Électricité</strong><span>Prix du kWh, abonnement et total par an, pour 3, 6 ou 9 kVA.</span></button>
       <button type="button" class="tile" data-go="gaz"><strong>Gaz</strong><span>Options Base, B0, B1 et B2i, avec le prix repère de la CRE.</span></button>
-      <button type="button" class="tile" data-go="eau"><strong>Eau</strong><span>Prix par m³ selon votre département et votre ville.</span></button>
+      <button type="button" class="tile" data-go="eau"><strong>Eau</strong><span>Prix par m³ selon votre code postal.</span></button>
       <button type="button" class="tile" data-go="abo"><strong>Abonnement</strong><span>Le détail de l'abonnement et des frais ponctuels.</span></button>
       <button type="button" class="tile" data-go="prime"><strong>Parrainages</strong><span>Ce que reçoivent le parrain et le filleul chez chaque fournisseur.</span></button>
     </div>
@@ -258,25 +259,25 @@ a { color: var(--accent); }
     <h2>Électricité, option Base</h2>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
-    <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur.</p>
+    <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
   </section>
 
   <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
     <h2>Gaz naturel</h2>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
-    <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 6 000 kWh, cuisson et eau chaude. B1 : environ 6 000 à 30 000 kWh, chauffage compris. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils. Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1. Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas la hausse de 8 % du 1er octobre pendant leur durée de blocage.</p>
+    <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 6 000 kWh, cuisson et eau chaude. B1 : environ 6 000 à 30 000 kWh, chauffage compris. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1. Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas la hausse de 8 % du 1er octobre pendant leur durée de blocage.</p>
   </section>
 
   <section class="panel" id="p-eau" role="tabpanel" aria-labelledby="tab-eau" hidden>
     <h2>Eau</h2>
-    <p class="lede">Le prix de l'eau change fortement d'une commune à l'autre. Choisissez votre département et votre ville pour estimer votre facture. Contrairement à l'électricité et au gaz, vous ne pouvez pas changer de fournisseur d'eau : le service est assuré par votre commune ou son syndicat. Cette page sert à estimer un budget, pas à comparer des offres. Les volumes d'eau se comptent en mètres cubes (m³) : 1 m³ = 1 000 litres, et un foyer de 2 personnes en consomme en moyenne une soixantaine par an.</p>
+    <p class="lede">Le prix de l'eau change fortement d'une commune à l'autre. Saisissez votre code postal pour estimer votre facture. Contrairement à l'électricité et au gaz, vous ne pouvez pas changer de fournisseur d'eau : le service est assuré par votre commune ou son syndicat. Cette page sert à estimer un budget, pas à comparer des offres. Les volumes d'eau se comptent en mètres cubes (m³) : 1 m³ = 1 000 litres, et un foyer de 2 personnes en consomme en moyenne une soixantaine par an.</p>
     <div id="eau-res"></div>
     <h3>Prix de l'eau par commune</h3>
     <div class="tablewrap"><table id="t-eau"></table></div>
     <h3>Moyenne par région</h3>
     <div class="tablewrap"><table id="t-reg"></table></div>
-    <p class="note">Prix en €/m³ TTC, eau potable et assainissement collectif compris, au 1er janvier 2026 (Kelwatt, d'après les données d'eaufrance). La moyenne nationale est de 4,69 €/m³ selon cette source, et de 4,89 €/m³ selon Selectra pour 2025. Le total par an se calcule ainsi : un abonnement estimé à 84 € (valeur moyenne de Selectra, car je n'ai pas l'abonnement de chaque commune) plus (prix par m³ − 0,70 €) × vos m³. Pour 120 m³, on retrouve le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Ma liste ne couvre que 77 communes : pour une autre commune, la page utilise la moyenne de la région, ou saisissez le prix de votre facture. * Valeur inhabituellement basse pour Antibes, à vérifier. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
+    <p class="note">Prix en €/m³ TTC, eau potable et assainissement collectif compris, au 1er janvier 2026 (Kelwatt, d'après les données d'eaufrance). La moyenne nationale est de 4,69 €/m³ selon cette source, et de 4,89 €/m³ selon Selectra pour 2025. Le total par an se calcule ainsi : un abonnement estimé à 84 € (valeur moyenne de Selectra, car je n'ai pas l'abonnement de chaque commune) plus (prix par m³ − 0,70 €) × vos m³. Pour 120 m³, on retrouve le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Ma liste ne couvre que 77 communes : pour une autre commune, la page déduit le département de votre code postal et utilise la moyenne de la région, ou saisissez le prix de votre facture. * Valeur inhabituellement basse pour Antibes, à vérifier. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
   </section>
 
 <section class="panel" id="p-abo" role="tabpanel" aria-labelledby="tab-abo" hidden>
@@ -368,10 +369,10 @@ a { color: var(--accent); }
       <p>Aujourd'hui, la liste contient 77 communes. Pour le Nord, seules 5 villes sur environ 650 communes sont proposées. Les autres reçoivent la moyenne de la région, qui peut être éloignée de leur vrai prix.</p>
       <ul>
         <li><strong>Ajouter des communes :</strong> par exemple les préfectures et les villes de plus de 20 000 habitants (environ 400 communes), à relever une par une avec le prix par m³ et, si possible, l'abonnement.</li>
-        <li><strong>Recherche par code postal ou par nom de commune</strong> au lieu d'une liste déroulante, dès que la liste sera longue.</li>
+        <li><strong>Code postal :</strong> en place. Le département se déduit du code postal et les 77 communes sont reconnues. Pour les autres, la moyenne de la région s'applique. La précision augmentera avec le nombre de communes ajoutées.</li>
         <li><strong>Saisie du prix de la facture :</strong> déjà possible, à mettre davantage en avant pour les communes absentes de la liste.</li>
         <li><strong>Source officielle :</strong> aucun téléchargement du prix de l'eau par commune (SISPEA, services.eaufrance.fr) n'a été trouvé à ce jour. À rechercher.</li>
-        <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui.</li>
+        <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui. Avec le code postal, il suffira d'une table « code postal → zone » pour que le gaz en tienne compte.</li>
       </ul>
     </div>
 
@@ -489,7 +490,7 @@ a { color: var(--accent); }
     </div>
     <div class="card">
       <h3>Exactitude des données</h3>
-      <p>Chaque ligne de prix indique sa source et sa date de relevé. Les prix et les primes viennent de pages de comparateurs, de sites de fournisseurs ou de textes officiels, avec la source indiquée sur chaque ligne. Les valeurs de départ ont été relevées surtout sur Selectra, un comparateur partenaire de fournisseurs. Un astérisque signale un montant estimé. Les prix et les primes changent souvent, et malgré le soin apporté, des erreurs sont possibles : l'éditeur ne garantit pas l'exactitude des données et n'est pas responsable d'une décision prise à partir d'elles. Pour signaler une erreur : benoittheret@hotmail.com.</p>
+      <p>Pour une comparaison officielle et personnalisée, utilisez le <a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">comparateur du Médiateur national de l'énergie</a> (autorité publique indépendante, ouvre un nouveau site). Chaque ligne de prix indique sa source et sa date de relevé. Les prix et les primes viennent de pages de comparateurs, de sites de fournisseurs ou de textes officiels, avec la source indiquée sur chaque ligne. Les valeurs de départ ont été relevées surtout sur Selectra, un comparateur partenaire de fournisseurs. Un astérisque signale un montant estimé. Les prix et les primes changent souvent, et malgré le soin apporté, des erreurs sont possibles : l'éditeur ne garantit pas l'exactitude des données et n'est pas responsable d'une décision prise à partir d'elles. Pour signaler une erreur : benoittheret@hotmail.com.</p>
     </div>
     <div class="card">
       <h3>Mise à jour des prix par une IA</h3>
@@ -498,7 +499,7 @@ a { color: var(--accent); }
     <div class="card">
       <h3>Données personnelles</h3>
       <ul>
-        <li><strong>Aucune collecte :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni statistiques de visite, ni cookies publicitaires. Ce que vous saisissez (logement, consommation, ville) reste dans votre navigateur.</li>
+        <li><strong>Aucune collecte :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni statistiques de visite, ni cookies publicitaires. Ce que vous saisissez (logement, consommation, code postal) reste dans votre navigateur : le code postal n'est envoyé à aucun service.</li>
         <li><strong>Mémorisation sur votre appareil :</strong> la description de votre logement, le choix du mode automatique et vos réglages sont gardés dans le stockage local de votre navigateur, pour votre prochaine visite. Rien n'est envoyé. Vous les effacez en supprimant les données du site dans votre navigateur.</li>
         <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil et ne charge aucune ressource d'un site tiers.</li>
         <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
@@ -534,11 +535,12 @@ a { color: var(--accent); }
     <strong>Sources</strong>
     <ul>
       <li><a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffage" target="_blank" rel="noopener">Consommation du chauffage électrique par m² (Selectra, d'après l'ADEME)</a> · <a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffe-eau" target="_blank" rel="noopener">Consommation du chauffe-eau (Selectra)</a> · <a href="https://ekwateur.fr/blog/ma-consommation-d-energie/consommation-electrique-maison/" target="_blank" rel="noopener">Consommation d'une maison (Ekwateur)</a></li>
-      <li><a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
+      <li><a href="https://www.geonames.org/" target="_blank" rel="noopener">Noms des communes par code postal (GeoNames, licence CC BY 4.0)</a> · <a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/prix" target="_blank" rel="noopener">Prix du kWh d'électricité, octobre 2026 (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/abonnement" target="_blank" rel="noopener">Abonnement d'électricité par fournisseur et composition (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement" target="_blank" rel="noopener">Abonnement de gaz (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-gaz/prix" target="_blank" rel="noopener">Prix du gaz par fournisseur (Selectra)</a></li>
-      <li><a href="https://www.kelwatt.fr/actu/prix-du-gaz-hausse-octobre-2026" target="_blank" rel="noopener">Prix repère du gaz, octobre 2026 (Kelwatt, d'après la CRE)</a></li>
+      <li><a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">Comparateur officiel d'offres d'électricité et de gaz du Médiateur national de l'énergie</a> (autorité publique indépendante) : pour comparer selon votre adresse et votre contrat</li>
+      <li><a href="https://www.kelwatt.fr/actu/prix-du-gaz-hausse-octobre-2026" target="_blank" rel="noopener">Prix repère du gaz, octobre 2026 (Kelwatt, d'après la CRE)</a> · <a href="https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html" target="_blank" rel="noopener">page officielle de la CRE</a></li>
       <li><a href="https://prix-elec.com/fournisseurs/edf/parrainage" target="_blank" rel="noopener">Parrainage EDF</a> · <a href="https://www.comparonslenergie.com/fournisseurs/engie/code-parrainage/" target="_blank" rel="noopener">Parrainage ENGIE</a> · <a href="https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage" target="_blank" rel="noopener">Parrainage Gaz de Bordeaux</a></li>
       <li><a href="https://leparrain.com/blog/meilleurs-parrainages-energie-comparatif" target="_blank" rel="noopener">Comparatif des parrainages énergie 2026</a> · <a href="https://www.jechange.fr/energie/electricite/news/parrainage-energie-rentree-septembre-2026-meilleurs-bonus" target="_blank" rel="noopener">Bonus de la rentrée 2026</a></li>
     </ul>
@@ -633,6 +635,7 @@ function srcCell(kind, r) {
   var da = kind === "elec" ? ABO_D[r.k] : null;
   var d = "relevé le " + dk;
   if (!r.ref && da && da !== dk) d = "kWh relevé le " + dk + ", abonnement le " + da;
+  if (!r.ref && kind === "gaz") d = "kWh relevé le " + dk + ", abonnement non relu automatiquement";
   var est = "";
   if (!r.ref && r._est) est = kind === "elec" ? " · abonnement estimé (écart du tarif réglementé)" : " · prix du kWh estimé d'après le prix repère";
   return '<td class="src">' + srcLink(a) + '<br><span class="offer">' + d + est + "</span></td>";
@@ -813,7 +816,7 @@ var UNITS = { c: "cycles par semaine", h: "heures par jour", km: "km par an" };
 var POSTES = [["chauffage", "Chauffage"], ["eau", "Eau chaude"], ["cuisine", "Cuisine"], ["froid", "Froid"], ["lavage", "Lavage"], ["multimedia", "Multimédia"], ["eclairage", "Éclairage"], ["clim", "Climatisation"], ["voiture", "Voiture électrique"], ["divers", "Veilles et divers"]];
 var POSTES_GAZ = [["chauffage", "Chauffage"], ["eau", "Eau chaude"], ["cuisson", "Cuisson"]];
 var fmtInt = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
-var lastLogt = { conso: 0, ck: "6", gconso: 0, gopt: "b1", eau: { m3: 0, dept: "", ville: "", prix: 0 } };
+var lastLogt = { conso: 0, ck: "6", gconso: 0, gopt: "b1", eau: { m3: 0, cp: "", dept: "", ville: "", prix: 0 } };
 
 function num(id, fb) { var el = $(id); var v = el ? parseFloat(el.value) : NaN; return isFinite(v) && v >= 0 ? v : fb; }
 function numInput(id, val, min, max, step, lab) { return '<input id="' + id + '"' + (lab ? ' aria-label="' + esc(lab) + '"' : "") + ' type="number" inputmode="decimal" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '">'; }
@@ -837,13 +840,14 @@ function buildLogt() {
     + fld("Cuisson", "l-cuisson", selectEl("l-cuisson", [["elec", "Électrique ou induction"], ["gaz", "Gaz"]], "elec"))
     + '</div><p class="note" id="l-hint"></p></div>';
   h += '<div class="card"><h3>Localisation et eau</h3><div class="grid2">'
-    + fld("Département", "l-dept", selectEl("l-dept", deptOpts(), ""))
-    + fld("Ville", "l-ville", '<select id="l-ville"></select>')
+    + fld("Code postal", "l-cp", '<input id="l-cp" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="ex. 69003"><span class="offer" id="l-cp-info" role="status" aria-live="polite"></span>')
+    + '<div class="field" id="l-ville-f" hidden><label for="l-ville">Commune</label><select id="l-ville"></select></div>'
+    + '<select id="l-dept" hidden aria-hidden="true" tabindex="-1">' + deptOpts().map(function (o) { return '<option value="' + o[0] + '">' + esc(o[1]) + "</option>"; }).join("") + "</select>"
     + fld("Prix de l'eau si vous le connaissez (€/m³ TTC)", "l-prixeau", numInput("l-prixeau", "", 0, 20, 0.01))
     + fld("Douches par personne et par semaine", "l-douches", numInput("l-douches", 7, 0, 30, 1))
     + fld("Bains par personne et par semaine", "l-bains", numInput("l-bains", 0, 0, 30, 1))
     + fld("Jardin, piscine, voiture (m³ par an)", "l-jardin", numInput("l-jardin", 0, 0, 500, 1))
-    + '</div><p class="note">La localisation sert surtout à estimer le prix de l\'eau, qui varie beaucoup d\'une commune à l\'autre. Le tarif réglementé de l\'électricité est le même partout en métropole. Pour le gaz, il existe 6 zones tarifaires (de la zone 1, la moins chère, à la zone 6) : pour l\'option B1, le prix repère de la CRE ne change pas selon la zone, mais certaines offres varient de quelques millièmes d\'euro par kWh (exemple EDF Avantage Gaz : 0,1265 € en zone 1 et 0,1300 € en zone 6). Je n\'ai pas de liste des zones par commune : <a href="https://particuliers.engie.fr/gaz-naturel/conseils-gaz-naturel/conseils-tarifs-gaz-naturel/connaitre-zone-tarifaire-gaz.html" target="_blank" rel="noopener">trouvez votre zone chez ENGIE</a>. Les lave-linge et lave-vaisselle du tableau des appareils comptent aussi dans la consommation d\'eau.</p></div>';
+    + '</div><p class="note">Le code postal sert surtout à estimer le prix de l\'eau, qui varie beaucoup d\'une commune à l\'autre. Il reste dans votre navigateur. Le tarif réglementé de l\'électricité est le même partout en métropole. Pour le gaz, il existe 6 zones tarifaires (de la zone 1, la moins chère, à la zone 6) : pour l\'option B1, le prix repère de la CRE ne change pas selon la zone, mais certaines offres varient de quelques millièmes d\'euro par kWh (exemple EDF Avantage Gaz : 0,1265 € en zone 1 et 0,1300 € en zone 6). Je n\'ai pas de liste des zones par commune : <a href="https://particuliers.engie.fr/gaz-naturel/conseils-gaz-naturel/conseils-tarifs-gaz-naturel/connaitre-zone-tarifaire-gaz.html" target="_blank" rel="noopener">trouvez votre zone chez ENGIE</a>. Les lave-linge et lave-vaisselle du tableau des appareils comptent aussi dans la consommation d\'eau.</p></div>';
   h += '<div class="card"><h3>Pièces</h3><div class="grid2">'
     + ROOMS.map(function (r) { return fld(r.label, "r-" + r.id, numInput("r-" + r.id, r.n, 0, 20, 1)); }).join("")
     + '</div><p class="note">Le nombre de pièces sert à estimer l\'éclairage (LED de 8 W, 3 heures par jour) et à suggérer le nombre de points de chauffage.</p></div>';
@@ -866,14 +870,16 @@ function saveLogt() {
 function loadLogt() {
   try {
     var o = JSON.parse(localStorage.getItem(LOGT_KEY) || "null");
-    if (!o) { fillVilles("l-ville", "", ""); return; }
-    Object.keys(o).forEach(function (id) { var el = $(id); if (el && id !== "l-ville") el.value = o[id]; });
+    if (o) {
+      Object.keys(o).forEach(function (id) { var el = $(id); if (el && id !== "l-ville" && id !== "l-dept") el.value = o[id]; });
+      if (o["l-cp"] === undefined && o["l-ville"] && CITY_CP[o["l-ville"]]) $("l-cp").value = CITY_CP[o["l-ville"]][0];
+    }
   } catch (e) { /* ignoré */ }
-  fillVilles("l-ville", $("l-dept").value, o && o["l-ville"]);
+  applyCP("l-", o && o["l-ville"]);
 }
 
 function readLogt() {
-  var s = { surface: num("l-surface", 60), pers: num("l-pers", 2), iso: $("l-iso").value, heat: $("l-heat").value, pts: num("l-pts", 4), w: num("l-w", 1000), ecs: $("l-ecs").value, cuisson: $("l-cuisson").value, dept: $("l-dept").value, ville: $("l-ville").value, prixEau: num("l-prixeau", 0), douches: num("l-douches", 7), bains: num("l-bains", 0), jardin: num("l-jardin", 0), rooms: {}, apps: {} };
+  var s = { surface: num("l-surface", 60), pers: num("l-pers", 2), iso: $("l-iso").value, heat: $("l-heat").value, pts: num("l-pts", 4), w: num("l-w", 1000), ecs: $("l-ecs").value, cuisson: $("l-cuisson").value, cp: $("l-cp").value, dept: $("l-dept").value, ville: $("l-ville").value, prixEau: num("l-prixeau", 0), douches: num("l-douches", 7), bains: num("l-bains", 0), jardin: num("l-jardin", 0), rooms: {}, apps: {} };
   ROOMS.forEach(function (r) { s.rooms[r.id] = num("r-" + r.id, r.n); });
   APPS.forEach(function (a) { s.apps[a.id] = { q: num("a-" + a.id + "-q", a.q), u: num("a-" + a.id + "-u", a.u) }; });
   return s;
@@ -937,7 +943,7 @@ function renderLogt() {
   var s = readLogt(), r = computeLogt(s);
   var kva = kvaStep(r.peakW), ck = kva <= 3 ? "3" : kva <= 6 ? "6" : "9";
   var conso = Math.round(r.eTot / 100) * 100, gconso = Math.round(r.gTot / 100) * 100;
-  lastLogt = { conso: conso, ck: ck, gconso: gconso, gopt: gasOptionFor(r.gTot), eau: { m3: Math.round(r.eau.m3), dept: s.dept, ville: s.ville, prix: s.prixEau } };
+  lastLogt = { conso: conso, ck: ck, gconso: gconso, gopt: gasOptionFor(r.gTot), eau: { m3: Math.round(r.eau.m3), cp: s.cp, dept: s.dept, ville: s.ville, prix: s.prixEau } };
   $("l-hint").textContent = "Pièces à chauffer d'après votre liste : " + r.heated + ". Les radiateurs vont de 750 à 2 500 W.";
   APPS.forEach(function (a) { var c = $("k-" + a.id); if (c) c.textContent = fmtInt.format(r.perApp[a.id] || 0); });
 
@@ -973,9 +979,8 @@ function renderLogt() {
 
 function initLogt() {
   buildLogt();
-  $("logt-form").addEventListener("input", function () { saveLogt(); renderLogt(); });
+  $("logt-form").addEventListener("input", function (ev) { if (ev.target && ev.target.id === "l-cp") applyCP("l-"); saveLogt(); renderLogt(); });
   $("logt-form").addEventListener("change", function (ev) {
-    if (ev.target && ev.target.id === "l-dept") fillVilles("l-ville", $("l-dept").value, "");
     saveLogt(); renderLogt();
   });
   $("logt-res").addEventListener("click", function (ev) {
@@ -1043,18 +1048,79 @@ function deptOpts() {
   return o;
 }
 
-function fillVilles(selId, dept, selected) {
+var CITY_CP = {"Lyon": ["69001", "69002", "69003", "69004", "69005", "69006", "69007", "69008", "69009"], "Annecy": ["74000", "74370", "74600", "74940", "74960"], "Clermont-Ferrand": ["63000", "63100"], "Grenoble": ["38000", "38100"], "Valence": ["26000"], "Aix-les-Bains": ["73100"], "Dijon": ["21000"], "Auxerre": ["89000", "89290"], "Nevers": ["58000"], "Besançon": ["25000"], "Pontarlier": ["25300"], "Héricourt": ["70400"], "Rennes": ["35000", "35200", "35700"], "Saint-Brieuc": ["22000"], "Lorient": ["56100"], "Pontivy": ["56300"], "Saint-Malo": ["35400"], "Brest": ["29200"], "Tours": ["37000", "37100", "37200"], "Orléans": ["45000", "45100"], "Vendôme": ["41100"], "Châteauroux": ["36000"], "Montargis": ["45200"], "Bourges": ["18000"], "Strasbourg": ["67000", "67100", "67200"], "Metz": ["57000", "57050", "57070"], "Nancy": ["54000", "54100"], "Reims": ["51100"], "Mulhouse": ["68100", "68200"], "Colmar": ["68000"], "Lille": ["59000", "59160", "59260", "59777", "59800"], "Dunkerque": ["59140", "59240", "59279", "59430", "59640"], "Valenciennes": ["59300"], "Calais": ["62100"], "Roubaix": ["59100"], "Douai": ["59500"], "Paris": ["75001", "75002", "75003", "75004", "75005", "75006", "75007", "75008", "75009", "75010", "75011", "75012", "75013", "75014", "75015", "75016", "75017", "75018", "75019", "75020", "75116"], "Versailles": ["78000"], "Vincennes": ["94300"], "Nanterre": ["92000"], "Melun": ["77000"], "Rouen": ["76000", "76100"], "Caen": ["14000"], "Le Havre": ["76600", "76610", "76620"], "Alençon": ["61000"], "Bayeux": ["14400"], "Évreux": ["27000"], "Bordeaux": ["33000", "33100", "33200", "33300", "33800"], "Poitiers": ["86000"], "Limoges": ["87000", "87100", "87280"], "Niort": ["79000"], "Biarritz": ["64200"], "Agen": ["47000"], "Toulouse": ["31000", "31100", "31200", "31300", "31400", "31500"], "Montpellier": ["34000", "34070", "34080", "34090"], "Perpignan": ["66000", "66100"], "Nîmes": ["30000", "30900"], "Montauban": ["82000"], "Narbonne": ["11100"], "Nantes": ["44000", "44100", "44200", "44300"], "Angers": ["49000", "49100"], "Le Mans": ["72000", "72100"], "Saint-Nazaire": ["44600"], "Laval": ["53000"], "Montaigu-Vendée": ["85600"], "Marseille": ["13001", "13002", "13003", "13004", "13005", "13006", "13007", "13008", "13009", "13010", "13011", "13012", "13013", "13014", "13015", "13016"], "Cannes": ["06150", "06400"], "Nice": ["06000", "06100", "06200", "06300"], "Aix-en-Provence": ["13080", "13090", "13100", "13290", "13540"], "Antibes": ["06160", "06600"], "Saint-Tropez": ["83990"], "Ajaccio": ["20000", "20090", "20167"], "Corte": ["20250"], "Bastia": ["20200", "20600"], "Bonifacio": ["20169"], "L'Île-Rousse": ["20220"], "Porto-Vecchio": ["20137"]};
+var CP_CITY = {};
+Object.keys(CITY_CP).forEach(function (n) { CITY_CP[n].forEach(function (c) { CP_CITY[c] = n; }); });
+
+// Le département se déduit des deux premiers chiffres du code postal (Corse : 20000-20199 = 2A, au-delà 2B).
+function deptFromCP(cp) {
+  if (!/^[0-9]{5}$/.test(cp)) return "";
+  var p = cp.slice(0, 2);
+  if (p === "20") return cp < "20200" ? "2A" : "2B";
+  return DEPT_BY[p] ? p : "";
+}
+function hasCities(dept) { return CITIES.some(function (c) { return c.d === dept; }); }
+// Noms des communes par code postal : fichier codes-postaux.json (GeoNames, CC BY 4.0), chargé à part.
+// Sans serveur (fichier ouvert directement), seules les 77 communes de la liste sont reconnues.
+var CP_PLACES = null;
+function loadCPPlaces() {
+  try {
+    fetch("codes-postaux.json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+      CP_PLACES = j;
+      if ($("l-cp") && $("l-cp").value) applyCP("l-", $("l-ville").value);
+      if ($("cp") && $("cp").value) applyCP("", $("ville").value);
+      refresh(); renderLogt();
+    }).catch(function () { /* repli : liste de 77 communes */ });
+  } catch (e) { /* repli */ }
+}
+function foldName(n) { var t = n.normalize ? n.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : n; return t.toLowerCase(); }
+function resolveCP(raw) {
+  var cp = (raw || "").replace(/\s/g, "");
+  if (!cp) return { dept: "", ville: "", names: [], msg: "Facultatif. Sans code postal, la moyenne nationale est utilisée." };
+  if (!/^[0-9]{5}$/.test(cp)) return { dept: "", ville: "", names: [], msg: "Un code postal compte 5 chiffres." };
+  var d = deptFromCP(cp);
+  if (!d) return { dept: "", ville: "", names: [], msg: "Code postal non reconnu (métropole uniquement) : moyenne nationale utilisée." };
+  var names = CP_PLACES && CP_PLACES[cp] ? CP_PLACES[cp].split("|") : [];
+  var v = CP_CITY[cp] || "";
+  if (!v) names.forEach(function (n) { if (!v && CITIES.some(function (c) { return c.d === d && c.n === n; })) v = n; });
+  if (v) { // la commune de ma liste prend la place de ses variantes d'orthographe
+    names = names.filter(function (n) { return foldName(n) !== foldName(v); });
+    names.unshift(v);
+  }
+  var priced = v && CITIES.some(function (c) { return c.d === d && c.n === v; });
+  var first = priced ? v : (names[0] || "");
+  var lab = names.join(", ");
+  if (priced) return { dept: d, ville: v, names: names, msg: lab + " (" + deptLabel(d) + "). Prix utilisé : celui de " + v + "." };
+  var tail = "moyenne de la région utilisée, car aucune de ces communes n'est dans ma liste de prix.";
+  if (names.length > 1) return { dept: d, ville: first, names: names, msg: lab + " (" + deptLabel(d) + "). Choisissez votre commune ci-dessous. Prix de l'eau : " + tail };
+  if (names.length) return { dept: d, ville: first, names: names, msg: lab + " (" + deptLabel(d) + "). Prix de l'eau : " + tail };
+  return { dept: d, ville: "", names: [], msg: deptLabel(d) + (CP_PLACES ? ". Code postal introuvable dans la liste des communes : " : ". ") + "moyenne de la région utilisée." };
+}
+// prefix "" = barre de l'onglet Eau ; "l-" = onglet Mon logement
+function applyCP(prefix, selectedVille) {
+  var r = resolveCP($(prefix + "cp").value);
+  $(prefix + "dept").value = r.dept;
+  fillVilles(prefix + "ville", r.dept, selectedVille || r.ville, r.names);
+  var info = $(prefix + "cp-info");
+  if (info) info.textContent = r.msg;
+  var show = r.names.length > 0 || hasCities(r.dept);
+  if (prefix === "l-") $("l-ville-f").hidden = !show;
+  else $("f-ville").hidden = $("f-cp").hidden || !show;
+}
+
+function fillVilles(selId, dept, selected, names) {
   var el = $(selId);
   if (!el) return;
   var opts;
-  if (!dept) opts = [["", "Choisissez d'abord un département"]];
+  if (!dept) opts = [["", "Saisissez d'abord un code postal"]];
+  else if (names && names.length) opts = names.map(function (n) { return [n, n]; });
   else {
     opts = [["", "Autre commune (moyenne de la région)"]];
     CITIES.filter(function (c) { return c.d === dept; }).forEach(function (c) { opts.push([c.n, c.n]); });
   }
   el.innerHTML = opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
   var ok = selected && opts.some(function (o) { return o[0] === selected; });
-  el.value = ok ? selected : "";
+  el.value = ok ? selected : (names && names.length ? names[0] : "");
 }
 
 function eauPrice(dept, ville, over) {
@@ -1069,7 +1135,7 @@ function eauPrice(dept, ville, over) {
     if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", car votre commune n'est pas dans la liste", exact: false };
     return { p: EAU_NAT, src: "moyenne nationale, car la moyenne de la région " + reg[0] + " est peu fiable", exact: false };
   }
-  return { p: EAU_NAT, src: "moyenne nationale, aucun département choisi", exact: false };
+  return { p: EAU_NAT, src: "moyenne nationale, aucun code postal valide", exact: false };
 }
 function eauCost(p, v) { return EAU_ABO + Math.max(0, p - EAU_ABO_PM3) * v; }
 
@@ -1126,7 +1192,7 @@ function initEau() {
 
 /* ---------- Interface ---------- */
 var TABS = ["home", "logt", "elec", "gaz", "eau", "abo", "prime", "memo", "reg", "legal"];
-var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauDept: "", eauVille: "", eauPrix: 0 };
+var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0 };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -1140,7 +1206,7 @@ function syncAuto() {
   $("conso").disabled = eff;
   if (t === "elec") $("kva").disabled = eff;
   if (t === "gaz") $("gopt").disabled = eff;
-  if (t === "eau") { $("dept").disabled = eff; $("prixeau").disabled = eff; }
+  if (t === "eau") { $("cp").disabled = eff; $("prixeau").disabled = eff; }
   if (eff) {
     if (t === "elec") {
       $("conso").value = lastLogt.conso;
@@ -1153,10 +1219,10 @@ function syncAuto() {
     } else {
       var L = lastLogt.eau;
       $("conso").value = L.m3;
-      $("dept").value = L.dept;
-      fillVilles("ville", L.dept, L.ville);
+      $("cp").value = L.cp || "";
+      applyCP("", L.ville);
       $("prixeau").value = L.prix > 0 ? L.prix : "";
-      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + L.ville : "") : ", aucun département choisi") + ".";
+      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + L.ville : "") : ", aucun code postal valide") + ".";
     }
   } else {
     var typed = parseFloat($("conso").value) || 0;
@@ -1164,7 +1230,7 @@ function syncAuto() {
     else if (t === "eau") $("auto-hint").textContent = "Mode manuel : saisissez votre consommation d'eau en m³ et votre localisation.";
     else $("auto-hint").textContent = "Mode manuel : saisissez votre consommation.";
   }
-  if (t === "eau") $("ville").disabled = eff || !$("dept").value;
+  if (t === "eau") $("ville").disabled = eff;
 }
 
 function saveAuto() { try { localStorage.setItem("auto-v1", JSON.stringify({ e: state.autoElec, g: state.autoGaz, w: state.autoEau })); } catch (e) { /* ignoré */ } }
@@ -1182,6 +1248,7 @@ function refresh() {
   if (state.tab === "gaz") state.gasConso = conso();
   if (state.tab === "eau") {
     state.eauConso = conso();
+    state.eauCp = $("cp").value;
     state.eauDept = $("dept").value;
     state.eauVille = $("ville").value;
     state.eauPrix = parseFloat($("prixeau").value) || 0;
@@ -1318,8 +1385,8 @@ function setTab(t) {
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz";
-  $("f-dept").hidden = t !== "eau";
-  $("f-ville").hidden = t !== "eau";
+  $("f-cp").hidden = t !== "eau";
+  $("f-ville").hidden = true;
   $("f-prixeau").hidden = t !== "eau";
   var eau = t === "eau";
   $("conso").setAttribute("min", eau ? "1" : "100");
@@ -1330,8 +1397,8 @@ function setTab(t) {
   if (t === "eau") {
     $("conso").value = state.eauConso;
     $("conso-label").textContent = "Consommation d'eau (m³ par an)";
-    $("dept").value = state.eauDept;
-    fillVilles("ville", state.eauDept, state.eauVille);
+    $("cp").value = state.eauCp;
+    applyCP("", state.eauVille);
     $("prixeau").value = state.eauPrix > 0 ? state.eauPrix : "";
   }
   a11yTabs();
@@ -1348,7 +1415,7 @@ $("conso").addEventListener("input", refresh);
   });
 });
 $("kva").addEventListener("change", refresh);
-$("dept").addEventListener("change", function () { fillVilles("ville", $("dept").value, ""); refresh(); });
+$("cp").addEventListener("input", function () { applyCP(""); refresh(); });
 $("ville").addEventListener("change", refresh);
 $("prixeau").addEventListener("input", refresh);
 $("auto").addEventListener("change", function () {
@@ -1364,6 +1431,7 @@ renderPrimes();
 loadAuto();
 initReg(); initEau();
 initLogt();
+loadCPPlaces();
 setTab("home");
 initA11y();
 staleCheck();
