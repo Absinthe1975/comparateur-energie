@@ -212,7 +212,7 @@ def ask(label, url, text, needle, fields, state, rep, extra=""):
     h = hashlib.sha256((body + "|" + needle + "|" + ",".join(fields)).encode()).hexdigest()[:16]
     key = f"{url}|{needle}"
     if state.get(key) == h and not os.environ.get("FORCE"):
-        rep.same.append(f"{label} : page inchangée depuis la dernière lecture"); return None, None
+        rep.same.append(f"{label} : page inchangée depuis la dernière lecture"); return None, "inchangee"
     prompt = (f"Page : {url}\n{extra}\nChamps demandés :\n" + "\n".join(f"- {k} : {v}" for k, v in fields.items())
               + '\n\nRéponds par {"fields": {"<nom>": {"value": ..., "quote": ...}, ...}}.\n\n=== TEXTE DE LA PAGE ===\n' + body)
     try:
@@ -241,7 +241,11 @@ def update_offers(data, src, state, rep, kinds, cache):
             else:
                 fields["kwh"] = "prix du kWh TTC de gaz, profil chauffage (B1), pour cette offre, en €/kWh"
             got, commit = ask(label, url, text, r["offer"], fields, state, rep, f"Offre cherchée : {r['offer']} ({r['name']}), {'électricité' if kind == 'elec' else 'gaz'}.")
-            if got is None: continue
+            if got is None:
+                if commit == "inchangee":   # même texte que la dernière lecture vérifiée : le prix est confirmé aujourd'hui
+                    r["d"] = today
+                    if kind == "elec": data.setdefault("abo_d", {})[r["k"]] = today
+                continue
             pn = norm(text)
             q = (got.get("offre") or {}).get("quote")
             if not q or norm(q) not in pn or fold(r["offer"]).split(" ")[0] not in fold(q): rep.failed.append(f"{label} : offre non retrouvée dans la page"); continue
@@ -340,6 +344,32 @@ def maintenant():
         return datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=2)
 
 
+MOIS = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
+
+def update_trend(data, src, state, rep, cache, avant, now):
+    """Compare la variation du prix repère annoncée par le médiateur (energie-info.fr) avec celle de notre prix B1.
+    Information seulement : ne modifie aucun prix."""
+    tpl = src.get("references", {}).get("gas_trend_template")
+    if not tpl: return
+    url = tpl.format(mois=MOIS[now.month - 1], annee=now.year); label = "contrôle · variation du prix repère du gaz (médiateur)"
+    text = pagetext(url, cache, state, rep, label)
+    if not text: return
+    f = {"variation": "variation annoncée du prix repère du gaz en pourcentage TTC pour le mois en cours, en valeur absolue (ex. 6,3)"}
+    got, commit = ask(label, url, text, "prix repère", f, state, rep)
+    if not got: return
+    pn = norm(text); v, why = check_field(got.get("variation"), pn, 0, 50)
+    if v is None: rep.review.append(f"{label} : valeur refusée ({why})"); return
+    q = norm(got["variation"]["quote"]); sens = 1 if "hausse" in q or "augment" in q else (-1 if "baisse" in q or "diminu" in q else 0)
+    if not sens: rep.review.append(f"{label} : sens (hausse ou baisse) non confirmé dans la phrase citée"); return
+    commit(); annonce = sens * v
+    old, new = avant, data["gas_b1"]["a"]
+    if old and abs(new - old) > 1e-9:
+        nous = (new - old) / old * 100
+        msg = f"{label} : annoncé {annonce:+.1f} % TTC, notre prix B1 du kWh {old} → {new} ({nous:+.1f} %)"
+        (rep.review if abs(nous - annonce) > 4 else rep.same).append(msg + (" : écart à vérifier" if abs(nous - annonce) > 4 else " : cohérent"))
+    else:
+        rep.same.append(f"{label} : annoncé {annonce:+.1f} % TTC, notre prix B1 du kWh est inchangé ({new})")
+
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs")
     a = ap.parse_args(argv); kinds = set(a.only.split(","))
@@ -348,7 +378,8 @@ def main(argv=None):
     rep, cache = Report(), {}
     if kinds & {"elec", "gaz"}: update_offers(data, src, state, rep, kinds, cache)
     if "primes" in kinds: update_primes(data, src, state, rep, cache)
-    if "refs" in kinds: update_refs(data, src, state, rep, cache)
+    avant_b1 = data["gas_b1"]["a"]
+    if "refs" in kinds: update_refs(data, src, state, rep, cache); update_trend(data, src, state, rep, cache, avant_b1, now)
     md = rep.md(data["updated_label"]); print(md)
     if not a.dry_run:
         # la date globale ne change que si au moins une valeur a été vérifiée avec succès
