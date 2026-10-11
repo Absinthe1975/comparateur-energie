@@ -54,6 +54,17 @@ class T(unittest.TestCase):
     def test_offre_absente(self):
         self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["offre"]["quote"] = "Offre Fantôme"
         r, _ = self.run_engie(); self.assertEqual(r["a"], 0.2330)
+    def test_accents_differents_acceptes(self):
+        d = json.load(open(up.DATA, encoding="utf-8"))
+        for r in d["elec"]:
+            if r["k"] == "engie": r["offer"] = "Électricité Référence"
+        json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        up.fetch_text = lambda url: ("Offres ENGIE. Electricite Reference 3 ans. Le prix du kWh est de 0,2400 € TTC en option Base. L'abonnement 6 kVA est de 190,00 € par an." if "engie" in url else (_ for _ in ()).throw(RuntimeError("404")))
+        self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["offre"]["quote"] = "Electricite Reference 3 ans"
+        r, _ = self.run_engie(); self.assertEqual(r["a"], 0.24)
+    def test_offre_a_verifier_a_la_main_ignoree(self):
+        up.main(["--only", "gaz"]); rap = open(up.REPORT, encoding="utf-8").read()
+        self.assertIn("à vérifier à la main", rap)
     def test_source_en_echec_ne_casse_rien(self):
         up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 18)
 
