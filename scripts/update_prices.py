@@ -277,6 +277,8 @@ def update_primes(data, src, state, rep, cache):
     for k, p in data["primes"].items():
         if not p.get("s"): continue
         url, label = src.get("primes_pages", {}).get(k) or p["s"][1], f"prime · {p['name']}"
+        raison = src.get("manuel", {}).get("primes", {}).get(k)
+        if raison: rep.same.append(f"{label} : à vérifier à la main ({raison})"); continue
         text = pagetext(url, cache, state, rep, label)
         if not text: continue
         fields = {"parrain": f"montant de la prime du parrain chez {p['name']}, en euros (null si ce n'est pas une somme en euros)",
@@ -302,14 +304,12 @@ def update_refs(data, src, state, rep, cache):
     text = pagetext(url, cache, state, rep, label)
     if text:
         f = {"kwh_3_6": "prix du kWh TTC du tarif réglementé Bleu, option Base, 3 à 6 kVA (€/kWh)",
-             "kwh_9": "prix du kWh TTC du tarif réglementé Bleu, option Base, 9 kVA et plus (€/kWh)",
-             "abo6": "abonnement annuel TTC du tarif réglementé, option Base, 6 kVA (€/an)"}
+             "kwh_9": "prix du kWh TTC du tarif réglementé Bleu, option Base, 9 kVA et plus (€/kWh)"}
         got, commit = ask(label, url, text, "tarif réglementé", f, state, rep)
         if got:
             pn = norm(text); ref = data["elec_ref"]
             for fld, key, old, lo_hi, setter in (("kwh_3_6", "a", ref["a"], "elec_kwh", lambda v: ref.__setitem__("a", v)),
-                                                 ("kwh_9", "b", ref["b"], "elec_kwh", lambda v: ref.__setitem__("b", v)),
-                                                 ("abo6", "abo6", data["trv_abo"]["6"], "elec_abo", lambda v: data["trv_abo"].__setitem__("6", v))):
+                                                 ("kwh_9", "b", ref["b"], "elec_kwh", lambda v: ref.__setitem__("b", v))):
                 v, why = check_field(got.get(fld), pn, *BOUNDS[lo_hi])
                 if v is not None and fld == "kwh_3_6": ref["s"] = [urllib.parse.urlsplit(url).netloc.replace("www.", ""), url]
                 if v is None: rep.review.append(f"{label} : {fld} refusé ({why})")
@@ -318,13 +318,11 @@ def update_refs(data, src, state, rep, cache):
     url = src["references"]["gas_ref"]; label = "référence · prix repère du gaz (CRE)"
     text = pagetext(url, cache, state, rep, label)
     if text:
-        f = {"b1_kwh": "prix repère CRE du gaz, option B1 (chauffage), €/kWh TTC", "b1_abo": "prix repère CRE, option B1, abonnement annuel TTC",
-             "b0_kwh": "prix repère CRE du gaz, option B0 (cuisson et eau chaude), €/kWh TTC", "b0_abo": "prix repère CRE, option B0, abonnement annuel TTC"}
+        f = {"b1_kwh": "prix repère CRE du gaz, option B1 (chauffage), €/kWh TTC", "b0_kwh": "prix repère CRE du gaz, option B0 (cuisson et eau chaude), €/kWh TTC"}
         got, commit = ask(label, url, text, "prix repère", f, state, rep)
         if got:
             pn = norm(text)
-            for fld, tgt, key, b in (("b1_kwh", data["gas_b1"], "a", "gas_kwh"), ("b1_abo", data["gas_b1"], "abo", "gas_abo"),
-                                     ("b0_kwh", data["gas_b0"], "a", "gas_kwh"), ("b0_abo", data["gas_b0"], "abo", "gas_abo")):
+            for fld, tgt, key, b in (("b1_kwh", data["gas_b1"], "a", "gas_kwh"), ("b0_kwh", data["gas_b0"], "a", "gas_kwh")):
                 v, why = check_field(got.get(fld), pn, *BOUNDS[b])
                 if v is not None and fld == "b1_kwh": data["gas_ref"]["s"] = [urllib.parse.urlsplit(url).netloc.replace("www.", ""), url]
                 if v is None: rep.review.append(f"{label} : {fld} refusé ({why})")
