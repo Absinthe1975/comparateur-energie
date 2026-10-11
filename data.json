@@ -21,7 +21,11 @@
    "offer": "Électricité 100 % renouvelable Europe",
    "a": 0.1753,
    "b": 0.1906,
-   "d": "9 oct. 2026"
+   "d": "11 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ]
   },
   {
    "k": "total",
@@ -706,7 +710,7 @@
   }
  },
  "abo_d": {
-  "ekw": "9 oct. 2026",
+  "ekw": "11 oct. 2026",
   "total": "11 oct. 2026",
   "gdb": "11 oct. 2026",
   "geg": "11 oct. 2026",
@@ -725,5 +729,5 @@
   "ilek": "11 oct. 2026",
   "enercoop": "11 oct. 2026"
  },
- "updated_time": "13:19"
+ "updated_time": "13:39"
 }
