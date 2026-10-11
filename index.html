@@ -1,0 +1,1371 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Prix du kWh, abonnements et primes de parrainage des fournisseurs d'électricité et de gaz, avec l'eau et une estimation de consommation selon votre logement.">
+<title>Comparateur énergie</title>
+<style>
+/* Layout: une colonne, bandeau de réglages collant, le tableau de prix est le centre de la page. */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --fg: #14202b;
+  --muted: #566879;
+  --line: #d8e0e6;
+  --accent: #0b6e6e;
+  --accent-soft: #dcf0ee;
+  --warn: #8f5700;
+  --warn-soft: #fbecce;
+  --good: #14713f;
+  --bad: #a3361f;
+  --ref-bg: #eaeff3;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d151c; --surface: #141f28; --fg: #e6edf2; --muted: #92a4b3; --line: #25333e;
+    --accent: #4fc3b8; --accent-soft: #12332f; --warn: #e8b25a; --warn-soft: #382c12;
+    --good: #5cc98a; --bad: #f08a72; --ref-bg: #1b2833;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d151c; --surface: #141f28; --fg: #e6edf2; --muted: #92a4b3; --line: #25333e;
+  --accent: #4fc3b8; --accent-soft: #12332f; --warn: #e8b25a; --warn-soft: #382c12;
+  --good: #5cc98a; --bad: #f08a72; --ref-bg: #1b2833;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; padding-inline: 16px; padding-block: 0; }
+.wrap { max-width: 980px; margin-inline: auto; padding-block: 28px 56px; display: flex; flex-direction: column; gap: 20px; }
+h1, h2 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.08; }
+h2 { font-size: 1.3rem; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+header { display: flex; flex-direction: column; gap: 10px; }
+.stamp { font-family: var(--font-data); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.sum { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sum .label { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.sum .big { font-family: var(--font-data); font-size: 1.5rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.sum .who { color: var(--muted); font-size: 13px; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; border-bottom: 1px solid var(--line); }
+.tabs { display: flex; gap: 4px; background: var(--ref-bg); padding: 4px; border-radius: 8px; }
+.tabs button { font: inherit; font-weight: 500; border: 0; background: transparent; color: var(--muted); padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+.cta { font: inherit; font-weight: 600; color: #fff; background: var(--accent); border: 0; border-radius: 8px; padding: 12px 22px; cursor: pointer; }
+html[data-theme="dark"] .cta { color: #0d151c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cta { color: #0d151c; } }
+.cta:hover { filter: brightness(1.08); }
+.tag.best { background: var(--accent-soft); color: var(--accent); }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 20; background: var(--accent); color: #fff; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; }
+.skip:focus { top: 8px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skip { color: #0d151c; } }
+:root[data-theme="dark"] .skip { color: #0d151c; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+main { display: flex; flex-direction: column; gap: 20px; outline: none; }
+main h2:focus, .panel h2:focus { outline: none; }
+.tablewrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (pointer: coarse) {
+  .tabs button, .sortbtn, .cta, .tile, input, select { min-height: 44px; }
+  .autoop input[type="checkbox"] { width: 24px; height: 24px; }
+  .autoop label { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+}
+@media (forced-colors: active) {
+  .tabs button[aria-selected="true"] { outline: 2px solid CanvasText; }
+  .tag, .badge { border: 1px solid CanvasText; }
+}
+.field[hidden] { display: none !important; }
+.field { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.field label { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+input, select { font: inherit; font-family: var(--font-data); color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; min-width: 0; }
+input[type="number"] { width: 8.5rem; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel[hidden] { display: none !important; }
+.panel { display: flex; flex-direction: column; gap: 12px; }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; min-width: 780px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); background: var(--surface); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.prov { font-weight: 600; }
+.offer { color: var(--muted); font-size: 13px; }
+tr.ref td { background: var(--ref-bg); }
+.tag { display: inline-block; font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; background: var(--fg); color: var(--bg); padding: 1px 6px; border-radius: 3px; margin-left: 6px; vertical-align: 1px; }
+.delta-good { color: var(--good); }
+.delta-bad { color: var(--bad); }
+.prime { display: flex; flex-direction: column; gap: 1px; font-size: 13px; white-space: nowrap; }
+.prime b { font-family: var(--font-data); font-weight: 500; }
+.prime .none { color: var(--muted); }
+.chk { font-size: 11px; color: var(--warn); }
+.badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.badge.check { background: var(--warn-soft); color: var(--warn); }
+.badge.none { background: var(--ref-bg); color: var(--muted); }
+.note { font-size: 13px; color: var(--muted); max-width: 80ch; }
+.callout { background: var(--accent-soft); border-radius: 8px; padding: 12px 16px; font-size: 14px; max-width: 80ch; }
+h3 { font-family: var(--font-display); font-size: 1.05rem; margin: 6px 0 0; }
+.sub { display: flex; flex-direction: column; gap: 10px; }
+.tabs { overflow-x: auto; max-width: 100%; }
+.tabs button { white-space: nowrap; }
+.logt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: 20px; align-items: start; }
+.logt-form { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.logt-res { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 78px); display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.card .label { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.card .big { font-family: var(--font-data); font-size: 1.5rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.tile { text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; }
+.tile:hover { border-color: var(--accent); }
+.tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tile strong { color: var(--accent); }
+.tile span { color: var(--muted); font-size: 14px; }
+.steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; max-width: 70ch; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.grid2 input, .grid2 select { width: 100%; }
+table.apps { min-width: 520px; }
+.linkbtn { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
+.src { font-size: 13px; min-width: 11rem; }
+.todo { background: var(--warn-soft); color: var(--warn); padding: 0 4px; border-radius: 3px; }
+.apps td { vertical-align: middle; }
+.apps input { width: 5.5rem; }
+.bars { display: flex; flex-direction: column; gap: 6px; }
+.barrow { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) 5.5rem; gap: 8px; align-items: center; font-size: 13px; }
+.barrow .num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.track { display: block; background: var(--ref-bg); border-radius: 3px; height: 10px; }
+.fill { display: block; background: var(--accent); height: 10px; border-radius: 3px; }
+.btn { font: inherit; font-weight: 500; border: 0; background: var(--accent); color: var(--bg); padding: 9px 14px; border-radius: 6px; cursor: pointer; align-self: flex-start; }
+.note ul { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 860px) {
+  .bar { position: static; }
+  .tabs { flex-wrap: wrap; overflow: visible; }
+  .tabs button { padding: 7px 10px; }
+  .bar .field { flex: 1 1 9rem; }
+  .bar .field input[type="number"], .bar .field select { width: 100%; }
+  .logt { grid-template-columns: minmax(0, 1fr); }
+  .logt-res { position: static; order: -1; }
+}
+.autoop { max-width: 24rem; }
+.autoop label { display: flex; gap: 8px; align-items: center; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--fg); cursor: pointer; }
+.autoop input { width: auto; padding: 0; accent-color: var(--accent); }
+.hint { font-size: 12px; color: var(--muted); }
+input:disabled, select:disabled { opacity: 0.6; cursor: not-allowed; }
+.sortbtn { font: inherit; font-size: 11px; letter-spacing: 0; text-transform: none; border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 4px; padding: 2px 7px; cursor: pointer; }
+.sortbtn.on { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+footer { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+footer ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
+a { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) { .tabs button { transition: background .15s, color .15s; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <a class="skip" href="#main">Aller au contenu</a>
+  <header>
+    <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
+    <h1>Comparateur énergie : électricité, gaz et eau</h1>
+    <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage.</p>
+  </header>
+
+  <div class="bar">
+    <div class="tabs" role="tablist" aria-label="Rubriques">
+      <button role="tab" id="tab-home" aria-selected="true" tabindex="0" aria-controls="p-home">Accueil</button>
+      <button role="tab" id="tab-logt" aria-selected="false" tabindex="-1" aria-controls="p-logt">Mon logement</button>
+      <button role="tab" id="tab-elec" aria-selected="false" tabindex="-1" aria-controls="p-elec">Électricité</button>
+      <button role="tab" id="tab-gaz" aria-selected="false" tabindex="-1" aria-controls="p-gaz">Gaz</button>
+      <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
+      <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
+      <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Primes</button>
+      <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
+      <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Légal</button>
+      <button role="tab" id="tab-reg" aria-selected="false" tabindex="-1" aria-controls="p-reg">Réglages</button>
+    </div>
+    <div class="field autoop" id="f-auto"><label for="auto"><input id="auto" type="checkbox" checked> Utiliser mon logement (automatique)</label><span class="hint" id="auto-hint"></span></div>
+    <div class="field" id="f-conso">
+      <label for="conso" id="conso-label">Consommation (kWh/an)</label>
+      <input id="conso" type="number" min="100" max="60000" step="100" value="5700" inputmode="numeric">
+    </div>
+    <div class="field" id="f-kva">
+      <label for="kva">Puissance du compteur</label>
+      <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
+    </div>
+    <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 6 000 kWh)</option><option value="b1" selected>B1 (6 000 à 30 000 kWh)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
+    <div class="field" id="f-dept"><label for="dept">Département</label><select id="dept"></select></div>
+    <div class="field" id="f-ville"><label for="ville">Ville</label><select id="ville"></select></div>
+    <div class="field" id="f-prixeau"><label for="prixeau">Prix de l'eau (€/m³, facultatif)</label><input id="prixeau" type="number" min="0" max="20" step="0.01" placeholder="selon votre facture"></div>
+    
+  </div>
+
+  <main id="main" tabindex="-1">
+  <section class="panel" id="p-home" role="tabpanel" aria-labelledby="tab-home">
+    <h2>Bienvenue</h2>
+    <p class="lede">Ce site compare les prix de l'électricité et du gaz, estime votre facture d'eau, et affiche les primes de parrainage de chaque fournisseur. Pour une estimation proche de chez vous, commencez par décrire votre logement : la consommation se remplit ensuite toute seule dans les autres onglets.</p>
+
+    <div class="callout" id="stale" hidden></div>
+    <div><button type="button" class="cta" data-go="logt">Décrire mon logement</button></div>
+
+    <h3>Les chiffres du moment</h3>
+    <section class="summary" id="summary" aria-label="Résumé"></section>
+
+    <h3>Où voulez-vous aller ?</h3>
+    <div class="tiles">
+      <button type="button" class="tile" data-go="logt"><strong>Mon logement</strong><span>Surface, chauffage, appareils, eau : la page estime votre consommation et la puissance de compteur utile.</span></button>
+      <button type="button" class="tile" data-go="elec"><strong>Électricité</strong><span>Prix du kWh, abonnement et total par an, pour 3, 6 ou 9 kVA.</span></button>
+      <button type="button" class="tile" data-go="gaz"><strong>Gaz</strong><span>Options Base, B0, B1 et B2i, avec le prix repère de la CRE.</span></button>
+      <button type="button" class="tile" data-go="eau"><strong>Eau</strong><span>Prix par m³ selon votre département et votre ville.</span></button>
+      <button type="button" class="tile" data-go="abo"><strong>Abonnement</strong><span>Le détail de l'abonnement et des frais ponctuels.</span></button>
+      <button type="button" class="tile" data-go="prime"><strong>Primes</strong><span>Ce que reçoivent le parrain et le filleul chez chaque fournisseur.</span></button>
+    </div>
+
+    <h3>Comment ça marche</h3>
+    <ol class="steps">
+      <li><strong>Décrivez votre logement</strong> dans l'onglet Mon logement, ou saisissez directement votre consommation.</li>
+      <li><strong>Consultez les tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
+      <li><strong>Repérez les primes</strong> de parrainage dans l'onglet Primes. Ce site n'envoie vers aucun lien pour l'instant : il indique seulement les montants.</li>
+    </ol>
+
+    <p class="note" id="updated"></p>
+    <p class="note">Prix TTC, France métropolitaine, relevés le <span class="dlong">10 octobre 2026</span>. Les montants marqués d'une étoile sont estimés. Les primes marquées « à vérifier » n'ont pas été confirmées. Les chiffres du moment ci-dessus supposent 5 700 kWh d'électricité à 6 kVA et 10 000 kWh de gaz en B1.</p>
+  </section>
+
+  <section class="panel" id="p-logt" role="tabpanel" aria-labelledby="tab-logt" hidden>
+    <h2>Mon logement</h2>
+    <p class="lede">Décrivez votre logement et vos appareils. La page estime votre consommation par poste, la puissance de compteur utile et la facture annuelle, puis les envoie au comparateur. Les valeurs de départ sont des exemples : remplacez-les par les vôtres.</p>
+    <div class="logt">
+      <div class="logt-form" id="logt-form"></div>
+      <aside class="logt-res" id="logt-res" aria-live="polite"></aside>
+    </div>
+    <div class="note">
+      <strong>Hypothèses</strong>
+      <ul>
+        <li>Chauffage : surface × 70, 110 ou 140 kWh par m² et par an selon l'isolation (chiffres ADEME repris par Selectra). Pompe à chaleur : consommation divisée par 3. Chaudière gaz : rendement de 90 %. Le climat et la température choisie peuvent faire varier le résultat de 20 % ou plus.</li>
+        <li>Eau chaude : 800 kWh par personne et par an avec un ballon électrique, 1 269 kWh au gaz (Selectra). Chauffe-eau thermodynamique : divisé par 3.</li>
+        <li>Appareils : puissance × durée d'usage, ou consommation par cycle × nombre de cycles. Les valeurs par défaut sont indicatives et modifiables.</li>
+        <li>Cuisson au gaz : 160 kWh par an, valeur forfaitaire.</li>
+        <li>Eau (1 m³ = 1 000 litres) : 0,04 m³ par personne et par jour pour les WC, la cuisine et les mains, 0,06 m³ par douche, 0,15 m³ par bain, 0,05 m³ par cycle de lave-linge et 0,012 m³ par cycle de lave-vaisselle. Ce sont mes ordres de grandeur, car je n'ai pas trouvé de chiffres sourcés par usage. Selectra estime à titre de comparaison 64 m³ par an pour 2 personnes et 94 m³ pour 3.</li>
+      </ul>
+    </div>
+  </section>
+
+<section class="panel" id="p-elec" role="tabpanel" aria-labelledby="tab-elec" hidden>
+    <h2>Électricité, option Base</h2>
+    <div class="callout" id="best-elec" aria-live="polite"></div>
+    <div class="tablewrap"><table id="t-elec"></table></div>
+    <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur.</p>
+  </section>
+
+  <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
+    <h2>Gaz naturel</h2>
+    <div class="callout" id="best-gaz" aria-live="polite"></div>
+    <div class="tablewrap"><table id="t-gaz"></table></div>
+    <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 6 000 kWh, cuisson et eau chaude. B1 : environ 6 000 à 30 000 kWh, chauffage compris. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils. Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1. Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas la hausse de 8 % du 1er octobre pendant leur durée de blocage.</p>
+  </section>
+
+  <section class="panel" id="p-eau" role="tabpanel" aria-labelledby="tab-eau" hidden>
+    <h2>Eau</h2>
+    <p class="lede">Le prix de l'eau change fortement d'une commune à l'autre. Choisissez votre département et votre ville pour estimer votre facture. Contrairement à l'électricité et au gaz, vous ne pouvez pas changer de fournisseur d'eau : le service est assuré par votre commune ou son syndicat. Cette page sert à estimer un budget, pas à comparer des offres. Les volumes d'eau se comptent en mètres cubes (m³) : 1 m³ = 1 000 litres, et un foyer de 2 personnes en consomme en moyenne une soixantaine par an.</p>
+    <div id="eau-res"></div>
+    <h3>Prix de l'eau par commune</h3>
+    <div class="tablewrap"><table id="t-eau"></table></div>
+    <h3>Moyenne par région</h3>
+    <div class="tablewrap"><table id="t-reg"></table></div>
+    <p class="note">Prix en €/m³ TTC, eau potable et assainissement collectif compris, au 1er janvier 2026 (Kelwatt, d'après les données d'eaufrance). La moyenne nationale est de 4,69 €/m³ selon cette source, et de 4,89 €/m³ selon Selectra pour 2025. Le total par an se calcule ainsi : un abonnement estimé à 84 € (valeur moyenne de Selectra, car je n'ai pas l'abonnement de chaque commune) plus (prix par m³ − 0,70 €) × vos m³. Pour 120 m³, on retrouve le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Ma liste ne couvre que 77 communes : pour une autre commune, la page utilise la moyenne de la région, ou saisissez le prix de votre facture. * Valeur inhabituellement basse pour Antibes, à vérifier. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
+  </section>
+
+<section class="panel" id="p-abo" role="tabpanel" aria-labelledby="tab-abo" hidden>
+    <h2>Ce que contient un abonnement</h2>
+    <p class="lede">L'abonnement se paie même sans consommer un seul kWh. Une grande partie est fixée par l'État et le gestionnaire du réseau, donc identique chez tous les fournisseurs. Une seule part change d'un fournisseur à l'autre.</p>
+    <div class="sub">
+      <h3>Électricité, compteur de 6 kVA</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Poste</th><th>Montant par an</th><th>Qui le fixe</th></tr></thead>
+        <tbody>
+          <tr><td>Gestion du contrat (TURPE)</td><td>17,12 € HT</td><td>Réseau, identique pour tous</td></tr>
+          <tr><td>Comptage (TURPE)</td><td>22,67 € HT</td><td>Réseau, identique pour tous</td></tr>
+          <tr><td>Soutirage fixe, lié à la puissance (TURPE)</td><td>10,42 € HT par kVA, soit 62,52 € à 6 kVA</td><td>Réseau, identique pour tous</td></tr>
+          <tr><td>CTA (financement des retraites des industries électriques et gazières)</td><td>15 % de la part fixe du réseau, soit environ 15 € HT</td><td>État</td></tr>
+          <tr><td><strong>Part du fournisseur</strong></td><td>Environ 41 € HT (calculée par différence avec le tarif réglementé)</td><td><strong>Chaque fournisseur</strong>, c'est la seule part qui varie</td></tr>
+          <tr><td>TVA</td><td>20 % sur l'ensemble</td><td>État</td></tr>
+          <tr class="ref"><td><strong>Total au tarif réglementé</strong></td><td><strong>190,32 € TTC</strong>, soit 15,86 € par mois</td><td></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Selon la puissance, le total au tarif réglementé passe de 145,56 € (3 kVA) à 190,32 € (6 kVA), 238,56 € (9 kVA), 285,12 € (12 kVA) et 373,68 € (18 kVA). Les montants du réseau ont augmenté de 3,04 % au 1er août 2026.</p>
+
+      <h3>Gaz</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Poste</th><th>Ce que c'est</th><th>Qui le fixe</th></tr></thead>
+        <tbody>
+          <tr><td>Distribution, transport, stockage</td><td>Part fixe de l'acheminement par le réseau (GRDF en zone desservie)</td><td>Réseaux, identique pour tous</td></tr>
+          <tr><td>CTA</td><td>Contribution aux retraites des industries électriques et gazières</td><td>État</td></tr>
+          <tr><td>Composante CPB</td><td>Certificats de production de biogaz, ajoutée en janvier 2026</td><td>État</td></tr>
+          <tr><td><strong>Part du fournisseur</strong></td><td>Frais de gestion et marge</td><td><strong>Chaque fournisseur</strong></td></tr>
+          <tr><td>TVA</td><td>20 % depuis le 1er août 2025 (le taux réduit de 5,5 % a été supprimé)</td><td>État</td></tr>
+          <tr class="ref"><td><strong>Prix repère de la CRE</strong></td><td><strong>360,79 € TTC par an</strong> (chauffage) ou 152,46 € (cuisson et eau chaude)</td><td></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Je n'ai pas trouvé le détail chiffré de chaque poste du gaz. En revanche, l'abonnement chauffage varie de 341,40 € (EDF) à 517,44 € (Ekwateur) : cet écart de 176 € par an peut effacer l'avantage d'un kWh moins cher.</p>
+
+      <h3>Options tarifaires du gaz</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Option</th><th>Consommation par an</th><th>Usage</th><th>Prix repère, octobre 2026</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Base</strong></td><td>Moins de 1 000 kWh</td><td>Cuisson seule</td><td>0,1783 €/kWh, abonnement 152,46 € par an</td></tr>
+          <tr><td><strong>B0</strong></td><td>1 000 à 6 000 kWh environ</td><td>Cuisson et eau chaude</td><td>0,1783 €/kWh, abonnement 152,46 € par an</td></tr>
+          <tr><td><strong>B1</strong></td><td>6 000 à 30 000 kWh environ</td><td>Chauffage, eau chaude et cuisson</td><td>0,1456 €/kWh, abonnement 360,79 € par an</td></tr>
+          <tr><td><strong>B2i</strong></td><td>30 000 à 150 000 kWh</td><td>Petit chauffage collectif</td><td>Sur devis, tarif professionnel</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">Votre option figure en général sur votre facture de gaz. Chaque fournisseur peut appliquer ses propres seuils.</p>
+
+      <h3>Frais ponctuels et conditions</h3>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Frais</th><th>Montant</th></tr></thead>
+        <tbody>
+          <tr><td>Changer de fournisseur, résilier un contrat</td><td>Gratuit, sans coupure</td></tr>
+          <tr><td>Mise en service du gaz</td><td>22,55 € TTC. D'après Selectra, facturée si vous résiliez vous-même l'ancien contrat</td></tr>
+          <tr><td>Changement de puissance du compteur électrique (Enedis)</td><td>Environ 4,30 € (les sources donnent 4,28 € et 4,32 €)</td></tr>
+          <tr><td>Retard de paiement</td><td>Variable. Exemple chez Octopus Energy : 1,5 fois le taux d'intérêt légal, avec un minimum de 7,50 € par dossier</td></tr>
+          <tr><td>Ouverture de compteur, déplacement d'un technicien</td><td>Non relevé. Facturé par le distributeur, il varie selon la prestation</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p-prime" role="tabpanel" aria-labelledby="tab-prime" hidden>
+    <h2>Primes de parrainage par fournisseur</h2>
+    <p class="callout">Cette page indique seulement le montant des primes. Aucun code ni lien de parrainage n'est affiché pour le moment.</p>
+    <div class="tablewrap"><table id="t-prime"></table></div>
+    <p class="note">Les primes sont versées une seule fois, en général sous forme de remise sur une des premières factures ou de crédit en cagnotte. Une prime se compare après le prix : un écart de kWh se paie toute l'année, une prime ne se touche qu'une fois. Les montants marqués « à vérifier » ne reposent que sur un comparateur, sur un relevé ancien, ou ne figurent pas sur le site du fournisseur. Les montants « confirmés » viennent de plusieurs comparateurs ou du règlement officiel du fournisseur ; la colonne Source indique lesquels.</p>
+  </section>
+
+  <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
+    <h2>Mémo : ce qu'il reste à ajouter</h2>
+    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo rédigé le 10 octobre 2026.</p>
+
+    <div class="card">
+      <h3>1. Mise à jour automatique des prix par IA <span class="badge check">Installée, à activer</span></h3>
+      <p>Le script, le fichier de données (data.json), la liste des pages à lire (sources.json) et le workflow mensuel sont dans le dossier fourni. Pour l'activer : suivre le fichier LISEZMOI du dossier (clé gratuite Gemini, secret GitHub, autorisation des demandes de fusion, premier lancement à la main).</p>
+      <ul>
+        <li><strong>Premier essai réel du 10 octobre :</strong> le flux de travail a fonctionné, mais 24 sources ont été refusées car Selectra et Kelwatt interdisent la lecture automatique (robots.txt), que le script respecte. Les sources ont été remplacées par prix-elec.com, hellowatt.fr et la CRE, dont le robots.txt l'autorise ; ces adresses n'ont pas toutes été ouvertes, un deuxième essai est à faire et à relire.</li>
+        <li><strong>Relire chaque demande de fusion</strong> avant de l'accepter : le rapport liste ce qui a changé, ce qui est refusé et ce qui est à relire.</li>
+        <li><strong>Sources à fiabiliser :</strong> les valeurs de départ viennent de Selectra et peuvent différer des nouvelles sources (exemple : ENGIE 0,2330 €/kWh chez Selectra, 0,2127 € sur prix-elec.com, à expliquer). Ajouter les grilles officielles des fournisseurs (certaines en PDF, que le script sait lire) et le règlement de parrainage de chacun.</li>
+        <li><strong>Conditions d'utilisation :</strong> le script respecte le fichier robots.txt de chaque site et signale son nom, mais cela ne remplace pas la lecture de leurs conditions d'utilisation.</li>
+        <li><strong>Textes à chiffres fixes :</strong> les notes de l'onglet Gaz et de l'onglet Abonnement citent des chiffres (prix repère, abonnements du tarif réglementé) qui ne se mettent pas à jour tout seuls. Les rattacher à data.json.</li>
+        <li><strong>Non automatisé :</strong> prix de l'eau, abonnements à 3 et 9 kVA, consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
+        <li><strong>IA gratuite :</strong> la clé Gemini est gratuite (Google AI Studio), avec des limites par minute et par jour à consulter dans AI Studio, qui peuvent changer. Si l'offre gratuite disparaît, le script sait aussi utiliser Mistral (offre gratuite) ou Claude (payant) en changeant une variable. GitHub Models, qui était une autre piste gratuite, est arrêté depuis le 30 juillet 2026.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>2. Choisir plus de villes <span class="badge check">Réalisable, à relever commune par commune</span></h3>
+      <p>Aujourd'hui, la liste contient 77 communes. Pour le Nord, seules 5 villes sur environ 650 communes sont proposées. Les autres reçoivent la moyenne de la région, qui peut être éloignée de leur vrai prix.</p>
+      <ul>
+        <li><strong>Ajouter des communes :</strong> par exemple les préfectures et les villes de plus de 20 000 habitants (environ 400 communes), à relever une par une avec le prix par m³ et, si possible, l'abonnement.</li>
+        <li><strong>Recherche par code postal ou par nom de commune</strong> au lieu d'une liste déroulante, dès que la liste sera longue.</li>
+        <li><strong>Saisie du prix de la facture :</strong> déjà possible, à mettre davantage en avant pour les communes absentes de la liste.</li>
+        <li><strong>Source officielle :</strong> aucun téléchargement du prix de l'eau par commune (SISPEA, services.eaufrance.fr) n'a été trouvé à ce jour. À rechercher.</li>
+        <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>3. Permettre à chaque utilisateur d'ajouter sa facture <span class="badge check">Réalisable, avec des précautions</span></h3>
+      <p>Ce que cela apporterait : pré-remplir la consommation, la puissance, l'option tarifaire et le prix réellement payé, puis comparer avec les autres offres. Plus tard, cela pourrait aussi enrichir la base de prix, à condition que les données soient anonymes.</p>
+      <h3>Deux façons de faire</h3>
+      <ul>
+        <li><strong>A. Lecture dans le navigateur (recommandée).</strong> Le fichier ne quitte jamais l'appareil de l'utilisateur. La page en extrait seulement le fournisseur, l'offre, le prix du kWh, l'abonnement, la puissance, l'option tarifaire, la consommation et la période. Rien n'est envoyé ni stocké. C'est faisable avec le site actuel, qui reste gratuit à héberger. Chaque fournisseur a sa propre mise en page : la lecture se programme fournisseur par fournisseur, avec une saisie assistée quand la facture n'est pas reconnue. La facture Octopus fournie en exemple a pu être lue, pas encore les autres.</li>
+        <li><strong>B. Envoi à un serveur ou à une IA externe.</strong> Plus souple pour lire tous les formats, mais la facture devient une donnée personnelle que vous recevez. Cela demande un serveur (donc plus d'hébergement purement gratuit) et un prestataire d'IA encadré par un contrat.</li>
+      </ul>
+      <h3>Vie privée et RGPD</h3>
+      <p>Une facture contient des données personnelles : nom, adresse, numéro de point de livraison, consommation. Le RGPD s'applique dès que vous les recevez ou que vous les faites traiter par un prestataire.</p>
+      <ul>
+        <li><strong>Avec la méthode A, sans aucun envoi,</strong> vous ne collectez aucune donnée personnelle : le risque est très faible. Il faut quand même l'écrire clairement sur la page (« votre facture reste sur votre appareil »).</li>
+        <li><strong>Si vous collectez des factures ou des données extraites,</strong> il faut au minimum :
+          <ul>
+            <li>un consentement clair, demandé avant l'envoi, avec une explication de ce qui est fait de la facture ;</li>
+            <li>ne garder que le nécessaire, en supprimant le nom, l'adresse, le numéro de point de livraison, le numéro de client et les coordonnées bancaires, idéalement avant l'envoi, dans le navigateur ;</li>
+            <li>une durée de conservation courte et la suppression à la demande de l'utilisateur ;</li>
+            <li>une politique de confidentialité et des mentions légales (identité de l'éditeur, contact) ;</li>
+            <li>des prestataires et un hébergement dans l'Union européenne, ou avec des garanties équivalentes, un contrat de sous-traitance avec le prestataire d'IA, et la vérification que les factures ne servent pas à entraîner son modèle ;</li>
+            <li>une sécurité sérieuse (chiffrement, accès restreint), et un registre des traitements.</li>
+          </ul>
+        </li>
+        <li><strong>Publier des prix issus de factures :</strong> uniquement des données agrégées et anonymes (fournisseur, offre, prix, date), jamais l'adresse. Avec peu de relevés dans une petite commune, un prix peut permettre de reconnaître un foyer : publier seulement à partir de plusieurs relevés.</li>
+        <li><strong>Fiabilité :</strong> une facture peut contenir une remise personnelle qui ne vaut pas pour les autres, une erreur, ou être falsifiée. Il faut recouper plusieurs relevés avant de s'en servir.</li>
+      </ul>
+      <p class="note">Ceci n'est pas un avis juridique. Avant de collecter quoi que ce soit, consultez les guides de la CNIL ou un juriste.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Avant la mise en ligne <span class="badge check">À faire</span></h3>
+      <ul>
+        <li><strong>Onglet Légal :</strong> l'identité et le contact sont renseignés, l'adresse postale n'est pas publiée. Pour rester sans adresse publique, vérifier que votre identité figure bien sur votre compte GitHub (l'hébergeur) ; faire relire le texte par un juriste ou selon les guides de la CNIL ; le décrire à nouveau quand la mise à jour automatique des prix existera. L'adresse e-mail est visible de tous sur le site : elle peut recevoir du courrier indésirable, une adresse dédiée est possible.</li>
+        <li><strong>Site sans but lucratif :</strong> si un jour des liens de parrainage rémunérés, de la publicité ou la lecture de factures sont ajoutés, revoir l'onglet Légal (rémunération, identité de l'éditeur, confidentialité).</li>
+        <li><strong>Hébergement sur GitHub Pages (choisi) :</strong> le dépôt doit être public avec le compte gratuit. Les conditions de GitHub excluent l'usage de Pages pour une activité commerciale : sans but lucratif, ce n'est pas un obstacle, mais à relire si le site change de nature. Plus tard, un nom de domaine à soi.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>5. Données encore à confirmer <span class="badge check">À faire</span></h3>
+      <ul>
+        <li><strong>Prix des offres :</strong> ils viennent de Selectra, un comparateur partenaire de fournisseurs. Les recouper avec les grilles tarifaires officielles de chaque fournisseur.</li>
+        <li><strong>Abonnements à 3 et 9 kVA :</strong> estimés à partir de l'écart du tarif réglementé, faute de prix publiés par fournisseur. Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li><strong>Gaz en Base et B0 :</strong> le prix du kWh des fournisseurs est estimé à partir de l'écart du prix repère.</li>
+        <li><strong>Primes à confirmer sur le site du fournisseur :</strong> Plenitude (une seule source pour le montant du parrain), Ekwateur (montant du parrain absent du règlement), Mint Énergie, Happ-e (20 à 40 €), LLUM et ilek (une seule source). Octopus, Alpiq, EDF, ENGIE, Gaz de Bordeaux et TotalEnergies viennent de comparateurs ; seule Primeo est confirmée par un règlement officiel.</li>
+        <li><strong>Données d'eau :</strong> prix d'Antibes à vérifier, moyennes de la Corse et de la région Provence-Alpes-Côte d'Azur peu fiables, abonnement d'eau fixé à 84 € partout.</li>
+        <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
+        <li><strong>Indicateur de confiance :</strong> un repère visuel unique par ligne (relevé, estimé, à vérifier), au lieu de l'astérisque et des mentions dispersées.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>6. Fiabiliser et mieux adapter le site <span class="badge check">À faire</span></h3>
+      <h3>Contrôler la qualité (le script le fait déjà pour les prix)</h3>
+      <ul>
+        <li>Une page « Méthode et sources » qui explique les calculs et leurs limites.</li>
+        <li>Un moyen de signaler une erreur, par exemple un lien de contact.</li>
+      </ul>
+      <h3>Rendre le comparateur plus juste</h3>
+      <ul>
+        <li>Heures creuses : l'option existe en électricité et la page ne la traite pas. C'est une limite importante pour un logement chauffé à l'électricité.</li>
+        <li>Distinguer prix fixe et prix indexé, avec la durée de blocage.</li>
+        <li>Simuler la facture sur 12 mois plutôt qu'un total annuel à prix constant.</li>
+        <li>Inclure les frais ponctuels (mise en service, déplacement) dans le total de la première année.</li>
+      </ul>
+      <h3>Mieux adapter le site à l'utilisateur</h3>
+      <ul>
+        <li>Recherche de commune par code postal pour l'eau.</li>
+        <li>Lecture de la facture dans le navigateur, sans rien envoyer (voir le point 3).</li>
+        <li>Mode « DPE » en plus du mode réaliste, avec des valeurs conventionnelles sourcées, une fois le texte officiel de la méthode 3CL relevé.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>7. Eau : top 3 par région <span class="badge check">Idée du 10 octobre 2026</span></h3>
+      <p>Pour l'eau, on ne choisit pas son fournisseur : chaque commune a son service, géré par une régie ou par un opérateur (Veolia, Suez, Saur). Trois pistes ont été identifiées.</p>
+      <ul>
+        <li><strong>Les 3 communes les moins chères par région.</strong> Réalisable avec les prix déjà dans le site. Limite : la liste ne couvre que 77 communes, donc certaines régions n'auraient pas trois communes et le classement ne vaudrait que pour les communes listées. À écrire clairement sur la page.</li>
+        <li><strong>Les 3 opérateurs les plus présents par région</strong> (Veolia, Suez, Saur, régies). Aucune donnée chiffrée et sourcée n'a été trouvée à ce jour. Source à chercher : rapport de la Fédération professionnelle des entreprises de l'eau, données SISPEA, si elles sont en accès libre.</li>
+        <li><strong>L'opérateur de chaque commune de la liste,</strong> affiché dans le tableau des prix. C'est la donnée la plus utile pour l'utilisateur, mais elle est à relever commune par commune.</li>
+      </ul>
+      <p class="note">À faire en premier : le classement des communes les moins chères, avec la mention de ses limites. Le reste dépend de la recherche de source.</p>
+    </div>
+
+    <div class="card">
+      <h3>8. Présentation et accessibilité <span class="badge check">À faire</span></h3>
+      <ul>
+        <li>Tableaux en cartes sur téléphone : ils défilent aujourd'hui sur le côté.</li>
+        <li>Vérifier le zoom à 200 % et le texte agrandi dans le navigateur.</li>
+        <li>Tester avec un vrai lecteur d'écran (NVDA, VoiceOver).</li>
+        <li>Écart avec l'offre actuelle de l'utilisateur, pour une économie personnalisée.</li>
+        <li>Pied de page de sources, graphiques simples (abonnement, énergie, taxes), export ou impression du résultat.</li>
+      </ul>
+    </div>
+  </section>
+
+<section class="panel" id="p-legal" role="tabpanel" aria-labelledby="tab-legal" hidden>
+    <h2>Mentions légales et confidentialité</h2>
+    <p class="lede">Dernière mise à jour : 10 octobre 2026.</p>
+    <div class="card">
+      <h3>Éditeur du site</h3>
+      <p>Theret Benoit, particulier non professionnel, France.<br>Adresse postale : non publiée.<br>Contact : benoittheret@hotmail.com<br>Directeur de la publication : Theret Benoit</p>
+      <h3>Hébergeur</h3>
+      <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Site : github.com. Le code source de ce site est public sur GitHub.</p>
+    </div>
+    <div class="card">
+      <h3>Ce que fait ce site</h3>
+      <p>Ce site compare à titre indicatif les prix de l'électricité et du gaz, estime une facture d'eau et affiche le montant des primes de parrainage. Il ne vend pas d'énergie, n'est pas un courtier et n'est pas édité par un fournisseur. Les informations ne sont pas contractuelles : vérifiez les prix et les conditions sur le site du fournisseur avant de souscrire.</p>
+    </div>
+    <div class="card">
+      <h3>Site sans but lucratif</h3>
+      <p>Ce site est tenu à titre personnel, sans but lucratif, pour aider chacun à comparer. L'éditeur ne touche aucune rémunération, n'affiche aucune publicité et ne propose ni lien ni code de parrainage : le site affiche seulement le montant des primes. Le classement des offres se fait par le prix ou par le montant de la prime, selon la colonne choisie. Si cela devait changer, ce serait indiqué ici et à côté de chaque lien, avant le clic.</p>
+    </div>
+    <div class="card">
+      <h3>Exactitude des données</h3>
+      <p>Chaque ligne de prix indique sa source et sa date de relevé. Les prix et les primes viennent de pages de comparateurs, de sites de fournisseurs ou de textes officiels, avec la source indiquée sur chaque ligne. Les valeurs de départ ont été relevées surtout sur Selectra, un comparateur partenaire de fournisseurs. Un astérisque signale un montant estimé. Les prix et les primes changent souvent, et malgré le soin apporté, des erreurs sont possibles : l'éditeur ne garantit pas l'exactitude des données et n'est pas responsable d'une décision prise à partir d'elles. Pour signaler une erreur : benoittheret@hotmail.com.</p>
+    </div>
+    <div class="card">
+      <h3>Mise à jour des prix par une IA</h3>
+      <p>Les prix sont mis à jour une fois par mois par un programme qui lit des pages publiques de sites de comparateurs et de fournisseurs. Une IA gratuite (Gemini, de Google) en extrait les chiffres, puis le programme vérifie que chaque chiffre figure bien dans la page lue et qu'il reste plausible. L'éditeur relit les changements avant leur publication. Aucune donnée de visiteur n'est envoyée à l'IA : elle ne reçoit que le texte de pages publiques (l'offre gratuite de Google peut réutiliser ces textes pour améliorer ses produits). Malgré ces contrôles, des erreurs restent possibles. La date de chaque relevé est indiquée sur chaque ligne.</p>
+    </div>
+    <div class="card">
+      <h3>Données personnelles</h3>
+      <ul>
+        <li><strong>Aucune collecte :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni statistiques de visite, ni cookies publicitaires. Ce que vous saisissez (logement, consommation, ville) reste dans votre navigateur.</li>
+        <li><strong>Mémorisation sur votre appareil :</strong> la description de votre logement, le choix du mode automatique et vos réglages sont gardés dans le stockage local de votre navigateur, pour votre prochaine visite. Rien n'est envoyé. Vous les effacez en supprimant les données du site dans votre navigateur.</li>
+        <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil et ne charge aucune ressource d'un site tiers.</li>
+        <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
+        <li><strong>Liens vers d'autres sites :</strong> les sources citées s'ouvrent sur des sites tiers qui ont leurs propres règles.</li>
+        <li><strong>Vos droits :</strong> comme le site ne conserve aucune donnée vous concernant, il n'y a rien à consulter ni à supprimer de son côté. Pour toute question : benoittheret@hotmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
+      </ul>
+    </div>
+    <p class="note">Les marques citées appartiennent à leurs propriétaires et servent seulement à identifier les offres. Si vous ajoutez un jour des liens de parrainage rémunérés, de la publicité ou la lecture de factures, ce texte devra être revu. Ce texte est un modèle rédigé sans avocat : il n'est pas un avis juridique. Faites-le relire, et adaptez-le si votre situation change.</p>
+  </section>
+
+  <section class="panel" id="p-reg" role="tabpanel" aria-labelledby="tab-reg" hidden>
+    <h2>Réglages</h2>
+    <p class="lede">Ces valeurs servent à estimer votre consommation dans l'onglet Mon logement et le prix de l'eau. Modifiez-les si vous connaissez mieux votre cas, par exemple d'après vos factures. Elles sont gardées sur cet appareil.</p>
+    <div class="card">
+      <h3>Chauffage</h3>
+      <div class="grid2" id="reg-grid-heat"></div>
+    </div>
+    <div class="card">
+      <h3>Eau chaude et rendements</h3>
+      <div class="grid2" id="reg-grid-ecs"></div>
+    </div>
+    <div class="card">
+      <h3>Eau</h3>
+      <div class="grid2" id="reg-grid-eau"></div>
+    </div>
+    <div><button type="button" class="tile" id="reg-reset" style="display:inline-flex">Rétablir les valeurs d'origine</button></div>
+    <p class="note">Valeurs d'origine : chauffage 70, 110 ou 140 kWh par m² et par an selon l'isolation, eau chaude 800 kWh par personne (ballon électrique) ou 1 269 kWh (gaz), coefficient de performance 3, rendement de la chaudière gaz 90 %, abonnement d'eau 84 € par an. Ce sont des moyennes : votre consommation réelle dépend du climat, de la température choisie et de vos habitudes.</p>
+  </section>
+
+</main>
+
+<footer>
+    <strong>Sources</strong>
+    <ul>
+      <li><a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffage" target="_blank" rel="noopener">Consommation du chauffage électrique par m² (Selectra, d'après l'ADEME)</a> · <a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffe-eau" target="_blank" rel="noopener">Consommation du chauffe-eau (Selectra)</a> · <a href="https://ekwateur.fr/blog/ma-consommation-d-energie/consommation-electrique-maison/" target="_blank" rel="noopener">Consommation d'une maison (Ekwateur)</a></li>
+      <li><a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
+      <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/prix" target="_blank" rel="noopener">Prix du kWh d'électricité, octobre 2026 (Selectra)</a></li>
+      <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/abonnement" target="_blank" rel="noopener">Abonnement d'électricité par fournisseur et composition (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement" target="_blank" rel="noopener">Abonnement de gaz (Selectra)</a></li>
+      <li><a href="https://www.fournisseurs-electricite.com/contrat-gaz/prix" target="_blank" rel="noopener">Prix du gaz par fournisseur (Selectra)</a></li>
+      <li><a href="https://www.kelwatt.fr/actu/prix-du-gaz-hausse-octobre-2026" target="_blank" rel="noopener">Prix repère du gaz, octobre 2026 (Kelwatt, d'après la CRE)</a></li>
+      <li><a href="https://prix-elec.com/fournisseurs/edf/parrainage" target="_blank" rel="noopener">Parrainage EDF</a> · <a href="https://www.comparonslenergie.com/fournisseurs/engie/code-parrainage/" target="_blank" rel="noopener">Parrainage ENGIE</a> · <a href="https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage" target="_blank" rel="noopener">Parrainage Gaz de Bordeaux</a></li>
+      <li><a href="https://leparrain.com/blog/meilleurs-parrainages-energie-comparatif" target="_blank" rel="noopener">Comparatif des parrainages énergie 2026</a> · <a href="https://www.jechange.fr/energie/electricite/news/parrainage-energie-rentree-septembre-2026-meilleurs-bonus" target="_blank" rel="noopener">Bonus de la rentrée 2026</a></li>
+    </ul>
+    <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="legal">Mentions légales et confidentialité</button></p>
+  </footer>
+</div>
+
+<script>
+/* ---------- Données (octobre 2026) ---------- */
+// Primes : p = parrain, f = filleul, pn/fn = montants numériques pour le tri, st = ok | check | none
+var PRIMES = {
+  edf:   { name: "EDF", en: "Électricité et gaz", p: "20 €", f: "40 €", pn: 20, fn: 40, valid: "Jusqu'au 31/12/2026", st: "ok", s: ["prix-elec.com", "https://prix-elec.com/fournisseurs/edf/parrainage"], d: "relevé le 9 oct. 2026" },
+  total: { name: "TotalEnergies", en: "Électricité et gaz", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "Montant standard. L'opération à 50 € s'est terminée le 30/09/2026", st: "ok", s: ["Leparrain.com", "https://leparrain.com/blog/meilleurs-parrainages-energie-comparatif"], d: "relevé le 9 oct. 2026" },
+  engie: { name: "ENGIE", en: "Électricité et gaz", p: "20 €", f: "20 € (+5 € avec option verte)", pn: 20, fn: 25, valid: "Une prime par souscription, y compris pour une offre duo", st: "ok", s: ["Comparonslenergie.com", "https://www.comparonslenergie.com/fournisseurs/engie/code-parrainage/"], d: "relevé le 9 oct. 2026" },
+  gdb:   { name: "Gaz de Bordeaux", en: "Électricité et gaz", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "En cours en octobre 2026", st: "ok", s: ["prix-elec.com", "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"], d: "relevé le 9 oct. 2026" },
+  octo:  { name: "Octopus Energy", en: "Électricité et gaz", p: "40 €", f: "40 €", pn: 40, fn: 40, valid: "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus", st: "ok", s: ["Kelwatt", "https://www.kelwatt.fr/fournisseurs/octopus-energy/code-promo"], d: "page du 12 mai 2026, relevé le 10 oct. 2026" },
+  plen:  { name: "Plenitude", en: "Électricité et gaz", p: "50 €", f: "40 €", pn: 50, fn: 40, valid: "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  ekw:   { name: "Ekwateur", en: "Électricité et gaz verts", p: "Non indiqué dans le règlement", f: "150 kWh offerts", pn: 0, fn: 25, valid: "Le règlement officiel donne 150 kWh au filleul après deux mois et renvoie à une page pour la prime du parrain. Le tri utilise 25 € pour 150 kWh (estimation)", st: "check", s: ["Règlement officiel Ekwateur", "https://ekwateur.fr/documents/reglement-parrainage.pdf"], d: "règlement de janv. 2026, lu le 10 oct. 2026" },
+  mint:  { name: "Mint Énergie", en: "Électricité verte", p: "30 € par parrainage validé", f: "10 € sur la 1re facture", pn: 30, fn: 10, valid: "Versé 6 mois après l'activation du contrat (FAQ officielle). Les montants viennent de Selectra, pas du site de Mint", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  alpiq: { name: "Alpiq", en: "Électricité", p: "15 €", f: "15 €", pn: 15, fn: 15, valid: "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo)", st: "ok", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  primeo:{ name: "Primeo Energie", en: "Électricité", p: "15 €", f: "15 €", pn: 15, fn: 15, valid: "Règlement officiel 2026 : versé avec la 6e facture, sans date de fin fixée", st: "ok", s: ["Règlement officiel Primeo", "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf"], d: "règlement 2026, lu le 10 oct. 2026" },
+  happe: { name: "Happ-e", en: "Électricité et gaz", p: "20 à 40 € en carte Amazon", f: "20 à 40 € en carte Amazon", pn: 40, fn: 40, valid: "Le montant varie. Une seule source (Selectra)", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  llum:  { name: "LLUM", en: "Électricité", p: "20 €", f: "20 €", pn: 20, fn: 20, valid: "Remise sur la facture d'électricité. Une seule source (Selectra)", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  ilek:  { name: "ilek", en: "Électricité et gaz verts", p: "Prime surprise (jusqu'à 60 €)", f: "Prime surprise (jusqu'à 60 €)", pn: 0, fn: 0, valid: "Montant non communiqué, déduit de la facture de régularisation dans la limite de 60 €", st: "check", s: ["Selectra","https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"], d: "page du 29 avr. 2026, relevé le 10 oct. 2026" },
+  geg:   { name: "GEG", en: "Électricité et gaz", p: null, f: null, pn: -1, fn: -1, valid: "Aucun programme relevé", st: "none", s: null, d: "" },
+  ohm:   { name: "OHM Énergie", en: "Électricité et gaz", p: null, f: null, pn: -1, fn: -1, valid: "Aucun programme relevé", st: "none", s: null, d: "" },
+  dyneff:{ name: "Dyneff", en: "Électricité et gaz", p: null, f: null, pn: -1, fn: -1, valid: "Aucun programme relevé", st: "none", s: null, d: "" },
+  alterna:{ name: "Alterna", en: "Électricité et gaz", p: null, f: null, pn: -1, fn: -1, valid: "Aucun programme relevé", st: "none", s: null, d: "" },
+  enercoop:{ name: "Enercoop", en: "Électricité", p: null, f: null, pn: -1, fn: -1, valid: "Aucun programme relevé", st: "none", s: null, d: "" }
+};
+
+// Électricité : a = kWh pour 3 et 6 kVA, b = kWh pour 9 kVA et plus (option Base, TTC)
+var ELEC_REF = { k: "edf", name: "EDF", offer: "Tarif réglementé (Tarif Bleu)", a: 0.2001, b: 0.1985, ref: true };
+var ELEC = [
+  { k: "ekw", name: "Ekwateur", offer: "Électricité 100 % renouvelable Europe", a: 0.1753, b: 0.1906 },
+  { k: "total", name: "TotalEnergies", offer: "Access Électricité (prix indexé)", a: 0.1837, b: 0.1823 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Elec Verte, fixe 3 ans", a: 0.1837, b: 0.1823 },
+  { k: "gdb", name: "Gaz de Bordeaux", offer: "NovaFixe Élec", a: 0.1837, b: 0.1823 },
+  { k: "plen", name: "Plenitude", offer: "PleniWeb Électricité", a: 0.1837, b: 0.1823 },
+  { k: "llum", name: "LLUM", offer: "Électricité particuliers", a: 0.1900, b: 0.1900 },
+  { k: "dyneff", name: "Dyneff", offer: "Contrat+ Électricité", a: 0.1907, b: 0.1907 },
+  { k: "mint", name: "Mint Énergie", offer: "Online & Green", a: 0.1919, b: 0.1904 },
+  { k: "primeo", name: "Primeo Energie", offer: "Essentielle Verte", a: 0.1919, b: 0.1904 },
+  { k: "alterna", name: "Alterna", offer: "Mon électricité française fixe 1 an", a: 0.1919, b: 0.1904 },
+  { k: "edf", name: "EDF", offer: "Zen Online", a: 0.1925, b: 0.1909 },
+  { k: "octo", name: "Octopus Energy", offer: "Intelligent Octopus", a: 0.1968, b: 0.1953 },
+  { k: "alpiq", name: "Alpiq", offer: "Sérénité", a: 0.1993, b: 0.1977 },
+  { k: "ohm", name: "OHM Énergie", offer: "OHM Sérénité Fixe 1 an", a: 0.2148, b: 0.2148 },
+  { k: "happe", name: "Happ-e", offer: "Électricité 1 an", a: 0.2273, b: 0.2273 },
+  { k: "engie", name: "ENGIE", offer: "Elec Référence 3 ans", a: 0.2330, b: 0.2347 },
+  { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Elec", a: 0.2400, b: 0.2385 },
+  { k: "enercoop", name: "Enercoop", offer: "Offre Base", a: 0.2541, b: 0.2571 }
+];
+
+// Gaz : prix du kWh TTC, profil chauffage
+var GAS_REF = { k: null, name: "CRE", offer: "Prix repère de vente de gaz (n'est pas une offre)", a: 0.1456, ref: true };
+var GAS = [
+  { k: "ekw", name: "Ekwateur", offer: "Gaz Naturel 15 % Biogaz Fixe", a: 0.1246 },
+  { k: "edf", name: "EDF", offer: "Avantage Gaz 2 ans", a: 0.1336 },
+  { k: "gdb", name: "Gaz de Bordeaux", offer: "NovaFixe BioGaz", a: 0.1346 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Gaz, fixe 3 ans", a: 0.1354 },
+  { k: "total", name: "TotalEnergies", offer: "Fixe 2 ans Gaz", a: 0.1412 },
+  { k: "engie", name: "ENGIE", offer: "Gaz Référence 3 ans", a: 0.1414 },
+  { k: "alterna", name: "Alterna", offer: "Mon gaz naturel indexé", a: 0.1393 },
+  { k: "ohm", name: "OHM Énergie", offer: "Extra Eco Gaz", a: 0.1429 },
+  { k: "dyneff", name: "Dyneff", offer: "Contrat+ Gaz 15 % Vert", a: 0.1432 },
+  { k: "plen", name: "Plenitude", offer: "Plenifix 1 an Gaz", a: 0.1456 },
+  { k: "mint", name: "Mint Énergie", offer: "Biogaz Online", a: 0.1456 },
+  { k: "octo", name: "Octopus Energy", offer: "Gaz Fixe", a: 0.1487 },
+  { k: "happe", name: "Happ-e", offer: "Gaz Naturel", a: 0.1504 },
+  { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Gaz", a: 0.1652 }
+];
+
+// Abonnements TTC par an. Électricité : compteur 6 kVA, option Base. Gaz : profil chauffage (B1).
+var ABO_E = { ekw: 190.32, total: 190.32, gdb: 190.44, geg: 190.80, plen: 219.15, ohm: 173.40, dyneff: 187.80, mint: 190.32, primeo: 190.32, edf: 190.32, llum: 190.32, alterna: 211.92, octo: 190.32, engie: 186.98, alpiq: 190.32, happe: 185.52, ilek: 301.20, enercoop: 181.92 };
+// Abonnements relevés le 10 octobre 2026 sur les pages de chaque offre (Selectra, prix vérifiés les 1er et 2 octobre 2026)
+var ABO_D = {};
+var ABO_G = { edf: 341.40, ohm: 359.52, gdb: 360.72, total: 360.72, engie: 360.79, mint: 360.84, octo: 360.84, plen: 387.43, happe: 387.84, alterna: 389.64, ilek: 438.36, dyneff: 469.32, geg: 499.44, ekw: 517.44 };
+
+/* ---------- Sources et dates ---------- */
+var DATA_DATE = "2026-10-10", DATA_LABEL = "10 oct. 2026";
+var SRC = {
+  elec: ["Selectra", "https://www.fournisseurs-electricite.com/contrat-electricite/prix"],
+  gaz: ["Selectra", "https://www.fournisseurs-electricite.com/contrat-gaz/prix"],
+  refgaz: ["CRE, via Kelwatt", "https://www.kelwatt.fr/actu/prix-du-gaz-hausse-octobre-2026"],
+  refelec: ["Tarif réglementé, via Selectra", "https://www.fournisseurs-electricite.com/contrat-electricite/prix"]
+};
+function srcLink(a) { return '<a href="' + a[1] + '" target="_blank" rel="noopener">' + esc(a[0]) + "</a>"; }
+function srcCell(kind, r) {
+  var a = r.s || (r.ref ? (kind === "elec" ? SRC.refelec : SRC.refgaz) : SRC[kind]);
+  var dk = r.d || DATA_LABEL;
+  var da = kind === "elec" ? ABO_D[r.k] : null;
+  var d = "relevé le " + dk;
+  if (!r.ref && da && da !== dk) d = "kWh relevé le " + dk + ", abonnement le " + da;
+  var est = "";
+  if (!r.ref && r._est) est = kind === "elec" ? " · abonnement estimé (écart du tarif réglementé)" : " · prix du kWh estimé d'après le prix repère";
+  return '<td class="src">' + srcLink(a) + '<br><span class="offer">' + d + est + "</span></td>";
+}
+function staleCheck() {
+  var days = (Date.now() - Date.parse(DATA_DATE)) / 86400000;
+  var el = $("stale");
+  if (!el) return;
+  el.hidden = !(days > 30);
+  if (days > 30) el.textContent = "Attention : les prix ont été relevés le " + DATA_LABEL + ", il y a plus de 30 jours. Ils ont probablement changé. Vérifiez-les sur le site du fournisseur.";
+}
+
+/* ---------- Utilitaires ---------- */
+var fmtEur0 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+var fmtEur2 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+var fmtKwh = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+function $(id) { return document.getElementById(id); }
+function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+function primeCell(k) {
+  var p = k && PRIMES[k];
+  if (!p || p.st === "none") return '<div class="prime"><span class="none">Non relevée</span></div>';
+  var h = '<div class="prime"><span>Parrain <b>' + esc(p.p || "non relevée") + '</b></span><span>Filleul <b>' + esc(p.f || "non relevée") + '</b></span>';
+  if (p.st === "check") h += '<span class="chk">à vérifier</span>';
+  return h + "</div>";
+}
+
+function sortRows(rows, key) {
+  var out = rows.slice();
+  out.sort(function (x, y) {
+    if (key === "prix") return x._tot - y._tot;
+    var px = x.k && PRIMES[x.k] ? PRIMES[x.k] : { fn: -1, pn: -1 };
+    var py = y.k && PRIMES[y.k] ? PRIMES[y.k] : { fn: -1, pn: -1 };
+    var d = key === "filleul" ? py.fn - px.fn : py.pn - px.pn;
+    return d !== 0 ? d : x._tot - y._tot;
+  });
+  return out;
+}
+
+var ABO_G0 = { edf: 120.00, ohm: 152.04, gdb: 152.40, total: 152.40, engie: 152.46, mint: 152.52, octo: 152.40, plen: 179.10, happe: 152.40, alterna: 174.00, ilek: 218.04, dyneff: 163.44, geg: 125.64, ekw: 243.84 };
+var GAS_B0 = { a: 0.1783, abo: 152.46 }, GAS_B1 = { a: 0.1456, abo: 360.79 };
+var GAS_OPT_LABEL = { base: "Base", b0: "B0", b1: "B1", b2i: "B2i" };
+function gasOptionFor(k) { return k < 1000 ? "base" : k <= 6000 ? "b0" : k <= 30000 ? "b1" : "b2i"; }
+function gasListFor(opt) {
+  var ratio = GAS_B0.a / GAS_B1.a;
+  var base = opt === "b1" ? GAS_B1 : GAS_B0;
+  var list = GAS.map(function (r) {
+    return opt === "b1" ? Object.assign({}, r, { abo: ABO_G[r.k], est: false }) : Object.assign({}, r, { a: r.a * ratio, abo: ABO_G0[r.k], est: true });
+  });
+  return { list: list, ref: Object.assign({}, GAS_REF, { a: base.a, abo: base.abo, offer: "Prix repère de vente de gaz, option " + GAS_OPT_LABEL[opt] + " (n'est pas une offre)" }) };
+}
+function renderGas() {
+  if (state.gasOpt === "b2i") {
+    $("t-gaz").innerHTML = "<tbody><tr><td>L'option B2i concerne les consommations de 30 000 à 150 000 kWh par an (petit chauffage collectif). Les tarifs se font sur devis : ils ne sont pas comparables ici.</td></tr></tbody>";
+    return;
+  }
+  var g = gasListFor(state.gasOpt);
+  renderPrices("t-gaz", g.list, g.ref, "a", state.gasConso, state.sort, "gaz", "6");
+}
+
+var TRV_ABO = { "3": 145.56, "6": 190.32, "9": 238.56 };
+
+function sortBtn(key, label, cur) {
+  return '<button type="button" class="sortbtn' + (cur === key ? " on" : "") + '" data-sort="' + key + '" aria-pressed="' + (cur === key ? "true" : "false") + '">' + label + "</button>";
+}
+
+function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
+  var aboMap = kind === "elec" ? ABO_E : ABO_G;
+  var all = list.concat([ref]).map(function (r) {
+    var abo, est = false;
+    if (r.ref) abo = kind === "elec" ? TRV_ABO[kva] : r.abo;
+    else if (kind === "elec") {
+      var known = typeof aboMap[r.k] === "number";
+      abo = (known ? aboMap[r.k] : TRV_ABO["6"]) + (TRV_ABO[kva] - TRV_ABO["6"]);
+      est = !known || kva !== "6";
+    } else { abo = r.abo; est = !!r.est; }
+    var cons = r[field] * conso;
+    return Object.assign({}, r, { _abo: abo, _est: est, _cons: cons, _tot: cons + abo });
+  });
+  all = sortRows(all, sortKey);
+  var refTot = all.filter(function (r) { return r.ref; })[0]._tot;
+  var bestRow = all.filter(function (r) { return !r.ref; }).sort(function (a, b) { return a._tot - b._tot; })[0];
+  var refName = kind === "elec" ? "le tarif réglementé" : "le prix repère";
+  var bd = bestRow._tot - refTot;
+  var bel = $("best-" + kind);
+  if (bel) bel.innerHTML = "<strong>La moins chère : " + esc(bestRow.name) + "</strong> (" + esc(bestRow.offer) + "), " + fmtEur0.format(bestRow._tot) + " par an. "
+    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".");
+  var h = "<thead><tr><th>Fournisseur et offre</th><th class=\"num\">kWh TTC</th><th class=\"num\">Consommation par an</th><th class=\"num\">Abonnement par an</th><th class=\"num\">" + sortBtn("prix", "Total par an", sortKey) + "</th><th class=\"num\">Écart</th><th>Prime de parrainage<br>" + sortBtn("parrain", "Parrain", sortKey) + " " + sortBtn("filleul", "Filleul", sortKey) + "</th><th>Source et date</th></tr></thead><tbody>";
+  all.forEach(function (r) {
+    var diff = r._tot - refTot;
+    var d;
+    if (r.ref) d = "référence";
+    else if (Math.round(diff) === 0) d = "0 €";
+    else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
+    var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + esc(r.name) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div></td>'
+      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
+  });
+  $(tableId).innerHTML = h + "</tbody>";
+}
+
+function renderPrimes() {
+  var keys = Object.keys(PRIMES).sort(function (a, b) {
+    var x = PRIMES[a], y = PRIMES[b];
+    var rank = { ok: 0, check: 1, none: 2 };
+    if (rank[x.st] !== rank[y.st]) return rank[x.st] - rank[y.st];
+    return (y.fn + y.pn) - (x.fn + x.pn);
+  });
+  var h = "<thead><tr><th>Fournisseur</th><th>Prime parrain</th><th>Prime filleul</th><th>Détail</th><th>Fiabilité</th><th>Source et date</th></tr></thead><tbody>";
+  keys.forEach(function (k) {
+    var p = PRIMES[k];
+    var badge = p.st === "ok" ? '<span class="badge">Confirmée en octobre 2026</span>' : p.st === "check" ? '<span class="badge check">À vérifier</span>' : '<span class="badge none">Aucune prime</span>';
+    h += '<tr><td><div class="prov">' + esc(p.name) + '</div><div class="offer">' + esc(p.en) + '</div></td>'
+      + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.p || "—") + '</td>'
+      + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.f || "—") + '</td>'
+      + '<td class="offer" style="min-width:14rem">' + esc(p.valid) + '</td><td>' + badge + '</td><td class="src">' + (p.s ? srcLink(p.s) + '<br><span class="offer">' + esc(p.d) + '</span>' : '<span class="offer">Aucun programme relevé</span>') + '</td></tr>';
+  });
+  $("t-prime").innerHTML = h + "</tbody>";
+}
+
+function totalOf(r, kind, c) {
+  var v = (kind === "elec" ? ABO_E : ABO_G)[r.k];
+  if (typeof v !== "number") v = kind === "elec" ? TRV_ABO["6"] : 0;
+  return r.a * c + v;
+}
+
+function renderSummary() {
+  var el = ELEC.slice().sort(function (x, y) { return totalOf(x, "elec", 5700) - totalOf(y, "elec", 5700); })[0];
+  var ga = GAS.slice().sort(function (x, y) { return totalOf(x, "gaz", 10000) - totalOf(y, "gaz", 10000); })[0];
+  var elRef = TRV_ABO["6"] + ELEC_REF.a * 5700;
+  var gaRef = GAS_B1.abo + GAS_REF.a * 10000;
+  var best = Object.keys(PRIMES).filter(function (k) { return PRIMES[k].st === "ok"; }).sort(function (a, b) { return PRIMES[b].fn - PRIMES[a].fn; })[0];
+  var bp = PRIMES[best];
+  $("summary").innerHTML =
+    '<div class="sum"><span class="label">Électricité la moins chère par an</span><span class="big">' + fmtEur0.format(totalOf(el, "elec", 5700)) + '</span><span class="who">' + esc(el.name) + ' · 5 700 kWh, 6 kVA, abonnement compris. Tarif réglementé : ' + fmtEur0.format(elRef) + '</span></div>'
+    + '<div class="sum"><span class="label">Gaz le moins cher par an</span><span class="big">' + fmtEur0.format(totalOf(ga, "gaz", 10000)) + '</span><span class="who">' + esc(ga.name) + ' · 10 000 kWh, option B1, abonnement compris. Prix repère : ' + fmtEur0.format(gaRef) + '</span></div>'
+    + '<div class="sum"><span class="label">Prime filleul confirmée la plus haute</span><span class="big">' + esc(bp.f.split(" ")[0] + " €") + '</span><span class="who">' + esc(bp.name) + ' · ' + esc(bp.valid.toLowerCase()) + '</span></div>';
+}
+
+/* ---------- Mon logement : estimation de consommation ---------- */
+// Chauffage : kWh/m²/an selon l'isolation (ADEME, repris par Selectra). Eau chaude : Selectra.
+var HEAT_KWH = { bonne: 70, moyenne: 110, mauvaise: 140 };
+var ECS_ELEC = 800, ECS_GAZ = 1269, COP = 3, RENDEMENT_GAZ = 0.9, LED_W = 8, LED_H = 3;
+var USAGES_MOYENS = 2228;
+var LOGT_KEY = "logement-v1";
+
+var ROOMS = [
+  { id: "salon", label: "Salon ou séjour", pts: 3, heat: true, n: 1 },
+  { id: "chambre", label: "Chambre", pts: 2, heat: true, n: 2 },
+  { id: "cuisine", label: "Cuisine", pts: 3, heat: true, n: 1 },
+  { id: "sdb", label: "Salle de bains", pts: 2, heat: true, n: 1 },
+  { id: "bureau", label: "Bureau", pts: 2, heat: true, n: 0 },
+  { id: "wc", label: "WC", pts: 1, heat: false, n: 1 },
+  { id: "couloir", label: "Couloir ou entrée", pts: 1, heat: false, n: 1 },
+  { id: "cave", label: "Cave, garage ou cellier", pts: 1, heat: false, n: 0 }
+];
+
+// mode c : cycles par semaine (kwh par cycle). mode h : heures par jour (w en watts, d jours par an). mode km : km par an.
+var APPS = [
+  { id: "frigo", label: "Réfrigérateur", g: "froid", mode: "h", w: 100, u: 6, d: 365, peak: 0, q: 1 },
+  { id: "cong", label: "Congélateur", g: "froid", mode: "h", w: 100, u: 6, d: 365, peak: 0, q: 0 },
+  { id: "ll", label: "Lave-linge", g: "lavage", mode: "c", kwh: 1.0, u: 4, peak: 2200, q: 1 },
+  { id: "sl", label: "Sèche-linge", g: "lavage", mode: "c", kwh: 2.0, u: 2, peak: 2500, q: 0 },
+  { id: "lv", label: "Lave-vaisselle", g: "lavage", mode: "c", kwh: 1.1, u: 5, peak: 2000, q: 0 },
+  { id: "four", label: "Four électrique", g: "cuisine", mode: "c", kwh: 1.2, u: 3, peak: 2500, q: 1 },
+  { id: "plaques", label: "Plaques électriques ou induction", g: "cuisine", mode: "h", w: 1800, u: 0.25, d: 365, peak: 3000, q: 1 },
+  { id: "micro", label: "Micro-ondes", g: "cuisine", mode: "h", w: 1000, u: 0.1, d: 365, peak: 1000, q: 1 },
+  { id: "bouil", label: "Bouilloire et cafetière", g: "cuisine", mode: "h", w: 2000, u: 0.15, d: 365, peak: 2000, q: 1 },
+  { id: "tv", label: "Télévision", g: "multimedia", mode: "h", w: 100, u: 3.5, d: 365, peak: 0, q: 1 },
+  { id: "pc", label: "Ordinateur portable", g: "multimedia", mode: "h", w: 50, u: 4, d: 365, peak: 0, q: 1 },
+  { id: "fixe", label: "Ordinateur fixe", g: "multimedia", mode: "h", w: 150, u: 4, d: 365, peak: 0, q: 0 },
+  { id: "box", label: "Box internet", g: "multimedia", mode: "h", w: 12, u: 24, d: 365, peak: 0, q: 1 },
+  { id: "console", label: "Console de jeux", g: "multimedia", mode: "h", w: 120, u: 1, d: 365, peak: 0, q: 0 },
+  { id: "clim", label: "Climatiseur (90 jours d'été)", g: "clim", mode: "h", w: 900, u: 2, d: 90, peak: 1000, q: 0 },
+  { id: "vae", label: "Voiture électrique (17 kWh aux 100 km)", g: "voiture", mode: "km", kwh100: 17, u: 10000, peak: 7400, q: 0 }
+];
+var UNITS = { c: "cycles par semaine", h: "heures par jour", km: "km par an" };
+var POSTES = [["chauffage", "Chauffage"], ["eau", "Eau chaude"], ["cuisine", "Cuisine"], ["froid", "Froid"], ["lavage", "Lavage"], ["multimedia", "Multimédia"], ["eclairage", "Éclairage"], ["clim", "Climatisation"], ["voiture", "Voiture électrique"], ["divers", "Veilles et divers"]];
+var POSTES_GAZ = [["chauffage", "Chauffage"], ["eau", "Eau chaude"], ["cuisson", "Cuisson"]];
+var fmtInt = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+var lastLogt = { conso: 0, ck: "6", gconso: 0, gopt: "b1", eau: { m3: 0, dept: "", ville: "", prix: 0 } };
+
+function num(id, fb) { var el = $(id); var v = el ? parseFloat(el.value) : NaN; return isFinite(v) && v >= 0 ? v : fb; }
+function numInput(id, val, min, max, step, lab) { return '<input id="' + id + '"' + (lab ? ' aria-label="' + esc(lab) + '"' : "") + ' type="number" inputmode="decimal" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '">'; }
+function selectEl(id, opts, sel) {
+  return '<select id="' + id + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === sel ? " selected" : "") + ">" + esc(o[1]) + "</option>"; }).join("") + "</select>";
+}
+function fld(label, id, control) { return '<div class="field"><label for="' + id + '">' + esc(label) + "</label>" + control + "</div>"; }
+
+function buildLogt() {
+  var h = "";
+  h += '<div class="card"><h3>Le logement</h3><div class="grid2">'
+    + fld("Surface (m²)", "l-surface", numInput("l-surface", 60, 10, 500, 1))
+    + fld("Nombre de personnes", "l-pers", numInput("l-pers", 2, 1, 10, 1))
+    + fld("Isolation", "l-iso", selectEl("l-iso", [["bonne", "Bonne (70 kWh/m²/an)"], ["moyenne", "Moyenne (110 kWh/m²/an)"], ["mauvaise", "Mauvaise (140 kWh/m²/an)"]], "moyenne"))
+    + "</div></div>";
+  h += '<div class="card"><h3>Chauffage, eau chaude et cuisson</h3><div class="grid2">'
+    + fld("Chauffage", "l-heat", selectEl("l-heat", [["elec", "Électrique (radiateurs)"], ["pac", "Pompe à chaleur"], ["gaz", "Gaz de ville"], ["autre", "Autre (bois, fioul, réseau)"]], "elec"))
+    + fld("Points de chauffage", "l-pts", numInput("l-pts", 4, 0, 30, 1))
+    + fld("Puissance par point (W)", "l-w", numInput("l-w", 1000, 250, 3000, 50))
+    + fld("Eau chaude", "l-ecs", selectEl("l-ecs", [["elec", "Ballon électrique"], ["thermo", "Chauffe-eau thermodynamique"], ["gaz", "Gaz"], ["autre", "Autre"]], "elec"))
+    + fld("Cuisson", "l-cuisson", selectEl("l-cuisson", [["elec", "Électrique ou induction"], ["gaz", "Gaz"]], "elec"))
+    + '</div><p class="note" id="l-hint"></p></div>';
+  h += '<div class="card"><h3>Localisation et eau</h3><div class="grid2">'
+    + fld("Département", "l-dept", selectEl("l-dept", deptOpts(), ""))
+    + fld("Ville", "l-ville", '<select id="l-ville"></select>')
+    + fld("Prix de l'eau si vous le connaissez (€/m³ TTC)", "l-prixeau", numInput("l-prixeau", "", 0, 20, 0.01))
+    + fld("Douches par personne et par semaine", "l-douches", numInput("l-douches", 7, 0, 30, 1))
+    + fld("Bains par personne et par semaine", "l-bains", numInput("l-bains", 0, 0, 30, 1))
+    + fld("Jardin, piscine, voiture (m³ par an)", "l-jardin", numInput("l-jardin", 0, 0, 500, 1))
+    + '</div><p class="note">La localisation sert surtout à estimer le prix de l\'eau, qui varie beaucoup d\'une commune à l\'autre. Le tarif réglementé de l\'électricité est le même partout en métropole. Pour le gaz, il existe 6 zones tarifaires (de la zone 1, la moins chère, à la zone 6) : pour l\'option B1, le prix repère de la CRE ne change pas selon la zone, mais certaines offres varient de quelques millièmes d\'euro par kWh (exemple EDF Avantage Gaz : 0,1265 € en zone 1 et 0,1300 € en zone 6). Je n\'ai pas de liste des zones par commune : <a href="https://particuliers.engie.fr/gaz-naturel/conseils-gaz-naturel/conseils-tarifs-gaz-naturel/connaitre-zone-tarifaire-gaz.html" target="_blank" rel="noopener">trouvez votre zone chez ENGIE</a>. Les lave-linge et lave-vaisselle du tableau des appareils comptent aussi dans la consommation d\'eau.</p></div>';
+  h += '<div class="card"><h3>Pièces</h3><div class="grid2">'
+    + ROOMS.map(function (r) { return fld(r.label, "r-" + r.id, numInput("r-" + r.id, r.n, 0, 20, 1)); }).join("")
+    + '</div><p class="note">Le nombre de pièces sert à estimer l\'éclairage (LED de 8 W, 3 heures par jour) et à suggérer le nombre de points de chauffage.</p></div>';
+  h += '<div class="card"><h3>Appareils électriques</h3><div class="tablewrap"><table class="apps"><thead><tr><th>Appareil</th><th>Nombre</th><th>Usage</th><th class="num">kWh par an</th></tr></thead><tbody>'
+    + APPS.map(function (a) {
+      return '<tr><td>' + esc(a.label) + '</td><td>' + numInput("a-" + a.id + "-q", a.q, 0, 20, 1, a.label + " : nombre") + '</td><td>' + numInput("a-" + a.id + "-u", a.u, 0, 100000, a.mode === "km" ? 500 : 0.05, a.label + " : " + UNITS[a.mode]) + '<div class="offer">' + UNITS[a.mode] + '</div></td><td class="num" id="k-' + a.id + '">0</td></tr>';
+    }).join("")
+    + '</tbody></table></div><p class="note">Les consommations par défaut sont des ordres de grandeur. Modifiez le nombre et l\'usage selon vos appareils.</p></div>';
+  $("logt-form").innerHTML = h;
+  loadLogt();
+}
+
+function saveLogt() {
+  try {
+    var o = {}; var els = $("logt-form").querySelectorAll("input[id],select[id]");
+    for (var i = 0; i < els.length; i++) o[els[i].id] = els[i].value;
+    localStorage.setItem(LOGT_KEY, JSON.stringify(o));
+  } catch (e) { /* stockage indisponible : la page fonctionne sans */ }
+}
+function loadLogt() {
+  try {
+    var o = JSON.parse(localStorage.getItem(LOGT_KEY) || "null");
+    if (!o) { fillVilles("l-ville", "", ""); return; }
+    Object.keys(o).forEach(function (id) { var el = $(id); if (el && id !== "l-ville") el.value = o[id]; });
+  } catch (e) { /* ignoré */ }
+  fillVilles("l-ville", $("l-dept").value, o && o["l-ville"]);
+}
+
+function readLogt() {
+  var s = { surface: num("l-surface", 60), pers: num("l-pers", 2), iso: $("l-iso").value, heat: $("l-heat").value, pts: num("l-pts", 4), w: num("l-w", 1000), ecs: $("l-ecs").value, cuisson: $("l-cuisson").value, dept: $("l-dept").value, ville: $("l-ville").value, prixEau: num("l-prixeau", 0), douches: num("l-douches", 7), bains: num("l-bains", 0), jardin: num("l-jardin", 0), rooms: {}, apps: {} };
+  ROOMS.forEach(function (r) { s.rooms[r.id] = num("r-" + r.id, r.n); });
+  APPS.forEach(function (a) { s.apps[a.id] = { q: num("a-" + a.id + "-q", a.q), u: num("a-" + a.id + "-u", a.u) }; });
+  return s;
+}
+
+function appKwh(a, q, u) {
+  if (a.mode === "c") return q * a.kwh * u * 52;
+  if (a.mode === "km") return q * u * a.kwh100 / 100;
+  return q * a.w * u * a.d / 1000;
+}
+function sumVals(o) { return Object.keys(o).reduce(function (t, k) { return t + o[k]; }, 0); }
+function kvaStep(w) { var steps = [3, 6, 9, 12, 15, 18, 24, 30, 36]; var k = w / 1000; for (var i = 0; i < steps.length; i++) if (k <= steps[i]) return steps[i]; return 36; }
+
+function computeLogt(s) {
+  var e = {}, g = {}, big = 0, heatW = 0;
+  function add(o, k, v) { if (v > 0) o[k] = (o[k] || 0) + v; }
+  var need = s.surface * HEAT_KWH[s.iso];
+  if (s.heat === "elec") { add(e, "chauffage", need); heatW = s.pts * s.w; }
+  else if (s.heat === "pac") { add(e, "chauffage", need / COP); heatW = 2500; }
+  else if (s.heat === "gaz") add(g, "chauffage", need / RENDEMENT_GAZ);
+  if (s.ecs === "elec") { add(e, "eau", ECS_ELEC * s.pers); big += 2200; }
+  else if (s.ecs === "thermo") { add(e, "eau", ECS_ELEC * s.pers / COP); big += 500; }
+  else if (s.ecs === "gaz") add(g, "eau", ECS_GAZ * s.pers);
+  var pts = 0, heated = 0;
+  ROOMS.forEach(function (r) { pts += s.rooms[r.id] * r.pts; if (r.heat) heated += s.rooms[r.id]; });
+  add(e, "eclairage", pts * LED_W * LED_H * 365 / 1000);
+  var perApp = {};
+  APPS.forEach(function (a) {
+    var x = s.apps[a.id];
+    if (a.id === "plaques" && s.cuisson === "gaz") { perApp[a.id] = 0; return; }
+    var kwh = appKwh(a, x.q, x.u);
+    perApp[a.id] = kwh;
+    add(e, a.g, kwh);
+    if (x.q > 0) big += x.q * (a.peak || 0);
+  });
+  if (s.cuisson === "gaz") add(g, "cuisson", 160);
+  add(e, "divers", 100);
+  var usages = 0;
+  ["cuisine", "froid", "lavage", "multimedia", "eclairage", "divers"].forEach(function (k) { usages += e[k] || 0; });
+  return { e: e, g: g, eTot: sumVals(e), gTot: sumVals(g), peakW: 0.9 * heatW + 0.3 * big + 500, heated: heated, perApp: perApp, usages: usages, eau: waterDetail(s) };
+}
+
+function elecCostFor(r, kva, conso) {
+  var field = kva === "9" ? "b" : "a";
+  var abo;
+  if (r.ref) abo = TRV_ABO[kva];
+  else abo = (typeof ABO_E[r.k] === "number" ? ABO_E[r.k] : TRV_ABO["6"]) + (TRV_ABO[kva] - TRV_ABO["6"]);
+  return r[field] * conso + abo;
+}
+function gasCostFor(r, conso) { return r.a * conso + (r.ref ? GAS_B1.abo : ABO_G[r.k]); }
+
+function bars(posts, data, unit) {
+  var max = 0; posts.forEach(function (p) { if ((data[p[0]] || 0) > max) max = data[p[0]]; });
+  return '<div class="bars">' + posts.filter(function (p) { return data[p[0]] > 0; }).map(function (p) {
+    var v = data[p[0]];
+    return '<div class="barrow"><span>' + p[1] + '</span><span class="track"><span class="fill" style="width:' + Math.max(2, Math.round(v / max * 100)) + '%"></span></span><span class="num">' + fmtInt.format(v) + (unit ? " " + unit : "") + "</span></div>";
+  }).join("") + "</div>";
+}
+
+function renderLogt() {
+  var s = readLogt(), r = computeLogt(s);
+  var kva = kvaStep(r.peakW), ck = kva <= 3 ? "3" : kva <= 6 ? "6" : "9";
+  var conso = Math.round(r.eTot / 100) * 100, gconso = Math.round(r.gTot / 100) * 100;
+  lastLogt = { conso: conso, ck: ck, gconso: gconso, gopt: gasOptionFor(r.gTot), eau: { m3: Math.round(r.eau.m3), dept: s.dept, ville: s.ville, prix: s.prixEau } };
+  $("l-hint").textContent = "Pièces à chauffer d'après votre liste : " + r.heated + ". Les radiateurs vont de 750 à 2 500 W.";
+  APPS.forEach(function (a) { var c = $("k-" + a.id); if (c) c.textContent = fmtInt.format(r.perApp[a.id] || 0); });
+
+  var h = '<div class="card"><span class="label stampy">Électricité estimée</span><span class="big">' + fmtInt.format(r.eTot) + ' kWh par an</span>' + bars(POSTES, r.e)
+    + '<p class="note">Appareils et éclairage seuls : ' + fmtInt.format(r.usages) + ' kWh par an. Un foyer en consomme en moyenne environ ' + fmtInt.format(USAGES_MOYENS) + '.</p></div>';
+  h += '<div class="card"><span class="label stampy">Puissance conseillée</span><span class="big">' + kva + ' kVA</span><p class="note">Pic estimé à ' + fmtInt.format(r.peakW) + ' W : 90 % du chauffage, 30 % des gros appareils et 500 W de fond. C\'est indicatif. Votre compteur Linky garde l\'historique de vos pointes réelles.'
+    + (kva > 9 ? ' Le comparateur ne couvre pas plus de 9 kVA : les coûts ci-dessous sont calculés à 9 kVA.' : "") + "</p></div>";
+  if (r.eTot > 0) {
+    var offers = ELEC.map(function (o) { return { o: o, t: elecCostFor(o, ck, r.eTot) }; }).sort(function (a, b) { return a.t - b.t; });
+    var trv = elecCostFor(ELEC_REF, ck, r.eTot);
+    h += '<div class="card"><span class="label stampy">Facture annuelle estimée, électricité</span><p>Tarif réglementé : <strong>' + fmtInt.format(trv) + ' €</strong><br>Offre la moins chère : <strong>' + fmtInt.format(offers[0].t) + ' €</strong> (' + esc(offers[0].o.name) + ')<br><span class="delta-good">Écart : −' + fmtInt.format(trv - offers[0].t) + ' €</span></p><button class="btn" id="apply-elec" type="button">Voir dans le comparateur</button></div>';
+  }
+  if (r.gTot > 0) {
+    var gopt = gasOptionFor(r.gTot);
+    h += '<div class="card"><span class="label stampy">Gaz estimé</span><span class="big">' + fmtInt.format(r.gTot) + ' kWh par an</span>' + bars(POSTES_GAZ, r.g)
+      + '<p class="note">Option tarifaire : <strong>' + GAS_OPT_LABEL[gopt] + '</strong></p>';
+    if (gopt === "b2i") {
+      h += '<p class="note">Au-delà de 30 000 kWh par an, les tarifs se font sur devis.</p>';
+    } else {
+      var gl = gasListFor(gopt);
+      var go = gl.list.map(function (o) { return { o: o, t: o.a * r.gTot + o.abo }; }).sort(function (x, y) { return x.t - y.t; });
+      var gref = gl.ref.a * r.gTot + gl.ref.abo;
+      h += '<p>Prix repère : <strong>' + fmtInt.format(gref) + ' €</strong><br>Offre la moins chère : <strong>' + fmtInt.format(go[0].t) + ' €</strong> (' + esc(go[0].o.name) + ')</p>';
+    }
+    h += '<button class="btn" id="apply-gaz" type="button">Voir le gaz dans le comparateur</button></div>';
+  }
+  var ep = eauPrice(s.dept, s.ville, s.prixEau);
+  h += '<div class="card"><span class="label stampy">Eau estimée</span><span class="big">' + fmtInt.format(r.eau.m3) + ' m³ par an</span>' + bars(POSTES_EAU, r.eau.det, "m³")
+    + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3)) + ' €</strong></p>'
+    + '<button class="btn" id="apply-eau" type="button">Voir l\'eau dans le comparateur</button></div>';
+  $("logt-res").innerHTML = h;
+}
+
+function initLogt() {
+  buildLogt();
+  $("logt-form").addEventListener("input", function () { saveLogt(); renderLogt(); });
+  $("logt-form").addEventListener("change", function (ev) {
+    if (ev.target && ev.target.id === "l-dept") fillVilles("l-ville", $("l-dept").value, "");
+    saveLogt(); renderLogt();
+  });
+  $("logt-res").addEventListener("click", function (ev) {
+    var id = ev.target && ev.target.id;
+    if (id === "apply-elec") { state.autoElec = true; saveAuto(); setTab("elec"); }
+    if (id === "apply-gaz") { state.autoGaz = true; saveAuto(); setTab("gaz"); }
+    if (id === "apply-eau") { state.autoEau = true; saveAuto(); setTab("eau"); }
+  });
+  renderLogt();
+}
+
+/* ---------- Eau et localisation ---------- */
+// Prix de l'eau : eau potable + assainissement collectif, €/m³ TTC au 1er janvier 2026 (Kelwatt, d'après eaufrance).
+var EAU_NAT = 4.69;       // moyenne nationale (Kelwatt, janvier 2026). Selectra donne 4,89 pour 2025.
+var EAU_ABO = 84;         // abonnement annuel moyen (Selectra), environ 14 % d'une facture de 120 m³
+var EAU_ABO_PM3 = EAU_ABO / 120;
+var REGIONS = {
+  ARA: ["Auvergne-Rhône-Alpes", 3.74, true], BFC: ["Bourgogne-Franche-Comté", 5.87, true], BRE: ["Bretagne", 5.71, true],
+  CVL: ["Centre-Val de Loire", 5.37, true], COR: ["Corse", 1.87, false], GES: ["Grand Est", 4.56, true],
+  HDF: ["Hauts-de-France", 5.60, true], IDF: ["Île-de-France", 5.04, true], NOR: ["Normandie", 5.24, true],
+  NAQ: ["Nouvelle-Aquitaine", 5.84, true], OCC: ["Occitanie", 4.28, true], PDL: ["Pays de la Loire", 5.83, true],
+  PAC: ["Provence-Alpes-Côte d'Azur", 2.48, false]
+};
+var DEPT_RAW = "01|Ain|ARA;03|Allier|ARA;07|Ardèche|ARA;15|Cantal|ARA;26|Drôme|ARA;38|Isère|ARA;42|Loire|ARA;43|Haute-Loire|ARA;63|Puy-de-Dôme|ARA;69|Rhône|ARA;73|Savoie|ARA;74|Haute-Savoie|ARA;"
+  + "21|Côte-d'Or|BFC;25|Doubs|BFC;39|Jura|BFC;58|Nièvre|BFC;70|Haute-Saône|BFC;71|Saône-et-Loire|BFC;89|Yonne|BFC;90|Territoire de Belfort|BFC;"
+  + "22|Côtes-d'Armor|BRE;29|Finistère|BRE;35|Ille-et-Vilaine|BRE;56|Morbihan|BRE;"
+  + "18|Cher|CVL;28|Eure-et-Loir|CVL;36|Indre|CVL;37|Indre-et-Loire|CVL;41|Loir-et-Cher|CVL;45|Loiret|CVL;"
+  + "2A|Corse-du-Sud|COR;2B|Haute-Corse|COR;"
+  + "08|Ardennes|GES;10|Aube|GES;51|Marne|GES;52|Haute-Marne|GES;54|Meurthe-et-Moselle|GES;55|Meuse|GES;57|Moselle|GES;67|Bas-Rhin|GES;68|Haut-Rhin|GES;88|Vosges|GES;"
+  + "02|Aisne|HDF;59|Nord|HDF;60|Oise|HDF;62|Pas-de-Calais|HDF;80|Somme|HDF;"
+  + "75|Paris|IDF;77|Seine-et-Marne|IDF;78|Yvelines|IDF;91|Essonne|IDF;92|Hauts-de-Seine|IDF;93|Seine-Saint-Denis|IDF;94|Val-de-Marne|IDF;95|Val-d'Oise|IDF;"
+  + "14|Calvados|NOR;27|Eure|NOR;50|Manche|NOR;61|Orne|NOR;76|Seine-Maritime|NOR;"
+  + "16|Charente|NAQ;17|Charente-Maritime|NAQ;19|Corrèze|NAQ;23|Creuse|NAQ;24|Dordogne|NAQ;33|Gironde|NAQ;40|Landes|NAQ;47|Lot-et-Garonne|NAQ;64|Pyrénées-Atlantiques|NAQ;79|Deux-Sèvres|NAQ;86|Vienne|NAQ;87|Haute-Vienne|NAQ;"
+  + "09|Ariège|OCC;11|Aude|OCC;12|Aveyron|OCC;30|Gard|OCC;31|Haute-Garonne|OCC;32|Gers|OCC;34|Hérault|OCC;46|Lot|OCC;48|Lozère|OCC;65|Hautes-Pyrénées|OCC;66|Pyrénées-Orientales|OCC;81|Tarn|OCC;82|Tarn-et-Garonne|OCC;"
+  + "44|Loire-Atlantique|PDL;49|Maine-et-Loire|PDL;53|Mayenne|PDL;72|Sarthe|PDL;85|Vendée|PDL;"
+  + "04|Alpes-de-Haute-Provence|PAC;05|Hautes-Alpes|PAC;06|Alpes-Maritimes|PAC;13|Bouches-du-Rhône|PAC;83|Var|PAC;84|Vaucluse|PAC";
+var CITY_RAW = "Lyon|69|3.63;Annecy|74|5.23;Clermont-Ferrand|63|4.32;Grenoble|38|3.32;Valence|26|4.09;Aix-les-Bains|73|5.16;"
+  + "Dijon|21|3.76;Auxerre|89|4.99;Nevers|58|4.54;Besançon|25|4.08;Pontarlier|25|6.06;Héricourt|70|4.25;"
+  + "Rennes|35|4.20;Saint-Brieuc|22|6.53;Lorient|56|4.94;Pontivy|56|4.99;Saint-Malo|35|5.86;Brest|29|5.52;"
+  + "Tours|37|4.14;Orléans|45|3.97;Vendôme|41|5.55;Châteauroux|36|3.90;Montargis|45|4.96;Bourges|18|5.09;"
+  + "Strasbourg|67|2.84;Metz|57|3.74;Nancy|54|4.20;Reims|51|3.71;Mulhouse|68|4.50;Colmar|68|3.69;"
+  + "Lille|59|4.55;Dunkerque|59|6.04;Valenciennes|59|7.58;Calais|62|5.29;Roubaix|59|4.55;Douai|59|5.44;"
+  + "Paris|75|4.31;Versailles|78|5.52;Vincennes|94|5.42;Nanterre|92|5.31;Melun|77|5.67;"
+  + "Rouen|76|4.27;Caen|14|4.18;Le Havre|76|4.66;Alençon|61|5.60;Bayeux|14|6.05;Évreux|27|5.85;"
+  + "Bordeaux|33|4.16;Poitiers|86|4.31;Limoges|87|3.96;Niort|79|5.39;Biarritz|64|4.93;Agen|47|4.89;"
+  + "Toulouse|31|3.32;Montpellier|34|3.16;Perpignan|66|4.44;Nîmes|30|3.89;Montauban|82|5.04;Narbonne|11|5.57;"
+  + "Nantes|44|3.98;Angers|49|4.01;Le Mans|72|4.23;Saint-Nazaire|44|4.60;Laval|53|3.95;Montaigu-Vendée|85|4.57;"
+  + "Marseille|13|4.32;Cannes|06|3.70;Nice|06|5.03;Aix-en-Provence|13|3.44;Antibes|06|1.48;Saint-Tropez|83|3.56;"
+  + "Ajaccio|2A|4.85;Corte|2B|2.86;Bastia|2B|5.09;Bonifacio|2A|8.42;L'Île-Rousse|2B|5.36;Porto-Vecchio|2A|4.96";
+var DEPTS = DEPT_RAW.split(";").map(function (x) { var a = x.split("|"); return { c: a[0], n: a[1], r: a[2] }; });
+var CITIES = CITY_RAW.split(";").map(function (x) { var a = x.split("|"); return { n: a[0], d: a[1], p: parseFloat(a[2]) }; });
+var DEPT_BY = {};
+DEPTS.forEach(function (d) { DEPT_BY[d.c] = d; });
+var CITY_DOUTE = { "Antibes": true };
+
+// Consommation d'eau par usage (ordres de grandeur, modifiables dans la page)
+var EAU_BASE_L = 40, EAU_DOUCHE_L = 60, EAU_BAIN_L = 150, EAU_LL_L = 50, EAU_LV_L = 12;
+var POSTES_EAU = [["base", "WC, cuisine, mains"], ["douches", "Douches"], ["bains", "Bains"], ["ll", "Lave-linge"], ["lv", "Lave-vaisselle"], ["jardin", "Jardin, piscine, voiture"]];
+var fmtNum2 = new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+function deptLabel(code) { var d = DEPT_BY[code]; return d ? code + " – " + d.n : ""; }
+function deptOpts() {
+  var o = [["", "Non renseigné (moyenne nationale)"]];
+  DEPTS.slice().sort(function (a, b) { return a.c < b.c ? -1 : 1; }).forEach(function (d) { o.push([d.c, d.c + " – " + d.n]); });
+  return o;
+}
+
+function fillVilles(selId, dept, selected) {
+  var el = $(selId);
+  if (!el) return;
+  var opts;
+  if (!dept) opts = [["", "Choisissez d'abord un département"]];
+  else {
+    opts = [["", "Autre commune (moyenne de la région)"]];
+    CITIES.filter(function (c) { return c.d === dept; }).forEach(function (c) { opts.push([c.n, c.n]); });
+  }
+  el.innerHTML = opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
+  var ok = selected && opts.some(function (o) { return o[0] === selected; });
+  el.value = ok ? selected : "";
+}
+
+function eauPrice(dept, ville, over) {
+  if (over > 0) return { p: over, src: "prix saisi d'après votre facture", exact: true };
+  if (dept && ville) {
+    for (var i = 0; i < CITIES.length; i++) {
+      if (CITIES[i].d === dept && CITIES[i].n === ville) return { p: CITIES[i].p, src: "commune de " + ville, exact: true };
+    }
+  }
+  if (dept && DEPT_BY[dept]) {
+    var reg = REGIONS[DEPT_BY[dept].r];
+    if (reg[2]) return { p: reg[1], src: "moyenne de la région " + reg[0] + ", car votre commune n'est pas dans la liste", exact: false };
+    return { p: EAU_NAT, src: "moyenne nationale, car la moyenne de la région " + reg[0] + " est peu fiable", exact: false };
+  }
+  return { p: EAU_NAT, src: "moyenne nationale, aucun département choisi", exact: false };
+}
+function eauCost(p, v) { return EAU_ABO + Math.max(0, p - EAU_ABO_PM3) * v; }
+
+function waterDetail(s) {
+  var det = {};
+  det.base = s.pers * EAU_BASE_L * 365 / 1000;
+  det.douches = s.pers * s.douches * 52 * EAU_DOUCHE_L / 1000;
+  det.bains = s.pers * s.bains * 52 * EAU_BAIN_L / 1000;
+  det.ll = s.apps.ll.q * s.apps.ll.u * 52 * EAU_LL_L / 1000;
+  det.lv = s.apps.lv.q * s.apps.lv.u * 52 * EAU_LV_L / 1000;
+  det.jardin = s.jardin;
+  var m3 = 0;
+  Object.keys(det).forEach(function (k) { m3 += det[k]; });
+  return { m3: m3, det: det };
+}
+
+function eauSummary(V, ep) {
+  var total = eauCost(ep.p, V), nat = eauCost(EAU_NAT, V), diff = total - nat;
+  var cls = Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
+  var d = Math.round(diff) === 0 ? "identique" : (diff < 0 ? "−" : "+") + fmtInt.format(Math.abs(diff)) + " € par an";
+  return '<div class="card"><span class="label stampy">Votre facture d\'eau estimée</span><span class="big">' + fmtInt.format(total) + ' € par an</span>'
+    + '<p class="note">' + fmtInt.format(V) + ' m³ par an à ' + fmtNum2.format(ep.p) + ' €/m³ (' + esc(ep.src) + '). Le total comprend un abonnement estimé à ' + EAU_ABO + ' € par an et '
+    + fmtNum2.format(Math.max(0, ep.p - EAU_ABO_PM3)) + ' € par m³ consommé.</p>'
+    + '<p>Avec le prix moyen national (' + fmtNum2.format(EAU_NAT) + ' €/m³) : <strong>' + fmtInt.format(nat) + ' €</strong> par an. Écart : <span class="' + cls + '">' + d + '</span></p></div>';
+}
+
+function renderEau() {
+  var V = state.eauConso, ep = eauPrice(state.eauDept, state.eauVille, state.eauPrix);
+  var me = eauCost(ep.p, V);
+  $("eau-res").innerHTML = eauSummary(V, ep);
+  var rows = CITIES.slice().sort(function (a, b) { return a.p - b.p; });
+  var h = '<thead><tr><th>Commune</th><th>Département</th><th class="num">Prix par m³ TTC</th><th class="num">Total par an</th><th class="num">Écart avec vous</th></tr></thead><tbody>';
+  h += '<tr class="ref"><td><div class="prov">Votre prix<span class="tag">Vous</span></div><div class="offer">' + esc(ep.src) + '</div></td><td>' + (state.eauDept ? esc(deptLabel(state.eauDept)) : "—") + '</td><td class="num">' + fmtNum2.format(ep.p) + ' €</td><td class="num"><strong>' + fmtInt.format(me) + ' €</strong></td><td class="num">référence</td></tr>';
+  rows.forEach(function (c) {
+    var t = eauCost(c.p, V), diff = t - me;
+    var cls = Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
+    var d = Math.round(diff) === 0 ? "0 €" : (diff < 0 ? "−" : "+") + fmtInt.format(Math.abs(diff)) + " €";
+    h += '<tr><td><div class="prov">' + esc(c.n) + (CITY_DOUTE[c.n] ? " *" : "") + '</div></td><td>' + esc(deptLabel(c.d)) + '</td><td class="num">' + fmtNum2.format(c.p) + ' €</td><td class="num"><strong>' + fmtInt.format(t) + ' €</strong></td><td class="num ' + cls + '">' + d + '</td></tr>';
+  });
+  $("t-eau").innerHTML = h + "</tbody>";
+  var regs = Object.keys(REGIONS).sort(function (a, b) { return REGIONS[a][1] - REGIONS[b][1]; });
+  var g = '<thead><tr><th>Région</th><th class="num">Prix moyen par m³</th><th class="num">Total par an</th><th>Fiabilité</th></tr></thead><tbody>';
+  regs.forEach(function (k) {
+    var r = REGIONS[k];
+    g += '<tr><td class="prov">' + esc(r[0]) + '</td><td class="num">' + fmtNum2.format(r[1]) + ' €</td><td class="num">' + fmtInt.format(eauCost(r[1], V)) + ' €</td><td>' + (r[2] ? '<span class="badge">Cohérente avec les communes</span>' : '<span class="badge check">Peu fiable, non utilisée</span>') + "</td></tr>";
+  });
+  $("t-reg").innerHTML = g + "</tbody>";
+}
+
+function initEau() {
+  $("dept").innerHTML = deptOpts().map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
+  fillVilles("ville", "", "");
+}
+
+/* ---------- Interface ---------- */
+var TABS = ["home", "logt", "elec", "gaz", "eau", "abo", "prime", "memo", "reg", "legal"];
+var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauDept: "", eauVille: "", eauPrix: 0 };
+
+function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
+
+function syncAuto() {
+  var t = state.tab;
+  if (t !== "elec" && t !== "gaz" && t !== "eau") return;
+  var on = t === "elec" ? state.autoElec : t === "gaz" ? state.autoGaz : state.autoEau;
+  var avail = t === "gaz" ? lastLogt.gconso > 0 : true;
+  var eff = on && avail;
+  $("auto").checked = on;
+  $("conso").disabled = eff;
+  if (t === "elec") $("kva").disabled = eff;
+  if (t === "gaz") $("gopt").disabled = eff;
+  if (t === "eau") { $("dept").disabled = eff; $("prixeau").disabled = eff; }
+  if (eff) {
+    if (t === "elec") {
+      $("conso").value = lastLogt.conso;
+      $("kva").value = lastLogt.ck;
+      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(lastLogt.conso) + " kWh par an, " + lastLogt.ck + " kVA.";
+    } else if (t === "gaz") {
+      $("conso").value = lastLogt.gconso;
+      $("gopt").value = lastLogt.gopt;
+      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(lastLogt.gconso) + " kWh par an, option " + GAS_OPT_LABEL[lastLogt.gopt] + ".";
+    } else {
+      var L = lastLogt.eau;
+      $("conso").value = L.m3;
+      $("dept").value = L.dept;
+      fillVilles("ville", L.dept, L.ville);
+      $("prixeau").value = L.prix > 0 ? L.prix : "";
+      $("auto-hint").textContent = "Repris de Mon logement : " + fmtInt.format(L.m3) + " m³ par an" + (L.dept ? ", " + deptLabel(L.dept) + (L.ville ? ", " + L.ville : "") : ", aucun département choisi") + ".";
+    }
+  } else {
+    var typed = parseFloat($("conso").value) || 0;
+    if (t === "gaz") $("auto-hint").textContent = on && !avail ? "Mon logement n'utilise pas de gaz : la valeur saisie ici est utilisée." : "Mode manuel. Pour " + fmtInt.format(typed) + " kWh par an, l'option habituelle est " + GAS_OPT_LABEL[gasOptionFor(typed)] + ".";
+    else if (t === "eau") $("auto-hint").textContent = "Mode manuel : saisissez votre consommation d'eau en m³ et votre localisation.";
+    else $("auto-hint").textContent = "Mode manuel : saisissez votre consommation.";
+  }
+  if (t === "eau") $("ville").disabled = eff || !$("dept").value;
+}
+
+function saveAuto() { try { localStorage.setItem("auto-v1", JSON.stringify({ e: state.autoElec, g: state.autoGaz, w: state.autoEau })); } catch (e) { /* ignoré */ } }
+function loadAuto() {
+  try {
+    var o = JSON.parse(localStorage.getItem("auto-v1") || "null");
+    if (o) { state.autoElec = o.e !== false; state.autoGaz = o.g !== false; state.autoEau = o.w !== false; }
+  } catch (e) { /* ignoré */ }
+}
+
+function refresh() {
+  syncAuto();
+  state.gasOpt = $("gopt").value;
+  if (state.tab === "elec") state.elecConso = conso();
+  if (state.tab === "gaz") state.gasConso = conso();
+  if (state.tab === "eau") {
+    state.eauConso = conso();
+    state.eauDept = $("dept").value;
+    state.eauVille = $("ville").value;
+    state.eauPrix = parseFloat($("prixeau").value) || 0;
+  }
+  state.kva = $("kva").value;
+  renderPrices("t-elec", ELEC, ELEC_REF, state.kva === "9" ? "b" : "a", state.elecConso, state.sort, "elec", state.kva);
+  renderGas();
+  renderEau();
+}
+
+/* ---------- Chargement de data.json ---------- */
+// Les données intégrées plus haut servent de repli (ouverture du fichier sans serveur, ou data.json absent).
+function applyData(d) {
+  if (!d || d.schema !== 1 || !Array.isArray(d.elec) || !Array.isArray(d.gas) || !d.primes || !d.abo_e || !d.abo_g || !d.elec_ref || !d.gas_ref) return false;
+  ELEC_REF = d.elec_ref; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
+  ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
+  GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes;
+  if (d.updated) DATA_DATE = d.updated;
+  if (d.updated_label) DATA_LABEL = d.updated_label;
+  return true;
+}
+function showDates() {
+  var M = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  var p = String(DATA_DATE).split("-"), t = p.length === 3 ? (parseInt(p[2], 10) === 1 ? "1er" : parseInt(p[2], 10)) + " " + M[parseInt(p[1], 10) - 1] + " " + p[0] : DATA_LABEL;
+  var els = document.querySelectorAll(".dlong");
+  for (var i = 0; i < els.length; i++) els[i].textContent = t;
+  var u = $("updated"); if (u) u.textContent = "Données mises à jour le " + DATA_LABEL + ".";
+}
+function loadData() {
+  if (!window.fetch || location.protocol === "file:") return;
+  fetch("data.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+    if (!applyData(d)) return;
+    renderSummary(); renderPrimes(); refresh(); staleCheck();
+    showDates();
+  }).catch(function () { /* on garde les données intégrées */ });
+}
+
+/* ---------- Réglages ---------- */
+var REG_DEF = { hb: 70, hm: 110, hh: 140, ee: 800, eg: 1269, cop: 3, rg: 90, abo: 84 };
+var REG = {};
+var REG_FIELDS = [
+  ["heat", "hb", "Bonne isolation (kWh/m²/an)", 10, 400, 5], ["heat", "hm", "Isolation moyenne (kWh/m²/an)", 10, 400, 5], ["heat", "hh", "Mauvaise isolation (kWh/m²/an)", 10, 500, 5],
+  ["ecs", "ee", "Eau chaude électrique (kWh/personne/an)", 100, 3000, 50], ["ecs", "eg", "Eau chaude au gaz (kWh/personne/an)", 100, 4000, 50],
+  ["ecs", "cop", "Coefficient de performance des pompes à chaleur", 1, 6, 0.1], ["ecs", "rg", "Rendement de la chaudière gaz (%)", 50, 110, 1],
+  ["eau", "abo", "Abonnement d'eau (€ par an)", 0, 400, 1]
+];
+function regApply() {
+  HEAT_KWH.bonne = REG.hb; HEAT_KWH.moyenne = REG.hm; HEAT_KWH.mauvaise = REG.hh;
+  ECS_ELEC = REG.ee; ECS_GAZ = REG.eg; COP = REG.cop; RENDEMENT_GAZ = REG.rg / 100;
+  EAU_ABO = REG.abo; EAU_ABO_PM3 = EAU_ABO / 120;
+}
+function regLoad() {
+  var o = null;
+  try { o = JSON.parse(localStorage.getItem("reglages-v1") || "null"); } catch (e) { o = null; }
+  Object.keys(REG_DEF).forEach(function (k) { var v = o && Number(o[k]); REG[k] = v > 0 ? v : REG_DEF[k]; });
+  regApply();
+}
+function regSave() { try { localStorage.setItem("reglages-v1", JSON.stringify(REG)); } catch (e) { /* ignoré */ } }
+function regBuild() {
+  var h = { heat: "", ecs: "", eau: "" };
+  REG_FIELDS.forEach(function (f) {
+    h[f[0]] += '<div class="field"><label for="reg-' + f[1] + '">' + f[2] + '</label><input id="reg-' + f[1] + '" data-k="' + f[1] + '" type="number" min="' + f[3] + '" max="' + f[4] + '" step="' + f[5] + '" value="' + REG[f[1]] + '" inputmode="decimal"></div>';
+  });
+  $("reg-grid-heat").innerHTML = h.heat; $("reg-grid-ecs").innerHTML = h.ecs; $("reg-grid-eau").innerHTML = h.eau;
+}
+function regChanged() {
+  regApply(); regSave(); renderLogt(); refresh();
+}
+function initReg() {
+  regLoad(); regBuild();
+  $("p-reg").addEventListener("input", function (ev) {
+    var k = ev.target.getAttribute && ev.target.getAttribute("data-k");
+    if (!k) return;
+    var v = parseFloat(ev.target.value);
+    if (!(v > 0)) return;
+    REG[k] = v; regChanged();
+  });
+  $("reg-reset").addEventListener("click", function () {
+    Object.keys(REG_DEF).forEach(function (k) { REG[k] = REG_DEF[k]; });
+    regBuild(); regChanged();
+  });
+}
+
+/* ---------- Accessibilité ---------- */
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", eau: "Eau", abo: "Abonnement", prime: "Primes", memo: "Mémo", reg: "Réglages", legal: "Légal" };
+function a11yTabs() {
+  TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
+}
+function a11yTables() {
+  Array.prototype.forEach.call(document.querySelectorAll("table"), function (t) {
+    Array.prototype.forEach.call(t.querySelectorAll("th"), function (th) { if (!th.getAttribute("scope")) th.setAttribute("scope", "col"); });
+    if (!t.querySelector("caption")) {
+      var h = null, n = t.closest(".tablewrap");
+      var p = n && n.previousElementSibling;
+      while (p && !/^H[23]$/.test(p.tagName)) p = p.previousElementSibling;
+      h = p ? p.textContent : (t.closest(".panel") && t.closest(".panel").querySelector("h2") ? t.closest(".panel").querySelector("h2").textContent : "Tableau");
+      var c = document.createElement("caption"); c.className = "sr-only"; c.textContent = h; t.insertBefore(c, t.firstChild);
+    }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".tablewrap"), function (w) {
+    var c = w.querySelector("caption");
+    if (!w.getAttribute("tabindex")) { w.setAttribute("tabindex", "0"); w.setAttribute("role", "region"); }
+    if (c) w.setAttribute("aria-label", c.textContent);
+  });
+}
+function initA11y() {
+  var mo = new MutationObserver(function () { mo.disconnect(); a11yTables(); watch(); });
+  function watch() { Array.prototype.forEach.call(document.querySelectorAll("table"), function (t) { mo.observe(t, { childList: true }); }); }
+  a11yTables(); watch();
+  $("tab-home").parentNode.addEventListener("keydown", function (ev) {
+    var i = TABS.indexOf(state.tab), k = ev.key, j = -1;
+    if (k === "ArrowRight") j = (i + 1) % TABS.length;
+    else if (k === "ArrowLeft") j = (i - 1 + TABS.length) % TABS.length;
+    else if (k === "Home") j = 0;
+    else if (k === "End") j = TABS.length - 1;
+    if (j < 0) return;
+    ev.preventDefault(); setTab(TABS[j]); $("tab-" + TABS[j]).focus();
+  });
+}
+
+function setTab(t) {
+  if (state.tab === "elec") state.elecConso = conso() || state.elecConso;
+  if (state.tab === "gaz") state.gasConso = conso() || state.gasConso;
+  if (state.tab === "eau") state.eauConso = conso() || state.eauConso;
+  state.tab = t;
+  TABS.forEach(function (n) {
+    $("p-" + n).hidden = n !== t;
+    $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
+  });
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "reg" || t === "legal";
+  $("f-kva").hidden = t !== "elec";
+  $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
+  $("f-gopt").hidden = t !== "gaz";
+  $("f-dept").hidden = t !== "eau";
+  $("f-ville").hidden = t !== "eau";
+  $("f-prixeau").hidden = t !== "eau";
+  var eau = t === "eau";
+  $("conso").setAttribute("min", eau ? "1" : "100");
+  $("conso").setAttribute("max", eau ? "2000" : "60000");
+  $("conso").setAttribute("step", eau ? "5" : "100");
+  if (t === "elec") { $("conso").value = state.elecConso; $("conso-label").textContent = "Consommation d'électricité (kWh/an)"; }
+  if (t === "gaz") { $("conso").value = state.gasConso; $("conso-label").textContent = "Consommation de gaz (kWh/an)"; }
+  if (t === "eau") {
+    $("conso").value = state.eauConso;
+    $("conso-label").textContent = "Consommation d'eau (m³ par an)";
+    $("dept").value = state.eauDept;
+    fillVilles("ville", state.eauDept, state.eauVille);
+    $("prixeau").value = state.eauPrix > 0 ? state.eauPrix : "";
+  }
+  a11yTabs();
+  refresh();
+}
+
+Array.prototype.forEach.call(document.querySelectorAll("[data-go]"), function (b) { b.addEventListener("click", function () { var g = b.getAttribute("data-go"); setTab(g); window.scrollTo(0, 0); var hh = $("p-" + g).querySelector("h2"); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus(); } }); });
+TABS.forEach(function (n) { $("tab-" + n).addEventListener("click", function () { setTab(n); }); });
+$("conso").addEventListener("input", refresh);
+["t-elec", "t-gaz"].forEach(function (id) {
+  $(id).addEventListener("click", function (ev) {
+    var b = ev.target.closest ? ev.target.closest("[data-sort]") : null;
+    if (b) { state.sort = b.getAttribute("data-sort"); refresh(); }
+  });
+});
+$("kva").addEventListener("change", refresh);
+$("dept").addEventListener("change", function () { fillVilles("ville", $("dept").value, ""); refresh(); });
+$("ville").addEventListener("change", refresh);
+$("prixeau").addEventListener("input", refresh);
+$("auto").addEventListener("change", function () {
+  if (state.tab === "elec") state.autoElec = $("auto").checked;
+  if (state.tab === "gaz") state.autoGaz = $("auto").checked;
+  if (state.tab === "eau") state.autoEau = $("auto").checked;
+  saveAuto();
+  refresh();
+});
+
+renderSummary();
+renderPrimes();
+loadAuto();
+initReg(); initEau();
+initLogt();
+setTab("home");
+initA11y();
+staleCheck();
+showDates();
+loadData();
+</script>
+</body>
+</html>

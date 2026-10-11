@@ -1,0 +1,44 @@
+{
+  "provider": "gemini",
+  "model": "gemini-3.1-flash-lite",
+  "max_rel_change": {
+    "kwh": 0.12,
+    "abo": 0.15
+  },
+  "note": "Pages lues par le script de mise à jour. Seules les pages dont le robots.txt autorise la lecture automatique sont lues (Selectra, Kelwatt, CRE, leparrain et comparonslenergie l'interdisent). Corrigez une adresse ici si elle change. L'abonnement gaz n'est pas lu automatiquement.",
+  "tarifs_pages": {
+    "ekw": "https://prix-elec.com/fournisseurs/ekwateur/offres",
+    "total": "https://prix-elec.com/fournisseurs/totalenergies/offres",
+    "geg": "https://prix-elec.com/fournisseurs/geg/offres",
+    "gdb": "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres",
+    "plen": "https://prix-elec.com/fournisseurs/plenitude/offres",
+    "llum": "https://prix-elec.com/fournisseurs/llum/offres",
+    "dyneff": "https://prix-elec.com/fournisseurs/dyneff/offres",
+    "mint": "https://prix-elec.com/fournisseurs/mint-energie/offres",
+    "primeo": "https://prix-elec.com/fournisseurs/primeo/offres",
+    "alterna": "https://prix-elec.com/fournisseurs/alterna/offres",
+    "edf": "https://prix-elec.com/fournisseurs/edf/offres",
+    "octo": "https://prix-elec.com/fournisseurs/octopus-energy/offres",
+    "alpiq": "https://prix-elec.com/fournisseurs/alpiq/offres",
+    "ohm": "https://prix-elec.com/fournisseurs/ohm-energie/offres",
+    "happe": "https://prix-elec.com/fournisseurs/happ-e/offres",
+    "engie": "https://prix-elec.com/fournisseurs/engie/offres",
+    "ilek": "https://prix-elec.com/fournisseurs/ilek/offres",
+    "enercoop": "https://prix-elec.com/fournisseurs/enercoop/offres"
+  },
+  "references": {
+    "trv": "https://www.hellowatt.fr/contrat-electricite/prix-electricite",
+    "gas_ref": "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere"
+  },
+  "primes_pages": {
+    "total": "https://prix-elec.com/fournisseurs/totalenergies/parrainage",
+    "engie": "https://prix-elec.com/fournisseurs/engie/parrainage",
+    "octo": "https://prix-elec.com/fournisseurs/octopus-energy/parrainage",
+    "plen": "https://prix-elec.com/fournisseurs/plenitude/parrainage",
+    "mint": "https://prix-elec.com/fournisseurs/mint-energie/parrainage",
+    "alpiq": "https://prix-elec.com/fournisseurs/alpiq/parrainage",
+    "happe": "https://prix-elec.com/fournisseurs/happ-e/parrainage",
+    "llum": "https://prix-elec.com/fournisseurs/llum/parrainage",
+    "ilek": "https://prix-elec.com/fournisseurs/ilek/parrainage"
+  }
+}
