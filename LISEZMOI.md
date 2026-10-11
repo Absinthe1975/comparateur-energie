@@ -47,6 +47,7 @@ GEMINI_API_KEY=... python scripts/update_prices.py --dry-run
 Le fichier `communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
 - la base officielle des codes postaux (data.gouv.fr, fichier `019HexaSmal.csv`),
 - les fichiers SISPEA « tarifs eau potable » et « tarifs assainissement collectif » (services.eaufrance.fr/pro/telechargement), feuille « Zones tarifaires » exportée en CSV UTF-8 sous les noms `tarifs_AEP_<année>.csv` et `tarifs_AC_<année>.csv`,
+- les feuilles « Détail tarifaire » des mêmes fichiers, exportées en `detail_AEP_<année>.csv` et `detail_AC_<année>.csv` (abonnement = part fixe),
 - éventuellement `zones_gn.json` (orthographe des communes).
 
 Commande : `python3 scripts/build_eau.py eau-sources communes-cp.json 2025`
