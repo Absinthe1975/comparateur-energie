@@ -1,0 +1,43 @@
+name: Mise à jour des prix
+
+on:
+  schedule:
+    - cron: "0 6 5 * *"   # le 5 de chaque mois, 6 h UTC
+  workflow_dispatch:       # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  maj:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Installation de pypdf (lecture des PDF)
+        run: pip install pypdf
+      - name: Tests du script
+        run: python -m unittest discover -s tests
+      - name: Lecture des pages et extraction par l'IA
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PROVIDER: gemini
+          CONTACT: ${{ github.server_url }}/${{ github.repository }}
+        run: python scripts/update_prices.py
+      - name: Contrôle de data.json
+        run: python scripts/check_data.py
+      - name: Ouvrir une demande de fusion à relire
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: maj-prix
+          title: "Mise à jour des prix à relire"
+          commit-message: "Mise à jour des prix (script + IA)"
+          body-path: report.md
+          add-paths: |
+            data.json
+            state/hashes.json
+          delete-branch: true
