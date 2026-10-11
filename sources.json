@@ -28,7 +28,8 @@
   },
   "references": {
     "trv": "https://www.hellowatt.fr/contrat-electricite/prix-electricite",
-    "gas_ref": "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere"
+    "gas_ref": "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere",
+    "gas_trend_template": "https://www.energie-info.fr/{mois}-{annee}-publication-du-prix-repere-du-gaz-par-la-cre/"
   },
   "primes_pages": {
     "total": "https://prix-elec.com/fournisseurs/totalenergies/parrainage",
