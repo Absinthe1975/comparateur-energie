@@ -8,34 +8,37 @@
 <style>
 /* Layout: une colonne, bandeau de réglages collant, le tableau de prix est le centre de la page. */
 :root {
-  --bg: #f3f5f7;
+  --bg: #f8fafc;
   --surface: #ffffff;
-  --fg: #14202b;
-  --muted: #566879;
-  --line: #d8e0e6;
-  --accent: #0b6e6e;
-  --accent-soft: #dcf0ee;
-  --warn: #8f5700;
-  --warn-soft: #fbecce;
-  --good: #14713f;
-  --bad: #a3361f;
-  --ref-bg: #eaeff3;
-  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --fg: #0f172a;
+  --muted: #5b6b80;
+  --line: #e2e8f0;
+  --accent: #0f766e;
+  --accent-2: #0d9488;
+  --accent-soft: #e6f7f4;
+  --warn: #92400e;
+  --warn-soft: #fef3c7;
+  --good: #047857;
+  --bad: #b91c1c;
+  --ref-bg: #f1f5f9;
+  --elec: #eab308; --gas: #f97316; --water: #0284c7;
+  --shadow: 0 1px 2px rgba(15,23,42,.05), 0 8px 24px -12px rgba(15,23,42,.10);
+  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-data: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0d151c; --surface: #141f28; --fg: #e6edf2; --muted: #92a4b3; --line: #25333e;
-    --accent: #4fc3b8; --accent-soft: #12332f; --warn: #e8b25a; --warn-soft: #382c12;
-    --good: #5cc98a; --bad: #f08a72; --ref-bg: #1b2833;
+    --bg: #0b1220; --surface: #111a2b; --fg: #e2e8f0; --muted: #98a8bd; --line: #1f2c42;
+    --accent: #2dd4bf; --accent-2: #14b8a6; --accent-soft: #0f2d2c; --warn: #fbbf24; --warn-soft: #3a2c0b;
+    --good: #34d399; --bad: #f87171; --ref-bg: #162238; --shadow: 0 1px 2px rgba(0,0,0,.4);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0d151c; --surface: #141f28; --fg: #e6edf2; --muted: #92a4b3; --line: #25333e;
-  --accent: #4fc3b8; --accent-soft: #12332f; --warn: #e8b25a; --warn-soft: #382c12;
-  --good: #5cc98a; --bad: #f08a72; --ref-bg: #1b2833;
+  --bg: #0b1220; --surface: #111a2b; --fg: #e2e8f0; --muted: #98a8bd; --line: #1f2c42;
+  --accent: #2dd4bf; --accent-2: #14b8a6; --accent-soft: #0f2d2c; --warn: #fbbf24; --warn-soft: #3a2c0b;
+  --good: #34d399; --bad: #f87171; --ref-bg: #162238; --shadow: 0 1px 2px rgba(0,0,0,.4);
   color-scheme: dark;
 }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; padding-inline: 16px; padding-block: 0; }
@@ -186,20 +189,99 @@ footer { display: flex; flex-direction: column; gap: 8px; font-size: 13px; color
 footer ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 2px; }
 a { color: var(--accent); }
 @media (prefers-reduced-motion: no-preference) { .tabs button { transition: background .15s, color .15s; } }
+
+/* ===== Nouveau style : barre du haut, héros, cartes arrondies, tableaux aérés ===== */
+body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; padding-inline: 16px; padding-block: 24px 48px; gap: 24px; }
+.topbar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--surface) 88%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.topbar-in { max-width: 1120px; margin-inline: auto; padding: 10px 16px; display: flex; align-items: center; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; font-size: 17px; }
+.brand-logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #0d9488, #0284c7 62%, #eab308); display: grid; place-items: center; color: #fff; box-shadow: 0 6px 16px -6px rgba(13,148,136,.55); flex: none; }
+.topbar .tabs { background: transparent; padding: 0; border-radius: 0; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; justify-content: flex-end; }
+.topbar .tabs::-webkit-scrollbar { display: none; }
+.tabs button { font-size: 14px; font-weight: 500; padding: 8px 12px; border-radius: 10px; color: var(--muted); display: inline-flex; align-items: center; }
+.tabs button:hover { background: var(--ref-bg); color: var(--fg); }
+.tabs button[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); box-shadow: none; font-weight: 700; }
+#tab-elec::before, #tab-gaz::before, #tab-eau::before { content: ""; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; flex: none; }
+#tab-elec::before { background: var(--elec); } #tab-gaz::before { background: var(--gas); } #tab-eau::before { background: var(--water); }
+@media (max-width: 860px) {
+  .topbar-in { flex-wrap: wrap; gap: 6px 12px; padding-block: 8px; }
+  .topbar .tabs { flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
+  .tabs button { padding: 8px 11px; white-space: nowrap; }
+}
+@media (max-width: 420px) { .brand span:last-child { font-size: 15px; } }
+
+.hero { position: relative; overflow: hidden; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: clamp(28px, 6vw, 60px) clamp(18px, 4vw, 44px); border: 1px solid var(--line); border-radius: 28px; background: radial-gradient(circle at 12% 18%, rgba(13,148,136,.16) 0%, rgba(2,132,199,.08) 48%, rgba(249,115,22,.07) 100%), var(--surface); box-shadow: var(--shadow); }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line)); color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+h1 { font-weight: 900; letter-spacing: -0.03em; font-size: clamp(2rem, 5.6vw, 3.6rem); line-height: 1.05; }
+.grad { background: linear-gradient(90deg, #0f766e, #0369a1); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .grad { background-image: linear-gradient(90deg, #5eead4, #38bdf8); } }
+.hero .lede { font-size: clamp(1rem, 2.2vw, 1.2rem); max-width: 60ch; margin-inline: auto; }
+.stamp { font-size: 12px; letter-spacing: 0.04em; }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
+h3 { font-weight: 700; }
+.lede { color: var(--muted); }
+
+.card, .tile { border-radius: 20px; box-shadow: var(--shadow); padding: 18px 20px; }
+.card .label { font-weight: 700; font-size: 11px; letter-spacing: 0.08em; }
+.card .big { font-weight: 800; font-size: 1.9rem; letter-spacing: -0.02em; }
+.callout { border-radius: 16px; border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); background: var(--accent-soft); padding: 14px 18px; font-size: 15px; max-width: none; }
+.note { max-width: 90ch; }
+.bar { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px 20px; box-shadow: var(--shadow); gap: 14px 20px; }
+.bar:not(:has(> .field:not([hidden]))) { display: none; }
+.field label, .field .lbl { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; color: var(--muted); }
+input, select { border-radius: 12px; padding: 10px 12px; border: 1px solid var(--line); background: var(--bg); font-family: var(--font-body); }
+input:focus, select:focus { outline: 0; border-color: var(--accent-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 28%, transparent); }
+.cta, .btn, .logt-bar button { background: linear-gradient(135deg, #0f766e, #0e7490); color: #fff; border-radius: 12px; font-weight: 700; box-shadow: 0 8px 18px -8px rgba(15,118,110,.6); transition: transform .15s, box-shadow .15s; }
+.cta:hover, .btn:hover, .logt-bar button:hover { transform: translateY(-1px); filter: none; box-shadow: 0 12px 22px -10px rgba(15,118,110,.7); }
+.btn { padding: 10px 16px; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cta, :root:not([data-theme="light"]) .btn, :root:not([data-theme="light"]) .logt-bar button { background: linear-gradient(135deg, #2dd4bf, #38bdf8); color: #06222a; } }
+.sortbtn { border-radius: 999px; padding: 2px 9px; }
+.sortbtn.on { background: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sortbtn.on { color: #06222a; } }
+
+.tablewrap { border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+th { background: var(--bg); font-size: 11px; font-weight: 700; letter-spacing: 0.07em; }
+td, th { border-bottom: 1px solid var(--line); }
+tbody tr:hover td { background: var(--bg); }
+tbody tr:has(.tag.best) td { background: var(--accent-soft); }
+tbody tr:has(.tag.best) .tag.best { background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
+tr.ref td { background: var(--ref-bg); }
+.prov { font-weight: 700; }
+.tag { border-radius: 999px; padding: 2px 9px; font-weight: 700; }
+.badge { font-weight: 600; }
+.track { height: 8px; border-radius: 999px; }
+.fill { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #0d9488, #0284c7); }
+
+/* Accueil */
+.steps { list-style: none; padding: 0; margin: 0; max-width: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; counter-reset: etape; }
+.steps li { counter-increment: etape; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow); }
+.steps li::before { content: counter(etape); display: grid; place-items: center; width: 32px; height: 32px; margin-bottom: 10px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 800; }
+#h-box { border-radius: 24px; padding: 24px; box-shadow: 0 24px 48px -28px rgba(15,23,42,.35); }
+#h-box h3 { margin: 0; font-size: 1.2rem; }
+#h-box input { font-size: 1.1rem; padding: 12px 14px; }
+
+/* Mon logement : première carte de résultats en foncé */
+.logt-res > .card:first-child { background: #0f172a; border-color: #0f172a; color: #e2e8f0; }
+.logt-res > .card:first-child .label, .logt-res > .card:first-child .note, .logt-res > .card:first-child .barrow { color: #9fb0c6; }
+.logt-res > .card:first-child .big { background: linear-gradient(90deg, #6ee7b7, #67e8f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.logt-res > .card:first-child .track { background: #1e293b; }
+.logt-res > .card:first-child .fill { background: linear-gradient(90deg, #2dd4bf, #38bdf8); }
+.logt-bar { border-radius: 20px 20px 0 0; box-shadow: 0 -8px 24px -12px rgba(15,23,42,.3); }
+
+/* Pied de page */
+footer { background: #0f172a; color: #94a3b8; border: 0; border-radius: 24px; padding: 28px clamp(18px, 4vw, 36px); gap: 10px; font-size: 13px; }
+footer p { max-width: 80ch; }
+footer .linkbtn, footer a { color: #5eead4; }
+footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 800; font-size: 16px; }
 </style>
 
 </head>
 <body>
-<div class="wrap">
-  <a class="skip" href="#main">Aller au contenu</a>
-  <header>
-    <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
-    <h1>Comparateur énergie : électricité, gaz et eau</h1>
-    <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage.</p>
-  </header>
-
-  <div class="bar">
-    <div class="tabs" role="tablist" aria-label="Rubriques">
+<a class="skip" href="#main">Aller au contenu</a>
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="#" data-brand><span class="brand-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span><span>Comparateur énergie</span></a>
+  <div class="tabs" role="tablist" aria-label="Rubriques">
       <button role="tab" id="tab-home" aria-selected="true" tabindex="0" aria-controls="p-home">Accueil</button>
       <button role="tab" id="tab-logt" aria-selected="false" tabindex="-1" aria-controls="p-logt">Mon logement</button>
       <button role="tab" id="tab-elec" aria-selected="false" tabindex="-1" aria-controls="p-elec">Électricité</button>
@@ -211,6 +293,9 @@ a { color: var(--accent); }
       <button role="tab" id="tab-sources" aria-selected="false" tabindex="-1" aria-controls="p-sources">Sources</button>
       <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Légal</button>
     </div>
+</div></div>
+<div class="wrap">
+  <div class="bar">
     <div class="field autoop" id="f-auto"><input id="auto" type="checkbox" checked hidden aria-hidden="true" tabindex="-1"><span class="hint" id="auto-hint"></span><span class="hint" id="auto-cmp"></span><button type="button" class="linkbtn" id="auto-back" hidden>Revenir aux valeurs de Mon logement</button></div>
     <div class="field" id="f-conso">
       <label for="conso" id="conso-label">Consommation (kWh/an)</label>
@@ -231,8 +316,12 @@ a { color: var(--accent); }
 
   <main id="main" tabindex="-1">
   <section class="panel" id="p-home" role="tabpanel" aria-labelledby="tab-home">
-    <h2>Bienvenue</h2>
-    <p class="lede">Ce site compare les prix de l'électricité et du gaz, estime votre facture d'eau, et affiche les primes de parrainage de chaque fournisseur. Pour une estimation proche de chez vous, commencez par votre code postal ; décrire votre logement, c'est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
+    <div class="hero">
+      <span class="pill">Gratuit · sans but lucratif · sans lien d'affiliation</span>
+      <h1>Comparez l'<span class="grad">électricité, le gaz et l'eau</span></h1>
+      <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal : décrire votre logement est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
+      <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
+    </div>
 
     <div class="callout" id="stale" hidden></div>
     <h3>Comment ça marche</h3>
@@ -254,7 +343,7 @@ a { color: var(--accent); }
     </div>
 
     <p class="note" id="updated"></p>
-    <p class="note">Prix TTC, France métropolitaine, relevés le <span class="dlong">10 octobre 2026</span>. Les montants marqués d'une étoile sont estimés. Les primes marquées « à vérifier » n'ont pas été confirmées. Les chiffres du moment ci-dessus supposent 5 700 kWh d'électricité à 6 kVA et 10 000 kWh de gaz en B1.</p>
+    <p class="note">Prix TTC, France métropolitaine, relevés le <span class="dlong">10 octobre 2026</span>. Les montants marqués d'une étoile sont estimés. Les primes marquées « à vérifier » n'ont pas été confirmées.</p>
   </section>
 
   <section class="panel" id="p-logt" role="tabpanel" aria-labelledby="tab-logt" hidden>
@@ -528,6 +617,7 @@ a { color: var(--accent); }
 </main>
 
 <footer>
+    <div class="foot-brand"><span class="brand-logo" style="width:28px;height:28px;border-radius:9px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>Comparateur énergie</div>
     <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="sources">Sources</button> · <button type="button" class="linkbtn" data-go="legal">Mentions légales et confidentialité</button></p>
   </footer>
 </div>
@@ -1489,6 +1579,7 @@ function setAuto(v) {
 });
 $("auto-back").addEventListener("click", function () { setAuto(true); refresh(); });
 
+document.querySelector("[data-brand]").addEventListener("click", function (ev) { ev.preventDefault(); setTab("home"); window.scrollTo(0, 0); });
 renderSummary();
 renderPrimes();
 loadAuto();
