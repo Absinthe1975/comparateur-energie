@@ -206,12 +206,12 @@ def pagetext(url, cache, state, rep, label, needle=None):
     cache[url] = t
     return t
 
-def ask(label, url, text, needle, fields, state, rep, extra=""):
+def ask(label, url, text, needle, fields, state, rep, extra="", nocache=False):
     """fields : {nom: description}. Renvoie le JSON de l'IA ou None. Saute l'appel si la page n'a pas changé."""
     body = window(text, needle)
     h = hashlib.sha256((body + "|" + needle + "|" + ",".join(fields)).encode()).hexdigest()[:16]
     key = f"{url}|{needle}"
-    if state.get(key) == h and not os.environ.get("FORCE"):
+    if state.get(key) == h and not nocache and not os.environ.get("FORCE"):
         rep.same.append(f"{label} : page inchangée depuis la dernière lecture"); return None, "inchangee"
     prompt = (f"Page : {url}\n{extra}\nChamps demandés :\n" + "\n".join(f"- {k} : {v}" for k, v in fields.items())
               + '\n\nRéponds par {"fields": {"<nom>": {"value": ..., "quote": ...}, ...}}.\n\n=== TEXTE DE LA PAGE ===\n' + body)
@@ -221,6 +221,29 @@ def ask(label, url, text, needle, fields, state, rep, extra=""):
         rep.failed.append(f"{label} : appel à l'IA en échec ({e})"); return None, None
     commit = lambda: state.__setitem__(key, h)   # mémorisé seulement si les contrôles passent
     return (out.get("fields", {}) if isinstance(out, dict) else None), commit
+
+def second_urls(src, k):
+    v = src.get("tarifs_pages_2", {}).get(k)
+    return [v] if isinstance(v, str) else list(v or [])
+
+def confirm_offer(src, r, kind, kwh, cache, state, rep, label):
+    """Relit l'offre sur les secondes sources. True : une seconde source donne le même kWh (à 0,0002 près) ;
+    False : une seconde source lit un autre chiffre ; None : aucune seconde source exploitable."""
+    verdict = None
+    for url in second_urls(src, r["k"]):
+        text = pagetext(url, cache, state, rep, f"{label} (second site)")
+        if not text: continue
+        fields = {"offre": f"le nom de l'offre « {r['offer']} » tel qu'écrit dans la page (value = 1 si présent, sinon null)",
+                  "kwh": ("prix du kWh TTC, option Base, 6 kVA, pour cette offre, en €/kWh" if kind == "elec" else "prix du kWh TTC de gaz, profil chauffage (B1), pour cette offre, en €/kWh")}
+        got, _ = ask(label + " (second site)", url, text, r["offer"], fields, state, rep, f"Offre cherchée : {r['offer']} ({r['name']}).", nocache=True)
+        if not got: continue
+        pn = norm(text); q = (got.get("offre") or {}).get("quote")
+        if not q or norm(q) not in pn or fold(r["offer"]).split(" ")[0] not in fold(q): continue
+        v, _ = check_field(got.get("kwh"), pn, *BOUNDS["elec_kwh" if kind == "elec" else "gas_kwh"])
+        if v is None: continue
+        if abs(v - kwh) <= 0.0002: return True
+        verdict = False
+    return verdict
 
 def update_offers(data, src, state, rep, kinds, cache):
     rel = src["max_rel_change"]; today = data["updated_label"]
@@ -259,8 +282,15 @@ def update_offers(data, src, state, rep, kinds, cache):
             if kwh is None: rep.review.append(f"{label} : kWh refusé ({e1})")
             elif too_far(kwh, r["a"], rel["kwh"]): rep.review.append(f"{label} : kWh {r['a']} → {kwh} (écart > {int(rel['kwh']*100)} %, non appliqué)")
             elif abs(kwh - r["a"]) > 1e-9:
-                if kind == "elec" and "b" in r: r["b"] = round(r["b"] + (kwh - r["a"]), 4)
-                changed.append(f"kWh {r['a']} → {kwh}"); r["a"] = kwh
+                conf = confirm_offer(src, r, kind, kwh, cache, state, rep, label)
+                if conf is True:
+                    if kind == "elec" and "b" in r: r["b"] = round(r["b"] + (kwh - r["a"]), 4)
+                    changed.append(f"kWh {r['a']} → {kwh} (confirmé par un second site)"); r["a"] = kwh
+                elif conf is False: rep.review.append(f"{label} : kWh {r['a']} → {kwh} contredit par un second site, non appliqué")
+                else: rep.review.append(f"{label} : kWh {r['a']} → {kwh} vu sur un seul site, à confirmer sur un second (non appliqué)"); kwh = None
+            elif os.environ.get("CROSSCHECK"):
+                conf = confirm_offer(src, r, kind, r["a"], cache, state, rep, label)
+                if conf is False: rep.review.append(f"{label} : kWh {r['a']} vérifié sur un site mais un second site donne une autre valeur : à contrôler")
             if kind == "elec" and kwh is not None:
                 k9, _ = check_field(got.get("kwh9"), pn, *BOUNDS["elec_kwh"])
                 if k9 is not None and not too_far(k9, r.get("b"), rel["kwh"]): r["b"] = k9
@@ -302,38 +332,75 @@ def update_primes(data, src, state, rep, cache):
             rep.applied.append(f"{label} : " + ", ".join(changes) + " (passé en « à vérifier »)")
         else: rep.same.append(f"{label} : montants identiques ou non confirmés")
 
+def _urls(v):
+    return [v] if isinstance(v, str) else list(v or [])
+
+def _host(url):
+    return urllib.parse.urlsplit(url).netloc.replace("www.", "")
+
+def consensus(label, urls, needle, fields, bounds, cache, state, rep, extra=""):
+    """Lit plusieurs sites. Pour chaque champ renvoie (valeur, [sites d'accord], [sites en désaccord]) ou None.
+    Une valeur n'est retenue que si au moins DEUX sites indépendants donnent le même chiffre (à 0,0002 près)."""
+    seen = {k: [] for k in fields}; ok_sites = 0
+    for url in urls:
+        text = pagetext(url, cache, state, rep, f"{label} ({_host(url)})")
+        if not text: continue
+        got, commit = ask(f"{label} ({_host(url)})", url, text, needle, fields, state, rep, extra, nocache=True)
+        if not got: continue
+        pn = norm(text); ok_sites += 1
+        for k in fields:
+            v, why = check_field(got.get(k), pn, *bounds)
+            if v is not None: seen[k].append((v, url))
+        if commit: commit()
+    out = {}
+    for k, vals in seen.items():
+        best = None
+        for v, _ in vals:
+            grp = [(w, u) for w, u in vals if abs(w - v) <= 0.0002]
+            if best is None or len(grp) > len(best): best = grp
+        if not best: out[k] = None; continue
+        agree = {u for _, u in best}; other = [u for _, u in vals if u not in agree]
+        val = round(sum(w for w, _ in best) / len(best), 5)
+        out[k] = (val, sorted(_host(u) for u in agree), sorted(_host(u) for u in other))
+    return out, ok_sites
+
+def apply_consensus(label, fld, res, old, rel, setter, rep, urls_count):
+    r = res.get(fld)
+    if not r: rep.review.append(f"{label} : {fld} introuvable sur les sites lus"); return None
+    v, agree, other = r
+    if other: rep.review.append(f"{label} : {fld} sites en désaccord ({', '.join(agree)} : {v} ; {', '.join(other)} : autre valeur), non appliqué"); return None
+    if len(agree) < 2:
+        if abs(v - old) > 1e-9: rep.review.append(f"{label} : {fld} {old} → {v} proposé par un seul site ({agree[0]}), à confirmer sur un second site (non appliqué)")
+        else: rep.same.append(f"{label} : {fld} identique ({old}), vu sur un seul site ({agree[0]})")
+        return None
+    if too_far(v, old, rel): rep.review.append(f"{label} : {fld} {old} → {v} (écart important, non appliqué ; sites d'accord : {', '.join(agree)})"); return None
+    if abs(v - old) > 1e-9: setter(v); rep.applied.append(f"{label} : {fld} {old} → {v} (confirmé par {', '.join(agree)})")
+    else: rep.same.append(f"{label} : {fld} vérifié sur {len(agree)} sites ({', '.join(agree)})")
+    return v
+
 def update_refs(data, src, state, rep, cache):
     today = data["updated_label"]; rel = src["max_rel_change"]
-    url = src["references"]["trv"]; label = "référence · tarif réglementé"
-    text = pagetext(url, cache, state, rep, label)
-    if text:
-        f = {"kwh_3_6": "prix du kWh TTC du tarif réglementé Bleu, option Base, 3 à 6 kVA (€/kWh)",
-             "kwh_9": "prix du kWh TTC du tarif réglementé Bleu, option Base, 9 kVA et plus (€/kWh)"}
-        got, commit = ask(label, url, text, "tarif réglementé", f, state, rep)
-        if got:
-            pn = norm(text); ref = data["elec_ref"]
-            for fld, key, old, lo_hi, setter in (("kwh_3_6", "a", ref["a"], "elec_kwh", lambda v: ref.__setitem__("a", v)),
-                                                 ("kwh_9", "b", ref["b"], "elec_kwh", lambda v: ref.__setitem__("b", v))):
-                v, why = check_field(got.get(fld), pn, *BOUNDS[lo_hi])
-                if v is not None and fld == "kwh_3_6": ref["s"] = [urllib.parse.urlsplit(url).netloc.replace("www.", ""), url]
-                if v is None: rep.review.append(f"{label} : {fld} refusé ({why})")
-                elif too_far(v, old, rel["kwh"]): rep.review.append(f"{label} : {fld} {old} → {v} (écart important, non appliqué)")
-                elif abs(v - old) > 1e-9: setter(v); rep.applied.append(f"{label} : {fld} {old} → {v}")
-    url = src["references"]["gas_ref"]; label = "référence · prix repère du gaz (CRE)"
-    text = pagetext(url, cache, state, rep, label)
-    if text:
-        f = {"b1_kwh": "prix repère CRE du gaz, option B1 (chauffage), €/kWh TTC", "b0_kwh": "prix repère CRE du gaz, option B0 (cuisson et eau chaude), €/kWh TTC"}
-        got, commit = ask(label, url, text, "prix repère", f, state, rep)
-        if got:
-            pn = norm(text)
-            for fld, tgt, key, b in (("b1_kwh", data["gas_b1"], "a", "gas_kwh"), ("b0_kwh", data["gas_b0"], "a", "gas_kwh")):
-                v, why = check_field(got.get(fld), pn, *BOUNDS[b])
-                if v is not None and fld == "b1_kwh": data["gas_ref"]["s"] = [urllib.parse.urlsplit(url).netloc.replace("www.", ""), url]
-                if v is None: rep.review.append(f"{label} : {fld} refusé ({why})")
-                elif too_far(v, tgt[key], rel["kwh"]): rep.review.append(f"{label} : {fld} {tgt[key]} → {v} (écart important, non appliqué)")
-                elif abs(v - tgt[key]) > 1e-9:
-                    rep.applied.append(f"{label} : {fld} {tgt[key]} → {v}"); tgt[key] = v
-                    if fld == "b1_kwh": data["gas_ref"]["a"] = v
+    urls = _urls(src["references"]["trv"]); label = "référence · tarif réglementé"
+    f = {"kwh_3_6": "prix du kWh TTC du tarif réglementé Bleu, option Base, 3 à 6 kVA (€/kWh)",
+         "kwh_9": "prix du kWh TTC du tarif réglementé Bleu, option Base, 9 kVA et plus (€/kWh)"}
+    res, n = consensus(label, urls, "tarif réglementé", f, BOUNDS["elec_kwh"], cache, state, rep)
+    if n:
+        ref = data["elec_ref"]
+        v = apply_consensus(label, "kwh_3_6", res, ref["a"], rel["kwh"], lambda x: ref.__setitem__("a", x), rep, len(urls))
+        apply_consensus(label, "kwh_9", res, ref["b"], rel["kwh"], lambda x: ref.__setitem__("b", x), rep, len(urls))
+        if res.get("kwh_3_6") and len(res["kwh_3_6"][1]) >= 2: ref["s"] = [_host(urls[0]), urls[0]]
+    urls = _urls(src["references"]["gas_ref"]); label = "référence · prix repère du gaz (CRE)"
+    f = {"b1_kwh": "prix repère CRE du gaz, option B1 (CHAUFFAGE), €/kWh TTC, zone GRDF. Ne pas confondre avec B0.",
+         "b0_kwh": "prix repère CRE du gaz, option B0 (CUISSON et eau chaude seulement), €/kWh TTC, zone GRDF. Plus élevé que B1."}
+    res, n = consensus(label, urls, "prix repère", f, BOUNDS["gas_kwh"], cache, state, rep)
+    if n:
+        b1, b0 = res.get("b1_kwh"), res.get("b0_kwh")
+        if b1 and b0 and b0[0] <= b1[0]:
+            rep.review.append(f"{label} : valeurs incohérentes (B0 {b0[0]} doit être supérieur à B1 {b1[0]}), rien d'appliqué"); return
+        def set_b1(x): data["gas_b1"]["a"] = x; data["gas_ref"]["a"] = x
+        v = apply_consensus(label, "b1_kwh", res, data["gas_b1"]["a"], rel["kwh"], set_b1, rep, len(urls))
+        apply_consensus(label, "b0_kwh", res, data["gas_b0"]["a"], rel["kwh"], lambda x: data["gas_b0"].__setitem__("a", x), rep, len(urls))
+        if b1 and len(b1[1]) >= 2: data["gas_ref"]["s"] = [_host(urls[0]), urls[0]]
 
 def maintenant():
     """Date et heure de Paris (le serveur GitHub est en heure UTC)."""
@@ -362,13 +429,50 @@ def update_trend(data, src, state, rep, cache, avant, now):
     q = norm(got["variation"]["quote"]); sens = 1 if "hausse" in q or "augment" in q else (-1 if "baisse" in q or "diminu" in q else 0)
     if not sens: rep.review.append(f"{label} : sens (hausse ou baisse) non confirmé dans la phrase citée"); return
     commit(); annonce = sens * v
-    old, new = avant, data["gas_b1"]["a"]
-    if old and abs(new - old) > 1e-9:
-        nous = (new - old) / old * 100
-        msg = f"{label} : annoncé {annonce:+.1f} % TTC, notre prix B1 du kWh {old} → {new} ({nous:+.1f} %)"
-        (rep.review if abs(nous - annonce) > 4 else rep.same).append(msg + (" : écart à vérifier" if abs(nous - annonce) > 4 else " : cohérent"))
+    olds = avant if isinstance(avant, tuple) else (avant, None)
+    news = (data["gas_b1"]["a"], data["gas_b0"]["a"])
+    vars_ = [(n - o) / o * 100 for o, n in zip(olds, news) if o and abs(n - o) > 1e-9]
+    if vars_:
+        lo, hi = min(vars_), max(vars_); ok = lo - 2 <= annonce <= hi + 2
+        msg = f"{label} : annoncé {annonce:+.1f} % TTC (moyenne), nos prix B1/B0 varient de " + " / ".join(f"{x:+.1f} %" for x in vars_)
+        (rep.same if ok else rep.review).append(msg + (" : cohérent" if ok else " : écart à vérifier"))
     else:
-        rep.same.append(f"{label} : annoncé {annonce:+.1f} % TTC, notre prix B1 du kWh est inchangé ({new})")
+        rep.review.append(f"{label} : annoncé {annonce:+.1f} % TTC, mais nos prix B1 et B0 du kWh sont inchangés : à vérifier à la main")
+
+def update_official(data, src, rep, now, get=None):
+    """Sources officielles de la CRE : elles font foi et l'emportent sur les sites lus par l'IA."""
+    od = src.get("open_data")
+    if not od: return
+    import cre_open
+    get = get or cre_open._get; today = now.date()
+    def poser(label, old, new, setter, lo, hi, where, maxrel=0.25):
+        if not (lo <= new <= hi) or abs(new - old) / old > maxrel:
+            rep.review.append(f"{label} : {old} → {new} hors limites, non appliqué (source officielle : {where})"); return
+        if abs(new - old) > 1e-9: setter(new); rep.applied.append(f"{label} : {old} → {new} (source officielle CRE : {where})")
+        else: rep.same.append(f"{label} : {old} confirmé par la CRE ({where})")
+    try:
+        rid = od["trv_base_rid"]; ref = data["elec_ref"]
+        t6, how = cre_open.trv(rid, 6, get); t9, _ = cre_open.trv(rid, 9, get)
+        poser("CRE · tarif réglementé 3-6 kVA (kWh TTC)", ref["a"], t6["PART_VARIABLE_TTC"], lambda x: ref.__setitem__("a", x), *BOUNDS["elec_kwh"], "data.gouv.fr")
+        poser("CRE · tarif réglementé 9 kVA et plus (kWh TTC)", ref["b"], t9["PART_VARIABLE_TTC"], lambda x: ref.__setitem__("b", x), *BOUNDS["elec_kwh"], "data.gouv.fr")
+        for k, t in (("6", t6), ("9", t9)):
+            ecart = abs(t["PART_FIXE_TTC"] - data["trv_abo"][k])
+            if ecart > 2: rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {t['PART_FIXE_TTC']} € (CRE) contre {data['trv_abo'][k]} € chez nous : à vérifier")
+    except Exception as e:
+        rep.failed.append(f"CRE · tarif réglementé (data.gouv.fr) : {e}")
+    try:
+        page = get(od["gas_page"]).decode("utf-8", "replace")
+        grilles = cre_open.gaz_grilles(get(cre_open.trouver_xlsx(page)))
+        d, g = cre_open.gaz_en_vigueur(grilles, today)
+        lab = f"CRE · prix repère gaz du {d.strftime('%d/%m/%Y')}"
+        b1, b0 = data["gas_b1"], data["gas_b0"]
+        def s1(x): b1["a"] = x; data["gas_ref"]["a"] = x
+        poser(lab + " B1 (kWh TTC)", b1["a"], g["b1_kwh"], s1, *BOUNDS["gas_kwh"], "Excel cre.fr")
+        poser(lab + " B0 (kWh TTC)", b0["a"], g["b0_kwh"], lambda x: b0.__setitem__("a", x), *BOUNDS["gas_kwh"], "Excel cre.fr")
+        poser(lab + " B1 (abonnement TTC/an)", b1["abo"], g["b1_abo"], lambda x: b1.__setitem__("abo", x), *BOUNDS["gas_abo"], "Excel cre.fr")
+        poser(lab + " B0 (abonnement TTC/an)", b0["abo"], g["b0_abo"], lambda x: b0.__setitem__("abo", x), *BOUNDS["gas_abo"], "Excel cre.fr")
+    except Exception as e:
+        rep.failed.append(f"CRE · prix repère gaz (cre.fr) : {e}")
 
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs")
@@ -378,8 +482,8 @@ def main(argv=None):
     rep, cache = Report(), {}
     if kinds & {"elec", "gaz"}: update_offers(data, src, state, rep, kinds, cache)
     if "primes" in kinds: update_primes(data, src, state, rep, cache)
-    avant_b1 = data["gas_b1"]["a"]
-    if "refs" in kinds: update_refs(data, src, state, rep, cache); update_trend(data, src, state, rep, cache, avant_b1, now)
+    avant_b1 = (data["gas_b1"]["a"], data["gas_b0"]["a"])
+    if "refs" in kinds: update_refs(data, src, state, rep, cache); update_official(data, src, rep, now); update_trend(data, src, state, rep, cache, avant_b1, now)
     md = rep.md(data["updated_label"]); print(md)
     if not a.dry_run:
         # la date globale ne change que si au moins une valeur a été vérifiée avec succès
