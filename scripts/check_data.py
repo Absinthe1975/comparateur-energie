@@ -15,8 +15,13 @@ for r in d["gas"]:
     need(0.08 <= r["a"] <= 0.30, f"kWh gaz hors fourchette : {r['name']}")
     need(isinstance(d["abo_g"].get(r["k"]), (int, float)) and 80 <= d["abo_g"][r["k"]] <= 700, f"abonnement gaz manquant ou hors fourchette : {r['name']}")
     need(isinstance(d["abo_g0"].get(r["k"]), (int, float)), f"abonnement gaz B0 manquant : {r['name']}")
+    if "b0" in r: need(r["a"] < r["b0"] <= 0.35, f"kWh gaz B0 incohérent (doit dépasser le B1) : {r['name']}")
 for k, p in d["primes"].items():
     need(p.get("st") in ("ok", "check", "none"), f"statut de prime invalide : {k}")
+for r in d.get("duo", []):
+    need(0.10 <= r["ea"] <= 0.45 and 100 <= r["eabo"] <= 450, f"offre duo : électricité hors fourchette : {r['name']}")
+    need(0.08 <= r["ga"] <= 0.30 and 80 <= r["gabo"] <= 700, f"offre duo : gaz hors fourchette : {r['name']}")
+    need(0 <= r.get("promo", 0) <= 200, f"offre duo : promotion hors fourchette : {r['name']}")
 for t in ("3", "6", "9"): need(t in d["trv_abo"], f"abonnement du tarif réglementé manquant : {t} kVA")
 if err: print("\n".join("ERREUR : " + e for e in err)); sys.exit(1)
 print("data.json : OK")
