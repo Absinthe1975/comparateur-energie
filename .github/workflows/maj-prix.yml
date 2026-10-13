@@ -2,8 +2,13 @@ name: Mise à jour des prix
 
 on:
   schedule:
-    - cron: "0 6 5 * *"   # le 5 de chaque mois, 6 h UTC
+    - cron: "0 6 1-10 * *"  # chaque jour du 1er au 10 (publication du prix repère, changements des fournisseurs), 6 h UTC
+    - cron: "0 6 * * 1"     # puis chaque lundi pour rattraper un changement en cours de mois
   workflow_dispatch:       # bouton « Run workflow » pour lancer à la main
+
+concurrency:
+  group: maj-prix
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -18,19 +23,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Installation de pypdf (lecture des PDF)
-        run: pip install pypdf
+      - name: Installation de pypdf et openpyxl (lecture des PDF et des fichiers Excel de la CRE)
+        run: pip install pypdf openpyxl
       - name: Tests du script
         run: python -m unittest discover -s tests
       - name: Lecture des pages et extraction par l'IA
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PROVIDER: gemini
+          CROSSCHECK: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '0 6 * * 1') && '1' || '' }}
           CONTACT: ${{ github.server_url }}/${{ github.repository }}
         run: python scripts/update_prices.py
       - name: Contrôle de data.json
         run: python scripts/check_data.py
+      - name: Y a-t-il quelque chose à relire ?
+        id: chg
+        run: |
+          if grep -q "^## Changements appliqués (0)" report.md && grep -q "^## À relire : valeur proposée mais non appliquée (0)" report.md; then
+            echo "open=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "open=true" >> "$GITHUB_OUTPUT"
+          fi
       - name: Ouvrir une demande de fusion à relire
+        if: steps.chg.outputs.open == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
           branch: maj-prix
