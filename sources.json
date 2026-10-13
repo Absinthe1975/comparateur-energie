@@ -1,61 +1,132 @@
 {
-  "provider": "gemini",
-  "model": "gemini-3.1-flash-lite",
-  "max_rel_change": {
-    "kwh": 0.12,
-    "abo": 0.15
+ "provider": "gemini",
+ "model": "gemini-3.1-flash-lite",
+ "max_rel_change": {
+  "kwh": 0.12,
+  "abo": 0.15
+ },
+ "note": "Pages lues par le script de mise à jour. Seules les pages dont le robots.txt autorise la lecture automatique sont lues (Selectra, Kelwatt, CRE, leparrain et comparonslenergie l'interdisent). Corrigez une adresse ici si elle change. L'abonnement gaz n'est pas lu automatiquement. Les abonnements du tarif réglementé et du prix repère du gaz sont à mettre à jour à la main. Les prix de référence (tarif réglementé, prix repère du gaz) ne sont appliqués que si au moins deux sites de la liste donnent le même chiffre ; un site qui refuse les robots est simplement ignoré et signalé. Un changement de prix d'une offre n'est appliqué que si un second site (tarifs_pages_2) lit le même kWh ; sinon il est listé « à confirmer ». Le lundi et au lancement à la main, les prix inchangés sont aussi recoupés (variable CROSSCHECK). Les adresses de tarifs_pages_2 non vérifiées sont à corriger après le premier rapport.",
+ "tarifs_pages": {
+  "ekw": "https://prix-elec.com/fournisseurs/ekwateur/offres",
+  "total": "https://prix-elec.com/fournisseurs/totalenergies/offres",
+  "geg": "https://prix-elec.com/fournisseurs/geg/offres",
+  "gdb": "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres",
+  "plen": "https://prix-elec.com/fournisseurs/plenitude/offres",
+  "llum": "https://prix-elec.com/fournisseurs/llum/offres",
+  "dyneff": "https://prix-elec.com/fournisseurs/dyneff/offres",
+  "mint": "https://prix-elec.com/fournisseurs/mint-energie/offres",
+  "primeo": "https://prix-elec.com/fournisseurs/primeo/offres",
+  "alterna": "https://prix-elec.com/fournisseurs/alterna/offres",
+  "edf": "https://prix-elec.com/fournisseurs/edf/offres",
+  "octo": "https://prix-elec.com/fournisseurs/octopus-energy/offres",
+  "alpiq": "https://prix-elec.com/fournisseurs/alpiq/offres",
+  "ohm": "https://prix-elec.com/fournisseurs/ohm-energie/offres",
+  "happe": "https://prix-elec.com/fournisseurs/happ-e/offres",
+  "engie": "https://prix-elec.com/fournisseurs/engie/offres",
+  "ilek": "https://prix-elec.com/fournisseurs/ilek/offres",
+  "enercoop": "https://prix-elec.com/fournisseurs/enercoop/offres"
+ },
+ "references": {
+  "trv": [
+   "https://www.hellowatt.fr/contrat-electricite/prix-electricite",
+   "https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html",
+   "https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html",
+   "https://www.lesfurets.com/energie/electricite/tarif-electricite"
+  ],
+  "gas_ref": [
+   "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere",
+   "https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html",
+   "https://jeswitch.fr/energie/actualites/prix-repere-gaz-naturel-cre",
+   "https://www.lesfurets.com/energie/gaz/tarif-gaz"
+  ],
+  "gas_trend_template": "https://www.energie-info.fr/{mois}-{annee}-publication-du-prix-repere-du-gaz-par-la-cre/"
+ },
+ "primes_pages": {
+  "total": "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches",
+  "engie": "https://prix-elec.com/fournisseurs/engie/parrainage",
+  "octo": "https://prix-elec.com/fournisseurs/octopus-energy/parrainage",
+  "plen": "https://prix-elec.com/fournisseurs/plenitude/parrainage",
+  "mint": "https://prix-elec.com/fournisseurs/mint-energie/parrainage",
+  "alpiq": "https://prix-elec.com/fournisseurs/alpiq/parrainage",
+  "happe": "https://prix-elec.com/fournisseurs/happ-e/parrainage",
+  "llum": "https://prix-elec.com/fournisseurs/llum/parrainage",
+  "ilek": "https://prix-elec.com/fournisseurs/ilek/parrainage"
+ },
+ "manuel": {
+  "gaz": {
+   "geg": "la page source ne publie pas le prix du kWh de cette offre",
+   "total": "la page source ne publie pas le prix du kWh de cette offre"
   },
-  "note": "Pages lues par le script de mise à jour. Seules les pages dont le robots.txt autorise la lecture automatique sont lues (Selectra, Kelwatt, CRE, leparrain et comparonslenergie l'interdisent). Corrigez une adresse ici si elle change. L'abonnement gaz n'est pas lu automatiquement. Les abonnements du tarif réglementé et du prix repère du gaz sont à mettre à jour à la main.",
-  "tarifs_pages": {
-    "ekw": "https://prix-elec.com/fournisseurs/ekwateur/offres",
-    "total": "https://prix-elec.com/fournisseurs/totalenergies/offres",
-    "geg": "https://prix-elec.com/fournisseurs/geg/offres",
-    "gdb": "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres",
-    "plen": "https://prix-elec.com/fournisseurs/plenitude/offres",
-    "llum": "https://prix-elec.com/fournisseurs/llum/offres",
-    "dyneff": "https://prix-elec.com/fournisseurs/dyneff/offres",
-    "mint": "https://prix-elec.com/fournisseurs/mint-energie/offres",
-    "primeo": "https://prix-elec.com/fournisseurs/primeo/offres",
-    "alterna": "https://prix-elec.com/fournisseurs/alterna/offres",
-    "edf": "https://prix-elec.com/fournisseurs/edf/offres",
-    "octo": "https://prix-elec.com/fournisseurs/octopus-energy/offres",
-    "alpiq": "https://prix-elec.com/fournisseurs/alpiq/offres",
-    "ohm": "https://prix-elec.com/fournisseurs/ohm-energie/offres",
-    "happe": "https://prix-elec.com/fournisseurs/happ-e/offres",
-    "engie": "https://prix-elec.com/fournisseurs/engie/offres",
-    "ilek": "https://prix-elec.com/fournisseurs/ilek/offres",
-    "enercoop": "https://prix-elec.com/fournisseurs/enercoop/offres"
+  "elec": {
+   "alpiq": "la grille de prix de la page source n'est pas lisible par le script"
   },
-  "references": {
-    "trv": "https://www.hellowatt.fr/contrat-electricite/prix-electricite",
-    "gas_ref": "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere",
-    "gas_trend_template": "https://www.energie-info.fr/{mois}-{annee}-publication-du-prix-repere-du-gaz-par-la-cre/"
-  },
-  "primes_pages": {
-    "total": "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches",
-    "engie": "https://prix-elec.com/fournisseurs/engie/parrainage",
-    "octo": "https://prix-elec.com/fournisseurs/octopus-energy/parrainage",
-    "plen": "https://prix-elec.com/fournisseurs/plenitude/parrainage",
-    "mint": "https://prix-elec.com/fournisseurs/mint-energie/parrainage",
-    "alpiq": "https://prix-elec.com/fournisseurs/alpiq/parrainage",
-    "happe": "https://prix-elec.com/fournisseurs/happ-e/parrainage",
-    "llum": "https://prix-elec.com/fournisseurs/llum/parrainage",
-    "ilek": "https://prix-elec.com/fournisseurs/ilek/parrainage"
-  },
-  "manuel": {
-    "gaz": {
-      "geg": "la page source ne publie pas le prix du kWh de cette offre",
-      "total": "la page source ne publie pas le prix du kWh de cette offre"
-    },
-    "elec": {
-      "alpiq": "la grille de prix de la page source n'est pas lisible par le script"
-    },
-    "primes": {
-      "engie": "prime à deux niveaux (20 € + 5 € avec option verte) : relevée à la main sur la page officielle",
-      "ekw": "le règlement n'indique pas de montant en euros pour le parrain",
-      "happe": "prime en carte cadeau, pas un montant fixe en euros",
-      "llum": "montant non confirmé par la source",
-      "ilek": "prime variable, sans montant fixe en euros"
-    }
+  "primes": {
+   "engie": "prime à deux niveaux (20 € + 5 € avec option verte) : relevée à la main sur la page officielle",
+   "ekw": "le règlement n'indique pas de montant en euros pour le parrain",
+   "happe": "prime en carte cadeau, pas un montant fixe en euros",
+   "llum": "montant non confirmé par la source",
+   "ilek": "prime variable, sans montant fixe en euros"
   }
+ },
+ "tarifs_pages_2": {
+  "ekw": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/ekwateur/tarifs"
+  ],
+  "total": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs"
+  ],
+  "geg": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/geg/tarifs"
+  ],
+  "gdb": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs"
+  ],
+  "plen": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/plenitude/tarifs"
+  ],
+  "llum": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/llum/tarifs"
+  ],
+  "dyneff": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs"
+  ],
+  "mint": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/mint-energie/tarifs"
+  ],
+  "primeo": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/primeo/tarifs"
+  ],
+  "alterna": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/alterna/tarifs"
+  ],
+  "edf": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs"
+  ],
+  "octo": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/octopus-energy/tarifs"
+  ],
+  "alpiq": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/alpiq/tarifs"
+  ],
+  "ohm": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/ohm-energie/tarifs"
+  ],
+  "happe": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/happ-e/tarifs"
+  ],
+  "engie": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference",
+   "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs"
+  ],
+  "ilek": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/ilek/tarifs"
+  ],
+  "enercoop": [
+   "https://www.fournisseurs-electricite.com/fournisseurs/enercoop/tarifs"
+  ]
+ },
+ "open_data": {
+  "trv_base_rid": "c13d05e5-9e55-4d03-bf7e-042a2ade7e49",
+  "gas_page": "https://www.cre.fr/documents/open-data/construction-du-prix-repere-de-vente-de-gaz-de-la-cre.html"
+ }
 }
