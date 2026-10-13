@@ -194,20 +194,39 @@ a { color: var(--accent); }
 body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; -webkit-font-smoothing: antialiased; }
 .wrap { max-width: 1120px; padding-inline: 16px; padding-block: 24px 48px; gap: 24px; }
 .topbar { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--surface) 88%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
-.topbar-in { max-width: 1120px; margin-inline: auto; padding: 10px 16px; display: flex; align-items: center; gap: 18px; }
+.topbar-in { max-width: 1120px; margin-inline: auto; padding: 8px 16px 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 2px 12px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; font-size: 17px; }
 .brand-logo { width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #0d9488, #0284c7 62%, #eab308); display: grid; place-items: center; color: #fff; box-shadow: 0 6px 16px -6px rgba(13,148,136,.55); flex: none; }
-.topbar .tabs { background: transparent; padding: 0; border-radius: 0; gap: 2px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; justify-content: flex-end; }
+.topbar .tabs { background: transparent; padding: 0; border-radius: 0; gap: 2px; flex: 1 1 100%; min-width: 0; overflow-x: auto; scrollbar-width: none; justify-content: flex-start; }
 .topbar .tabs::-webkit-scrollbar { display: none; }
 .tabs button { font-size: 14px; font-weight: 500; padding: 8px 12px; border-radius: 10px; color: var(--muted); display: inline-flex; align-items: center; }
 .tabs button:hover { background: var(--ref-bg); color: var(--fg); }
 .tabs button[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); box-shadow: none; font-weight: 700; }
-#tab-elec::before, #tab-gaz::before, #tab-eau::before { content: ""; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; flex: none; }
+#tab-elec::before, #tab-gaz::before, #tab-duo::before, #tab-eau::before { content: ""; width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; flex: none; }
+#tab-duo::before { background: #dc2626; }
 #tab-elec::before { background: var(--elec); } #tab-gaz::before { background: var(--gas); } #tab-eau::before { background: var(--water); }
 @media (max-width: 860px) {
   .topbar-in { flex-wrap: wrap; gap: 6px 12px; padding-block: 8px; }
   .topbar .tabs { flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
   .tabs button { padding: 8px 11px; white-space: nowrap; }
+}
+
+/* Tableaux en cartes sur petit écran (hors tableau Appareils, déjà adapté) */
+@media (max-width: 700px) {
+  .tablewrap table:not(.apps), .tablewrap table:not(.apps) tbody, .tablewrap table:not(.apps) tr { display: block; min-width: 0; width: 100%; box-sizing: border-box; }
+  .tablewrap table:not(.apps) thead { display: block; }
+  .tablewrap table:not(.apps) thead tr { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .tablewrap table:not(.apps) thead th { display: none; }
+  .tablewrap table:not(.apps) thead th:has(.sortbtn) { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; border: 0; padding: 0; background: transparent; text-transform: none; letter-spacing: 0; font-size: 13px; }
+  .tablewrap table:not(.apps) thead th:has(.sortbtn)::before { content: "Trier par :"; color: var(--muted); font-weight: 600; }
+  .tablewrap table:not(.apps) tbody tr { padding: 12px 14px; border-bottom: 1px solid var(--line); }
+  .tablewrap table:not(.apps) tbody tr:last-child { border-bottom: 0; }
+  .tablewrap table:not(.apps) td { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; border: 0; padding: 3px 0; text-align: right; white-space: normal; }
+  .tablewrap table:not(.apps) td[data-label]::before { content: attr(data-label); flex: none; max-width: 48%; text-align: left; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .tablewrap table:not(.apps) td:first-child, .tablewrap table:not(.apps) td[colspan] { display: block; text-align: left; font-weight: 700; padding-bottom: 6px; }
+  .tablewrap table:not(.apps) td:first-child::before { display: none; }
+  .tablewrap table:not(.apps) tr.ref td { background: transparent; }
+  .tablewrap table:not(.apps) tr.ref { background: var(--ref-bg); }
 }
 @media (max-width: 420px) { .brand span:last-child { font-size: 15px; } }
 
@@ -286,12 +305,13 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <button role="tab" id="tab-logt" aria-selected="false" tabindex="-1" aria-controls="p-logt">Mon logement</button>
       <button role="tab" id="tab-elec" aria-selected="false" tabindex="-1" aria-controls="p-elec">Électricité</button>
       <button role="tab" id="tab-gaz" aria-selected="false" tabindex="-1" aria-controls="p-gaz">Gaz</button>
+      <button role="tab" id="tab-duo" aria-selected="false" tabindex="-1" aria-controls="p-duo">Élec + Gaz</button>
       <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
       <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Parrainages</button>
       <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
       <button role="tab" id="tab-sources" aria-selected="false" tabindex="-1" aria-controls="p-sources">Sources</button>
-      <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Légal</button>
+      <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Mentions légales</button>
     </div>
 </div></div>
 <div class="wrap">
@@ -305,7 +325,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <label for="kva">Puissance du compteur</label>
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
     </div>
-    <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 6 000 kWh)</option><option value="b1" selected>B1 (6 000 à 30 000 kWh)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
+    <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
     <div id="f-cp" hidden><input id="cp" type="hidden"><span id="cp-info"></span></div>
     <div class="field" id="f-loc" hidden><span class="lbl">Localisation</span><span id="eau-loc"></span><button type="button" class="linkbtn" id="eau-loc-edit">Modifier le code postal (accueil)</button></div>
     <div id="f-ville" hidden><select id="ville"></select></div>
@@ -379,7 +399,17 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
-    <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 6 000 kWh, cuisson et eau chaude. B1 : environ 6 000 à 30 000 kWh, chauffage compris. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1. Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas la hausse de 8 % du 1er octobre pendant leur durée de blocage.</p>
+    <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
+  </section>
+
+  <section class="panel" id="p-duo" role="tabpanel" aria-labelledby="tab-duo" hidden>
+    <h2>Offres combinées : électricité + gaz</h2>
+    <p class="lede">Un seul fournisseur pour les deux énergies. Le tableau montre les offres duo relevées (un fournisseur pour les deux énergies). Vous pouvez y ajouter, avec la case ci-dessous, les offres d'électricité et de gaz d'un même fournisseur additionnées : ce sont alors deux contrats séparés.</p>
+    <p class="note" id="duo-hint"></p>
+    <p class="note"><label><input type="checkbox" id="duo-sep"> Ajouter les offres séparées d'un même fournisseur (deux contrats, additionnés)</label></p>
+    <div class="callout" id="best-duo" aria-live="polite"></div>
+    <div class="tablewrap"><table id="t-duo"></table></div>
+    <p class="note">Les offres duo relevées viennent du comparateur Hello Watt (relevé du 13 octobre 2026, pour 3 710 kWh d'électricité et 5 211 kWh de gaz) : Leurs prix et leurs promotions changent souvent, ne sont pas mis à jour automatiquement et sont à confirmer chez le fournisseur ; le prix du gaz de certaines offres dépend de la tranche de consommation. Elles sont calculées avec le prix du gaz en option B1 (chauffage) ; avec une autre option, le gaz est estimé (astérisque). La prime de parrainage est celle du fournisseur : son montant peut être différent pour un contrat combiné.</p>
   </section>
 
   <section class="panel" id="p-eau" role="tabpanel" aria-labelledby="tab-eau" hidden>
@@ -410,7 +440,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
           <tr class="ref"><td><strong>Total au tarif réglementé</strong></td><td><strong>190,32 € TTC</strong>, soit 15,86 € par mois</td><td></td></tr>
         </tbody>
       </table></div>
-      <p class="note">Selon la puissance, le total au tarif réglementé passe de 145,56 € (3 kVA) à 190,32 € (6 kVA), 238,56 € (9 kVA), 285,12 € (12 kVA) et 373,68 € (18 kVA). Les montants du réseau ont augmenté de 3,04 % au 1er août 2026.</p>
+      <p class="note"><span id="trv-abo-txt">Selon la puissance, le total au tarif réglementé passe de 145,56 € (3 kVA) à 190,32 € (6 kVA) et 238,56 € (9 kVA).</span> Les montants du réseau ont augmenté de 3,04 % au 1er août 2026.</p>
 
       <h3>Gaz</h3>
       <div class="tablewrap"><table>
@@ -431,8 +461,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <thead><tr><th>Option</th><th>Consommation par an</th><th>Usage</th><th>Prix repère, octobre 2026</th></tr></thead>
         <tbody>
           <tr><td><strong>Base</strong></td><td>Moins de 1 000 kWh</td><td>Cuisson seule</td><td>0,1783 €/kWh, abonnement 152,46 € par an</td></tr>
-          <tr><td><strong>B0</strong></td><td>1 000 à 6 000 kWh environ</td><td>Cuisson et eau chaude</td><td>0,1783 €/kWh, abonnement 152,46 € par an</td></tr>
-          <tr><td><strong>B1</strong></td><td>6 000 à 30 000 kWh environ</td><td>Chauffage, eau chaude et cuisson</td><td>0,1456 €/kWh, abonnement 360,79 € par an</td></tr>
+          <tr><td><strong>B0</strong></td><td>1 000 à 4 000 kWh environ (6 000 pour la CRE)</td><td>Cuisson et eau chaude</td><td>0,1783 €/kWh, abonnement 152,46 € par an</td></tr>
+          <tr><td><strong>B1</strong></td><td>4 000 à 30 000 kWh environ (6 000 pour la CRE)</td><td>Chauffage, eau chaude et cuisson</td><td>0,1456 €/kWh, abonnement 360,79 € par an</td></tr>
           <tr><td><strong>B2i</strong></td><td>30 000 à 150 000 kWh</td><td>Petit chauffage collectif</td><td>Sur devis, tarif professionnel</td></tr>
         </tbody>
       </table></div>
@@ -465,13 +495,15 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
     <div class="card">
       <h3>1. Mise à jour automatique des prix par IA <span class="badge check">Installée, à activer</span></h3>
-      <p>Le script, le fichier de données (data.json), la liste des pages à lire (sources.json) et le workflow mensuel sont dans le dossier fourni. Pour l'activer : suivre le fichier LISEZMOI du dossier (clé gratuite Gemini, secret GitHub, autorisation des demandes de fusion, premier lancement à la main).</p>
+      <p>Le script, le fichier de données (data.json), la liste des pages à lire (sources.json) et le workflow de mise à jour (chaque jour du 1er au 10, puis chaque lundi) sont dans le dossier fourni. Pour l'activer : suivre le fichier LISEZMOI du dossier (clé gratuite Gemini, secret GitHub, autorisation des demandes de fusion, premier lancement à la main).</p>
       <ul>
-        <li><strong>Premier essai réel du 10 octobre :</strong> le flux de travail a fonctionné, mais 24 sources ont été refusées car Selectra et Kelwatt interdisent la lecture automatique (robots.txt), que le script respecte. Les sources ont été remplacées par prix-elec.com, hellowatt.fr et la CRE, dont le robots.txt l'autorise ; ces adresses n'ont pas toutes été ouvertes, un deuxième essai est à faire et à relire.</li>
+        <li><strong>Essais réels des 10 et 12 octobre :</strong> le flux de travail fonctionne et a déjà appliqué 3 prix du gaz. Plusieurs pages prix-elec.com renvoient une erreur 404 et certains prix ne sont lus que sur une page par fournisseur : regarder les prochains rapports (rubrique « Sources en échec ») et corriger les adresses. Les prix de référence (tarif réglementé, prix repère du gaz) ne sont appliqués que si au moins deux sites donnent le même chiffre.</li>
         <li><strong>Relire chaque demande de fusion</strong> avant de l'accepter : le rapport liste ce qui a changé, ce qui est refusé et ce qui est à relire.</li>
-        <li><strong>Sources à fiabiliser :</strong> les valeurs de départ viennent de Selectra et peuvent différer des nouvelles sources (exemple : ENGIE 0,2330 €/kWh chez Selectra, 0,2127 € sur prix-elec.com, à expliquer). Ajouter les grilles officielles des fournisseurs (certaines en PDF, que le script sait lire) et le règlement de parrainage de chacun.</li>
+        <li><strong>Sources à fiabiliser :</strong> un changement de prix d'une offre n'est maintenant appliqué que si un second site (fournisseurs-electricite.com, page tarifs du fournisseur) lit le même kWh. Les adresses de ces secondes sources n'ont pas toutes été ouvertes : corriger celles qui échouent après le prochain rapport. Reste à ajouter les grilles officielles des fournisseurs (certaines en PDF, que le script sait lire) et le règlement de parrainage de chacun.</li>
+        <li><strong>Sources officielles de la CRE :</strong> le script lit maintenant le tarif réglementé (API tabulaire de data.gouv.fr, repli sur le CSV) et le prix repère du gaz (fichier Excel de cre.fr), sans IA, et ces valeurs l'emportent sur celles des autres sites. Elles n'ont pas encore été testées en vrai : lire le rapport du prochain lancement. Les offres à prix fixe et les offres combinées restent à confirmer, faute de fichier public.</li>
+        <li><strong>Prix B0 du gaz :</strong> seul EDF a son vrai prix B0 (grille officielle du 1er octobre 2026, zone 1 : 0,1788 €/kWh, abonnement 120 €/an). Les autres offres sont estimées avec le rapport B0/B1 du prix repère et marquées d'une étoile : à remplacer au fur et à mesure par les grilles officielles des fournisseurs (champ <code>b0</code> de chaque offre gaz dans data.json). Les grilles EDF donnent aussi les 6 zones gaz : un sélecteur de zone est faisable pour EDF et TotalEnergies.</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte le fichier robots.txt de chaque site et signale son nom, mais cela ne remplace pas la lecture de leurs conditions d'utilisation.</li>
-        <li><strong>Textes à chiffres fixes :</strong> les notes de l'onglet Gaz et de l'onglet Abonnement citent des chiffres (prix repère, abonnements du tarif réglementé) qui ne se mettent pas à jour tout seuls. Les rattacher à data.json.</li>
+        <li><strong>Textes à chiffres fixes :</strong> les notes de l'onglet Gaz (prix repère, abonnements) et de l'onglet Abonnement (tarif réglementé) se mettent maintenant à jour avec data.json. Il reste des chiffres écrits en dur, par exemple le tarif réglementé 12 et 18 kVA ou la hausse du réseau du 1er août.</li><li><strong>Offres combinées :</strong> l'onglet Élec + Gaz reprend 14 offres duo relevées sur Hello Watt le 13 octobre (Plenitude, Alterna, EDF, Mint, Octopus, TotalEnergies, ENGIE, GEG, Ekwateur, ilek) et, sur demande (case à cocher), additionne les offres séparées d'un même fournisseur. Les offres duo sont saisies à la main dans data.json (rubrique « duo ») : le script ne les met pas à jour, et celles relevées sur Hello Watt et Selectra sont « à confirmer » chez le fournisseur. À faire : ajouter les offres duo des autres fournisseurs (EDF, Ekwateur, Mint, Happ-e, OHM, ilek…) et les lire par le script.</li>
         <li><strong>Non automatisé :</strong> prix de l'eau, abonnements à 3 et 9 kVA, consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
         <li><strong>IA gratuite :</strong> la clé Gemini est gratuite (Google AI Studio), avec des limites par minute et par jour à consulter dans AI Studio, qui peuvent changer. Si l'offre gratuite disparaît, le script sait aussi utiliser Mistral (offre gratuite) ou Claude (payant) en changeant une variable. GitHub Models, qui était une autre piste gratuite, est arrêté depuis le 30 juillet 2026.</li>
       </ul>
@@ -493,8 +525,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <div class="card">
       <h3>3. Avant la mise en ligne <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Onglet Légal :</strong> l'identité et le contact sont renseignés, l'adresse postale n'est pas publiée. Pour rester sans adresse publique, vérifier que votre identité figure bien sur votre compte GitHub (l'hébergeur) ; faire relire le texte par un juriste ou selon les guides de la CNIL ; le décrire à nouveau quand la mise à jour automatique des prix existera. L'adresse e-mail est visible de tous sur le site : elle peut recevoir du courrier indésirable, une adresse dédiée est possible.</li>
-        <li><strong>Site sans but lucratif :</strong> si un jour des liens de parrainage rémunérés, de la publicité sont ajoutés, revoir l'onglet Légal (rémunération, identité de l'éditeur, confidentialité).</li>
+        <li><strong>Onglet Mentions légales :</strong> l'identité et le contact sont renseignés, l'adresse postale n'est pas publiée. Pour rester sans adresse publique, vérifier que votre identité figure bien sur votre compte GitHub (l'hébergeur) ; faire relire le texte par un juriste ou selon les guides de la CNIL ; le décrire à nouveau quand la mise à jour automatique des prix existera. L'adresse e-mail est visible de tous sur le site : elle peut recevoir du courrier indésirable, une adresse dédiée est possible.</li>
+        <li><strong>Site sans but lucratif :</strong> si un jour des liens de parrainage rémunérés, de la publicité sont ajoutés, revoir l'onglet Mentions légales (rémunération, identité de l'éditeur, confidentialité).</li>
         <li><strong>Hébergement sur GitHub Pages (choisi) :</strong> le dépôt doit être public avec le compte gratuit. Les conditions de GitHub excluent l'usage de Pages pour une activité commerciale : sans but lucratif, ce n'est pas un obstacle, mais à relire si le site change de nature. Plus tard, un nom de domaine à soi.</li>
       </ul>
     </div>
@@ -546,8 +578,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>7. Présentation et accessibilité <span class="badge check">À faire</span></h3>
       <ul>
-        <li>Tableaux en cartes sur téléphone : fait pour les appareils de Mon logement ; les autres tableaux (prix, parrainages) défilent encore sur le côté.</li>
-        <li>Vérifier le zoom à 200 % et le texte agrandi dans le navigateur.</li>
+        <li>Fait le 12 octobre : tous les tableaux passent en cartes sur téléphone, les onglets Accueil et Mon logement ne sont plus cachés sur ordinateur, et les contrastes, les noms des champs, les légendes de tableaux et le parcours au clavier ont été contrôlés par script (aucun défaut restant relevé). Le zoom à 200 % n'a été simulé qu'en réduisant la largeur de la page.</li>
         <li>Tester avec un vrai lecteur d'écran (NVDA, VoiceOver).</li>
         <li>Écart avec l'offre actuelle de l'utilisateur, pour une économie personnalisée.</li>
         <li>Graphiques simples (abonnement, énergie, taxes), export ou impression du résultat.</li>
@@ -565,6 +596,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/prix" target="_blank" rel="noopener">Prix du kWh d'électricité, octobre 2026 (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/abonnement" target="_blank" rel="noopener">Abonnement d'électricité par fournisseur et composition (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement" target="_blank" rel="noopener">Abonnement de gaz (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-gaz/prix" target="_blank" rel="noopener">Prix du gaz par fournisseur (Selectra)</a></li>
+      <li>Offres duo électricité + gaz : <a href="https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-access-electricite-et-gaz" target="_blank" rel="noopener">TotalEnergies Access Électricité + Gaz (site du fournisseur)</a> · <a href="https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs/access-electricite-gaz" target="_blank" rel="noopener">prix (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/fournisseurs/alterna/tarifs/mon-electricite-francaise-mon-biogaz-francais-fixes-1-an" target="_blank" rel="noopener">Alterna (Selectra)</a> · autres offres duo : relevé sur le comparateur Hello Watt le 13 octobre 2026</li>
       <li><a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">Comparateur officiel d'offres d'électricité et de gaz du Médiateur national de l'énergie</a> (autorité publique indépendante) : pour comparer selon votre adresse et votre contrat</li>
       <li><a href="https://www.kelwatt.fr/actu/prix-du-gaz-hausse-octobre-2026" target="_blank" rel="noopener">Prix repère du gaz, octobre 2026 (Kelwatt, d'après la CRE)</a> · <a href="https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html" target="_blank" rel="noopener">page officielle de la CRE</a></li>
       <li><a href="https://prix-elec.com/fournisseurs/edf/parrainage" target="_blank" rel="noopener">Parrainage EDF</a> · <a href="https://www.comparonslenergie.com/fournisseurs/engie/code-parrainage/" target="_blank" rel="noopener">Parrainage ENGIE</a> · <a href="https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage" target="_blank" rel="noopener">Parrainage Gaz de Bordeaux</a></li>
@@ -575,11 +607,11 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
   </section>
 
 <section class="panel" id="p-legal" role="tabpanel" aria-labelledby="tab-legal" hidden>
-    <h2>Mentions légales et confidentialité</h2>
-    <p class="lede">Dernière mise à jour : 10 octobre 2026.</p>
+    <h2>Mentions légales</h2>
+    <p class="lede">Dernière mise à jour : 12 octobre 2026.</p>
     <div class="card">
       <h3>Éditeur du site</h3>
-      <p>Theret Benoit, particulier non professionnel, France.<br>Adresse postale : non publiée.<br>Contact : benoittheret@hotmail.com<br>Directeur de la publication : Theret Benoit</p>
+      <p>Theret Benoit, particulier non professionnel, France.<br>Adresse postale : non publiée.<br>Contact : benoittheret@gmail.com<br>Directeur de la publication : Theret Benoit</p>
       <h3>Hébergeur</h3>
       <p>GitHub, Inc. (service GitHub Pages), 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis. Site : github.com. Le code source de ce site est public sur GitHub.</p>
     </div>
@@ -593,11 +625,11 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </div>
     <div class="card">
       <h3>Exactitude des données</h3>
-      <p>Pour une comparaison officielle et personnalisée, utilisez le <a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">comparateur du Médiateur national de l'énergie</a> (autorité publique indépendante, ouvre un nouveau site). Chaque ligne de prix indique sa source et sa date de relevé. Les prix et les primes viennent de pages de comparateurs, de sites de fournisseurs ou de textes officiels, avec la source indiquée sur chaque ligne. Les valeurs de départ ont été relevées surtout sur Selectra, un comparateur partenaire de fournisseurs. Un astérisque signale un montant estimé. Les prix et les primes changent souvent, et malgré le soin apporté, des erreurs sont possibles : l'éditeur ne garantit pas l'exactitude des données et n'est pas responsable d'une décision prise à partir d'elles. Pour signaler une erreur : benoittheret@hotmail.com.</p>
+      <p>Pour une comparaison officielle et personnalisée, utilisez le <a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">comparateur du Médiateur national de l'énergie</a> (autorité publique indépendante, ouvre un nouveau site). Chaque ligne de prix indique sa source et sa date de relevé. Les prix et les primes viennent de pages de comparateurs, de sites de fournisseurs ou de textes officiels, avec la source indiquée sur chaque ligne. Les valeurs de départ ont été relevées surtout sur Selectra, un comparateur partenaire de fournisseurs. Un astérisque signale un montant estimé. Les prix et les primes changent souvent, et malgré le soin apporté, des erreurs sont possibles : l'éditeur ne garantit pas l'exactitude des données et n'est pas responsable d'une décision prise à partir d'elles. Pour signaler une erreur : benoittheret@gmail.com.</p>
     </div>
     <div class="card">
       <h3>Mise à jour des prix par une IA</h3>
-      <p>Les prix sont mis à jour une fois par mois par un programme qui lit des pages publiques de sites de comparateurs et de fournisseurs. Une IA gratuite (Gemini, de Google) en extrait les chiffres, puis le programme vérifie que chaque chiffre figure bien dans la page lue et qu'il reste plausible. L'éditeur relit les changements avant leur publication. Aucune donnée de visiteur n'est envoyée à l'IA : elle ne reçoit que le texte de pages publiques (l'offre gratuite de Google peut réutiliser ces textes pour améliorer ses produits). Malgré ces contrôles, des erreurs restent possibles. La date de chaque relevé est indiquée sur chaque ligne.</p>
+      <p>Les prix sont contrôlés automatiquement chaque jour du 1er au 10 du mois, puis chaque lundi, par un programme qui lit des pages publiques de sites de comparateurs, de fournisseurs et d'organismes officiels. Les prix de référence (tarif réglementé, prix repère du gaz) et tout changement de prix d'une offre ne sont retenus que si au moins deux sites donnent le même chiffre. Une IA gratuite (Gemini, de Google) en extrait les chiffres, puis le programme vérifie que chaque chiffre figure bien dans la page lue et qu'il reste plausible. L'éditeur relit les changements avant leur publication. Aucune donnée de visiteur n'est envoyée à l'IA : elle ne reçoit que le texte de pages publiques (l'offre gratuite de Google peut réutiliser ces textes pour améliorer ses produits). Malgré ces contrôles, des erreurs restent possibles. La date de chaque relevé est indiquée sur chaque ligne.</p>
     </div>
     <div class="card">
       <h3>Données personnelles</h3>
@@ -607,10 +639,10 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil et ne charge aucune ressource d'un site tiers.</li>
         <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
         <li><strong>Liens vers d'autres sites :</strong> les sources citées s'ouvrent sur des sites tiers qui ont leurs propres règles.</li>
-        <li><strong>Vos droits :</strong> comme le site ne conserve aucune donnée vous concernant, il n'y a rien à consulter ni à supprimer de son côté. Pour toute question : benoittheret@hotmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
+        <li><strong>Vos droits :</strong> comme le site ne conserve aucune donnée vous concernant, il n'y a rien à consulter ni à supprimer de son côté. Pour toute question : benoittheret@gmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
       </ul>
     </div>
-    <p class="note">Les marques citées appartiennent à leurs propriétaires et servent seulement à identifier les offres. Si vous ajoutez un jour des liens de parrainage rémunérés, de la publicité ou la lecture de factures, ce texte devra être revu. Ce texte est un modèle rédigé sans avocat : il n'est pas un avis juridique. Faites-le relire, et adaptez-le si votre situation change.</p>
+    <p class="note">Les marques citées appartiennent à leurs propriétaires et servent seulement à identifier les offres. Si vous ajoutez un jour des liens de parrainage rémunérés, de la publicité ou le traitement de documents d'utilisateurs, ce texte devra être revu. Ce texte est un modèle rédigé sans avocat : il n'est pas un avis juridique. Faites-le relire, et adaptez-le si votre situation change.</p>
   </section>
 
 
@@ -618,7 +650,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
 <footer>
     <div class="foot-brand"><span class="brand-logo" style="width:28px;height:28px;border-radius:9px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>Comparateur énergie</div>
-    <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="sources">Sources</button> · <button type="button" class="linkbtn" data-go="legal">Mentions légales et confidentialité</button></p>
+    <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="sources">Sources</button> · <button type="button" class="linkbtn" data-go="legal">Mentions légales</button></p>
   </footer>
 </div>
 
@@ -670,6 +702,7 @@ var ELEC = [
 ];
 
 // Gaz : prix du kWh TTC, profil chauffage
+var DUO = [{"k": "plen", "name": "Plenitude", "offer": "Plenifix Élec + Gaz 1 an", "ea": 0.1901, "eb": 0.1886, "eabo": 219.12, "ga": 0.1456, "gabo": 387.48, "promo": 70, "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)", "ea": 0.1919, "eb": 0.1904, "eabo": 211.92, "ga": 0.129, "gabo": 389.64, "promo": 0, "note": "électricité à prix fixe, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Zen Fixe + Avantage Gaz 2 ans", "ea": 0.208, "eb": 0.2065, "eabo": 190.32, "ga": 0.1372, "gabo": 341.4, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Classic & Green + Biogaz Classic", "ea": 0.1939, "eb": 0.1924, "eabo": 188.4, "ga": 0.1518, "gabo": 360.84, "promo": 48, "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Tarif Bleu réglementé + Avantage Gaz Optimisé", "ea": 0.2, "eb": 0.1985, "eabo": 190.32, "ga": 0.1471, "gabo": 366.24, "promo": 0, "note": "électricité au tarif réglementé, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "octo", "name": "Octopus Energy", "offer": "OctoEco Fixe + Eco-conso gaz", "ea": 0.2032, "eb": 0.2017, "eabo": 190.32, "ga": 0.1487, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Smart & Green + Biogaz Classic", "ea": 0.2017, "eb": 0.2002, "eabo": 227.28, "ga": 0.1518, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "total", "name": "TotalEnergies", "offer": "Fixe 2 ans Électricité + Gaz", "ea": 0.2267, "eb": 0.2252, "eabo": 190.32, "ga": 0.1394, "gabo": 360.72, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "engie", "name": "ENGIE", "offer": "Duo référence 3 ans", "ea": 0.2332, "eb": 0.2317, "eabo": 207.6, "ga": 0.1383, "gabo": 360.84, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité du coin + Mon biogaz français", "ea": 0.1968, "eb": 0.1953, "eabo": 211.92, "ga": 0.1706, "gabo": 389.64, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "geg", "name": "GEG", "offer": "Électricité et gaz 100 % Verts", "ea": 0.1838, "eb": 0.1823, "eabo": 190.8, "ga": 0.1642, "gabo": 499.44, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe", "ea": 0.2407, "eb": 0.2392, "eabo": 190.32, "ga": 0.1246, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 100 % renouvelable, prix fixe", "ea": 0.2264, "eb": 0.2249, "eabo": 190.32, "ga": 0.1446, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ilek", "name": "ilek", "offer": "ÉnRFixe+ Élec + Gaz", "ea": 0.24, "eb": 0.2385, "eabo": 301.2, "ga": 0.1633, "gabo": 438.36, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check", "eabo9": 408.0}];
 var GAS_REF = { k: null, name: "CRE", offer: "Prix repère de vente de gaz (n'est pas une offre)", a: 0.1456, ref: true };
 var GAS = [
   { k: "ekw", name: "Ekwateur", offer: "Gaz Naturel 15 % Biogaz Fixe", a: 0.1246 },
@@ -752,12 +785,13 @@ function sortRows(rows, key) {
 var ABO_G0 = { edf: 120.00, ohm: 152.04, gdb: 152.40, total: 152.40, engie: 152.46, mint: 152.52, octo: 152.40, plen: 179.10, happe: 152.40, alterna: 174.00, ilek: 218.04, dyneff: 163.44, geg: 125.64, ekw: 243.84 };
 var GAS_B0 = { a: 0.1783, abo: 152.46 }, GAS_B1 = { a: 0.1456, abo: 360.79 };
 var GAS_OPT_LABEL = { base: "Base", b0: "B0", b1: "B1", b2i: "B2i" };
-function gasOptionFor(k) { return k < 1000 ? "base" : k <= 6000 ? "b0" : k <= 30000 ? "b1" : "b2i"; }
+function gasOptionFor(k) { return k < 1000 ? "base" : k <= 4000 ? "b0" : k <= 30000 ? "b1" : "b2i"; }
 function gasListFor(opt) {
   var ratio = GAS_B0.a / GAS_B1.a;
   var base = opt === "b1" ? GAS_B1 : GAS_B0;
   var list = GAS.map(function (r) {
-    return opt === "b1" ? Object.assign({}, r, { abo: ABO_G[r.k], est: false }) : Object.assign({}, r, { a: r.a * ratio, abo: ABO_G0[r.k], est: true });
+    if (opt === "b1") return Object.assign({}, r, { abo: ABO_G[r.k], est: false });
+    return typeof r.b0 === "number" ? Object.assign({}, r, { a: r.b0, abo: ABO_G0[r.k], est: false }) : Object.assign({}, r, { a: r.a * ratio, abo: ABO_G0[r.k], est: true });
   });
   return { list: list, ref: Object.assign({}, GAS_REF, { a: base.a, abo: base.abo, offer: "Prix repère de vente de gaz, option " + GAS_OPT_LABEL[opt] + " (n'est pas une offre)" }) };
 }
@@ -1351,7 +1385,7 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "eau", "abo", "prime", "memo", "sources", "legal"];
+var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "prime", "memo", "sources", "legal"];
 var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0 };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
@@ -1423,6 +1457,60 @@ function loadAuto() {
   } catch (e) { /* ignoré */ }
 }
 
+/* ---------- Offres combinées électricité + gaz ---------- */
+function duoInputs() {
+  var gAuto = state.autoGaz && lastLogt.gconso > 0;
+  var gk = gAuto ? lastLogt.gconso : state.gasConso;
+  return {
+    ek: state.autoElec ? lastLogt.conso : state.elecConso,
+    kva: state.autoElec ? lastLogt.ck : state.kva,
+    gk: gk,
+    gopt: gAuto ? lastLogt.gopt : (state.gasOpt || gasOptionFor(gk))
+  };
+}
+function renderDuo() {
+  var el = $("t-duo"); if (!el) return;
+  var I = duoInputs();
+  $("duo-hint").innerHTML = "Calculé avec " + fmtInt.format(I.ek) + " kWh d'électricité (" + I.kva + " kVA) et " + fmtInt.format(I.gk) + " kWh de gaz (option " + GAS_OPT_LABEL[I.gopt] + "). Modifiez ces valeurs dans l'onglet <button type=\"button\" class=\"linkbtn\" data-go=\"elec\">Électricité</button> ou <button type=\"button\" class=\"linkbtn\" data-go=\"gaz\">Gaz</button>.";
+  if (I.gopt === "b2i") {
+    $("best-duo").hidden = true;
+    el.innerHTML = "<tbody><tr><td>Avec plus de 30 000 kWh de gaz par an (option B2i), les tarifs se font sur devis : pas de comparaison combinée possible.</td></tr></tbody>";
+    return;
+  }
+  $("best-duo").hidden = false;
+  var gl = gasListFor(I.gopt), gmap = {};
+  gl.list.forEach(function (g) { gmap[g.k] = g; });
+  var rows = [];
+  (($("duo-sep") && $("duo-sep").checked) ? ELEC : []).forEach(function (e) {
+    var g = gmap[e.k]; if (!g) return;
+    var ec = elecCostFor(e, I.kva, I.ek);
+    var gc = g.a * I.gk + (typeof g.abo === "number" ? g.abo : 0);
+    rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
+  });
+  DUO.forEach(function (D) {
+    var abo = (I.kva === "9" && D.eabo9) ? D.eabo9 : D.eabo + ((TRV_ABO[I.kva] || TRV_ABO["6"]) - TRV_ABO["6"]);
+    var kwh = (I.kva === "9" && D.eb) ? D.eb : D.ea;
+    var ec = kwh * I.ek + abo, gc = D.ga * I.gk + D.gabo - (D.promo || 0);
+    rows.push({ k: D.k, name: D.name, eo: D.offer, go: "", ec: ec, gc: gc, tot: ec + gc, est: I.gopt !== "b1" || !(I.kva === "3" || I.kva === "6" || I.kva === "9"), duo: D });
+  });
+  rows.sort(function (a, b) { return a.tot - b.tot; });
+  var ref = elecCostFor(ELEC_REF, I.kva, I.ek) + gl.ref.a * I.gk + gl.ref.abo;
+  if (!rows.length) { el.innerHTML = "<tbody><tr><td>Aucun fournisseur ne propose les deux énergies dans les données actuelles.</td></tr></tbody>"; $("best-duo").hidden = true; return; }
+  var b = rows[0], bd = b.tot - ref;
+  $("best-duo").innerHTML = "<strong>La moins chère : " + esc(b.name) + "</strong> (" + (b.duo ? "offre duo " + esc(b.eo) : esc(b.eo) + " + " + esc(b.go)) + "), " + fmtEur0.format(b.tot) + " par an. "
+    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que le tarif réglementé et le prix repère du gaz réunis." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que le tarif réglementé et le prix repère du gaz réunis." : "C'est le même montant que le tarif réglementé et le prix repère du gaz réunis.");
+  var h = '<thead><tr><th>Fournisseur et offres</th><th class="num">Électricité par an</th><th class="num">Gaz par an</th><th class="num">Total par an</th><th class="num">Écart</th><th>Prime de parrainage</th></tr></thead><tbody>';
+  rows.forEach(function (r, i) {
+    var d = r.tot - ref;
+    var dtxt = Math.round(d) === 0 ? "0 €" : (d < 0 ? "−" : "+") + fmtEur0.format(Math.abs(d));
+    var cls = Math.round(d) === 0 ? "" : d < 0 ? "delta-good" : "delta-bad";
+    h += '<tr><td><div class="prov">' + esc(r.name) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '. Source : ' + esc(r.duo.s[0]) + ', ' + esc(r.duo.d) + ', à confirmer.</div>' : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>') + '</td>'
+      + '<td class="num">' + fmtEur0.format(r.ec) + '</td><td class="num">' + fmtEur0.format(r.gc) + (r.est ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r.tot) + '</strong></td><td class="num ' + cls + '">' + dtxt + '</td><td>' + primeCell(r.k) + '</td></tr>';
+  });
+  h += '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
+  el.innerHTML = h + "</tbody>";
+}
+
 function refresh() {
   syncAuto();
   state.gasOpt = $("gopt").value;
@@ -1438,6 +1526,7 @@ function refresh() {
   state.kva = $("kva").value;
   renderPrices("t-elec", ELEC, ELEC_REF, state.kva === "9" ? "b" : "a", state.elecConso, state.sort, "elec", state.kva);
   renderGas();
+  renderDuo();
   renderEau();
 }
 
@@ -1447,6 +1536,7 @@ function applyData(d) {
   if (!d || d.schema !== 1 || !Array.isArray(d.elec) || !Array.isArray(d.gas) || !d.primes || !d.abo_e || !d.abo_g || !d.elec_ref || !d.gas_ref) return false;
   ELEC_REF = d.elec_ref; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
   ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
+  DUO = Array.isArray(d.duo) ? d.duo : DUO;
   GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes;
   if (d.updated) DATA_DATE = d.updated;
   if (d.updated_label) DATA_LABEL = d.updated_label;
@@ -1460,6 +1550,10 @@ function showDates() {
   t += hh;
   var els = document.querySelectorAll(".dlong");
   for (var i = 0; i < els.length; i++) els[i].textContent = t;
+  var M2 = M[parseInt(p[1], 10) - 1], g = $("gaz-ref-txt");
+  if (g && p.length === 3) g.textContent = "Prix repère de la CRE en " + M2 + " " + p[0] + " : " + fmtKwh.format(GAS_B0.a) + " €/kWh et " + fmtEur2.format(GAS_B0.abo).replace(/\s?€/, "") + " € d'abonnement en Base et B0, " + fmtKwh.format(GAS_B1.a) + " €/kWh et " + fmtEur2.format(GAS_B1.abo).replace(/\s?€/, "") + " € en B1.";
+  var tr = $("trv-abo-txt");
+  if (tr) tr.textContent = "Selon la puissance, le total au tarif réglementé passe de " + fmtEur2.format(TRV_ABO["3"]).replace(/\s?€/, "") + " € (3 kVA) à " + fmtEur2.format(TRV_ABO["6"]).replace(/\s?€/, "") + " € (6 kVA) et " + fmtEur2.format(TRV_ABO["9"]).replace(/\s?€/, "") + " € (9 kVA).";
   var u = $("updated"); if (u) u.textContent = "Données mises à jour le " + DATA_LABEL + hh + ".";
 }
 function loadData() {
@@ -1485,13 +1579,24 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", sources: "Sources", legal: "Légal" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", sources: "Sources", legal: "Mentions légales" };
 function a11yTabs() {
   TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
 }
 function a11yTables() {
   Array.prototype.forEach.call(document.querySelectorAll("table"), function (t) {
     Array.prototype.forEach.call(t.querySelectorAll("th"), function (th) { if (!th.getAttribute("scope")) th.setAttribute("scope", "col"); });
+    var heads = [];
+    Array.prototype.forEach.call(t.querySelectorAll("thead th"), function (th) {
+      var c = th.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll(".sortbtn,br"), function (x) { x.parentNode.removeChild(x); });
+      var tx = c.textContent.replace(/\s+/g, " ").trim();
+      if (!tx) { var sb = th.querySelector(".sortbtn"); tx = sb ? sb.textContent.trim() : ""; }
+      heads.push(tx);
+    });
+    if (heads.length) Array.prototype.forEach.call(t.querySelectorAll("tbody tr"), function (tr) {
+      if (tr.children.length !== heads.length) return;
+      Array.prototype.forEach.call(tr.children, function (td, i) { if (td.tagName === "TD" && heads[i]) td.setAttribute("data-label", heads[i]); });
+    });
     if (!t.querySelector("caption")) {
       var h = null, n = t.closest(".tablewrap");
       var p = n && n.previousElementSibling;
@@ -1530,7 +1635,7 @@ function setTab(t) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "sources" || t === "legal";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "legal";
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz";
@@ -1554,7 +1659,7 @@ function setTab(t) {
   refresh();
 }
 
-Array.prototype.forEach.call(document.querySelectorAll("[data-go]"), function (b) { b.addEventListener("click", function () { var g = b.getAttribute("data-go"); setTab(g); window.scrollTo(0, 0); var hh = $("p-" + g).querySelector("h2"); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus(); } }); });
+document.addEventListener("click", function (e) { var b = e.target.closest ? e.target.closest("[data-go]") : null; if (!b) return; var g = b.getAttribute("data-go"); setTab(g); window.scrollTo(0, 0); var hh = $("p-" + g).querySelector("h2"); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus(); } });
 TABS.forEach(function (n) { $("tab-" + n).addEventListener("click", function () { setTab(n); }); });
 $("conso").addEventListener("input", refresh);
 ["t-elec", "t-gaz"].forEach(function (id) {
@@ -1564,6 +1669,7 @@ $("conso").addEventListener("input", refresh);
   });
 });
 $("kva").addEventListener("change", refresh);
+$("gopt").addEventListener("change", refresh);
 $("eau-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });
 $("ville").addEventListener("change", refresh);
 $("prixeau").addEventListener("input", refresh);
@@ -1574,10 +1680,16 @@ function setAuto(v) {
   saveAuto();
 }
 // Modifier une valeur à la main passe cet onglet en saisie manuelle (le listener en capture passe avant refresh)
+var gasOptTouched = false;   // vrai si l'utilisateur a choisi lui-même l'option gaz
 [["conso", "input"], ["kva", "change"], ["gopt", "change"], ["prixeau", "input"]].forEach(function (p) {
-  $(p[0]).addEventListener(p[1], function () { setAuto(false); }, true);
+  $(p[0]).addEventListener(p[1], function () {
+    if (p[0] === "gopt") gasOptTouched = true;
+    if (p[0] === "conso" && state.tab === "gaz" && !gasOptTouched) { var v = parseFloat($("conso").value); if (v > 0) $("gopt").value = gasOptionFor(v); }
+    setAuto(false);
+  }, true);
 });
-$("auto-back").addEventListener("click", function () { setAuto(true); refresh(); });
+$("duo-sep").addEventListener("change", function () { renderDuo(); });
+$("auto-back").addEventListener("click", function () { gasOptTouched = false; setAuto(true); refresh(); });
 
 document.querySelector("[data-brand]").addEventListener("click", function (ev) { ev.preventDefault(); setTab("home"); window.scrollTo(0, 0); });
 renderSummary();
