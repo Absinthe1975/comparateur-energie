@@ -17,7 +17,9 @@ class T(unittest.TestCase):
         for f in ("data.json", "sources.json"): shutil.copy(os.path.join(ROOT, f), self.tmp)
         up.DATA, up.SOURCES = os.path.join(self.tmp, "data.json"), os.path.join(self.tmp, "sources.json")
         up.STATE, up.REPORT = os.path.join(self.tmp, "state", "hashes.json"), os.path.join(self.tmp, "report.md")
-        os.environ["FETCH_DELAY"] = "0"; os.environ.pop("FORCE", None)
+        sj = json.load(open(up.SOURCES, encoding="utf-8")); sj["tarifs_pages_2"] = {"engie": ["https://second.example/engie"]}
+        json.dump(sj, open(up.SOURCES, "w", encoding="utf-8"), ensure_ascii=False)
+        os.environ["FETCH_DELAY"] = "0"; os.environ.pop("FORCE", None); os.environ.pop("CROSSCHECK", None)
         up.fetch_text = lambda url: PAGE if "engie" in url else (_ for _ in ()).throw(RuntimeError("404"))
         self.calls = 0
         self.reply = GOOD
@@ -32,6 +34,20 @@ class T(unittest.TestCase):
         r, d = self.run_engie()
         self.assertEqual(r["a"], 0.24); self.assertEqual(d["abo_e"]["engie"], 190.0)
         self.assertEqual(r["d"], d["updated_label"])
+    def test_sans_second_site_non_applique(self):
+        sj = json.load(open(up.SOURCES, encoding="utf-8")); sj["tarifs_pages_2"] = {}
+        json.dump(sj, open(up.SOURCES, "w", encoding="utf-8"), ensure_ascii=False)
+        r, _ = self.run_engie(); self.assertEqual(r["a"], 0.2330)
+        self.assertIn("à confirmer sur un second", open(up.REPORT, encoding="utf-8").read())
+    def test_second_site_contredit_non_applique(self):
+        up.fetch_text = lambda url: "Offres ENGIE. Elec Référence 3 ans. Le prix du kWh est de 0,2300 € TTC en option Base. L'abonnement 6 kVA est de 190,00 € par an." if "second" in url else PAGE
+        def fake(prompt):
+            if "second.example" in prompt:
+                return {"fields": {"offre": {"value": 1, "quote": "Elec Référence 3 ans"}, "kwh": {"value": 0.23, "quote": "Le prix du kWh est de 0,2300 € TTC en option Base"}}}
+            return GOOD
+        up.call_llm = fake
+        r, _ = self.run_engie(); self.assertEqual(r["a"], 0.2330)
+        self.assertIn("contredit par un second site", open(up.REPORT, encoding="utf-8").read())
     def test_phrase_inventee_refusee(self):
         self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["kwh"]["quote"] = "Le kWh coûte 0,2400 € chez nous"
         r, _ = self.run_engie(); self.assertEqual(r["a"], 0.2330)
@@ -86,6 +102,38 @@ class T(unittest.TestCase):
         self.assertTrue(any("écart à vérifier" in x for x in rep.review), rep.review)
     def test_source_en_echec_ne_casse_rien(self):
         up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 18)
+
+    # ---- prix de référence : plusieurs sites obligatoires ----
+    def _refs(self, pages, b1, b0):
+        d = json.load(open(up.DATA, encoding="utf-8")); src = json.load(open(up.SOURCES, encoding="utf-8"))
+        src["references"] = {"trv": [], "gas_ref": list(pages)}
+        up.fetch_text = lambda url: pages[url]
+        def fake(prompt):
+            url = prompt.split("\n")[0].replace("Page : ", "")
+            q1, q0 = pages[url].split("|")
+            return {"fields": {"b1_kwh": {"value": b1[url], "quote": q1}, "b0_kwh": {"value": b0[url], "quote": q0}}}
+        up.call_llm = fake
+        rep = up.Report(); up.update_refs(d, src, {}, rep, {}); return d, rep
+    def test_reference_deux_sites_daccord_appliquee(self):
+        pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh", "http://b/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh"}
+        d, rep = self._refs(pg, {u: 0.15 for u in pg}, {u: 0.18 for u in pg})
+        self.assertEqual((d["gas_b1"]["a"], d["gas_b0"]["a"], d["gas_ref"]["a"]), (0.15, 0.18, 0.15)); self.assertEqual(len(rep.applied), 2)
+    def test_reference_un_seul_site_non_appliquee(self):
+        pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh"}
+        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b0"]["a"]
+        d, rep = self._refs(pg, {u: 0.15 for u in pg}, {u: 0.18 for u in pg})
+        self.assertEqual(d["gas_b0"]["a"], old); self.assertTrue(any("second site" in x or "un seul site" in x for x in rep.review + rep.same))
+    def test_reference_sites_en_desaccord_non_appliquee(self):
+        pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh", "http://b/x": "Chauffage 0,1400 €/kWh|Cuisson 0,1800 €/kWh"}
+        b1 = {"http://a/x": 0.15, "http://b/x": 0.14}
+        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b1"]["a"]
+        d, rep = self._refs(pg, b1, {u: 0.18 for u in pg})
+        self.assertEqual(d["gas_b1"]["a"], old); self.assertTrue(any("désaccord" in x for x in rep.review))
+    def test_reference_b0_confondu_avec_b1_refuse(self):
+        pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1500 €/kWh", "http://b/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1500 €/kWh"}
+        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b0"]["a"]
+        d, rep = self._refs(pg, {u: 0.15 for u in pg}, {u: 0.15 for u in pg})
+        self.assertEqual(d["gas_b0"]["a"], old); self.assertTrue(any("incohérentes" in x for x in rep.review))
 
 class Http(unittest.TestCase):
     def setUp(self):
