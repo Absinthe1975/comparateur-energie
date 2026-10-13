@@ -1,864 +1,969 @@
 {
-  "schema": 1,
-  "updated": "2026-10-10",
-  "updated_label": "10 oct. 2026",
-  "elec_ref": {
-    "k": "edf",
-    "name": "EDF",
-    "offer": "Tarif réglementé (Tarif Bleu)",
-    "a": 0.2001,
-    "b": 0.1985,
-    "ref": true
+ "schema": 1,
+ "updated": "2026-10-13",
+ "updated_label": "13 oct. 2026",
+ "elec_ref": {
+  "k": "edf",
+  "name": "EDF",
+  "offer": "Tarif réglementé (Tarif Bleu)",
+  "a": 0.2001,
+  "b": 0.1985,
+  "ref": true
+ },
+ "elec": [
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Électricité 100 % renouvelable Europe",
+   "a": 0.1753,
+   "b": 0.1906,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ]
   },
-  "elec": [
-    {
-      "k": "ekw",
-      "name": "Ekwateur",
-      "offer": "Électricité 100 % renouvelable Europe",
-      "a": 0.1753,
-      "b": 0.1906,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "total",
-      "name": "TotalEnergies",
-      "offer": "Access Électricité (prix indexé)",
-      "a": 0.1837,
-      "b": 0.1823,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "geg",
-      "name": "GEG",
-      "offer": "Mon Offre Elec Verte, fixe 3 ans",
-      "a": 0.1837,
-      "b": 0.1823,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "gdb",
-      "name": "Gaz de Bordeaux",
-      "offer": "NovaFixe Élec",
-      "a": 0.1837,
-      "b": 0.1823,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "plen",
-      "name": "Plenitude",
-      "offer": "PleniWeb Électricité",
-      "a": 0.1837,
-      "b": 0.1823,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "llum",
-      "name": "LLUM",
-      "offer": "Électricité particuliers",
-      "a": 0.19,
-      "b": 0.19,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "dyneff",
-      "name": "Dyneff",
-      "offer": "Contrat+ Électricité",
-      "a": 0.1907,
-      "b": 0.1907,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "mint",
-      "name": "Mint Énergie",
-      "offer": "Online & Green",
-      "a": 0.1919,
-      "b": 0.1904,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "primeo",
-      "name": "Primeo Energie",
-      "offer": "Essentielle Verte",
-      "a": 0.1919,
-      "b": 0.1904,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "alterna",
-      "name": "Alterna",
-      "offer": "Mon électricité française fixe 1 an",
-      "a": 0.1919,
-      "b": 0.1904,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "edf",
-      "name": "EDF",
-      "offer": "Zen Online",
-      "a": 0.1925,
-      "b": 0.1909,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "octo",
-      "name": "Octopus Energy",
-      "offer": "Intelligent Octopus",
-      "a": 0.1968,
-      "b": 0.1953,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "alpiq",
-      "name": "Alpiq",
-      "offer": "Sérénité",
-      "a": 0.1993,
-      "b": 0.1977,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "ohm",
-      "name": "OHM Énergie",
-      "offer": "OHM Sérénité Fixe 1 an",
-      "a": 0.2148,
-      "b": 0.2148,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "happe",
-      "name": "Happ-e",
-      "offer": "Électricité 1 an",
-      "a": 0.2273,
-      "b": 0.2273,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "engie",
-      "name": "ENGIE",
-      "offer": "Elec Référence 3 ans",
-      "a": 0.233,
-      "b": 0.2347,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "ilek",
-      "name": "ilek",
-      "offer": "ÉnRFixe+ Elec",
-      "a": 0.24,
-      "b": 0.2385,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "enercoop",
-      "name": "Enercoop",
-      "offer": "Offre Base",
-      "a": 0.2541,
-      "b": 0.2571,
-      "d": "9 oct. 2026"
-    }
-  ],
-  "gas_ref": {
-    "k": null,
-    "name": "CRE",
-    "offer": "Prix repère de vente de gaz (n'est pas une offre)",
-    "a": 0.1456,
-    "ref": true
+  {
+   "k": "total",
+   "name": "TotalEnergies",
+   "offer": "Access Électricité (prix indexé)",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/totalenergies/offres"
+   ]
   },
-  "gas": [
-    {
-      "k": "ekw",
-      "name": "Ekwateur",
-      "offer": "Gaz Naturel 15 % Biogaz Fixe",
-      "a": 0.1246,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "edf",
-      "name": "EDF",
-      "offer": "Avantage Gaz 2 ans",
-      "a": 0.1336,
-      "d": "9 oct. 2026",
-      "b0": 0.1788
-    },
-    {
-      "k": "gdb",
-      "name": "Gaz de Bordeaux",
-      "offer": "NovaFixe BioGaz",
-      "a": 0.1346,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "geg",
-      "name": "GEG",
-      "offer": "Mon Offre Gaz, fixe 3 ans",
-      "a": 0.1354,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "total",
-      "name": "TotalEnergies",
-      "offer": "Fixe 2 ans Gaz",
-      "a": 0.1412,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "engie",
-      "name": "ENGIE",
-      "offer": "Gaz Référence 3 ans",
-      "a": 0.1414,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "alterna",
-      "name": "Alterna",
-      "offer": "Mon gaz naturel indexé",
-      "a": 0.1393,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "ohm",
-      "name": "OHM Énergie",
-      "offer": "Extra Eco Gaz",
-      "a": 0.1429,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "dyneff",
-      "name": "Dyneff",
-      "offer": "Contrat+ Gaz 15 % Vert",
-      "a": 0.1432,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "plen",
-      "name": "Plenitude",
-      "offer": "Plenifix 1 an Gaz",
-      "a": 0.1456,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "mint",
-      "name": "Mint Énergie",
-      "offer": "Biogaz Online",
-      "a": 0.1456,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "octo",
-      "name": "Octopus Energy",
-      "offer": "Gaz Fixe",
-      "a": 0.1487,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "happe",
-      "name": "Happ-e",
-      "offer": "Gaz Naturel",
-      "a": 0.1504,
-      "d": "9 oct. 2026"
-    },
-    {
-      "k": "ilek",
-      "name": "ilek",
-      "offer": "ÉnRFixe+ Gaz",
-      "a": 0.1652,
-      "d": "9 oct. 2026"
-    }
-  ],
-  "abo_e": {
-    "ekw": 190.32,
-    "total": 190.32,
-    "gdb": 190.44,
-    "geg": 190.8,
-    "plen": 219.15,
-    "ohm": 173.4,
-    "dyneff": 187.8,
-    "mint": 190.32,
-    "primeo": 190.32,
-    "edf": 190.32,
-    "llum": 190.32,
-    "alterna": 211.92,
-    "octo": 190.32,
-    "engie": 186.98,
-    "alpiq": 190.32,
-    "happe": 185.52,
-    "ilek": 301.2,
-    "enercoop": 181.92
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Elec Verte, fixe 3 ans",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/geg/offres"
+   ]
   },
-  "abo_g": {
-    "edf": 341.4,
-    "ohm": 359.52,
-    "gdb": 360.72,
-    "total": 360.72,
-    "engie": 360.79,
-    "mint": 360.84,
-    "octo": 360.84,
-    "plen": 387.43,
-    "happe": 387.84,
-    "alterna": 389.64,
-    "ilek": 438.36,
-    "dyneff": 469.32,
-    "geg": 499.44,
-    "ekw": 517.44
+  {
+   "k": "gdb",
+   "name": "Gaz de Bordeaux",
+   "offer": "NovaFixe Élec",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ]
   },
-  "abo_g0": {
-    "edf": 120,
-    "ohm": 152.04,
-    "gdb": 152.4,
-    "total": 152.4,
-    "engie": 152.46,
-    "mint": 152.52,
-    "octo": 152.4,
-    "plen": 179.1,
-    "happe": 152.4,
-    "alterna": 174,
-    "ilek": 218.04,
-    "dyneff": 163.44,
-    "geg": 125.64,
-    "ekw": 243.84
+  {
+   "k": "plen",
+   "name": "Plenitude",
+   "offer": "PleniWeb Électricité",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/plenitude/offres"
+   ]
   },
-  "gas_b0": {
-    "a": 0.1783,
-    "abo": 152.46
+  {
+   "k": "llum",
+   "name": "LLUM",
+   "offer": "Électricité particuliers",
+   "a": 0.19,
+   "b": 0.19,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/llum/offres"
+   ]
   },
-  "gas_b1": {
-    "a": 0.1456,
-    "abo": 360.79
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Électricité",
+   "a": 0.1907,
+   "b": 0.1907,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ]
   },
-  "trv_abo": {
-    "3": 145.56,
-    "6": 190.32,
-    "9": 238.56
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "offer": "Online & Green",
+   "a": 0.1919,
+   "b": 0.1904,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/offres"
+   ]
   },
-  "primes": {
-    "edf": {
-      "name": "EDF",
-      "en": "Électricité et gaz",
-      "p": "20 €",
-      "f": "40 €",
-      "pn": 20,
-      "fn": 40,
-      "valid": "Jusqu'au 31/12/2026",
-      "st": "ok",
-      "s": [
-        "prix-elec.com",
-        "https://prix-elec.com/fournisseurs/edf/parrainage"
-      ],
-      "d": "relevé le 9 oct. 2026"
-    },
-    "total": {
-      "name": "TotalEnergies",
-      "en": "Électricité et gaz",
-      "p": "20 €",
-      "f": "20 €",
-      "pn": 20,
-      "fn": 20,
-      "valid": "Montant standard, sans date de fin indiquée. Bonus de 10, 20 ou 30 € pour 2, 4 ou 6 filleuls",
-      "st": "ok",
-      "s": [
-        "Site officiel TotalEnergies",
-        "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches"
-      ],
-      "d": "relevé le 11 oct. 2026"
-    },
-    "engie": {
-      "name": "ENGIE",
-      "en": "Électricité et gaz",
-      "p": "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)",
-      "f": "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)",
-      "pn": 25,
-      "fn": 25,
-      "valid": "Jusqu'à 10 parrainages par an. Prime versée environ 2 mois après l'activation du contrat du filleul",
-      "st": "ok",
-      "s": [
-        "Site officiel ENGIE",
-        "https://particuliers.engie.fr/parrainage.html"
-      ],
-      "d": "relevé le 11 oct. 2026"
-    },
-    "gdb": {
-      "name": "Gaz de Bordeaux",
-      "en": "Électricité et gaz",
-      "p": "20 €",
-      "f": "20 €",
-      "pn": 20,
-      "fn": 20,
-      "valid": "En cours en octobre 2026",
-      "st": "ok",
-      "s": [
-        "prix-elec.com",
-        "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"
-      ],
-      "d": "relevé le 9 oct. 2026"
-    },
-    "octo": {
-      "name": "Octopus Energy",
-      "en": "Électricité et gaz",
-      "p": "40 €",
-      "f": "40 €",
-      "pn": 40,
-      "fn": 40,
-      "valid": "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus",
-      "st": "ok",
-      "s": [
-        "Kelwatt",
-        "https://www.kelwatt.fr/fournisseurs/octopus-energy/code-promo"
-      ],
-      "d": "page du 12 mai 2026, relevé le 10 oct. 2026"
-    },
-    "plen": {
-      "name": "Plenitude",
-      "en": "Électricité et gaz",
-      "p": "50 €",
-      "f": "40 €",
-      "pn": 50,
-      "fn": 40,
-      "valid": "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude",
-      "st": "check",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "ekw": {
-      "name": "Ekwateur",
-      "en": "Électricité et gaz verts",
-      "p": "Non indiqué dans le règlement",
-      "f": "150 kWh offerts",
-      "pn": 0,
-      "fn": 25,
-      "valid": "Le règlement officiel donne 150 kWh au filleul après deux mois et renvoie à une page pour la prime du parrain. Le tri utilise 25 € pour 150 kWh (estimation)",
-      "st": "check",
-      "s": [
-        "Règlement officiel Ekwateur",
-        "https://ekwateur.fr/documents/reglement-parrainage.pdf"
-      ],
-      "d": "règlement de janv. 2026, lu le 10 oct. 2026"
-    },
-    "mint": {
-      "name": "Mint Énergie",
-      "en": "Électricité verte",
-      "p": "30 € par parrainage validé",
-      "f": "10 € sur la 1re facture",
-      "pn": 30,
-      "fn": 10,
-      "valid": "Versé 6 mois après l'activation du contrat (FAQ officielle). Les montants viennent de Selectra, pas du site de Mint",
-      "st": "check",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "alpiq": {
-      "name": "Alpiq",
-      "en": "Électricité",
-      "p": "15 €",
-      "f": "15 €",
-      "pn": 15,
-      "fn": 15,
-      "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo)",
-      "st": "ok",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "primeo": {
-      "name": "Primeo Energie",
-      "en": "Électricité",
-      "p": "15 €",
-      "f": "15 €",
-      "pn": 15,
-      "fn": 15,
-      "valid": "Règlement officiel 2026 : versé avec la 6e facture, sans date de fin fixée",
-      "st": "ok",
-      "s": [
-        "Règlement officiel Primeo",
-        "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf"
-      ],
-      "d": "règlement 2026, lu le 10 oct. 2026"
-    },
-    "happe": {
-      "name": "Happ-e",
-      "en": "Électricité et gaz",
-      "p": "20 à 40 € en carte Amazon",
-      "f": "20 à 40 € en carte Amazon",
-      "pn": 40,
-      "fn": 40,
-      "valid": "Le montant varie. Une seule source (Selectra)",
-      "st": "check",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "llum": {
-      "name": "LLUM",
-      "en": "Électricité",
-      "p": "20 €",
-      "f": "20 €",
-      "pn": 20,
-      "fn": 20,
-      "valid": "Remise sur la facture d'électricité. Une seule source (Selectra)",
-      "st": "check",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "ilek": {
-      "name": "ilek",
-      "en": "Électricité et gaz verts",
-      "p": "Prime surprise (jusqu'à 60 €)",
-      "f": "Prime surprise (jusqu'à 60 €)",
-      "pn": 0,
-      "fn": 0,
-      "valid": "Montant non communiqué, déduit de la facture de régularisation dans la limite de 60 €",
-      "st": "check",
-      "s": [
-        "Selectra",
-        "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
-      ],
-      "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
-    },
-    "geg": {
-      "name": "GEG",
-      "en": "Électricité et gaz",
-      "p": null,
-      "f": null,
-      "pn": -1,
-      "fn": -1,
-      "valid": "Aucun programme relevé",
-      "st": "none",
-      "s": null,
-      "d": ""
-    },
-    "ohm": {
-      "name": "OHM Énergie",
-      "en": "Électricité et gaz",
-      "p": null,
-      "f": null,
-      "pn": -1,
-      "fn": -1,
-      "valid": "Aucun programme relevé",
-      "st": "none",
-      "s": null,
-      "d": ""
-    },
-    "dyneff": {
-      "name": "Dyneff",
-      "en": "Électricité et gaz",
-      "p": null,
-      "f": null,
-      "pn": -1,
-      "fn": -1,
-      "valid": "Aucun programme relevé",
-      "st": "none",
-      "s": null,
-      "d": ""
-    },
-    "alterna": {
-      "name": "Alterna",
-      "en": "Électricité et gaz",
-      "p": null,
-      "f": null,
-      "pn": -1,
-      "fn": -1,
-      "valid": "Aucun programme relevé",
-      "st": "none",
-      "s": null,
-      "d": ""
-    },
-    "enercoop": {
-      "name": "Enercoop",
-      "en": "Électricité",
-      "p": null,
-      "f": null,
-      "pn": -1,
-      "fn": -1,
-      "valid": "Aucun programme relevé",
-      "st": "none",
-      "s": null,
-      "d": ""
-    }
+  {
+   "k": "primeo",
+   "name": "Primeo Energie",
+   "offer": "Essentielle Verte",
+   "a": 0.1919,
+   "b": 0.1904,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/primeo/offres"
+   ]
   },
-  "abo_d": {
-    "ekw": "9 oct. 2026",
-    "total": "9 oct. 2026",
-    "gdb": "9 oct. 2026",
-    "geg": "9 oct. 2026",
-    "plen": "9 oct. 2026",
-    "ohm": "9 oct. 2026",
-    "dyneff": "9 oct. 2026",
-    "mint": "9 oct. 2026",
-    "primeo": "9 oct. 2026",
-    "edf": "9 oct. 2026",
-    "llum": "9 oct. 2026",
-    "alterna": "9 oct. 2026",
-    "octo": "10 oct. 2026",
-    "engie": "10 oct. 2026",
-    "alpiq": "10 oct. 2026",
-    "happe": "10 oct. 2026",
-    "ilek": "10 oct. 2026",
-    "enercoop": "10 oct. 2026"
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon électricité française fixe 1 an",
+   "a": 0.1919,
+   "b": 0.1904,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/alterna/offres"
+   ]
   },
-  "duo": [
-    {
-      "k": "plen",
-      "name": "Plenitude",
-      "offer": "Plenifix Élec + Gaz 1 an",
-      "ea": 0.1901,
-      "eb": 0.1886,
-      "eabo": 219.12,
-      "ga": 0.1456,
-      "gabo": 387.48,
-      "promo": 70,
-      "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "alterna",
-      "name": "Alterna",
-      "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)",
-      "ea": 0.1919,
-      "eb": 0.1904,
-      "eabo": 211.92,
-      "ga": 0.129,
-      "gabo": 389.64,
-      "promo": 0,
-      "note": "électricité à prix fixe, gaz indexé",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "edf",
-      "name": "EDF",
-      "offer": "Zen Fixe + Avantage Gaz 2 ans",
-      "ea": 0.208,
-      "eb": 0.2065,
-      "eabo": 190.32,
-      "ga": 0.1372,
-      "gabo": 341.4,
-      "promo": 0,
-      "note": "prix fixes 2 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "mint",
-      "name": "Mint Énergie",
-      "offer": "Classic & Green + Biogaz Classic",
-      "ea": 0.1939,
-      "eb": 0.1924,
-      "eabo": 188.4,
-      "ga": 0.1518,
-      "gabo": 360.84,
-      "promo": 48,
-      "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "edf",
-      "name": "EDF",
-      "offer": "Tarif Bleu réglementé + Avantage Gaz Optimisé",
-      "ea": 0.2,
-      "eb": 0.1985,
-      "eabo": 190.32,
-      "ga": 0.1471,
-      "gabo": 366.24,
-      "promo": 0,
-      "note": "électricité au tarif réglementé, gaz indexé",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "octo",
-      "name": "Octopus Energy",
-      "offer": "OctoEco Fixe + Eco-conso gaz",
-      "ea": 0.2032,
-      "eb": 0.2017,
-      "eabo": 190.32,
-      "ga": 0.1487,
-      "gabo": 360.84,
-      "promo": 0,
-      "note": "prix fixes 2 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "mint",
-      "name": "Mint Énergie",
-      "offer": "Smart & Green + Biogaz Classic",
-      "ea": 0.2017,
-      "eb": 0.2002,
-      "eabo": 227.28,
-      "ga": 0.1518,
-      "gabo": 360.84,
-      "promo": 0,
-      "note": "prix fixes 2 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "total",
-      "name": "TotalEnergies",
-      "offer": "Fixe 2 ans Électricité + Gaz",
-      "ea": 0.2267,
-      "eb": 0.2252,
-      "eabo": 190.32,
-      "ga": 0.1394,
-      "gabo": 360.72,
-      "promo": 0,
-      "note": "prix fixes 2 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "engie",
-      "name": "ENGIE",
-      "offer": "Duo référence 3 ans",
-      "ea": 0.2332,
-      "eb": 0.2317,
-      "eabo": 207.6,
-      "ga": 0.1383,
-      "gabo": 360.84,
-      "promo": 0,
-      "note": "prix fixes 3 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "alterna",
-      "name": "Alterna",
-      "offer": "Mon électricité du coin + Mon biogaz français",
-      "ea": 0.1968,
-      "eb": 0.1953,
-      "eabo": 211.92,
-      "ga": 0.1706,
-      "gabo": 389.64,
-      "promo": 0,
-      "note": "prix fixes 1 an",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "geg",
-      "name": "GEG",
-      "offer": "Électricité et gaz 100 % Verts",
-      "ea": 0.1838,
-      "eb": 0.1823,
-      "eabo": 190.8,
-      "ga": 0.1642,
-      "gabo": 499.44,
-      "promo": 0,
-      "note": "prix fixes 3 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "ekw",
-      "name": "Ekwateur",
-      "offer": "Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe",
-      "ea": 0.2407,
-      "eb": 0.2392,
-      "eabo": 190.32,
-      "ga": 0.1246,
-      "gabo": 517.44,
-      "promo": 0,
-      "note": "prix fixes 1 an",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "ekw",
-      "name": "Ekwateur",
-      "offer": "Électricité 100 % verte + Gaz 100 % renouvelable, prix fixe",
-      "ea": 0.2264,
-      "eb": 0.2249,
-      "eabo": 190.32,
-      "ga": 0.1446,
-      "gabo": 517.44,
-      "promo": 0,
-      "note": "prix fixes 1 an",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check"
-    },
-    {
-      "k": "ilek",
-      "name": "ilek",
-      "offer": "ÉnRFixe+ Élec + Gaz",
-      "ea": 0.24,
-      "eb": 0.2385,
-      "eabo": 301.2,
-      "ga": 0.1633,
-      "gabo": 438.36,
-      "promo": 0,
-      "note": "prix fixes 2 ans",
-      "d": "13 oct. 2026",
-      "s": [
-        "hellowatt.fr",
-        "https://www.hellowatt.fr/"
-      ],
-      "st": "check",
-      "eabo9": 408.0
-    }
-  ]
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Zen Online",
+   "a": 0.1925,
+   "b": 0.1909,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "Intelligent Octopus",
+   "a": 0.1968,
+   "b": 0.1953,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ]
+  },
+  {
+   "k": "alpiq",
+   "name": "Alpiq",
+   "offer": "Sérénité",
+   "a": 0.1993,
+   "b": 0.1977,
+   "d": "9 oct. 2026"
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "OHM Sérénité Fixe 1 an",
+   "a": 0.2148,
+   "b": 0.2148,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ohm-energie/offres"
+   ]
+  },
+  {
+   "k": "happe",
+   "name": "Happ-e",
+   "offer": "Électricité 1 an",
+   "a": 0.2273,
+   "b": 0.2273,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/happ-e/offres"
+   ]
+  },
+  {
+   "k": "engie",
+   "name": "ENGIE",
+   "offer": "Elec Référence 3 ans",
+   "a": 0.233,
+   "b": 0.2347,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/engie/offres"
+   ]
+  },
+  {
+   "k": "ilek",
+   "name": "ilek",
+   "offer": "ÉnRFixe+ Elec",
+   "a": 0.24,
+   "b": 0.2385,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ilek/offres"
+   ]
+  },
+  {
+   "k": "enercoop",
+   "name": "Enercoop",
+   "offer": "Offre Base",
+   "a": 0.2541,
+   "b": 0.2571,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/enercoop/offres"
+   ]
+  }
+ ],
+ "gas_ref": {
+  "k": null,
+  "name": "CRE",
+  "offer": "Prix repère de vente de gaz (n'est pas une offre)",
+  "a": 0.1456,
+  "ref": true
+ },
+ "gas": [
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Gaz Naturel 15 % Biogaz Fixe",
+   "a": 0.1246,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ]
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Avantage Gaz 2 ans",
+   "a": 0.1336,
+   "d": "13 oct. 2026",
+   "b0": 0.1788,
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
+  },
+  {
+   "k": "gdb",
+   "name": "Gaz de Bordeaux",
+   "offer": "NovaFixe BioGaz",
+   "a": 0.1346,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ]
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Gaz, fixe 3 ans",
+   "a": 0.1354,
+   "d": "9 oct. 2026"
+  },
+  {
+   "k": "total",
+   "name": "TotalEnergies",
+   "offer": "Fixe 2 ans Gaz",
+   "a": 0.1412,
+   "d": "9 oct. 2026"
+  },
+  {
+   "k": "engie",
+   "name": "ENGIE",
+   "offer": "Gaz Référence 3 ans",
+   "a": 0.1414,
+   "d": "9 oct. 2026"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon gaz naturel indexé",
+   "a": 0.1393,
+   "d": "9 oct. 2026"
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Extra Eco Gaz",
+   "a": 0.1429,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ohm-energie/offres"
+   ]
+  },
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Gaz 15 % Vert",
+   "a": 0.1432,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ]
+  },
+  {
+   "k": "plen",
+   "name": "Plenitude",
+   "offer": "Plenifix 1 an Gaz",
+   "a": 0.1456,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/plenitude/offres"
+   ]
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "offer": "Biogaz Online",
+   "a": 0.1456,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/offres"
+   ]
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "Gaz Fixe",
+   "a": 0.1487,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ]
+  },
+  {
+   "k": "happe",
+   "name": "Happ-e",
+   "offer": "Gaz Naturel",
+   "a": 0.1504,
+   "d": "13 oct. 2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/happ-e/offres"
+   ]
+  },
+  {
+   "k": "ilek",
+   "name": "ilek",
+   "offer": "ÉnRFixe+ Gaz",
+   "a": 0.1652,
+   "d": "9 oct. 2026"
+  }
+ ],
+ "abo_e": {
+  "ekw": 190.32,
+  "total": 190.32,
+  "gdb": 190.44,
+  "geg": 190.8,
+  "plen": 219.15,
+  "ohm": 173.4,
+  "dyneff": 187.8,
+  "mint": 190.32,
+  "primeo": 190.32,
+  "edf": 190.32,
+  "llum": 190.32,
+  "alterna": 211.92,
+  "octo": 190.32,
+  "engie": 186.98,
+  "alpiq": 190.32,
+  "happe": 185.52,
+  "ilek": 301.2,
+  "enercoop": 181.92
+ },
+ "abo_g": {
+  "edf": 341.4,
+  "ohm": 359.52,
+  "gdb": 360.72,
+  "total": 360.72,
+  "engie": 360.79,
+  "mint": 360.84,
+  "octo": 360.84,
+  "plen": 387.43,
+  "happe": 387.84,
+  "alterna": 389.64,
+  "ilek": 438.36,
+  "dyneff": 469.32,
+  "geg": 499.44,
+  "ekw": 517.44
+ },
+ "abo_g0": {
+  "edf": 120,
+  "ohm": 152.04,
+  "gdb": 152.4,
+  "total": 152.4,
+  "engie": 152.46,
+  "mint": 152.52,
+  "octo": 152.4,
+  "plen": 179.1,
+  "happe": 152.4,
+  "alterna": 174,
+  "ilek": 218.04,
+  "dyneff": 163.44,
+  "geg": 125.64,
+  "ekw": 243.84
+ },
+ "gas_b0": {
+  "a": 0.1783,
+  "abo": 152.46
+ },
+ "gas_b1": {
+  "a": 0.1456,
+  "abo": 360.79
+ },
+ "trv_abo": {
+  "3": 145.56,
+  "6": 190.32,
+  "9": 238.56
+ },
+ "primes": {
+  "edf": {
+   "name": "EDF",
+   "en": "Électricité et gaz",
+   "p": "20 €",
+   "f": "40 €",
+   "pn": 20,
+   "fn": 40,
+   "valid": "Jusqu'au 31/12/2026",
+   "st": "ok",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/parrainage"
+   ],
+   "d": "relevé le 9 oct. 2026"
+  },
+  "total": {
+   "name": "TotalEnergies",
+   "en": "Électricité et gaz",
+   "p": "20 €",
+   "f": "20 €",
+   "pn": 20,
+   "fn": 20,
+   "valid": "Montant standard, sans date de fin indiquée. Bonus de 10, 20 ou 30 € pour 2, 4 ou 6 filleuls",
+   "st": "ok",
+   "s": [
+    "totalenergies.fr",
+    "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches"
+   ],
+   "d": "relevé le 11 oct. 2026"
+  },
+  "engie": {
+   "name": "ENGIE",
+   "en": "Électricité et gaz",
+   "p": "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)",
+   "f": "20 € (+5 € avec option Elec Vert+ ou Gaz Vert+)",
+   "pn": 25,
+   "fn": 25,
+   "valid": "Jusqu'à 10 parrainages par an. Prime versée environ 2 mois après l'activation du contrat du filleul",
+   "st": "ok",
+   "s": [
+    "Site officiel ENGIE",
+    "https://particuliers.engie.fr/parrainage.html"
+   ],
+   "d": "relevé le 11 oct. 2026"
+  },
+  "gdb": {
+   "name": "Gaz de Bordeaux",
+   "en": "Électricité et gaz",
+   "p": "20 €",
+   "f": "20 €",
+   "pn": 20,
+   "fn": 20,
+   "valid": "En cours en octobre 2026",
+   "st": "ok",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"
+   ],
+   "d": "relevé le 9 oct. 2026"
+  },
+  "octo": {
+   "name": "Octopus Energy",
+   "en": "Électricité et gaz",
+   "p": "40 €",
+   "f": "40 €",
+   "pn": 40,
+   "fn": 40,
+   "valid": "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus",
+   "st": "ok",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/parrainage"
+   ],
+   "d": "page du 12 mai 2026, relevé le 10 oct. 2026"
+  },
+  "plen": {
+   "name": "Plenitude",
+   "en": "Électricité et gaz",
+   "p": "50 €",
+   "f": "40 €",
+   "pn": 50,
+   "fn": 40,
+   "valid": "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude",
+   "st": "check",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/plenitude/parrainage"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "ekw": {
+   "name": "Ekwateur",
+   "en": "Électricité et gaz verts",
+   "p": "Non indiqué dans le règlement",
+   "f": "150 kWh offerts",
+   "pn": 0,
+   "fn": 25,
+   "valid": "Le règlement officiel donne 150 kWh au filleul après deux mois et renvoie à une page pour la prime du parrain. Le tri utilise 25 € pour 150 kWh (estimation)",
+   "st": "check",
+   "s": [
+    "Règlement officiel Ekwateur",
+    "https://ekwateur.fr/documents/reglement-parrainage.pdf"
+   ],
+   "d": "règlement de janv. 2026, lu le 10 oct. 2026"
+  },
+  "mint": {
+   "name": "Mint Énergie",
+   "en": "Électricité verte",
+   "p": "30 € par parrainage validé",
+   "f": "10 € sur la 1re facture",
+   "pn": 30,
+   "fn": 10,
+   "valid": "Versé 6 mois après l'activation du contrat (FAQ officielle). Les montants viennent de Selectra, pas du site de Mint",
+   "st": "check",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/parrainage"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "alpiq": {
+   "name": "Alpiq",
+   "en": "Électricité",
+   "p": "15 €",
+   "f": "15 €",
+   "pn": 15,
+   "fn": 15,
+   "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo)",
+   "st": "ok",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/alpiq/parrainage"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "primeo": {
+   "name": "Primeo Energie",
+   "en": "Électricité",
+   "p": "15 €",
+   "f": "15 €",
+   "pn": 15,
+   "fn": 15,
+   "valid": "Règlement officiel 2026 : versé avec la 6e facture, sans date de fin fixée",
+   "st": "ok",
+   "s": [
+    "particuliers.primeo-energie.fr",
+    "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf"
+   ],
+   "d": "règlement 2026, lu le 10 oct. 2026"
+  },
+  "happe": {
+   "name": "Happ-e",
+   "en": "Électricité et gaz",
+   "p": "20 à 40 € en carte Amazon",
+   "f": "20 à 40 € en carte Amazon",
+   "pn": 40,
+   "fn": 40,
+   "valid": "Le montant varie. Une seule source (Selectra)",
+   "st": "check",
+   "s": [
+    "Selectra",
+    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "llum": {
+   "name": "LLUM",
+   "en": "Électricité",
+   "p": "20 €",
+   "f": "20 €",
+   "pn": 20,
+   "fn": 20,
+   "valid": "Remise sur la facture d'électricité. Une seule source (Selectra)",
+   "st": "check",
+   "s": [
+    "Selectra",
+    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "ilek": {
+   "name": "ilek",
+   "en": "Électricité et gaz verts",
+   "p": "Prime surprise (jusqu'à 60 €)",
+   "f": "Prime surprise (jusqu'à 60 €)",
+   "pn": 0,
+   "fn": 0,
+   "valid": "Montant non communiqué, déduit de la facture de régularisation dans la limite de 60 €",
+   "st": "check",
+   "s": [
+    "Selectra",
+    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+   ],
+   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+  },
+  "geg": {
+   "name": "GEG",
+   "en": "Électricité et gaz",
+   "p": null,
+   "f": null,
+   "pn": -1,
+   "fn": -1,
+   "valid": "Aucun programme relevé",
+   "st": "none",
+   "s": null,
+   "d": ""
+  },
+  "ohm": {
+   "name": "OHM Énergie",
+   "en": "Électricité et gaz",
+   "p": null,
+   "f": null,
+   "pn": -1,
+   "fn": -1,
+   "valid": "Aucun programme relevé",
+   "st": "none",
+   "s": null,
+   "d": ""
+  },
+  "dyneff": {
+   "name": "Dyneff",
+   "en": "Électricité et gaz",
+   "p": null,
+   "f": null,
+   "pn": -1,
+   "fn": -1,
+   "valid": "Aucun programme relevé",
+   "st": "none",
+   "s": null,
+   "d": ""
+  },
+  "alterna": {
+   "name": "Alterna",
+   "en": "Électricité et gaz",
+   "p": null,
+   "f": null,
+   "pn": -1,
+   "fn": -1,
+   "valid": "Aucun programme relevé",
+   "st": "none",
+   "s": null,
+   "d": ""
+  },
+  "enercoop": {
+   "name": "Enercoop",
+   "en": "Électricité",
+   "p": null,
+   "f": null,
+   "pn": -1,
+   "fn": -1,
+   "valid": "Aucun programme relevé",
+   "st": "none",
+   "s": null,
+   "d": ""
+  }
+ },
+ "abo_d": {
+  "ekw": "13 oct. 2026",
+  "total": "13 oct. 2026",
+  "gdb": "13 oct. 2026",
+  "geg": "13 oct. 2026",
+  "plen": "13 oct. 2026",
+  "ohm": "13 oct. 2026",
+  "dyneff": "13 oct. 2026",
+  "mint": "13 oct. 2026",
+  "primeo": "13 oct. 2026",
+  "edf": "13 oct. 2026",
+  "llum": "13 oct. 2026",
+  "alterna": "13 oct. 2026",
+  "octo": "13 oct. 2026",
+  "engie": "13 oct. 2026",
+  "alpiq": "10 oct. 2026",
+  "happe": "13 oct. 2026",
+  "ilek": "13 oct. 2026",
+  "enercoop": "13 oct. 2026"
+ },
+ "duo": [
+  {
+   "k": "plen",
+   "name": "Plenitude",
+   "offer": "Plenifix Élec + Gaz 1 an",
+   "ea": 0.1901,
+   "eb": 0.1886,
+   "eabo": 219.12,
+   "ga": 0.1456,
+   "gabo": 387.48,
+   "promo": 70,
+   "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)",
+   "ea": 0.1919,
+   "eb": 0.1904,
+   "eabo": 211.92,
+   "ga": 0.129,
+   "gabo": 389.64,
+   "promo": 0,
+   "note": "électricité à prix fixe, gaz indexé",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Zen Fixe + Avantage Gaz 2 ans",
+   "ea": 0.208,
+   "eb": 0.2065,
+   "eabo": 190.32,
+   "ga": 0.1372,
+   "gabo": 341.4,
+   "promo": 0,
+   "note": "prix fixes 2 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "offer": "Classic & Green + Biogaz Classic",
+   "ea": 0.1939,
+   "eb": 0.1924,
+   "eabo": 188.4,
+   "ga": 0.1518,
+   "gabo": 360.84,
+   "promo": 48,
+   "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Tarif Bleu réglementé + Avantage Gaz Optimisé",
+   "ea": 0.2,
+   "eb": 0.1985,
+   "eabo": 190.32,
+   "ga": 0.1471,
+   "gabo": 366.24,
+   "promo": 0,
+   "note": "électricité au tarif réglementé, gaz indexé",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "OctoEco Fixe + Eco-conso gaz",
+   "ea": 0.2032,
+   "eb": 0.2017,
+   "eabo": 190.32,
+   "ga": 0.1487,
+   "gabo": 360.84,
+   "promo": 0,
+   "note": "prix fixes 2 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "offer": "Smart & Green + Biogaz Classic",
+   "ea": 0.2017,
+   "eb": 0.2002,
+   "eabo": 227.28,
+   "ga": 0.1518,
+   "gabo": 360.84,
+   "promo": 0,
+   "note": "prix fixes 2 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "total",
+   "name": "TotalEnergies",
+   "offer": "Fixe 2 ans Électricité + Gaz",
+   "ea": 0.2267,
+   "eb": 0.2252,
+   "eabo": 190.32,
+   "ga": 0.1394,
+   "gabo": 360.72,
+   "promo": 0,
+   "note": "prix fixes 2 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "engie",
+   "name": "ENGIE",
+   "offer": "Duo référence 3 ans",
+   "ea": 0.2332,
+   "eb": 0.2317,
+   "eabo": 207.6,
+   "ga": 0.1383,
+   "gabo": 360.84,
+   "promo": 0,
+   "note": "prix fixes 3 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon électricité du coin + Mon biogaz français",
+   "ea": 0.1968,
+   "eb": 0.1953,
+   "eabo": 211.92,
+   "ga": 0.1706,
+   "gabo": 389.64,
+   "promo": 0,
+   "note": "prix fixes 1 an",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Électricité et gaz 100 % Verts",
+   "ea": 0.1838,
+   "eb": 0.1823,
+   "eabo": 190.8,
+   "ga": 0.1642,
+   "gabo": 499.44,
+   "promo": 0,
+   "note": "prix fixes 3 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe",
+   "ea": 0.2407,
+   "eb": 0.2392,
+   "eabo": 190.32,
+   "ga": 0.1246,
+   "gabo": 517.44,
+   "promo": 0,
+   "note": "prix fixes 1 an",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Électricité 100 % verte + Gaz 100 % renouvelable, prix fixe",
+   "ea": 0.2264,
+   "eb": 0.2249,
+   "eabo": 190.32,
+   "ga": 0.1446,
+   "gabo": 517.44,
+   "promo": 0,
+   "note": "prix fixes 1 an",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check"
+  },
+  {
+   "k": "ilek",
+   "name": "ilek",
+   "offer": "ÉnRFixe+ Élec + Gaz",
+   "ea": 0.24,
+   "eb": 0.2385,
+   "eabo": 301.2,
+   "ga": 0.1633,
+   "gabo": 438.36,
+   "promo": 0,
+   "note": "prix fixes 2 ans",
+   "d": "13 oct. 2026",
+   "s": [
+    "hellowatt.fr",
+    "https://www.hellowatt.fr/"
+   ],
+   "st": "check",
+   "eabo9": 408.0
+  }
+ ],
+ "updated_time": "13:18"
 }
