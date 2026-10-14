@@ -286,6 +286,8 @@ def update_offers(data, src, state, rep, kinds, cache):
                 if conf is True:
                     if kind == "elec" and "b" in r: r["b"] = round(r["b"] + (kwh - r["a"]), 4)
                     changed.append(f"kWh {r['a']} → {kwh} (confirmé par un second site)"); r["a"] = kwh
+                    if r.get("niv") == "officiel" or "zones" in r or "b0" in r:
+                        r["niv"] = "confirmer"; r.pop("nivd", None); rep.review.append(f"{label} : prix modifié, le niveau « grille officielle », le B0 et les zones sont à revoir sur la grille du fournisseur")
                 elif conf is False: rep.review.append(f"{label} : kWh {r['a']} → {kwh} contredit par un second site, non appliqué")
                 else: rep.review.append(f"{label} : kWh {r['a']} → {kwh} vu sur un seul site, à confirmer sur un second (non appliqué)"); kwh = None
             elif os.environ.get("CROSSCHECK"):
@@ -413,7 +415,7 @@ def maintenant():
 
 MOIS = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
 
-def update_trend(data, src, state, rep, cache, avant, now):
+def update_trend(data, src, state, rep, cache, avant, now, officiel=None):
     """Compare la variation du prix repère annoncée par le médiateur (energie-info.fr) avec celle de notre prix B1.
     Information seulement : ne modifie aucun prix."""
     tpl = src.get("references", {}).get("gas_trend_template")
@@ -429,6 +431,10 @@ def update_trend(data, src, state, rep, cache, avant, now):
     q = norm(got["variation"]["quote"]); sens = 1 if "hausse" in q or "augment" in q else (-1 if "baisse" in q or "diminu" in q else 0)
     if not sens: rep.review.append(f"{label} : sens (hausse ou baisse) non confirmé dans la phrase citée"); return
     commit(); annonce = sens * v
+    if officiel is not None:
+        ok = abs(annonce - officiel) <= 0.3
+        (rep.same if ok else rep.review).append(f"{label} : annoncé {annonce:+.1f} % TTC, la CRE donne {officiel:+.1f} % entre les deux derniers mois" + (" : cohérent" if ok else " : écart à vérifier"))
+        return
     olds = avant if isinstance(avant, tuple) else (avant, None)
     news = (data["gas_b1"]["a"], data["gas_b0"]["a"])
     vars_ = [(n - o) / o * 100 for o, n in zip(olds, news) if o and abs(n - o) > 1e-9]
@@ -441,8 +447,8 @@ def update_trend(data, src, state, rep, cache, avant, now):
 
 def update_official(data, src, rep, now, get=None):
     """Sources officielles de la CRE : elles font foi et l'emportent sur les sites lus par l'IA."""
-    od = src.get("open_data")
-    if not od: return
+    od = src.get("open_data"); info = {}
+    if not od: return info
     import cre_open
     get = get or cre_open._get; today = now.date()
     def poser(label, old, new, setter, lo, hi, where, maxrel=0.25):
@@ -462,7 +468,10 @@ def update_official(data, src, rep, now, get=None):
         rep.failed.append(f"CRE · tarif réglementé (data.gouv.fr) : {e}")
     try:
         page = get(od["gas_page"]).decode("utf-8", "replace")
-        grilles = cre_open.gaz_grilles(get(cre_open.trouver_xlsx(page)))
+        raw = get(cre_open.trouver_xlsx(page))
+        grilles = cre_open.gaz_grilles(raw)
+        try: info["var_pct"] = cre_open.variation_mensuelle(cre_open.prvg_moyen(raw), today)
+        except Exception: pass
         d, g = cre_open.gaz_en_vigueur(grilles, today)
         lab = f"CRE · prix repère gaz du {d.strftime('%d/%m/%Y')}"
         b1, b0 = data["gas_b1"], data["gas_b0"]
@@ -473,6 +482,31 @@ def update_official(data, src, rep, now, get=None):
         poser(lab + " B0 (abonnement TTC/an)", b0["abo"], g["b0_abo"], lambda x: b0.__setitem__("abo", x), *BOUNDS["gas_abo"], "Excel cre.fr")
     except Exception as e:
         rep.failed.append(f"CRE · prix repère gaz (cre.fr) : {e}")
+    return info
+
+def update_mint_zones(data, src, rep, now, get=None, post=None):
+    """Prix par zone des offres indexées au prix repère (Mint Biogaz Online), lus sur la page de prix repère de Mint."""
+    page = src.get("mint_prg")
+    cibles = [r for r in data["gas"] if r.get("prg")]
+    if not page or not cibles: return
+    import mint_prg
+    try:
+        if get is None: get, post = mint_prg.reseau(allowed)
+        z = mint_prg.zones(get, post, page, now.month, now.year)
+        ref = data["gas_b1"]["a"]
+        if abs(z["b1"][0] - ref) > 0.0006:
+            rep.review.append(f"Mint · prix repère zone 1 : {z['b1'][0]} (page Mint) contre {ref} (CRE) : écart trop grand, non appliqué"); return
+        if not all(0.08 <= x <= 0.30 for x in z["b1"] + z["b0"]): raise ValueError("prix hors limites")
+        d1 = f"01/{now.month:02d}/{now.year}"
+        for r in cibles:
+            neuf = {"b1": [round(x, 4) for x in z["b1"]], "b0": [round(z["b0"][0], 4)] * 6}
+            if r.get("zones") != neuf or r.get("a") != neuf["b1"][0]:
+                r["zones"] = neuf; r["a"] = neuf["b1"][0]; r["b0"] = neuf["b0"][0]
+                rep.applied.append(f"Mint · {r['offer']} : prix par zone du prix repère de {MONTHS[now.month-1]} {now.year} (page Mint)")
+            else: rep.same.append(f"Mint · {r['offer']} : prix par zone confirmés (page Mint)")
+            r["niv"], r["nivd"] = "officiel", d1
+    except Exception as e:
+        rep.failed.append(f"Mint · prix repère par zone : {e}")
 
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs")
@@ -483,7 +517,7 @@ def main(argv=None):
     if kinds & {"elec", "gaz"}: update_offers(data, src, state, rep, kinds, cache)
     if "primes" in kinds: update_primes(data, src, state, rep, cache)
     avant_b1 = (data["gas_b1"]["a"], data["gas_b0"]["a"])
-    if "refs" in kinds: update_refs(data, src, state, rep, cache); update_official(data, src, rep, now); update_trend(data, src, state, rep, cache, avant_b1, now)
+    if "refs" in kinds: update_refs(data, src, state, rep, cache); off = update_official(data, src, rep, now); update_mint_zones(data, src, rep, now); update_trend(data, src, state, rep, cache, avant_b1, now, off.get("var_pct"))
     md = rep.md(data["updated_label"]); print(md)
     if not a.dry_run:
         # la date globale ne change que si au moins une valeur a été vérifiée avec succès
