@@ -23,7 +23,7 @@ for r in d["gas"]:
     if "b0" in r: need(r["a"] < r["b0"] <= 0.35, f"kWh gaz B0 incohérent (doit dépasser le B1) : {r['name']}")
 for k, u in d.get("liens", {}).items():
     need(isinstance(u, str) and u.startswith("https://") and " " not in u, f"lien fournisseur invalide : {k}")
-for r in d["elec"] + d["gas"]:
+for r in d["elec"] + d["gas"] + [d["elec_ref"], d["gas_ref"]]:
     need("url" not in r or (isinstance(r["url"], str) and r["url"].startswith("https://") and " " not in r["url"]), f"lien d'offre invalide : {r['name']} {r['offer']}")
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 for r in d["gas"]:
