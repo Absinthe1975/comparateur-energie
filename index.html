@@ -882,7 +882,7 @@ function eloAbo(r, kva) {
 // Lien vers le fournisseur : adresse propre à l'offre (champ « url » de l'offre) sinon page du fournisseur (rubrique « liens » de data.json).
 var LIENS = {};
 function nomLien(r) {
-  var u = !r.ref && (typeof r.url === "string" ? r.url : LIENS[r.k]);
+  var u = typeof r.url === "string" ? r.url : (!r.ref && LIENS[r.k]);
   if (typeof u !== "string" || !/^https:\/\//.test(u)) return esc(r.name);
   return '<a class="prov-lien" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer" title="Voir l\'offre sur le site de ' + esc(r.name) + ' (nouvel onglet)">' + esc(r.name) + "</a>";
 }

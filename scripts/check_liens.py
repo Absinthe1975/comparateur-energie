@@ -9,8 +9,8 @@ UA = "ComparateurEnergieBot/1.0 (+" + os.environ.get("CONTACT", "verification de
 def liens(d):
     out = {}
     for k, u in d.get("liens", {}).items(): out[u] = f"fournisseur {k}"
-    for r in d["elec"] + d["gas"]:
-        if r.get("url"): out[r["url"]] = f"{r['name']} · {r['offer']}"
+    for r in d["elec"] + d["gas"] + [d.get("elec_ref", {}), d.get("gas_ref", {})]:
+        if r.get("url"): out[r["url"]] = f"{r.get('name', '')} · {r.get('offer', '')}"
     return out
 
 def etat(url, ouvrir=urllib.request.urlopen):

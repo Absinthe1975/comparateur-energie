@@ -8,7 +8,8 @@
   "offer": "Tarif réglementé (Tarif Bleu)",
   "a": 0.2001,
   "b": 0.1985,
-  "ref": true
+  "ref": true,
+  "url": "https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html"
  },
  "elec": [
   {
@@ -363,7 +364,8 @@
   "name": "CRE",
   "offer": "Prix repère de vente de gaz (n'est pas une offre)",
   "a": 0.1456,
-  "ref": true
+  "ref": true,
+  "url": "https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html"
  },
  "gas": [
   {
@@ -1411,6 +1413,11 @@
   "dyneff": "https://www.dyneff.fr/",
   "happe": "https://www.happ-e.fr/",
   "ekw": "https://ekwateur.fr/",
-  "primeo": "https://particuliers.primeo-energie.fr/"
+  "primeo": "https://particuliers.primeo-energie.fr/",
+  "gdb": "https://www.gazdebordeaux.fr/",
+  "llum": "https://www.llum.fr/",
+  "alpiq": "https://particuliers.alpiq.fr/",
+  "enercoop": "https://www.enercoop.fr/",
+  "ilek": "https://www.ilek.fr/"
  }
 }
