@@ -101,7 +101,7 @@ class T(unittest.TestCase):
         rep = up.Report(); up.update_trend(d, src, {}, rep, {}, old, datetime.datetime(2026, 10, 5))
         self.assertTrue(any("écart à vérifier" in x for x in rep.review), rep.review)
     def test_source_en_echec_ne_casse_rien(self):
-        up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 18)
+        up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 28)
 
     # ---- prix de référence : plusieurs sites obligatoires ----
     def _refs(self, pages, b1, b0):

@@ -9,6 +9,8 @@ def xlsx():
     for d, k0, k1 in ((datetime.datetime(2026, 10, 1), 0.17832, 0.14557), (datetime.datetime(2026, 9, 1), 0.16757, 0.13474)):
         ws.append([d, "Cuisson/eau chaude", None, "Chauffage"]); ws.append([None, "HT", "TTC", "HT", "TTC"])
         ws.append(["Abonnement (€/an)", 112.8, 152.4596, 252.04, 360.7916]); ws.append(["Part variable moyenne (€/kWh)", k0 - .05, k0, k1 - .04, k1]); ws.append([])
+    h = wb.create_sheet("Historique PRVG moyen"); h.append(["Date", "HT", "TTC"])
+    for d, v in ((datetime.datetime(2026, 9, 1), 172.05), (datetime.datetime(2026, 10, 1), 182.875), (datetime.datetime(2026, 11, 1), 194.9)): h.append([d, v / 1.4, v])
     g = wb.create_sheet("Grille tarifaire TTC"); g.append(["Grilles tarifaires TTC prix repère au 1er novembre 2026"])
     g.append([None, "Consommateur type", "Part fixe", "Minimale", "Moyenne", "Maximale"])
     g.append(["Cuisson/eau chaude", 152.46, 185.6, 190.27, 200.0]); g.append(["Chauffage", 360.79, 147.98, 157.6, 176.39])
@@ -37,6 +39,10 @@ class T(unittest.TestCase):
             if "tabular-api" in url: raise RuntimeError("503")
             return "DATE_DEBUT;DATE_FIN;P_SOUSCRITE;PART_FIXE_HT;PART_FIXE_TTC;PART_VARIABLE_HT;PART_VARIABLE_TTC\n01/08/2026;;6;143,28;190,81;0,1361;0,2001\n".encode()
         t, how = c.trv("rid", 6, get); self.assertEqual((t["PART_VARIABLE_TTC"], how), (0.2001, "trv_depuis_csv"))
+
+    def test_variation_officielle(self):
+        v = c.variation_mensuelle(c.prvg_moyen(xlsx()), datetime.date(2026, 10, 13)); self.assertAlmostEqual(v, 6.29, 1)
+        v = c.variation_mensuelle(c.prvg_moyen(xlsx()), datetime.date(2026, 11, 2)); self.assertAlmostEqual(v, 6.57, 1)
 
 class Integ(unittest.TestCase):
     def run_official(self, today, trv_kwh=0.2001):
