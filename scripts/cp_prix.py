@@ -3,12 +3,13 @@
 (texte extrait du PDF : une ligne par commune « CP COMMUNE abo_B0 kWh_B0 abo_B1 kWh_B1 », TTC).
 Un fichier par offre, dans prix-cp/ ; l'offre de data.json y renvoie par son champ « cpf »."""
 import json, re, sys, collections
-LIGNE = re.compile(r"^(\d{4,5}) (.+?) (\d+,\d\d) (\d,\d{4}) (\d+,\d\d) (\d,\d{4})$", re.M)
+LIGNE = re.compile(r"^(\d{4,5})\s+(.+?)\s+(\d+,\d\d)\s+(\d,\d{4})\s+(\d+,\d\d)\s+(\d,\d{4})\s*$", re.M)
 f = lambda s: float(s.replace(",", "."))
 
 def lire(txt):
     rows = [(m[1].zfill(5), f(m[3]), f(m[4]), f(m[5]), f(m[6])) for m in LIGNE.findall(txt) for m in [(None,) + m]]
-    if not rows: raise SystemExit("aucune ligne lue")
+    if not rows: raise ValueError("aucune ligne lue")
+    if re.search(r"Tarifs HT", txt) and not re.search(r"Tarifs TTC", txt): raise ValueError("grille en HT seulement : les prix TTC sont nécessaires")
     top = max(r[3] for r in rows)          # fichier HT + TTC : on garde le TTC (abonnement le plus élevé)
     return [r for r in rows if r[3] == top]
 
