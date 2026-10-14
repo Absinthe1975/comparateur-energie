@@ -106,3 +106,21 @@ def trouver_xlsx(page_html, base="https://www.cre.fr"):
     if not m: raise ValueError("lien du fichier Excel introuvable sur la page de la CRE")
     u = m.group(1).replace("&amp;", "&")
     return u if u.startswith("http") else base + (u if u.startswith("/") else "/" + u)
+
+
+def prvg_moyen(path_or_bytes):
+    """Série mensuelle du prix repère moyen TTC (€/MWh), onglet « Historique PRVG moyen » : [(date, valeur)]."""
+    import openpyxl
+    src = io.BytesIO(path_or_bytes) if isinstance(path_or_bytes, (bytes, bytearray)) else path_or_bytes
+    ws = openpyxl.load_workbook(src, read_only=True, data_only=True)["Historique PRVG moyen"]
+    out = []
+    for row in ws.iter_rows(values_only=True):
+        if isinstance(row[0], datetime.datetime) and isinstance(row[2], (int, float)): out.append((row[0].date(), float(row[2])))
+    return sorted(out)
+
+
+def variation_mensuelle(serie, today):
+    """Variation en % entre le mois en vigueur et le précédent, ou None."""
+    ok = [x for x in serie if x[0] <= today]
+    if len(ok) < 2 or not ok[-2][1]: return None
+    return (ok[-1][1] / ok[-2][1] - 1) * 100
