@@ -36,6 +36,9 @@ jobs:
         run: python scripts/update_prices.py
       - name: Contrôle de data.json
         run: python scripts/check_data.py
+      - name: Vérification des liens fournisseur (n'empêche jamais la mise à jour)
+        continue-on-error: true
+        run: python scripts/check_liens.py
       - name: Y a-t-il quelque chose à relire ?
         id: chg
         run: |
