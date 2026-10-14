@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "updated": "2026-10-10",
- "updated_label": "10 oct. 2026",
+ "updated": "2026-10-14",
+ "updated_label": "14 oct. 2026",
  "elec_ref": {
   "k": "edf",
   "name": "EDF",
@@ -17,8 +17,12 @@
    "offer": "Électricité 100 % renouvelable Europe",
    "a": 0.1753,
    "b": 0.1906,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ]
   },
   {
    "k": "total",
@@ -26,9 +30,13 @@
    "offer": "Access Électricité (prix indexé)",
    "a": 0.1837,
    "b": 0.1823,
-   "d": "9 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
-   "nivd": "01/10/2026"
+   "nivd": "01/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/totalenergies/offres"
+   ]
   },
   {
    "k": "geg",
@@ -40,7 +48,11 @@
    "niv": "officiel",
    "ab6": 190.32,
    "ab9": 238.56,
-   "nivd": "05/10/2026"
+   "nivd": "05/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/geg/offres"
+   ]
   },
   {
    "k": "geg",
@@ -60,8 +72,12 @@
    "offer": "NovaFixe Élec",
    "a": 0.1837,
    "b": 0.1823,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ]
   },
   {
    "k": "plen",
@@ -79,8 +95,12 @@
    "offer": "Électricité particuliers",
    "a": 0.19,
    "b": 0.19,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/llum/offres"
+   ]
   },
   {
    "k": "dyneff",
@@ -88,8 +108,12 @@
    "offer": "Contrat+ Électricité",
    "a": 0.1907,
    "b": 0.1907,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ]
   },
   {
    "k": "mint",
@@ -133,8 +157,12 @@
    "offer": "Essentielle Verte",
    "a": 0.1919,
    "b": 0.1904,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/primeo/offres"
+   ]
   },
   {
    "k": "alterna",
@@ -146,7 +174,11 @@
    "nivd": "01/09/2026",
    "offer": "Mon électricité française fixe 1 an",
    "a": 0.1919,
-   "b": 0.1904
+   "b": 0.1904,
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/alterna/offres"
+   ]
   },
   {
    "k": "alterna",
@@ -178,9 +210,13 @@
    "offer": "Zen Online",
    "a": 0.1925,
    "b": 0.1909,
-   "d": "13 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
-   "nivd": "01/08/2026"
+   "nivd": "01/08/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
   },
   {
    "k": "edf",
@@ -220,8 +256,12 @@
    "offer": "Intelligent Octopus",
    "a": 0.1968,
    "b": 0.1953,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ]
   },
   {
    "k": "alpiq",
@@ -284,8 +324,12 @@
    "offer": "Elec Référence 3 ans",
    "a": 0.233,
    "b": 0.2347,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/engie/offres"
+   ]
   },
   {
    "k": "ilek",
@@ -293,8 +337,12 @@
    "offer": "ÉnRFixe+ Elec",
    "a": 0.24,
    "b": 0.2385,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ilek/offres"
+   ]
   },
   {
    "k": "enercoop",
@@ -302,8 +350,12 @@
    "offer": "Offre Base",
    "a": 0.2541,
    "b": 0.2571,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/enercoop/offres"
+   ]
   }
  ],
  "gas_ref": {
@@ -319,15 +371,19 @@
    "name": "Ekwateur",
    "offer": "Gaz Naturel 15 % Biogaz Fixe",
    "a": 0.1246,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ]
   },
   {
    "k": "edf",
    "name": "EDF",
    "offer": "Avantage Gaz 2 ans",
    "a": 0.1336,
-   "d": "9 oct. 2026",
+   "d": "14 oct. 2026",
    "b0": 0.1788,
    "niv": "officiel",
    "nivd": "01/10/2026",
@@ -348,7 +404,11 @@
      0.1454,
      0.1486
     ]
-   }
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
   },
   {
    "k": "edf",
@@ -385,8 +445,12 @@
    "name": "Gaz de Bordeaux",
    "offer": "NovaFixe BioGaz",
    "a": 0.1346,
-   "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "d": "14 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ]
   },
   {
    "k": "geg",
@@ -496,7 +560,7 @@
    "offer": "Extra Eco Gaz",
    "a": 0.1429,
    "b0": 0.178,
-   "d": "13 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
    "nivd": "27/08/2026",
    "zones": {
@@ -508,7 +572,11 @@
      0.1543,
      0.1577
     ]
-   }
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ohm-energie/offres"
+   ]
   },
   {
    "k": "ohm",
@@ -576,9 +644,13 @@
    "offer": "Contrat+ Gaz 15 % Vert",
    "a": 0.1432,
    "b0": 0.185,
-   "d": "13 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
-   "nivd": "01/10/2026"
+   "nivd": "01/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ]
   },
   {
    "k": "dyneff",
@@ -619,14 +691,36 @@
    "niv": "officiel",
    "b0": 0.1783,
    "nivd": "01/10/2026",
-   "prg": true
+   "prg": true,
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/offres"
+   ],
+   "zones": {
+    "b1": [
+     0.1456,
+     0.1463,
+     0.147,
+     0.1477,
+     0.1484,
+     0.1492
+    ],
+    "b0": [
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783
+    ]
+   }
   },
   {
    "k": "octo",
    "name": "Octopus Energy",
    "offer": "Gaz Fixe",
    "a": 0.1487,
-   "d": "13 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
    "b0": 0.1835,
    "nivd": "30/09/2026",
@@ -647,14 +741,18 @@
      0.1555,
      0.1554
     ]
-   }
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ]
   },
   {
    "k": "happe",
    "name": "Happ-e",
    "offer": "Gaz Naturel",
    "a": 0.1504,
-   "d": "13 oct. 2026",
+   "d": "14 oct. 2026",
    "niv": "officiel",
    "b0": 0.1881,
    "nivd": "01/10/2026",
@@ -667,7 +765,11 @@
      0.1533,
      0.154
     ]
-   }
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/happ-e/offres"
+   ]
   },
   {
    "k": "ilek",
@@ -694,7 +796,7 @@
   "octo": 190.32,
   "engie": 186.98,
   "alpiq": 190.32,
-  "happe": 193.74,
+  "happe": 185.52,
   "ilek": 301.2,
   "enercoop": 181.92
  },
@@ -769,7 +871,7 @@
    "valid": "Montant standard, sans date de fin indiquée. Bonus de 10, 20 ou 30 € pour 2, 4 ou 6 filleuls",
    "st": "ok",
    "s": [
-    "Site officiel TotalEnergies",
+    "totalenergies.fr",
     "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches"
    ],
    "d": "relevé le 11 oct. 2026"
@@ -814,8 +916,8 @@
    "valid": "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus",
    "st": "ok",
    "s": [
-    "Kelwatt",
-    "https://www.kelwatt.fr/fournisseurs/octopus-energy/code-promo"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/parrainage"
    ],
    "d": "page du 12 mai 2026, relevé le 10 oct. 2026"
   },
@@ -829,8 +931,8 @@
    "valid": "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude",
    "st": "check",
    "s": [
-    "Selectra",
-    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/plenitude/parrainage"
    ],
    "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
   },
@@ -859,8 +961,8 @@
    "valid": "Versé 6 mois après l'activation du contrat (FAQ officielle). Les montants viennent de Selectra, pas du site de Mint",
    "st": "check",
    "s": [
-    "Selectra",
-    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/parrainage"
    ],
    "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
   },
@@ -874,8 +976,8 @@
    "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo)",
    "st": "ok",
    "s": [
-    "Selectra",
-    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/alpiq/parrainage"
    ],
    "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
   },
@@ -889,7 +991,7 @@
    "valid": "Règlement officiel 2026 : versé avec la 6e facture, sans date de fin fixée",
    "st": "ok",
    "s": [
-    "Règlement officiel Primeo",
+    "particuliers.primeo-energie.fr",
     "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf"
    ],
    "d": "règlement 2026, lu le 10 oct. 2026"
@@ -1001,24 +1103,24 @@
   }
  },
  "abo_d": {
-  "ekw": "9 oct. 2026",
-  "total": "9 oct. 2026",
-  "gdb": "9 oct. 2026",
-  "geg": "9 oct. 2026",
+  "ekw": "14 oct. 2026",
+  "total": "14 oct. 2026",
+  "gdb": "14 oct. 2026",
+  "geg": "14 oct. 2026",
   "plen": "13 oct. 2026",
   "ohm": "13 oct. 2026",
-  "dyneff": "13 oct. 2026",
+  "dyneff": "14 oct. 2026",
   "mint": "14 oct. 2026",
-  "primeo": "9 oct. 2026",
-  "edf": "9 oct. 2026",
-  "llum": "9 oct. 2026",
+  "primeo": "14 oct. 2026",
+  "edf": "14 oct. 2026",
+  "llum": "14 oct. 2026",
   "alterna": "14 oct. 2026",
-  "octo": "10 oct. 2026",
-  "engie": "10 oct. 2026",
+  "octo": "14 oct. 2026",
+  "engie": "14 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
-  "ilek": "10 oct. 2026",
-  "enercoop": "10 oct. 2026"
+  "ilek": "14 oct. 2026",
+  "enercoop": "14 oct. 2026"
  },
  "duo": [
   {
@@ -1294,5 +1396,6 @@
    "eabo9": 408.0,
    "niv": "confirmer"
   }
- ]
+ ],
+ "updated_time": "08:18"
 }
