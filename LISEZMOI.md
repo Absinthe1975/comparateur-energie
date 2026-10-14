@@ -71,3 +71,21 @@ Le script lit lui-même, avant les sites lus par l'IA :
 - le prix repère du gaz, via le fichier Excel de la page open data de la CRE (nécessite `openpyxl`, installé par le workflow).
 
 Ces valeurs font foi : elles remplacent celles des autres sites. En cas de lecture impossible, le rapport l'indique dans « Sources en échec » et rien n'est modifié. La ligne en vigueur du tarif réglementé est celle dont la date de fin est vide : on ne se fie pas aux dates de l'API, qui ont été vues avec jour et mois inversés.
+
+### Prix repère du gaz par zone (page de Mint Énergie)
+
+La CRE ne publie pas de prix par zone. La page `informations.mint-energie.com/.../prix-repere-gaz.aspx` (clé `mint_prg` de `sources.json`) republie le prix repère pour les 6 zones. C'est un formulaire : `scripts/mint_prg.py` rejoue ce que fait le navigateur (une requête par zone) et vérifie que la page répond bien à la zone et au mois demandés. Le résultat sert aux offres marquées `"prg": true` dans `data.json` (Mint Biogaz Online, indexée au niveau du prix repère). Le robots.txt du site est respecté. Si la zone 1 s'écarte de plus de 0,0006 €/kWh du prix repère de la CRE, rien n'est appliqué et la ligne apparaît dans « À relire ».
+
+## Prix du gaz par code postal (dossier prix-cp/)
+
+Quand un fournisseur publie une grille par commune (pour l'instant Alterna gaz), elle est intégrée en entier, **dans un fichier à part par offre** (`prix-cp/alterna-mon-gaz-naturel-indexe.json`). Rien n'est mélangé entre fournisseurs :
+- l'offre concernée dans `data.json` porte un champ `"cpf"` qui désigne son fichier ;
+- le fichier rappelle sa clé de fournisseur (`k`), le nom exact de l'offre, la date de la grille et sa source ;
+- le site n'utilise un fichier que si sa clé et son offre correspondent à celles de l'offre (sinon il l'ignore) ;
+- `scripts/check_data.py` refuse la publication si un fichier est introuvable, ne correspond pas à son offre, contient des codes postaux invalides ou en double, ou des prix hors fourchette.
+
+Sur le site, si l'utilisateur a saisi son code postal, il voit le prix exact de son code postal ; s'il ne figure pas dans la grille, c'est la moyenne du département, puis la moyenne de la grille. Un code postal qui regroupe des communes à prix différents reçoit la moyenne de ces communes. Sans code postal, le site utilise la zone choisie (1 à 6).
+
+Pour ajouter ou mettre à jour une grille : extraire le texte du PDF (`pdftotext -layout`), puis lancer
+`python3 scripts/cp_prix.py prix-cp fournisseur "Nom exact de l'offre" jj/mm/aaaa URL-source grille.txt`
+et ajouter le champ `cpf` à l'offre dans `data.json`.

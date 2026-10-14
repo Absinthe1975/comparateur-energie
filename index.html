@@ -326,6 +326,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
     </div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
+    <div class="field" id="f-gzone" hidden><label for="gzone">Zone tarifaire gaz</label><select id="gzone"><option value="1" selected>Zone 1</option><option value="2">Zone 2</option><option value="3">Zone 3</option><option value="4">Zone 4</option><option value="5">Zone 5</option><option value="6">Zone 6</option></select></div>
     <div id="f-cp" hidden><input id="cp" type="hidden"><span id="cp-info"></span></div>
     <div class="field" id="f-loc" hidden><span class="lbl">Localisation</span><span id="eau-loc"></span><button type="button" class="linkbtn" id="eau-loc-edit">Modifier le code postal (accueil)</button></div>
     <div id="f-ville" hidden><select id="ville"></select></div>
@@ -391,6 +392,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <p class="lede">Les offres classées pour votre consommation et la puissance de votre compteur, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
+    <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
   </section>
 
@@ -399,6 +401,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
+    <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
+    <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
   </section>
 
@@ -501,7 +505,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong>Relire chaque demande de fusion</strong> avant de l'accepter : le rapport liste ce qui a changé, ce qui est refusé et ce qui est à relire.</li>
         <li><strong>Sources à fiabiliser :</strong> un changement de prix d'une offre n'est maintenant appliqué que si un second site (fournisseurs-electricite.com, page tarifs du fournisseur) lit le même kWh. Les adresses de ces secondes sources n'ont pas toutes été ouvertes : corriger celles qui échouent après le prochain rapport. Reste à ajouter les grilles officielles des fournisseurs (certaines en PDF, que le script sait lire) et le règlement de parrainage de chacun.</li>
         <li><strong>Sources officielles de la CRE :</strong> le script lit maintenant le tarif réglementé (API tabulaire de data.gouv.fr, repli sur le CSV) et le prix repère du gaz (fichier Excel de cre.fr), sans IA, et ces valeurs l'emportent sur celles des autres sites. Elles n'ont pas encore été testées en vrai : lire le rapport du prochain lancement. Les offres à prix fixe et les offres combinées restent à confirmer, faute de fichier public.</li>
-        <li><strong>Prix B0 du gaz :</strong> seul EDF a son vrai prix B0 (grille officielle du 1er octobre 2026, zone 1 : 0,1788 €/kWh, abonnement 120 €/an). Les autres offres sont estimées avec le rapport B0/B1 du prix repère et marquées d'une étoile : à remplacer au fur et à mesure par les grilles officielles des fournisseurs (champ <code>b0</code> de chaque offre gaz dans data.json). Les grilles EDF donnent aussi les 6 zones gaz : un sélecteur de zone est faisable pour EDF et TotalEnergies.</li>
+        <li><strong>Fiabilité et zones :</strong> chaque offre porte maintenant « Grille officielle du jj/mm/aaaa » (lue dans la grille du fournisseur) ou « À confirmer ». Pour l'instant seuls TotalEnergies Access (électricité) et EDF (gaz, et le duo EDF) sont officiels. Le prix B0 réel et les prix des 6 zones gaz n'existent que pour EDF (champs <code>b0</code> et <code>zones</code> de l'offre dans data.json) ; les autres offres gaz sont estimées (étoile) et affichées au prix de la zone 1. À compléter avec les grilles de Plenitude, ENGIE, Octopus, Mint, ilek et Ohm, et celle de TotalEnergies gaz si on l'ajoute (offre Access indexée : son prix changerait chaque mois). Si un prix est modifié par le script, le niveau repasse à « À confirmer ».</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte le fichier robots.txt de chaque site et signale son nom, mais cela ne remplace pas la lecture de leurs conditions d'utilisation.</li>
         <li><strong>Textes à chiffres fixes :</strong> les notes de l'onglet Gaz (prix repère, abonnements) et de l'onglet Abonnement (tarif réglementé) se mettent maintenant à jour avec data.json. Il reste des chiffres écrits en dur, par exemple le tarif réglementé 12 et 18 kVA ou la hausse du réseau du 1er août.</li><li><strong>Offres combinées :</strong> l'onglet Élec + Gaz reprend 14 offres duo relevées sur Hello Watt le 13 octobre (Plenitude, Alterna, EDF, Mint, Octopus, TotalEnergies, ENGIE, GEG, Ekwateur, ilek) et, sur demande (case à cocher), additionne les offres séparées d'un même fournisseur. Les offres duo sont saisies à la main dans data.json (rubrique « duo ») : le script ne les met pas à jour, et celles relevées sur Hello Watt et Selectra sont « à confirmer » chez le fournisseur. À faire : ajouter les offres duo des autres fournisseurs (EDF, Ekwateur, Mint, Happ-e, OHM, ilek…) et les lire par le script.</li>
         <li><strong>Non automatisé :</strong> prix de l'eau, abonnements à 3 et 9 kVA, consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
@@ -683,38 +687,56 @@ var ELEC_REF = { k: "edf", name: "EDF", offer: "Tarif réglementé (Tarif Bleu)"
 var ELEC = [
   { k: "ekw", name: "Ekwateur", offer: "Électricité 100 % renouvelable Europe", a: 0.1753, b: 0.1906 },
   { k: "total", name: "TotalEnergies", offer: "Access Électricité (prix indexé)", a: 0.1837, b: 0.1823 },
-  { k: "geg", name: "GEG", offer: "Mon Offre Elec Verte, fixe 3 ans", a: 0.1837, b: 0.1823 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Elec Verte, fixe 3 ans", a: 0.1837, b: 0.1823, ab6: 190.32, ab9: 238.56 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Elec Verte Direct Producteur, fixe 3 ans", a: 0.1837, b: 0.1823, ab6: 207.60, ab9: 260.04 },
   { k: "gdb", name: "Gaz de Bordeaux", offer: "NovaFixe Élec", a: 0.1837, b: 0.1823 },
-  { k: "plen", name: "Plenitude", offer: "PleniWeb Électricité", a: 0.1837, b: 0.1823 },
+  { k: "plen", name: "Plenitude", offer: "Pleniweb 1 an Électricité", a: 0.1837, b: 0.1823 },
   { k: "llum", name: "LLUM", offer: "Électricité particuliers", a: 0.1900, b: 0.1900 },
   { k: "dyneff", name: "Dyneff", offer: "Contrat+ Électricité", a: 0.1907, b: 0.1907 },
-  { k: "mint", name: "Mint Énergie", offer: "Online & Green", a: 0.1919, b: 0.1904 },
+  { k: "mint", name: "Mint Énergie", offer: "Online & Green", a: 0.1904, b: 0.1904, ab6: 190.32, ab9: 238.56 },
+  { k: "mint", name: "Mint Énergie", offer: "Classic & Green", a: 0.1924, b: 0.1924, ab6: 188.4, ab9: 235.44 },
+  { k: "mint", name: "Mint Énergie", offer: "Smart & Green", a: 0.2002, b: 0.2002, ab6: 227.28, ab9: 261.6 },
   { k: "primeo", name: "Primeo Energie", offer: "Essentielle Verte", a: 0.1919, b: 0.1904 },
-  { k: "alterna", name: "Alterna", offer: "Mon électricité française fixe 1 an", a: 0.1919, b: 0.1904 },
+  { k: "alterna", name: "Alterna", offer: "Mon électricité française fixe 1 an", a: 0.1919, b: 0.1904, ab6: 211.92, ab9: 267.36 },
+  { k: "alterna", name: "Alterna", offer: "Mon électricité française indexée", a: 0.1919, b: 0.1904, ab6: 211.92, ab9: 267.36 },
+  { k: "alterna", name: "Alterna", offer: "Mon électricité du coin", a: 0.1968, b: 0.1953, ab6: 211.92, ab9: 267.36 },
   { k: "edf", name: "EDF", offer: "Zen Online", a: 0.1925, b: 0.1909 },
+  { k: "edf", name: "EDF", offer: "Vert Électrique", a: 0.2022, b: 0.2007 },
+  { k: "edf", name: "EDF", offer: "Vert Électrique Régional", a: 0.2037, b: 0.2065 },
+  { k: "octo", name: "Octopus Energy", offer: "Eco fixe Base (moyenne hiver/été)", a: 0.2019, b: 0.2053, ab6: 190.32, ab9: 238.56 },
   { k: "octo", name: "Octopus Energy", offer: "Intelligent Octopus", a: 0.1968, b: 0.1953 },
   { k: "alpiq", name: "Alpiq", offer: "Sérénité", a: 0.1993, b: 0.1977 },
-  { k: "ohm", name: "OHM Énergie", offer: "OHM Sérénité Fixe 1 an", a: 0.2148, b: 0.2148 },
-  { k: "happe", name: "Happ-e", offer: "Électricité 1 an", a: 0.2273, b: 0.2273 },
+  { k: "ohm", name: "OHM Énergie", offer: "OHM Sérénité Fixe 1 an", a: 0.2183, b: 0.2183, ab6: 173.40, ab9: 217.32 },
+  { k: "ohm", name: "OHM Énergie", offer: "Offre Fixe 2 ans", a: 0.2213, b: 0.2213, ab6: 190.56, ab9: 238.80 },
+  { k: "ohm", name: "OHM Énergie", offer: "Premi'Ohm 3 ans", a: 0.2287, b: 0.2287, ab6: 190.56, ab9: 238.80 },
+  { k: "happe", name: "Happ-e", offer: "Électricité 1 an", a: 0.2032, b: 0.2032 },
   { k: "engie", name: "ENGIE", offer: "Elec Référence 3 ans", a: 0.2330, b: 0.2347 },
   { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Elec", a: 0.2400, b: 0.2385 },
   { k: "enercoop", name: "Enercoop", offer: "Offre Base", a: 0.2541, b: 0.2571 }
 ];
 
 // Gaz : prix du kWh TTC, profil chauffage
-var DUO = [{"k": "plen", "name": "Plenitude", "offer": "Plenifix Élec + Gaz 1 an", "ea": 0.1901, "eb": 0.1886, "eabo": 219.12, "ga": 0.1456, "gabo": 387.48, "promo": 70, "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)", "ea": 0.1919, "eb": 0.1904, "eabo": 211.92, "ga": 0.129, "gabo": 389.64, "promo": 0, "note": "électricité à prix fixe, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Zen Fixe + Avantage Gaz 2 ans", "ea": 0.208, "eb": 0.2065, "eabo": 190.32, "ga": 0.1372, "gabo": 341.4, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Classic & Green + Biogaz Classic", "ea": 0.1939, "eb": 0.1924, "eabo": 188.4, "ga": 0.1518, "gabo": 360.84, "promo": 48, "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Tarif Bleu réglementé + Avantage Gaz Optimisé", "ea": 0.2, "eb": 0.1985, "eabo": 190.32, "ga": 0.1471, "gabo": 366.24, "promo": 0, "note": "électricité au tarif réglementé, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "octo", "name": "Octopus Energy", "offer": "OctoEco Fixe + Eco-conso gaz", "ea": 0.2032, "eb": 0.2017, "eabo": 190.32, "ga": 0.1487, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Smart & Green + Biogaz Classic", "ea": 0.2017, "eb": 0.2002, "eabo": 227.28, "ga": 0.1518, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "total", "name": "TotalEnergies", "offer": "Fixe 2 ans Électricité + Gaz", "ea": 0.2267, "eb": 0.2252, "eabo": 190.32, "ga": 0.1394, "gabo": 360.72, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "engie", "name": "ENGIE", "offer": "Duo référence 3 ans", "ea": 0.2332, "eb": 0.2317, "eabo": 207.6, "ga": 0.1383, "gabo": 360.84, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité du coin + Mon biogaz français", "ea": 0.1968, "eb": 0.1953, "eabo": 211.92, "ga": 0.1706, "gabo": 389.64, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "geg", "name": "GEG", "offer": "Électricité et gaz 100 % Verts", "ea": 0.1838, "eb": 0.1823, "eabo": 190.8, "ga": 0.1642, "gabo": 499.44, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe", "ea": 0.2407, "eb": 0.2392, "eabo": 190.32, "ga": 0.1246, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 100 % renouvelable, prix fixe", "ea": 0.2264, "eb": 0.2249, "eabo": 190.32, "ga": 0.1446, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ilek", "name": "ilek", "offer": "ÉnRFixe+ Élec + Gaz", "ea": 0.24, "eb": 0.2385, "eabo": 301.2, "ga": 0.1633, "gabo": 438.36, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check", "eabo9": 408.0}];
+var DUO = [{"k": "plen", "name": "Plenitude", "offer": "Plenifix Élec + Gaz 1 an", "ea": 0.1901, "eb": 0.1886, "eabo": 219.12, "ga": 0.1456, "gabo": 387.48, "promo": 70, "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)", "ea": 0.1919, "eb": 0.1904, "eabo": 211.92, "ga": 0.129, "gabo": 389.64, "promo": 0, "note": "électricité à prix fixe, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Zen Fixe + Avantage Gaz 2 ans", "ea": 0.208, "eb": 0.2065, "eabo": 190.32, "ga": 0.1372, "gabo": 341.4, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Classic & Green + Biogaz Classic", "ea": 0.1939, "eb": 0.1924, "eabo": 188.4, "ga": 0.1518, "gabo": 360.84, "promo": 48, "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "edf", "name": "EDF", "offer": "Tarif Bleu réglementé + Avantage Gaz Optimisé", "ea": 0.2, "eb": 0.1985, "eabo": 190.32, "ga": 0.1471, "gabo": 366.24, "promo": 0, "note": "électricité au tarif réglementé, gaz indexé", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "octo", "name": "Octopus Energy", "offer": "OctoEco Fixe + Eco-conso gaz", "ea": 0.2032, "eb": 0.2017, "eabo": 190.32, "ga": 0.1487, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "mint", "name": "Mint Énergie", "offer": "Smart & Green + Biogaz Classic", "ea": 0.2017, "eb": 0.2002, "eabo": 227.28, "ga": 0.1518, "gabo": 360.84, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "total", "name": "TotalEnergies", "offer": "Fixe 2 ans Électricité + Gaz", "ea": 0.2267, "eb": 0.2252, "eabo": 190.32, "ga": 0.1394, "gabo": 360.72, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "engie", "name": "ENGIE", "offer": "Duo référence 3 ans", "ea": 0.2332, "eb": 0.2317, "eabo": 207.6, "ga": 0.1383, "gabo": 360.84, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "alterna", "name": "Alterna", "offer": "Mon électricité du coin + Mon biogaz français", "ea": 0.1968, "eb": 0.1953, "eabo": 211.92, "ga": 0.1706, "gabo": 389.64, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "geg", "name": "GEG", "offer": "Élec Verte + Biogaz, fixe 3 ans", "ea": 0.1837, "eb": 0.1823, "eabo": 190.32, "ga": 0.1642, "gabo": 499.44, "promo": 0, "note": "prix fixes 3 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe", "ea": 0.2407, "eb": 0.2392, "eabo": 190.32, "ga": 0.1246, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ekw", "name": "Ekwateur", "offer": "Électricité 100 % verte + Gaz 100 % renouvelable, prix fixe", "ea": 0.2264, "eb": 0.2249, "eabo": 190.32, "ga": 0.1446, "gabo": 517.44, "promo": 0, "note": "prix fixes 1 an", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check"}, {"k": "ilek", "name": "ilek", "offer": "ÉnRFixe+ Élec + Gaz", "ea": 0.24, "eb": 0.2385, "eabo": 301.2, "ga": 0.1633, "gabo": 438.36, "promo": 0, "note": "prix fixes 2 ans", "d": "13 oct. 2026", "s": ["hellowatt.fr", "https://www.hellowatt.fr/"], "st": "check", "eabo9": 408.0}];
 var GAS_REF = { k: null, name: "CRE", offer: "Prix repère de vente de gaz (n'est pas une offre)", a: 0.1456, ref: true };
 var GAS = [
   { k: "ekw", name: "Ekwateur", offer: "Gaz Naturel 15 % Biogaz Fixe", a: 0.1246 },
   { k: "edf", name: "EDF", offer: "Avantage Gaz 2 ans", a: 0.1336 },
+  { k: "edf", name: "EDF", offer: "Avantage Gaz Optimisé", a: 0.1437, ab1: 366.24, ab0: 152.76 },
   { k: "gdb", name: "Gaz de Bordeaux", offer: "NovaFixe BioGaz", a: 0.1346 },
-  { k: "geg", name: "GEG", offer: "Mon Offre Gaz, fixe 3 ans", a: 0.1354 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Gaz, fixe 3 ans", a: 0.1354, b0: 0.2036, ab1: 499.44, ab0: 125.64 },
+  { k: "geg", name: "GEG", offer: "Mon Offre Biogaz, fixe 3 ans", a: 0.1642, b0: 0.2324, ab1: 499.44, ab0: 125.64 },
   { k: "total", name: "TotalEnergies", offer: "Fixe 2 ans Gaz", a: 0.1412 },
   { k: "engie", name: "ENGIE", offer: "Gaz Référence 3 ans", a: 0.1414 },
-  { k: "alterna", name: "Alterna", offer: "Mon gaz naturel indexé", a: 0.1393 },
+  { k: "alterna", name: "Alterna", offer: "Mon gaz naturel indexé", a: 0.1386, b0: 0.1704, ab1: 389.64, ab0: 174.00, zones: { b0: [0.1704,0.1704,0.1704,0.1704,0.1704,0.1704], b1: [0.1386,0.1393,0.1399,0.1406,0.1413,0.1419] } },
+  { k: "alterna", name: "Alterna", offer: "Mon biogaz français", a: 0.1698, b0: 0.2100, ab1: 389.64, ab0: 174.00, zones: { b0: [0.21,0.21,0.21,0.21,0.21,0.21], b1: [0.1698,0.1706,0.1714,0.1724,0.1732,0.1741] } },
   { k: "ohm", name: "OHM Énergie", offer: "Extra Eco Gaz", a: 0.1429 },
+  { k: "ohm", name: "OHM Énergie", offer: "Classique Gaz 10 % biogaz", a: 0.1492 },
+  { k: "ohm", name: "OHM Énergie", offer: "Fixe 2 ans Gaz", a: 0.1554 },
+  { k: "ohm", name: "OHM Énergie", offer: "Premi'Ohm 3 ans Gaz", a: 0.1617 },
   { k: "dyneff", name: "Dyneff", offer: "Contrat+ Gaz 15 % Vert", a: 0.1432 },
-  { k: "plen", name: "Plenitude", offer: "Plenifix 1 an Gaz", a: 0.1456 },
+  { k: "dyneff", name: "Dyneff", offer: "Contrat+ Gaz 55 % Vert", a: 0.1552 },
+  { k: "dyneff", name: "Dyneff", offer: "Contrat+ Gaz 100 % Vert", a: 0.1687 },
+  { k: "plen", name: "Plenitude", offer: "Pleniweb 1 an Gaz", a: 0.1456 },
   { k: "mint", name: "Mint Énergie", offer: "Biogaz Online", a: 0.1456 },
   { k: "octo", name: "Octopus Energy", offer: "Gaz Fixe", a: 0.1487 },
   { k: "happe", name: "Happ-e", offer: "Gaz Naturel", a: 0.1504 },
@@ -722,10 +744,10 @@ var GAS = [
 ];
 
 // Abonnements TTC par an. Électricité : compteur 6 kVA, option Base. Gaz : profil chauffage (B1).
-var ABO_E = { ekw: 190.32, total: 190.32, gdb: 190.44, geg: 190.80, plen: 219.15, ohm: 173.40, dyneff: 187.80, mint: 190.32, primeo: 190.32, edf: 190.32, llum: 190.32, alterna: 211.92, octo: 190.32, engie: 186.98, alpiq: 190.32, happe: 185.52, ilek: 301.20, enercoop: 181.92 };
+var ABO_E = { ekw: 190.32, total: 190.32, gdb: 190.44, geg: 190.32, plen: 219.15, ohm: 173.40, dyneff: 187.80, mint: 190.32, primeo: 190.32, edf: 190.32, llum: 190.32, alterna: 211.92, octo: 190.32, engie: 186.98, alpiq: 190.32, happe: 193.74, ilek: 301.20, enercoop: 181.92 };
 // Abonnements relevés le 10 octobre 2026 sur les pages de chaque offre (Selectra, prix vérifiés les 1er et 2 octobre 2026)
 var ABO_D = {};
-var ABO_G = { edf: 341.40, ohm: 359.52, gdb: 360.72, total: 360.72, engie: 360.79, mint: 360.84, octo: 360.84, plen: 387.43, happe: 387.84, alterna: 389.64, ilek: 438.36, dyneff: 469.32, geg: 499.44, ekw: 517.44 };
+var ABO_G = { edf: 341.40, ohm: 359.52, gdb: 360.72, total: 360.72, engie: 360.79, mint: 360.84, octo: 360.84, plen: 387.43, happe: 387.85, alterna: 389.64, ilek: 438.36, dyneff: 469.32, geg: 499.44, ekw: 517.44 };
 
 /* ---------- Sources et dates ---------- */
 var DATA_DATE = "2026-10-10", DATA_LABEL = "10 oct. 2026", DATA_TIME = "";
@@ -782,16 +804,54 @@ function sortRows(rows, key) {
   return out;
 }
 
-var ABO_G0 = { edf: 120.00, ohm: 152.04, gdb: 152.40, total: 152.40, engie: 152.46, mint: 152.52, octo: 152.40, plen: 179.10, happe: 152.40, alterna: 174.00, ilek: 218.04, dyneff: 163.44, geg: 125.64, ekw: 243.84 };
+var ABO_G0 = { edf: 120.00, ohm: 152.04, gdb: 152.40, total: 152.40, engie: 152.46, mint: 152.40, octo: 152.40, plen: 179.10, happe: 152.46, alterna: 174.00, ilek: 218.04, dyneff: 163.44, geg: 125.64, ekw: 243.84 };
 var GAS_B0 = { a: 0.1783, abo: 152.46 }, GAS_B1 = { a: 0.1456, abo: 360.79 };
+// Prix par code postal (prix-cp.json, grilles des fournisseurs) : prix exact si le code postal figure dans la grille,
+// sinon moyenne du département, sinon moyenne de la grille. Sans fichier ou sans code postal : prix par zone.
+var CPP = {};
+// Chaque offre dont la grille est publiée par code postal renvoie, par son champ « cpf » dans data.json, à son propre fichier
+// (dossier prix-cp/). Le fichier doit porter la même clé de fournisseur et le même nom d'offre, sinon il est ignoré.
+function loadCPP() {
+  if (!window.fetch || location.protocol === "file:") return;
+  GAS.forEach(function (r) {
+    if (typeof r.cpf !== "string" || !/^prix-cp\/[a-z0-9-]+\.json$/.test(r.cpf) || CPP[r.cpf]) return;
+    fetch(r.cpf).then(function (x) { if (!x.ok) throw 0; return x.json(); }).then(function (j) {
+      if (j.type !== "prix-par-code-postal" || j.k !== r.k || j.offre !== r.offer) return;
+      var out = {};
+      ["b0", "b1"].forEach(function (opt) {
+        var t = j[opt]; if (!t) return;
+        var idx = {};
+        Object.keys(t.niv).forEach(function (p) { t.niv[p].split(" ").forEach(function (cp) { idx[cp] = parseFloat(p); }); });
+        Object.keys(t.mixte).forEach(function (cp) { idx[cp] = t.mixte[cp]; });
+        out[opt] = { idx: idx, dep: t.dep, moy: t.moy };
+      });
+      CPP[r.cpf] = out; refresh();
+    }).catch(function () { /* repli : prix par zone */ });
+  });
+}
+function cpGas(r, opt) {
+  var t = r.cpf ? CPP[r.cpf] : null, cp = ($("h-cp") ? $("h-cp").value : "").replace(/\s/g, "");
+  if (!t || !t[opt] || !/^[0-9]{5}$/.test(cp)) return null;
+  var x = t[opt];
+  if (typeof x.idx[cp] === "number") return { p: x.idx[cp], k: "cp", cp: cp };
+  if (typeof x.dep[cp.slice(0, 2)] === "number") return { p: x.dep[cp.slice(0, 2)], k: "dep", cp: cp };
+  return { p: x.moy, k: "nat", cp: cp };
+}
 var GAS_OPT_LABEL = { base: "Base", b0: "B0", b1: "B1", b2i: "B2i" };
 function gasOptionFor(k) { return k < 1000 ? "base" : k <= 4000 ? "b0" : k <= 30000 ? "b1" : "b2i"; }
 function gasListFor(opt) {
   var ratio = GAS_B0.a / GAS_B1.a;
   var base = opt === "b1" ? GAS_B1 : GAS_B0;
   var list = GAS.map(function (r) {
-    if (opt === "b1") return Object.assign({}, r, { abo: ABO_G[r.k], est: false });
-    return typeof r.b0 === "number" ? Object.assign({}, r, { a: r.b0, abo: ABO_G0[r.k], est: false }) : Object.assign({}, r, { a: r.a * ratio, abo: ABO_G0[r.k], est: true });
+    var zn = (state.gasZone || 1) - 1, zp = r.zones && r.zones[opt] && typeof r.zones[opt][zn] === "number" ? r.zones[opt][zn] : null;
+    var cpp = cpGas(r, opt === "b1" ? "b1" : "b0");
+    if (cpp) {
+      var ab = opt === "b1" ? (typeof r.ab1 === "number" ? r.ab1 : ABO_G[r.k]) : (typeof r.ab0 === "number" ? r.ab0 : ABO_G0[r.k]);
+      return Object.assign({}, r, { a: cpp.p, abo: ab, est: false, cpk: cpp.k, cpc: cpp.cp });
+    }
+    if (opt === "b1") return Object.assign({}, r, { a: zp !== null ? zp : r.a, abo: (typeof r.ab1 === "number" ? r.ab1 : ABO_G[r.k]), est: false });
+    if (zp !== null) return Object.assign({}, r, { a: zp, abo: (typeof r.ab0 === "number" ? r.ab0 : ABO_G0[r.k]), est: false });
+    return typeof r.b0 === "number" ? Object.assign({}, r, { a: r.b0, abo: (typeof r.ab0 === "number" ? r.ab0 : ABO_G0[r.k]), est: false }) : Object.assign({}, r, { a: r.a * ratio, abo: (typeof r.ab0 === "number" ? r.ab0 : ABO_G0[r.k]), est: true });
   });
   return { list: list, ref: Object.assign({}, GAS_REF, { a: base.a, abo: base.abo, offer: "Prix repère de vente de gaz, option " + GAS_OPT_LABEL[opt] + " (n'est pas une offre)" }) };
 }
@@ -810,15 +870,26 @@ function sortBtn(key, label, cur) {
   return '<button type="button" class="sortbtn' + (cur === key ? " on" : "") + '" data-sort="' + key + '" aria-pressed="' + (cur === key ? "true" : "false") + '">' + label + "</button>";
 }
 
+function eloAbo(r, kva) {
+  if (r.ref) return { abo: TRV_ABO[kva], est: false };
+  var own = kva === "9" ? r.ab9 : kva === "6" ? r.ab6 : null;
+  if (typeof own === "number") return { abo: own, est: false };
+  var base = typeof r.ab6 === "number" ? r.ab6 : (typeof ABO_E[r.k] === "number" ? ABO_E[r.k] : TRV_ABO["6"]);
+  return { abo: base + (TRV_ABO[kva] - TRV_ABO["6"]), est: !(typeof r.ab6 === "number" || typeof ABO_E[r.k] === "number") || kva !== "6" };
+}
+function nivBadge(r) {
+  if (r.ref) return '<div class="offer"><span class="badge">Source officielle (CRE)</span></div>';
+  if (r.niv === "officiel") return '<div class="offer"><span class="badge">Grille officielle' + (r.nivd ? " du " + esc(r.nivd) : "") + "</span>"
+    + (r.cpk ? ' <span class="badge' + (r.cpk === "cp" ? "" : " check") + '">' + (r.cpk === "cp" ? "Prix du " + esc(r.cpc) : r.cpk === "dep" ? "Code postal absent : moyenne du département" : "Code postal absent : moyenne de la grille") + "</span>" : "") + "</div>";
+  return '<div class="offer"><span class="badge check">À confirmer</span></div>';
+}
 function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var aboMap = kind === "elec" ? ABO_E : ABO_G;
   var all = list.concat([ref]).map(function (r) {
     var abo, est = false;
     if (r.ref) abo = kind === "elec" ? TRV_ABO[kva] : r.abo;
     else if (kind === "elec") {
-      var known = typeof aboMap[r.k] === "number";
-      abo = (known ? aboMap[r.k] : TRV_ABO["6"]) + (TRV_ABO[kva] - TRV_ABO["6"]);
-      est = !known || kva !== "6";
+      var ea = eloAbo(r, kva); abo = ea.abo; est = ea.est;
     } else { abo = r.abo; est = !!r.est; }
     var cons = r[field] * conso;
     return Object.assign({}, r, { _abo: abo, _est: est, _cons: cons, _tot: cons + abo });
@@ -830,7 +901,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var bd = bestRow._tot - refTot;
   var bel = $("best-" + kind);
   if (bel) bel.innerHTML = "<strong>La moins chère : " + esc(bestRow.name) + "</strong> (" + esc(bestRow.offer) + "), " + fmtEur0.format(bestRow._tot) + " par an. "
-    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".");
+    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".") + (bestRow.niv === "officiel" ? "" : " Son prix est à confirmer auprès du fournisseur.");
   var h = "<thead><tr><th>Fournisseur et offre</th><th class=\"num\">kWh TTC</th><th class=\"num\">Consommation par an</th><th class=\"num\">Abonnement par an</th><th class=\"num\">" + sortBtn("prix", "Total par an", sortKey) + "</th><th class=\"num\">Écart</th><th>Prime de parrainage<br>" + sortBtn("parrain", "Parrain", sortKey) + " " + sortBtn("filleul", "Filleul", sortKey) + "</th><th>Source et date</th></tr></thead><tbody>";
   all.forEach(function (r) {
     var diff = r._tot - refTot;
@@ -839,7 +910,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else if (Math.round(diff) === 0) d = "0 €";
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
-    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + esc(r.name) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div></td>'
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + esc(r.name) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
       + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
@@ -1048,10 +1119,10 @@ function elecCostFor(r, kva, conso) {
   var field = kva === "9" ? "b" : "a";
   var abo;
   if (r.ref) abo = TRV_ABO[kva];
-  else abo = (typeof ABO_E[r.k] === "number" ? ABO_E[r.k] : TRV_ABO["6"]) + (TRV_ABO[kva] - TRV_ABO["6"]);
+  else abo = eloAbo(r, kva).abo;
   return r[field] * conso + abo;
 }
-function gasCostFor(r, conso) { return r.a * conso + (r.ref ? GAS_B1.abo : ABO_G[r.k]); }
+function gasCostFor(r, conso) { return r.a * conso + (r.ref ? GAS_B1.abo : (typeof r.ab1 === "number" ? r.ab1 : ABO_G[r.k])); }
 
 function bars(posts, data, unit) {
   var max = 0; posts.forEach(function (p) { if ((data[p[0]] || 0) > max) max = data[p[0]]; });
@@ -1485,7 +1556,7 @@ function renderDuo() {
     var g = gmap[e.k]; if (!g) return;
     var ec = elecCostFor(e, I.kva, I.ek);
     var gc = g.a * I.gk + (typeof g.abo === "number" ? g.abo : 0);
-    rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
+    rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, niv: (e.niv === "officiel" && g.niv === "officiel") ? "officiel" : "confirmer", est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
   });
   DUO.forEach(function (D) {
     var abo = (I.kva === "9" && D.eabo9) ? D.eabo9 : D.eabo + ((TRV_ABO[I.kva] || TRV_ABO["6"]) - TRV_ABO["6"]);
@@ -1504,7 +1575,7 @@ function renderDuo() {
     var d = r.tot - ref;
     var dtxt = Math.round(d) === 0 ? "0 €" : (d < 0 ? "−" : "+") + fmtEur0.format(Math.abs(d));
     var cls = Math.round(d) === 0 ? "" : d < 0 ? "delta-good" : "delta-bad";
-    h += '<tr><td><div class="prov">' + esc(r.name) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '. Source : ' + esc(r.duo.s[0]) + ', ' + esc(r.duo.d) + ', à confirmer.</div>' : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>') + '</td>'
+    h += '<tr><td><div class="prov">' + esc(r.name) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '. Source : ' + esc(r.duo.s[0]) + ', ' + esc(r.duo.d) + '.</div>' + nivBadge(r.duo) : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv })) + '</td>'
       + '<td class="num">' + fmtEur0.format(r.ec) + '</td><td class="num">' + fmtEur0.format(r.gc) + (r.est ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r.tot) + '</strong></td><td class="num ' + cls + '">' + dtxt + '</td><td>' + primeCell(r.k) + '</td></tr>';
   });
   h += '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
@@ -1513,7 +1584,7 @@ function renderDuo() {
 
 function refresh() {
   syncAuto();
-  state.gasOpt = $("gopt").value;
+  state.gasOpt = $("gopt").value; state.gasZone = parseInt($("gzone").value, 10) || 1;
   if (state.tab === "elec") state.elecConso = conso();
   if (state.tab === "gaz") state.gasConso = conso();
   if (state.tab === "eau") {
@@ -1560,6 +1631,7 @@ function loadData() {
   if (!window.fetch || location.protocol === "file:") return;
   fetch("data.json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
     if (!applyData(d)) return;
+    loadCPP();
     renderSummary(); renderPrimes(); refresh(); staleCheck();
     showDates();
   }).catch(function () { /* on garde les données intégrées */ });
@@ -1638,7 +1710,7 @@ function setTab(t) {
   $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "legal";
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
-  $("f-gopt").hidden = t !== "gaz";
+  $("f-gopt").hidden = t !== "gaz"; $("f-gzone").hidden = t !== "gaz";
   $("f-cp").hidden = true;
   $("f-loc").hidden = t !== "eau";
   $("f-ville").hidden = true;
@@ -1670,6 +1742,7 @@ $("conso").addEventListener("input", refresh);
 });
 $("kva").addEventListener("change", refresh);
 $("gopt").addEventListener("change", refresh);
+$("gzone").addEventListener("change", refresh);
 $("eau-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });
 $("ville").addEventListener("change", refresh);
 $("prixeau").addEventListener("input", refresh);
