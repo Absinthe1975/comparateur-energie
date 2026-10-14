@@ -1397,5 +1397,20 @@
    "niv": "confirmer"
   }
  ],
- "updated_time": "08:18"
+ "updated_time": "08:18",
+ "liens": {
+  "edf": "https://particulier.edf.fr/",
+  "total": "https://www.totalenergies.fr/particuliers",
+  "engie": "https://particuliers.engie.fr/",
+  "geg": "https://www.geg.fr/",
+  "ohm": "https://www.ohm-energie.com/",
+  "octo": "https://octopusenergy.fr/",
+  "plen": "https://eniplenitude.fr/",
+  "mint": "https://www.mint-energie.com/",
+  "alterna": "https://www.alterna-energie.fr/",
+  "dyneff": "https://www.dyneff.fr/",
+  "happe": "https://www.happ-e.fr/",
+  "ekw": "https://ekwateur.fr/",
+  "primeo": "https://particuliers.primeo-energie.fr/"
+ }
 }
