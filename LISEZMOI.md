@@ -89,3 +89,18 @@ Sur le site, si l'utilisateur a saisi son code postal, il voit le prix exact de 
 Pour ajouter ou mettre à jour une grille : extraire le texte du PDF (`pdftotext -layout`), puis lancer
 `python3 scripts/cp_prix.py prix-cp fournisseur "Nom exact de l'offre" jj/mm/aaaa URL-source grille.txt`
 et ajouter le champ `cpf` à l'offre dans `data.json`.
+
+## Détection automatique des PDF de grilles (rubrique « grilles » de sources.json)
+
+Le nom d'un PDF change souvent (date, version) : on ne garde donc pas son adresse. Chaque entrée de `sources.json > grilles` donne la **page du fournisseur** qui propose le PDF, et des mots qui décrivent le lien :
+
+```
+{"k": "alterna", "offre": "Mon gaz naturel indexé", "page": "https://…", "type": "cp-gaz",
+ "contient": ["grille"], "un_de": ["gaz naturel"], "exclut": ["biogaz"]}
+```
+
+À chaque lancement, le script lit la page, repère le lien PDF dont le **texte** (« Grille tarifaire ») ou le nom de fichier contient ces mots, télécharge ce que le lien désigne ce jour-là et le lit. Garde-fous : `robots.txt` respecté ; aucun ou plusieurs liens possibles = rien n'est deviné, l'entrée apparaît dans « Sources en échec » ; PDF inchangé (empreinte identique) = ignoré ; grille sans date, en HT seulement, avec trop peu de codes postaux ou un prix moyen très différent = non appliquée, listée « À relire ».
+- `"type": "cp-gaz"` : grille par code postal, intégrée automatiquement dans `prix-cp/` et dans l'offre de `data.json` (qui doit déjà porter son champ `cpf`).
+- `"type": "info"` : le PDF est seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main.
+
+Les adresses de page de la liste sont à vérifier après le premier rapport (celle d'Alterna est provisoire).

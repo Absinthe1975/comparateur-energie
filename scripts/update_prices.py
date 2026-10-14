@@ -253,6 +253,8 @@ def update_offers(data, src, state, rep, kinds, cache):
             url = src["tarifs_pages"].get(r["k"]); label = f"{kind} · {r['name']} ({r['offer']})"
             raison = src.get("manuel", {}).get(kind, {}).get(r["k"])
             if raison: rep.same.append(f"{label} : à vérifier à la main ({raison})"); continue
+            if r.get("niv") == "officiel":   # grille du fournisseur lue à la main ou par code : l'IA ne la retouche jamais
+                rep.same.append(f"{label} : grille officielle{' du ' + r['nivd'] if r.get('nivd') else ''}, non relue par l'IA"); continue
             if not url: rep.failed.append(f"{label} : aucune page dans sources.json"); continue
             text = pagetext(url, cache, state, rep, label)
             if not text: continue
@@ -509,7 +511,7 @@ def update_mint_zones(data, src, rep, now, get=None, post=None):
         rep.failed.append(f"Mint · prix repère par zone : {e}")
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs")
+    ap = argparse.ArgumentParser(); ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--only", default="elec,gaz,primes,refs,grilles")
     a = ap.parse_args(argv); kinds = set(a.only.split(","))
     data, src = load(DATA), load(SOURCES); state = load(STATE, {}) or {}
     now = maintenant(); data["updated"] = now.date().isoformat(); data["updated_label"] = f"{now.day} {MONTHS[now.month-1]} {now.year}"; data["updated_time"] = now.strftime("%H:%M")
@@ -518,6 +520,8 @@ def main(argv=None):
     if "primes" in kinds: update_primes(data, src, state, rep, cache)
     avant_b1 = (data["gas_b1"]["a"], data["gas_b0"]["a"])
     if "refs" in kinds: update_refs(data, src, state, rep, cache); off = update_official(data, src, rep, now); update_mint_zones(data, src, rep, now); update_trend(data, src, state, rep, cache, avant_b1, now, off.get("var_pct"))
+    if "grilles" in kinds:
+        import grilles_pdf; grilles_pdf.update_grilles(data, src, state, rep, now)
     md = rep.md(data["updated_label"]); print(md)
     if not a.dry_run:
         # la date globale ne change que si au moins une valeur a été vérifiée avec succès

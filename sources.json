@@ -129,5 +129,34 @@
   "trv_base_rid": "c13d05e5-9e55-4d03-bf7e-042a2ade7e49",
   "gas_page": "https://www.cre.fr/documents/open-data/construction-du-prix-repere-de-vente-de-gaz-de-la-cre.html"
  },
- "mint_prg": "https://informations.mint-energie.com/Pages/Informations/prix-repere-gaz.aspx"
+ "mint_prg": "https://informations.mint-energie.com/Pages/Informations/prix-repere-gaz.aspx",
+ "grilles": [
+  {
+   "k": "alterna",
+   "offre": "Mon gaz naturel indexé",
+   "page": "https://www.alterna-energie.fr/",
+   "type": "cp-gaz",
+   "contient": [
+    "grille"
+   ],
+   "un_de": [
+    "gaz naturel"
+   ],
+   "exclut": [
+    "biogaz"
+   ]
+  },
+  {
+   "k": "alterna",
+   "offre": "Mon biogaz français",
+   "page": "https://www.alterna-energie.fr/",
+   "type": "cp-gaz",
+   "contient": [
+    "grille"
+   ],
+   "un_de": [
+    "biogaz"
+   ]
+  }
+ ]
 }
