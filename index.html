@@ -267,6 +267,8 @@ tbody tr:has(.tag.best) td { background: var(--accent-soft); }
 tbody tr:has(.tag.best) .tag.best { background: var(--surface); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); }
 tr.ref td { background: var(--ref-bg); }
 .prov { font-weight: 700; }
+.prov-lien { color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+.prov-lien:hover, .prov-lien:focus-visible { color: var(--accent); text-decoration-style: solid; }
 .tag { border-radius: 999px; padding: 2px 9px; font-weight: 700; }
 .badge { font-weight: 600; }
 .track { height: 8px; border-radius: 999px; }
@@ -877,6 +879,13 @@ function eloAbo(r, kva) {
   var base = typeof r.ab6 === "number" ? r.ab6 : (typeof ABO_E[r.k] === "number" ? ABO_E[r.k] : TRV_ABO["6"]);
   return { abo: base + (TRV_ABO[kva] - TRV_ABO["6"]), est: !(typeof r.ab6 === "number" || typeof ABO_E[r.k] === "number") || kva !== "6" };
 }
+// Lien vers le fournisseur : adresse propre à l'offre (champ « url » de l'offre) sinon page du fournisseur (rubrique « liens » de data.json).
+var LIENS = {};
+function nomLien(r) {
+  var u = !r.ref && (typeof r.url === "string" ? r.url : LIENS[r.k]);
+  if (typeof u !== "string" || !/^https:\/\//.test(u)) return esc(r.name);
+  return '<a class="prov-lien" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer" title="Voir l\'offre sur le site de ' + esc(r.name) + ' (nouvel onglet)">' + esc(r.name) + "</a>";
+}
 function nivBadge(r) {
   if (r.ref) return '<div class="offer"><span class="badge">Source officielle (CRE)</span></div>';
   if (r.niv === "officiel") return '<div class="offer"><span class="badge">Grille officielle' + (r.nivd ? " du " + esc(r.nivd) : "") + "</span>"
@@ -910,7 +919,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else if (Math.round(diff) === 0) d = "0 €";
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
-    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + esc(r.name) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
       + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
@@ -1575,7 +1584,7 @@ function renderDuo() {
     var d = r.tot - ref;
     var dtxt = Math.round(d) === 0 ? "0 €" : (d < 0 ? "−" : "+") + fmtEur0.format(Math.abs(d));
     var cls = Math.round(d) === 0 ? "" : d < 0 ? "delta-good" : "delta-bad";
-    h += '<tr><td><div class="prov">' + esc(r.name) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '. Source : ' + esc(r.duo.s[0]) + ', ' + esc(r.duo.d) + '.</div>' + nivBadge(r.duo) : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv })) + '</td>'
+    h += '<tr><td><div class="prov">' + nomLien(r) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '. Source : ' + esc(r.duo.s[0]) + ', ' + esc(r.duo.d) + '.</div>' + nivBadge(r.duo) : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv })) + '</td>'
       + '<td class="num">' + fmtEur0.format(r.ec) + '</td><td class="num">' + fmtEur0.format(r.gc) + (r.est ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r.tot) + '</strong></td><td class="num ' + cls + '">' + dtxt + '</td><td>' + primeCell(r.k) + '</td></tr>';
   });
   h += '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
@@ -1607,7 +1616,7 @@ function applyData(d) {
   if (!d || d.schema !== 1 || !Array.isArray(d.elec) || !Array.isArray(d.gas) || !d.primes || !d.abo_e || !d.abo_g || !d.elec_ref || !d.gas_ref) return false;
   ELEC_REF = d.elec_ref; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
   ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
-  DUO = Array.isArray(d.duo) ? d.duo : DUO;
+  DUO = Array.isArray(d.duo) ? d.duo : DUO; LIENS = d.liens || {};
   GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes;
   if (d.updated) DATA_DATE = d.updated;
   if (d.updated_label) DATA_LABEL = d.updated_label;

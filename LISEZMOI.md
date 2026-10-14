@@ -104,3 +104,11 @@ Le nom d'un PDF change souvent (date, version) : on ne garde donc pas son adress
 - `"type": "info"` : le PDF est seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main.
 
 Les adresses de page de la liste sont à vérifier après le premier rapport (celle d'Alterna est provisoire).
+
+## Liens vers les fournisseurs
+
+Le nom du fournisseur dans les tableaux est un lien (nouvel onglet) vers son site. L'adresse vient de `data.json` :
+- `liens` : une adresse par fournisseur (clé `k`), utilisée pour toutes ses offres ;
+- `url` : adresse propre à une offre, à ajouter sur l'offre elle-même pour renvoyer directement vers sa page. Elle l'emporte sur le lien du fournisseur.
+
+Les adresses doivent commencer par `https://`. À chaque mise à jour, `scripts/check_liens.py` vérifie qu'elles répondent et ajoute au rapport la section « Liens fournisseur en échec ». Un fournisseur sans lien s'affiche simplement en texte. Les liens sont sans parrainage ni suivi : le site ne reçoit rien.
