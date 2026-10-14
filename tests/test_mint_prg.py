@@ -31,6 +31,8 @@ class Maj(unittest.TestCase):
     def setUp(self):
         self.d = json.load(open(os.path.join(ROOT, "data.json"), encoding="utf-8")); self.src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
         self.now = datetime.datetime(2026, 10, 14, 7, 0)
+        for r in self.d["gas"]:
+            if r.get("prg"): r.pop("zones", None)   # data.json peut déjà porter les zones lues par le workflow : on repart de zéro
     def run_(self, post):
         rep = up.Report(); up.update_mint_zones(self.d, self.src, rep, self.now, get=lambda u: PAGE, post=post); return rep
     def mint(self): return [r for r in self.d["gas"] if r.get("prg")][0]

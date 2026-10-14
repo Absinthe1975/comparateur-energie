@@ -78,6 +78,14 @@ class T(unittest.TestCase):
         up.fetch_text = lambda url: ("Offres ENGIE. Electricite Reference 3 ans. Le prix du kWh est de 0,2400 € TTC en option Base. L'abonnement 6 kVA est de 190,00 € par an." if "engie" in url else (_ for _ in ()).throw(RuntimeError("404")))
         self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["offre"]["quote"] = "Electricite Reference 3 ans"
         r, _ = self.run_engie(); self.assertEqual(r["a"], 0.24)
+    def test_grille_officielle_jamais_retouchee_par_lia(self):
+        d = json.load(open(up.DATA, encoding="utf-8"))
+        for r in d["elec"]:
+            if r["k"] == "engie": r["niv"], r["nivd"] = "officiel", "01/10/2026"
+        avant = d["abo_e"]["engie"]; json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        r, d2 = self.run_engie()
+        self.assertEqual(self.calls, 0); self.assertNotEqual(r["a"], 0.24); self.assertEqual(d2["abo_e"]["engie"], avant)
+        self.assertIn("non relue par l'IA", open(up.REPORT, encoding="utf-8").read())
     def test_offre_a_verifier_a_la_main_ignoree(self):
         up.main(["--only", "gaz"]); rap = open(up.REPORT, encoding="utf-8").read()
         self.assertIn("à vérifier à la main", rap)
