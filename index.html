@@ -497,21 +497,61 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
   <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
     <h2>Mémo : ce qu'il reste à ajouter</h2>
-    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo mis à jour le 12 octobre 2026. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer.</p>
+    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo mis à jour le 15 octobre 2026. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer.</p>
 
     <div class="card">
-      <h3>1. Mise à jour automatique des prix par IA <span class="badge check">Installée, à activer</span></h3>
-      <p>Le script, le fichier de données (data.json), la liste des pages à lire (sources.json) et le workflow de mise à jour (chaque jour du 1er au 10, puis chaque lundi) sont dans le dossier fourni. Pour l'activer : suivre le fichier LISEZMOI du dossier (clé gratuite Gemini, secret GitHub, autorisation des demandes de fusion, premier lancement à la main).</p>
+      <h3>1. Mise à jour automatique des prix <span class="badge ok">En service, à étendre</span></h3>
+      <p>Le workflow GitHub (chaque jour du 1er au 10, puis chaque lundi, ou à la main avec « Run workflow ») lit les sources, ouvre une demande de fusion que vous relisez, et ne touche jamais directement au site. Les modifications du code passent aussi par des demandes de fusion.</p>
+      <h3>Déjà en place</h3>
       <ul>
-        <li><strong>Essais réels des 10 et 12 octobre :</strong> le flux de travail fonctionne et a déjà appliqué 3 prix du gaz. Plusieurs pages prix-elec.com renvoient une erreur 404 et certains prix ne sont lus que sur une page par fournisseur : regarder les prochains rapports (rubrique « Sources en échec ») et corriger les adresses. Les prix de référence (tarif réglementé, prix repère du gaz) ne sont appliqués que si au moins deux sites donnent le même chiffre.</li>
-        <li><strong>Relire chaque demande de fusion</strong> avant de l'accepter : le rapport liste ce qui a changé, ce qui est refusé et ce qui est à relire.</li>
-        <li><strong>Sources à fiabiliser :</strong> un changement de prix d'une offre n'est maintenant appliqué que si un second site (fournisseurs-electricite.com, page tarifs du fournisseur) lit le même kWh. Les adresses de ces secondes sources n'ont pas toutes été ouvertes : corriger celles qui échouent après le prochain rapport. Reste à ajouter les grilles officielles des fournisseurs (certaines en PDF, que le script sait lire) et le règlement de parrainage de chacun.</li>
-        <li><strong>Sources officielles de la CRE :</strong> le script lit maintenant le tarif réglementé (API tabulaire de data.gouv.fr, repli sur le CSV) et le prix repère du gaz (fichier Excel de cre.fr), sans IA, et ces valeurs l'emportent sur celles des autres sites. Elles n'ont pas encore été testées en vrai : lire le rapport du prochain lancement. Les offres à prix fixe et les offres combinées restent à confirmer, faute de fichier public.</li>
-        <li><strong>Fiabilité et zones :</strong> chaque offre porte maintenant « Grille officielle du jj/mm/aaaa » (lue dans la grille du fournisseur) ou « À confirmer ». Pour l'instant seuls TotalEnergies Access (électricité) et EDF (gaz, et le duo EDF) sont officiels. Le prix B0 réel et les prix des 6 zones gaz n'existent que pour EDF (champs <code>b0</code> et <code>zones</code> de l'offre dans data.json) ; les autres offres gaz sont estimées (étoile) et affichées au prix de la zone 1. À compléter avec les grilles de Plenitude, ENGIE, Octopus, Mint, ilek et Ohm, et celle de TotalEnergies gaz si on l'ajoute (offre Access indexée : son prix changerait chaque mois). Si un prix est modifié par le script, le niveau repasse à « À confirmer ».</li>
-        <li><strong>Conditions d'utilisation :</strong> le script respecte le fichier robots.txt de chaque site et signale son nom, mais cela ne remplace pas la lecture de leurs conditions d'utilisation.</li>
-        <li><strong>Textes à chiffres fixes :</strong> les notes de l'onglet Gaz (prix repère, abonnements) et de l'onglet Abonnement (tarif réglementé) se mettent maintenant à jour avec data.json. Il reste des chiffres écrits en dur, par exemple le tarif réglementé 12 et 18 kVA ou la hausse du réseau du 1er août.</li><li><strong>Offres combinées :</strong> l'onglet Élec + Gaz reprend 14 offres duo relevées sur Hello Watt le 13 octobre (Plenitude, Alterna, EDF, Mint, Octopus, TotalEnergies, ENGIE, GEG, Ekwateur, ilek) et, sur demande (case à cocher), additionne les offres séparées d'un même fournisseur. Les offres duo sont saisies à la main dans data.json (rubrique « duo ») : le script ne les met pas à jour, et celles relevées sur Hello Watt et Selectra sont « à confirmer » chez le fournisseur. À faire : ajouter les offres duo des autres fournisseurs (EDF, Ekwateur, Mint, Happ-e, OHM, ilek…) et les lire par le script.</li>
-        <li><strong>Non automatisé :</strong> prix de l'eau, abonnements à 3 et 9 kVA, consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
-        <li><strong>IA gratuite :</strong> la clé Gemini est gratuite (Google AI Studio), avec des limites par minute et par jour à consulter dans AI Studio, qui peuvent changer. Si l'offre gratuite disparaît, le script sait aussi utiliser Mistral (offre gratuite) ou Claude (payant) en changeant une variable. GitHub Models, qui était une autre piste gratuite, est arrêté depuis le 30 juillet 2026.</li>
+        <li><strong>Sources officielles de la CRE</strong> (tarif réglementé, prix repère du gaz) et <strong>prix du prix repère par zone chez Mint</strong> (page Mint lue automatiquement, appliquée le 14 octobre).</li>
+        <li><strong>Grilles officielles saisies à la main</strong> (niveau « Grille officielle du jj/mm/aaaa ») : 18 offres d'électricité et 17 offres de gaz, ainsi que les duos EDF, Octopus et GEG. L'IA ne retouche plus jamais une offre en « Grille officielle ».</li>
+        <li><strong>Prix par code postal</strong> : Alterna gaz (2 offres), un fichier par offre dans le dossier prix-cp. Prix exact si le code postal figure dans la grille, sinon moyenne du département, puis de la grille.</li>
+        <li><strong>Détection automatique des PDF par leur lien</strong> (rubrique « grilles » de sources.json) : le script retrouve le PDF même si son nom change. Pour l'instant lu et intégré automatiquement pour Alterna gaz seulement.</li>
+        <li><strong>Liens vers les fournisseurs</strong> (nom cliquable) et vérification automatique des liens à chaque mise à jour.</li>
+      </ul>
+      <h3>À faire</h3>
+      <ul>
+        <li><strong>Pages des grilles tarifaires de chaque fournisseur</strong> (à fournir) : sans elles, le script ne peut pas détecter les nouveaux PDF. Commencer par EDF, Alterna (page où figurent « Grille tarifaire » et « Fiche descriptive »), GEG (page des tarifs : geg.fr, rubrique centre de documentation, tarifs), Plenitude et Octopus.</li>
+        <li><strong>Lecture des PDF par l'IA</strong> pour les fournisseurs autres qu'Alterna, avec citation obligatoire et comparaison des dates : n'appliquer une grille que si elle est plus récente et si les prix restent plausibles. Archiver chaque PDF avec sa date.</li>
+        <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots (28 sources en échec lors du premier rapport). Les remplacer par les grilles officielles des fournisseurs.</li>
+        <li><strong>Lire le prochain rapport</strong> après la fusion : section « Liens fournisseur en échec » (corriger les adresses), lignes Mint et CRE, offres encore « À relire ».</li>
+        <li><strong>Prix indexés</strong> (Alterna, Mint gaz, OHM, Happ-e…) : leur grille change chaque mois, donc à relire au 1er de chaque mois.</li>
+        <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site.</li>
+        <li><strong>Textes à chiffres fixes :</strong> il reste quelques chiffres écrits en dur (tarif réglementé 12 et 18 kVA, hausse du réseau du 1er août).</li>
+        <li><strong>Non automatisé :</strong> prix de l'eau, consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
+        <li><strong>IA gratuite :</strong> clé Gemini gratuite, aux limites susceptibles de changer ; Mistral (gratuit) ou Claude (payant) possibles en changeant une variable.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>1 bis. Grilles manquantes ou à confirmer <span class="badge check">À faire, au fil des envois</span></h3>
+      <p>Offres encore marquées « À confirmer » : à remplacer par la grille officielle datée du fournisseur (PDF ou capture).</p>
+      <ul>
+        <li><strong>Gaz de Bordeaux</strong> : NovaFixe Élec et NovaFixe BioGaz. Les prix varient selon le code postal (grille par commune à intégrer) ; manquent aussi les conditions du NovaFixe Duo et du Bonus Élec.</li>
+        <li><strong>ENGIE</strong> : Elec Référence 3 ans et Gaz Référence 3 ans (le gaz à 0,1373 €/kWh est à valider), et le duo.</li>
+        <li><strong>ilek</strong> : ÉnRFixe+ Élec et Gaz (le gaz à 0,1633 €/kWh est à valider), et le duo.</li>
+        <li><strong>Mint Énergie</strong> : grilles gaz Classic et Smart d'octobre (seules celles de novembre ont été reçues, elles ne sont plus en ligne) ; duos Mint.</li>
+        <li><strong>TotalEnergies</strong> : gaz « Fixe 2 ans » et le duo.</li>
+        <li><strong>Plenitude</strong> : les grilles Pleniweb 1 an (élec et gaz) sont à jour ; il n'existe pas d'offre combinée, le duo a été retiré. Reste la grille Plenifix actuelle, si l'offre est toujours commercialisée.</li>
+        <li><strong>Octopus</strong> : grille de l'offre Cocon fixe et de l'offre Intelligent Octopus.</li>
+        <li><strong>Dyneff</strong> : électricité Contrat+ (grille datée).</li>
+        <li><strong>Ekwateur</strong> (électricité et gaz, duos), <strong>Alpiq</strong> (Sérénité), <strong>LLUM</strong>, <strong>Primeo</strong> (Essentielle Verte), <strong>Enercoop</strong> (Offre Base) : aucune grille officielle encore reçue.</li>
+        <li><strong>Alterna</strong> : le duo n'a pas de grille officielle ; décider de retirer ces lignes de l'onglet Élec + Gaz ou de les garder en « À confirmer ».</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>1 ter. Décisions et limites du calcul <span class="badge check">À trancher</span></h3>
+      <ul>
+        <li><strong>Octopus saisonnier :</strong> le prix moyen suppose 58 % de la consommation en hiver. À confirmer ou corriger.</li>
+        <li><strong>« Offre combinée non relevée » :</strong> mention proposée pour les fournisseurs sans duo relevé, non décidée.</li>
+        <li><strong>Offres à tarifs différenciés</strong> (week-end, Tempo, heures pleines/creuses, Estival, Heures Super Creuses) : non modélisées, donc absentes des tableaux.</li>
+        <li><strong>Abonnement à 3 kVA</strong> de OHM, Mint et Octopus : non exact. Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li><strong>Gaz :</strong> profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie (GEG, Plenitude) sont à surveiller ; zone ELD (Bordeaux, Strasbourg, Colmar) non modélisée ; GEG gaz au réseau NTR 0-3 seulement.</li>
+        <li><strong>Primes ponctuelles</strong> (20, 50, 60 €) non comptées dans le classement.</li>
+        <li><strong>Prix par code postal :</strong> un code postal regroupant des communes à prix différents reçoit la moyenne de ces communes (233 cas chez Alterna).</li>
+        <li><strong>Hausse du gaz de novembre :</strong> volontairement non affichée.</li>
       </ul>
     </div>
 
@@ -540,9 +580,9 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>4. Données encore à confirmer <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Prix des offres :</strong> ils viennent de Selectra, un comparateur partenaire de fournisseurs. Les recouper avec les grilles tarifaires officielles de chaque fournisseur.</li>
-        <li><strong>Abonnements à 3 et 9 kVA :</strong> estimés à partir de l'écart du tarif réglementé, faute de prix publiés par fournisseur. Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
-        <li><strong>Gaz en Base et B0 :</strong> le prix du kWh des fournisseurs est estimé à partir de l'écart du prix repère.</li>
+        <li><strong>Prix des offres :</strong> 18 offres d'électricité et 17 offres de gaz viennent maintenant des grilles officielles ; les autres, encore issues de comparateurs, sont listées dans la carte 1 bis.</li>
+        <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li><strong>Gaz en Base et B0 :</strong> prix et abonnements réels pour les offres à grille officielle ; estimés à partir de l'écart du prix repère pour les autres (étoile).</li>
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> Plenitude (une seule source pour le montant du parrain), Ekwateur (montant du parrain absent du règlement), Mint Énergie, Happ-e (20 à 40 €), LLUM et ilek (une seule source). Octopus, Alpiq, EDF et Gaz de Bordeaux viennent de comparateurs. Primeo, ENGIE (20 €, plus 5 € avec l'option verte) et TotalEnergies (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
         <li><strong>Données d'eau :</strong> prix d'Antibes à vérifier, moyennes de la Corse et de la région Provence-Alpes-Côte d'Azur peu fiables, abonnement d'eau estimé (moyenne du département, ou 99 €) quand le service ne l'a pas renseigné.</li>
         <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
