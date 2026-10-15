@@ -41,6 +41,11 @@ def liens_pdf(html_page, base):
         u = urllib.parse.urljoin(base, h.strip())
         if not re.search(r"\.pdf($|[?#])", u.lower()) or u in vus: continue
         vus.add(u); out.append((u, t))
+    # sites dont les liens sont dans des données intégrées à la page (JSON : adresses avec « \\/ » ou « \\u002F ») : on lit aussi les adresses .pdf du texte brut
+    brut = html_page.replace("\\u002F", "/").replace("\\u002f", "/").replace("\\/", "/")
+    for m in re.finditer(r"""https?://[^"'\s<>\\]+?\.pdf(?:\?[^"'\s<>\\]*)?""", brut):
+        u = m.group(0)
+        if u not in vus: vus.add(u); out.append((u, ""))
     return out
 
 def choisir(liens, regle):
