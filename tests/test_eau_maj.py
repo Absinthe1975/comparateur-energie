@@ -24,3 +24,8 @@ class Annee(unittest.TestCase):
         def tel(u, d):
             if "2026" in u: raise OSError("404")
         self.assertEqual(e.annee_disponible(self.cfg, "/tmp", tel, lambda *a: 500), "2025")
+
+class Suspects(unittest.TestCase):
+    def test_bas_complet_signale(self):
+        com = {"06600": "06004~Antibes~1.49~~107~1.12~0.37~d", "61130": "61001~Dame~1.30~s~~1.30", "01000": "01053~Bourg~3.95~~95~2.42~1.53"}
+        self.assertEqual(list(e.suspects(com)), ["06004"])
