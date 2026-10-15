@@ -261,6 +261,17 @@
     "grille",
     "hphc"
    ]
+  },
+  {
+   "k": "octo",
+   "offre": "Gaz fixe",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "gaz",
+    "fixe"
+   ]
   }
  ]
 }

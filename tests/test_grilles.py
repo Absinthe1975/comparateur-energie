@@ -59,6 +59,17 @@ class Donnees_integrees(unittest.TestCase):
         h2 = self.H.replace("f9e6", "aaaa").replace("aout-26", "sept-26")
         u, _ = grilles_pdf.choisir(grilles_pdf.liens_pdf(h2, "https://x.fr/"), {"contient": ["grille", "base"], "exclut": ["hphc"]}); self.assertIn("aaaa", u)
 
+class Octopus_noms_reels(unittest.TestCase):
+    NOMS = ["grille-tarifaire-eco-fixe-aout-26-base.pdf", "grille-tarifaire-ecofixe-aout-26-hphc.pdf", "grille-tarifaire-ecofixe_aout26.pdf",
+            "fiche-descriptive-de-l-offre-d-electricite-cocon-juillet-26.pdf", "grille-tarifaire-octotempo_aout26.pdf",
+            "fiche-descriptive-de-l-offre-electricite-octotempo-aout-26.pdf", "grille-tarifaire-gaz_fixe_oct26_b.pdf", "fiche-descriptive-de-l-offre-de-gaz-gaz-fixe-octobre-2026.pdf"]
+    def test_chaque_regle_designe_un_seul_fichier(self):
+        liens = [("https://a.storyblok.com/f/151412/x/%d/%s" % (i, n), "") for i, n in enumerate(self.NOMS)]
+        regles = [e for e in json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "sources.json"), encoding="utf-8"))["grilles"] if e["k"] == "octo"]
+        self.assertEqual(len(regles), 3)
+        for e, attendu in zip(regles, ["eco-fixe-aout-26-base", "ecofixe-aout-26-hphc", "gaz_fixe_oct26"]):
+            u, why = grilles_pdf.choisir(liens, e); self.assertIsNone(why, e); self.assertIn(attendu, u)
+
 class Urls_directes(unittest.TestCase):
     def lancer(self, entree, reponses, data, state, txt=TXT, racine="."):
         rep = update_prices.Report()
