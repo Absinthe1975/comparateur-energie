@@ -103,6 +103,8 @@ Le nom d'un PDF change souvent (date, version) : on ne garde donc pas son adress
 - `"type": "cp-gaz"` : grille par code postal, intégrée automatiquement dans `prix-cp/` et dans l'offre de `data.json` (qui doit déjà porter son champ `cpf`).
 - `"type": "info"` : le PDF est seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main.
 
+Au lieu de `"page"`, une entrée peut donner `"url"` : l'adresse stable du PDF (EDF garde le même nom de fichier chaque mois) ou une adresse qui redirige vers le PDF du moment (Alterna : `/tarifs-gaz-indexe`). C'est la solution la plus simple quand elle existe. Pour le type `"info"`, la première lecture enregistre le PDF comme référence ; ensuite, chaque changement du fichier apparaît dans « À relire » avec son lien.
+
 Les adresses de page de la liste sont à vérifier après le premier rapport (celle d'Alterna est provisoire).
 
 ## Liens vers les fournisseurs
@@ -112,3 +114,5 @@ Le nom du fournisseur dans les tableaux est un lien (nouvel onglet) vers son sit
 - `url` : adresse propre à une offre, à ajouter sur l'offre elle-même pour renvoyer directement vers sa page. Elle l'emporte sur le lien du fournisseur.
 
 Les adresses doivent commencer par `https://`. À chaque mise à jour, `scripts/check_liens.py` vérifie qu'elles répondent et ajoute au rapport la section « Liens fournisseur en échec ». Un fournisseur sans lien s'affiche simplement en texte. Les liens sont sans parrainage ni suivi : le site ne reçoit rien.
+
+Quand les liens PDF d'une page sont intégrés dans des données (JSON) plutôt que dans des balises `<a>` (cas d'Octopus), le script lit aussi les adresses `.pdf` du texte brut de la page, et reconnaît le bon fichier à des mots de son nom (« grille », « base », « hphc »), même si l'identifiant du fichier change chaque mois. Si une page n'affiche ses liens qu'après exécution d'un script dans le navigateur, ni le script ni moi ne les voyons : le rapport le signale (« aucun lien PDF ne correspond ») et on revient à l'envoi manuel.

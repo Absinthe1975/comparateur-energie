@@ -10,6 +10,7 @@ Règles de sécurité : robots.txt respecté ; si aucun lien ou plusieurs liens 
 Entrée de sources.json, rubrique « grilles » :
   {"k": "alterna", "offre": "Mon gaz naturel indexé", "page": "https://…", "type": "cp-gaz",
    "contient": ["grille"], "un_de": ["gaz naturel"], "exclut": ["biogaz"]}
+  Au lieu de « page », une entrée peut donner « url » : adresse stable du PDF, ou adresse qui redirige vers le PDF du moment.
   type « cp-gaz » : grille par code postal, intégrée automatiquement (fichier prix-cp/…, offre de data.json) ;
   type « info »   : PDF seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main."""
 import hashlib, html.parser, json, os, re, subprocess, tempfile, urllib.parse
@@ -40,6 +41,11 @@ def liens_pdf(html_page, base):
         u = urllib.parse.urljoin(base, h.strip())
         if not re.search(r"\.pdf($|[?#])", u.lower()) or u in vus: continue
         vus.add(u); out.append((u, t))
+    # sites dont les liens sont dans des données intégrées à la page (JSON : adresses avec « \\/ » ou « \\u002F ») : on lit aussi les adresses .pdf du texte brut
+    brut = html_page.replace("\\u002F", "/").replace("\\u002f", "/").replace("\\/", "/")
+    for m in re.finditer(r"""https?://[^"'\s<>\\]+?\.pdf(?:\?[^"'\s<>\\]*)?""", brut):
+        u = m.group(0)
+        if u not in vus: vus.add(u); out.append((u, ""))
     return out
 
 def choisir(liens, regle):
@@ -90,21 +96,31 @@ def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=No
     for e in entrees:
         nom = f"{e['k']} · {e['offre']}"
         try:
-            page = get(e["page"]).decode("utf-8", "replace")
-            url, why = choisir(liens_pdf(page, e["page"]), e)
-            if not url: rep.failed.append(f"{nom} : PDF non trouvé sur {e['page']} ({why})"); continue
-            raw = get(url)
+            if e.get("url"):
+                # adresse stable (le PDF garde son adresse, ou l'adresse redirige vers le PDF du moment) : pas de page à fouiller
+                url = e["url"]; raw = get(url)
+                if raw[:5] != b"%PDF-":   # une page plutôt qu'un PDF : on cherche le lien dedans
+                    u2, why = choisir(liens_pdf(raw.decode("utf-8", "replace"), url), e)
+                    if not u2: rep.failed.append(f"{nom} : {url} n'est pas un PDF et aucun lien PDF n'y a été trouvé ({why})"); continue
+                    url = u2; raw = get(url)
+            else:
+                page = get(e["page"]).decode("utf-8", "replace")
+                url, why = choisir(liens_pdf(page, e["page"]), e)
+                if not url: rep.failed.append(f"{nom} : PDF non trouvé sur {e['page']} ({why})"); continue
+                raw = get(url)
             if raw[:5] != b"%PDF-": rep.failed.append(f"{nom} : {url} n'est pas un PDF"); continue
             h = hashlib.sha256(raw).hexdigest()
             if mem.get(nom, {}).get("sha") == h: rep.same.append(f"{nom} : PDF inchangé ({url})"); continue
             if e.get("type") != "cp-gaz":
+                if nom not in mem:   # première vue : enregistré comme référence (grille déjà intégrée à la main), pas de fausse alerte
+                    mem[nom] = {"sha": h, "url": url}; rep.same.append(f"{nom} : PDF enregistré comme référence ({url})"); continue
                 rep.review.append(f"{nom} : PDF nouveau ou modifié, à intégrer à la main : {url}"); mem[nom] = {"sha": h, "url": url}; continue
             txt = to_text(raw)
             date = lire_date(txt)
             if not date: rep.review.append(f"{nom} : date de la grille introuvable dans {url}, non appliqué"); continue
             offre = next((r for r in data["gas"] if r["k"] == e["k"] and r["offer"] == e["offre"] and r.get("cpf")), None)
             if not offre: rep.failed.append(f"{nom} : offre absente de data.json ou sans champ cpf"); continue
-            f = cp_prix.construire(e["k"], e["offre"], date, e["page"], txt)
+            f = cp_prix.construire(e["k"], e["offre"], date, e.get("page") or e["url"], txt)
             chemin = os.path.join(racine, offre["cpf"])
             ancien = None
             try: ancien = json.load(open(chemin, encoding="utf-8"))
