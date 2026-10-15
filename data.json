@@ -1126,25 +1126,6 @@
  },
  "duo": [
   {
-   "k": "plen",
-   "name": "Plenitude",
-   "offer": "Plenifix Élec + Gaz 1 an",
-   "ea": 0.1901,
-   "eb": 0.1886,
-   "eabo": 219.12,
-   "ga": 0.1456,
-   "gabo": 387.48,
-   "promo": 70,
-   "note": "prix fixes 1 an, promotion duo d'environ 70 € la première année",
-   "d": "13 oct. 2026",
-   "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
-   ],
-   "st": "check",
-   "niv": "confirmer"
-  },
-  {
    "k": "alterna",
    "name": "Alterna",
    "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)",
