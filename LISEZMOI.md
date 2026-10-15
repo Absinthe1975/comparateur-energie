@@ -103,6 +103,8 @@ Le nom d'un PDF change souvent (date, version) : on ne garde donc pas son adress
 - `"type": "cp-gaz"` : grille par code postal, intégrée automatiquement dans `prix-cp/` et dans l'offre de `data.json` (qui doit déjà porter son champ `cpf`).
 - `"type": "info"` : le PDF est seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main.
 
+Au lieu de `"page"`, une entrée peut donner `"url"` : l'adresse stable du PDF (EDF garde le même nom de fichier chaque mois) ou une adresse qui redirige vers le PDF du moment (Alterna : `/tarifs-gaz-indexe`). C'est la solution la plus simple quand elle existe. Pour le type `"info"`, la première lecture enregistre le PDF comme référence ; ensuite, chaque changement du fichier apparaît dans « À relire » avec son lien.
+
 Les adresses de page de la liste sont à vérifier après le premier rapport (celle d'Alterna est provisoire).
 
 ## Liens vers les fournisseurs
