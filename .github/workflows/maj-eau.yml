@@ -1,0 +1,35 @@
+name: Mise à jour du prix de l'eau
+
+on:
+  schedule:
+    - cron: "0 6 15 * *"   # le 15 de chaque mois : prend la dernière année SISPEA disponible
+  workflow_dispatch:
+
+concurrency:
+  group: maj-eau
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  eau:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pandas xlrd openpyxl
+      - run: python3 -m unittest tests.test_eau_maj
+      - name: Télécharger et reconstruire communes-cp.json
+        run: python3 scripts/eau_maj.py
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          branch: maj-eau
+          title: "Prix de l'eau : mise à jour SISPEA"
+          commit-message: "Prix de l'eau : mise à jour automatique (SISPEA + La Poste)"
+          body: "Mise à jour automatique de communes-cp.json. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
+          add-paths: communes-cp.json
