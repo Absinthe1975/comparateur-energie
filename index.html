@@ -1216,7 +1216,7 @@ function renderLogt() {
   if ($("l-prixeau")) $("l-prixeau").placeholder = eauHint(s.dept, s.ville);
   homeEauLine(eauPrice(s.dept, s.ville, 0));
   h += '<div class="card"><span class="label stampy">Eau estimée</span><span class="big">' + fmtInt.format(r.eau.m3) + ' m³ par an</span>' + bars(POSTES_EAU, r.eau.det, "m³")
-    + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>' + (eauSplit(ep) ? eauSplit(ep).replace('<p class="note">', "").replace("</p>", "") + "<br>" : "") + 'Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3, ep.abo)) + ' €</strong>' + (ep.ad ? '<br><span class="note">Abonnement : prix officiel inconnu, moyenne départementale utilisée</span>' : '') + (ep.kind === "commune" && !(ep.abo > 0) ? '<br><span class="note">Abonnement estimé à ' + fmtInt.format(EAU_ABO) + ' € (valeur moyenne), le vôtre est inconnu</span>' : '') + '</p>'
+    + '<p>Prix : <strong>' + fmtNum2.format(ep.p) + ' €/m³</strong> (' + esc(ep.src) + ')<br>' + (ep.kind === "region" || ep.kind === "national" ? '<span class="note">' + EAU_NC + '</span><br>' : '') + (eauSplit(ep) ? eauSplit(ep).replace('<p class="note">', "").replace("</p>", "") + "<br>" : "") + 'Facture annuelle estimée : <strong>' + fmtInt.format(eauCost(ep.p, r.eau.m3, ep.abo)) + ' €</strong>' + (ep.ad ? '<br><span class="note">Abonnement : prix officiel inconnu, moyenne départementale utilisée</span>' : '') + (ep.kind === "commune" && !(ep.abo > 0) ? '<br><span class="note">Abonnement estimé à ' + fmtInt.format(EAU_ABO) + ' € (valeur moyenne), le vôtre est inconnu</span>' : '') + '</p>'
     + '<button class="btn" id="apply-eau" type="button">Voir l\'eau dans le comparateur</button></div>';
   $("logt-res").innerHTML = h;
   var bt = $("logt-bar-t");
@@ -1235,6 +1235,7 @@ function homeEauLine(ep) {
   if (!$("l-cp").value) { el.textContent = ""; return; }
   var sp = eauSplit(ep);
   el.innerHTML = "<strong>Prix de l'eau chez vous : " + fmtNum2.format(ep.p) + " €/m³</strong> (" + esc(ep.kind === "commune" ? "prix de la commune" : ep.kind === "region" ? "moyenne de la région, commune inconnue" : ep.kind === "national" ? "moyenne nationale, commune inconnue" : ep.src) + ")."
+    + (ep.kind === "region" || ep.kind === "national" ? "<br><span class=\"note\">" + EAU_NC + "</span>" : "")
     + (sp ? "<br>" + sp.replace('<p class="note">', "").replace("</p>", "") : "");
 }
 function initHome() {
@@ -1270,6 +1271,7 @@ function initLogt() {
 
 /* ---------- Eau et localisation ---------- */
 // Prix de l'eau : eau potable + assainissement collectif, €/m³ TTC au 1er janvier 2026 (Kelwatt, d'après eaufrance).
+var EAU_NC = "Données non communiquées par la collectivité au SISPEA – Estimation indisponible";
 var EAU_NAT = 4.69;       // moyenne nationale (Kelwatt, janvier 2026). Selectra donne 4,89 pour 2025.
 var EAU_ABO = 99;         // abonnement annuel médian eau + assainissement (SISPEA), utilisé si celui du service est inconnu
 var EAU_ABO_PM3 = EAU_ABO / 120;
@@ -1438,7 +1440,7 @@ function eauPrice(dept, ville, over) {
 function eauHint(dept, ville) {
   var e = eauPrice(dept, ville, 0), n = fmtNum2.format(e.p) + " €/m³";
   if (e.kind === "commune" || e.kind === "liste") return n + (e.fl === "s" ? " (eau potable seule)" : e.est ? " (en partie estimé)" : "") + " : prix de votre commune";
-  return "Prix de votre commune inconnu : " + (e.kind === "region" ? "moyenne de la région, " : "moyenne nationale, ") + n;
+  return EAU_NC + ". Valeur indicative : " + (e.kind === "region" ? "moyenne de la région, " : "moyenne nationale, ") + n;
 }
 // Détail eau potable / assainissement, quand le SISPEA les donne séparément
 function eauSplit(ep) {
