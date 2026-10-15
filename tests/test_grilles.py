@@ -70,6 +70,18 @@ class Octopus_noms_reels(unittest.TestCase):
         for e, attendu in zip(regles, ["eco-fixe-aout-26-base", "ecofixe-aout-26-hphc", "gaz_fixe_oct26"]):
             u, why = grilles_pdf.choisir(liens, e); self.assertIsNone(why, e); self.assertIn(attendu, u)
 
+class Geg_noms_reels(unittest.TestCase):
+    NOMS = ["Grille-tarifaire-Mes_Offres_Elec_fixes_3_ans-PART1026.pdf", "Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf",
+            "Grille-tarifaire-Mon_Offre_Gaz_Index_e-PART1026_1.pdf", "Grille-tarifaire-Mes_Offres_Tarifs_R_glement_es_Bleues-PART08.26.pdf",
+            "Fiche%20descriptive%20-%20Mon%20Offre%20Gaz%20-%20fixe%203%20ans.pdf", "fiche%20descriptive%20offre%20de%20fourniture%20d%E2%80%99%C3%A9lectricit%C3%A9%20verte%20GEG%20-%20Mon%20Offre%20Elec%20Verte%20-%20fixe%203%20ans.pdf"]
+    def test_regles_geg(self):
+        liens = [("https://www.geg.fr/Medias/tarifs/" + n, "") for n in self.NOMS]
+        regles = [e for e in json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "sources.json"), encoding="utf-8"))["grilles"] if e["k"] == "geg"]
+        self.assertEqual(len(regles), 2)
+        for e, attendu in zip(regles, ["Mes_Offres_Elec_fixes_3_ans", "Offres-Gaz-Prix-fixes-3-ans"]):
+            u, why = grilles_pdf.choisir(liens, e)
+            self.assertIsNone(why, (e, why)); self.assertIn(attendu, u)
+
 class Urls_directes(unittest.TestCase):
     def lancer(self, entree, reponses, data, state, txt=TXT, racine="."):
         rep = update_prices.Report()
