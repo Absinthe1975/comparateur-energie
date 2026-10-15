@@ -426,7 +426,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="tablewrap"><table id="t-eau"></table></div>
     <h3>Moyenne par région</h3>
     <div class="tablewrap"><table id="t-reg"></table></div>
-    <p class="note">Prix en €/m³ TTC pour 120 m³ par an, eau potable et assainissement collectif additionnés, d'après l'Observatoire national des services d'eau et d'assainissement (SISPEA, Office français de la biodiversité, licence ouverte), exercice 2025. Beaucoup de prix 2025 sont encore « publiés non vérifiés » par les services. Pour les communes où l'assainissement n'est pas renseigné, le prix est celui de l'eau potable seule (petites communes, souvent en assainissement individuel) ou, à partir de 2 000 habitants, complété par la médiane du département : l'origine est indiquée dans le tableau. La moyenne nationale utilisée en dernier recours est de 4,69 €/m³ (Kelwatt, janvier 2026) ; Selectra donne 4,89 € pour 2025. Le total par an se calcule ainsi : l'abonnement (part fixe) de votre service d'eau et d'assainissement quand le SISPEA le donne, sinon un abonnement estimé à 99 € (valeur médiane du SISPEA), plus (prix par m³ − abonnement ÷ 120) × vos m³. Pour 120 m³, on retrouve exactement le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Le prix de votre commune est repris du fichier SISPEA quand il existe ; sinon la page utilise la moyenne de la région, ou saisissez le prix de votre facture. Valeurs inhabituellement basses (moins de 2 €/m³, comme Antibes) : à vérifier sur votre facture. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
+    <p class="note">Prix en €/m³ TTC pour 120 m³ par an, eau potable et assainissement collectif additionnés, d'après l'Observatoire national des services d'eau et d'assainissement (SISPEA, Office français de la biodiversité, licence ouverte), exercice 2025. Beaucoup de prix 2025 sont encore « publiés non vérifiés » par les services. Pour les communes où l'assainissement n'est pas renseigné, le prix est celui de l'eau potable seule et la page indique « Données non communiquées par la collectivité au SISPEA – Estimation indisponible » : l'assainissement n'est plus estimé. La moyenne nationale utilisée en dernier recours est de 4,69 €/m³ (Kelwatt, janvier 2026) ; Selectra donne 4,89 € pour 2025. Le total par an se calcule ainsi : l'abonnement (part fixe) de votre service d'eau et d'assainissement quand le SISPEA le donne, sinon un abonnement estimé à 99 € (valeur médiane du SISPEA), plus (prix par m³ − abonnement ÷ 120) × vos m³. Pour 120 m³, on retrouve exactement le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Le prix de votre commune est repris du fichier SISPEA quand il existe ; sinon la page utilise la moyenne de la région, ou saisissez le prix de votre facture. Valeurs inhabituellement basses (moins de 2 €/m³, comme Antibes) : à vérifier sur votre facture. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
   </section>
 
 <section class="panel" id="p-abo" role="tabpanel" aria-labelledby="tab-abo" hidden>
@@ -1347,6 +1347,8 @@ function loadCPPlaces() {
       Object.keys(j).forEach(function (cp) {
         ent[cp] = j[cp].split("|").map(function (x) {
           var a = x.split("~"), o = { i: a[0], n: a[1], p: a[2] ? parseFloat(a[2]) : 0, f: a[3] || "", a: a[4] ? parseFloat(a[4]) : 0, e: a[5] ? parseFloat(a[5]) : 0, s: a[6] ? parseFloat(a[6]) : 0, d: a[7] === "d" };
+          // assainissement non communiqué : on ne l'estime plus, on compte l'eau potable seule et on le dit
+          if (o.f === "e" && o.e > 0) { o.p = o.e; o.f = "s"; o.s = 0; }
           PRIX_INSEE[o.i] = o; return o;
         });
       });
@@ -1420,7 +1422,7 @@ function eauPrice(dept, ville, over) {
   if (over > 0) return { p: over, src: "prix saisi d'après votre facture", exact: true, kind: "saisi" };
   var sp = PRIX_INSEE[ville];
   if (sp && sp.p > 0) {
-    var note = sp.f === "e" ? ", assainissement estimé (médiane du département)" : sp.f === "s" ? ", eau potable seule (assainissement non renseigné)" : ", eau potable + assainissement";
+    var note = sp.f === "e" ? ", assainissement estimé (médiane du département)" : sp.f === "s" ? ", eau potable seule ; assainissement : données non communiquées, estimation indisponible" : ", eau potable + assainissement";
     return { p: sp.p, src: "commune de " + sp.n + " (SISPEA, exercice 2025" + note + ")" + (sp.p < 2 ? " · valeur inhabituellement basse, à vérifier" : ""), exact: sp.f === "", est: sp.f !== "", abo: sp.a, kind: "commune", pe: sp.e, pa: sp.s, fl: sp.f, ad: sp.d };
   }
   if (dept && ville) {
@@ -1444,7 +1446,7 @@ function eauHint(dept, ville) {
 function eauSplit(ep) {
   if (ep.kind !== "commune" || !(ep.pe > 0)) return "";
   var t = '<strong>Eau potable</strong> : ' + fmtNum2.format(ep.pe) + ' €/m³ · <strong>Assainissement</strong> : ';
-  if (ep.fl === "s") t += 'non renseigné (non compté)';
+  if (ep.fl === "s") t += EAU_NC + ' (assainissement non compté)';
   else t += fmtNum2.format(ep.pa) + ' €/m³' + (ep.fl === "e" ? " (estimé d'après la médiane du département)" : "");
   return '<p class="note">' + t + '</p>';
 }
