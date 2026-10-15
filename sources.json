@@ -297,6 +297,18 @@
    "exclut": [
     "indexe"
    ]
+  },
+  {
+   "k": "plen",
+   "offre": "Pleniweb 1 an Électricité",
+   "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf",
+   "type": "info"
+  },
+  {
+   "k": "plen",
+   "offre": "Pleniweb 1 an Gaz",
+   "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf",
+   "type": "info"
   }
  ]
 }
