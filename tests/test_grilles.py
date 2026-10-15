@@ -46,4 +46,27 @@ class Mise_a_jour(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             os.makedirs(os.path.join(t, "prix-cp")); rep = self.lancer(t, self.data(), {}, txt=TXT.replace("applicables au 01/10/2026", ""))
             self.assertEqual((len(rep.applied), len(rep.review)), (0, 1))
+class Urls_directes(unittest.TestCase):
+    def lancer(self, entree, reponses, data, state, txt=TXT, racine="."):
+        rep = update_prices.Report()
+        grilles_pdf.update_grilles(data, {"grilles": [entree]}, state, rep, None, get=lambda u: reponses[u], racine=racine, to_text=lambda raw: txt)
+        return rep
+    def test_info_reference_puis_changement(self):
+        e = {"k": "edf", "offre": "Zen Fixe", "url": "https://edf.fr/g.pdf", "type": "info"}; st = {}
+        r1 = self.lancer(e, {"https://edf.fr/g.pdf": b"%PDF-1.4 a"}, {"gas": []}, st); self.assertEqual((len(r1.same), len(r1.review)), (1, 0))
+        r2 = self.lancer(e, {"https://edf.fr/g.pdf": b"%PDF-1.4 a"}, {"gas": []}, st); self.assertEqual((len(r2.same), len(r2.review)), (1, 0))
+        r3 = self.lancer(e, {"https://edf.fr/g.pdf": b"%PDF-1.4 b"}, {"gas": []}, st); self.assertEqual((len(r3.same), len(r3.review)), (0, 1)); self.assertIn("edf.fr/g.pdf", r3.review[0])
+    def test_url_qui_est_une_page(self):
+        e = {"k": "alterna", "offre": "Mon gaz naturel indexé", "url": "https://x.fr/tarifs", "type": "info", "contient": ["grille"], "un_de": ["gaz naturel"], "exclut": ["biogaz"]}
+        rep = self.lancer(e, {"https://x.fr/tarifs": PAGE.encode(), "https://x.fr/docs/DOC_Grille_Tarifaire_Mon_gaz_naturel_011026_index_e_HT_TTC__1_.pdf": b"%PDF-1.4 z"}, {"gas": []}, {})
+        self.assertEqual((len(rep.same), len(rep.failed)), (1, 0))
+    def test_url_ni_pdf_ni_page_utile(self):
+        e = {"k": "alterna", "offre": "X", "url": "https://x.fr/t", "type": "info"}
+        rep = self.lancer(e, {"https://x.fr/t": b"<html>rien</html>"}, {"gas": []}, {}); self.assertEqual(len(rep.failed), 1)
+    def test_cp_gaz_par_url_directe(self):
+        with tempfile.TemporaryDirectory() as t:
+            os.makedirs(os.path.join(t, "prix-cp")); d = {"gas": [{"k": "alterna", "offer": "Mon gaz naturel indexé", "a": 0.1, "cpf": "prix-cp/alterna-test.json", "niv": "confirmer"}]}
+            e = dict(E1, url="https://x.fr/tarifs-gaz-indexe"); e.pop("page")
+            rep = self.lancer(e, {"https://x.fr/tarifs-gaz-indexe": b"%PDF-1.4 t"}, d, {}, racine=t); self.assertEqual(len(rep.applied), 1, rep.failed + rep.review)
+            f = json.load(open(os.path.join(t, "prix-cp/alterna-test.json"), encoding="utf-8")); self.assertEqual(f["source"], "https://x.fr/tarifs-gaz-indexe")
 if __name__ == "__main__": unittest.main()

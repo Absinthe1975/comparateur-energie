@@ -134,29 +134,110 @@
   {
    "k": "alterna",
    "offre": "Mon gaz naturel indexé",
-   "page": "https://www.alterna-energie.fr/",
-   "type": "cp-gaz",
-   "contient": [
-    "grille"
-   ],
-   "un_de": [
-    "gaz naturel"
-   ],
-   "exclut": [
-    "biogaz"
-   ]
+   "url": "https://www.alterna-energie.fr/tarifs-gaz-indexe",
+   "type": "cp-gaz"
   },
   {
    "k": "alterna",
    "offre": "Mon biogaz français",
-   "page": "https://www.alterna-energie.fr/",
-   "type": "cp-gaz",
-   "contient": [
-    "grille"
-   ],
-   "un_de": [
-    "biogaz"
-   ]
+   "url": "https://www.alterna-energie.fr/tarifs-biogaz",
+   "type": "cp-gaz"
+  },
+  {
+   "k": "edf",
+   "offre": "Zen Estival",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-estival.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Zen Fixe",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille-prix-zen-fixe.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Zen Online",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-online.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Zen Week-End",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-week-end.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Zen Week-End Plus",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-week-end-plus.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Vert Électrique",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Vert Électrique Week-End",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-weekend.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Vert Électrique Auto",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-auto.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Vert Électrique Régional",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-regional.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Tarif Bleu",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Tarif_Bleu.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Avantage Gaz Optimisé",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille_prix_avantage_gaz_optimise.pdf",
+   "type": "info"
+  },
+  {
+   "k": "edf",
+   "offre": "Avantage Gaz 2 ans",
+   "url": "https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Avantage_Gaz_2_ans.pdf",
+   "type": "info"
+  },
+  {
+   "k": "alterna",
+   "offre": "Électricité locale",
+   "url": "https://www.alterna-energie.fr/tarifs-electricite-locale",
+   "type": "info"
+  },
+  {
+   "k": "alterna",
+   "offre": "Électricité française",
+   "url": "https://www.alterna-energie.fr/tarifs-electricite-francaise",
+   "type": "info"
+  },
+  {
+   "k": "alterna",
+   "offre": "Électricité française indexée",
+   "url": "https://www.alterna-energie.fr/tarifs-electricite-francaise-indexe",
+   "type": "info"
+  },
+  {
+   "k": "alterna",
+   "offre": "Électricité verte 100 % véhicule électrique",
+   "url": "https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique",
+   "type": "info"
   }
  ]
 }
