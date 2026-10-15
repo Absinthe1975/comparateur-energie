@@ -46,6 +46,19 @@ class Mise_a_jour(unittest.TestCase):
         with tempfile.TemporaryDirectory() as t:
             os.makedirs(os.path.join(t, "prix-cp")); rep = self.lancer(t, self.data(), {}, txt=TXT.replace("applicables au 01/10/2026", ""))
             self.assertEqual((len(rep.applied), len(rep.review)), (0, 1))
+class Donnees_integrees(unittest.TestCase):
+    H = ('<script id="__NEXT_DATA__">{"a":"https:\\/\\/a.storyblok.com\\/f\\/1\\/x\\/f9e6\\/grille-tarifaire-eco-fixe-aout-26-base.pdf",'
+         '"b":"https:\\u002F\\u002Fa.storyblok.com\\u002Ff\\u002F1\\u002Fx\\u002Fd505\\u002Fgrille-tarifaire-ecofixe-aout-26-hphc.pdf"}</script>'
+         '<a href="https://a.storyblok.com/f/1/x/f0fd/fiche-descriptive-cocon.pdf">Fiche descriptive de l\'offre</a>')
+    def test_liens_dans_le_json_de_la_page(self):
+        l = grilles_pdf.liens_pdf(self.H, "https://octopusenergy.fr/offre-electricite-tarifs")
+        self.assertEqual(len(l), 3)
+        u, why = grilles_pdf.choisir(l, {"contient": ["grille", "base"], "exclut": ["hphc"]}); self.assertIsNone(why); self.assertIn("f9e6", u)
+        u, why = grilles_pdf.choisir(l, {"contient": ["grille", "hphc"]}); self.assertIn("d505", u)
+    def test_identifiant_change_chaque_mois(self):
+        h2 = self.H.replace("f9e6", "aaaa").replace("aout-26", "sept-26")
+        u, _ = grilles_pdf.choisir(grilles_pdf.liens_pdf(h2, "https://x.fr/"), {"contient": ["grille", "base"], "exclut": ["hphc"]}); self.assertIn("aaaa", u)
+
 class Urls_directes(unittest.TestCase):
     def lancer(self, entree, reponses, data, state, txt=TXT, racine="."):
         rep = update_prices.Report()

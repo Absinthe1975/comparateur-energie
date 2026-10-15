@@ -238,6 +238,29 @@
    "offre": "Électricité verte 100 % véhicule électrique",
    "url": "https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique",
    "type": "info"
+  },
+  {
+   "k": "octo",
+   "offre": "Eco fixe Base",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "base"
+   ],
+   "exclut": [
+    "hphc"
+   ]
+  },
+  {
+   "k": "octo",
+   "offre": "Eco fixe HP/HC",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "hphc"
+   ]
   }
  ]
 }
