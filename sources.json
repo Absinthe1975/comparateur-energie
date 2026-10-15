@@ -238,6 +238,77 @@
    "offre": "Électricité verte 100 % véhicule électrique",
    "url": "https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique",
    "type": "info"
+  },
+  {
+   "k": "octo",
+   "offre": "Eco fixe Base",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "base"
+   ],
+   "exclut": [
+    "hphc"
+   ]
+  },
+  {
+   "k": "octo",
+   "offre": "Eco fixe HP/HC",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "hphc"
+   ]
+  },
+  {
+   "k": "octo",
+   "offre": "Gaz fixe",
+   "page": "https://octopusenergy.fr/offre-electricite-tarifs",
+   "type": "info",
+   "contient": [
+    "grille",
+    "gaz",
+    "fixe"
+   ]
+  },
+  {
+   "k": "geg",
+   "offre": "Élec Verte fixe 3 ans (grille)",
+   "page": "https://www.geg.fr/aide-et-contact/centredocumentation/particulier/tarifs/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "elec",
+    "3 ans"
+   ]
+  },
+  {
+   "k": "geg",
+   "offre": "Gaz et biogaz fixe 3 ans (grille)",
+   "page": "https://www.geg.fr/aide-et-contact/centredocumentation/particulier/tarifs/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "gaz",
+    "3 ans"
+   ],
+   "exclut": [
+    "indexe"
+   ]
+  },
+  {
+   "k": "plen",
+   "offre": "Pleniweb 1 an Électricité",
+   "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf",
+   "type": "info"
+  },
+  {
+   "k": "plen",
+   "offre": "Pleniweb 1 an Gaz",
+   "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf",
+   "type": "info"
   }
  ]
 }
