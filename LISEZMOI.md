@@ -42,7 +42,11 @@ GEMINI_API_KEY=... python scripts/update_prices.py --dry-run
 - Vérifiez les conditions d'utilisation de chaque site lu. Le programme respecte `robots.txt` et se présente sous le nom « ComparateurEnergieBot ».
 
 
-## Prix de l'eau par commune (une fois par an)
+## Prix de l'eau par commune
+
+Automatique : le workflow « Mise à jour du prix de l'eau » (le 15 de chaque mois, ou bouton *Run workflow*) lance `scripts/eau_maj.py`. Il télécharge la base La Poste et les fichiers SISPEA indiqués dans `eau-config.json` (à renseigner : adresses des deux fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls`), prend la dernière année non vide, reconstruit `communes-cp.json`, refuse le résultat si des codes postaux disparaissent ou si les prix bougent trop, puis ouvre une demande à relire.
+
+Procédure manuelle (si besoin) :
 
 Le fichier `communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
 - la base officielle des codes postaux (data.gouv.fr, fichier `019HexaSmal.csv`),
