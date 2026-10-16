@@ -48,3 +48,17 @@ class Candidats(unittest.TestCase):
         def tel(u, d): open(d, "wb").write(b"<html>erreur</html>")
         with tempfile.TemporaryDirectory() as t:
             with self.assertRaises(RuntimeError): e.premier_qui_marche("https://a/{an}", 2025, os.path.join(t, "x.xls"), tel)
+
+
+class Conversion(unittest.TestCase):
+    def test_csv_lisible_par_build_eau(self):
+        import tempfile, os, csv
+        try: import openpyxl, pandas
+        except ImportError: self.skipTest("openpyxl ou pandas absent")
+        with tempfile.TemporaryDirectory() as t:
+            wb = openpyxl.Workbook(); ws = wb.active; ws.title = "Zones tarifaires"
+            ws.append(["Code INSEE de la commune adhérente", "Nom de la commune adhérente", "Population de la commune"]); ws.append(["01053", "Bourg-en-Bresse, ville", 40000])
+            x = os.path.join(t, "a.xlsx"); wb.save(x)
+            c = os.path.join(t, "a.csv"); self.assertEqual(e.xls_vers_csv(x, "Zones tarifaires", c), 1)
+            rows = list(csv.DictReader(open(c, encoding="utf-8", newline="")))
+            self.assertEqual(rows[0]["Code INSEE de la commune adhérente"], "01053"); self.assertEqual(rows[0]["Nom de la commune adhérente"], "Bourg-en-Bresse, ville")
