@@ -13,19 +13,38 @@ class Garde_fous(unittest.TestCase):
     def test_hausse_normale(self): self.assertEqual(e.comparer(base(), base(prix=4.1)), [])
     def test_premiere_fois(self): self.assertEqual(e.comparer({}, base()), [])
 
+XLS = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+def ecrit(u, d): open(d, "wb").write(XLS)
+
 class Annee(unittest.TestCase):
     cfg = {"annees": [2026, 2025], "sispea": {"AEP": "u/aep_{an}", "AC": "u/ac_{an}"}}
     def test_annee_vide_repli(self):
         def conv(src, feuille, dest): return 0 if "2026" in src else 500
-        self.assertEqual(e.annee_disponible(self.cfg, "/tmp", lambda u, d: None, conv), "2025")
+        self.assertEqual(e.annee_disponible(self.cfg, "/tmp", ecrit, conv), "2025")
     def test_aucune(self):
-        self.assertIsNone(e.annee_disponible(self.cfg, "/tmp", lambda u, d: None, lambda *a: 0))
+        self.assertIsNone(e.annee_disponible(self.cfg, "/tmp", ecrit, lambda *a: 0))
     def test_erreur_reseau_repli(self):
         def tel(u, d):
             if "2026" in u: raise OSError("404")
+            ecrit(u, d)
         self.assertEqual(e.annee_disponible(self.cfg, "/tmp", tel, lambda *a: 500), "2025")
 
 class Suspects(unittest.TestCase):
     def test_bas_complet_signale(self):
         com = {"06600": "06004~Antibes~1.49~~107~1.12~0.37~d", "61130": "61001~Dame~1.30~s~~1.30", "01000": "01053~Bourg~3.95~~95~2.42~1.53"}
         self.assertEqual(list(e.suspects(com)), ["06004"])
+
+
+class Candidats(unittest.TestCase):
+    def test_premiere_adresse_valide(self):
+        import tempfile, os
+        def tel(u, d):
+            if "bonne" not in u: raise OSError("404")
+            open(d, "wb").write(b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1 reste")
+        with tempfile.TemporaryDirectory() as t:
+            self.assertEqual(e.premier_qui_marche(["https://a/{an}", "https://bonne/{an}"], 2025, os.path.join(t, "x.xls"), tel), "https://bonne/2025")
+    def test_page_html_refusee(self):
+        import tempfile, os
+        def tel(u, d): open(d, "wb").write(b"<html>erreur</html>")
+        with tempfile.TemporaryDirectory() as t:
+            with self.assertRaises(RuntimeError): e.premier_qui_marche("https://a/{an}", 2025, os.path.join(t, "x.xls"), tel)
