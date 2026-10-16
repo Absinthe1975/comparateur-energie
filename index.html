@@ -454,7 +454,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
           <tr class="ref"><td><strong>Total au tarif réglementé</strong></td><td><strong>190,32 € TTC</strong>, soit 15,86 € par mois</td><td></td></tr>
         </tbody>
       </table></div>
-      <p class="note"><span id="trv-abo-txt">Selon la puissance, le total au tarif réglementé passe de 145,56 € (3 kVA) à 190,32 € (6 kVA) et 238,56 € (9 kVA).</span> Les montants du réseau ont augmenté de 3,04 % au 1er août 2026.</p>
+      <p class="note"><span id="trv-abo-txt">Selon la puissance, le total au tarif réglementé passe de 145,56 € (3 kVA) à 190,32 € (6 kVA) et 238,56 € (9 kVA).</span> Les montants du réseau (TURPE) sont révisés chaque 1er août.</p>
 
       <h3>Gaz</h3>
       <div class="tablewrap"><table>
@@ -523,14 +523,10 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>1. Mise à jour automatique des prix <span class="badge check">À étendre</span></h3>
       <ul>
-        <li><strong>Après chaque fusion :</strong> lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes Mint et CRE, offres « À relire », premiers repères des PDF suivis).</li>
-        <li><strong>Lecture des PDF par l'IA</strong> pour les fournisseurs autres qu'Alterna (EDF, GEG, Octopus, Plenitude, LLUM, Primeo suivis seulement : le script signale un changement mais ne lit pas les prix), avec citation obligatoire et comparaison des dates. Archiver chaque PDF avec sa date.</li>
-        <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer par les grilles officielles des fournisseurs (voir 1 bis).</li>
-        <li><strong>Prix indexés</strong> (Alterna, Mint gaz, OHM, Happ-e…) : leur grille change chaque mois, donc à relire au 1er de chaque mois.</li>
-        <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site.</li>
-        <li><strong>Textes à chiffres fixes :</strong> il reste quelques chiffres écrits en dur (tarif réglementé 12 et 18 kVA, hausse du réseau du 1er août).</li>
+        <li><strong>Après chaque fusion :</strong> lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes Mint et CRE, offres « À relire », premiers repères des PDF suivis). Quand un PDF suivi change, le rapport donne maintenant le prix du kWh lu par l'IA (avec citation vérifiée) à côté du nôtre, sans rien appliquer : vous saisissez ensuite la grille à la main.</li>
+        <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer, offre par offre, par les grilles officielles des fournisseurs (voir 1 bis : il faut les PDF ou leurs adresses).</li>
+        <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site (à faire par vous).</li>
         <li><strong>Non automatisé :</strong> consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
-        <li><strong>IA gratuite :</strong> clé Gemini gratuite, aux limites susceptibles de changer ; Mistral (gratuit) ou Claude (payant) possibles en changeant une variable.</li>
       </ul>
     </div>
 

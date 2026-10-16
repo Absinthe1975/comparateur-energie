@@ -120,3 +120,7 @@ Le nom du fournisseur dans les tableaux est un lien (nouvel onglet) vers son sit
 Les adresses doivent commencer par `https://`. À chaque mise à jour, `scripts/check_liens.py` vérifie qu'elles répondent et ajoute au rapport la section « Liens fournisseur en échec ». Un fournisseur sans lien s'affiche simplement en texte. Les liens sont sans parrainage ni suivi : le site ne reçoit rien.
 
 Quand les liens PDF d'une page sont intégrés dans des données (JSON) plutôt que dans des balises `<a>` (cas d'Octopus), le script lit aussi les adresses `.pdf` du texte brut de la page, et reconnaît le bon fichier à des mots de son nom (« grille », « base », « hphc »), même si l'identifiant du fichier change chaque mois. Si une page n'affiche ses liens qu'après exécution d'un script dans le navigateur, ni le script ni moi ne les voyons : le rapport le signale (« aucun lien PDF ne correspond ») et on revient à l'envoi manuel.
+
+## Lecture IA des PDF modifiés
+
+Quand le PDF d'une offre suivie (type `info`) change et qu'une clé d'IA est disponible, le script demande à l'IA le prix du kWh qu'il contient (citation obligatoire, chiffre vérifié dans le texte, fourchette plausible) et l'écrit dans « À relire » à côté du prix actuel. Rien n'est appliqué : une grille officielle se saisit à la main.
