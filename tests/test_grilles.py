@@ -127,3 +127,23 @@ class Proposition_ia(unittest.TestCase):
         st = {}; self.lancer(0.19, "x", st); st["n"] = 1
         rep, data = self.lancer(0.2010, "phrase inventée 0,2010", st)
         self.assertIn("n'a pas pu lire", rep.review[0]); self.assertEqual(data["elec"][0]["a"], 0.19)
+
+
+class Reessai_429(unittest.TestCase):
+    def test_429_puis_succes(self):
+        import urllib.error
+        appels, pauses = [], []
+        class R:
+            def __enter__(s): return s
+            def __exit__(s, *a): pass
+            def read(s): return b"ok"
+        def ouvrir(req, timeout):
+            appels.append(1)
+            if len(appels) < 3: raise urllib.error.HTTPError("https://x.fr", 429, "x", {}, None)
+            return R()
+        self.assertEqual(grilles_pdf._telecharger("https://x.fr", lambda u, ua: True, ouvrir, pauses.append), b"ok")
+        self.assertEqual((len(appels), pauses), (3, [15, 45]))
+    def test_404_pas_de_reessai(self):
+        import urllib.error
+        def ouvrir(req, timeout): raise urllib.error.HTTPError("https://x.fr", 404, "x", {}, None)
+        with self.assertRaises(urllib.error.HTTPError): grilles_pdf._telecharger("https://x.fr", lambda u, ua: True, ouvrir, lambda s: None)
