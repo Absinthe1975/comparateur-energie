@@ -23,7 +23,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/ekwateur/offres"
-   ]
+   ],
+   "vert": true
   },
   {
    "k": "total",
@@ -37,7 +38,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/totalenergies/offres"
-   ]
+   ],
+   "typ": "indexe"
   },
   {
    "k": "geg",
@@ -53,7 +55,10 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/geg/offres"
-   ]
+   ],
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
   },
   {
    "k": "geg",
@@ -65,7 +70,10 @@
    "niv": "officiel",
    "ab6": 207.6,
    "ab9": 260.04,
-   "nivd": "05/10/2026"
+   "nivd": "05/10/2026",
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
   },
   {
    "k": "gdb",
@@ -78,7 +86,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
-   ]
+   ],
+   "typ": "fixe"
   },
   {
    "k": "plen",
@@ -102,7 +111,9 @@
     "Grille officielle LLUM",
     "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf"
    ],
-   "nivd": "01/08/2026"
+   "nivd": "01/08/2026",
+   "typ": "indexe",
+   "vert": true
   },
   {
    "k": "dyneff",
@@ -127,7 +138,8 @@
    "a": 0.1904,
    "b": 0.1904,
    "ab6": 190.32,
-   "ab9": 238.56
+   "ab9": 238.56,
+   "vert": true
   },
   {
    "k": "mint",
@@ -139,7 +151,8 @@
    "a": 0.1924,
    "b": 0.1924,
    "ab6": 188.4,
-   "ab9": 235.44
+   "ab9": 235.44,
+   "vert": true
   },
   {
    "k": "mint",
@@ -151,7 +164,8 @@
    "a": 0.2002,
    "b": 0.2002,
    "ab6": 227.28,
-   "ab9": 261.6
+   "ab9": 261.6,
+   "vert": true
   },
   {
    "k": "primeo",
@@ -164,7 +178,10 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/primeo/offres"
-   ]
+   ],
+   "typ": "indexe",
+   "vert": true,
+   "eng": 0
   },
   {
    "k": "alterna",
@@ -180,7 +197,9 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/alterna/offres"
-   ]
+   ],
+   "typ": "fixe",
+   "eng": 12
   },
   {
    "k": "alterna",
@@ -192,7 +211,8 @@
    "nivd": "01/09/2026",
    "offer": "Mon électricité française indexée",
    "a": 0.1919,
-   "b": 0.1904
+   "b": 0.1904,
+   "typ": "indexe"
   },
   {
    "k": "alterna",
@@ -228,7 +248,8 @@
    "b": 0.2007,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "15/09/2026"
+   "nivd": "15/09/2026",
+   "vert": true
   },
   {
    "k": "edf",
@@ -238,7 +259,8 @@
    "b": 0.2065,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "15/09/2026"
+   "nivd": "15/09/2026",
+   "vert": true
   },
   {
    "k": "octo",
@@ -250,7 +272,8 @@
    "ab9": 238.56,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "12/08/2026"
+   "nivd": "12/08/2026",
+   "typ": "fixe"
   },
   {
    "k": "octo",
@@ -284,7 +307,9 @@
    "ab9": 217.32,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "14/10/2026"
+   "nivd": "14/10/2026",
+   "typ": "fixe",
+   "eng": 12
   },
   {
    "k": "ohm",
@@ -296,7 +321,9 @@
    "ab9": 238.8,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "09/09/2026"
+   "nivd": "09/09/2026",
+   "typ": "fixe",
+   "eng": 24
   },
   {
    "k": "ohm",
@@ -308,7 +335,8 @@
    "ab9": 238.8,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "14/10/2026"
+   "nivd": "14/10/2026",
+   "eng": 36
   },
   {
    "k": "happe",
@@ -331,7 +359,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/engie/offres"
-   ]
+   ],
+   "typ": "fixe"
   },
   {
    "k": "ilek",
@@ -344,7 +373,9 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/ilek/offres"
-   ]
+   ],
+   "typ": "fixe",
+   "vert": true
   },
   {
    "k": "enercoop",
@@ -379,7 +410,9 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/ekwateur/offres"
-   ]
+   ],
+   "typ": "fixe",
+   "vert": true
   },
   {
    "k": "edf",
@@ -453,7 +486,9 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
-   ]
+   ],
+   "typ": "fixe",
+   "vert": true
   },
   {
    "k": "geg",
@@ -465,7 +500,9 @@
    "b0": 0.2036,
    "ab1": 499.44,
    "ab0": 125.64,
-   "nivd": "21/09/2026"
+   "nivd": "21/09/2026",
+   "typ": "fixe",
+   "eng": 36
   },
   {
    "k": "geg",
@@ -477,7 +514,10 @@
    "b0": 0.2324,
    "ab1": 499.44,
    "ab0": 125.64,
-   "nivd": "21/09/2026"
+   "nivd": "21/09/2026",
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
   },
   {
    "k": "total",
@@ -485,7 +525,9 @@
    "offer": "Fixe 2 ans Gaz",
    "a": 0.1412,
    "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "niv": "confirmer",
+   "typ": "fixe",
+   "eng": 24
   },
   {
    "k": "engie",
@@ -524,7 +566,8 @@
     ]
    },
    "nivd": "01/10/2026",
-   "cpf": "prix-cp/alterna-mon-gaz-naturel-indexe.json"
+   "cpf": "prix-cp/alterna-mon-gaz-naturel-indexe.json",
+   "typ": "indexe"
   },
   {
    "k": "alterna",
@@ -555,7 +598,8 @@
     ]
    },
    "nivd": "01/10/2026",
-   "cpf": "prix-cp/alterna-mon-biogaz-francais.json"
+   "cpf": "prix-cp/alterna-mon-biogaz-francais.json",
+   "vert": true
   },
   {
    "k": "ohm",
@@ -599,7 +643,8 @@
      0.1606,
      0.1639
     ]
-   }
+   },
+   "vert": true
   },
   {
    "k": "ohm",
@@ -619,7 +664,9 @@
      0.1668,
      0.1702
     ]
-   }
+   },
+   "typ": "fixe",
+   "eng": 24
   },
   {
    "k": "ohm",
@@ -639,7 +686,8 @@
      0.1731,
      0.1764
     ]
-   }
+   },
+   "eng": 36
   },
   {
    "k": "dyneff",
@@ -653,7 +701,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/dyneff/offres"
-   ]
+   ],
+   "vert": true
   },
   {
    "k": "dyneff",
@@ -663,7 +712,8 @@
    "b0": 0.197,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "01/10/2026"
+   "nivd": "01/10/2026",
+   "vert": true
   },
   {
    "k": "dyneff",
@@ -673,7 +723,8 @@
    "b0": 0.2105,
    "d": "13 oct. 2026",
    "niv": "officiel",
-   "nivd": "01/10/2026"
+   "nivd": "01/10/2026",
+   "vert": true
   },
   {
    "k": "plen",
@@ -716,7 +767,8 @@
      0.1783,
      0.1783
     ]
-   }
+   },
+   "vert": true
   },
   {
    "k": "octo",
@@ -748,7 +800,8 @@
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/octopus-energy/offres"
-   ]
+   ],
+   "typ": "fixe"
   },
   {
    "k": "happe",
@@ -780,7 +833,9 @@
    "offer": "ÉnRFixe+ Gaz",
    "a": 0.1652,
    "d": "9 oct. 2026",
-   "niv": "confirmer"
+   "niv": "confirmer",
+   "typ": "fixe",
+   "vert": true
   }
  ],
  "abo_e": {
