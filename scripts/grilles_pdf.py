@@ -83,7 +83,26 @@ def _telecharger(url, allowed):
     req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Language": "fr"})
     with urllib.request.urlopen(req, timeout=60) as r: return r.read()
 
-def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=None, to_text=None):
+
+def proposer(e, data, txt, rep, url, ask_fn=None):
+    """Quand le PDF d'une offre change : demande à l'IA les prix qu'il contient et les met dans le rapport, à côté
+    des prix actuels. Ne modifie jamais data.json : une grille officielle se saisit à la main après relecture."""
+    import update_prices as up
+    ask_fn = ask_fn or up.ask
+    for kind, lst in (("elec", data.get("elec", [])), ("gaz", data.get("gas", []))):
+        r = next((x for x in lst if x["k"] == e["k"] and x["offer"] == e["offre"]), None)
+        if not r: continue
+        champs = {"kwh": ("prix du kWh TTC, option Base, 6 kVA (prix unique), en €/kWh" if kind == "elec"
+                          else "prix du kWh TTC de gaz, profil chauffage (B1), en €/kWh")}
+        got, _ = ask_fn(f"{e['k']} · {e['offre']} (PDF)", url, txt, e["offre"], champs, {}, rep, f"Offre cherchée : {e['offre']}.", nocache=True)
+        if not got: return
+        v, why = up.check_field(got.get("kwh"), up.norm(txt), *up.BOUNDS["elec_kwh" if kind == "elec" else "gas_kwh"])
+        nom = f"{e['k']} · {e['offre']}"
+        if v is None: rep.review.append(f"{nom} : PDF modifié, l'IA n'a pas pu lire le prix ({why}), à intégrer à la main : {url}"); return
+        if abs(v - r["a"]) < 0.00005: rep.same.append(f"{nom} : PDF modifié mais le prix du kWh lu ({v}) est identique au nôtre ({url})"); return
+        rep.review.append(f"{nom} : PDF modifié, prix du kWh lu {v} (le nôtre : {r['a']}), à vérifier et saisir à la main : {url}"); return
+
+def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=None, to_text=None, ask_fn=None):
     """get(url) -> octets (page ou PDF). to_text(octets) -> texte. Injectables pour les tests."""
     entrees = src.get("grilles") or []
     if not entrees: return
@@ -114,7 +133,13 @@ def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=No
             if e.get("type") != "cp-gaz":
                 if nom not in mem:   # première vue : enregistré comme référence (grille déjà intégrée à la main), pas de fausse alerte
                     mem[nom] = {"sha": h, "url": url}; rep.same.append(f"{nom} : PDF enregistré comme référence ({url})"); continue
-                rep.review.append(f"{nom} : PDF nouveau ou modifié, à intégrer à la main : {url}"); mem[nom] = {"sha": h, "url": url}; continue
+                mem[nom] = {"sha": h, "url": url}
+                if ask_fn or os.environ.get("GEMINI_API_KEY") or os.environ.get("MISTRAL_API_KEY") or os.environ.get("ANTHROPIC_API_KEY"):
+                    n0 = len(rep.review) + len(rep.same)
+                    try: proposer(e, data, to_text(raw), rep, url, ask_fn)
+                    except Exception as ex: rep.failed.append(f"{nom} : lecture IA du PDF en échec ({ex})")
+                    if len(rep.review) + len(rep.same) > n0: continue
+                rep.review.append(f"{nom} : PDF nouveau ou modifié, à intégrer à la main : {url}"); continue
             txt = to_text(raw)
             date = lire_date(txt)
             if not date: rep.review.append(f"{nom} : date de la grille introuvable dans {url}, non appliqué"); continue
