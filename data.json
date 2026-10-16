@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "updated": "2026-10-14",
- "updated_label": "14 oct. 2026",
+ "updated": "2026-10-16",
+ "updated_label": "16 oct. 2026",
  "elec_ref": {
   "k": "edf",
   "name": "EDF",
@@ -18,7 +18,7 @@
    "offer": "Électricité 100 % renouvelable Europe",
    "a": 0.1753,
    "b": 0.1906,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -81,7 +81,7 @@
    "offer": "NovaFixe Élec",
    "a": 0.1837,
    "b": 0.1823,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -121,7 +121,7 @@
    "offer": "Contrat+ Électricité",
    "a": 0.1907,
    "b": 0.1907,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -173,7 +173,7 @@
    "offer": "Essentielle Verte",
    "a": 0.1919,
    "b": 0.1904,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -281,7 +281,7 @@
    "offer": "Intelligent Octopus",
    "a": 0.1968,
    "b": 0.1953,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -354,7 +354,7 @@
    "offer": "Elec Référence 3 ans",
    "a": 0.233,
    "b": 0.2347,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -368,7 +368,7 @@
    "offer": "ÉnRFixe+ Elec",
    "a": 0.24,
    "b": 0.2385,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -383,7 +383,7 @@
    "offer": "Offre Base",
    "a": 0.2541,
    "b": 0.2571,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -405,7 +405,7 @@
    "name": "Ekwateur",
    "offer": "Gaz Naturel 15 % Biogaz Fixe",
    "a": 0.1246,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -481,7 +481,7 @@
    "name": "Gaz de Bordeaux",
    "offer": "NovaFixe BioGaz",
    "a": 0.1346,
-   "d": "14 oct. 2026",
+   "d": "16 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -548,14 +548,6 @@
    "ab1": 389.64,
    "ab0": 174.0,
    "zones": {
-    "b0": [
-     0.1704,
-     0.1704,
-     0.1704,
-     0.1704,
-     0.1704,
-     0.1704
-    ],
     "b1": [
      0.1386,
      0.1393,
@@ -563,6 +555,14 @@
      0.1406,
      0.1413,
      0.1419
+    ],
+    "b0": [
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704
     ]
    },
    "nivd": "01/10/2026",
@@ -580,14 +580,6 @@
    "ab1": 389.64,
    "ab0": 174.0,
    "zones": {
-    "b0": [
-     0.21,
-     0.21,
-     0.21,
-     0.21,
-     0.21,
-     0.21
-    ],
     "b1": [
      0.1698,
      0.1706,
@@ -595,6 +587,14 @@
      0.1724,
      0.1732,
      0.1741
+    ],
+    "b0": [
+     0.21,
+     0.21,
+     0.21,
+     0.21,
+     0.21,
+     0.21
     ]
    },
    "nivd": "01/10/2026",
@@ -1161,24 +1161,24 @@
   }
  },
  "abo_d": {
-  "ekw": "14 oct. 2026",
+  "ekw": "16 oct. 2026",
   "total": "14 oct. 2026",
-  "gdb": "14 oct. 2026",
+  "gdb": "16 oct. 2026",
   "geg": "14 oct. 2026",
   "plen": "13 oct. 2026",
   "ohm": "13 oct. 2026",
-  "dyneff": "14 oct. 2026",
+  "dyneff": "16 oct. 2026",
   "mint": "14 oct. 2026",
-  "primeo": "14 oct. 2026",
+  "primeo": "16 oct. 2026",
   "edf": "14 oct. 2026",
   "llum": "14 oct. 2026",
   "alterna": "14 oct. 2026",
-  "octo": "14 oct. 2026",
-  "engie": "14 oct. 2026",
+  "octo": "16 oct. 2026",
+  "engie": "16 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
-  "ilek": "14 oct. 2026",
-  "enercoop": "14 oct. 2026"
+  "ilek": "16 oct. 2026",
+  "enercoop": "16 oct. 2026"
  },
  "duo": [
   {
@@ -1436,7 +1436,7 @@
    "niv": "confirmer"
   }
  ],
- "updated_time": "08:18",
+ "updated_time": "09:36",
  "liens": {
   "edf": "https://particulier.edf.fr/",
   "total": "https://www.totalenergies.fr/particuliers",
