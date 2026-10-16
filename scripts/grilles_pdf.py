@@ -13,7 +13,7 @@ Entrée de sources.json, rubrique « grilles » :
   Au lieu de « page », une entrée peut donner « url » : adresse stable du PDF, ou adresse qui redirige vers le PDF du moment.
   type « cp-gaz » : grille par code postal, intégrée automatiquement (fichier prix-cp/…, offre de data.json) ;
   type « info »   : PDF seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main."""
-import hashlib, html.parser, json, os, re, subprocess, tempfile, urllib.parse
+import time, hashlib, html.parser, json, os, re, subprocess, tempfile, urllib.parse
 import cp_prix
 
 class _Liens(html.parser.HTMLParser):
@@ -76,20 +76,52 @@ def lire_date(txt):
     m = re.search(r"applicables?\s+au\s+(\d\d/\d\d/\d{4})", txt) or re.search(r"(?:en vigueur|valables?)\s+(?:à partir du|au|depuis le)\s+(\d\d/\d\d/\d{4})", txt)
     return m.group(1) if m else None
 
-def _telecharger(url, allowed):
-    import urllib.request, os
+def _telecharger(url, allowed, ouvrir=None, pause=None):
+    """Télécharge avec le nom du robot. En cas de « trop de requêtes » (429) ou de panne passagère (503), attend et réessaie."""
+    import urllib.request, urllib.error, os, time
+    ouvrir = ouvrir or urllib.request.urlopen; pause = pause or time.sleep
     ua = "ComparateurEnergieBot/1.0 (+" + os.environ.get("CONTACT", "mise a jour mensuelle, non lucratif") + ")"
     if not allowed(url, ua): raise RuntimeError("interdit par robots.txt")
     req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Language": "fr"})
-    with urllib.request.urlopen(req, timeout=60) as r: return r.read()
+    for attente in (15, 45, 120, None):
+        try:
+            with ouvrir(req, timeout=60) as r: return r.read()
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 503) or attente is None: raise
+            try: ra = int(e.headers.get("Retry-After", "0")) if e.headers else 0
+            except ValueError: ra = 0
+            pause(min(max(attente, ra), 180))
 
-def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=None, to_text=None):
+def proposer(e, data, txt, rep, url, ask_fn=None):
+    """Quand le PDF d'une offre change : demande à l'IA les prix qu'il contient et les met dans le rapport, à côté
+    des prix actuels. Ne modifie jamais data.json : une grille officielle se saisit à la main après relecture."""
+    import update_prices as up
+    ask_fn = ask_fn or up.ask
+    for kind, lst in (("elec", data.get("elec", [])), ("gaz", data.get("gas", []))):
+        r = next((x for x in lst if x["k"] == e["k"] and x["offer"] == e["offre"]), None)
+        if not r: continue
+        champs = {"kwh": ("prix du kWh TTC, option Base, 6 kVA (prix unique), en €/kWh" if kind == "elec"
+                          else "prix du kWh TTC de gaz, profil chauffage (B1), en €/kWh")}
+        got, _ = ask_fn(f"{e['k']} · {e['offre']} (PDF)", url, txt, e["offre"], champs, {}, rep, f"Offre cherchée : {e['offre']}.", nocache=True)
+        if not got: return
+        v, why = up.check_field(got.get("kwh"), up.norm(txt), *up.BOUNDS["elec_kwh" if kind == "elec" else "gas_kwh"])
+        nom = f"{e['k']} · {e['offre']}"
+        if v is None: rep.review.append(f"{nom} : PDF modifié, l'IA n'a pas pu lire le prix ({why}), à intégrer à la main : {url}"); return
+        if abs(v - r["a"]) < 0.00005: rep.same.append(f"{nom} : PDF modifié mais le prix du kWh lu ({v}) est identique au nôtre ({url})"); return
+        rep.review.append(f"{nom} : PDF modifié, prix du kWh lu {v} (le nôtre : {r['a']}), à vérifier et saisir à la main : {url}"); return
+
+def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=None, to_text=None, ask_fn=None):
     """get(url) -> octets (page ou PDF). to_text(octets) -> texte. Injectables pour les tests."""
     entrees = src.get("grilles") or []
     if not entrees: return
     if get is None:
         import update_prices; allowed = allowed or update_prices.allowed
-        get = lambda u: _telecharger(u, allowed)
+        _cache = {}
+        def get(u):   # une même page n'est téléchargée qu'une fois par lancement (Octopus : trois entrées, une page), avec une pause entre sites
+            if u not in _cache:
+                time.sleep(float(os.environ.get("FETCH_DELAY", "2")))
+                _cache[u] = _telecharger(u, allowed)
+            return _cache[u]
     to_text = to_text or texte_pdf
     racine = racine or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     mem = state.setdefault("grilles", {})
@@ -114,7 +146,13 @@ def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=No
             if e.get("type") != "cp-gaz":
                 if nom not in mem:   # première vue : enregistré comme référence (grille déjà intégrée à la main), pas de fausse alerte
                     mem[nom] = {"sha": h, "url": url}; rep.same.append(f"{nom} : PDF enregistré comme référence ({url})"); continue
-                rep.review.append(f"{nom} : PDF nouveau ou modifié, à intégrer à la main : {url}"); mem[nom] = {"sha": h, "url": url}; continue
+                mem[nom] = {"sha": h, "url": url}
+                if ask_fn or os.environ.get("GEMINI_API_KEY") or os.environ.get("MISTRAL_API_KEY") or os.environ.get("ANTHROPIC_API_KEY"):
+                    n0 = len(rep.review) + len(rep.same)
+                    try: proposer(e, data, to_text(raw), rep, url, ask_fn)
+                    except Exception as ex: rep.failed.append(f"{nom} : lecture IA du PDF en échec ({ex})")
+                    if len(rep.review) + len(rep.same) > n0: continue
+                rep.review.append(f"{nom} : PDF nouveau ou modifié, à intégrer à la main : {url}"); continue
             txt = to_text(raw)
             date = lire_date(txt)
             if not date: rep.review.append(f"{nom} : date de la grille introuvable dans {url}, non appliqué"); continue

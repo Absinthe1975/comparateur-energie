@@ -106,3 +106,44 @@ class Urls_directes(unittest.TestCase):
             rep = self.lancer(e, {"https://x.fr/tarifs-gaz-indexe": b"%PDF-1.4 t"}, d, {}, racine=t); self.assertEqual(len(rep.applied), 1, rep.failed + rep.review)
             f = json.load(open(os.path.join(t, "prix-cp/alterna-test.json"), encoding="utf-8")); self.assertEqual(f["source"], "https://x.fr/tarifs-gaz-indexe")
 if __name__ == "__main__": unittest.main()
+
+
+class Proposition_ia(unittest.TestCase):
+    E = {"k": "llum", "offre": "Base", "url": "https://x.fr/g.pdf", "type": "info"}
+    def lancer(self, kwh, quote, state):
+        rep = update_prices.Report()
+        data = {"elec": [{"k": "llum", "offer": "Base", "a": 0.19}], "gas": []}
+        def ia(label, url, text, needle, fields, st, rp, extra="", nocache=False):
+            return {"kwh": {"value": kwh, "quote": quote}}, None
+        pdf = [b"%PDF-1.4 un", b"%PDF-1.4 deux"][state.pop("n", 0)]
+        grilles_pdf.update_grilles(data, {"grilles": [self.E]}, state, rep, None, get=lambda u: pdf, to_text=lambda raw: "Base : prix du kWh 0,2010 € TTC", ask_fn=ia)
+        return rep, data
+    def test_pdf_modifie_propose_sans_appliquer(self):
+        st = {}; self.lancer(0.19, "prix du kWh 0,19 €", st)           # première vue : référence
+        st["n"] = 1
+        rep, data = self.lancer(0.2010, "Base : prix du kWh 0,2010 € TTC", st)
+        self.assertEqual(len(rep.review), 1); self.assertIn("0.201", rep.review[0]); self.assertEqual(data["elec"][0]["a"], 0.19)
+    def test_citation_fausse_refusee(self):
+        st = {}; self.lancer(0.19, "x", st); st["n"] = 1
+        rep, data = self.lancer(0.2010, "phrase inventée 0,2010", st)
+        self.assertIn("n'a pas pu lire", rep.review[0]); self.assertEqual(data["elec"][0]["a"], 0.19)
+
+
+class Reessai_429(unittest.TestCase):
+    def test_429_puis_succes(self):
+        import urllib.error
+        appels, pauses = [], []
+        class R:
+            def __enter__(s): return s
+            def __exit__(s, *a): pass
+            def read(s): return b"ok"
+        def ouvrir(req, timeout):
+            appels.append(1)
+            if len(appels) < 3: raise urllib.error.HTTPError("https://x.fr", 429, "x", {}, None)
+            return R()
+        self.assertEqual(grilles_pdf._telecharger("https://x.fr", lambda u, ua: True, ouvrir, pauses.append), b"ok")
+        self.assertEqual((len(appels), pauses), (3, [15, 45]))
+    def test_404_pas_de_reessai(self):
+        import urllib.error
+        def ouvrir(req, timeout): raise urllib.error.HTTPError("https://x.fr", 404, "x", {}, None)
+        with self.assertRaises(urllib.error.HTTPError): grilles_pdf._telecharger("https://x.fr", lambda u, ua: True, ouvrir, lambda s: None)
