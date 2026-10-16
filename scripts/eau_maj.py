@@ -67,15 +67,29 @@ def suspects(com, seuil=2.0):
             except (IndexError, ValueError): pass
     return out
 
+def premier_qui_marche(modeles, an, dest, telecharger=telecharger):
+    """Essaie chaque adresse candidate (modèle avec {an}) ; garde la première qui livre un vrai classeur Excel."""
+    modeles = [modeles] if isinstance(modeles, str) else list(modeles)
+    erreurs = []
+    for m in modeles:
+        url = m.replace("{an}", str(an))
+        try:
+            telecharger(url, dest)
+            tete = open(dest, "rb").read(8)
+            if tete[:4] == b"PK\x03\x04" or tete == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1": print("adresse retenue :", url); return url
+            erreurs.append("%s : ce n'est pas un fichier Excel" % url)
+        except Exception as e:
+            erreurs.append("%s : %s" % (url, e))
+    raise RuntimeError("aucune adresse ne donne un fichier Excel : " + " | ".join(erreurs))
+
 def annee_disponible(cfg, dossier, telecharger=telecharger, convertir=xls_vers_csv):
     """Essaie les années de la plus récente à la plus ancienne ; renvoie l'année dont les 4 feuilles ont des données."""
     for an in sorted(cfg["annees"], reverse=True):
         ok = True
         for code, nom in (("AEP", "tarifs_AEP"), ("AC", "tarifs_AC")):
-            url = cfg["sispea"][code].replace("{an}", str(an))
             tmp = os.path.join(dossier, "%s_%s.xls" % (nom, an))
             try:
-                telecharger(url, tmp)
+                premier_qui_marche(cfg["sispea"][code], an, tmp, telecharger)
                 n = convertir(tmp, "Zones tarifaires", os.path.join(dossier, "%s_%s.csv" % (nom, an)))
                 d = convertir(tmp, "Détail tarifaire", os.path.join(dossier, "detail_%s_%s.csv" % (code, an)))
             except Exception as e:
@@ -89,7 +103,7 @@ def main():
     cfg_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(RACINE, "eau-config.json")
     dst = sys.argv[2] if len(sys.argv) > 2 else os.path.join(RACINE, "communes-cp.json")
     cfg = json.load(open(cfg_path, encoding="utf-8"))
-    if any("A_COMPLETER" in u for u in cfg["sispea"].values()):
+    if any("A_COMPLETER" in u for v in cfg["sispea"].values() for u in ([v] if isinstance(v, str) else v)):
         print("eau-config.json : adresses des fichiers SISPEA à renseigner."); return 1
     ancien = json.load(open(dst, encoding="utf-8")) if os.path.exists(dst) else {}
     with tempfile.TemporaryDirectory() as dossier:
