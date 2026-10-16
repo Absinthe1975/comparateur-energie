@@ -110,7 +110,7 @@ def main():
         telecharger(cfg["laposte"], os.path.join(dossier, "019HexaSmal.csv"))
         an = annee_disponible(cfg, dossier)
         if not an:
-            print("Aucune année SISPEA exploitable : communes-cp.json conservé."); return 0
+            print("Aucune année SISPEA exploitable (voir les lignes ci-dessus) : communes-cp.json conservé."); return 1
         # noms avec accents : repris du fichier actuel (la base La Poste est en majuscules sans accents)
         gn = {cp: "|".join(i.split("~")[1] if "~" in i else i for i in v.split("|")) for cp, v in ancien.items()}
         json.dump(gn, open(os.path.join(dossier, "zones_gn.json"), "w", encoding="utf-8"), ensure_ascii=False)
