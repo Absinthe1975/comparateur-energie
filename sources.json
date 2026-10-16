@@ -309,6 +309,12 @@
    "offre": "Pleniweb 1 an Gaz",
    "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf",
    "type": "info"
+  },
+  {
+   "k": "primeo",
+   "offre": "Essentielle Verte",
+   "url": "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf",
+   "type": "info"
   }
  ]
 }
