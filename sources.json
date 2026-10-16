@@ -315,6 +315,12 @@
    "offre": "Électricité verte, Base compteur non communicant (prix unique)",
    "url": "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf",
    "type": "info"
+  },
+  {
+   "k": "primeo",
+   "offre": "Essentielle Verte",
+   "url": "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf",
+   "type": "info"
   }
  ]
 }
