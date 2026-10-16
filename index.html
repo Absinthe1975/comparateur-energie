@@ -149,6 +149,11 @@ table.apps { min-width: 520px; }
 .barrow .num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
 .track { display: block; background: var(--ref-bg); border-radius: 3px; height: 10px; }
 .fill { display: block; background: var(--accent); height: 10px; border-radius: 3px; }
+.flt { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 8px 0; font-size: 14px; }
+.flt select { font: inherit; padding: 6px 8px; border-radius: 6px; }
+.flt label { display: inline-flex; gap: 6px; align-items: center; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.tags .badge { font-weight: 400; }
 .btn { font: inherit; font-weight: 500; border: 0; background: var(--accent); color: var(--bg); padding: 9px 14px; border-radius: 6px; cursor: pointer; align-self: flex-start; }
 .note ul { margin: 6px 0 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
 @media (max-width: 860px) {
@@ -393,6 +398,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 <section class="panel" id="p-elec" role="tabpanel" aria-labelledby="tab-elec" hidden>
     <h2>Électricité, option Base</h2>
     <p class="lede">Les offres classées pour votre consommation et la puissance de votre compteur, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
+    <div class="flt" id="flt-elec"></div>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
@@ -402,6 +408,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
   <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
     <h2>Gaz naturel</h2>
     <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
+    <div class="flt" id="flt-gaz"></div>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
@@ -588,6 +595,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
         <li><strong>Gaz en Base et B0 :</strong> prix et abonnements réels pour les offres à grille officielle ; estimés à partir de l'écart du prix repère pour les autres (étoile).</li>
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> Plenitude (une seule source pour le montant du parrain), Ekwateur (montant du parrain absent du règlement), Mint Énergie, Happ-e (20 à 40 €), LLUM et ilek (une seule source). Octopus, Alpiq, EDF et Gaz de Bordeaux viennent de comparateurs. Primeo, ENGIE (20 €, plus 5 € avec l'option verte) et TotalEnergies (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
+        <li><strong>Filtres des offres :</strong> prix fixe ou indexé, engagement et offre verte sont renseignés pour une trentaine d'offres seulement (d'après leur nom ou leur grille). À compléter pour les autres en lisant la fiche descriptive de chaque offre (champs typ, eng et vert dans data.json), et à faire relire par le script plus tard.</li>
         <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
         <li><strong>Indicateur de confiance :</strong> un repère visuel unique par ligne (relevé, estimé, à vérifier), au lieu de l'astérisque et des mentions dispersées.</li>
       </ul>
@@ -699,7 +707,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, et les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
         <li>Pour le gaz, la zone des distributeurs locaux (Bordeaux, Strasbourg, Colmar) n'est pas modélisée.</li>
         <li>Pour l'eau, environ 8 700 communes n'ont pas de prix au SISPEA ; le site le dit et utilise une moyenne indicative. Pour les communes sans assainissement renseigné, seule l'eau potable est comptée.</li>
-        <li>La qualité du service, la durée d'engagement et l'origine de l'énergie ne sont pas comparées.</li>
+        <li>Les filtres « prix fixe / indexé », « engagement » et « offres vertes » ne reposent que sur ce qui est écrit dans le nom ou la grille de l'offre. Quand la caractéristique n'est pas relevée, l'offre disparaît dès que vous activez le filtre. La qualité du service n'est pas comparée.</li>
       </ul>
     </div>
 
@@ -986,6 +994,35 @@ function nivBadge(r) {
     + (r.cpk ? ' <span class="badge' + (r.cpk === "cp" ? "" : " check") + '">' + (r.cpk === "cp" ? "Prix du " + esc(r.cpc) : r.cpk === "dep" ? "Code postal absent : moyenne du département" : "Code postal absent : moyenne de la grille") + "</span>" : "") + "</div>";
   return '<div class="offer"><span class="badge check">À confirmer</span></div>';
 }
+function tagsLine(r) {
+  if (r.ref) return "";
+  var t = [];
+  if (r.typ === "fixe") t.push("Prix fixe"); else if (r.typ === "indexe") t.push("Prix indexé");
+  if (r.eng === 0) t.push("Sans engagement"); else if (typeof r.eng === "number") t.push("Engagement " + r.eng + " mois");
+  if (r.vert) t.push("Verte ou biogaz");
+  return t.length ? '<div class="tags">' + t.map(function (x) { return '<span class="badge">' + esc(x) + "</span>"; }).join("") + "</div>" : "";
+}
+function fltPass(r, f) {
+  if (f.typ && r.typ !== f.typ) return false;
+  if (f.vert && !r.vert) return false;
+  if (f.eng !== "" && !(typeof r.eng === "number" && r.eng <= parseInt(f.eng, 10))) return false;
+  return true;
+}
+function fltActive(f) { return !!(f.typ || f.vert || f.eng !== ""); }
+function buildFilters(kind) {
+  var el = $("flt-" + kind); if (!el) return;
+  var f = state.flt[kind];
+  function opt(v, t, cur) { return '<option value="' + v + '"' + (cur === v ? " selected" : "") + ">" + t + "</option>"; }
+  el.innerHTML = '<label>Prix <select data-k="typ">' + opt("", "Tous", f.typ) + opt("fixe", "Prix fixe", f.typ) + opt("indexe", "Prix indexé", f.typ) + "</select></label>"
+    + '<label>Engagement <select data-k="eng">' + opt("", "Tous", f.eng) + opt("0", "Sans engagement", f.eng) + opt("12", "12 mois maximum", f.eng) + opt("24", "24 mois maximum", f.eng) + "</select></label>"
+    + '<label><input type="checkbox" data-k="vert"' + (f.vert ? " checked" : "") + "> Offres vertes ou biogaz</label>"
+    + '<span class="note" id="flt-n-' + kind + '"></span>';
+  el.onchange = function (ev) {
+    var k = ev.target.getAttribute("data-k"); if (!k) return;
+    f[k] = k === "vert" ? ev.target.checked : ev.target.value;
+    refresh();
+  };
+}
 function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var aboMap = kind === "elec" ? ABO_E : ABO_G;
   var all = list.concat([ref]).map(function (r) {
@@ -997,6 +1034,13 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     var cons = r[field] * conso;
     return Object.assign({}, r, { _abo: abo, _est: est, _cons: cons, _tot: cons + abo });
   });
+  var fk = kind === "elec" ? "elec" : "gaz", fl = state.flt[fk], hidden = 0;
+  if (fltActive(fl)) { var before = all.length; all = all.filter(function (r) { return r.ref || fltPass(r, fl); }); hidden = before - all.length; }
+  var fn_ = $("flt-n-" + fk); if (fn_) fn_.textContent = fltActive(fl) ? hidden + " offre(s) masquée(s) : caractéristique différente ou non relevée." : "";
+  if (all.filter(function (r) { return !r.ref; }).length === 0) {
+    var be0 = $("best-" + kind); if (be0) be0.textContent = "Aucune offre ne correspond à ces filtres (les offres dont la caractéristique n'est pas relevée sont masquées).";
+    $(tableId).innerHTML = ""; return;
+  }
   all = sortRows(all, sortKey);
   var refTot = all.filter(function (r) { return r.ref; })[0]._tot;
   var bestRow = all.filter(function (r) { return !r.ref; }).sort(function (a, b) { return a._tot - b._tot; })[0];
@@ -1013,7 +1057,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else if (Math.round(diff) === 0) d = "0 €";
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
-    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
       + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
@@ -1564,7 +1608,7 @@ function initEau() {
 
 /* ---------- Interface ---------- */
 var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "prime", "memo", "methode", "sources", "legal"];
-var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0 };
+var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -1689,7 +1733,9 @@ function renderDuo() {
   el.innerHTML = h + "</tbody>";
 }
 
+var fltBuilt = false;
 function refresh() {
+  if (!fltBuilt) { fltBuilt = true; buildFilters("elec"); buildFilters("gaz"); }
   syncAuto();
   state.gasOpt = $("gopt").value; state.gasZone = parseInt($("gzone").value, 10) || 1;
   if (state.tab === "elec") state.elecConso = conso();
