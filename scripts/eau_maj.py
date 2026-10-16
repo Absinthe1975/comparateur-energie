@@ -56,6 +56,17 @@ def comparer(ancien, nouveau, max_perte=0.03, max_ecart=0.25):
             pb.append("%d codes postaux sur %d changent de plus de %d %%" % (len(bouge), len(commun), int(max_ecart * 100)))
     return pb
 
+def suspects(com, seuil=2.0):
+    """Communes dont le prix eau potable + assainissement (complet, non estimé) est sous le seuil : à vérifier à la main."""
+    out = {}
+    for cp, s in com.items():
+        for item in s.split("|"):
+            p = item.split("~")
+            try:
+                if len(p) > 3 and p[3] == "" and float(p[2]) < seuil: out[p[0]] = (p[1], float(p[2]))
+            except (IndexError, ValueError): pass
+    return out
+
 def annee_disponible(cfg, dossier, telecharger=telecharger, convertir=xls_vers_csv):
     """Essaie les années de la plus récente à la plus ancienne ; renvoie l'année dont les 4 feuilles ont des données."""
     for an in sorted(cfg["annees"], reverse=True):
@@ -95,6 +106,8 @@ def main():
         pb = comparer(ancien, nouveau)
         if pb:
             print("Résultat refusé :", "; ".join(pb)); return 1
+        for ins, (nom, pr) in sorted(suspects(nouveau).items()):
+            print("À vérifier : %s (%s) à %.2f €/m³ eau + assainissement, très bas" % (nom, ins, pr))
         if nouveau == ancien:
             print("Prix de l'eau %s : aucun changement." % an); return 0
         with open(dst, "w", encoding="utf-8") as f:
