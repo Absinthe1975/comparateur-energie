@@ -23,7 +23,7 @@ def xls_vers_csv(src, feuille, dest):
     """Exporte une feuille d'un classeur .xls/.xlsx en CSV UTF-8 ; renvoie le nombre de lignes de données."""
     import pandas as pd
     df = pd.read_excel(src, sheet_name=feuille, dtype=str)
-    df.to_csv(dest, index=False, encoding="utf-8", sep=";")
+    df.to_csv(dest, index=False, encoding="utf-8")   # virgule : build_eau.py lit avec csv.DictReader par défaut
     return len(df)
 
 def prix_valides(com):
