@@ -312,6 +312,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
       <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Parrainages</button>
       <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
+      <button role="tab" id="tab-methode" aria-selected="false" tabindex="-1" aria-controls="p-methode">Méthode</button>
       <button role="tab" id="tab-sources" aria-selected="false" tabindex="-1" aria-controls="p-sources">Sources</button>
       <button role="tab" id="tab-legal" aria-selected="false" tabindex="-1" aria-controls="p-legal">Mentions légales</button>
     </div>
@@ -652,6 +653,56 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </ul>
     </div>
     <p class="note">Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire.</p>
+  </section>
+
+<section class="panel" id="p-methode" role="tabpanel" aria-labelledby="tab-methode" hidden>
+    <h2>Comment on compare</h2>
+    <p class="lede">Ce que le site calcule, d'où viennent les chiffres, et ce qu'il ne sait pas faire. Les prix sont indicatifs : vérifiez-les chez le fournisseur avant de souscrire.</p>
+
+    <div class="card">
+      <h3>Le calcul</h3>
+      <ul>
+        <li><strong>Électricité :</strong> facture annuelle = consommation × prix du kWh + abonnement de votre puissance (3, 6 ou 9 kVA). Le classement se fait sur ce total, du moins cher au plus cher, pas sur le seul prix du kWh.</li>
+        <li><strong>Gaz :</strong> même calcul, avec l'option tarifaire de votre logement (Base, B0 ou B1). La comparaison porte par défaut sur le profil chauffage (B1).</li>
+        <li><strong>Eau :</strong> on ne compare pas d'offres, car on ne choisit pas son service d'eau : le site estime votre facture avec le prix de votre commune et l'abonnement de votre service, d'après le SISPEA.</li>
+        <li><strong>Élec + Gaz :</strong> addition de l'électricité et du gaz chez le même fournisseur, avec ses offres combinées quand elles existent, ou séparées si vous le demandez.</li>
+        <li>Tous les prix sont <strong>TTC</strong>, pour la France métropolitaine.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Ce que veulent dire les mentions sous chaque offre</h3>
+      <ul>
+        <li><span class="badge">Grille officielle du jj/mm/aaaa</span> : le prix est lu dans la grille tarifaire publiée par le fournisseur lui-même, à la date indiquée. Un programme automatique peut signaler un changement de cette grille, mais ne la modifie jamais seul.</li>
+        <li><span class="badge check">À confirmer</span> : le prix vient d'un comparateur ou d'une estimation, pas de la grille du fournisseur. Il peut être en retard ou approximatif.</li>
+        <li><span class="badge">Source officielle (CRE)</span> : tarif réglementé de l'électricité et prix repère du gaz, publiés par la Commission de régulation de l'énergie.</li>
+        <li><span class="badge">Prix du code postal</span> : pour les offres dont la grille est publiée par code postal, le prix exact de votre code postal est affiché. S'il n'y figure pas, c'est la moyenne du département, puis de la grille, et c'est écrit.</li>
+        <li>Une <strong>étoile</strong> signale un abonnement estimé à partir de l'écart avec le tarif réglementé, quand la grille officielle ne le donne pas.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Comment les prix sont mis à jour</h3>
+      <p>Un programme automatique lit les sources officielles (CRE) et les pages publiques des fournisseurs, chaque jour du 1er au 10 du mois puis chaque lundi. Il ne modifie jamais le site directement : il propose les changements, qui sont relus par l'éditeur avant d'être publiés. Pour le prix de l’eau, une mise à jour mensuelle (en cours de mise en place) reprendra la dernière année publiée par le SISPEA. Une intelligence artificielle aide à lire certaines pages, jamais pour modifier une grille officielle. Le détail est dans l'onglet Mentions légales.</p>
+    </div>
+
+    <div class="card">
+      <h3>Les primes de parrainage</h3>
+      <p>Le site affiche seulement le montant des primes. Il ne propose aucun lien ni code de parrainage et n'est rémunéré par personne. Le classement par prix ne tient pas compte des primes, qui sont ponctuelles.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ce que le site ne sait pas encore faire</h3>
+      <ul>
+        <li>Les offres à tarifs différenciés (heures pleines/creuses, week-end, saisonniers, Tempo) ne sont pas modélisées, donc absentes des tableaux ou approchées. Octopus saisonnier suppose 58 % de la consommation en hiver.</li>
+        <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, et les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li>Pour le gaz, la zone des distributeurs locaux (Bordeaux, Strasbourg, Colmar) n'est pas modélisée.</li>
+        <li>Pour l'eau, environ 8 700 communes n'ont pas de prix au SISPEA ; le site le dit et utilise une moyenne indicative. Pour les communes sans assainissement renseigné, seule l'eau potable est comptée.</li>
+        <li>La qualité du service, la durée d'engagement et l'origine de l'énergie ne sont pas comparées.</li>
+      </ul>
+    </div>
+
+    <p class="note">Une erreur, un prix périmé ? Écrivez-moi (adresse dans l'onglet Mentions légales). Pour une comparaison officielle et personnalisée, utilisez aussi le <a href="https://comparateur-offres.energie-info.fr/" target="_blank" rel="noopener">comparateur du Médiateur national de l'énergie</a>.</p>
   </section>
 
 <section class="panel" id="p-legal" role="tabpanel" aria-labelledby="tab-legal" hidden>
@@ -1511,7 +1562,7 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "prime", "memo", "sources", "legal"];
+var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "prime", "memo", "methode", "sources", "legal"];
 var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0 };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
@@ -1706,7 +1757,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", sources: "Sources", legal: "Mentions légales" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", legal: "Mentions légales" };
 function a11yTabs() {
   TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
 }
@@ -1762,7 +1813,7 @@ function setTab(t) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "legal";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "methode" || t === "legal";
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz"; $("f-gzone").hidden = t !== "gaz";
