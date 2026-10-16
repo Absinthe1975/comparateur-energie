@@ -497,25 +497,14 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
   <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
     <h2>Mémo : ce qu'il reste à ajouter</h2>
-    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo mis à jour le 15 octobre 2026. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer.</p>
+    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo mis à jour le 16 octobre 2026 : seul ce qui reste à faire y figure, ce qui est terminé est retiré. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer.</p>
 
     <div class="card">
-      <h3>1. Mise à jour automatique des prix <span class="badge ok">En service, à étendre</span></h3>
-      <p>Le workflow GitHub (chaque jour du 1er au 10, puis chaque lundi, ou à la main avec « Run workflow ») lit les sources, ouvre une demande de fusion que vous relisez, et ne touche jamais directement au site. Les modifications du code passent aussi par des demandes de fusion.</p>
-      <h3>Déjà en place</h3>
+      <h3>1. Mise à jour automatique des prix <span class="badge check">À étendre</span></h3>
       <ul>
-        <li><strong>Sources officielles de la CRE</strong> (tarif réglementé, prix repère du gaz) et <strong>prix du prix repère par zone chez Mint</strong> (page Mint lue automatiquement, appliquée le 14 octobre).</li>
-        <li><strong>Grilles officielles saisies à la main</strong> (niveau « Grille officielle du jj/mm/aaaa ») : 18 offres d'électricité et 17 offres de gaz, ainsi que les duos EDF, Octopus et GEG. L'IA ne retouche plus jamais une offre en « Grille officielle ».</li>
-        <li><strong>Prix par code postal</strong> : Alterna gaz (2 offres), un fichier par offre dans le dossier prix-cp. Prix exact si le code postal figure dans la grille, sinon moyenne du département, puis de la grille.</li>
-        <li><strong>Détection automatique des PDF par leur lien</strong> (rubrique « grilles » de sources.json) : le script retrouve le PDF même si son nom change. Pour l'instant lu et intégré automatiquement pour Alterna gaz seulement.</li>
-        <li><strong>Liens vers les fournisseurs</strong> (nom cliquable) et vérification automatique des liens à chaque mise à jour.</li>
-      </ul>
-      <h3>À faire</h3>
-      <ul>
-        <li><strong>Pages des grilles tarifaires de chaque fournisseur</strong> (à fournir) : sans elles, le script ne peut pas détecter les nouveaux PDF. Commencer par EDF, Alterna (page où figurent « Grille tarifaire » et « Fiche descriptive »), GEG (page des tarifs : geg.fr, rubrique centre de documentation, tarifs), Plenitude et Octopus.</li>
-        <li><strong>Lecture des PDF par l'IA</strong> pour les fournisseurs autres qu'Alterna, avec citation obligatoire et comparaison des dates : n'appliquer une grille que si elle est plus récente et si les prix restent plausibles. Archiver chaque PDF avec sa date.</li>
-        <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots (28 sources en échec lors du premier rapport). Les remplacer par les grilles officielles des fournisseurs.</li>
-        <li><strong>Lire le prochain rapport</strong> après la fusion : section « Liens fournisseur en échec » (corriger les adresses), lignes Mint et CRE, offres encore « À relire ».</li>
+        <li><strong>Après chaque fusion :</strong> lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes Mint et CRE, offres « À relire », premiers repères des PDF suivis).</li>
+        <li><strong>Lecture des PDF par l'IA</strong> pour les fournisseurs autres qu'Alterna (EDF, GEG, Octopus, Plenitude, LLUM, Primeo suivis seulement : le script signale un changement mais ne lit pas les prix), avec citation obligatoire et comparaison des dates. Archiver chaque PDF avec sa date.</li>
+        <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer par les grilles officielles des fournisseurs (voir 1 bis).</li>
         <li><strong>Prix indexés</strong> (Alterna, Mint gaz, OHM, Happ-e…) : leur grille change chaque mois, donc à relire au 1er de chaque mois.</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site.</li>
         <li><strong>Textes à chiffres fixes :</strong> il reste quelques chiffres écrits en dur (tarif réglementé 12 et 18 kVA, hausse du réseau du 1er août).</li>
@@ -526,17 +515,18 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
     <div class="card">
       <h3>1 bis. Grilles manquantes ou à confirmer <span class="badge check">À faire, au fil des envois</span></h3>
-      <p>Offres encore marquées « À confirmer » : à remplacer par la grille officielle datée du fournisseur (PDF ou capture).</p>
+      <p>Offres encore marquées « À confirmer » : à remplacer par la grille officielle datée du fournisseur (PDF ou adresse de la page stable).</p>
       <ul>
-        <li><strong>Gaz de Bordeaux</strong> : NovaFixe Élec et NovaFixe BioGaz. Les prix varient selon le code postal (grille par commune à intégrer) ; manquent aussi les conditions du NovaFixe Duo et du Bonus Élec.</li>
+        <li><strong>Gaz de Bordeaux</strong> : NovaFixe Élec et NovaFixe BioGaz. Les prix gaz varient selon le code postal (grille par commune à intégrer) ; manquent aussi les conditions du NovaFixe Duo et du Bonus Élec.</li>
         <li><strong>ENGIE</strong> : Elec Référence 3 ans et Gaz Référence 3 ans (le gaz à 0,1373 €/kWh est à valider), et le duo.</li>
         <li><strong>ilek</strong> : ÉnRFixe+ Élec et Gaz (le gaz à 0,1633 €/kWh est à valider), et le duo.</li>
-        <li><strong>Mint Énergie</strong> : grilles gaz Classic et Smart d'octobre (seules celles de novembre ont été reçues, elles ne sont plus en ligne) ; duos Mint.</li>
+        <li><strong>Mint Énergie</strong> : grilles gaz Classic et Smart d'octobre (non en ligne) ; duos Mint.</li>
         <li><strong>TotalEnergies</strong> : gaz « Fixe 2 ans » et le duo.</li>
-        <li><strong>Plenitude</strong> : les grilles Pleniweb 1 an (élec et gaz) sont à jour ; il n'existe pas d'offre combinée, le duo a été retiré. Reste la grille Plenifix actuelle, si l'offre est toujours commercialisée.</li>
-        <li><strong>Octopus</strong> : grille de l'offre Cocon fixe et de l'offre Intelligent Octopus.</li>
+        <li><strong>Octopus</strong> : grille de l'offre Cocon fixe (fiche reçue, sans prix) et de l'offre Intelligent Octopus.</li>
         <li><strong>Dyneff</strong> : électricité Contrat+ (grille datée).</li>
-        <li><strong>Ekwateur</strong> (électricité et gaz, duos), <strong>Alpiq</strong> (Sérénité), <strong>LLUM</strong>, <strong>Primeo</strong> (Essentielle Verte), <strong>Enercoop</strong> (Offre Base) : aucune grille officielle encore reçue.</li>
+        <li><strong>Alpiq</strong> (Sérénité) et <strong>Enercoop</strong> (Offre Base) : aucune grille officielle encore reçue.</li>
+        <li><strong>Ekwateur</strong> (électricité, gaz et duos) : le prix n'apparaît qu'à la souscription (code postal demandé), pas de grille publique à suivre. Il faut un PDF de grille, ou renoncer à « Grille officielle » pour cet acteur.</li>
+        <li><strong>Primeo</strong> (Essentielle Verte) : le prix est une formule (kWh HT à 95 % du tarif réglementé, abonnement identique). Notre 0,1919 €/kWh en 6 kVA est cohérent, mais calculé par nous (voir 1 ter).</li>
         <li><strong>Alterna</strong> : le duo n'a pas de grille officielle ; décider de retirer ces lignes de l'onglet Élec + Gaz ou de les garder en « À confirmer ».</li>
       </ul>
     </div>
@@ -544,6 +534,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>1 ter. Décisions et limites du calcul <span class="badge check">À trancher</span></h3>
       <ul>
+        <li><strong>LLUM, compteur Linky :</strong> la grille officielle d'août 2026 est lue (prix unique 0,19 €/kWh, abonnement 190,32 € en 6 kVA) mais ce prix ne concerne que les compteurs non communicants. Avec un Linky, LLUM applique une grille par saison et heures pleines/creuses (Base : 0,22276 € en heures pleines et 0,15064 € en heures creuses, selon la saison), non modélisée. À décider : modéliser une moyenne, ou afficher la mention.</li>
+        <li><strong>Primeo, prix calculé :</strong> à décider : l'afficher comme « calculé selon la formule officielle (TRV −5 %) » et le recalculer à chaque mise à jour du tarif réglementé, ou le laisser « À confirmer ».</li>
         <li><strong>Octopus saisonnier :</strong> le prix moyen suppose 58 % de la consommation en hiver. À confirmer ou corriger.</li>
         <li><strong>« Offre combinée non relevée » :</strong> mention proposée pour les fournisseurs sans duo relevé, non décidée.</li>
         <li><strong>Offres à tarifs différenciés</strong> (week-end, Tempo, heures pleines/creuses, Estival, Heures Super Creuses) : non modélisées, donc absentes des tableaux.</li>
@@ -556,15 +548,14 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </div>
 
     <div class="card">
-      <h3>2. Prix de l'eau par commune <span class="badge ok">En place, à fiabiliser</span></h3>
-      <p>Le site utilise maintenant le fichier officiel SISPEA : un prix pour environ 29 000 communes, choisies par code postal. Il reste à fiabiliser les cas où l'assainissement n'est pas renseigné, et à renouveler le fichier chaque année.</p>
+      <h3>2. Prix de l'eau par commune <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Renouvellement annuel :</strong> quand l'exercice 2026 sera saisi (le fichier était encore vide en octobre 2026), relancer scripts/build_eau.py avec les nouveaux fichiers SISPEA (tarifs eau potable et assainissement) et la base des codes postaux.</li>
-        <li><strong>Communes sans prix :</strong> environ 8 000 communes de la base des codes postaux n'ont aucun prix dans SISPEA ; elles reçoivent la moyenne de la région. À améliorer avec une autre source si elle apparaît.</li>
-        <li><strong>Abonnement :</strong> repris du SISPEA (part fixe eau potable + assainissement, TTC) pour les communes où il est renseigné ; sinon la moyenne du département, signalée comme telle sur le site ; et 99 € si le département n'a pas assez de communes renseignées (Paris, par exemple).</li>
-        <li><strong>Code postal :</strong> en place, avec la base officielle de La Poste : toutes les communes d'un code postal sont proposées et on choisit la sienne.</li>
-        <li><strong>Prix saisi à la main :</strong> possible dans la barre de l'onglet Eau, pour les communes sans prix.</li>
-                <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui. Avec le code postal, il suffira d'une table « code postal → zone » pour que le gaz en tienne compte.</li>
+        <li><strong>Automatisation :</strong> renseigner dans eau-config.json les adresses des fichiers SISPEA tarifs_AEP et tarifs_AC (services.eaufrance.fr), puis lancer une première fois « Mise à jour du prix de l'eau » et lire le résultat. Le workflow tourne ensuite chaque mois et prend la dernière année non vide (l'exercice 2026 était encore vide en octobre 2026).</li>
+        <li><strong>Communes sans prix :</strong> environ 8 700 communes n'ont aucun prix dans SISPEA ; le site le dit et utilise une moyenne indicative (région, ou nationale). À améliorer avec une autre source si elle apparaît.</li>
+        <li><strong>Abonnement estimé :</strong> pour environ 3 400 communes, médiane du département ; 99 € si le département n'a pas assez de données. Décider d'afficher aussi pour lui la mention « Données non communiquées… ».</li>
+        <li><strong>Prix très bas :</strong> 17 communes ont un prix eau potable + assainissement sous 2 €/m³ : Innimond (01680), Soleilhas (04120), Antibes (06160 et 06600, 1,49 €), La Rochette (06260), Châteauneuf-Grasse (06740), Belfort-sur-Rebenty et Sainte-Colombe-sur-Guette (11140), Castellare-di-Mercurio, Erbajolo et Favalello (20212), Lano (20244), Chauvac-Laux-Montaux (26510), Ballons et Lachau (26560), Heyrieux (38540), Chambon-sur-Dolore (63980). Vérifier chaque commune sur sa fiche SISPEA ou auprès de son service d'eau (assainissement collectif existant ou non, part d'assainissement omise ?), puis corriger ou signaler. Pistes, liens non vérifiés : <a href="https://www.services.eaufrance.fr/commune/06004/2021" target="_blank" rel="noopener">fiche SISPEA d'Antibes</a>, <a href="https://www.services.eaufrance.fr/donnees/recherche" target="_blank" rel="noopener">recherche SISPEA par commune</a>, <a href="https://www.paysdegrasse.fr/eau-et-assainissement" target="_blank" rel="noopener">eau et assainissement du Pays de Grasse</a> (Châteauneuf-Grasse), <a href="https://deliberations.antibes-juanlespins.com/jsp/openfile.jsp?datePub=25/11/2024&amp;dateRetLega=25/11/2024&amp;name=Acte%20n%C2%B0%20CM2024/242&amp;pdf=CJVCLancWiZgmUj%2Ftd5SGtSN9pLIMijos%2BzCW6VmMOfSw7LGM3GqeWWsqssgB7vXnu6WJTIza8o6zKZbQPLrRXh%2BNMDCrcwIeFWUeefWIMb4tIDHb0lUSXopG8enhLGSp6a9TLJEMW2O2ZuI8eAckgByBbQhksDlY5HiCmR3f3mU743KXxqvPEzUkG1JMYiQ" target="_blank" rel="noopener">délibération Antibes / CASA sur le rapport eau et assainissement (novembre 2024)</a>. Le script signale déjà ces communes dans son journal.</li>
+        <li><strong>Moyennes de la Corse et de la région Provence-Alpes-Côte d'Azur :</strong> peu fiables, la moyenne nationale est utilisée à la place.</li>
+        <li><strong>Zone tarifaire du gaz par commune :</strong> pas de liste trouvée, donc aucun écart n'est appliqué aujourd'hui. Avec le code postal, il suffira d'une table « code postal → zone » pour que le gaz en tienne compte.</li>
       </ul>
     </div>
 
@@ -580,14 +571,9 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>4. Données encore à confirmer <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Prix des offres :</strong> 18 offres d'électricité et 17 offres de gaz viennent maintenant des grilles officielles ; les autres, encore issues de comparateurs, sont listées dans la carte 1 bis.</li>
         <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
         <li><strong>Gaz en Base et B0 :</strong> prix et abonnements réels pour les offres à grille officielle ; estimés à partir de l'écart du prix repère pour les autres (étoile).</li>
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> Plenitude (une seule source pour le montant du parrain), Ekwateur (montant du parrain absent du règlement), Mint Énergie, Happ-e (20 à 40 €), LLUM et ilek (une seule source). Octopus, Alpiq, EDF et Gaz de Bordeaux viennent de comparateurs. Primeo, ENGIE (20 €, plus 5 € avec l'option verte) et TotalEnergies (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
-        <li><strong>Données d'eau :</strong> prix d'Antibes à vérifier, moyennes de la Corse et de la région Provence-Alpes-Côte d'Azur peu fiables, abonnement d'eau estimé (moyenne du département, ou 99 €) quand le service ne l'a pas renseigné.</li>
-        <li><strong>Eau, à reprendre plus tard : prix très bas.</strong> 17 communes ont un prix eau potable + assainissement sous 2 €/m³ : Innimond (01680), Soleilhas (04120), Antibes (06160 et 06600, 1,49 €), La Rochette (06260), Châteauneuf-Grasse (06740), Belfort-sur-Rebenty et Sainte-Colombe-sur-Guette (11140), Castellare-di-Mercurio, Erbajolo et Favalello (20212), Lano (20244), Chauvac-Laux-Montaux (26510), Ballons et Lachau (26560), Heyrieux (38540), Chambon-sur-Dolore (63980). À faire : vérifier chaque commune sur sa fiche SISPEA ou auprès de son service d'eau (assainissement collectif existant ou non, part d'assainissement omise ?), puis corriger ou signaler. Pistes à contrôler, ces liens et leurs numéros de commune n'ont pas été vérifiés : <a href="https://www.services.eaufrance.fr/commune/06004/2021" target="_blank" rel="noopener">fiche SISPEA d'Antibes</a>, <a href="https://www.services.eaufrance.fr/donnees/recherche" target="_blank" rel="noopener">recherche SISPEA par commune</a>, <a href="https://www.paysdegrasse.fr/eau-et-assainissement" target="_blank" rel="noopener">eau et assainissement du Pays de Grasse</a> (Châteauneuf-Grasse), <a href="https://deliberations.antibes-juanlespins.com/jsp/openfile.jsp?datePub=25/11/2024&amp;dateRetLega=25/11/2024&amp;name=Acte%20n%C2%B0%20CM2024/242&amp;pdf=CJVCLancWiZgmUj%2Ftd5SGtSN9pLIMijos%2BzCW6VmMOfSw7LGM3GqeWWsqssgB7vXnu6WJTIza8o6zKZbQPLrRXh%2BNMDCrcwIeFWUeefWIMb4tIDHb0lUSXopG8enhLGSp6a9TLJEMW2O2ZuI8eAckgByBbQhksDlY5HiCmR3f3mU743KXxqvPEzUkG1JMYiQ" target="_blank" rel="noopener">délibération Antibes / CASA sur le rapport eau et assainissement (novembre 2024)</a>. Le script de mise à jour de l'eau signale déjà ces communes dans son journal.</li>
-        <li><strong>LLUM :</strong> la grille officielle d'août 2026 est lue (prix unique 0,19 €/kWh, abonnement 190,32 € en 6 kVA), mais ce prix unique ne concerne que les compteurs non communicants. Avec un compteur Linky, LLUM applique une grille par saison et heures pleines/creuses (par exemple Base : 0,22276 € en heures pleines et 0,15064 € en heures creuses, saison haute), non modélisée ici. À décider : modéliser une moyenne, ou afficher la mention.</li>
-        <li><strong>Ekwateur :</strong> le prix n'apparaît qu'à la souscription (code postal demandé), pas de grille publique à suivre : reste « à confirmer ».</li>
         <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
         <li><strong>Indicateur de confiance :</strong> un repère visuel unique par ligne (relevé, estimé, à vérifier), au lieu de l'astérisque et des mentions dispersées.</li>
       </ul>
