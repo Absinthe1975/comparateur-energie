@@ -93,15 +93,16 @@
   {
    "k": "llum",
    "name": "LLUM",
-   "offer": "Électricité particuliers",
+   "offer": "Électricité verte, Base compteur non communicant (prix unique)",
    "a": 0.19,
    "b": 0.19,
-   "d": "14 oct. 2026",
-   "niv": "confirmer",
+   "d": "01/08/2026",
+   "niv": "officiel",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/llum/offres"
-   ]
+    "Grille officielle LLUM",
+    "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf"
+   ],
+   "nivd": "01/08/2026"
   },
   {
    "k": "dyneff",

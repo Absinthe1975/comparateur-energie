@@ -309,6 +309,12 @@
    "offre": "Pleniweb 1 an Gaz",
    "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf",
    "type": "info"
+  },
+  {
+   "k": "llum",
+   "offre": "Électricité verte, Base compteur non communicant (prix unique)",
+   "url": "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf",
+   "type": "info"
   }
  ]
 }
