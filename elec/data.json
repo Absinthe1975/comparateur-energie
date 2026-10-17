@@ -15,7 +15,7 @@
    "offer": "Électricité 100 % renouvelable Europe",
    "a": 0.1753,
    "b": 0.1906,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -78,7 +78,7 @@
    "offer": "NovaFixe Élec",
    "a": 0.1837,
    "b": 0.1823,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -118,7 +118,7 @@
    "offer": "Contrat+ Électricité",
    "a": 0.1907,
    "b": 0.1907,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -170,7 +170,7 @@
    "offer": "Essentielle Verte",
    "a": 0.1919,
    "b": 0.1904,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -278,7 +278,7 @@
    "offer": "Intelligent Octopus",
    "a": 0.1968,
    "b": 0.1953,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -351,7 +351,7 @@
    "offer": "Elec Référence 3 ans",
    "a": 0.233,
    "b": 0.2347,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -365,7 +365,7 @@
    "offer": "ÉnRFixe+ Elec",
    "a": 0.24,
    "b": 0.2385,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -380,7 +380,7 @@
    "offer": "Offre Base",
    "a": 0.2541,
    "b": 0.2571,
-   "d": "16 oct. 2026",
+   "d": "17 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -409,24 +409,24 @@
   "enercoop": 181.92
  },
  "abo_d": {
-  "ekw": "16 oct. 2026",
+  "ekw": "17 oct. 2026",
   "total": "14 oct. 2026",
-  "gdb": "16 oct. 2026",
+  "gdb": "17 oct. 2026",
   "geg": "14 oct. 2026",
   "plen": "13 oct. 2026",
   "ohm": "13 oct. 2026",
-  "dyneff": "16 oct. 2026",
+  "dyneff": "17 oct. 2026",
   "mint": "14 oct. 2026",
-  "primeo": "16 oct. 2026",
+  "primeo": "17 oct. 2026",
   "edf": "14 oct. 2026",
   "llum": "14 oct. 2026",
   "alterna": "14 oct. 2026",
-  "octo": "16 oct. 2026",
-  "engie": "16 oct. 2026",
+  "octo": "17 oct. 2026",
+  "engie": "17 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
-  "ilek": "16 oct. 2026",
-  "enercoop": "16 oct. 2026"
+  "ilek": "17 oct. 2026",
+  "enercoop": "17 oct. 2026"
  },
  "trv_abo": {
   "3": 145.56,
