@@ -13,6 +13,7 @@ Usage : python scripts/update_prices.py [--dry-run] [--only elec,gaz,primes,refs
 Variables : GEMINI_API_KEY (par défaut, gratuit), ou MISTRAL_API_KEY / ANTHROPIC_API_KEY selon PROVIDER ; MODEL et CONTACT facultatifs.
 """
 import argparse, unicodedata, datetime, hashlib, html.parser, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request, urllib.robotparser
+import donnees
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data.json")
@@ -173,11 +174,15 @@ def too_far(new, old, rel):
 
 # ---------- état, rapport ----------
 def load(path, default=None):
+    if os.path.basename(path) == "data.json" and os.path.dirname(path) == os.path.dirname(DATA):
+        try: return donnees.charger(os.path.dirname(path))
+        except FileNotFoundError: return default
     try:
         with open(path, encoding="utf-8") as fh: return json.load(fh)
     except FileNotFoundError: return default
 
 def save(path, obj):
+    if os.path.basename(path) == "data.json" and os.path.dirname(path) == os.path.dirname(DATA): return donnees.enregistrer(os.path.dirname(path), obj)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh: json.dump(obj, fh, ensure_ascii=False, indent=1); fh.write("\n")
 
