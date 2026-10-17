@@ -45,8 +45,8 @@ jobs:
       - name: Y a-t-il quelque chose à relire ?
         id: chg
         run: |
-          git add -N elec gaz 2>/dev/null || true
-          if grep -q "^## Changements appliqués (0)" report.md && grep -q "^## À relire : valeur proposée mais non appliquée (0)" report.md && git diff --quiet -- elec/historique.json gaz/historique.json elec/historique-offres.json gaz/historique-offres.json; then
+          git status --short
+          if grep -q "^## Changements appliqués (0)" report.md && grep -q "^## À relire : valeur proposée mais non appliquée (0)" report.md && [ -z "$(git status --porcelain -- elec/historique.json gaz/historique.json elec/historique-offres.json gaz/historique-offres.json)" ]; then
             echo "open=false" >> "$GITHUB_OUTPUT"
           else
             echo "open=true" >> "$GITHUB_OUTPUT"
@@ -64,12 +64,8 @@ jobs:
           labels: à-fusionner
           add-paths: |
             data.json
-            elec/data.json
-            gaz/data.json
-            elec/historique.json
-            gaz/historique.json
-            elec/historique-offres.json
-            gaz/historique-offres.json
+            elec/*.json
+            gaz/*.json
             state/hashes.json
             gaz/prix-cp/*.json
           delete-branch: true
