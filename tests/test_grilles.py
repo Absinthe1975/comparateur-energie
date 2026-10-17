@@ -27,24 +27,24 @@ class Mise_a_jour(unittest.TestCase):
         def get(u): return PAGE.encode() if u.endswith("/gaz") else b"%PDF-1.4 test"
         grilles_pdf.update_grilles(data, {"grilles": [E1]}, state, rep, None, get=get, racine=racine, to_text=lambda raw: txt)
         return rep
-    def data(self): return {"gas": [{"k": "alterna", "offer": "Mon gaz naturel indexé", "a": 0.1, "cpf": "prix-cp/alterna-test.json", "niv": "confirmer"}]}
+    def data(self): return {"gas": [{"k": "alterna", "offer": "Mon gaz naturel indexé", "a": 0.1, "cpf": "gaz/prix-cp/alterna-test.json", "niv": "confirmer"}]}
     def test_applique_et_ne_refait_pas(self):
         with tempfile.TemporaryDirectory() as t:
-            os.makedirs(os.path.join(t, "prix-cp")); d, st = self.data(), {}
+            os.makedirs(os.path.join(t, "gaz", "prix-cp")); d, st = self.data(), {}
             rep = self.lancer(t, d, st); self.assertEqual(len(rep.applied), 1, rep.failed + rep.review)
-            f = json.load(open(os.path.join(t, "prix-cp/alterna-test.json"), encoding="utf-8"))
+            f = json.load(open(os.path.join(t, "gaz/prix-cp/alterna-test.json"), encoding="utf-8"))
             self.assertEqual((f["k"], f["offre"], f["date"]), ("alterna", "Mon gaz naturel indexé", "01/10/2026"))
             self.assertEqual((d["gas"][0]["niv"], d["gas"][0]["nivd"]), ("officiel", "01/10/2026")); self.assertGreater(d["gas"][0]["a"], 0.12)
             rep2 = self.lancer(t, d, st); self.assertEqual((len(rep2.applied), len(rep2.same)), (0, 1))
     def test_refuse_si_trop_peu_de_codes(self):
         with tempfile.TemporaryDirectory() as t:
-            os.makedirs(os.path.join(t, "prix-cp")); d, st = self.data(), {}
+            os.makedirs(os.path.join(t, "gaz", "prix-cp")); d, st = self.data(), {}
             self.lancer(t, d, st); st.clear()
             rep = self.lancer(t, d, st, txt="\n".join([l for l in TXT.splitlines() if " 14,50 " in l][:20] + ["Tarifs TTC - applicables au 01/10/2026"]))
             self.assertEqual((len(rep.applied), len(rep.review)), (0, 1))
     def test_sans_date_non_applique(self):
         with tempfile.TemporaryDirectory() as t:
-            os.makedirs(os.path.join(t, "prix-cp")); rep = self.lancer(t, self.data(), {}, txt=TXT.replace("applicables au 01/10/2026", ""))
+            os.makedirs(os.path.join(t, "gaz", "prix-cp")); rep = self.lancer(t, self.data(), {}, txt=TXT.replace("applicables au 01/10/2026", ""))
             self.assertEqual((len(rep.applied), len(rep.review)), (0, 1))
 class Donnees_integrees(unittest.TestCase):
     H = ('<script id="__NEXT_DATA__">{"a":"https:\\/\\/a.storyblok.com\\/f\\/1\\/x\\/f9e6\\/grille-tarifaire-eco-fixe-aout-26-base.pdf",'
@@ -101,10 +101,10 @@ class Urls_directes(unittest.TestCase):
         rep = self.lancer(e, {"https://x.fr/t": b"<html>rien</html>"}, {"gas": []}, {}); self.assertEqual(len(rep.failed), 1)
     def test_cp_gaz_par_url_directe(self):
         with tempfile.TemporaryDirectory() as t:
-            os.makedirs(os.path.join(t, "prix-cp")); d = {"gas": [{"k": "alterna", "offer": "Mon gaz naturel indexé", "a": 0.1, "cpf": "prix-cp/alterna-test.json", "niv": "confirmer"}]}
+            os.makedirs(os.path.join(t, "gaz", "prix-cp")); d = {"gas": [{"k": "alterna", "offer": "Mon gaz naturel indexé", "a": 0.1, "cpf": "gaz/prix-cp/alterna-test.json", "niv": "confirmer"}]}
             e = dict(E1, url="https://x.fr/tarifs-gaz-indexe"); e.pop("page")
             rep = self.lancer(e, {"https://x.fr/tarifs-gaz-indexe": b"%PDF-1.4 t"}, d, {}, racine=t); self.assertEqual(len(rep.applied), 1, rep.failed + rep.review)
-            f = json.load(open(os.path.join(t, "prix-cp/alterna-test.json"), encoding="utf-8")); self.assertEqual(f["source"], "https://x.fr/tarifs-gaz-indexe")
+            f = json.load(open(os.path.join(t, "gaz/prix-cp/alterna-test.json"), encoding="utf-8")); self.assertEqual(f["source"], "https://x.fr/tarifs-gaz-indexe")
 if __name__ == "__main__": unittest.main()
 
 
