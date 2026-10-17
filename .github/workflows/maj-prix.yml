@@ -55,6 +55,9 @@ jobs:
           title: "Mise à jour des prix à relire"
           commit-message: "Mise à jour des prix (script + IA)"
           body-path: report.md
+          assignees: Absinthe1975
+          reviewers: Absinthe1975
+          labels: à-fusionner
           add-paths: |
             data.json
             state/hashes.json
