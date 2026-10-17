@@ -60,6 +60,8 @@ jobs:
           labels: à-fusionner
           add-paths: |
             data.json
+            elec/data.json
+            gaz/data.json
             state/hashes.json
             gaz/prix-cp/*.json
           delete-branch: true

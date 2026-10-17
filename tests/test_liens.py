@@ -21,6 +21,6 @@ class Liens(unittest.TestCase):
         d = {"liens": {"edf": "https://a.fr/"}, "elec": [{"name": "X", "offer": "O", "url": "https://b.fr/o"}], "gas": [{"name": "Y", "offer": "P"}]}
         self.assertEqual(set(c.liens(d)), {"https://a.fr/", "https://b.fr/o"})
     def test_data_json_liens_https(self):
-        d = json.load(open(os.path.join(c.RACINE, "data.json"), encoding="utf-8"))
+        d = __import__("donnees").charger(c.RACINE)
         self.assertTrue(d["liens"] and all(u.startswith("https://") for u in d["liens"].values()))
 if __name__ == "__main__": unittest.main()

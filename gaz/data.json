@@ -1,0 +1,489 @@
+{
+ "gas_ref": {
+  "k": null,
+  "name": "CRE",
+  "offer": "Prix repère de vente de gaz (n'est pas une offre)",
+  "a": 0.1456,
+  "ref": true,
+  "url": "https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html"
+ },
+ "gas": [
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Gaz Naturel 15 % Biogaz Fixe",
+   "a": 0.1246,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ],
+   "typ": "fixe",
+   "vert": true
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Avantage Gaz 2 ans",
+   "a": 0.1336,
+   "d": "14 oct. 2026",
+   "b0": 0.1788,
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "zones": {
+    "b0": [
+     0.1788,
+     0.1792,
+     0.1822,
+     0.1857,
+     0.1904,
+     0.1936
+    ],
+    "b1": [
+     0.1336,
+     0.1342,
+     0.1372,
+     0.1407,
+     0.1454,
+     0.1486
+    ]
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Avantage Gaz Optimisé",
+   "a": 0.1437,
+   "b0": 0.1777,
+   "ab1": 366.24,
+   "ab0": 152.76,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "zones": {
+    "b0": [
+     0.1777,
+     0.1779,
+     0.1794,
+     0.1812,
+     0.1844,
+     0.1856
+    ],
+    "b1": [
+     0.1437,
+     0.1442,
+     0.1471,
+     0.1506,
+     0.1549,
+     0.1582
+    ]
+   }
+  },
+  {
+   "k": "gdb",
+   "name": "Gaz de Bordeaux",
+   "offer": "NovaFixe BioGaz",
+   "a": 0.1346,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ],
+   "typ": "fixe",
+   "vert": true
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Gaz, fixe 3 ans",
+   "a": 0.1354,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.2036,
+   "ab1": 499.44,
+   "ab0": 125.64,
+   "nivd": "21/09/2026",
+   "typ": "fixe",
+   "eng": 36
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Biogaz, fixe 3 ans",
+   "a": 0.1642,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.2324,
+   "ab1": 499.44,
+   "ab0": 125.64,
+   "nivd": "21/09/2026",
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
+  },
+  {
+   "k": "total",
+   "name": "TotalEnergies",
+   "offer": "Fixe 2 ans Gaz",
+   "a": 0.1412,
+   "d": "9 oct. 2026",
+   "niv": "confirmer",
+   "typ": "fixe",
+   "eng": 24
+  },
+  {
+   "k": "engie",
+   "name": "ENGIE",
+   "offer": "Gaz Référence 3 ans",
+   "a": 0.1414,
+   "d": "9 oct. 2026",
+   "niv": "confirmer"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon gaz naturel indexé",
+   "a": 0.1386,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.1704,
+   "ab1": 389.64,
+   "ab0": 174.0,
+   "zones": {
+    "b1": [
+     0.1386,
+     0.1393,
+     0.1399,
+     0.1406,
+     0.1413,
+     0.1419
+    ],
+    "b0": [
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704,
+     0.1704
+    ]
+   },
+   "nivd": "01/10/2026",
+   "cpf": "gaz/prix-cp/alterna-mon-gaz-naturel-indexe.json",
+   "typ": "indexe"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "offer": "Mon biogaz français",
+   "a": 0.1698,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.21,
+   "ab1": 389.64,
+   "ab0": 174.0,
+   "zones": {
+    "b1": [
+     0.1698,
+     0.1706,
+     0.1714,
+     0.1724,
+     0.1732,
+     0.1741
+    ],
+    "b0": [
+     0.21,
+     0.21,
+     0.21,
+     0.21,
+     0.21,
+     0.21
+    ]
+   },
+   "nivd": "01/10/2026",
+   "cpf": "gaz/prix-cp/alterna-mon-biogaz-francais.json",
+   "vert": true
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Extra Eco Gaz",
+   "a": 0.1429,
+   "b0": 0.178,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "27/08/2026",
+   "zones": {
+    "b1": [
+     0.1429,
+     0.1452,
+     0.1487,
+     0.1499,
+     0.1543,
+     0.1577
+    ]
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ohm-energie/offres"
+   ]
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Classique Gaz 10 % biogaz",
+   "a": 0.1492,
+   "b0": 0.1859,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "27/08/2026",
+   "zones": {
+    "b1": [
+     0.1492,
+     0.1514,
+     0.155,
+     0.1562,
+     0.1606,
+     0.1639
+    ]
+   },
+   "vert": true
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Fixe 2 ans Gaz",
+   "a": 0.1554,
+   "b0": 0.1938,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/09/2026",
+   "zones": {
+    "b1": [
+     0.1554,
+     0.1577,
+     0.1612,
+     0.1624,
+     0.1668,
+     0.1702
+    ]
+   },
+   "typ": "fixe",
+   "eng": 24
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Premi'Ohm 3 ans Gaz",
+   "a": 0.1617,
+   "b0": 0.2017,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/09/2026",
+   "zones": {
+    "b1": [
+     0.1617,
+     0.1639,
+     0.1675,
+     0.1687,
+     0.1731,
+     0.1764
+    ]
+   },
+   "eng": 36
+  },
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Gaz 15 % Vert",
+   "a": 0.1432,
+   "b0": 0.185,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ],
+   "vert": true
+  },
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Gaz 55 % Vert",
+   "a": 0.1552,
+   "b0": 0.197,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "vert": true
+  },
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Gaz 100 % Vert",
+   "a": 0.1687,
+   "b0": 0.2105,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "vert": true
+  },
+  {
+   "k": "plen",
+   "name": "Plenitude",
+   "offer": "Pleniweb 1 an Gaz",
+   "a": 0.1456,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.1783,
+   "nivd": "01/10/2026"
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "offer": "Biogaz Online",
+   "a": 0.1456,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.1783,
+   "nivd": "01/10/2026",
+   "prg": true,
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/offres"
+   ],
+   "zones": {
+    "b1": [
+     0.1456,
+     0.1463,
+     0.147,
+     0.1477,
+     0.1484,
+     0.1492
+    ],
+    "b0": [
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783,
+     0.1783
+    ]
+   },
+   "vert": true
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "Gaz Fixe",
+   "a": 0.1487,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.1835,
+   "nivd": "30/09/2026",
+   "zones": {
+    "b0": [
+     0.1835,
+     0.1847,
+     0.1859,
+     0.1867,
+     0.1873,
+     0.1872
+    ],
+    "b1": [
+     0.1487,
+     0.1506,
+     0.1531,
+     0.1546,
+     0.1555,
+     0.1554
+    ]
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ],
+   "typ": "fixe"
+  },
+  {
+   "k": "happe",
+   "name": "Happ-e",
+   "offer": "Gaz Naturel",
+   "a": 0.1504,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "b0": 0.1881,
+   "nivd": "01/10/2026",
+   "zones": {
+    "b1": [
+     0.1504,
+     0.1512,
+     0.1519,
+     0.1526,
+     0.1533,
+     0.154
+    ]
+   },
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/happ-e/offres"
+   ]
+  },
+  {
+   "k": "ilek",
+   "name": "ilek",
+   "offer": "ÉnRFixe+ Gaz",
+   "a": 0.1652,
+   "d": "9 oct. 2026",
+   "niv": "confirmer",
+   "typ": "fixe",
+   "vert": true
+  }
+ ],
+ "abo_g": {
+  "edf": 341.4,
+  "ohm": 359.52,
+  "gdb": 360.72,
+  "total": 360.72,
+  "engie": 360.79,
+  "mint": 360.84,
+  "octo": 360.84,
+  "plen": 387.43,
+  "happe": 387.85,
+  "alterna": 389.64,
+  "ilek": 438.36,
+  "dyneff": 469.32,
+  "geg": 499.44,
+  "ekw": 517.44
+ },
+ "abo_g0": {
+  "edf": 120,
+  "ohm": 152.04,
+  "gdb": 152.4,
+  "total": 152.4,
+  "engie": 152.46,
+  "mint": 152.4,
+  "octo": 152.4,
+  "plen": 179.1,
+  "happe": 152.46,
+  "alterna": 174,
+  "ilek": 218.04,
+  "dyneff": 163.44,
+  "geg": 125.64,
+  "ekw": 243.84
+ },
+ "gas_b0": {
+  "a": 0.1783,
+  "abo": 152.46
+ },
+ "gas_b1": {
+  "a": 0.1456,
+  "abo": 360.79
+ }
+}
