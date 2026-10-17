@@ -48,13 +48,13 @@ Automatique : le workflow « Mise à jour du prix de l'eau » (chaque lundi, ou 
 
 Procédure manuelle (si besoin) :
 
-Le fichier `eau/communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
+Les fichiers `eau/cp/NN.json` (un par début de code postal : communes, avec le prix de l’eau) sont fabriqués par `scripts/build_eau.py` à partir de :
 - la base officielle des codes postaux (data.gouv.fr, fichier `019HexaSmal.csv`),
 - les fichiers SISPEA « tarifs eau potable » et « tarifs assainissement collectif » (services.eaufrance.fr/pro/telechargement), feuille « Zones tarifaires » exportée en CSV UTF-8 sous les noms `tarifs_AEP_<année>.csv` et `tarifs_AC_<année>.csv`,
 - les feuilles « Détail tarifaire » des mêmes fichiers, exportées en `detail_AEP_<année>.csv` et `detail_AC_<année>.csv` (abonnement = part fixe),
 - éventuellement `zones_gn.json` (orthographe des communes).
 
-Commande : `python3 scripts/build_eau.py eau-sources eau/communes-cp.json 2025`
+Commande : `python3 scripts/build_eau.py eau-sources communes-cp.json 2025` (fichier unique intermédiaire, que `eau_maj.py` découpe ensuite par département).
 
 ## Prix de référence : recoupement obligatoire
 
