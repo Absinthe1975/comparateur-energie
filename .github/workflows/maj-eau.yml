@@ -23,7 +23,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pandas xlrd openpyxl
-      - run: python3 -m unittest tests.test_eau_maj
+      - run: python3 -m unittest tests.test_eau_maj tests.test_eau_historique
+      - name: Historique du prix de l'eau (toutes les années SISPEA disponibles)
+        continue-on-error: true
+        run: python3 scripts/eau_historique.py
       - name: Télécharger et reconstruire eau/cp
         run: python3 scripts/eau_maj.py
       - uses: peter-evans/create-pull-request@v6
@@ -31,8 +34,10 @@ jobs:
           branch: maj-eau
           title: "Prix de l'eau : mise à jour SISPEA"
           commit-message: "Prix de l'eau : mise à jour automatique (SISPEA + La Poste)"
-          body: "Mise à jour automatique des fichiers eau/cp. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
-          add-paths: eau/cp
+          body: "Mise à jour automatique des fichiers eau/cp et eau/historique. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
+          add-paths: |
+            eau/cp
+            eau/historique
           assignees: Absinthe1975
           reviewers: Absinthe1975
           labels: à-fusionner
