@@ -1,6 +1,6 @@
 # Comparateur énergie : mise à jour automatique des prix
 
-Ce dossier contient le site (`index.html`), ses données (`data.json`) et le programme qui les met à jour une fois par mois avec l'aide d'une IA.
+Ce dossier contient le site (`index.html`), ses données (`elec/data.json` pour l'électricité, `gaz/data.json` pour le gaz, `data.json` pour ce qui est commun : dates, primes, liens, offres combinées) et le programme qui les met à jour avec l'aide d'une IA.
 
 ## Comment ça marche
 
@@ -8,8 +8,8 @@ Ce dossier contient le site (`index.html`), ses données (`data.json`) et le pro
 2. Le programme lit les pages listées dans `sources.json`.
 3. Pour chaque offre, l'IA (Gemini, gratuite) renvoie les chiffres **et la phrase exacte où elle les a trouvés**.
 4. Le programme refuse un chiffre si la phrase n'est pas dans la page, si le chiffre n'est pas dans la phrase, s'il est hors d'une fourchette plausible, ou s'il s'écarte trop de l'ancienne valeur (alors il est seulement signalé).
-5. Les changements acceptés sont mis dans `data.json` avec la date, et GitHub ouvre une **demande de fusion** (pull request) avec un rapport. **Rien n'est publié tant que vous ne l'avez pas acceptée.**
-6. Le site lit `data.json` à chaque visite. S'il ne peut pas le lire, il utilise les données intégrées à `index.html`.
+5. Les changements acceptés sont mis dans ces fichiers de données avec la date, et GitHub ouvre une **demande de fusion** (pull request) avec un rapport. **Rien n'est publié tant que vous ne l'avez pas acceptée.**
+6. Le site lit les trois fichiers de données à chaque visite. S'il ne peut pas le lire, il utilise les données intégrées à `index.html`.
 
 ## Mise en route (une seule fois)
 
@@ -83,7 +83,7 @@ La CRE ne publie pas de prix par zone. La page `informations.mint-energie.com/..
 ## Prix du gaz par code postal (dossier gaz/prix-cp/)
 
 Quand un fournisseur publie une grille par commune (pour l'instant Alterna gaz), elle est intégrée en entier, **dans un fichier à part par offre** (`gaz/prix-cp/alterna-mon-gaz-naturel-indexe.json`). Rien n'est mélangé entre fournisseurs :
-- l'offre concernée dans `data.json` porte un champ `"cpf"` qui désigne son fichier ;
+- l'offre concernée (dans `gaz/data.json`) porte un champ `"cpf"` qui désigne son fichier ;
 - le fichier rappelle sa clé de fournisseur (`k`), le nom exact de l'offre, la date de la grille et sa source ;
 - le site n'utilise un fichier que si sa clé et son offre correspondent à celles de l'offre (sinon il l'ignore) ;
 - `scripts/check_data.py` refuse la publication si un fichier est introuvable, ne correspond pas à son offre, contient des codes postaux invalides ou en double, ou des prix hors fourchette.
@@ -92,7 +92,7 @@ Sur le site, si l'utilisateur a saisi son code postal, il voit le prix exact de 
 
 Pour ajouter ou mettre à jour une grille : extraire le texte du PDF (`pdftotext -layout`), puis lancer
 `python3 scripts/cp_prix.py gaz/prix-cp fournisseur "Nom exact de l'offre" jj/mm/aaaa URL-source grille.txt`
-et ajouter le champ `cpf` à l'offre dans `data.json`.
+et ajouter le champ `cpf` à l'offre dans `gaz/data.json`.
 
 ## Détection automatique des PDF de grilles (rubrique « grilles » de sources.json)
 
@@ -113,7 +113,7 @@ Les adresses de page de la liste sont à vérifier après le premier rapport (ce
 
 ## Liens vers les fournisseurs
 
-Le nom du fournisseur dans les tableaux est un lien (nouvel onglet) vers son site. L'adresse vient de `data.json` :
+Le nom du fournisseur dans les tableaux est un lien (nouvel onglet) vers son site. L'adresse vient de `data.json` (rubrique « liens ») :
 - `liens` : une adresse par fournisseur (clé `k`), utilisée pour toutes ses offres ;
 - `url` : adresse propre à une offre, à ajouter sur l'offre elle-même pour renvoyer directement vers sa page. Elle l'emporte sur le lien du fournisseur.
 

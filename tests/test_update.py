@@ -15,6 +15,7 @@ class T(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.mkdtemp()
         for f in ("data.json", "sources.json"): shutil.copy(os.path.join(ROOT, f), self.tmp)
+        for dos in ("elec", "gaz"): os.makedirs(os.path.join(self.tmp, dos), exist_ok=True); shutil.copy(os.path.join(ROOT, dos, "data.json"), os.path.join(self.tmp, dos))
         up.DATA, up.SOURCES = os.path.join(self.tmp, "data.json"), os.path.join(self.tmp, "sources.json")
         up.STATE, up.REPORT = os.path.join(self.tmp, "state", "hashes.json"), os.path.join(self.tmp, "report.md")
         sj = json.load(open(up.SOURCES, encoding="utf-8")); sj["tarifs_pages_2"] = {"engie": ["https://second.example/engie"]}
@@ -28,7 +29,7 @@ class T(unittest.TestCase):
         up.call_llm = fake
     def run_engie(self):
         up.main(["--only", "elec"])
-        d = json.load(open(up.DATA, encoding="utf-8"))
+        d = up.load(up.DATA)
         return next(r for r in d["elec"] if r["k"] == "engie"), d
     def test_valeur_correcte_appliquee(self):
         r, d = self.run_engie()
@@ -71,18 +72,18 @@ class T(unittest.TestCase):
         self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["offre"]["quote"] = "Offre Fantôme"
         r, _ = self.run_engie(); self.assertEqual(r["a"], 0.2330)
     def test_accents_differents_acceptes(self):
-        d = json.load(open(up.DATA, encoding="utf-8"))
+        d = up.load(up.DATA)
         for r in d["elec"]:
             if r["k"] == "engie": r["offer"] = "Électricité Référence"
-        json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        up.save(up.DATA, d)
         up.fetch_text = lambda url: ("Offres ENGIE. Electricite Reference 3 ans. Le prix du kWh est de 0,2400 € TTC en option Base. L'abonnement 6 kVA est de 190,00 € par an." if "engie" in url else (_ for _ in ()).throw(RuntimeError("404")))
         self.reply = json.loads(json.dumps(GOOD)); self.reply["fields"]["offre"]["quote"] = "Electricite Reference 3 ans"
         r, _ = self.run_engie(); self.assertEqual(r["a"], 0.24)
     def test_grille_officielle_jamais_retouchee_par_lia(self):
-        d = json.load(open(up.DATA, encoding="utf-8"))
+        d = up.load(up.DATA)
         for r in d["elec"]:
             if r["k"] == "engie": r["niv"], r["nivd"] = "officiel", "01/10/2026"
-        avant = d["abo_e"]["engie"]; json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        avant = d["abo_e"]["engie"]; up.save(up.DATA, d)
         r, d2 = self.run_engie()
         self.assertEqual(self.calls, 0); self.assertNotEqual(r["a"], 0.24); self.assertEqual(d2["abo_e"]["engie"], avant)
         self.assertIn("non relue par l'IA", open(up.REPORT, encoding="utf-8").read())
@@ -91,15 +92,15 @@ class T(unittest.TestCase):
         self.assertIn("à vérifier à la main", rap)
     def test_page_inchangee_date_du_jour(self):
         self.run_engie()                      # première lecture : empreinte mémorisée
-        d = json.load(open(up.DATA, encoding="utf-8"))
+        d = up.load(up.DATA)
         for r in d["elec"]:
             if r["k"] == "engie": r["d"] = "1 janv. 2020"
-        d["abo_d"]["engie"] = "1 janv. 2020"; json.dump(d, open(up.DATA, "w", encoding="utf-8"), ensure_ascii=False)
+        d["abo_d"]["engie"] = "1 janv. 2020"; up.save(up.DATA, d)
         r, d = self.run_engie()               # page inchangée : la date du jour est posée sans nouvel appel
         self.assertEqual(r["d"], d["updated_label"]); self.assertEqual(d["abo_d"]["engie"], d["updated_label"])
     def test_variation_prix_repere(self):
         import datetime
-        d = json.load(open(up.DATA, encoding="utf-8")); src = json.load(open(up.SOURCES, encoding="utf-8"))
+        d = up.load(up.DATA); src = json.load(open(up.SOURCES, encoding="utf-8"))
         up.fetch_text = lambda url: "Octobre 2026. Le prix repère du gaz augmente de 6,3 % TTC en octobre."
         self.reply = {"fields": {"variation": {"value": 6.3, "quote": "Le prix repère du gaz augmente de 6,3 % TTC en octobre"}}}
         old = d["gas_b1"]["a"]; d["gas_b1"]["a"] = round(old * 1.063, 4)
@@ -109,11 +110,11 @@ class T(unittest.TestCase):
         rep = up.Report(); up.update_trend(d, src, {}, rep, {}, old, datetime.datetime(2026, 10, 5))
         self.assertTrue(any("écart à vérifier" in x for x in rep.review), rep.review)
     def test_source_en_echec_ne_casse_rien(self):
-        up.main(["--only", "elec"]); d = json.load(open(up.DATA, encoding="utf-8")); self.assertEqual(len(d["elec"]), 28)
+        up.main(["--only", "elec"]); d = up.load(up.DATA); self.assertEqual(len(d["elec"]), 28)
 
     # ---- prix de référence : plusieurs sites obligatoires ----
     def _refs(self, pages, b1, b0):
-        d = json.load(open(up.DATA, encoding="utf-8")); src = json.load(open(up.SOURCES, encoding="utf-8"))
+        d = up.load(up.DATA); src = json.load(open(up.SOURCES, encoding="utf-8"))
         src["references"] = {"trv": [], "gas_ref": list(pages)}
         up.fetch_text = lambda url: pages[url]
         def fake(prompt):
@@ -128,18 +129,18 @@ class T(unittest.TestCase):
         self.assertEqual((d["gas_b1"]["a"], d["gas_b0"]["a"], d["gas_ref"]["a"]), (0.15, 0.18, 0.15)); self.assertEqual(len(rep.applied), 2)
     def test_reference_un_seul_site_non_appliquee(self):
         pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh"}
-        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b0"]["a"]
+        old = up.load(up.DATA)["gas_b0"]["a"]
         d, rep = self._refs(pg, {u: 0.15 for u in pg}, {u: 0.18 for u in pg})
         self.assertEqual(d["gas_b0"]["a"], old); self.assertTrue(any("second site" in x or "un seul site" in x for x in rep.review + rep.same))
     def test_reference_sites_en_desaccord_non_appliquee(self):
         pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1800 €/kWh", "http://b/x": "Chauffage 0,1400 €/kWh|Cuisson 0,1800 €/kWh"}
         b1 = {"http://a/x": 0.15, "http://b/x": 0.14}
-        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b1"]["a"]
+        old = up.load(up.DATA)["gas_b1"]["a"]
         d, rep = self._refs(pg, b1, {u: 0.18 for u in pg})
         self.assertEqual(d["gas_b1"]["a"], old); self.assertTrue(any("désaccord" in x for x in rep.review))
     def test_reference_b0_confondu_avec_b1_refuse(self):
         pg = {"http://a/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1500 €/kWh", "http://b/x": "Chauffage 0,1500 €/kWh|Cuisson 0,1500 €/kWh"}
-        old = json.load(open(up.DATA, encoding="utf-8"))["gas_b0"]["a"]
+        old = up.load(up.DATA)["gas_b0"]["a"]
         d, rep = self._refs(pg, {u: 0.15 for u in pg}, {u: 0.15 for u in pg})
         self.assertEqual(d["gas_b0"]["a"], old); self.assertTrue(any("incohérentes" in x for x in rep.review))
 

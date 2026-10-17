@@ -1,0 +1,436 @@
+{
+ "elec_ref": {
+  "k": "edf",
+  "name": "EDF",
+  "offer": "Tarif réglementé (Tarif Bleu)",
+  "a": 0.2001,
+  "b": 0.1985,
+  "ref": true,
+  "url": "https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html"
+ },
+ "elec": [
+  {
+   "k": "ekw",
+   "name": "Ekwateur",
+   "offer": "Électricité 100 % renouvelable Europe",
+   "a": 0.1753,
+   "b": 0.1906,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ekwateur/offres"
+   ],
+   "vert": true
+  },
+  {
+   "k": "total",
+   "name": "TotalEnergies",
+   "offer": "Access Électricité (prix indexé)",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/totalenergies/offres"
+   ],
+   "typ": "indexe"
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Elec Verte, fixe 3 ans",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "ab6": 190.32,
+   "ab9": 238.56,
+   "nivd": "05/10/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/geg/offres"
+   ],
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
+  },
+  {
+   "k": "geg",
+   "name": "GEG",
+   "offer": "Mon Offre Elec Verte Direct Producteur, fixe 3 ans",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "ab6": 207.6,
+   "ab9": 260.04,
+   "nivd": "05/10/2026",
+   "typ": "fixe",
+   "vert": true,
+   "eng": 36
+  },
+  {
+   "k": "gdb",
+   "name": "Gaz de Bordeaux",
+   "offer": "NovaFixe Élec",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres"
+   ],
+   "typ": "fixe"
+  },
+  {
+   "k": "plen",
+   "name": "Plenitude",
+   "offer": "Pleniweb 1 an Électricité",
+   "a": 0.1837,
+   "b": 0.1823,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026"
+  },
+  {
+   "k": "llum",
+   "name": "LLUM",
+   "offer": "Électricité verte, Base compteur non communicant (prix unique)",
+   "a": 0.19,
+   "b": 0.19,
+   "d": "01/08/2026",
+   "niv": "officiel",
+   "s": [
+    "Grille officielle LLUM",
+    "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf"
+   ],
+   "nivd": "01/08/2026",
+   "typ": "indexe",
+   "vert": true
+  },
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Électricité",
+   "a": 0.1907,
+   "b": 0.1907,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/dyneff/offres"
+   ]
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "08/10/2026",
+   "offer": "Online & Green",
+   "a": 0.1904,
+   "b": 0.1904,
+   "ab6": 190.32,
+   "ab9": 238.56,
+   "vert": true
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "08/10/2026",
+   "offer": "Classic & Green",
+   "a": 0.1924,
+   "b": 0.1924,
+   "ab6": 188.4,
+   "ab9": 235.44,
+   "vert": true
+  },
+  {
+   "k": "mint",
+   "name": "Mint Énergie",
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "08/10/2026",
+   "offer": "Smart & Green",
+   "a": 0.2002,
+   "b": 0.2002,
+   "ab6": 227.28,
+   "ab9": 261.6,
+   "vert": true
+  },
+  {
+   "k": "primeo",
+   "name": "Primeo Energie",
+   "offer": "Essentielle Verte",
+   "a": 0.1919,
+   "b": 0.1904,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/primeo/offres"
+   ],
+   "typ": "indexe",
+   "vert": true,
+   "eng": 0
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "ab6": 211.92,
+   "ab9": 267.36,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/09/2026",
+   "offer": "Mon électricité française fixe 1 an",
+   "a": 0.1919,
+   "b": 0.1904,
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/alterna/offres"
+   ],
+   "typ": "fixe",
+   "eng": 12
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "ab6": 211.92,
+   "ab9": 267.36,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/09/2026",
+   "offer": "Mon électricité française indexée",
+   "a": 0.1919,
+   "b": 0.1904,
+   "typ": "indexe"
+  },
+  {
+   "k": "alterna",
+   "name": "Alterna",
+   "ab6": 211.92,
+   "ab9": 267.36,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/09/2026",
+   "offer": "Mon électricité du coin",
+   "a": 0.1968,
+   "b": 0.1953
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Zen Online",
+   "a": 0.1925,
+   "b": 0.1909,
+   "d": "14 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/08/2026",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/edf/offres"
+   ]
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Vert Électrique",
+   "a": 0.2022,
+   "b": 0.2007,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "15/09/2026",
+   "vert": true
+  },
+  {
+   "k": "edf",
+   "name": "EDF",
+   "offer": "Vert Électrique Régional",
+   "a": 0.2037,
+   "b": 0.2065,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "15/09/2026",
+   "vert": true
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "Eco fixe Base (moyenne hiver/été)",
+   "a": 0.2019,
+   "b": 0.2053,
+   "ab6": 190.32,
+   "ab9": 238.56,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "12/08/2026",
+   "typ": "fixe"
+  },
+  {
+   "k": "octo",
+   "name": "Octopus Energy",
+   "offer": "Intelligent Octopus",
+   "a": 0.1968,
+   "b": 0.1953,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/offres"
+   ]
+  },
+  {
+   "k": "alpiq",
+   "name": "Alpiq",
+   "offer": "Sérénité",
+   "a": 0.1993,
+   "b": 0.1977,
+   "d": "9 oct. 2026",
+   "niv": "confirmer"
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "OHM Sérénité Fixe 1 an",
+   "a": 0.2183,
+   "b": 0.2183,
+   "ab6": 173.4,
+   "ab9": 217.32,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "14/10/2026",
+   "typ": "fixe",
+   "eng": 12
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Offre Fixe 2 ans",
+   "a": 0.2213,
+   "b": 0.2213,
+   "ab6": 190.56,
+   "ab9": 238.8,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "09/09/2026",
+   "typ": "fixe",
+   "eng": 24
+  },
+  {
+   "k": "ohm",
+   "name": "OHM Énergie",
+   "offer": "Premi'Ohm 3 ans",
+   "a": 0.2287,
+   "b": 0.2287,
+   "ab6": 190.56,
+   "ab9": 238.8,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "14/10/2026",
+   "eng": 36
+  },
+  {
+   "k": "happe",
+   "name": "Happ-e",
+   "offer": "Électricité 1 an",
+   "a": 0.2032,
+   "b": 0.2032,
+   "d": "13 oct. 2026",
+   "niv": "officiel",
+   "nivd": "01/10/2026"
+  },
+  {
+   "k": "engie",
+   "name": "ENGIE",
+   "offer": "Elec Référence 3 ans",
+   "a": 0.233,
+   "b": 0.2347,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/engie/offres"
+   ],
+   "typ": "fixe"
+  },
+  {
+   "k": "ilek",
+   "name": "ilek",
+   "offer": "ÉnRFixe+ Elec",
+   "a": 0.24,
+   "b": 0.2385,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/ilek/offres"
+   ],
+   "typ": "fixe",
+   "vert": true
+  },
+  {
+   "k": "enercoop",
+   "name": "Enercoop",
+   "offer": "Offre Base",
+   "a": 0.2541,
+   "b": 0.2571,
+   "d": "16 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/enercoop/offres"
+   ]
+  }
+ ],
+ "abo_e": {
+  "ekw": 190.32,
+  "total": 190.32,
+  "gdb": 190.44,
+  "geg": 190.8,
+  "plen": 219.15,
+  "ohm": 173.4,
+  "dyneff": 187.8,
+  "mint": 190.32,
+  "primeo": 190.32,
+  "edf": 190.32,
+  "llum": 190.32,
+  "alterna": 211.92,
+  "octo": 190.32,
+  "engie": 186.98,
+  "alpiq": 190.32,
+  "happe": 193.74,
+  "ilek": 301.2,
+  "enercoop": 181.92
+ },
+ "abo_d": {
+  "ekw": "16 oct. 2026",
+  "total": "14 oct. 2026",
+  "gdb": "16 oct. 2026",
+  "geg": "14 oct. 2026",
+  "plen": "13 oct. 2026",
+  "ohm": "13 oct. 2026",
+  "dyneff": "16 oct. 2026",
+  "mint": "14 oct. 2026",
+  "primeo": "16 oct. 2026",
+  "edf": "14 oct. 2026",
+  "llum": "14 oct. 2026",
+  "alterna": "14 oct. 2026",
+  "octo": "16 oct. 2026",
+  "engie": "16 oct. 2026",
+  "alpiq": "10 oct. 2026",
+  "happe": "13 oct. 2026",
+  "ilek": "16 oct. 2026",
+  "enercoop": "16 oct. 2026"
+ },
+ "trv_abo": {
+  "3": 145.56,
+  "6": 190.32,
+  "9": 238.56
+ }
+}
