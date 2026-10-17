@@ -11,7 +11,7 @@ Entrée de sources.json, rubrique « grilles » :
   {"k": "alterna", "offre": "Mon gaz naturel indexé", "page": "https://…", "type": "cp-gaz",
    "contient": ["grille"], "un_de": ["gaz naturel"], "exclut": ["biogaz"]}
   Au lieu de « page », une entrée peut donner « url » : adresse stable du PDF, ou adresse qui redirige vers le PDF du moment.
-  type « cp-gaz » : grille par code postal, intégrée automatiquement (fichier prix-cp/…, offre de data.json) ;
+  type « cp-gaz » : grille par code postal, intégrée automatiquement (fichier gaz/prix-cp/…, offre de data.json) ;
   type « info »   : PDF seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main."""
 import time, hashlib, html.parser, json, os, re, subprocess, tempfile, urllib.parse
 import cp_prix

@@ -2,11 +2,11 @@
 """Met à jour communes-cp.json (prix de l'eau par code postal) de façon automatique.
 
 1. Télécharge la base La Poste des codes postaux (data.gouv.fr) et les fichiers « tarifs » du SISPEA
-   de la dernière année disponible (liste dans eau-config.json).
+   de la dernière année disponible (liste dans eau/eau-config.json).
 2. Convertit les feuilles Excel en CSV, lance build_eau.py.
 3. Garde-fous : refuse le résultat s'il perd trop de codes postaux ou si les prix bougent trop.
    Si l'année la plus récente est vide (en-têtes seuls), on garde l'année précédente.
-Utilisation : python3 scripts/eau_maj.py [eau-config.json] [communes-cp.json]
+Utilisation : python3 scripts/eau_maj.py [eau/eau-config.json] [eau/communes-cp.json]
 Code de sortie 0 = rien à signaler ou fichier mis à jour ; 1 = échec (le fichier existant est conservé).
 """
 import csv, json, os, subprocess, sys, tempfile, urllib.request
@@ -101,17 +101,17 @@ def annee_disponible(cfg, dossier, telecharger=telecharger, convertir=xls_vers_c
     return None
 
 def main():
-    cfg_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(RACINE, "eau-config.json")
-    dst = sys.argv[2] if len(sys.argv) > 2 else os.path.join(RACINE, "communes-cp.json")
+    cfg_path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(RACINE, "eau", "eau-config.json")
+    dst = sys.argv[2] if len(sys.argv) > 2 else os.path.join(RACINE, "eau", "communes-cp.json")
     cfg = json.load(open(cfg_path, encoding="utf-8"))
     if any("A_COMPLETER" in u for v in cfg["sispea"].values() for u in ([v] if isinstance(v, str) else v)):
-        print("eau-config.json : adresses des fichiers SISPEA à renseigner."); return 1
+        print("eau/eau-config.json : adresses des fichiers SISPEA à renseigner."); return 1
     ancien = json.load(open(dst, encoding="utf-8")) if os.path.exists(dst) else {}
     with tempfile.TemporaryDirectory() as dossier:
         telecharger(cfg["laposte"], os.path.join(dossier, "019HexaSmal.csv"))
         an = annee_disponible(cfg, dossier)
         if not an:
-            print("Aucune année SISPEA exploitable (voir les lignes ci-dessus) : communes-cp.json conservé."); return 1
+            print("Aucune année SISPEA exploitable (voir les lignes ci-dessus) : eau/communes-cp.json conservé."); return 1
         # noms avec accents : repris du fichier actuel (la base La Poste est en majuscules sans accents)
         gn = {cp: "|".join(i.split("~")[1] if "~" in i else i for i in v.split("|")) for cp, v in ancien.items()}
         json.dump(gn, open(os.path.join(dossier, "zones_gn.json"), "w", encoding="utf-8"), ensure_ascii=False)

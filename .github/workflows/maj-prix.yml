@@ -61,5 +61,5 @@ jobs:
           add-paths: |
             data.json
             state/hashes.json
-            prix-cp/*.json
+            gaz/prix-cp/*.json
           delete-branch: true
