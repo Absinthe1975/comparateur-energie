@@ -50,6 +50,14 @@ class Candidats(unittest.TestCase):
             with self.assertRaises(RuntimeError): e.premier_qui_marche("https://a/{an}", 2025, os.path.join(t, "x.xls"), tel)
 
 
+class SansPrix(unittest.TestCase):
+    def test_commune_sans_prix_ne_casse_pas_comparer(self):
+        a = {"01000": "01001~A~~s|01002~B~3.5", "02000": "02001~C~"}
+        n = {"01000": "01001~A~~s|01002~B~3.6", "02000": "02001~C~"}
+        self.assertEqual(e.prix_valides(a), {"01000": [("01002", 3.5)]})
+        self.assertEqual(e.comparer(a, n), [])
+
+
 class Conversion(unittest.TestCase):
     def test_csv_lisible_par_build_eau(self):
         import tempfile, os, csv
