@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Vérifie que data.json est complet et plausible. Code de sortie 1 si une erreur est trouvée."""
 import json, os, sys
-d = json.load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data.json"), encoding="utf-8"))
+import donnees
+d = donnees.charger(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 err = []
 def need(c, m):
     if not c: err.append(m)

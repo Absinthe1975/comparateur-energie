@@ -46,7 +46,7 @@ class T(unittest.TestCase):
 
 class Integ(unittest.TestCase):
     def run_official(self, today, trv_kwh=0.2001):
-        d = json.load(open(os.path.join(ROOT, "data.json"), encoding="utf-8")); src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
+        d = __import__("donnees").charger(ROOT); src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
         def get(url):
             if "tabular-api" in url: return json.dumps(rows(None, trv_kwh) if "kva=6" in url or "exact=6" in url else {"data": [dict(rows()["data"][0], P_SOUSCRITE=9, PART_VARIABLE_TTC=0.1985, PART_FIXE_TTC=239.84)]}).encode()
             if url.endswith(".html"): return b'<a href="/content/download/1/fichier.xlsx">x</a>'
