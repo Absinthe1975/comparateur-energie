@@ -124,3 +124,12 @@ Quand les liens PDF d'une page sont intégrés dans des données (JSON) plutôt 
 ## Lecture IA des PDF modifiés
 
 Quand le PDF d'une offre suivie (type `info`) change et qu'une clé d'IA est disponible, le script demande à l'IA le prix du kWh qu'il contient (citation obligatoire, chiffre vérifié dans le texte, fourchette plausible) et l'écrit dans « À relire » à côté du prix actuel. Rien n'est appliqué : une grille officielle se saisit à la main.
+
+## Historique des prix (onglet « Marché »)
+
+`scripts/historique.py` est lancé par le workflow des prix, après la mise à jour. Il écrit :
+- `elec/historique.json` : le tarif réglementé de vente (Base, 6 kVA), période par période, lu dans les données ouvertes de la CRE (data.gouv.fr). Les dates de ce jeu de données sont écrites de façon incohérente (jour et mois inversés) : le programme reconstruit chaque début de période à partir de la fin de la précédente et refuse d'écrire la série si les périodes ne s'enchaînent pas ;
+- `gaz/historique.json` : le prix repère moyen mensuel de la CRE et les grilles B0/B1, lus dans le classeur Excel de la CRE ;
+- `elec/historique-offres.json` et `gaz/historique-offres.json` : le prix de chaque offre relevé par le site, ajouté seulement quand il change (l'historique commence à la première exécution).
+
+Aucune valeur n'est estimée. Si une source ne répond pas ou si les contrôles échouent, la série existante est conservée et le rapport indique « Historique … non mis à jour ».

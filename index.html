@@ -315,6 +315,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <button role="tab" id="tab-duo" aria-selected="false" tabindex="-1" aria-controls="p-duo">Élec + Gaz</button>
       <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
+      <button role="tab" id="tab-marche" aria-selected="false" tabindex="-1" aria-controls="p-marche">Marché</button>
       <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Parrainages</button>
       <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
       <button role="tab" id="tab-methode" aria-selected="false" tabindex="-1" aria-controls="p-methode">Méthode</button>
@@ -610,7 +611,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <ul>
         <li>Heures creuses : l'option existe en électricité et la page ne la traite pas. C'est une limite importante pour un logement chauffé à l'électricité.</li>
         <li>Afficher la durée de blocage des prix fixes (le filtre fixe / indexé existe déjà).</li>
-        <li>Historique des prix : onglet « Marché » avec les séries officielles de la CRE (tarif réglementé de l'électricité, prix repère du gaz) sur 5 ans et plus, puis l'historique de nos propres relevés. Il faut les séries CRE (à fournir ou à chercher).</li>
+        <li><strong>Historique des prix (onglet « Marché ») :</strong> le code est prêt mais les données n'existent pas encore : elles sont créées au premier lancement de « Mise à jour des prix » après fusion. Ensuite, vérifier l'onglet Marché (courbe du tarif réglementé, du prix repère du gaz) et lire dans le rapport la ligne « Historique … non mis à jour » si une série manque : me l'envoyer. Pour les offres des fournisseurs, aucun historique ancien n'est disponible : les courbes se construisent à partir de la première mise à jour, un point à chaque changement de prix. Pour remonter plus loin, il faudrait des archives de grilles (PDF datés) à fournir.</li>
         <li>Simuler la facture sur 12 mois plutôt qu'un total annuel à prix constant.</li>
         <li>Inclure les frais ponctuels (mise en service, déplacement) dans le total de la première année.</li>
       </ul>
@@ -661,6 +662,26 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </ul>
     </div>
     <p class="note">Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire.</p>
+  </section>
+
+<section class="panel" id="p-marche" role="tabpanel" aria-labelledby="tab-marche" hidden>
+    <h2>Évolution du marché</h2>
+    <p class="lede">Les prix officiels sur plusieurs années, pour savoir si le moment est bon. Les séries viennent de la CRE (données ouvertes) et sont mises à jour automatiquement ; elles ne sont jamais estimées.</p>
+    <div class="card">
+      <h3>Électricité : tarif réglementé de vente (Base, 6 kVA)</h3>
+      <div id="mk-elec" class="mk"><p class="note">Chargement…</p></div>
+    </div>
+    <div class="card">
+      <h3>Gaz : prix repère mensuel de la CRE</h3>
+      <div id="mk-gaz" class="mk"><p class="note">Chargement…</p></div>
+    </div>
+    <div class="card">
+      <h3>Nos relevés des offres des fournisseurs</h3>
+      <p class="note">Le site relève les prix des offres à chaque mise à jour. Seuls les changements sont conservés : l'historique commence à la première mise à jour et s'allonge avec le temps.</p>
+      <div class="field"><label for="mk-offre">Offre</label><select id="mk-offre"></select></div>
+      <div id="mk-offres" class="mk"></div>
+    </div>
+    <p class="note">Le tarif réglementé et le prix repère ne sont pas des offres : ils servent de repère. Les prix passés ne présagent pas des prix futurs.</p>
   </section>
 
 <section class="panel" id="p-methode" role="tabpanel" aria-labelledby="tab-methode" hidden>
@@ -1616,7 +1637,7 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "prime", "memo", "methode", "sources", "legal"];
+var TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "marche", "prime", "memo", "methode", "sources", "legal"];
 var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
@@ -1804,6 +1825,73 @@ function loadData() {
   }).catch(function () { /* on garde les données intégrées */ });
 }
 
+/* ---------- Marché : historique des prix ---------- */
+var MK = { charge: false, offres: {} };
+function mkDate(iso) { var m = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."], p = iso.split("-"); return m[parseInt(p[1], 10) - 1] + " " + p[0]; }
+// Courbe en SVG : pts = [[date ISO, valeur]], pas = true pour un prix qui change à date fixe (en escalier), fmt = mise en forme de la valeur
+function mkCourbe(pts, pas, fmt, unite, aria) {
+  var W = 480, H = 240, L = 58, R = 12, T = 12, B = 30, i;
+  var t = pts.map(function (p) { return Date.parse(p[0]); }), v = pts.map(function (p) { return p[1]; });
+  var t0 = t[0], t1 = pas ? Math.max(Date.now(), t[t.length - 1] + 90 * 864e5) : t[t.length - 1];
+  var vmin = Math.min.apply(null, v), vmax = Math.max.apply(null, v), marge = (vmax - vmin) * 0.1 || vmax * 0.1;
+  vmin = Math.max(0, vmin - marge); vmax += marge;
+  var X = function (x) { return L + (t1 === t0 ? 0 : (x - t0) / (t1 - t0)) * (W - L - R); };
+  var Y = function (y) { return T + (1 - (y - vmin) / (vmax - vmin)) * (H - T - B); };
+  var d = "", x, y;
+  for (i = 0; i < pts.length; i++) {
+    x = X(t[i]); y = Y(v[i]);
+    d += i === 0 ? "M" + x.toFixed(1) + " " + y.toFixed(1) : pas ? "H" + x.toFixed(1) + "V" + y.toFixed(1) : "L" + x.toFixed(1) + " " + y.toFixed(1);
+  }
+  if (pas) d += "H" + X(t1).toFixed(1);
+  var g = "", k;
+  for (k = 0; k <= 4; k++) {
+    var val = vmin + (vmax - vmin) * k / 4, yy = Y(val);
+    g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + yy.toFixed(1) + '" y2="' + yy.toFixed(1) + '" stroke="var(--line)"/><text x="' + (L - 6) + '" y="' + (yy + 4).toFixed(1) + '" text-anchor="end" font-size="12" fill="var(--muted)">' + fmt(val) + '</text>';
+  }
+  var a0 = new Date(t0).getFullYear(), a1 = new Date(t1).getFullYear(), pasAn = Math.max(1, Math.ceil((a1 - a0 + 1) / 8)), an;
+  for (an = a0; an <= a1; an += pasAn) { var xa = X(Date.UTC(an, 0, 1)); if (xa >= L) g += '<text x="' + xa.toFixed(1) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="12" fill="var(--muted)">' + an + '</text>'; }
+  var fin = pts.length - 1;
+  return '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + aria + '" style="width:100%;height:auto;max-width:720px">' + g +
+    '<path d="' + d + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>' +
+    '<circle cx="' + X(t[fin]).toFixed(1) + '" cy="' + Y(v[fin]).toFixed(1) + '" r="3.5" fill="var(--accent)"/></svg>' +
+    '<p class="note">Axe vertical : ' + unite + '.</p>';
+}
+function mkResume(pts, fmt, unite) {
+  var a = pts[0], z = pts[pts.length - 1], pc = a[1] ? (z[1] / a[1] - 1) * 100 : 0;
+  var haut = pts.reduce(function (m, p) { return p[1] > m[1] ? p : m; }), bas = pts.reduce(function (m, p) { return p[1] < m[1] ? p : m; });
+  return '<p>Dernier relevé (' + mkDate(z[0]) + ') : <strong>' + fmt(z[1]) + unite + '</strong>. Depuis ' + mkDate(a[0]) + ' (' + fmt(a[1]) + ') : ' + (pc >= 0 ? "+" : "−") + fmtInt.format(Math.abs(pc)) + ' %. Plus haut : ' + fmt(haut[1]) + ' (' + mkDate(haut[0]) + '), plus bas : ' + fmt(bas[1]) + ' (' + mkDate(bas[0]) + ').</p>';
+}
+function mkTableau(pts, fmt) {
+  return '<details><summary>Voir les valeurs</summary><table style="min-width:0"><thead><tr><th>Date</th><th>Valeur</th></tr></thead><tbody>' + pts.slice().reverse().map(function (p) { return '<tr><td>' + mkDate(p[0]) + '</td><td>' + fmt(p[1]) + '</td></tr>'; }).join("") + '</tbody></table></details>';
+}
+function mkJson(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }); }
+function mkVide(id, msg) { $(id).innerHTML = '<p class="note">' + msg + '</p>'; }
+function loadMarche() {
+  if (MK.charge || !window.fetch || location.protocol === "file:") { if (!window.fetch || location.protocol === "file:") { mkVide("mk-elec", "L'historique demande d'ouvrir le site depuis son adresse en ligne."); mkVide("mk-gaz", ""); } return; }
+  MK.charge = true;
+  var f3 = function (x) { return fmtKwh.format(x) + " €"; }, f0 = function (x) { return fmtInt.format(x) + " €"; };
+  mkJson("elec/historique.json").then(function (j) {
+    var pts = j.trv6.map(function (p) { return [p[0], p[1]]; });
+    $("mk-elec").innerHTML = mkResume(pts, f3, "/kWh TTC") + mkCourbe(pts, true, f3, "prix du kWh TTC, en €", "Prix du kWh du tarif réglementé depuis " + mkDate(pts[0][0])) + mkTableau(pts, f3) + '<p class="note">Source : ' + j.source + ', mis à jour le ' + j.mis_a_jour + '.</p>';
+  }).catch(function () { mkVide("mk-elec", "Historique pas encore disponible : il apparaîtra après la prochaine mise à jour automatique des prix."); });
+  mkJson("gaz/historique.json").then(function (j) {
+    var pts = j.prvg.map(function (p) { return [p[0], p[1]]; }), fm = function (x) { return fmtInt.format(x) + " €"; };
+    $("mk-gaz").innerHTML = mkResume(pts, fm, "/MWh TTC") + mkCourbe(pts, false, fm, "prix repère moyen TTC, en €/MWh", "Prix repère du gaz depuis " + mkDate(pts[0][0])) + mkTableau(pts, fm) + '<p class="note">Source : ' + j.source + ', mis à jour le ' + j.mis_a_jour + '. 1 MWh = 1 000 kWh.</p>';
+  }).catch(function () { mkVide("mk-gaz", "Historique pas encore disponible : il apparaîtra après la prochaine mise à jour automatique des prix."); });
+  Promise.all([mkJson("elec/historique-offres.json").catch(function () { return {}; }), mkJson("gaz/historique-offres.json").catch(function () { return {}; })]).then(function (r) {
+    var sel = $("mk-offre"), cles = [];
+    ["elec", "gaz"].forEach(function (e, n) { Object.keys(r[n]).sort().forEach(function (k) { MK.offres[e + "|" + k] = r[n][k]; cles.push([e + "|" + k, (e === "elec" ? "Élec · " : "Gaz · ") + k.replace("|", " · ")]); }); });
+    if (!cles.length) { mkVide("mk-offres", "Pas encore de relevé."); return; }
+    sel.innerHTML = cles.map(function (c) { return '<option value="' + c[0].replace(/"/g, "&quot;") + '">' + c[1].replace(/&/g, "&amp;").replace(/</g, "&lt;") + '</option>'; }).join("");
+    var draw = function () {
+      var h = MK.offres[sel.value] || [], pts = h.map(function (p) { return [p[0], p[1]]; });
+      if (pts.length < 2) { $("mk-offres").innerHTML = '<p>Un seul relevé pour l\'instant : ' + (pts.length ? f3(pts[0][1]) + "/kWh le " + pts[0][0] : "aucun") + '. La courbe apparaîtra au premier changement de prix.</p>'; return; }
+      $("mk-offres").innerHTML = mkResume(pts, f3, "/kWh") + mkCourbe(pts, true, f3, "prix du kWh, en €", "Prix relevé de l'offre") + mkTableau(pts, f3);
+    };
+    sel.onchange = draw; draw();
+  });
+}
+
 /* ---------- Réglages ---------- */
 var REG_DEF = { hb: 70, hm: 110, hh: 140, ee: 800, eg: 1269, cop: 3, rg: 90, abo: 99 };
 var REG = {};
@@ -1818,7 +1906,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", legal: "Mentions légales" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", legal: "Mentions légales" };
 function a11yTabs() {
   TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
 }
@@ -1870,11 +1958,12 @@ function setTab(t) {
   if (state.tab === "gaz") state.gasConso = conso() || state.gasConso;
   if (state.tab === "eau") state.eauConso = conso() || state.eauConso;
   state.tab = t;
+  if (t === "marche") loadMarche();
   TABS.forEach(function (n) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "methode" || t === "legal";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "methode" || t === "legal";
   $("f-kva").hidden = t !== "elec";
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz"; $("f-gzone").hidden = t !== "gaz";
