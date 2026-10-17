@@ -58,6 +58,17 @@ class SansPrix(unittest.TestCase):
         self.assertEqual(e.comparer(a, n), [])
 
 
+class Eclats(unittest.TestCase):
+    def test_decoupage_et_relecture(self):
+        import tempfile
+        d = {"06600": "06004~Antibes~1.49", "06000": "06088~Nice~3.1", "75001": "75056~Paris~3.4"}
+        with tempfile.TemporaryDirectory() as t:
+            e.ecrire_eclats(t, d)
+            self.assertEqual(sorted(os.listdir(t)), ["06.json", "75.json"]); self.assertEqual(e.lire_eclats(t), d)
+            d.pop("75001"); e.ecrire_eclats(t, d)
+            self.assertEqual(os.listdir(t), ["06.json"]); self.assertEqual(e.lire_eclats(t), d)
+
+
 class Conversion(unittest.TestCase):
     def test_csv_lisible_par_build_eau(self):
         import tempfile, os, csv
