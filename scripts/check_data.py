@@ -28,7 +28,7 @@ for r in d["elec"] + d["gas"] + [d["elec_ref"], d["gas_ref"]]:
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 for r in d["gas"]:
     if "cpf" not in r: continue
-    need(isinstance(r["cpf"], str) and r["cpf"].startswith("prix-cp/") and r["cpf"].endswith(".json") and ".." not in r["cpf"], f"cpf invalide : {r['name']}")
+    need(isinstance(r["cpf"], str) and r["cpf"].startswith("gaz/prix-cp/") and r["cpf"].endswith(".json") and ".." not in r["cpf"], f"cpf invalide : {r['name']}")
     try: f = json.load(open(os.path.join(RACINE, r["cpf"]), encoding="utf-8"))
     except Exception: need(False, f"fichier par code postal introuvable : {r['cpf']}"); continue
     need(f.get("type") == "prix-par-code-postal" and f.get("energie") == "gaz", f"{r['cpf']} : type ou énergie invalide")

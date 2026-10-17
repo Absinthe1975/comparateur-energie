@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Construit prix-cp.json : prix du gaz par code postal, lus dans les grilles des fournisseurs
 (texte extrait du PDF : une ligne par commune « CP COMMUNE abo_B0 kWh_B0 abo_B1 kWh_B1 », TTC).
-Un fichier par offre, dans prix-cp/ ; l'offre de data.json y renvoie par son champ « cpf »."""
+Un fichier par offre, dans gaz/prix-cp/ ; l'offre de data.json y renvoie par son champ « cpf »."""
 import json, re, sys, collections
 LIGNE = re.compile(r"^(\d{4,5})\s+(.+?)\s+(\d+,\d\d)\s+(\d,\d{4})\s+(\d+,\d\d)\s+(\d,\d{4})\s*$", re.M)
 f = lambda s: float(s.replace(",", "."))
