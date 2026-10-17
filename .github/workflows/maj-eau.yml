@@ -24,15 +24,15 @@ jobs:
           python-version: "3.12"
       - run: pip install pandas xlrd openpyxl
       - run: python3 -m unittest tests.test_eau_maj
-      - name: Télécharger et reconstruire communes-cp.json
+      - name: Télécharger et reconstruire eau/communes-cp.json
         run: python3 scripts/eau_maj.py
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: maj-eau
           title: "Prix de l'eau : mise à jour SISPEA"
           commit-message: "Prix de l'eau : mise à jour automatique (SISPEA + La Poste)"
-          body: "Mise à jour automatique de communes-cp.json. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
-          add-paths: communes-cp.json
+          body: "Mise à jour automatique de eau/communes-cp.json. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
+          add-paths: eau/communes-cp.json
           assignees: Absinthe1975
           reviewers: Absinthe1975
           labels: à-fusionner

@@ -44,17 +44,17 @@ GEMINI_API_KEY=... python scripts/update_prices.py --dry-run
 
 ## Prix de l'eau par commune
 
-Automatique : le workflow « Mise à jour du prix de l'eau » (chaque lundi, ou bouton *Run workflow*) lance `scripts/eau_maj.py`. Il télécharge la base La Poste et les fichiers SISPEA indiqués dans `eau-config.json` (à renseigner : adresses des deux fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls`), prend la dernière année non vide, reconstruit `communes-cp.json`, refuse le résultat si des codes postaux disparaissent ou si les prix bougent trop, puis, seulement si quelque chose change, ouvre une demande à relire qui vous est assignée (notification GitHub et courriel, étiquette « à-fusionner »).
+Automatique : le workflow « Mise à jour du prix de l'eau » (chaque lundi, ou bouton *Run workflow*) lance `scripts/eau_maj.py`. Il télécharge la base La Poste et les fichiers SISPEA indiqués dans `eau/eau-config.json` (à renseigner : adresses des deux fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls`), prend la dernière année non vide, reconstruit `communes-cp.json`, refuse le résultat si des codes postaux disparaissent ou si les prix bougent trop, puis, seulement si quelque chose change, ouvre une demande à relire qui vous est assignée (notification GitHub et courriel, étiquette « à-fusionner »).
 
 Procédure manuelle (si besoin) :
 
-Le fichier `communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
+Le fichier `eau/communes-cp.json` (communes par code postal, avec le prix de l'eau) est fabriqué par `scripts/build_eau.py` à partir de :
 - la base officielle des codes postaux (data.gouv.fr, fichier `019HexaSmal.csv`),
 - les fichiers SISPEA « tarifs eau potable » et « tarifs assainissement collectif » (services.eaufrance.fr/pro/telechargement), feuille « Zones tarifaires » exportée en CSV UTF-8 sous les noms `tarifs_AEP_<année>.csv` et `tarifs_AC_<année>.csv`,
 - les feuilles « Détail tarifaire » des mêmes fichiers, exportées en `detail_AEP_<année>.csv` et `detail_AC_<année>.csv` (abonnement = part fixe),
 - éventuellement `zones_gn.json` (orthographe des communes).
 
-Commande : `python3 scripts/build_eau.py eau-sources communes-cp.json 2025`
+Commande : `python3 scripts/build_eau.py eau-sources eau/communes-cp.json 2025`
 
 ## Prix de référence : recoupement obligatoire
 
@@ -80,9 +80,9 @@ Ces valeurs font foi : elles remplacent celles des autres sites. En cas de lectu
 
 La CRE ne publie pas de prix par zone. La page `informations.mint-energie.com/.../prix-repere-gaz.aspx` (clé `mint_prg` de `sources.json`) republie le prix repère pour les 6 zones. C'est un formulaire : `scripts/mint_prg.py` rejoue ce que fait le navigateur (une requête par zone) et vérifie que la page répond bien à la zone et au mois demandés. Le résultat sert aux offres marquées `"prg": true` dans `data.json` (Mint Biogaz Online, indexée au niveau du prix repère). Le robots.txt du site est respecté. Si la zone 1 s'écarte de plus de 0,0006 €/kWh du prix repère de la CRE, rien n'est appliqué et la ligne apparaît dans « À relire ».
 
-## Prix du gaz par code postal (dossier prix-cp/)
+## Prix du gaz par code postal (dossier gaz/prix-cp/)
 
-Quand un fournisseur publie une grille par commune (pour l'instant Alterna gaz), elle est intégrée en entier, **dans un fichier à part par offre** (`prix-cp/alterna-mon-gaz-naturel-indexe.json`). Rien n'est mélangé entre fournisseurs :
+Quand un fournisseur publie une grille par commune (pour l'instant Alterna gaz), elle est intégrée en entier, **dans un fichier à part par offre** (`gaz/prix-cp/alterna-mon-gaz-naturel-indexe.json`). Rien n'est mélangé entre fournisseurs :
 - l'offre concernée dans `data.json` porte un champ `"cpf"` qui désigne son fichier ;
 - le fichier rappelle sa clé de fournisseur (`k`), le nom exact de l'offre, la date de la grille et sa source ;
 - le site n'utilise un fichier que si sa clé et son offre correspondent à celles de l'offre (sinon il l'ignore) ;
@@ -91,7 +91,7 @@ Quand un fournisseur publie une grille par commune (pour l'instant Alterna gaz),
 Sur le site, si l'utilisateur a saisi son code postal, il voit le prix exact de son code postal ; s'il ne figure pas dans la grille, c'est la moyenne du département, puis la moyenne de la grille. Un code postal qui regroupe des communes à prix différents reçoit la moyenne de ces communes. Sans code postal, le site utilise la zone choisie (1 à 6).
 
 Pour ajouter ou mettre à jour une grille : extraire le texte du PDF (`pdftotext -layout`), puis lancer
-`python3 scripts/cp_prix.py prix-cp fournisseur "Nom exact de l'offre" jj/mm/aaaa URL-source grille.txt`
+`python3 scripts/cp_prix.py gaz/prix-cp fournisseur "Nom exact de l'offre" jj/mm/aaaa URL-source grille.txt`
 et ajouter le champ `cpf` à l'offre dans `data.json`.
 
 ## Détection automatique des PDF de grilles (rubrique « grilles » de sources.json)
@@ -104,7 +104,7 @@ Le nom d'un PDF change souvent (date, version) : on ne garde donc pas son adress
 ```
 
 À chaque lancement, le script lit la page, repère le lien PDF dont le **texte** (« Grille tarifaire ») ou le nom de fichier contient ces mots, télécharge ce que le lien désigne ce jour-là et le lit. Garde-fous : `robots.txt` respecté ; aucun ou plusieurs liens possibles = rien n'est deviné, l'entrée apparaît dans « Sources en échec » ; PDF inchangé (empreinte identique) = ignoré ; grille sans date, en HT seulement, avec trop peu de codes postaux ou un prix moyen très différent = non appliquée, listée « À relire ».
-- `"type": "cp-gaz"` : grille par code postal, intégrée automatiquement dans `prix-cp/` et dans l'offre de `data.json` (qui doit déjà porter son champ `cpf`).
+- `"type": "cp-gaz"` : grille par code postal, intégrée automatiquement dans `gaz/prix-cp/` et dans l'offre de `data.json` (qui doit déjà porter son champ `cpf`).
 - `"type": "info"` : le PDF est seulement détecté ; le rapport signale qu'il a changé, pour une intégration à la main.
 
 Au lieu de `"page"`, une entrée peut donner `"url"` : l'adresse stable du PDF (EDF garde le même nom de fichier chaque mois) ou une adresse qui redirige vers le PDF du moment (Alterna : `/tarifs-gaz-indexe`). C'est la solution la plus simple quand elle existe. Pour le type `"info"`, la première lecture enregistre le PDF comme référence ; ensuite, chaque changement du fichier apparaît dans « À relire » avec son lien.

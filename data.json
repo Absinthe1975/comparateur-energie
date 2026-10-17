@@ -566,7 +566,7 @@
     ]
    },
    "nivd": "01/10/2026",
-   "cpf": "prix-cp/alterna-mon-gaz-naturel-indexe.json",
+   "cpf": "gaz/prix-cp/alterna-mon-gaz-naturel-indexe.json",
    "typ": "indexe"
   },
   {
@@ -598,7 +598,7 @@
     ]
    },
    "nivd": "01/10/2026",
-   "cpf": "prix-cp/alterna-mon-biogaz-francais.json",
+   "cpf": "gaz/prix-cp/alterna-mon-biogaz-francais.json",
    "vert": true
   },
   {
