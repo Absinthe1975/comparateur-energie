@@ -32,8 +32,9 @@ def prix_valides(com):
     for cp, s in com.items():
         for item in s.split("|"):
             p = item.split("~")
-            try: out.setdefault(cp, []).append((p[0], float(p[2])))
-            except (IndexError, ValueError): pass
+            try: v = (p[0], float(p[2]))
+            except (IndexError, ValueError): continue
+            out.setdefault(cp, []).append(v)
     return out
 
 def comparer(ancien, nouveau, max_perte=0.03, max_ecart=0.25):
