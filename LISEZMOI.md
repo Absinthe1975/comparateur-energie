@@ -44,7 +44,7 @@ GEMINI_API_KEY=... python scripts/update_prices.py --dry-run
 
 ## Prix de l'eau par commune
 
-Automatique : le workflow « Mise à jour du prix de l'eau » (le 15 de chaque mois, ou bouton *Run workflow*) lance `scripts/eau_maj.py`. Il télécharge la base La Poste et les fichiers SISPEA indiqués dans `eau-config.json` (à renseigner : adresses des deux fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls`), prend la dernière année non vide, reconstruit `communes-cp.json`, refuse le résultat si des codes postaux disparaissent ou si les prix bougent trop, puis ouvre une demande à relire.
+Automatique : le workflow « Mise à jour du prix de l'eau » (chaque lundi, ou bouton *Run workflow*) lance `scripts/eau_maj.py`. Il télécharge la base La Poste et les fichiers SISPEA indiqués dans `eau-config.json` (à renseigner : adresses des deux fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls`), prend la dernière année non vide, reconstruit `communes-cp.json`, refuse le résultat si des codes postaux disparaissent ou si les prix bougent trop, puis, seulement si quelque chose change, ouvre une demande à relire qui vous est assignée (notification GitHub et courriel, étiquette « à-fusionner »).
 
 Procédure manuelle (si besoin) :
 
