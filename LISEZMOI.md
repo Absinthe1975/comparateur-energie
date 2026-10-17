@@ -133,3 +133,7 @@ Quand le PDF d'une offre suivie (type `info`) change et qu'une clé d'IA est dis
 - `elec/historique-offres.json` et `gaz/historique-offres.json` : le prix de chaque offre relevé par le site, ajouté seulement quand il change (l'historique commence à la première exécution).
 
 Aucune valeur n'est estimée. Si une source ne répond pas ou si les contrôles échouent, la série existante est conservée et le rapport indique « Historique … non mis à jour ».
+
+## Historique du prix de l'eau
+
+`scripts/eau_historique.py` (lancé par le workflow de l'eau, avant la mise à jour) télécharge les fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls` du SISPEA pour chaque année depuis 2009 et écrit dans `eau/historique/` : un fichier par département (`NN.json`, prix de chaque commune année par année), `national.json` (médianes par année) et `annees.json`. Seules les années manquantes et les deux plus récentes sont retéléchargées. Une année dont le fichier est absent, vide ou d'un autre format est ignorée et signalée dans le journal ; aucune valeur n'est estimée. La page affiche la courbe de la commune (onglet Eau) et le prix médian national (onglet Marché).
