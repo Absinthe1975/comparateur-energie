@@ -13,6 +13,11 @@ class T(unittest.TestCase):
         s = h.serie_trv(ROWS)
         self.assertEqual([x[0] for x in s], [datetime.date(2025, 8, 1), datetime.date(2026, 2, 1), datetime.date(2026, 8, 1)])
         self.assertEqual(s[-1][1:], (0.2001, 192.3))
+    def test_dates_iso_inversees(self):
+        iso = [ligne("2025-01-08", "2026-01-31", "0,2016", "157,0"), ligne("2026-01-02", "2026-07-31", "0,1952", "190,8"), ligne("2026-01-08", None, "0,2001", "192,3")]
+        self.assertEqual([x[0] for x in h.serie_trv(iso)], [datetime.date(2025, 8, 1), datetime.date(2026, 2, 1), datetime.date(2026, 8, 1)])
+        iso2 = [ligne("2025-08-01", "2026-01-31", "0,2016", "157,0"), ligne("2026-02-01", "2026-07-31", "0,1952", "190,8"), ligne("2026-08-01", None, "0,2001", "192,3")]
+        self.assertEqual(len(h.serie_trv(iso2)), 3)   # dates normales aussi acceptées
     def test_refuse_si_les_periodes_ne_s_enchainent_pas(self):
         mauvais = [dict(r) for r in ROWS]; mauvais[1]["DATE_DEBUT"] = "03/15/2026"
         with self.assertRaises(ValueError): h.serie_trv(mauvais)
