@@ -22,7 +22,9 @@ def _date(s, ordre):
     if s.lower() in ("", "nul", "null", "none", "nan"): return None
     m = re.match(r"^(\d{4})-(\d\d)-(\d\d)", s)
     try:
-        if m: return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        if m:   # le jeu de données écrit parfois aaaa-jj-mm (2013-01-08 pour le 1er août 2013) : on essaie les deux ordres
+            x, y = int(m.group(2)), int(m.group(3))
+            return datetime.date(int(m.group(1)), x, y) if ordre == "mj" else datetime.date(int(m.group(1)), y, x)
         m = re.match(r"^(\d\d)/(\d\d)/(\d{4})$", s)
         if not m: return None
         a, b, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
@@ -34,14 +36,17 @@ def serie_trv(rows, kva=6):
     """[(date_debut, kwh_ttc, abo_ttc)] triée, ou ValueError si les périodes ne s'enchaînent pas."""
     rs = [r for r in rows if c.num(r.get("P_SOUSCRITE")) == kva]
     if len(rs) < 3: raise ValueError(f"TRV {kva} kVA : {len(rs)} périodes seulement")
-    fin = lambda r: _date(r.get("DATE_FIN"), "jm")
+    def fin(r):
+        """Fin de période : toujours un dernier jour de mois (28 à 31), donc jamais ambiguë entre jour et mois."""
+        c = [d for d in (_date(r.get("DATE_FIN"), o) for o in ("jm", "mj")) if d and (d + datetime.timedelta(days=1)).day == 1]
+        return c[0] if c else None
     fermees = sorted([r for r in rs if fin(r)], key=fin); ouvertes = [r for r in rs if not fin(r)]
     if len(ouvertes) != 1: raise ValueError(f"TRV {kva} kVA : {len(ouvertes)} périodes ouvertes (une attendue)")
     ordre = fermees + ouvertes
     # début de la première période : DATE_DEBUT, lu jour/mois puis mois/jour, doit précéder sa fin
     f0 = fin(ordre[0]); debut = [d for d in (_date(ordre[0].get("DATE_DEBUT"), o) for o in ("mj", "jm")) if d and d <= f0]
     if not debut: raise ValueError("TRV : début de la première période illisible")
-    d = debut[0]; out = []
+    d = next((x for x in debut if x.day == 1), debut[0]); out = []   # une période commence normalement le 1er du mois
     for r in ordre:
         if out:
             d = fin_prec + datetime.timedelta(days=1)
@@ -107,7 +112,7 @@ def main(racine=RACINE, get=c._get, today=None):
         page = get(od["gas_page"]).decode("utf-8", "replace")
         grilles, prvg = gaz_historique(get(c.trouver_xlsx(page)), today)
         _ecrire_serie(os.path.join(racine, "gaz", "historique.json"), {"source": "CRE, prix repère de vente de gaz naturel (data CRE)", "mis_a_jour": iso(today),
-            "b0": [[iso(d), g["b0_kwh"], g["b0_abo"]] for d, g in grilles], "b1": [[iso(d), g["b1_kwh"], g["b1_abo"]] for d, g in grilles], "prvg": [[iso(d), v] for d, v in prvg]})
+            "b0": [[iso(d), g["b0_kwh"], g["b0_abo"]] for d, g in grilles], "b1": [[iso(d), g["b1_kwh"], g["b1_abo"]] for d, g in grilles], "prvg": [[iso(d), round(v, 2)] for d, v in prvg]})
         print(f"Prix repère du gaz : {len(grilles)} grilles, {len(prvg)} mois depuis le {prvg[0][0]}.")
     except Exception as e: print("Historique du prix repère du gaz non mis à jour :", e); code = 1
     d = donnees.charger(racine)
