@@ -5,6 +5,11 @@ on:
     - cron: "0 6 1-10 * *"  # chaque jour du 1er au 10 (publication du prix repère, changements des fournisseurs), 6 h UTC
     - cron: "0 6 * * 1"     # puis chaque lundi pour rattraper un changement en cours de mois
   workflow_dispatch:       # bouton « Run workflow » pour lancer à la main
+    inputs:
+      recoupement:
+        description: "Recouper aussi les prix inchangés sur un second site (complet, mais bien plus long : le lundi, c'est automatique)"
+        type: boolean
+        default: false
 
 concurrency:
   group: maj-prix
@@ -31,7 +36,9 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PROVIDER: gemini
-          CROSSCHECK: ${{ (github.event_name == 'workflow_dispatch' || github.event.schedule == '0 6 * * 1') && '1' || '' }}
+          CROSSCHECK: ${{ (inputs.recoupement || github.event.schedule == '0 6 * * 1') && '1' || '' }}
+          LLM_DELAY: "4"
+          FETCH_DELAY: "1"
           CONTACT: ${{ github.server_url }}/${{ github.repository }}
         run: python scripts/update_prices.py
       - name: Contrôle de data.json
