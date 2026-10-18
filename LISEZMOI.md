@@ -17,7 +17,7 @@ Ce dossier contient le site (`index.html`), ses données (`elec/data.json` pour 
 2. Créez une clé gratuite sur aistudio.google.com/apikey (compte Google, pas de paiement demandé), puis dans le dépôt : Settings, Secrets and variables, Actions, New repository secret. Nom : `GEMINI_API_KEY`.
 3. Dans Settings, Actions, General, Workflow permissions : choisissez « Read and write permissions » et cochez « Allow GitHub Actions to create and approve pull requests ».
 4. Pour publier le site : Settings, Pages, « Deploy from a branch », branche `main`, dossier `/ (root)`.
-5. Premier essai : onglet Actions, « Mise à jour des prix », Run workflow. Lisez le rapport dans la demande de fusion qui apparaît.
+5. Premier essai : onglet Actions, « Mise à jour des prix », Run workflow (la case « recoupement » est décochée par défaut : lancement rapide ; cochez-la pour recouper aussi les prix inchangés sur un second site, plus long, fait automatiquement le lundi). Lisez le rapport dans la demande de fusion qui apparaît.
 
 ## Corriger ou ajouter une source
 
