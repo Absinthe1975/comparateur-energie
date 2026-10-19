@@ -50,8 +50,8 @@
    "ab9": 238.56,
    "nivd": "05/10/2026",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/geg/offres"
+    "Grille officielle GEG (5 oct. 2026)",
+    "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf"
    ],
    "typ": "fixe",
    "vert": true,
@@ -70,7 +70,11 @@
    "nivd": "05/10/2026",
    "typ": "fixe",
    "vert": true,
-   "eng": 36
+   "eng": 36,
+   "s": [
+    "Grille officielle GEG (5 oct. 2026)",
+    "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf"
+   ]
   },
   {
    "k": "gdb",

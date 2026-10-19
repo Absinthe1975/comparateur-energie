@@ -110,7 +110,11 @@
    "ab0": 125.64,
    "nivd": "21/09/2026",
    "typ": "fixe",
-   "eng": 36
+   "eng": 36,
+   "s": [
+    "Grille officielle GEG (21 sept. 2026)",
+    "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf"
+   ]
   },
   {
    "k": "geg",
@@ -125,7 +129,11 @@
    "nivd": "21/09/2026",
    "typ": "fixe",
    "vert": true,
-   "eng": 36
+   "eng": 36,
+   "s": [
+    "Grille officielle GEG (21 sept. 2026)",
+    "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf"
+   ]
   },
   {
    "k": "total",
