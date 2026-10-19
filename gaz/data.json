@@ -443,7 +443,12 @@
    "d": "9 oct. 2026",
    "niv": "confirmer",
    "typ": "fixe",
-   "vert": true
+   "vert": true,
+   "b0": 0.2002,
+   "s": [
+    "Grille ilek (zone B)",
+    "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/357/grille_357.pdf"
+   ]
   }
  ],
  "abo_g": {
