@@ -48,6 +48,20 @@ def liens_pdf(html_page, base):
         if u not in vus: vus.add(u); out.append((u, ""))
     return out
 
+_MOIS = ["janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
+
+def _ordre(u):
+    """(année, mois) lus dans l'adresse d'un PDF : dossier « 2026/Octobre/ », « PART1026 », « 21092026 »… ; (0, 0) si illisible."""
+    t = _f(urllib.parse.unquote(u))
+    an = re.findall(r"(?<!\d)(20\d\d)(?!\d)", t)
+    mois = [i + 1 for i, m in enumerate(_MOIS) if m in t]
+    m = re.search(r"part ?(\d\d)(\d\d)(?!\d)", t) or re.search(r"(?<!\d)\d\d(\d\d)(20\d\d)(?!\d)", t)
+    if m and not mois:
+        a, b = m.group(1), m.group(2)
+        if len(b) == 4: mois = [int(a)]; an = an or [b]
+        else: mois = [int(a)]; an = an or ["20" + b]
+    return (int(an[-1]) if an else 0, mois[-1] if mois else 0)
+
 def choisir(liens, regle):
     """-> (url, None) ou (None, raison). Le texte du lien et le nom du fichier sont examinés ensemble."""
     cont = [_f(x) for x in regle.get("contient", [])]
@@ -58,6 +72,11 @@ def choisir(liens, regle):
         s = _f(t + " " + urllib.parse.unquote(u.rsplit("/", 1)[-1]))
         if all(c in s for c in cont) and (not un_de or any(x in s for x in un_de)) and not any(x in s for x in excl): bons.append((u, t))
     if not bons: return None, f"aucun lien PDF ne correspond ({len(liens)} PDF sur la page)"
+    if len({u for u, _ in bons}) > 1 and regle.get("dernier"):
+        # le fournisseur garde les anciennes grilles en ligne : on prend la plus récente (année puis mois lus dans l'adresse)
+        rang = sorted({(_ordre(u), u) for u, _ in bons})
+        if len(rang) > 1 and rang[-1][0] == rang[-2][0] or rang[-1][0] == (0, 0): return None, "plusieurs PDF correspondent, dates illisibles : " + " ; ".join(sorted({u for u, _ in bons}))
+        return rang[-1][1], None
     if len({u for u, _ in bons}) > 1: return None, "plusieurs PDF correspondent : " + " ; ".join(sorted({u for u, _ in bons}))
     return bons[0][0], None
 
