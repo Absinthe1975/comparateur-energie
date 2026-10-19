@@ -321,6 +321,18 @@
    "offre": "Essentielle Verte",
    "url": "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf",
    "type": "info"
+  },
+  {
+   "k": "ilek",
+   "offre": "ÉnRFixe+ Elec",
+   "url": "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf",
+   "type": "info"
+  },
+  {
+   "k": "ilek",
+   "offre": "ÉnRFixe+ Gaz",
+   "url": "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/357/grille_357.pdf",
+   "type": "info"
   }
  ]
 }
