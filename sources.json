@@ -276,7 +276,7 @@
   {
    "k": "geg",
    "offre": "Élec Verte fixe 3 ans (grille)",
-   "page": "https://www.geg.fr/aide-et-contact/centredocumentation/particulier/tarifs/",
+   "page": "https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/",
    "type": "info",
    "contient": [
     "grille",
@@ -287,7 +287,7 @@
   {
    "k": "geg",
    "offre": "Gaz et biogaz fixe 3 ans (grille)",
-   "page": "https://www.geg.fr/aide-et-contact/centredocumentation/particulier/tarifs/",
+   "page": "https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/",
    "type": "info",
    "contient": [
     "grille",
