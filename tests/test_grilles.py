@@ -105,6 +105,20 @@ class Urls_directes(unittest.TestCase):
             e = dict(E1, url="https://x.fr/tarifs-gaz-indexe"); e.pop("page")
             rep = self.lancer(e, {"https://x.fr/tarifs-gaz-indexe": b"%PDF-1.4 t"}, d, {}, racine=t); self.assertEqual(len(rep.applied), 1, rep.failed + rep.review)
             f = json.load(open(os.path.join(t, "gaz/prix-cp/alterna-test.json"), encoding="utf-8")); self.assertEqual(f["source"], "https://x.fr/tarifs-gaz-indexe")
+
+class DernierTest(unittest.TestCase):
+    B = "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/"
+    def test_prend_la_plus_recente(self):
+        l = [(self.B + "Aout/Grille-tarifaire-Elec-PART0826.pdf", ""), (self.B + "Octobre/Grille-tarifaire-Elec-PART1026.pdf", "")]
+        u, why = grilles_pdf.choisir(l, {"contient": ["grille"], "dernier": True}); self.assertIsNone(why); self.assertIn("Octobre", u)
+        u, why = grilles_pdf.choisir(l, {"contient": ["grille"]}); self.assertIsNone(u)
+    def test_date_dans_le_nom(self):
+        l = [(self.B + "Septembre/Grille-gaz-21092026.pdf", ""), (self.B + "Aout/Grille-gaz-PART0826.pdf", "")]
+        u, _ = grilles_pdf.choisir(l, {"contient": ["grille"], "dernier": True}); self.assertIn("21092026", u)
+    def test_dates_illisibles(self):
+        l = [("https://x.fr/a-grille.pdf", ""), ("https://x.fr/b-grille.pdf", "")]
+        u, why = grilles_pdf.choisir(l, {"contient": ["grille"], "dernier": True}); self.assertIsNone(u); self.assertIn("illisibles", why)
+
 if __name__ == "__main__": unittest.main()
 
 
