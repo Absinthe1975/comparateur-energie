@@ -365,14 +365,17 @@
    "offer": "ÉnRFixe+ Elec",
    "a": 0.24,
    "b": 0.2385,
-   "d": "18 oct. 2026",
-   "niv": "confirmer",
+   "d": "01/10/2026",
+   "niv": "officiel",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/ilek/offres"
+    "Grille officielle ilek",
+    "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
    ],
    "typ": "fixe",
-   "vert": true
+   "vert": true,
+   "nivd": "01/10/2026",
+   "ab6": 301.2,
+   "ab9": 409.2
   },
   {
    "k": "enercoop",
@@ -425,7 +428,7 @@
   "engie": "18 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
-  "ilek": "18 oct. 2026",
+  "ilek": "19 oct. 2026",
   "enercoop": "18 oct. 2026"
  },
  "trv_abo": {
