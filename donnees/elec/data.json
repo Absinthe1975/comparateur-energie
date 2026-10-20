@@ -211,7 +211,7 @@
    "offer": "Essentielle Verte",
    "a": 0.1919,
    "b": 0.1904,
-   "d": "19 oct. 2026",
+   "d": "20 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -319,7 +319,7 @@
    "offer": "Intelligent Octopus",
    "a": 0.1968,
    "b": 0.1953,
-   "d": "19 oct. 2026",
+   "d": "20 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -392,7 +392,7 @@
    "offer": "Elec Référence 3 ans",
    "a": 0.233,
    "b": 0.2347,
-   "d": "19 oct. 2026",
+   "d": "20 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -475,12 +475,12 @@
   "ohm": "13 oct. 2026",
   "dyneff": "20 oct. 2026",
   "mint": "14 oct. 2026",
-  "primeo": "19 oct. 2026",
+  "primeo": "20 oct. 2026",
   "edf": "14 oct. 2026",
   "llum": "14 oct. 2026",
   "alterna": "14 oct. 2026",
-  "octo": "19 oct. 2026",
-  "engie": "19 oct. 2026",
+  "octo": "20 oct. 2026",
+  "engie": "20 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
   "ilek": "19 oct. 2026",
@@ -489,6 +489,8 @@
  "trv_abo": {
   "3": 145.56,
   "6": 190.32,
-  "9": 238.56
+  "9": 238.56,
+  "12": 286.86,
+  "15": 330.57
  }
 }

@@ -9,27 +9,27 @@
  "https://prix-elec.com/fournisseurs/alterna/offres|Mon électricité française fixe 1 an": "b43b18bad5ac6c51",
  "https://prix-elec.com/fournisseurs/edf/offres|Zen Online": "4ac3b0a2f68e1f6e",
  "https://prix-elec.com/fournisseurs/octopus-energy/offres|Intelligent Octopus": "a2be355b63d02bb8",
- "https://prix-elec.com/fournisseurs/engie/offres|Elec Référence 3 ans": "70b77cf0a2555cf9",
+ "https://prix-elec.com/fournisseurs/engie/offres|Elec Référence 3 ans": "59cb477d296c65da",
  "https://prix-elec.com/fournisseurs/ilek/offres|ÉnRFixe+ Elec": "007b0658e1790f6e",
  "https://prix-elec.com/fournisseurs/enercoop/offres|Offre Base": "0523077ca17e2909",
- "https://prix-elec.com/fournisseurs/ekwateur/offres|Gaz Naturel 15 % Biogaz Fixe": "045c6f81105613c6",
+ "https://prix-elec.com/fournisseurs/ekwateur/offres|Gaz Naturel 15 % Biogaz Fixe": "635708e93fe3d343",
  "https://prix-elec.com/fournisseurs/edf/offres|Avantage Gaz 2 ans": "590881d001ce551a",
- "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe BioGaz": "7899cc87f4a98ec8",
+ "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe BioGaz": "1f0c8e6c44aeb6be",
  "https://prix-elec.com/fournisseurs/ohm-energie/offres|Extra Eco Gaz": "bd87e685b47c0299",
  "https://prix-elec.com/fournisseurs/dyneff/offres|Contrat+ Gaz 15 % Vert": "38182e38e8f48a95",
  "https://prix-elec.com/fournisseurs/mint-energie/offres|Biogaz Online": "5917591679786b54",
  "https://prix-elec.com/fournisseurs/octopus-energy/offres|Gaz Fixe": "6f46ccaeb97a304b",
  "https://prix-elec.com/fournisseurs/happ-e/offres|Gaz Naturel": "61be5c256d74e57c",
- "https://prix-elec.com/fournisseurs/edf/parrainage|EDF": "0cc752e9905fad32",
+ "https://prix-elec.com/fournisseurs/edf/parrainage|EDF": "2847b2c24f666826",
  "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches|TotalEnergies": "f708ca8ba51d5a24",
  "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage|Gaz de Bordeaux": "e99d5e2caa626339",
- "https://prix-elec.com/fournisseurs/octopus-energy/parrainage|Octopus Energy": "0064710759e46208",
- "https://prix-elec.com/fournisseurs/plenitude/parrainage|Plenitude": "df19ad7680780a27",
+ "https://prix-elec.com/fournisseurs/octopus-energy/parrainage|Octopus Energy": "72e692215eb1252f",
+ "https://prix-elec.com/fournisseurs/plenitude/parrainage|Plenitude": "0501740f0ea7a0a8",
  "https://prix-elec.com/fournisseurs/mint-energie/parrainage|Mint Énergie": "b06ab728c43cb174",
- "https://prix-elec.com/fournisseurs/alpiq/parrainage|Alpiq": "11e7f58383c7f64c",
+ "https://prix-elec.com/fournisseurs/alpiq/parrainage|Alpiq": "fede4a883580925f",
  "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf|Primeo Energie": "477a73ecc62c70e9",
- "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "4d39d59b159c0cf9",
- "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "621dbbddb82f461a",
+ "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "0c67a9af5600b39b",
+ "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "deb05a8e43d4510c",
  "https://jeswitch.fr/energie/actualites/prix-repere-gaz-naturel-cre|prix repère": "995f7e4be237e45b",
  "https://www.energie-info.fr/octobre-2026-publication-du-prix-repere-du-gaz-par-la-cre/|prix repère": "a23855f678729859",
  "grilles": {
@@ -72,6 +72,14 @@
   "primeo · Essentielle Verte": {
    "sha": "f61d7e39f08c8c35ef360f196bdbe9700f0fc0f62806ebae4a4df11c168ab7a4",
    "url": "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf"
+  },
+  "dyneff · Contrat+ Électricité (Base)": {
+   "sha": "6b71459c7e718931b004f9441d465efc483f73858245d22b52a1f3702a0743b7",
+   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf"
+  },
+  "enercoop · Offre Base (annexes tarifaires particuliers)": {
+   "sha": "da33ad5fc6d92f5979a17b55802d05f431d7b81a0b6b4386f6b399be31a843a5",
+   "url": "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770"
   }
  }
 }
