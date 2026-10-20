@@ -474,16 +474,21 @@ def update_official(data, src, rep, now, get=None):
             if ecart > 2: rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {t['PART_FIXE_TTC']} € (CRE) contre {data['trv_abo'][k]} € chez nous : à vérifier")
     except Exception as e:
         rep.failed.append(f"CRE · tarif réglementé (data.gouv.fr) : {e}")
-    # abonnement du tarif réglementé pour les autres puissances du menu (12 à 36 kVA) : CRE seule source, bornes de contrôle
+    # abonnement du tarif réglementé pour les autres puissances du menu (12 à 36 kVA). Le fichier Base de la CRE n'a pas de ligne en vigueur
+    # pour toutes (18 kVA et plus) et ses valeurs à 12 et 15 kVA diffèrent de la grille d'EDF : ces valeurs sont saisies d'après la grille
+    # officielle d'EDF et la CRE ne fait que les confronter ; elle ne les remplit que si elles manquent.
     for k in ("12", "15", "18", "24", "30", "36"):
+        old = data["trv_abo"].get(k)
         try:
-            t, _ = cre_open.trv(od["trv_base_rid"], int(k), get); new = t["PART_FIXE_TTC"]; old = data["trv_abo"].get(k)
-            if not (100 <= new <= 1500) or (old and abs(new - old) / old > 0.25):
-                rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {new} € hors limites, non appliqué"); continue
-            if old is None or abs(new - old) > 1e-9:
-                data["trv_abo"][k] = new; rep.applied.append(f"CRE · abonnement tarif réglementé {k} kVA : {old} → {new} (source officielle CRE : data.gouv.fr)")
+            t, _ = cre_open.trv(od["trv_base_rid"], int(k), get); new = t["PART_FIXE_TTC"]
         except Exception as e:
-            rep.failed.append(f"CRE · abonnement tarif réglementé {k} kVA : {e}")
+            if old is None: rep.failed.append(f"CRE · abonnement tarif réglementé {k} kVA : {e}")
+            continue
+        if old is None:
+            if 100 <= new <= 1500:
+                data["trv_abo"][k] = new; rep.applied.append(f"CRE · abonnement tarif réglementé {k} kVA : relevé {new} € (source officielle CRE : data.gouv.fr)")
+        elif abs(new - old) > 2:
+            rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {new} € (CRE) contre {old} € chez nous (grille EDF) : à vérifier")
     try:
         page = get(od["gas_page"]).decode("utf-8", "replace")
         raw = get(cre_open.trouver_xlsx(page))
