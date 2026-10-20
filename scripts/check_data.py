@@ -2,7 +2,7 @@
 """Vérifie que data.json est complet et plausible. Code de sortie 1 si une erreur est trouvée."""
 import json, os, sys
 import donnees
-d = donnees.charger(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+d = donnees.charger_complet(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 err = []
 def need(c, m):
     if not c: err.append(m)

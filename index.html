@@ -531,6 +531,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong><a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a> :</strong> le script choisit maintenant le PDF le plus récent parmi ceux de la <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">page des tarifs</a>. Non intégré : « L'Offre Online » (indexée sur le tarif réglementé −5 %, grille du 1er février 2026 sans doute dépassée depuis août : envoyer la grille récente), Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp.</li>
         
         <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer, offre par offre, par les grilles officielles des fournisseurs (voir 1 bis : il faut les PDF ou leurs adresses).</li>
+        <li><strong>Grilles saisies à la main :</strong> le fichier <code>data/tarifs_manuels.json</code> est en place (vide pour l'instant), fusionné avec les données automatiques. À faire : y saisir, au fil des envois, les fournisseurs qui interdisent les robots (EDF, ilek) ; voir LISEZMOI.md pour le mode d'emploi.</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site (à faire par vous).</li>
         <li><strong>Non automatisé :</strong> consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
       </ul>
@@ -1844,14 +1845,31 @@ function showDates() {
   if (tr) tr.textContent = "Selon la puissance, le total au tarif réglementé passe de " + fmtEur2.format(TRV_ABO["3"]).replace(/\s?€/, "") + " € (3 kVA) à " + fmtEur2.format(TRV_ABO["6"]).replace(/\s?€/, "") + " € (6 kVA) et " + fmtEur2.format(TRV_ABO["9"]).replace(/\s?€/, "") + " € (9 kVA).";
   var u = $("updated"); if (u) u.textContent = "Données mises à jour le " + DATA_LABEL + hh + ".";
 }
+// Fusionne les grilles saisies à la main (même règle que scripts/donnees.py) : offre repérée par k + offer, complétée champ par champ ou ajoutée.
+function fusionManuels(d, man) {
+  var L = ["elec", "gas", "duo"], T = ["abo_e", "abo_g", "abo_g0"], i, j, m, cible, c, k;
+  for (i = 0; i < L.length; i++) {
+    if (!man[L[i]] || !man[L[i]].length) continue;
+    d[L[i]] = d[L[i]] || [];
+    for (j = 0; j < man[L[i]].length; j++) {
+      m = man[L[i]][j]; cible = null;
+      for (c = 0; c < d[L[i]].length; c++) if (d[L[i]][c].k === m.k && d[L[i]][c].offer === m.offer) { cible = d[L[i]][c]; break; }
+      if (!cible) d[L[i]].push(m); else for (k in m) if (Object.prototype.hasOwnProperty.call(m, k)) cible[k] = m[k];
+    }
+  }
+  for (i = 0; i < T.length; i++) if (man[T[i]]) { d[T[i]] = d[T[i]] || {}; for (k in man[T[i]]) if (k.charAt(0) !== "_" && Object.prototype.hasOwnProperty.call(man[T[i]], k)) d[T[i]][k] = man[T[i]][k]; }
+}
+
 function loadData() {
   if (!window.fetch || location.protocol === "file:") return;
   // Trois fichiers : data.json (commun), elec/data.json et gaz/data.json ; réunis en un seul objet.
-  Promise.all(["data.json", "elec/data.json", "gaz/data.json"].map(function (u) {
-    return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); });
+  // Plus data/tarifs_manuels.json : grilles saisies à la main (facultatif, absent = rien à ajouter).
+  Promise.all(["data.json", "elec/data.json", "gaz/data.json", "data/tarifs_manuels.json"].map(function (u, n) {
+    return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function (e) { if (n === 3) return {}; throw e; });
   })).then(function (p) {
-    var d = {}, i, k;
+    var d = {}, i, k, man = p.pop();
     for (i = 0; i < p.length; i++) for (k in p[i]) if (Object.prototype.hasOwnProperty.call(p[i], k)) d[k] = p[i][k];
+    fusionManuels(d, man);
     if (!applyData(d)) return;
     loadCPP();
     renderSummary(); renderPrimes(); refresh(); staleCheck();
