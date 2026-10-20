@@ -2,7 +2,7 @@
 """Vérifie que data.json est complet et plausible. Code de sortie 1 si une erreur est trouvée."""
 import json, os, sys
 import donnees
-d = donnees.charger_complet(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+d = donnees.charger_complet(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "donnees"))
 err = []
 def need(c, m):
     if not c: err.append(m)
@@ -26,7 +26,7 @@ for k, u in d.get("liens", {}).items():
     need(isinstance(u, str) and u.startswith("https://") and " " not in u, f"lien fournisseur invalide : {k}")
 for r in d["elec"] + d["gas"] + [d["elec_ref"], d["gas_ref"]]:
     need("url" not in r or (isinstance(r["url"], str) and r["url"].startswith("https://") and " " not in r["url"]), f"lien d'offre invalide : {r['name']} {r['offer']}")
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RACINE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "donnees")
 for r in d["gas"]:
     if "cpf" not in r: continue
     need(isinstance(r["cpf"], str) and r["cpf"].startswith("gaz/prix-cp/") and r["cpf"].endswith(".json") and ".." not in r["cpf"], f"cpf invalide : {r['name']}")

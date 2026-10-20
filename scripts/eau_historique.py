@@ -12,7 +12,8 @@ import datetime, json, os, statistics, sys, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import eau_maj as em, build_eau as be
 
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # racine du dépôt
+RACINE = os.path.join(DEPOT, "donnees")      # dossier des données
 PREMIERE = 2009
 
 

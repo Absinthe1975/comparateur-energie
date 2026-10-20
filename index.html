@@ -531,7 +531,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong><a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a> :</strong> le script choisit maintenant le PDF le plus récent parmi ceux de la <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">page des tarifs</a>. Non intégré : « L'Offre Online » (indexée sur le tarif réglementé −5 %, grille du 1er février 2026 sans doute dépassée depuis août : envoyer la grille récente), Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp.</li>
         
         <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer, offre par offre, par les grilles officielles des fournisseurs (voir 1 bis : il faut les PDF ou leurs adresses).</li>
-        <li><strong>Grilles saisies à la main :</strong> le fichier <code>data/tarifs_manuels.json</code> est en place (vide pour l'instant), fusionné avec les données automatiques. À faire : y saisir, au fil des envois, les fournisseurs qui interdisent les robots (EDF, ilek) ; voir LISEZMOI.md pour le mode d'emploi.</li>
+        <li><strong>Grilles saisies à la main :</strong> le fichier <code>donnees/manuel/tarifs_manuels.json</code> est en place (vide pour l'instant), fusionné avec les données automatiques. À faire : y saisir, au fil des envois, les fournisseurs qui interdisent les robots (EDF, ilek) ; voir docs/LISEZMOI.md pour le mode d'emploi.</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site (à faire par vous).</li>
         <li><strong>Non automatisé :</strong> consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
       </ul>
@@ -598,7 +598,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>4. Données encore à confirmer <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Toutes les puissances :</strong> le comparateur ne propose que 3, 6 et 9 kVA, alors que les grilles reçues (GEG, Dyneff, Gaz de Bordeaux, EDF…) vont de 3 à 36 kVA. À faire : stocker l'abonnement de chaque puissance par offre (3, 6, 9, 12, 15, 18, 24, 30, 36 kVA), élargir le menu de puissance, et signaler les offres dont la grille ne couvre pas la puissance choisie. Les liens reçus sont conservés dans le fichier LIENS-RECUS.md du dépôt.</li>
+        <li><strong>Toutes les puissances :</strong> le comparateur ne propose que 3, 6 et 9 kVA, alors que les grilles reçues (GEG, Dyneff, Gaz de Bordeaux, EDF…) vont de 3 à 36 kVA. À faire : stocker l'abonnement de chaque puissance par offre (3, 6, 9, 12, 15, 18, 24, 30, 36 kVA), élargir le menu de puissance, et signaler les offres dont la grille ne couvre pas la puissance choisie. Les liens reçus sont conservés dans le fichier docs/LIENS-RECUS.md du dépôt.</li>
         <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
         <li><strong>Gaz en Base et B0 :</strong> prix et abonnements réels pour les offres à grille officielle ; estimés à partir de l'écart du prix repère pour les autres (étoile).</li>
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a> (une seule source pour le montant du parrain), <a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> (montant du parrain absent du règlement), <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint Énergie</a>, <a href="https://www.happ-e.fr/" target="_blank" rel="noopener">Happ-e</a> (20 à 40 €), <a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> et <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> (une seule source). <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a>, <a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a>, <a href="https://particulier.edf.fr/" target="_blank" rel="noopener">EDF</a> et <a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> viennent de comparateurs. <a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a>, <a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> (20 €, plus 5 € avec l'option verte) et <a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a> (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
@@ -950,7 +950,7 @@ function loadCPP() {
   if (!window.fetch || location.protocol === "file:") return;
   GAS.forEach(function (r) {
     if (typeof r.cpf !== "string" || !/^gaz\/prix-cp\/[a-z0-9-]+\.json$/.test(r.cpf) || CPP[r.cpf]) return;
-    fetch(r.cpf).then(function (x) { if (!x.ok) throw 0; return x.json(); }).then(function (j) {
+    fetch("donnees/" + r.cpf).then(function (x) { if (!x.ok) throw 0; return x.json(); }).then(function (j) {
       if (j.type !== "prix-par-code-postal" || j.k !== r.k || j.offre !== r.offer) return;
       var out = {};
       ["b0", "b1"].forEach(function (opt) {
@@ -1477,7 +1477,7 @@ function loadShard(cp) {
   if (CP_SH[p]) return;
   CP_SH[p] = "chargement";
   try {
-    fetch("eau/cp/" + p + ".json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    fetch("donnees/eau/cp/" + p + ".json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
       Object.keys(j).forEach(function (c) {
         CP_ENT[c] = j[c].split("|").map(function (x) {
           var a = x.split("~"), o = { i: a[0], n: a[1], p: a[2] ? parseFloat(a[2]) : 0, f: a[3] || "", a: a[4] ? parseFloat(a[4]) : 0, e: a[5] ? parseFloat(a[5]) : 0, s: a[6] ? parseFloat(a[6]) : 0, d: a[7] === "d" };
@@ -1663,7 +1663,7 @@ function eauHist() {
   };
   if (EH.dept[dp] && EH.nat) { go(); return; }
   if (EH.dept[dp] === undefined) EH.dept[dp] = null;
-  Promise.all([EH.dept[dp] ? EH.dept[dp] : mkJson("eau/historique/" + dp + ".json"), EH.nat || mkJson("eau/historique/national.json")]).then(function (r) { EH.dept[dp] = r[0]; EH.nat = r[1]; if (state.eauVille === ins) go(); }).catch(function () { box.innerHTML = ""; });
+  Promise.all([EH.dept[dp] ? EH.dept[dp] : mkJson("donnees/eau/historique/" + dp + ".json"), EH.nat || mkJson("donnees/eau/historique/national.json")]).then(function (r) { EH.dept[dp] = r[0]; EH.nat = r[1]; if (state.eauVille === ins) go(); }).catch(function () { box.innerHTML = ""; });
 }
 
 function initEau() {
@@ -1864,7 +1864,7 @@ function loadData() {
   if (!window.fetch || location.protocol === "file:") return;
   // Trois fichiers : data.json (commun), elec/data.json et gaz/data.json ; réunis en un seul objet.
   // Plus data/tarifs_manuels.json : grilles saisies à la main (facultatif, absent = rien à ajouter).
-  Promise.all(["data.json", "elec/data.json", "gaz/data.json", "data/tarifs_manuels.json"].map(function (u, n) {
+  Promise.all(["donnees/data.json", "donnees/elec/data.json", "donnees/gaz/data.json", "donnees/manuel/tarifs_manuels.json"].map(function (u, n) {
     return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).catch(function (e) { if (n === 3) return {}; throw e; });
   })).then(function (p) {
     var d = {}, i, k, man = p.pop();
@@ -1926,15 +1926,15 @@ function loadMarche() {
   if (MK.charge || !window.fetch || location.protocol === "file:") { if (!window.fetch || location.protocol === "file:") { mkVide("mk-elec", "L'historique demande d'ouvrir le site depuis son adresse en ligne."); mkVide("mk-gaz", ""); } return; }
   MK.charge = true;
   var f3 = function (x) { return fmtKwh.format(x) + " €"; }, f0 = function (x) { return fmtInt.format(x) + " €"; };
-  mkJson("elec/historique.json").then(function (j) {
+  mkJson("donnees/elec/historique.json").then(function (j) {
     var pts = j.trv6.map(function (p) { return [p[0], p[1]]; });
     $("mk-elec").innerHTML = mkResume(pts, f3, "/kWh TTC") + mkCourbe(pts, true, f3, "prix du kWh TTC, en €", "Prix du kWh du tarif réglementé depuis " + mkDate(pts[0][0])) + mkTableau(pts, f3) + '<p class="note">Source : ' + j.source + ', mis à jour le ' + j.mis_a_jour + '.</p>';
   }).catch(function () { mkVide("mk-elec", "Historique pas encore disponible : il apparaîtra après la prochaine mise à jour automatique des prix."); });
-  mkJson("gaz/historique.json").then(function (j) {
+  mkJson("donnees/gaz/historique.json").then(function (j) {
     var pts = j.prvg.map(function (p) { return [p[0], p[1]]; }), fm = function (x) { return fmtInt.format(x) + " €"; };
     $("mk-gaz").innerHTML = mkResume(pts, fm, "/MWh TTC") + mkCourbe(pts, false, fm, "prix repère moyen TTC, en €/MWh", "Prix repère du gaz depuis " + mkDate(pts[0][0])) + mkTableau(pts, fm) + '<p class="note">Source : ' + j.source + ', mis à jour le ' + j.mis_a_jour + '. 1 MWh = 1 000 kWh.</p>';
   }).catch(function () { mkVide("mk-gaz", "Historique pas encore disponible : il apparaîtra après la prochaine mise à jour automatique des prix."); });
-  mkJson("eau/historique/national.json").then(function (j) {
+  mkJson("donnees/eau/historique/national.json").then(function (j) {
     var an = Object.keys(j).sort().filter(function (a) { return j[a].ep && j[a].ac; });
     if (an.length < 2) throw 0;
     var fe = function (x) { return fmtNum2.format(x) + " €"; }, pts = an.map(function (a) { return [a + "-07-01", Math.round((j[a].ep + j[a].ac) * 100) / 100]; });
@@ -1944,7 +1944,7 @@ function loadMarche() {
       '<details><summary>Voir les valeurs</summary><table style="min-width:0"><thead><tr><th>Année</th><th>Eau potable</th><th>Assainissement</th></tr></thead><tbody>' + an.slice().reverse().map(function (a) { return '<tr><td>' + a + '</td><td>' + fe(j[a].ep) + '</td><td>' + fe(j[a].ac) + '</td></tr>'; }).join("") + '</tbody></table></details>' +
       '<p class="note">Source : Observatoire national des services d\'eau et d\'assainissement (SISPEA), prix pour 120 m³ par an. La couverture des communes varie d\'une année à l\'autre.</p>';
   }).catch(function () { mkVide("mk-eau", "Historique pas encore disponible : il apparaîtra après la prochaine mise à jour de l'eau."); });
-  Promise.all([mkJson("elec/historique-offres.json").catch(function () { return {}; }), mkJson("gaz/historique-offres.json").catch(function () { return {}; })]).then(function (r) {
+  Promise.all([mkJson("donnees/elec/historique-offres.json").catch(function () { return {}; }), mkJson("donnees/gaz/historique-offres.json").catch(function () { return {}; })]).then(function (r) {
     var sel = $("mk-offre"), cles = [];
     ["elec", "gaz"].forEach(function (e, n) { Object.keys(r[n]).sort().forEach(function (k) { MK.offres[e + "|" + k] = r[n][k]; cles.push([e + "|" + k, (e === "elec" ? "Élec · " : "Gaz · ") + k.replace("|", " · ")]); }); });
     if (!cles.length) { mkVide("mk-offres", "Pas encore de relevé."); return; }

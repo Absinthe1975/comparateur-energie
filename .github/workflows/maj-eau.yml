@@ -36,8 +36,8 @@ jobs:
           commit-message: "Prix de l'eau : mise à jour automatique (SISPEA + La Poste)"
           body: "Mise à jour automatique des fichiers eau/cp et eau/historique. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
           add-paths: |
-            eau/cp
-            eau/historique
+            donnees/eau/cp
+            donnees/eau/historique
           assignees: Absinthe1975
           reviewers: Absinthe1975
           labels: à-fusionner

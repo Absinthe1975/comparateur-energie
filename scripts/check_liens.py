@@ -3,7 +3,8 @@
 Ne bloque jamais la mise à jour : les liens en échec sont ajoutés au rapport (report.md) pour correction.
 Un site qui refuse les robots (403/429) n'est pas compté comme cassé."""
 import json, os, sys, urllib.error, urllib.request
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # racine du dépôt
+RACINE = os.path.join(DEPOT, "donnees")      # dossier des données
 UA = "ComparateurEnergieBot/1.0 (+" + os.environ.get("CONTACT", "verification des liens, non lucratif") + ")"
 
 def liens(d):
@@ -28,7 +29,7 @@ def main():
     ko = [f"{u} ({qui}) : {why}" for u, qui in sorted(liens(d).items()) for why in [etat(u)] if why]
     texte = f"## Liens fournisseur en échec ({len(ko)})\n\n" + ("\n".join("- " + x for x in ko) if ko else "Aucun.") + "\n"
     print(texte)
-    rapport = os.path.join(RACINE, "report.md")
+    rapport = os.path.join(DEPOT, "report.md")
     if os.path.exists(rapport): open(rapport, "a", encoding="utf-8").write("\n" + texte)
     return 0
 if __name__ == "__main__": sys.exit(main())
