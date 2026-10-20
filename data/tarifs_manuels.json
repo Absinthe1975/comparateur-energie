@@ -1,0 +1,10 @@
+{
+ "_lisez_moi": "Grilles saisies à la main pour les fournisseurs dont le site interdit les robots (robots.txt) ou qui n'ont pas de page lisible. Ce fichier n'est jamais modifié par les programmes automatiques. Chaque offre a les mêmes champs que dans elec/data.json ou gaz/data.json ; une offre déjà présente (même k et même offer) est complétée champ par champ, sinon elle est ajoutée. Remplir 'niv': 'officiel' et 'nivd' (date de la grille) avec le PDF en source ('s'). Les sections abo_e, abo_g et abo_g0 donnent l'abonnement annuel d'un fournisseur nouveau.",
+ "_exemple": {"k": "fournisseur", "name": "Nom affiché", "offer": "Nom de l'offre", "a": 0.2000, "b": 0.1990, "ab6": 200.00, "ab9": 250.00, "niv": "officiel", "nivd": "01/10/2026", "d": "20 oct. 2026", "s": ["Grille officielle (1er oct. 2026)", "https://exemple.fr/grille.pdf"], "typ": "fixe"},
+ "elec": [],
+ "gas": [],
+ "duo": [],
+ "abo_e": {},
+ "abo_g": {},
+ "abo_g0": {}
+}

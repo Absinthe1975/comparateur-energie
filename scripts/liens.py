@@ -10,7 +10,7 @@ import donnees
 DEB, FIN = "<!-- AUTO:DEBUT -->", "<!-- AUTO:FIN -->"
 
 def collecter(racine="."):
-    d = donnees.charger(racine)
+    d = donnees.charger_complet(racine)
     s = json.load(open(os.path.join(racine, "sources.json"), encoding="utf-8"))
     noms = {}
     for r in d.get("elec", []) + d.get("gas", []) + d.get("duo", []):

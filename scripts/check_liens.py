@@ -24,7 +24,7 @@ def etat(url, ouvrir=urllib.request.urlopen):
 
 def main():
     import donnees
-    d = donnees.charger(RACINE)
+    d = donnees.charger_complet(RACINE)
     ko = [f"{u} ({qui}) : {why}" for u, qui in sorted(liens(d).items()) for why in [etat(u)] if why]
     texte = f"## Liens fournisseur en échec ({len(ko)})\n\n" + ("\n".join("- " + x for x in ko) if ko else "Aucun.") + "\n"
     print(texte)
