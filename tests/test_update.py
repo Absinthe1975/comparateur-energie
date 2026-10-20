@@ -4,7 +4,8 @@ import json, os, shutil, sys, tempfile, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import update_prices as up
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(DEPOT, "donnees")
 PAGE = "Offres ENGIE. Elec Référence 3 ans. Le prix du kWh est de 0,2400 € TTC en option Base. L'abonnement 6 kVA est de 190,00 € par an."
 GOOD = {"fields": {"offre": {"value": 1, "quote": "Elec Référence 3 ans"},
                    "kwh": {"value": 0.24, "quote": "Le prix du kWh est de 0,2400 € TTC en option Base"},

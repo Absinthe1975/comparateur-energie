@@ -16,9 +16,10 @@ import argparse, unicodedata, datetime, hashlib, html.parser, json, os, re, sys,
 import donnees
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join(ROOT, "data.json")
-SOURCES = os.path.join(ROOT, "sources.json")
-STATE = os.path.join(ROOT, "state", "hashes.json")
+DONNEES = os.path.join(ROOT, "donnees")   # toutes les données du site
+DATA = os.path.join(DONNEES, "data.json")
+SOURCES = os.path.join(DONNEES, "sources.json")
+STATE = os.path.join(DONNEES, "etat", "hashes.json")
 REPORT = os.path.join(ROOT, "report.md")
 MONTHS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
 BOUNDS = {"elec_kwh": (0.10, 0.45), "elec_abo": (100, 450), "gas_kwh": (0.08, 0.30), "gas_abo": (80, 700), "prime": (0, 200)}

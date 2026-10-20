@@ -2,7 +2,8 @@ import datetime, io, json, os, shutil, sys, tempfile, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import cre_open as c, update_prices as up
 import openpyxl
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(DEPOT, "donnees")
 
 def xlsx():
     wb = openpyxl.Workbook(); ws = wb.active; ws.title = "Historique grilles"

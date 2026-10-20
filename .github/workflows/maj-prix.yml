@@ -53,7 +53,7 @@ jobs:
         id: chg
         run: |
           git status --short
-          if grep -q "^## Changements appliqués (0)" report.md && grep -q "^## À relire : valeur proposée mais non appliquée (0)" report.md && [ -z "$(git status --porcelain -- elec/historique.json gaz/historique.json elec/historique-offres.json gaz/historique-offres.json)" ]; then
+          if grep -q "^## Changements appliqués (0)" report.md && grep -q "^## À relire : valeur proposée mais non appliquée (0)" report.md && [ -z "$(git status --porcelain -- donnees/elec/historique.json donnees/gaz/historique.json donnees/elec/historique-offres.json donnees/gaz/historique-offres.json)" ]; then
             echo "open=false" >> "$GITHUB_OUTPUT"
           else
             echo "open=true" >> "$GITHUB_OUTPUT"
@@ -70,9 +70,9 @@ jobs:
           reviewers: Absinthe1975
           labels: à-fusionner
           add-paths: |
-            data.json
-            elec/*.json
-            gaz/*.json
-            state/hashes.json
-            gaz/prix-cp/*.json
+            donnees/data.json
+            donnees/elec/*.json
+            donnees/gaz/*.json
+            donnees/etat/hashes.json
+            donnees/gaz/prix-cp/*.json
           delete-branch: true

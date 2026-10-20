@@ -142,7 +142,7 @@ def update_grilles(data, src, state, rep, now, allowed=None, get=None, racine=No
                 _cache[u] = _telecharger(u, allowed)
             return _cache[u]
     to_text = to_text or texte_pdf
-    racine = racine or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    racine = racine or os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "donnees")
     mem = state.setdefault("grilles", {})
     for e in entrees:
         nom = f"{e['k']} · {e['offre']}"
