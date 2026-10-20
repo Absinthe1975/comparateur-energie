@@ -38,5 +38,12 @@ Tout lien envoyé pour alimenter le comparateur est conservé ici. « Suivi » =
 - Fiche descriptive : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/FICHE-DESCRIPTIVE-Mon-Contrat-electricite-PART.pdf
 - Conditions générales : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/CONDITIONS-GENERALES-VENTES-elec-part-et-pro.pdf ; contrat réseau : .../Enedis-contrat-GRD.pdf
 
+## Enercoop
+- Annexes tarifaires : https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires
+- Grille particuliers, 1er août 2026 (suivi) : https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770
+- Grille professionnels < 36 kVA : https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556171922
+- Conditions générales de vente : https://www.faq.enercoop.fr/hc/fr/articles/360024967112-Conditions-G%C3%A9n%C3%A9rales-de-Vente (pièces : article_attachments/29227341324434 et 29227359244818)
+- Fiche standardisée : https://www.faq.enercoop.fr/hc/fr/articles/360025264871-Fiche-standardis%C3%A9e (pièces : article_attachments/34107522928914 et 34107551829906)
+
 ## Liste de fournisseurs
 - https://www.choisir.com/energie/fournisseurs (47 fournisseurs ; voir le Mémo pour ceux à ajouter)
