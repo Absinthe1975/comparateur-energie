@@ -391,12 +391,15 @@
    "offer": "Offre Base",
    "a": 0.2541,
    "b": 0.2571,
-   "d": "19 oct. 2026",
-   "niv": "confirmer",
+   "d": "20 oct. 2026",
+   "niv": "officiel",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/enercoop/offres"
-   ]
+    "Grille officielle Enercoop (1er août 2026)",
+    "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770"
+   ],
+   "ab6": 181.92,
+   "ab9": 247.56,
+   "nivd": "01/08/2026"
   }
  ],
  "abo_e": {
@@ -437,7 +440,7 @@
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
   "ilek": "19 oct. 2026",
-  "enercoop": "19 oct. 2026"
+  "enercoop": "20 oct. 2026"
  },
  "trv_abo": {
   "3": 145.56,
