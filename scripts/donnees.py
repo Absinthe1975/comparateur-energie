@@ -28,5 +28,29 @@ def enregistrer(racine, d):
         _ecrire(os.path.join(racine, dossier, "data.json"), part)
     _ecrire(os.path.join(racine, "data.json"), {k: v for k, v in d.items() if k not in pris})
 
+MANUELS = os.path.join("data", "tarifs_manuels.json")
+LISTES = ("elec", "gas", "duo")        # offres : repérées par (k, offer)
+TABLES = ("abo_e", "abo_g", "abo_g0")  # abonnements par fournisseur : repérés par k
+
+def fusionner_manuels(d, manuels):
+    """Ajoute à d (sans le modifier) les grilles saisies à la main : une offre déjà présente (même k et même offer)
+    est complétée champ par champ par la version manuelle, sinon elle est ajoutée. Les clés qui commencent par « _ » sont des notes."""
+    out = json.loads(json.dumps(d))
+    for cle in LISTES:
+        rows = out.setdefault(cle, [])
+        for m in manuels.get(cle, []):
+            cible = next((r for r in rows if r.get("k") == m.get("k") and r.get("offer") == m.get("offer")), None)
+            if cible is None: rows.append(dict(m))
+            else: cible.update(m)
+    for cle in TABLES:
+        out.setdefault(cle, {}).update({k: v for k, v in manuels.get(cle, {}).items() if not k.startswith("_")})
+    return out
+
+def charger_complet(racine):
+    """Données automatiques + grilles manuelles (data/tarifs_manuels.json, absent = rien à ajouter). Lecture seule : ne pas réenregistrer."""
+    d = charger(racine)
+    chemin = os.path.join(racine, MANUELS)
+    return fusionner_manuels(d, _lire(chemin)) if os.path.exists(chemin) else d
+
 def _ecrire(chemin, obj):
     with open(chemin, "w", encoding="utf-8") as fh: json.dump(obj, fh, ensure_ascii=False, indent=1); fh.write("\n")

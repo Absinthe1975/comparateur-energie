@@ -137,3 +137,7 @@ Aucune valeur n'est estimée. Si une source ne répond pas ou si les contrôles 
 ## Historique du prix de l'eau
 
 `scripts/eau_historique.py` (lancé par le workflow de l'eau, avant la mise à jour) télécharge les fichiers `tarifs_AEP_{an}.xls` et `tarifs_AC_{an}.xls` du SISPEA pour chaque année depuis 2009 et écrit dans `eau/historique/` : un fichier par département (`NN.json`, prix de chaque commune année par année), `national.json` (médianes par année) et `annees.json`. Seules les années manquantes et les deux plus récentes sont retéléchargées. Une année dont le fichier est absent, vide ou d'un autre format est ignorée et signalée dans le journal ; aucune valeur n'est estimée. La page affiche la courbe de la commune (onglet Eau) et le prix médian national (onglet Marché).
+
+## Grilles saisies à la main (`data/tarifs_manuels.json`)
+
+Pour un fournisseur dont le site interdit les robots (robots.txt) ou n'a pas de page lisible, on ne force pas la lecture : on saisit sa grille officielle dans `data/tarifs_manuels.json`. Les programmes automatiques ne modifient jamais ce fichier. Au chargement, le site (et `check_data.py`) fusionne ces offres avec celles lues automatiquement : une offre déjà présente (même `k` et même `offer`) est complétée champ par champ, sinon elle est ajoutée. Le fichier contient un exemple (`_exemple`) à copier dans `elec`, `gas` ou `duo`. Renseigner `niv: "officiel"`, `nivd` (date de la grille) et `s` (le PDF en source). Pour un nouveau fournisseur, ajouter aussi son abonnement annuel dans `abo_e`, `abo_g` et `abo_g0`.
