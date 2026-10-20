@@ -149,3 +149,7 @@ Le menu de puissance va de 3 à 36 kVA. Le prix du kWh est celui du champ `a` ju
 ## Promotions en cours
 
 La rubrique `promos` de `donnees/data.json` liste les promotions limitées dans le temps : `k` (fournisseur), `texte`, `debut` et `fin` (AAAA-MM-JJ), `offres` (mots du nom des offres concernées ; absent = toutes), `conditions` (infobulle) et `s` (source). Le site affiche une mention sous l'offre seulement entre ces deux dates ; une promotion ne compte jamais dans le classement. `check_data.py` vérifie les dates. Après la date de fin, supprimer la ligne.
+
+## Classement de l'eau par région
+
+`scripts/eau_classement.py` écrit `donnees/eau/classement.json` : les 3 communes où l'eau (potable + assainissement, par m³) est la moins chère, par région. Il ne retient que les prix complets et au moins égaux à 2 € par m³ (en dessous, la donnée est suspecte). Il est lancé chaque lundi par le workflow de l'eau, après la mise à jour des prix. Le rattachement département → région est lu dans `index.html` (variable `DEPT_RAW`). Le tableau s'affiche dans l'onglet Eau, sous la courbe de la commune.

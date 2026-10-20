@@ -23,12 +23,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pandas xlrd openpyxl
-      - run: python3 -m unittest tests.test_eau_maj tests.test_eau_historique
+      - run: python3 -m unittest tests.test_eau_maj tests.test_eau_historique tests.test_eau_classement
       - name: Historique du prix de l'eau (toutes les années SISPEA disponibles)
         continue-on-error: true
         run: python3 scripts/eau_historique.py
       - name: Télécharger et reconstruire eau/cp
         run: python3 scripts/eau_maj.py
+      - name: Classement des communes les moins chères par région
+        run: python3 scripts/eau_classement.py
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: maj-eau
@@ -37,6 +39,7 @@ jobs:
           body: "Mise à jour automatique des fichiers eau/cp et eau/historique. Les garde-fous (perte de codes postaux, écart de prix) ont été passés. À relire puis fusionner."
           add-paths: |
             donnees/eau/cp
+            donnees/eau/classement.json
             donnees/eau/historique
           assignees: Absinthe1975
           reviewers: Absinthe1975
