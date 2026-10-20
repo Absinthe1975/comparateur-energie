@@ -535,5 +535,36 @@
   "alpiq": "https://particuliers.alpiq.fr/",
   "enercoop": "https://www.enercoop.fr/",
   "ilek": "https://www.ilek.fr/"
- }
+ },
+ "promos": [
+  {
+   "k": "engie",
+   "texte": "deux mois d'abonnement TTC offerts",
+   "debut": "2026-10-19",
+   "fin": "2026-11-07",
+   "offres": [
+    "référence 3 ans",
+    "duo"
+   ],
+   "conditions": "Souscription du 19 octobre au 7 novembre 2026 inclus : Élec Référence 3 ans, Gaz Référence 3 ans, Duo Référence 3 ans ou Happy Week-End. Montant variable selon l'offre, la puissance et la consommation, versé sur la facture de souscription. Une remise par foyer, métropole hors Corse. Non comptée dans le classement.",
+   "s": [
+    "Conditions ENGIE",
+    "https://particuliers.engie.fr/"
+   ]
+  },
+  {
+   "k": "gdb",
+   "texte": "100 € TTC offerts avec l'offre NovaFixe Bonus Élec (même remise de 10 % sur le tarif réglementé)",
+   "debut": "2026-10-01",
+   "fin": "2026-11-30",
+   "offres": [
+    "novafixe élec"
+   ],
+   "conditions": "Souscription du 1er octobre au 30 novembre 2026. Nouveau client électricité, ou client gaz qui ajoute l'électricité. Un seul bonus par point de livraison, non cumulable avec le parrainage. Remise versée après le 11e mois de contrat. Métropole hors Corse. Non comptée dans le classement.",
+   "s": [
+    "Règlement Gaz de Bordeaux",
+    "https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf"
+   ]
+  }
+ ]
 }
