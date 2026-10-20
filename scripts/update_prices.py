@@ -474,6 +474,16 @@ def update_official(data, src, rep, now, get=None):
             if ecart > 2: rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {t['PART_FIXE_TTC']} € (CRE) contre {data['trv_abo'][k]} € chez nous : à vérifier")
     except Exception as e:
         rep.failed.append(f"CRE · tarif réglementé (data.gouv.fr) : {e}")
+    # abonnement du tarif réglementé pour les autres puissances du menu (12 à 36 kVA) : CRE seule source, bornes de contrôle
+    for k in ("12", "15", "18", "24", "30", "36"):
+        try:
+            t, _ = cre_open.trv(od["trv_base_rid"], int(k), get); new = t["PART_FIXE_TTC"]; old = data["trv_abo"].get(k)
+            if not (100 <= new <= 1500) or (old and abs(new - old) / old > 0.25):
+                rep.review.append(f"CRE · abonnement tarif réglementé {k} kVA : {new} € hors limites, non appliqué"); continue
+            if old is None or abs(new - old) > 1e-9:
+                data["trv_abo"][k] = new; rep.applied.append(f"CRE · abonnement tarif réglementé {k} kVA : {old} → {new} (source officielle CRE : data.gouv.fr)")
+        except Exception as e:
+            rep.failed.append(f"CRE · abonnement tarif réglementé {k} kVA : {e}")
     try:
         page = get(od["gas_page"]).decode("utf-8", "replace")
         raw = get(cre_open.trouver_xlsx(page))
