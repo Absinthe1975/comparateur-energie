@@ -433,6 +433,9 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <p class="lede">Le prix de l'eau dépend de votre commune. Vous ne pouvez pas changer de fournisseur d'eau : cette page estime un budget, elle ne compare pas des offres. 1 m³ = 1 000 litres ; un foyer de 2 personnes consomme en moyenne une soixantaine de m³ par an.</p>
     <div id="eau-res"></div>
     <div id="eau-hist"></div>
+    <details class="card" id="eau-top" data-loaded="0"><summary><strong>Où l'eau est-elle la moins chère ? Les 3 communes par région</strong></summary>
+      <div id="eau-top-corps"><p class="note">Chargement…</p></div>
+    </details>
     <h3>Prix de l'eau par commune</h3>
     <div class="tablewrap"><table id="t-eau"></table></div>
     <h3>Moyenne par région</h3>
@@ -577,6 +580,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>2. Prix de l'eau par commune <span class="badge check">À faire</span></h3>
       <ul>
+        <li><strong>Classement de l'eau par région :</strong> en place (onglet Eau, « Les 3 communes par région »), recalculé chaque lundi avec la mise à jour de l'eau. Les prix proches de 2 € par m³ restent à vérifier commune par commune (liste « Prix très bas » ci-dessous). À faire plus tard : opérateur de chaque commune, classement des opérateurs par région (source à trouver).</li>
         <li><strong>Chaque lundi :</strong> si une demande de fusion « eau » s'ouvre (prix changés, par exemple quand SISPEA publie l'année 2026), elle vous est assignée : relire les lignes « À vérifier » du journal, puis fusionner.</li>
         <li><strong>Historique de l'eau :</strong> les variations de plus de 40 % en un an sont maintenant signalées sous la courbe (par exemple Antibes) ; reste à vérifier ces communes une à une ; les prix par année ne sont pas toujours comparables (couverture des communes variable, 2025 moins complète).</li>
         <li><strong>Communes sans prix :</strong> environ 8 700 communes n'ont aucun prix dans SISPEA ; le site le dit et utilise une moyenne indicative (région, ou nationale). À améliorer avec une autre source si elle apparaît.</li>
@@ -626,14 +630,12 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </div>
 
     <div class="card">
-      <h3>6. Eau : top 3 par région <span class="badge check">Idée du 10 octobre 2026</span></h3>
-      <p>Pour l'eau, on ne choisit pas son fournisseur : chaque commune a son service, géré par une régie ou par un opérateur (Veolia, Suez, Saur). Trois pistes ont été identifiées.</p>
+      <h3>6. Eau : opérateurs <span class="badge check">Idée du 10 octobre 2026</span></h3>
+      <p>Pour l'eau, on ne choisit pas son fournisseur : chaque commune a son service, géré par une régie ou par un opérateur (Veolia, Suez, Saur). Le classement des communes les moins chères par région est fait ; restent deux pistes.</p>
       <ul>
-        <li><strong>Les 3 communes les moins chères par région.</strong> Réalisable avec les prix SISPEA déjà dans le site (environ 29 000 communes). Limite : une partie des prix 2025 est « publiée non vérifiée », et les petites communes n'ont souvent que l'eau potable. À écrire clairement sur la page.</li>
         <li><strong>Les 3 opérateurs les plus présents par région</strong> (Veolia, Suez, Saur, régies). Aucune donnée chiffrée et sourcée n'a été trouvée à ce jour. Source à chercher : rapport de la Fédération professionnelle des entreprises de l'eau, données SISPEA, si elles sont en accès libre.</li>
         <li><strong>L'opérateur de chaque commune de la liste,</strong> affiché dans le tableau des prix. C'est la donnée la plus utile pour l'utilisateur, mais elle est à relever commune par commune.</li>
       </ul>
-      <p class="note">À faire en premier : le classement des communes les moins chères, avec la mention de ses limites. Le reste dépend de la recherche de source.</p>
     </div>
 
     <div class="card">
@@ -1689,6 +1691,7 @@ function eauHist() {
 }
 
 function initEau() {
+  if ($("eau-top")) $("eau-top").addEventListener("toggle", eauTop);
   $("dept").innerHTML = deptOpts().map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
   fillVilles("ville", "", "");
 }
@@ -1945,6 +1948,21 @@ function mkResume(pts, fmt, unite) {
 }
 function mkTableau(pts, fmt) {
   return '<details><summary>Voir les valeurs</summary><table style="min-width:0"><thead><tr><th>Date</th><th>Valeur</th></tr></thead><tbody>' + pts.slice().reverse().map(function (p) { return '<tr><td>' + mkDate(p[0]) + '</td><td>' + fmt(p[1]) + '</td></tr>'; }).join("") + '</tbody></table></details>';
+}
+// Classement des 3 communes les moins chères par région (donnees/eau/classement.json, fabriqué par scripts/eau_classement.py)
+function eauTop() {
+  var box = $("eau-top"), corps = $("eau-top-corps");
+  if (!box || box.getAttribute("data-loaded") === "1" || !box.open) return;
+  box.setAttribute("data-loaded", "1");
+  mkJson("donnees/eau/classement.json").then(function (j) {
+    var h = '<div class="tablewrap"><table><thead><tr><th>Région</th><th>Commune (code postal)</th><th class="num">Eau + assainissement, par m³</th></tr></thead><tbody>';
+    Object.keys(j.regions).sort(function (a, b) { return REGIONS[a][0].localeCompare(REGIONS[b][0], "fr"); }).forEach(function (r) {
+      j.regions[r].forEach(function (c, i) {
+        h += "<tr>" + (i === 0 ? '<td rowspan="' + j.regions[r].length + '"><strong>' + esc(REGIONS[r][0]) + "</strong></td>" : "") + "<td>" + esc(c[1]) + " (" + esc(c[3]) + ')</td><td class="num">' + fmtNum2.format(c[2]) + " €</td></tr>";
+      });
+    });
+    corps.innerHTML = h + '</tbody></table></div><p class="note">Source : SISPEA, prix TTC pour 120 m³ par an, eau potable et assainissement collectif tous deux déclarés. Les communes dont le prix est inférieur à ' + fmtNum2.format(j.seuil) + " € par m³ ne sont pas classées (donnée suspecte). Ce classement ne dit pas la qualité du service ni le coût d'un assainissement non collectif ; une partie des prix les plus récents est « publiée non vérifiée », et les petites communes ont souvent des prix à confirmer auprès de leur mairie. Une commune ne se choisit pas : ce classement informe, il ne permet pas de changer de service.</p>";
+  }).catch(function () { corps.innerHTML = '<p class="note">Classement indisponible pour le moment.</p>'; box.setAttribute("data-loaded", "0"); });
 }
 function mkJson(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw 0; return r.json(); }); }
 function mkVide(id, msg) { $(id).innerHTML = '<p class="note">' + msg + '</p>'; }
