@@ -1,7 +1,8 @@
 import datetime, json, os, shutil, sys, tempfile, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import eau_historique as h
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(DEPOT, "donnees")
 EN_TETE = "Code INSEE de la commune adhérente,Nom de la commune adhérente,Population de la commune,Zone tarifaire 1,Tarif zone tarifaire 1,Identifiant SISPEA de l'entité de gestion à laquelle la commune adhère\n"
 
 def csv_annee(prix, n=3200):

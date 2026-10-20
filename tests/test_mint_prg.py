@@ -1,8 +1,9 @@
 import datetime, json, os, re, shutil, sys, tempfile, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import mint_prg as m, update_prices as up
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PAGE = open(os.path.join(ROOT, "tests", "fixtures", "mint_prix_repere_gaz.html"), encoding="utf-8").read()
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(DEPOT, "donnees")
+PAGE = open(os.path.join(DEPOT, "tests", "fixtures", "mint_prix_repere_gaz.html"), encoding="utf-8").read()
 B1 = {1: "0,1456", 2: "0,1463", 3: "0,1470", 4: "0,1477", 5: "0,1484", 6: "0,1491"}
 
 def reponse(form, ok=True):

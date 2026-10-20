@@ -1,7 +1,8 @@
 import datetime, json, os, shutil, sys, tempfile, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import historique as h
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(DEPOT, "donnees")
 
 def ligne(debut, fin, kwh, abo): return {"DATE_DEBUT": debut, "DATE_FIN": fin, "P_SOUSCRITE": 6, "PART_VARIABLE_TTC": kwh, "PART_FIXE_TTC": abo}
 # DATE_DEBUT écrite mois/jour, DATE_FIN jour/mois : cas réel observé

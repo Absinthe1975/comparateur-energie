@@ -54,8 +54,9 @@ def texte(racine="."):
     L += ["", FIN]
     return "\n".join(L)
 
-def ecrire(racine="."):
-    p = os.path.join(racine, "LIENS-RECUS.md")
+def ecrire(racine=".", fichier=None):
+    """racine = dossier des données (donnees/) ; fichier = LIENS-RECUS.md (par défaut docs/LIENS-RECUS.md à côté de donnees/)."""
+    p = fichier or os.path.join(os.path.dirname(os.path.abspath(racine)), "docs", "LIENS-RECUS.md")
     cur = open(p, encoding="utf-8").read() if os.path.exists(p) else ""
     bloc = texte(racine)
     if DEB in cur and FIN in cur:
@@ -65,4 +66,4 @@ def ecrire(racine="."):
     open(p, "w", encoding="utf-8").write(cur)
 
 if __name__ == "__main__":
-    ecrire(sys.argv[1] if len(sys.argv) > 1 else ".")
+    ecrire(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "donnees"))

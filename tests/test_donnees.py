@@ -1,7 +1,7 @@
 import os, sys, unittest, tempfile, json
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 import donnees
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RACINE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "donnees")
 
 class Donnees(unittest.TestCase):
     def test_aller_retour(self):
@@ -26,5 +26,5 @@ class Manuels(unittest.TestCase):
         self.assertEqual(donnees.fusionner_manuels(self.D, {"elec": [], "_exemple": {}}), self.D)
     def test_fichier_du_depot(self):
         import json, os
-        racine = os.path.join(os.path.dirname(__file__), "..")
-        self.assertIsInstance(json.load(open(os.path.join(racine, "data", "tarifs_manuels.json"), encoding="utf-8"))["elec"], list)
+        racine = os.path.join(os.path.dirname(__file__), "..", "donnees")
+        self.assertIsInstance(json.load(open(os.path.join(racine, "manuel", "tarifs_manuels.json"), encoding="utf-8"))["elec"], list)
