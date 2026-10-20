@@ -46,8 +46,11 @@ class T(unittest.TestCase):
         v = c.variation_mensuelle(c.prvg_moyen(xlsx()), datetime.date(2026, 11, 2)); self.assertAlmostEqual(v, 6.57, 1)
 
 class Integ(unittest.TestCase):
-    def run_official(self, today, trv_kwh=0.2001):
-        d = __import__("donnees").charger(ROOT); src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
+    def run_official(self, today, trv_kwh=0.2001, trv_abo_manquants=False):
+        d = __import__("donnees").charger(ROOT)
+        if trv_abo_manquants:
+            for k in ("12", "15", "18", "24", "30", "36"): d["trv_abo"].pop(k, None)
+        src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
         def get(url):
             if "tabular-api" in url:
                 kva = int(url.split("exact=")[1].split("&")[0])
@@ -63,9 +66,12 @@ class Integ(unittest.TestCase):
     def test_novembre_applique_la_nouvelle_grille(self):
         d, rep = self.run_official(datetime.date(2026, 11, 2)); self.assertEqual((d["gas_b1"]["a"], d["gas_ref"]["a"], d["gas_b0"]["a"]), (0.1576, 0.1576, 0.1903)); self.assertTrue(rep.applied)
     def test_abonnements_des_autres_puissances(self):
-        d, rep = self.run_official(datetime.date(2026, 10, 13)); self.assertEqual(rep.failed, [])
+        d, rep = self.run_official(datetime.date(2026, 10, 13), trv_abo_manquants=True); self.assertEqual(rep.failed, [])
         for k in ("12", "15", "18", "24", "30", "36"): self.assertIn(k, d["trv_abo"])
         self.assertEqual(d["trv_abo"]["12"], round(25.99 * 12, 2))
+    def test_abonnements_saisis_non_ecrases_par_la_cre(self):
+        d, rep = self.run_official(datetime.date(2026, 10, 13)); self.assertEqual(d["trv_abo"]["12"], 285.12)
+        self.assertTrue(any("tarif réglementé 12 kVA" in x and "à vérifier" in x for x in rep.review))
     def test_prix_aberrant_non_applique(self):
         d, rep = self.run_official(datetime.date(2026, 10, 13), 0.3); self.assertEqual(d["elec_ref"]["a"], 0.2001); self.assertTrue(any("hors limites" in x for x in rep.review))
 
