@@ -122,12 +122,16 @@
    "offer": "Contrat+ Électricité",
    "a": 0.1907,
    "b": 0.1907,
-   "d": "19 oct. 2026",
-   "niv": "confirmer",
+   "d": "20 oct. 2026",
+   "niv": "officiel",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/dyneff/offres"
-   ]
+    "Grille officielle Dyneff (1er août 2026)",
+    "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf"
+   ],
+   "ab6": 187.8,
+   "ab9": 234.72,
+   "nivd": "01/08/2026",
+   "typ": "indexe"
   },
   {
    "k": "mint",
@@ -422,7 +426,7 @@
   "geg": "14 oct. 2026",
   "plen": "13 oct. 2026",
   "ohm": "13 oct. 2026",
-  "dyneff": "19 oct. 2026",
+  "dyneff": "20 oct. 2026",
   "mint": "14 oct. 2026",
   "primeo": "19 oct. 2026",
   "edf": "14 oct. 2026",

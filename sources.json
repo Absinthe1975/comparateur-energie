@@ -323,6 +323,12 @@
    "offre": "Essentielle Verte",
    "url": "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf",
    "type": "info"
+  },
+  {
+   "k": "dyneff",
+   "offre": "Contrat+ Électricité (Base)",
+   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf",
+   "type": "info"
   }
  ]
 }
