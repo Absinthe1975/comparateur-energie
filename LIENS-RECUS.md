@@ -1,6 +1,10 @@
-# Liens reçus (grilles, règlements, pages)
+# Tous les liens utiles du comparateur
 
-Tout lien envoyé pour alimenter le comparateur est conservé ici. « Suivi » = le programme surveille le PDF (fichier `sources.json`). Les liens plus anciens que le 19 octobre 2026 sont dans `sources.json` (rubriques `grilles`, `tarifs_pages`, `primes_pages`).
+Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. Deux parties :
+1. **Liens reçus par message** (à la main, ci-dessous) : grilles, règlements, pages envoyés au fil des échanges.
+2. **Liens utilisés par le comparateur** (en bas, généré) : sites, grilles suivies, pages de prix, parrainage, références CRE, eau. Pour le remettre à jour : `python3 scripts/liens.py`.
+
+À chaque nouveau lien reçu : l'ajouter dans la partie 1.
 
 ## ilek
 - Page des grilles : https://www.ilek.fr/grilles-tarifaires
@@ -47,3 +51,172 @@ Tout lien envoyé pour alimenter le comparateur est conservé ici. « Suivi » =
 
 ## Liste de fournisseurs
 - https://www.choisir.com/energie/fournisseurs (47 fournisseurs ; voir le Mémo pour ceux à ajouter)
+
+<!-- AUTO:DEBUT -->
+## Liens utilisés par le comparateur (généré automatiquement, ne pas modifier à la main)
+
+### Alpiq
+- site du fournisseur : https://particuliers.alpiq.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/alpiq/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alpiq/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/alpiq/parrainage
+
+### Alterna
+- site du fournisseur : https://www.alterna-energie.fr/
+- grille : Mon gaz naturel indexé : https://www.alterna-energie.fr/tarifs-gaz-indexe
+- grille : Mon biogaz français : https://www.alterna-energie.fr/tarifs-biogaz
+- grille : Électricité locale : https://www.alterna-energie.fr/tarifs-electricite-locale
+- grille : Électricité française : https://www.alterna-energie.fr/tarifs-electricite-francaise
+- grille : Électricité française indexée : https://www.alterna-energie.fr/tarifs-electricite-francaise-indexe
+- grille : Électricité verte 100 % véhicule électrique : https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/alterna/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alterna/tarifs
+- source : hellowatt.fr (Mon électricité française fixe + Mon gaz naturel indexé (duo)) : https://www.hellowatt.fr/
+
+### Dyneff
+- site du fournisseur : https://www.dyneff.fr/
+- grille : Contrat+ Électricité (Base) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/dyneff/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs
+
+### EDF
+- site du fournisseur : https://particulier.edf.fr/
+- grille : Zen Estival : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-estival.pdf
+- grille : Zen Fixe : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille-prix-zen-fixe.pdf
+- grille : Zen Online : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-online.pdf
+- grille : Zen Week-End : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-week-end.pdf
+- grille : Zen Week-End Plus : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-zen-week-end-plus.pdf
+- grille : Vert Électrique : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique.pdf
+- grille : Vert Électrique Week-End : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-weekend.pdf
+- grille : Vert Électrique Auto : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-auto.pdf
+- grille : Vert Électrique Régional : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille-prix-vert-electrique-regional.pdf
+- grille : Tarif Bleu : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Tarif_Bleu.pdf
+- grille : Avantage Gaz Optimisé : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/grille_prix_avantage_gaz_optimise.pdf
+- grille : Avantage Gaz 2 ans : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Avantage_Gaz_2_ans.pdf
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/edf/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs
+- source : hellowatt.fr (Zen Fixe + Avantage Gaz 2 ans) : https://www.hellowatt.fr/
+- parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/edf/parrainage
+
+### Ekwateur
+- site du fournisseur : https://ekwateur.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/ekwateur/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ekwateur/tarifs
+- source : hellowatt.fr (Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe) : https://www.hellowatt.fr/
+- parrainage : Règlement officiel Ekwateur : https://ekwateur.fr/documents/reglement-parrainage.pdf
+
+### Enercoop
+- site du fournisseur : https://www.enercoop.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/enercoop/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/enercoop/tarifs
+
+### ENGIE
+- site du fournisseur : https://particuliers.engie.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/engie/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/engie/parrainage
+- source : hellowatt.fr (Duo référence 3 ans) : https://www.hellowatt.fr/
+- parrainage : Site officiel ENGIE : https://particuliers.engie.fr/parrainage.html
+
+### Gaz de Bordeaux
+- site du fournisseur : https://www.gazdebordeaux.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
+- parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage
+
+### GEG
+- site du fournisseur : https://www.geg.fr/
+- grille : Élec Verte fixe 3 ans (grille) : https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/geg/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/geg/tarifs
+- source : Grille officielle GEG (5 oct. 2026) (Mon Offre Elec Verte, fixe 3 ans) : https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf
+- source : Grille officielle GEG (21 sept. 2026) (Mon Offre Gaz, fixe 3 ans) : https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf
+
+### Happ-e
+- site du fournisseur : https://www.happ-e.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/happ-e/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/happ-e/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/happ-e/parrainage
+- parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
+
+### ilek
+- site du fournisseur : https://www.ilek.fr/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/ilek/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ilek/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/ilek/parrainage
+- source : Grille officielle ilek (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf
+- source : Grille ilek (zone B) (ÉnRFixe+ Gaz) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/357/grille_357.pdf
+- source : hellowatt.fr (ÉnRFixe+ Élec + Gaz) : https://www.hellowatt.fr/
+- parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
+
+### LLUM
+- site du fournisseur : https://www.llum.fr/
+- grille : Électricité verte, Base compteur non communicant (prix unique) : https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/llum/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/llum/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/llum/parrainage
+- parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
+
+### Mint Énergie
+- site du fournisseur : https://www.mint-energie.com/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/mint-energie/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/mint-energie/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/mint-energie/parrainage
+- source : hellowatt.fr (Classic & Green + Biogaz Classic) : https://www.hellowatt.fr/
+
+### Octopus Energy
+- site du fournisseur : https://octopusenergy.fr/
+- grille : Eco fixe Base : https://octopusenergy.fr/offre-electricite-tarifs
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/octopus-energy/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/octopus-energy/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/octopus-energy/parrainage
+- source : hellowatt.fr (OctoEco Fixe + Gaz Fixe) : https://www.hellowatt.fr/
+
+### OHM Énergie
+- site du fournisseur : https://www.ohm-energie.com/
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/ohm-energie/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ohm-energie/tarifs
+
+### Plenitude
+- site du fournisseur : https://eniplenitude.fr/
+- grille : Pleniweb 1 an Électricité : https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf
+- grille : Pleniweb 1 an Gaz : https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/plenitude/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/plenitude/tarifs
+- page de parrainage : https://prix-elec.com/fournisseurs/plenitude/parrainage
+
+### Primeo Energie
+- site du fournisseur : https://particuliers.primeo-energie.fr/
+- grille : Essentielle Verte : https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/primeo/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/primeo/tarifs
+- parrainage : particuliers.primeo-energie.fr : https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf
+
+### TotalEnergies
+- site du fournisseur : https://www.totalenergies.fr/particuliers
+- page de prix (comparateur) : https://prix-elec.com/fournisseurs/totalenergies/offres
+- page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs
+- page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
+- source : hellowatt.fr (Fixe 2 ans Électricité + Gaz) : https://www.hellowatt.fr/
+
+### Références (tarif réglementé, prix repère du gaz)
+- trv : https://www.hellowatt.fr/contrat-electricite/prix-electricite
+- trv : https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html
+- trv : https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html
+- trv : https://www.lesfurets.com/energie/electricite/tarif-electricite
+- gas_ref : https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere
+- gas_ref : https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html
+- gas_ref : https://jeswitch.fr/energie/actualites/prix-repere-gaz-naturel-cre
+- gas_ref : https://www.lesfurets.com/energie/gaz/tarif-gaz
+- gas_trend_template : https://www.energie-info.fr/{mois}-{annee}-publication-du-prix-repere-du-gaz-par-la-cre/
+- CRE, prix repère du gaz (données ouvertes) : https://www.cre.fr/documents/open-data/construction-du-prix-repere-de-vente-de-gaz-de-la-cre.html
+- CRE, tarif réglementé électricité (data.gouv.fr, ressource) : https://www.data.gouv.fr/fr/datasets/r/c13d05e5-9e55-4d03-bf7e-042a2ade7e49
+- Mint, prix repère gaz : https://informations.mint-energie.com/Pages/Informations/prix-repere-gaz.aspx
+
+### Eau
+- Codes postaux (La Poste, data.gouv.fr) : https://www.data.gouv.fr/api/1/datasets/r/008a2dda-2c60-4b63-b910-998f6f818089
+- SISPEA AEP : https://www.services.eaufrance.fr/documents/tarifsDescriptions/tarifs_AEP_{an}.xls
+- SISPEA AC : https://www.services.eaufrance.fr/documents/tarifsDescriptions/tarifs_AC_{an}.xls
+
+<!-- AUTO:FIN -->
