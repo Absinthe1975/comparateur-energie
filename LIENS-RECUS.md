@@ -107,6 +107,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ### Enercoop
 - site du fournisseur : https://www.enercoop.fr/
+- grille : Offre Base (annexes tarifaires particuliers) : https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/enercoop/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/enercoop/tarifs
 
