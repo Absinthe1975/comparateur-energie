@@ -12,7 +12,8 @@ import datetime, json, os, re, sys, urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cre_open as c, donnees
 
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # racine du dépôt
+RACINE = os.path.join(DEPOT, "donnees")      # dossier des données
 API = "https://tabular-api.data.gouv.fr/api/resources/{rid}/data/?P_SOUSCRITE__exact={kva}&page_size=100"
 
 

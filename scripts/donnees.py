@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Lecture et écriture des données des offres, réparties sur trois fichiers :
-  elec/data.json : offres d'électricité, tarif réglementé, abonnements
-  gaz/data.json  : offres de gaz, prix repère, abonnements
-  data.json      : ce qui est commun (dates, primes, liens, offres combinées)
+  donnees/elec/data.json : offres d'électricité, tarif réglementé, abonnements
+  donnees/gaz/data.json  : offres de gaz, prix repère, abonnements
+  donnees/data.json      : ce qui est commun (dates, primes, liens, offres combinées)
 En mémoire, le programme travaille toujours sur un seul dictionnaire ; cette rubrique les sépare ou les réunit."""
 import json, os
 
@@ -28,7 +28,7 @@ def enregistrer(racine, d):
         _ecrire(os.path.join(racine, dossier, "data.json"), part)
     _ecrire(os.path.join(racine, "data.json"), {k: v for k, v in d.items() if k not in pris})
 
-MANUELS = os.path.join("data", "tarifs_manuels.json")
+MANUELS = os.path.join("manuel", "tarifs_manuels.json")
 LISTES = ("elec", "gas", "duo")        # offres : repérées par (k, offer)
 TABLES = ("abo_e", "abo_g", "abo_g0")  # abonnements par fournisseur : repérés par k
 
@@ -47,7 +47,7 @@ def fusionner_manuels(d, manuels):
     return out
 
 def charger_complet(racine):
-    """Données automatiques + grilles manuelles (data/tarifs_manuels.json, absent = rien à ajouter). Lecture seule : ne pas réenregistrer."""
+    """Données automatiques + grilles manuelles (donnees/manuel/tarifs_manuels.json, absent = rien à ajouter). Lecture seule : ne pas réenregistrer."""
     d = charger(racine)
     chemin = os.path.join(racine, MANUELS)
     return fusionner_manuels(d, _lire(chemin)) if os.path.exists(chemin) else d

@@ -11,7 +11,8 @@ Code de sortie 0 = rien à signaler ou fichier mis à jour ; 1 = échec (le fich
 """
 import csv, json, os, subprocess, sys, tempfile, urllib.request
 
-RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEPOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))   # racine du dépôt
+RACINE = os.path.join(DEPOT, "donnees")      # dossier des données
 UA = {"User-Agent": "comparateur-energie (association loi 1901; contact via GitHub Absinthe1975)"}
 
 def telecharger(url, dest, ouvrir=urllib.request.urlopen):
@@ -135,7 +136,7 @@ def main():
         gn = {cp: "|".join(i.split("~")[1] if "~" in i else i for i in v.split("|")) for cp, v in ancien.items()}
         json.dump(gn, open(os.path.join(dossier, "zones_gn.json"), "w", encoding="utf-8"), ensure_ascii=False)
         sortie = os.path.join(dossier, "communes-cp.json")
-        subprocess.run([sys.executable, os.path.join(RACINE, "scripts", "build_eau.py"), dossier, sortie, an], check=True)
+        subprocess.run([sys.executable, os.path.join(DEPOT, "scripts", "build_eau.py"), dossier, sortie, an], check=True)
         nouveau = json.load(open(sortie, encoding="utf-8"))
         pb = comparer(ancien, nouveau)
         if pb:
