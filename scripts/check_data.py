@@ -52,5 +52,11 @@ for t in ("3", "6", "9"): need(t in d["trv_abo"], f"abonnement du tarif régleme
 for t, v in d["trv_abo"].items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement du tarif réglementé invalide : {t} kVA")
 for r in d["elec"]:
     for t, v in (r.get("abo") or {}).items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement par puissance invalide : {r['name']} {t} kVA")
+import datetime
+for p in d.get("promos", []):
+    try: ok = datetime.date.fromisoformat(p["debut"]) <= datetime.date.fromisoformat(p["fin"])
+    except Exception: ok = False
+    need(ok and isinstance(p.get("texte"), str) and p.get("k"), f"promotion invalide : {p.get('k')}")
+    need(any(o["k"] == p["k"] for o in d["elec"] + d["gas"] + d["duo"]), f"promotion d'un fournisseur inconnu : {p.get('k')}")
 if err: print("\n".join("ERREUR : " + e for e in err)); sys.exit(1)
 print("data.json : OK")
