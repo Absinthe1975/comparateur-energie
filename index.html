@@ -548,7 +548,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong><a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a></strong> : gaz « Fixe 2 ans » et le duo.</li>
         <li><strong><a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a></strong> : grille de l'offre Cocon fixe (fiche reçue, sans prix) et de l'offre Intelligent Octopus.</li>
         <li><strong><a href="https://www.dyneff-elec-gaz.fr/offres/contrat-electricite/" target="_blank" rel="noopener">Dyneff</a></strong> : grille officielle du 1er août 2026 lue (Base) et intégrée ; prix indexé sur le marché, sans engagement. Reste l'option heures pleines / creuses (<a href="https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf" target="_blank" rel="noopener">grille</a>, non modélisée) et le gaz Dyneff, absent.</li>
-        <li><strong><a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a></strong> (Sérénité) et <strong><a href="https://www.enercoop.fr/" target="_blank" rel="noopener">Enercoop</a></strong> (Offre Base) : aucune grille officielle encore reçue.</li>
+        <li><strong><a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a></strong> (Sérénité) : aucune grille officielle encore reçue.</li>
+        <li><strong><a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop</a></strong> : grille officielle du 1er août 2026 intégrée (Base). Restent les options Flexi Watt, Nuit &amp; week-end, 2 saisons et jours de pointe (non modélisées), et à vérifier : Choisir indique que l'accueil de nouveaux clients serait suspendu.</li>
         <li><strong><a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a></strong> (électricité, gaz et duos) : le prix n'apparaît qu'à la souscription (code postal demandé), pas de grille publique à suivre. Il faut un PDF de grille, ou renoncer à « Grille officielle » pour cet acteur.</li>
         <li><strong><a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a></strong> (Essentielle Verte) : le prix est une formule (kWh HT à 95 % du tarif réglementé, abonnement identique). Notre 0,1919 €/kWh en 6 kVA est cohérent, mais calculé par nous (voir 1 ter).</li>
         <li><strong><a href="https://www.alterna-energie.fr/" target="_blank" rel="noopener">Alterna</a></strong> : le duo n'a pas de grille officielle ; décider de retirer ces lignes de l'onglet Élec + Gaz ou de les garder en « À confirmer ».</li>
@@ -845,7 +846,7 @@ var ELEC = [
   { k: "happe", name: "Happ-e", offer: "Électricité 1 an", a: 0.2032, b: 0.2032 },
   { k: "engie", name: "ENGIE", offer: "Elec Référence 3 ans", a: 0.2330, b: 0.2347 },
   { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Elec", a: 0.2400, b: 0.2385, ab6: 301.20, ab9: 409.20 },
-  { k: "enercoop", name: "Enercoop", offer: "Offre Base", a: 0.2541, b: 0.2571 }
+  { k: "enercoop", name: "Enercoop", offer: "Offre Base", a: 0.2541, b: 0.2571, ab6: 181.92, ab9: 247.56 }
 ];
 
 // Gaz : prix du kWh TTC, profil chauffage
