@@ -49,7 +49,10 @@ class Integ(unittest.TestCase):
     def run_official(self, today, trv_kwh=0.2001):
         d = __import__("donnees").charger(ROOT); src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
         def get(url):
-            if "tabular-api" in url: return json.dumps(rows(None, trv_kwh) if "kva=6" in url or "exact=6" in url else {"data": [dict(rows()["data"][0], P_SOUSCRITE=9, PART_VARIABLE_TTC=0.1985, PART_FIXE_TTC=239.84)]}).encode()
+            if "tabular-api" in url:
+                kva = int(url.split("exact=")[1].split("&")[0])
+                if kva == 6: return json.dumps(rows(None, trv_kwh)).encode()
+                return json.dumps({"data": [dict(rows()["data"][0], P_SOUSCRITE=kva, PART_VARIABLE_TTC=0.1985, PART_FIXE_TTC=239.84 if kva == 9 else round(25.99 * 12 * kva / 12, 2))]}).encode()
             if url.endswith(".html"): return b'<a href="/content/download/1/fichier.xlsx">x</a>'
             return xlsx()
         class N: pass
@@ -59,6 +62,10 @@ class Integ(unittest.TestCase):
         d, rep = self.run_official(datetime.date(2026, 10, 13)); self.assertEqual(rep.failed, []); self.assertEqual(d["gas_b1"]["a"], 0.1456); self.assertEqual(d["gas_b0"]["a"], 0.1783)
     def test_novembre_applique_la_nouvelle_grille(self):
         d, rep = self.run_official(datetime.date(2026, 11, 2)); self.assertEqual((d["gas_b1"]["a"], d["gas_ref"]["a"], d["gas_b0"]["a"]), (0.1576, 0.1576, 0.1903)); self.assertTrue(rep.applied)
+    def test_abonnements_des_autres_puissances(self):
+        d, rep = self.run_official(datetime.date(2026, 10, 13)); self.assertEqual(rep.failed, [])
+        for k in ("12", "15", "18", "24", "30", "36"): self.assertIn(k, d["trv_abo"])
+        self.assertEqual(d["trv_abo"]["12"], round(25.99 * 12, 2))
     def test_prix_aberrant_non_applique(self):
         d, rep = self.run_official(datetime.date(2026, 10, 13), 0.3); self.assertEqual(d["elec_ref"]["a"], 0.2001); self.assertTrue(any("hors limites" in x for x in rep.review))
 

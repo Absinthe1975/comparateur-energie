@@ -332,7 +332,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     </div>
     <div class="field" id="f-kva">
       <label for="kva">Puissance du compteur</label>
-      <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option></select>
+      <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option><option value="12">12 kVA</option><option value="15">15 kVA</option><option value="18">18 kVA</option><option value="24">24 kVA</option><option value="30">30 kVA</option><option value="36">36 kVA</option></select>
     </div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
     <div class="field" id="f-gzone" hidden><label for="gzone">Zone tarifaire gaz</label><select id="gzone"><option value="1" selected>Zone 1</option><option value="2">Zone 2</option><option value="3">Zone 3</option><option value="4">Zone 4</option><option value="5">Zone 5</option><option value="6">Zone 6</option></select></div>
@@ -565,7 +565,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong><a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> saisonnier :</strong> le prix moyen suppose 58 % de la consommation en hiver. À confirmer ou corriger.</li>
         <li><strong>« Offre combinée non relevée » :</strong> mention proposée pour les fournisseurs sans duo relevé, non décidée.</li>
         
-        <li><strong>Abonnement à 3 kVA</strong> de <a href="https://www.ohm-energie.com/" target="_blank" rel="noopener">OHM</a>, <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint</a> et <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> : non exact. Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li><strong>Abonnement à 3 kVA</strong> de <a href="https://www.ohm-energie.com/" target="_blank" rel="noopener">OHM</a>, <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint</a> et <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> : non exact. </li>
         <li><strong>Gaz :</strong> profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie (<a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a>, <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a>) sont à surveiller ; zone ELD (Bordeaux, Strasbourg, Colmar) non modélisée ; GEG gaz au réseau NTR 0-3 seulement.</li>
         <li><strong>Primes ponctuelles</strong> (20, 50, 60 €) non comptées dans le classement.</li>
         <li><strong>Prix par code postal :</strong> un code postal regroupant des communes à prix différents reçoit la moyenne de ces communes (233 cas chez <a href="https://www.alterna-energie.fr/" target="_blank" rel="noopener">Alterna</a>).</li>
@@ -598,8 +598,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="card">
       <h3>4. Données encore à confirmer <span class="badge check">À faire</span></h3>
       <ul>
-        <li><strong>Toutes les puissances :</strong> le comparateur ne propose que 3, 6 et 9 kVA, alors que les grilles reçues (GEG, Dyneff, Gaz de Bordeaux, EDF…) vont de 3 à 36 kVA. À faire : stocker l'abonnement de chaque puissance par offre (3, 6, 9, 12, 15, 18, 24, 30, 36 kVA), élargir le menu de puissance, et signaler les offres dont la grille ne couvre pas la puissance choisie. Les liens reçus sont conservés dans le fichier docs/LIENS-RECUS.md du dépôt.</li>
-        <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li><strong>Toutes les puissances (3 à 36 kVA) :</strong> en place. Grilles complètes saisies pour GEG (2 offres), Dyneff et Enercoop ; les autres offres sont estimées à partir de leur abonnement 6 kVA et de l'écart du tarif réglementé (étoile). Le tarif réglementé 12 à 36 kVA vient de la CRE : il apparaît après la prochaine « Mise à jour des prix » (avant, le comparateur affiche « abonnement non relevé » pour ces puissances). À faire : saisir la grille de chaque puissance dès qu'un fournisseur la donne (champ <code>abo</code> de l'offre) ; les offres combinées (duo) ne sont relevées que pour 3, 6 et 9 kVA ; le prix du kWh à 7 et 8 kVA (Enercoop) et 21 kVA (Dyneff) n'est pas distingué.</li>
+        <li><strong>Abonnements à 3 et 9 kVA :</strong> repris des grilles officielles quand elles existent ; sinon estimés à partir de l'écart du tarif réglementé (signalé par une étoile). Même méthode de 12 à 36 kVA.</li>
         <li><strong>Gaz en Base et B0 :</strong> prix et abonnements réels pour les offres à grille officielle ; estimés à partir de l'écart du prix repère pour les autres (étoile).</li>
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a> (une seule source pour le montant du parrain), <a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> (montant du parrain absent du règlement), <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint Énergie</a>, <a href="https://www.happ-e.fr/" target="_blank" rel="noopener">Happ-e</a> (20 à 40 €), <a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> et <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> (une seule source). <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a>, <a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a>, <a href="https://particulier.edf.fr/" target="_blank" rel="noopener">EDF</a> et <a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> viennent de comparateurs. <a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a>, <a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> (20 €, plus 5 € avec l'option verte) et <a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a> (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
         <li><strong>Filtres des offres :</strong> prix fixe ou indexé, engagement et offre verte sont renseignés pour une trentaine d'offres seulement (d'après leur nom ou leur grille). À compléter pour les autres en lisant la fiche descriptive de chaque offre (champs typ, eng et vert dans data.json), et à faire relire par le script plus tard.</li>
@@ -735,7 +735,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <h3>Ce que le site ne sait pas encore faire</h3>
       <ul>
         <li>Les offres à tarifs différenciés (heures pleines/creuses, week-end, saisonniers, Tempo) ne sont pas modélisées, donc absentes des tableaux ou approchées. Octopus saisonnier suppose 58 % de la consommation en hiver.</li>
-        <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, et les puissances au-delà de 9 kVA ne sont pas couvertes.</li>
+        <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, les puissances de 12 à 36 kVA sont estimées sauf grille complète (GEG, Dyneff, Enercoop).</li>
         <li>Pour le gaz, la zone des distributeurs locaux (Bordeaux, Strasbourg, Colmar) n'est pas modélisée.</li>
         <li>Pour l'eau, environ 8 700 communes n'ont pas de prix au SISPEA ; le site le dit et utilise une moyenne indicative. Pour les communes sans assainissement renseigné, seule l'eau potable est comptée.</li>
         <li>Les filtres « prix fixe / indexé », « engagement » et « offres vertes » ne reposent que sur ce qui est écrit dans le nom ou la grille de l'offre. Quand la caractéristique n'est pas relevée, l'offre disparaît dès que vous activez le filtre. La qualité du service n'est pas comparée.</li>
@@ -1005,10 +1005,16 @@ function sortBtn(key, label, cur) {
   return '<button type="button" class="sortbtn' + (cur === key ? " on" : "") + '" data-sort="' + key + '" aria-pressed="' + (cur === key ? "true" : "false") + '">' + label + "</button>";
 }
 
+// Champ du prix du kWh : « a » jusqu'à 6 kVA, « b » à partir de 9 kVA
+function kwhField(kva) { return parseInt(kva, 10) >= 9 ? "b" : "a"; }
+// Abonnement annuel d'une offre à une puissance : grille de l'offre (champ « abo », une valeur par puissance) si elle existe, sinon estimation (signalée par une étoile)
+// = abonnement 6 kVA de l'offre + écart du tarif réglementé entre les deux puissances ; null = tarif réglementé non relevé à cette puissance, l'offre est alors absente du tableau.
 function eloAbo(r, kva) {
-  if (r.ref) return { abo: TRV_ABO[kva], est: false };
+  if (r.ref) return typeof TRV_ABO[kva] === "number" ? { abo: TRV_ABO[kva], est: false } : null;
+  if (r.abo && typeof r.abo[kva] === "number") return { abo: r.abo[kva], est: false };
   var own = kva === "9" ? r.ab9 : kva === "6" ? r.ab6 : null;
   if (typeof own === "number") return { abo: own, est: false };
+  if (typeof TRV_ABO[kva] !== "number") return null;
   var base = typeof r.ab6 === "number" ? r.ab6 : (typeof ABO_E[r.k] === "number" ? ABO_E[r.k] : TRV_ABO["6"]);
   return { abo: base + (TRV_ABO[kva] - TRV_ABO["6"]), est: !(typeof r.ab6 === "number" || typeof ABO_E[r.k] === "number") || kva !== "6" };
 }
@@ -1058,16 +1064,21 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var aboMap = kind === "elec" ? ABO_E : ABO_G;
   var all = list.concat([ref]).map(function (r) {
     var abo, est = false;
-    if (r.ref) abo = kind === "elec" ? TRV_ABO[kva] : r.abo;
-    else if (kind === "elec") {
-      var ea = eloAbo(r, kva); abo = ea.abo; est = ea.est;
-    } else { abo = r.abo; est = !!r.est; }
+    if (kind === "elec") {
+      var ea = eloAbo(r, kva); if (!ea) return null; abo = ea.abo; est = ea.est;
+    } else if (r.ref) abo = r.abo;
+    else { abo = r.abo; est = !!r.est; }
     var cons = r[field] * conso;
     return Object.assign({}, r, { _abo: abo, _est: est, _cons: cons, _tot: cons + abo });
   });
+  var sansGrille = 0;
+  if (kind === "elec") {
+    if (!all[all.length - 1]) { var be1 = $("best-elec"); if (be1) be1.textContent = "L'abonnement du tarif réglementé n'est pas encore relevé pour " + kva + " kVA : comparaison indisponible à cette puissance."; $(tableId).innerHTML = ""; return; }
+    all = all.filter(function (r) { if (!r) sansGrille++; return !!r; });
+  }
   var fk = kind === "elec" ? "elec" : "gaz", fl = state.flt[fk], hidden = 0;
   if (fltActive(fl)) { var before = all.length; all = all.filter(function (r) { return r.ref || fltPass(r, fl); }); hidden = before - all.length; }
-  var fn_ = $("flt-n-" + fk); if (fn_) fn_.textContent = fltActive(fl) ? hidden + " offre(s) masquée(s) : caractéristique différente ou non relevée." : "";
+  var fn_ = $("flt-n-" + fk); if (fn_) fn_.textContent = (fltActive(fl) ? hidden + " offre(s) masquée(s) : caractéristique différente ou non relevée. " : "") + (sansGrille ? sansGrille + " offre(s) absente(s) : abonnement à " + kva + " kVA non disponible." : "");
   if (all.filter(function (r) { return !r.ref; }).length === 0) {
     var be0 = $("best-" + kind); if (be0) be0.textContent = "Aucune offre ne correspond à ces filtres (les offres dont la caractéristique n'est pas relevée sont masquées).";
     $(tableId).innerHTML = ""; return;
@@ -1294,11 +1305,8 @@ function computeLogt(s) {
 }
 
 function elecCostFor(r, kva, conso) {
-  var field = kva === "9" ? "b" : "a";
-  var abo;
-  if (r.ref) abo = TRV_ABO[kva];
-  else abo = eloAbo(r, kva).abo;
-  return r[field] * conso + abo;
+  var field = kwhField(kva), ea = eloAbo(r, kva);
+  return ea ? r[field] * conso + ea.abo : null;
 }
 function gasCostFor(r, conso) { return r.a * conso + (r.ref ? GAS_B1.abo : (typeof r.ab1 === "number" ? r.ab1 : ABO_G[r.k])); }
 
@@ -1312,7 +1320,7 @@ function bars(posts, data, unit) {
 
 function renderLogt() {
   var s = readLogt(), r = computeLogt(s);
-  var kva = kvaStep(r.peakW), ck = kva <= 3 ? "3" : kva <= 6 ? "6" : "9";
+  var kva = kvaStep(r.peakW), ck = String(kva);
   var conso = Math.round(r.eTot / 100) * 100, gconso = Math.round(r.gTot / 100) * 100;
   lastLogt = { conso: conso, ck: ck, gconso: gconso, gopt: gasOptionFor(r.gTot), eau: { m3: Math.round(r.eau.m3), cp: s.cp, dept: s.dept, ville: s.ville, prix: s.prixEau } };
   $("l-hint").textContent = "Pièces à chauffer d'après votre liste : " + r.heated + ". Les radiateurs vont de 750 à 2 500 W.";
@@ -1321,10 +1329,11 @@ function renderLogt() {
   var h = '<div class="card"><span class="label stampy">Électricité estimée</span><span class="big">' + fmtInt.format(r.eTot) + ' kWh par an</span>' + bars(POSTES, r.e)
     + '<p class="note">Appareils et éclairage seuls : ' + fmtInt.format(r.usages) + ' kWh par an. Un foyer en consomme en moyenne environ ' + fmtInt.format(USAGES_MOYENS) + '.</p></div>';
   h += '<div class="card"><span class="label stampy">Puissance conseillée</span><span class="big">' + kva + ' kVA</span><p class="note">Pic estimé à ' + fmtInt.format(r.peakW) + ' W : 90 % du chauffage, 30 % des gros appareils et 500 W de fond. C\'est indicatif. Votre compteur Linky garde l\'historique de vos pointes réelles.'
-    + (kva > 9 ? ' Le comparateur ne couvre pas plus de 9 kVA : les coûts ci-dessous sont calculés à 9 kVA.' : "") + "</p></div>";
-  if (r.eTot > 0) {
-    var offers = ELEC.map(function (o) { return { o: o, t: elecCostFor(o, ck, r.eTot) }; }).sort(function (a, b) { return a.t - b.t; });
-    var trv = elecCostFor(ELEC_REF, ck, r.eTot);
+    + "</p></div>";
+  var trv = elecCostFor(ELEC_REF, ck, r.eTot);
+  var offers = ELEC.map(function (o) { return { o: o, t: elecCostFor(o, ck, r.eTot) }; }).filter(function (x) { return x.t !== null; }).sort(function (a, b) { return a.t - b.t; });
+  if (r.eTot > 0 && (trv === null || !offers.length)) h += '<div class="card"><span class="label stampy">Facture annuelle estimée, électricité</span><p class="note">Comparaison indisponible à ' + ck + ' kVA : abonnement du tarif réglementé ou des offres non relevé pour cette puissance.</p></div>';
+  else if (r.eTot > 0) {
     h += '<div class="card"><span class="label stampy">Facture annuelle estimée, électricité</span><p>Tarif réglementé : <strong>' + fmtInt.format(trv) + ' €</strong><br>Offre la moins chère : <strong>' + fmtInt.format(offers[0].t) + ' €</strong> (' + esc(offers[0].o.name) + ')<br><span class="delta-good">Écart : −' + fmtInt.format(trv - offers[0].t) + ' €</span></p><button class="btn" id="apply-elec" type="button">Voir dans le comparateur</button></div>';
   }
   if (r.gTot > 0) {
@@ -1682,7 +1691,8 @@ function cmpText(t) {
   var L = lastLogt, typed = conso(), pct = function (real, est) { var d = Math.round((real - est) / est * 100); return d === 0 ? "identique" : (d > 0 ? "+" : "−") + fmtInt.format(Math.abs(d)) + " %"; };
   if (t === "elec") {
     if (!(L.conso > 0)) return "";
-    var o = ELEC.map(function (x) { return { x: x, t: elecCostFor(x, L.ck, L.conso) }; }).sort(function (a, b) { return a.t - b.t; })[0];
+    var o = ELEC.map(function (x) { return { x: x, t: elecCostFor(x, L.ck, L.conso) }; }).filter(function (y) { return y.t !== null; }).sort(function (a, b) { return a.t - b.t; })[0];
+    if (!o) return "";
     return "Estimation de Mon logement : " + fmtInt.format(L.conso) + " kWh par an, " + L.ck + " kVA" + (typed > 0 ? " (votre valeur : " + pct(typed, L.conso) + ")" : "") + ". Avec cette estimation, l'offre la moins chère coûterait " + fmtInt.format(o.t) + " € par an (" + o.x.name + ").";
   }
   if (t === "gaz") {
@@ -1770,19 +1780,22 @@ function renderDuo() {
   var rows = [];
   (($("duo-sep") && $("duo-sep").checked) ? ELEC : []).forEach(function (e) {
     var g = gmap[e.k]; if (!g) return;
-    var ec = elecCostFor(e, I.kva, I.ek);
+    var ec = elecCostFor(e, I.kva, I.ek); if (ec === null) return;
     var gc = g.a * I.gk + (typeof g.abo === "number" ? g.abo : 0);
     rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, niv: (e.niv === "officiel" && g.niv === "officiel") ? "officiel" : "confirmer", est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
   });
   DUO.forEach(function (D) {
+    if (I.kva !== "3" && I.kva !== "6" && I.kva !== "9") return;   // les offres combinées ne sont relevées que pour 3, 6 et 9 kVA
     var abo = (I.kva === "9" && D.eabo9) ? D.eabo9 : D.eabo + ((TRV_ABO[I.kva] || TRV_ABO["6"]) - TRV_ABO["6"]);
     var kwh = (I.kva === "9" && D.eb) ? D.eb : D.ea;
     var ec = kwh * I.ek + abo, gc = D.ga * I.gk + D.gabo - (D.promo || 0);
     rows.push({ k: D.k, name: D.name, eo: D.offer, go: "", ec: ec, gc: gc, tot: ec + gc, est: I.gopt !== "b1" || !(I.kva === "3" || I.kva === "6" || I.kva === "9"), duo: D });
   });
   rows.sort(function (a, b) { return a.tot - b.tot; });
-  var ref = elecCostFor(ELEC_REF, I.kva, I.ek) + gl.ref.a * I.gk + gl.ref.abo;
-  if (!rows.length) { el.innerHTML = "<tbody><tr><td>Aucun fournisseur ne propose les deux énergies dans les données actuelles.</td></tr></tbody>"; $("best-duo").hidden = true; return; }
+  var refE = elecCostFor(ELEC_REF, I.kva, I.ek);
+  if (refE === null) { el.innerHTML = "<tbody><tr><td>Abonnement du tarif réglementé non relevé à " + I.kva + " kVA : comparaison indisponible à cette puissance.</td></tr></tbody>"; $("best-duo").hidden = true; return; }
+  var ref = refE + gl.ref.a * I.gk + gl.ref.abo;
+  if (!rows.length) { el.innerHTML = "<tbody><tr><td>Aucun fournisseur ne propose les deux énergies dans les données actuelles pour cette puissance (les offres combinées ne sont relevées que pour 3, 6 et 9 kVA).</td></tr></tbody>"; $("best-duo").hidden = true; return; }
   var b = rows[0], bd = b.tot - ref;
   $("best-duo").innerHTML = "<strong>La moins chère : " + esc(b.name) + "</strong> (" + (b.duo ? "offre duo " + esc(b.eo) : esc(b.eo) + " + " + esc(b.go)) + "), " + fmtEur0.format(b.tot) + " par an. "
     + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que le tarif réglementé et le prix repère du gaz réunis." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que le tarif réglementé et le prix repère du gaz réunis." : "C'est le même montant que le tarif réglementé et le prix repère du gaz réunis.");
@@ -1813,7 +1826,7 @@ function refresh() {
     state.eauPrix = parseFloat($("prixeau").value) || 0;
   }
   state.kva = $("kva").value;
-  renderPrices("t-elec", ELEC, ELEC_REF, state.kva === "9" ? "b" : "a", state.elecConso, state.sort, "elec", state.kva);
+  renderPrices("t-elec", ELEC, ELEC_REF, kwhField(state.kva), state.elecConso, state.sort, "elec", state.kva);
   renderGas();
   renderDuo();
   renderEau();

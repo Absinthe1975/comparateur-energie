@@ -49,5 +49,8 @@ for r in d.get("duo", []):
     need(0.08 <= r["ga"] <= 0.30 and 80 <= r["gabo"] <= 700, f"offre duo : gaz hors fourchette : {r['name']}")
     need(0 <= r.get("promo", 0) <= 200, f"offre duo : promotion hors fourchette : {r['name']}")
 for t in ("3", "6", "9"): need(t in d["trv_abo"], f"abonnement du tarif réglementé manquant : {t} kVA")
+for t, v in d["trv_abo"].items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement du tarif réglementé invalide : {t} kVA")
+for r in d["elec"]:
+    for t, v in (r.get("abo") or {}).items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement par puissance invalide : {r['name']} {t} kVA")
 if err: print("\n".join("ERREUR : " + e for e in err)); sys.exit(1)
 print("data.json : OK")
