@@ -221,3 +221,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - SISPEA AC : https://www.services.eaufrance.fr/documents/tarifsDescriptions/tarifs_AC_{an}.xls
 
 <!-- AUTO:FIN -->
+- Vattenfall reprise par Alterna (communiqué du 17 fév. 2026) : https://group.vattenfall.com/fr/presse-et-medias/communique-de-presse/2026/vattenfall-signe-un-accord-avec-alterna-energie-pour-la-cession-de-son-activite-de-fourniture-delectricite-et-de-gaz-en-france
