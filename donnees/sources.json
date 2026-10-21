@@ -335,6 +335,24 @@
    "offre": "Offre Base (annexes tarifaires particuliers)",
    "url": "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770",
    "type": "info"
+  },
+  {
+   "k": "dyneff",
+   "offre": "Contrat+ Électricité (heures pleines / creuses)",
+   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf",
+   "type": "info"
+  },
+  {
+   "k": "wekiwi",
+   "offre": "Fiche descriptive électricité",
+   "url": "https://www.wekiwi.fr/wp-content/uploads/2025/01/Fiche-descriptive-EL-01_25.pdf",
+   "type": "info"
+  },
+  {
+   "k": "wekiwi",
+   "offre": "Fiche descriptive gaz naturel",
+   "url": "https://www.wekiwi.fr/wp-content/uploads/2024/05/Fiche-descriptive-NG.pdf",
+   "type": "info"
   }
  ]
 }

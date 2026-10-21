@@ -76,6 +76,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ### Dyneff
 - site du fournisseur : https://www.dyneff.fr/
 - grille : Contrat+ Électricité (Base) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf
+- grille : Contrat+ Électricité (heures pleines / creuses) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/dyneff/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs
 
@@ -200,6 +201,10 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs
 - page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
 - source : hellowatt.fr (Fixe 2 ans Électricité + Gaz) : https://www.hellowatt.fr/
+
+### wekiwi
+- grille : Fiche descriptive électricité : https://www.wekiwi.fr/wp-content/uploads/2025/01/Fiche-descriptive-EL-01_25.pdf
+- grille : Fiche descriptive gaz naturel : https://www.wekiwi.fr/wp-content/uploads/2024/05/Fiche-descriptive-NG.pdf
 
 ### Références (tarif réglementé, prix repère du gaz)
 - trv : https://www.hellowatt.fr/contrat-electricite/prix-electricite
