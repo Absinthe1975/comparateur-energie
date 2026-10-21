@@ -116,6 +116,7 @@ tr.ref td { background: var(--ref-bg); }
 .conf { display: inline-block; min-width: 1.3em; text-align: center; font-weight: 700; font-size: 12px; border-radius: 50%; margin-right: 4px; padding: 0 2px; border: 1px solid currentColor; }
 .conf.c-ok { color: var(--accent); } .conf.c-est { color: var(--warn); } .conf.c-chk { color: var(--bad, #b91c1c); }
 .conf-leg { margin: 6px 2px 0; }
+.promo-list { margin: 6px 0; padding-left: 1.2em; } .promo-h { font-size: 16px; margin: 12px 0 4px; } #home-promos { margin: 12px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); }
 .badge.none { background: var(--ref-bg); color: var(--muted); }
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 .callout { background: var(--accent-soft); border-radius: 8px; padding: 12px 16px; font-size: 14px; max-width: 80ch; }
@@ -358,6 +359,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <span class="pill">Gratuit · sans but lucratif · sans lien d'affiliation</span>
       <h1>Comparez l'<span class="grad">électricité, le gaz et l'eau</span></h1>
       <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal : décrire votre logement est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
+      <div id="home-promos" hidden></div>
       <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
     </div>
 
@@ -1050,6 +1052,19 @@ function promoHtml(k, offre) {
   });
   return out;
 }
+// Promotions en cours (rubrique « promos » de data.json) : liste sur l'accueil, uniquement entre les dates de début et de fin
+function renderPromos() {
+  var box = $("home-promos"); if (!box) return;
+  var now = new Date(), h = "";
+  PROMOS.forEach(function (p) {
+    var d0 = new Date(p.debut + "T00:00:00"), d1 = new Date(p.fin + "T23:59:59");
+    if (isNaN(d0) || isNaN(d1) || now < d0 || now > d1) return;
+    var nom = (PRIMES[p.k] && PRIMES[p.k].name) || p.k, f = d1.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+    h += '<li><strong>' + esc(nom) + '</strong> : ' + esc(p.texte) + ' (jusqu\'au ' + esc(f) + ')' + (p.conditions ? '<br><span class="offer">' + esc(p.conditions) + '</span>' : "") + '</li>';
+  });
+  box.hidden = !h;
+  box.innerHTML = h ? '<h2 class="promo-h">Promotions en cours</h2><ul class="promo-list">' + h + '</ul><p class="offer">Ces promotions ne comptent pas dans le classement : seul le prix de l\'offre est comparé.</p>' : "";
+}
 function tagsLine(r) {
   if (r.ref) return "";
   var t = [];
@@ -1287,6 +1302,7 @@ function loadLogt() {
 }
 
 function readLogt() {
+  if ($("l-cuisson")) $("l-cuisson").setAttribute("aria-label", "Cuisson au gaz de ville");
   if ($("l-cuisson") && $("a-plaques-q")) $("l-cuisson").disabled = num("a-plaques-q", 1) > 0;
   var s = { surface: num("l-surface", 60), pers: num("l-pers", 2), iso: $("l-iso").value, heat: $("l-heat").value, pts: num("l-pts", 4), w: num("l-w", 1000), ecs: $("l-ecs").value, cuisson: num("a-plaques-q", 1) > 0 ? "elec" : $("l-cuisson").value, cp: $("l-cp").value, dept: $("l-dept").value, ville: $("l-ville").value, prixEau: num("l-prixeau", 0), douches: num("l-douches", 7), bains: num("l-bains", 0), jardin: num("l-jardin", 0), rooms: {}, apps: {} };
   ROOMS.forEach(function (r) { s.rooms[r.id] = num("r-" + r.id, r.n); });
@@ -1886,7 +1902,7 @@ function applyData(d) {
   ELEC_REF = d.elec_ref; HPHC = d.hphc || []; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
   ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
   DUO = Array.isArray(d.duo) ? d.duo : DUO; LIENS = d.liens || {};
-  GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes; PROMOS = d.promos || [];
+  GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes; PROMOS = d.promos || []; renderPromos();
   if (d.updated) DATA_DATE = d.updated;
   if (d.updated_label) DATA_LABEL = d.updated_label;
   DATA_TIME = (typeof d.updated_time === "string" && /^\d\d:\d\d$/.test(d.updated_time)) ? d.updated_time : "";
