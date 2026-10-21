@@ -157,3 +157,7 @@ La rubrique `promos` de `donnees/data.json` liste les promotions limitées dans 
 ## Heures pleines / creuses
 
 Les offres à deux prix du kWh se saisissent dans la rubrique `hphc` de `donnees/manuel/tarifs_manuels.json` (même mode d'emploi que les autres grilles manuelles) : `k`, `name`, `offer`, `hp` et `hc` (€/kWh TTC, heures pleines et heures creuses), éventuellement `hpb` et `hcb` pour 9 kVA et plus si les prix changent, `abo` (abonnement annuel TTC par puissance), `niv`, `nivd`, `s`. Le site propose alors, dans l'onglet Électricité, le choix « Formule » (Base ou heures pleines / creuses) et la part de consommation en heures creuses (40 % par défaut) ; le prix du kWh est la moyenne pondérée. `check_data.py` vérifie que `hp` ≥ `hc` et que les prix sont plausibles.
+
+## Communes à prix d'eau très bas
+
+`python3 scripts/eau_a_verifier.py` écrit `docs/EAU-A-VERIFIER.md` : les communes dont le prix complet est sous 2 € par m³, avec une colonne « Résultat » à remplir après vérification sur la fiche SISPEA. Le script ne modifie aucune donnée.
