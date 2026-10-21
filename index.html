@@ -213,9 +213,10 @@ body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; 
 #tab-elec::before { background: var(--elec); } #tab-gaz::before { background: var(--gas); } #tab-eau::before { background: var(--water); }
 @media (max-width: 860px) {
   .topbar-in { flex-wrap: wrap; gap: 6px 12px; padding-block: 8px; }
-  .topbar .tabs { flex: 1 1 100%; flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; }
   .tabs button { padding: 8px 11px; white-space: nowrap; }
 }
+/* Onglets : passage à la ligne plutôt que défilement caché (le dernier onglet restait coupé) */
+.topbar .tabs { flex-wrap: wrap; overflow: visible; }
 
 /* Tableaux en cartes sur petit écran (hors tableau Appareils, déjà adapté) */
 @media (max-width: 700px) {
