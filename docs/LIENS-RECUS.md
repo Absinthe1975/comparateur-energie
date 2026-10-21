@@ -243,3 +243,22 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Offre Lou : https://www.wekiwi.fr/offre-lou/
 - Offre Gustave : https://www.wekiwi.fr/offre-gustave/
 - Offre Duo : https://www.wekiwi.fr/offre-duo/
+
+## Gaz de Bordeaux (liens du 21 oct. 2026)
+- Règlement NovaFixe Bonus Élec : https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf
+- Documents contractuels : https://www.gazdebordeaux.fr/documents-contractuels
+- Offre duale gaz + électricité Bonus : https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel-et-electricite/offre-duale-gaz-et-electricite-bonus
+- CGV (OMT) : https://ressources.gazdebordeaux.fr/DOCUMENTS/CGV/CGVOMT_all.pdf
+- CGV (OMHT) : https://ressources.gazdebordeaux.fr/DOCUMENTS/CGV/CGVOMHT_ALL.pdf
+- CGV électricité : https://ressources.gazdebordeaux.fr/DOCUMENTS/CGV/CGVELEC_ALL.pdf
+- Conditions Régaz : https://www.gazdebordeaux.fr/sites/default/files/2025-03/conditions_regaz.pdf
+- Conditions de distribution GRDF (déc. 2021) : https://www.grdf.fr/documents/10184/5569228/CONDITIONS+DE+DISTRIBUTION++Version+12-2021.pdf/4d7f4ab6-f7e2-9cd5-fbf3-366d4206b1c6?t=1647421649342
+- Contrat Enedis : https://www.gazdebordeaux.fr/sites/default/files/2025-03/enedis.pdf
+- CGV professionnels (juil. 2026) : https://www.gazdebordeaux.fr/sites/default/files/2026-08/CGV_Pro_07-2026.pdf
+- Catalogue des prestations Régaz : https://portailfournisseur.regaz.fr/referentiel-documentaire/catalogue-de-prestations/download.html
+- Catalogue des prestations GRDF (juil. 2025) : https://www.grdf.fr/documents/10184/5567990/0925-GRDF-juillet-2025-vdef.pdf/
+- Catalogue des prestations Enedis : https://catalogue-prestations.enedis.fr/pdf/Prestations-Enedis.pdf
+- Formulaire de rétractation : https://www.gazdebordeaux.fr/sites/default/files/2025-02/formulaire-retractation.pdf
+- Téléchargement grille gaz : https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz
+- Téléchargement grille électricité : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
+- Historique du tarif réglementé (gaz) : https://www.gazdebordeaux.fr/sites/default/files/2024-12/histo_TRV.pdf
