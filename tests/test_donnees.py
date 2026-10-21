@@ -6,7 +6,7 @@ RACINE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))
 class Donnees(unittest.TestCase):
     def test_aller_retour(self):
         d = donnees.charger(RACINE)
-        for k in donnees.ELEC + donnees.GAZ + ("primes", "liens", "duo", "updated"): self.assertIn(k, d)
+        for k in tuple(x for x in donnees.ELEC if x != "hphc") + donnees.GAZ + ("primes", "liens", "duo", "updated"): self.assertIn(k, d)
         with tempfile.TemporaryDirectory() as t:
             donnees.enregistrer(t, d); self.assertEqual(donnees.charger(t), d)
             self.assertNotIn("elec", json.load(open(os.path.join(t, "data.json"), encoding="utf-8")))
@@ -22,6 +22,9 @@ class Manuels(unittest.TestCase):
         self.assertEqual(out["elec"][0]["a"], 0.19); self.assertEqual(out["elec"][0]["b"], 0.2); self.assertEqual(out["elec"][0]["niv"], "officiel")
         self.assertEqual(len(out["elec"]), 2); self.assertEqual(out["abo_e"], {"a": 190.0, "b": 200.0})
         self.assertEqual(self.D["elec"][0]["a"], 0.2)   # l'original n'est pas modifié
+    def test_heures_pleines_creuses(self):
+        out = donnees.fusionner_manuels(self.D, {"hphc": [{"k": "a", "offer": "X HC", "hp": 0.25, "hc": 0.15}]})
+        self.assertEqual(out["hphc"][0]["hc"], 0.15); self.assertNotIn("hphc", self.D)
     def test_fichier_vide_ne_change_rien(self):
         self.assertEqual(donnees.fusionner_manuels(self.D, {"elec": [], "_exemple": {}}), self.D)
     def test_fichier_du_depot(self):

@@ -52,6 +52,12 @@ for t in ("3", "6", "9"): need(t in d["trv_abo"], f"abonnement du tarif régleme
 for t, v in d["trv_abo"].items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement du tarif réglementé invalide : {t} kVA")
 for r in d["elec"]:
     for t, v in (r.get("abo") or {}).items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"abonnement par puissance invalide : {r['name']} {t} kVA")
+for r in d.get("hphc", []):
+    for ch in ("hp", "hc", "hpb", "hcb"):
+        if ch in r: need(isinstance(r[ch], (int, float)) and 0.05 <= r[ch] <= 0.6, f"heures pleines/creuses : prix du kWh invalide ({ch}) : {r.get('name')}")
+    need("hp" in r and "hc" in r, f"heures pleines/creuses : hp et hc obligatoires : {r.get('name')}")
+    need(r.get("hp", 0) >= r.get("hc", 0), f"heures pleines/creuses : hp doit être supérieur ou égal à hc : {r.get('name')}")
+    for t, v in (r.get("abo") or {}).items(): need(t in ("3", "6", "9", "12", "15", "18", "24", "30", "36") and 100 <= v <= 1500, f"heures pleines/creuses : abonnement invalide : {r.get('name')} {t} kVA")
 import datetime
 for p in d.get("promos", []):
     try: ok = datetime.date.fromisoformat(p["debut"]) <= datetime.date.fromisoformat(p["fin"])
