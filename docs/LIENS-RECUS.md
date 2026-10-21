@@ -267,3 +267,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Téléchargement grille gaz : https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz
 - Téléchargement grille électricité : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
 - Historique du tarif réglementé (gaz) : https://www.gazdebordeaux.fr/sites/default/files/2024-12/histo_TRV.pdf
+
+## Reprises de fournisseurs (constat du 21 oct. 2026)
+- Liste des fournisseurs et reprises (Hellowatt) : https://www.hellowatt.fr/electricite-et-gaz/liste-fournisseurs-energie
+- Elmy rejoint Octopus (Selectra) : https://selectra.info/energie/fournisseurs/elmy
