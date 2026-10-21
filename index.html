@@ -339,6 +339,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <label for="kva">Puissance du compteur</label>
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option><option value="12">12 kVA</option><option value="15">15 kVA</option><option value="18">18 kVA</option><option value="24">24 kVA</option><option value="30">30 kVA</option><option value="36">36 kVA</option></select>
     </div>
+    <div class="field" id="f-mine"><label for="mine">Ma facture actuelle (€ par an, facultatif)</label><input id="mine" type="number" min="0" max="20000" step="10" inputmode="numeric" placeholder="pour calculer votre économie"></div>
     <div class="field" id="f-fmla" hidden><label for="fmla">Formule</label><select id="fmla"><option value="base" selected>Base (un seul prix)</option><option value="hphc">Heures pleines / creuses</option></select></div>
     <div class="field" id="f-hc" hidden><label for="hcpart">Part en heures creuses (%)</label><input id="hcpart" type="number" min="0" max="100" step="5" value="40" inputmode="numeric"></div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
@@ -649,7 +650,6 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <ul>
         
         <li>Tester avec un vrai lecteur d'écran (NVDA, VoiceOver).</li>
-        <li>Écart avec l'offre actuelle de l'utilisateur, pour une économie personnalisée.</li>
         <li>Graphiques simples (abonnement, énergie, taxes), export ou impression du résultat.</li>
       </ul>
     </div>
@@ -1114,8 +1114,10 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var refName = kind === "elec" ? "le tarif réglementé" : "le prix repère";
   var bd = bestRow._tot - refTot;
   var bel = $("best-" + kind);
+  var mineV = parseFloat($("mine").value), mineTxt = "";
+  if (isFinite(mineV) && mineV > 0) { var eco = mineV - bestRow._tot; mineTxt = eco > 0 ? " Par rapport à votre facture actuelle (" + fmtEur0.format(mineV) + "), vous économiseriez environ " + fmtEur0.format(eco) + " par an." : " Votre facture actuelle (" + fmtEur0.format(mineV) + ") est déjà au niveau de la moins chère, ou en dessous."; }
   if (bel) bel.innerHTML = "<strong>La moins chère : " + esc(bestRow.name) + "</strong> (" + esc(bestRow.offer) + "), " + fmtEur0.format(bestRow._tot) + " par an. "
-    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".") + (bestRow.niv === "officiel" ? "" : " Son prix est à confirmer auprès du fournisseur.");
+    + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".") + (bestRow.niv === "officiel" ? "" : " Son prix est à confirmer auprès du fournisseur.") + mineTxt;
   var h = "<thead><tr><th>Fournisseur et offre</th><th class=\"num\">kWh TTC</th><th class=\"num\">Consommation par an</th><th class=\"num\">Abonnement par an</th><th class=\"num\">" + sortBtn("prix", "Total par an", sortKey) + "</th><th class=\"num\">Écart</th><th>Prime de parrainage<br>" + sortBtn("parrain", "Parrain", sortKey) + " " + sortBtn("filleul", "Filleul", sortKey) + "</th><th>Source et date</th></tr></thead><tbody>";
   all.forEach(function (r) {
     var diff = r._tot - refTot;
@@ -2093,6 +2095,8 @@ function initA11y() {
 }
 
 function setTab(t) {
+  if (state.tab === "elec" || state.tab === "gaz") { state["mine_" + state.tab] = $("mine").value; }
+  if (t === "elec" || t === "gaz") $("mine").value = state["mine_" + t] || "";
   if (state.tab === "elec") state.elecConso = conso() || state.elecConso;
   if (state.tab === "gaz") state.gasConso = conso() || state.gasConso;
   if (state.tab === "eau") state.eauConso = conso() || state.eauConso;
@@ -2105,6 +2109,7 @@ function setTab(t) {
   $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "methode" || t === "legal";
   $("f-kva").hidden = t !== "elec";
   $("f-fmla").hidden = !(t === "elec" && HPHC.length > 0);
+  $("f-mine").hidden = !(t === "elec" || t === "gaz");
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz"; $("f-gzone").hidden = t !== "gaz";
   $("f-cp").hidden = true;
@@ -2138,6 +2143,7 @@ $("conso").addEventListener("input", refresh);
 });
 $("kva").addEventListener("change", refresh);
 $("fmla").addEventListener("change", refresh);
+$("mine").addEventListener("input", refresh);
 $("hcpart").addEventListener("input", refresh);
 $("gopt").addEventListener("change", refresh);
 $("gzone").addEventListener("change", refresh);
