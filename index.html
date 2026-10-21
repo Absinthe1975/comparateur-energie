@@ -336,6 +336,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <label for="kva">Puissance du compteur</label>
       <select id="kva"><option value="3">3 kVA</option><option value="6" selected>6 kVA</option><option value="9">9 kVA</option><option value="12">12 kVA</option><option value="15">15 kVA</option><option value="18">18 kVA</option><option value="24">24 kVA</option><option value="30">30 kVA</option><option value="36">36 kVA</option></select>
     </div>
+    <div class="field" id="f-fmla" hidden><label for="fmla">Formule</label><select id="fmla"><option value="base" selected>Base (un seul prix)</option><option value="hphc">Heures pleines / creuses</option></select></div>
+    <div class="field" id="f-hc" hidden><label for="hcpart">Part en heures creuses (%)</label><input id="hcpart" type="number" min="0" max="100" step="5" value="40" inputmode="numeric"></div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
     <div class="field" id="f-gzone" hidden><label for="gzone">Zone tarifaire gaz</label><select id="gzone"><option value="1" selected>Zone 1</option><option value="2">Zone 2</option><option value="3">Zone 3</option><option value="4">Zone 4</option><option value="5">Zone 5</option><option value="6">Zone 6</option></select></div>
     <div id="f-cp" hidden><input id="cp" type="hidden"><span id="cp-info"></span></div>
@@ -548,7 +550,8 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
       <ul>
         <li><strong><a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a></strong> : NovaFixe Élec et NovaFixe BioGaz. Les prix gaz varient selon le code postal (grille par commune à intégrer) ; manquent aussi les conditions du NovaFixe Duo.<br>Offres électricité du <a href="https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite" target="_blank" rel="noopener">site</a> : Novafixe Bonus Élec (prix fixe 3 ans, −10 % par rapport au tarif réglementé, 100 € TTC offerts), Novafixe Élec (même prix, sans bonus), Novaflex Élec (indexée, −5 %). Le bonus de 100 € suit son <a href="https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf" target="_blank" rel="noopener">règlement</a> : souscription du 1er octobre au 30 novembre 2026 ; nouveau client électricité (ou client gaz qui ajoute l'électricité), un seul bonus par point de livraison, non cumulable avec le parrainage ; remise versée après le 11e mois de contrat, perdue en cas de résiliation ou de changement d'offre ; métropole hors Corse. Affiché sous l'offre NovaFixe Élec jusqu'au 30 novembre, hors classement (ligne à supprimer ensuite dans la rubrique <code>promos</code>). Les prix ne figurent ni sur les pages ni dans les conditions générales de vente (aucun prix chiffré, relu) : ils sont dans une fiche descriptive téléchargée par formulaire (offre, code postal, ville), pour l'<a href="https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec" target="_blank" rel="noopener">électricité</a> et pour le <a href="https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz" target="_blank" rel="noopener">gaz</a> (zone tarifaire, Novafixe Biogaz et Novaflex Gaz). À faire : télécharger et envoyer ces fiches (Novafixe Bonus Élec, qui remplacera la ligne « NovaFixe Élec » encore « À confirmer », et gaz pour deux ou trois codes postaux), plus le règlement du Novafixe Bonus Duo (100 € aussi, règlement distinct non reçu). Piste pour l'historique du gaz avant 2024 : <a href="https://www.gazdebordeaux.fr/sites/default/files/2024-12/histo_TRV.pdf" target="_blank" rel="noopener">histo_TRV.pdf</a>, anciens tarifs réglementés du gaz jusqu'en avril 2023 (dates difficiles à relier aux valeurs : à comparer avec les chiffres de la CRE avant tout usage).</li>
         <li><strong><a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a></strong> : Elec Référence 3 ans et Gaz Référence 3 ans, et le duo. Gaz : les deux prix vus (0,1414 et 0,1373 €/kWh) sont deux zones de la même grille. Selectra (1er oct. 2026, TTC, 4 001 à 29 999 kWh/an, abonnement 360,79 €/an) donne 8 zones : A 0,13728 · B 0,1383 · C 0,1414 · D 0,14474 · E 0,14835 · F 0,15104 · G 0,15324 · H 0,15326 €/kWh. Nous affichons la zone C. Il manque la grille officielle ENGIE et surtout la table code postal → zone (introuvable chez les comparateurs, ENGIE ne la donne que par formulaire) pour croiser avec le code postal saisi.<br>Promotion (deux mois d'abonnement offerts, jusqu'au 7 novembre 2026) : affichée sous les offres ENGIE, hors classement. Elle disparaît toute seule après sa date de fin ; supprimer ensuite sa ligne dans la rubrique <code>promos</code> de <code>donnees/data.json</code> (mode d'emploi dans LISEZMOI.md).</li>
-        <li><strong>Options des fournisseurs (à faire plus tard)</strong> : intégrer toutes les options proposées, pas seulement la formule Base. Heures pleines / heures creuses (ex. <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> 0,1989 / 0,2542 €/kWh), offres voiture électrique (ex. ilek <a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/275/grille_offre_ve.pdf" target="_blank" rel="noopener">grille_offre_ve.pdf</a>), formules week-end, jours de pointe, etc. Cela demande un choix « option » dans le comparateur et un profil de consommation (part en heures creuses).</li>
+        <li><strong>Heures pleines / creuses :</strong> le choix « Formule » et la part en heures creuses sont en place (ils n'apparaissent dans l'onglet Électricité que lorsqu'au moins une offre a ses prix). Il reste à saisir les prix de chaque offre dans la rubrique <code>hphc</code> de <code>donnees/manuel/tarifs_manuels.json</code> (champs <code>hp</code> et <code>hc</code> en €/kWh TTC, <code>abo</code> par puissance) : <a href="https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf" target="_blank" rel="noopener">Dyneff</a> (PDF HP/HC), <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">GEG</a>, <a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop</a>, <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> (0,1989 / 0,2542 €/kWh vus, ordre à confirmer sur la grille) et <a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a>. Je n'ai pas pu lire ces PDF d'ici : envoyez les chiffres ou les fichiers.</li>
+        <li><strong>Autres options des fournisseurs (à faire plus tard)</strong> : offres voiture électrique (ex. ilek <a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/275/grille_offre_ve.pdf" target="_blank" rel="noopener">grille_offre_ve.pdf</a>), formules week-end, jours de pointe, etc.</li>
         <li><strong><a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> :</strong> ses PDF sont hébergés sur un domaine qui interdit les robots : ils ne peuvent pas être suivis, à relire à la main. Relier la zone gaz (A à K, de 0,1633 à 0,1809 €/kWh en T2) au code postal avec la page <a href="https://www.ilek.fr/zone-tarifaire-gaz-vert" target="_blank" rel="noopener">ilek.fr/zone-tarifaire-gaz-vert</a> : nous affichons la zone B (0,1652 €/kWh). À confirmer aussi : le duo ilek.</li>
         <li><strong><a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint Énergie</a></strong> : grilles gaz Classic et Smart d'octobre (non en ligne) ; duos Mint.</li>
         <li><strong><a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a></strong> : gaz « Fixe 2 ans » et le duo.</li>
@@ -1316,6 +1319,19 @@ function computeLogt(s) {
   return { e: e, g: g, eTot: sumVals(e), gTot: sumVals(g), peakW: 0.9 * heatW + 0.3 * big + 500, heated: heated, perApp: perApp, usages: usages, eau: waterDetail(s) };
 }
 
+// Heures pleines / creuses : offres de la rubrique « hphc » (champs hp et hc, en €/kWh TTC ; hpb et hcb à partir de 9 kVA si le prix change).
+// Le prix du kWh est la moyenne pondérée par la part de consommation en heures creuses ; une offre sans prix à cette puissance est écartée.
+var HPHC = [];
+function hphcRows(kva, part) {
+  var p = Math.min(100, Math.max(0, part)) / 100, big = parseInt(kva, 10) >= 9, out = [];
+  HPHC.forEach(function (r) {
+    var hp = big && typeof r.hpb === "number" ? r.hpb : r.hp, hc = big && typeof r.hcb === "number" ? r.hcb : r.hc;
+    if (typeof hp !== "number" || typeof hc !== "number") return;
+    var v = hp * (1 - p) + hc * p, c = Object.assign({}, r, { offer: r.offer + " (heures pleines / creuses, " + Math.round(p * 100) + " % en heures creuses)" });
+    c.a = v; c.b = v; out.push(c);
+  });
+  return out;
+}
 function elecCostFor(r, kva, conso) {
   var field = kwhField(kva), ea = eloAbo(r, kva);
   return ea ? r[field] * conso + ea.abo : null;
@@ -1841,7 +1857,11 @@ function refresh() {
     state.eauPrix = parseFloat($("prixeau").value) || 0;
   }
   state.kva = $("kva").value;
-  renderPrices("t-elec", ELEC, ELEC_REF, kwhField(state.kva), state.elecConso, state.sort, "elec", state.kva);
+  var lstE = ELEC, hpOn = HPHC.length > 0 && $("fmla").value === "hphc";
+  if (hpOn) { lstE = hphcRows(state.kva, parseFloat($("hcpart").value)); if (!isFinite(parseFloat($("hcpart").value))) lstE = hphcRows(state.kva, 40); }
+  $("f-hc").hidden = !(hpOn && state.tab === "elec");
+  $("f-fmla").hidden = !(HPHC.length > 0 && state.tab === "elec");
+  renderPrices("t-elec", lstE, ELEC_REF, kwhField(state.kva), state.elecConso, state.sort, "elec", state.kva);
   renderGas();
   renderDuo();
   renderEau();
@@ -1851,7 +1871,7 @@ function refresh() {
 // Les données intégrées plus haut servent de repli (ouverture du fichier sans serveur, ou data.json absent).
 function applyData(d) {
   if (!d || d.schema !== 1 || !Array.isArray(d.elec) || !Array.isArray(d.gas) || !d.primes || !d.abo_e || !d.abo_g || !d.elec_ref || !d.gas_ref) return false;
-  ELEC_REF = d.elec_ref; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
+  ELEC_REF = d.elec_ref; HPHC = d.hphc || []; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
   ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
   DUO = Array.isArray(d.duo) ? d.duo : DUO; LIENS = d.liens || {};
   GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes; PROMOS = d.promos || [];
@@ -1875,7 +1895,7 @@ function showDates() {
 }
 // Fusionne les grilles saisies à la main (même règle que scripts/donnees.py) : offre repérée par k + offer, complétée champ par champ ou ajoutée.
 function fusionManuels(d, man) {
-  var L = ["elec", "gas", "duo"], T = ["abo_e", "abo_g", "abo_g0"], i, j, m, cible, c, k;
+  var L = ["elec", "gas", "duo", "hphc"], T = ["abo_e", "abo_g", "abo_g0"], i, j, m, cible, c, k;
   for (i = 0; i < L.length; i++) {
     if (!man[L[i]] || !man[L[i]].length) continue;
     d[L[i]] = d[L[i]] || [];
@@ -2074,6 +2094,7 @@ function setTab(t) {
   });
   $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "sources" || t === "methode" || t === "legal";
   $("f-kva").hidden = t !== "elec";
+  $("f-fmla").hidden = !(t === "elec" && HPHC.length > 0);
   $("f-auto").hidden = !(t === "elec" || t === "gaz" || t === "eau");
   $("f-gopt").hidden = t !== "gaz"; $("f-gzone").hidden = t !== "gaz";
   $("f-cp").hidden = true;
@@ -2106,6 +2127,8 @@ $("conso").addEventListener("input", refresh);
   });
 });
 $("kva").addEventListener("change", refresh);
+$("fmla").addEventListener("change", refresh);
+$("hcpart").addEventListener("input", refresh);
 $("gopt").addEventListener("change", refresh);
 $("gzone").addEventListener("change", refresh);
 $("eau-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });

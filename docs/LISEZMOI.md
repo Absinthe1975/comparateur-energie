@@ -153,3 +153,7 @@ La rubrique `promos` de `donnees/data.json` liste les promotions limitées dans 
 ## Classement de l'eau par région
 
 `scripts/eau_classement.py` écrit `donnees/eau/classement.json` : les 3 communes où l'eau (potable + assainissement, par m³) est la moins chère, par région. Il ne retient que les prix complets et au moins égaux à 2 € par m³ (en dessous, la donnée est suspecte). Il est lancé chaque lundi par le workflow de l'eau, après la mise à jour des prix. Le rattachement département → région est lu dans `index.html` (variable `DEPT_RAW`). Le tableau s'affiche dans l'onglet Eau, sous la courbe de la commune.
+
+## Heures pleines / creuses
+
+Les offres à deux prix du kWh se saisissent dans la rubrique `hphc` de `donnees/manuel/tarifs_manuels.json` (même mode d'emploi que les autres grilles manuelles) : `k`, `name`, `offer`, `hp` et `hc` (€/kWh TTC, heures pleines et heures creuses), éventuellement `hpb` et `hcb` pour 9 kVA et plus si les prix changent, `abo` (abonnement annuel TTC par puissance), `niv`, `nivd`, `s`. Le site propose alors, dans l'onglet Électricité, le choix « Formule » (Base ou heures pleines / creuses) et la part de consommation en heures creuses (40 % par défaut) ; le prix du kWh est la moyenne pondérée. `check_data.py` vérifie que `hp` ≥ `hc` et que les prix sont plausibles.
