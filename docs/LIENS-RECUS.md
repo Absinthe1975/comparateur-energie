@@ -222,3 +222,24 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 <!-- AUTO:FIN -->
 - Vattenfall reprise par Alterna (communiqué du 17 fév. 2026) : https://group.vattenfall.com/fr/presse-et-medias/communique-de-presse/2026/vattenfall-signe-un-accord-avec-alterna-energie-pour-la-cession-de-son-activite-de-fourniture-delectricite-et-de-gaz-en-france
+
+## Wekiwi (robots.txt : lecture automatique refusée, saisie à la main)
+- Accueil : https://www.wekiwi.fr/
+- Tarifs et CGV : https://www.wekiwi.fr/tarifs-et-cgv-wekiwi/
+- CGV électricité : https://www.wekiwi.fr/wp-content/uploads/2026/05/CGV-EL-01042024.pdf
+- CGV Wekiwi-Plenitude : https://www.wekiwi.fr/wp-content/uploads/2026/05/CGV-Wekiwi-Plenitude-OK.pdf
+- CGV Plenicoach : https://www.wekiwi.fr/wp-content/uploads/2026/05/CGV-Plenicoach-Wekiwi-OK.pdf
+- Fiche descriptive électricité : https://www.wekiwi.fr/wp-content/uploads/2025/01/Fiche-descriptive-EL-01_25.pdf
+- Fiche descriptive gaz : https://www.wekiwi.fr/wp-content/uploads/2024/05/Fiche-descriptive-NG.pdf
+- Prestations Enedis : https://www.wekiwi.fr/wp-content/uploads/2025/09/Prestations-Enedis.pdf
+- Brochure tarifaire Enedis TURPE 6 : https://www.wekiwi.fr/wp-content/uploads/2023/12/enedis-brochure-tarifaire-turpe6-1.pdf
+- Catalogue prestations gaz : https://www.wekiwi.fr/wp-content/uploads/2025/09/Catalogue-Prestation-Gaz.pdf
+- Conditions de parrainage : https://www.wekiwi.fr/conditions-parrainage/
+- Bordereau de rétractation : https://www.wekiwi.fr/wp-content/uploads/2024/08/Bordereau-de-retractation.pdf
+- Électricité : https://www.wekiwi.fr/electricite/
+- Offre Aurore : https://www.wekiwi.fr/offre-aurore/
+- Offre Pierre : https://www.wekiwi.fr/offre-pierre/
+- Gaz naturel : https://www.wekiwi.fr/gaz-naturel/
+- Offre Lou : https://www.wekiwi.fr/offre-lou/
+- Offre Gustave : https://www.wekiwi.fr/offre-gustave/
+- Offre Duo : https://www.wekiwi.fr/offre-duo/
