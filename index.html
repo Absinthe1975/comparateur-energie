@@ -113,6 +113,9 @@ tr.ref td { background: var(--ref-bg); }
 .chk { font-size: 11px; color: var(--warn); }
 .badge { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
 .badge.check { background: var(--warn-soft); color: var(--warn); }
+.conf { display: inline-block; min-width: 1.3em; text-align: center; font-weight: 700; font-size: 12px; border-radius: 50%; margin-right: 4px; padding: 0 2px; border: 1px solid currentColor; }
+.conf.c-ok { color: var(--accent); } .conf.c-est { color: var(--warn); } .conf.c-chk { color: var(--bad, #b91c1c); }
+.conf-leg { margin: 6px 2px 0; }
 .badge.none { background: var(--ref-bg); color: var(--muted); }
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 .callout { background: var(--accent-soft); border-radius: 8px; padding: 12px 16px; font-size: 14px; max-width: 80ch; }
@@ -406,6 +409,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="flt" id="flt-elec"></div>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
+    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
   </section>
@@ -416,6 +420,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
     <div class="flt" id="flt-gaz"></div>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
+    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle)</p>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
@@ -611,8 +616,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
         <li><strong>Primes à confirmer sur le site du fournisseur :</strong> <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a> (une seule source pour le montant du parrain), <a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> (montant du parrain absent du règlement), <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint Énergie</a>, <a href="https://www.happ-e.fr/" target="_blank" rel="noopener">Happ-e</a> (20 à 40 €), <a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> et <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> (une seule source). <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a>, <a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a>, <a href="https://particulier.edf.fr/" target="_blank" rel="noopener">EDF</a> et <a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> viennent de comparateurs. <a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a>, <a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> (20 €, plus 5 € avec l'option verte) et <a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a> (20 €) sont confirmés par une page ou un règlement officiel ; ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
         <li><strong>Filtres des offres :</strong> prix fixe ou indexé, engagement et offre verte sont renseignés pour une trentaine d'offres seulement (d'après leur nom ou leur grille). À compléter pour les autres en lisant la fiche descriptive de chaque offre (champs typ, eng et vert dans data.json), et à faire relire par le script plus tard.</li>
         <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
-        <li><strong>Indicateur de confiance :</strong> un repère visuel unique par ligne (relevé, estimé, à vérifier), au lieu de l'astérisque et des mentions dispersées.</li>
-      </ul>
+        </ul>
     </div>
 
     <div class="card">
@@ -1075,6 +1079,12 @@ function buildFilters(kind) {
     refresh();
   };
 }
+// Indicateur de confiance : ✓ relevé (grille officielle), ≈ estimé (abonnement calculé), ? à vérifier
+function confHtml(r) {
+  if (r.ref || (r.niv === "officiel" && !r._est)) return '<span class="conf c-ok" title="Relevé sur la grille officielle" aria-label="Relevé sur la grille officielle">✓</span> ';
+  if (r.niv === "officiel") return '<span class="conf c-est" title="Prix relevé, abonnement estimé" aria-label="Prix relevé, abonnement estimé">≈</span> ';
+  return '<span class="conf c-chk" title="À vérifier : prix non confirmé par une grille officielle" aria-label="À vérifier">?</span> ';
+}
 function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   var aboMap = kind === "elec" ? ABO_E : ABO_G;
   var all = list.concat([ref]).map(function (r) {
@@ -1115,7 +1125,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
     h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
-      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
+      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
 }
