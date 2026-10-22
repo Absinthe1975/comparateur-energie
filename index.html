@@ -338,7 +338,7 @@ code { overflow-wrap: anywhere; }
 </head>
 <body>
 <a class="skip" href="#main">Aller au contenu</a>
-<div class="topbar"><div class="topbar-in">
+<div class="topbar" role="banner"><div class="topbar-in">
   <a class="brand" href="#" data-brand><span class="brand-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span><span>Comparateur énergie</span></a>
   <div class="tabs" role="tablist" aria-label="Rubriques">
       <button role="tab" id="tab-home" aria-selected="true" tabindex="0" aria-controls="p-home">Accueil</button>
@@ -439,7 +439,7 @@ code { overflow-wrap: anywhere; }
     <div class="flt" id="flt-elec"></div>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
-    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button></p>
+    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-elec">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
@@ -451,7 +451,7 @@ code { overflow-wrap: anywhere; }
     <div class="flt" id="flt-gaz"></div>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
-    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button></p>
+    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-gaz">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
@@ -478,7 +478,7 @@ code { overflow-wrap: anywhere; }
     </details>
     <h3>Prix de l'eau par commune</h3>
     <div class="tablewrap"><table id="t-eau"></table></div>
-    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button></p>
+    <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-eau">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <h3>Moyenne par région</h3>
     <div class="tablewrap"><table id="t-reg"></table></div>
     <p class="note">Prix en €/m³ TTC pour 120 m³ par an, eau potable et assainissement collectif additionnés, d'après l'Observatoire national des services d'eau et d'assainissement (SISPEA, Office français de la biodiversité, licence ouverte), exercice 2025. Beaucoup de prix 2025 sont encore « publiés non vérifiés » par les services. Pour les communes où l'assainissement n'est pas renseigné, le prix est celui de l'eau potable seule et la page indique « Données non communiquées par la collectivité au SISPEA – Estimation indisponible » : l'assainissement n'est plus estimé. La moyenne nationale utilisée en dernier recours est de 4,69 €/m³ (Kelwatt, janvier 2026) ; Selectra donne 4,89 € pour 2025. Le total par an se calcule ainsi : l'abonnement (part fixe) de votre service d'eau et d'assainissement quand le SISPEA le donne, sinon un abonnement estimé à 99 € (valeur médiane du SISPEA), plus (prix par m³ − abonnement ÷ 120) × vos m³. Pour 120 m³, on retrouve exactement le prix par m³ affiché. L'écart entre communes va de 1,26 à 8,46 €/m³ selon Selectra, les prix les plus élevés se trouvant surtout dans les communes rurales. Le prix de votre commune est repris du fichier SISPEA quand il existe ; sinon la page utilise la moyenne de la région, ou saisissez le prix de votre facture. Valeurs inhabituellement basses (moins de 2 €/m³, comme Antibes) : à vérifier sur votre facture. Les moyennes de la Corse (1,87 €) et de Provence-Alpes-Côte d'Azur (2,48 €) sont inférieures aux prix de leurs communes : je ne les utilise pas et je prends la moyenne nationale pour ces deux régions.</p>
@@ -681,8 +681,8 @@ code { overflow-wrap: anywhere; }
       <h3>7. Présentation et accessibilité <span class="badge check">À faire</span></h3>
       <ul>
         
-        <li>Tester avec un vrai lecteur d'écran (NVDA, VoiceOver).</li>
-        <li>Graphique du détail des taxes (la barre actuelle sépare seulement consommation et abonnement : les taxes ne sont pas relevées séparément) et export du tableau en fichier.</li>
+        <li>Test avec un vrai lecteur d'écran (NVDA, VoiceOver) : seul un humain avec ce logiciel peut le faire. Vérifié automatiquement : ordre des titres, tableaux avec en-têtes, onglets, repères de page, libellés des champs, contrastes.</li>
+        <li>Graphique du détail des taxes : la barre actuelle sépare seulement consommation et abonnement, car les taxes ne sont pas relevées à part. Il faudrait les taux officiels de l'année (accise, CTA, TVA) vérifiés sur un texte officiel, puis une décomposition par offre.</li>
       </ul>
     </div>
   </section>
@@ -2203,7 +2203,26 @@ $("conso").addEventListener("input", refresh);
 $("kva").addEventListener("change", refresh);
 $("fmla").addEventListener("change", refresh);
 $("mine").addEventListener("input", refresh);
-document.addEventListener("click", function (ev) { var t = ev.target; if (t && t.getAttribute && t.getAttribute("data-print") !== null) window.print(); });
+document.addEventListener("click", function (ev) {
+  var t = ev.target; if (!t || !t.getAttribute) return;
+  if (t.getAttribute("data-print") !== null) window.print();
+  var id = t.getAttribute("data-csv"); if (id) exportCsv(id);
+});
+// Export du tableau affiché en CSV (séparateur « ; », encodage UTF-8 avec repère pour Excel)
+function exportCsv(id) {
+  var tb = $(id); if (!tb) return;
+  var rows = [].slice.call(tb.rows).map(function (tr) {
+    return [].slice.call(tr.cells).map(function (c) {
+      var cl = c.cloneNode(true);
+      [].slice.call(cl.querySelectorAll("*")).forEach(function (e) { e.insertAdjacentText("afterend", " "); });
+      var x = (cl.textContent || "").replace(/[\u00a0\u202f]/g, " ").replace(/\s+/g, " ").trim();
+      return '"' + x.replace(/"/g, '""') + '"';
+    }).join(";");
+  });
+  var blob = new Blob(["\ufeff" + rows.join("\r\n")], { type: "text/csv;charset=utf-8" }), u = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = u; a.download = "comparateur-" + id.replace(/^t-/, "") + "-" + new Date().toISOString().slice(0, 10) + ".csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function () { URL.revokeObjectURL(u); }, 1000);
+}
 $("hcpart").addEventListener("input", refresh);
 $("gopt").addEventListener("change", refresh);
 $("gzone").addEventListener("change", refresh);
