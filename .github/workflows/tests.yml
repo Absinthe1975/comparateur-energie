@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dépendances des tests
+        run: pip install pandas xlrd openpyxl pypdf
+      - name: Tests unitaires
+        run: python3 -m unittest discover -s tests
+      - name: Contrôle des données
+        run: python3 scripts/check_data.py
+      - name: Test de bout en bout (navigateur)
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+          python3 tests/e2e/smoke.py
