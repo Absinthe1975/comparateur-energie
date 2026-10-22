@@ -18,6 +18,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Dépendances des tests
+        run: pip install pandas xlrd openpyxl pypdf
       - name: Tests unitaires
         run: python3 -m unittest discover -s tests
       - name: Contrôle des données
