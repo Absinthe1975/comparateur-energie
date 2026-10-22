@@ -1,15 +1,15 @@
 {
- "https://prix-elec.com/fournisseurs/ekwateur/offres|Électricité 100 % renouvelable Europe": "6c5e6cec7417fad1",
+ "https://prix-elec.com/fournisseurs/ekwateur/offres|Électricité 100 % renouvelable Europe": "ba607c67d4d2a63f",
  "https://prix-elec.com/fournisseurs/totalenergies/offres|Access Électricité (prix indexé)": "1b888ffdd5f8af28",
  "https://prix-elec.com/fournisseurs/geg/offres|Mon Offre Elec Verte, fixe 3 ans": "d37c63abc5153226",
- "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe Élec": "4deeb8f2c4e17590",
+ "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe Élec": "cf7c8607558715da",
  "https://prix-elec.com/fournisseurs/llum/offres|Électricité particuliers": "ca5ae59887eb58c6",
  "https://prix-elec.com/fournisseurs/dyneff/offres|Contrat+ Électricité": "c8a6e2e16f2766a8",
- "https://prix-elec.com/fournisseurs/primeo/offres|Essentielle Verte": "1c96e27cea5b9bd8",
+ "https://prix-elec.com/fournisseurs/primeo/offres|Essentielle Verte": "46348292550a9118",
  "https://prix-elec.com/fournisseurs/alterna/offres|Mon électricité française fixe 1 an": "b43b18bad5ac6c51",
  "https://prix-elec.com/fournisseurs/edf/offres|Zen Online": "4ac3b0a2f68e1f6e",
- "https://prix-elec.com/fournisseurs/octopus-energy/offres|Intelligent Octopus": "a2be355b63d02bb8",
- "https://prix-elec.com/fournisseurs/engie/offres|Elec Référence 3 ans": "59cb477d296c65da",
+ "https://prix-elec.com/fournisseurs/octopus-energy/offres|Intelligent Octopus": "ad6250b9a71af96c",
+ "https://prix-elec.com/fournisseurs/engie/offres|Elec Référence 3 ans": "b1ff2d9c104e164c",
  "https://prix-elec.com/fournisseurs/ilek/offres|ÉnRFixe+ Elec": "007b0658e1790f6e",
  "https://prix-elec.com/fournisseurs/enercoop/offres|Offre Base": "0523077ca17e2909",
  "https://prix-elec.com/fournisseurs/ekwateur/offres|Gaz Naturel 15 % Biogaz Fixe": "635708e93fe3d343",
@@ -20,16 +20,16 @@
  "https://prix-elec.com/fournisseurs/mint-energie/offres|Biogaz Online": "5917591679786b54",
  "https://prix-elec.com/fournisseurs/octopus-energy/offres|Gaz Fixe": "6f46ccaeb97a304b",
  "https://prix-elec.com/fournisseurs/happ-e/offres|Gaz Naturel": "61be5c256d74e57c",
- "https://prix-elec.com/fournisseurs/edf/parrainage|EDF": "2847b2c24f666826",
+ "https://prix-elec.com/fournisseurs/edf/parrainage|EDF": "73a4e936cbab0268",
  "https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches|TotalEnergies": "f708ca8ba51d5a24",
- "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage|Gaz de Bordeaux": "e99d5e2caa626339",
+ "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage|Gaz de Bordeaux": "b6a4c13758fc0e1b",
  "https://prix-elec.com/fournisseurs/octopus-energy/parrainage|Octopus Energy": "72e692215eb1252f",
- "https://prix-elec.com/fournisseurs/plenitude/parrainage|Plenitude": "0501740f0ea7a0a8",
- "https://prix-elec.com/fournisseurs/mint-energie/parrainage|Mint Énergie": "b06ab728c43cb174",
+ "https://prix-elec.com/fournisseurs/plenitude/parrainage|Plenitude": "384bfd7744f21616",
+ "https://prix-elec.com/fournisseurs/mint-energie/parrainage|Mint Énergie": "0c8a0f99604eeb0a",
  "https://prix-elec.com/fournisseurs/alpiq/parrainage|Alpiq": "fede4a883580925f",
  "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf|Primeo Energie": "477a73ecc62c70e9",
- "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "0c67a9af5600b39b",
- "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "deb05a8e43d4510c",
+ "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "9600b5d34c64b805",
+ "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "cd9b84c0b1141fdd",
  "https://jeswitch.fr/energie/actualites/prix-repere-gaz-naturel-cre|prix repère": "995f7e4be237e45b",
  "https://www.energie-info.fr/octobre-2026-publication-du-prix-repere-du-gaz-par-la-cre/|prix repère": "a23855f678729859",
  "grilles": {
@@ -58,11 +58,11 @@
    "url": "https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique"
   },
   "plen · Pleniweb 1 an Électricité": {
-   "sha": "866dde6e39d6235debb317eef10131d2e973f8a96fd3daeac94036e108554aec",
+   "sha": "6b011cc907fcb5680ddaa7092aef3db865ce1daf01128a10a8fccaca54337edd",
    "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf"
   },
   "plen · Pleniweb 1 an Gaz": {
-   "sha": "22d79c2fffbc322b9da779ceb837950bee825b831ca50efcb12e7c68778d6c81",
+   "sha": "9ba744fafc29b5594e97a5f75cfe3da05ee32a46740d9268f49d6829394e2f01",
    "url": "https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_gaz.pdf"
   },
   "llum · Électricité verte, Base compteur non communicant (prix unique)": {
@@ -80,6 +80,10 @@
   "enercoop · Offre Base (annexes tarifaires particuliers)": {
    "sha": "da33ad5fc6d92f5979a17b55802d05f431d7b81a0b6b4386f6b399be31a843a5",
    "url": "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770"
+  },
+  "dyneff · Contrat+ Électricité (heures pleines / creuses)": {
+   "sha": "ab48c1368500fea44b7d82d8aa042c514700cd4fe311dbd8f5ad2d921eca4d92",
+   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf"
   }
  }
 }
