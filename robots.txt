@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://absinthe1975.github.io/comparateur-energie/sitemap.xml

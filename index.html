@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Prix du kWh, abonnements et primes de parrainage des fournisseurs d'électricité et de gaz, avec l'eau et une estimation de consommation selon votre logement.">
 <title>Comparateur énergie</title>
+<link rel="canonical" href="https://absinthe1975.github.io/comparateur-energie/">
+<meta name="theme-color" content="#0f766e">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Comparateur énergie">
+<meta property="og:title" content="Comparateur énergie : électricité, gaz et eau">
+<meta property="og:description" content="Prix du kWh, abonnements et primes de parrainage des fournisseurs d'électricité et de gaz, avec l'eau et une estimation de consommation selon votre logement.">
+<meta property="og:url" content="https://absinthe1975.github.io/comparateur-energie/">
+<meta property="og:image" content="https://absinthe1975.github.io/comparateur-energie/apercu.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Comparateur énergie : électricité, gaz et eau">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 /* Layout: une colonne, bandeau de réglages collant, le tableau de prix est le centre de la page. */
 :root {
@@ -116,6 +129,7 @@ tr.ref td { background: var(--ref-bg); }
 .conf { display: inline-block; min-width: 1.3em; text-align: center; font-weight: 700; font-size: 12px; border-radius: 50%; margin-right: 4px; padding: 0 2px; border: 1px solid currentColor; }
 .conf.c-ok { color: var(--accent); } .conf.c-est { color: var(--warn); } .conf.c-chk { color: var(--bad, #b91c1c); }
 .conf-leg { margin: 6px 2px 0; }
+.mini { display: block; height: 5px; min-width: 72px; margin-top: 4px; border-radius: 3px; background: var(--line); overflow: hidden; } .mini i { display: block; height: 100%; background: var(--accent); }
 .promo-list { margin: 6px 0; padding-left: 1.2em; } .promo-h { font-size: 16px; margin: 12px 0 4px; } #home-promos { margin: 12px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); }
 .badge.none { background: var(--ref-bg); color: var(--muted); }
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
@@ -426,7 +440,7 @@ code { overflow-wrap: anywhere; }
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button></p>
-    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle)</p>
+    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
   </section>
@@ -438,7 +452,7 @@ code { overflow-wrap: anywhere; }
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button></p>
-    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle)</p>
+    <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
@@ -668,7 +682,7 @@ code { overflow-wrap: anywhere; }
       <ul>
         
         <li>Tester avec un vrai lecteur d'écran (NVDA, VoiceOver).</li>
-        <li>Graphiques simples (abonnement, énergie, taxes).</li>
+        <li>Graphique du détail des taxes (la barre actuelle sépare seulement consommation et abonnement : les taxes ne sont pas relevées séparément) et export du tableau en fichier.</li>
       </ul>
     </div>
   </section>
@@ -725,7 +739,7 @@ code { overflow-wrap: anywhere; }
     <div class="card">
       <h3>Le calcul</h3>
       <ul>
-        <li><strong>Électricité :</strong> facture annuelle = consommation × prix du kWh + abonnement de votre puissance (3, 6 ou 9 kVA). Le classement se fait sur ce total, du moins cher au plus cher, pas sur le seul prix du kWh.</li>
+        <li><strong>Électricité :</strong> facture annuelle = consommation × prix du kWh + abonnement de votre puissance (de 3 à 36 kVA). Le classement se fait sur ce total, du moins cher au plus cher, pas sur le seul prix du kWh.</li>
         <li><strong>Gaz :</strong> même calcul, avec l'option tarifaire de votre logement (Base, B0 ou B1). La comparaison porte par défaut sur le profil chauffage (B1).</li>
         <li><strong>Eau :</strong> on ne compare pas d'offres, car on ne choisit pas son service d'eau : le site estime votre facture avec le prix de votre commune et l'abonnement de votre service, d'après le SISPEA.</li>
         <li><strong>Élec + Gaz :</strong> addition de l'électricité et du gaz chez le même fournisseur, avec ses offres combinées quand elles existent, ou séparées si vous le demandez.</li>
@@ -740,13 +754,14 @@ code { overflow-wrap: anywhere; }
         <li><span class="badge check">À confirmer</span> : le prix vient d'un comparateur ou d'une estimation, pas de la grille du fournisseur. Il peut être en retard ou approximatif.</li>
         <li><span class="badge">Source officielle (CRE)</span> : tarif réglementé de l'électricité et prix repère du gaz, publiés par la Commission de régulation de l'énergie.</li>
         <li><span class="badge">Prix du code postal</span> : pour les offres dont la grille est publiée par code postal, le prix exact de votre code postal est affiché. S'il n'y figure pas, c'est la moyenne du département, puis de la grille, et c'est écrit.</li>
+        <li>Le repère devant le total : <strong>✓</strong> prix relevé sur la grille officielle, <strong>≈</strong> prix relevé mais abonnement estimé, <strong>?</strong> prix à vérifier.</li>
         <li>Une <strong>étoile</strong> signale un abonnement estimé à partir de l'écart avec le tarif réglementé, quand la grille officielle ne le donne pas.</li>
       </ul>
     </div>
 
     <div class="card">
       <h3>Comment les prix sont mis à jour</h3>
-      <p>Un programme automatique lit les sources officielles (CRE) et les pages publiques des fournisseurs, chaque jour du 1er au 10 du mois puis chaque lundi. Il ne modifie jamais le site directement : il propose les changements, qui sont relus par l'éditeur avant d'être publiés. Pour le prix de l’eau, une mise à jour mensuelle (en cours de mise en place) reprendra la dernière année publiée par le SISPEA. Une intelligence artificielle aide à lire certaines pages, jamais pour modifier une grille officielle. Le détail est dans l'onglet Mentions légales.</p>
+      <p>Un programme automatique lit les sources officielles (CRE) et les pages publiques des fournisseurs, chaque jour du 1er au 10 du mois puis chaque lundi. Il ne modifie jamais le site directement : il propose les changements, qui sont relus par l'éditeur avant d'être publiés. Pour le prix de l’eau, une vérification a lieu chaque lundi : elle reprend la dernière année publiée par le SISPEA et ne propose un changement que si les prix ont bougé. Une intelligence artificielle aide à lire certaines pages, jamais pour modifier une grille officielle. Le détail est dans l'onglet Mentions légales.</p>
     </div>
 
     <div class="card">
@@ -757,7 +772,7 @@ code { overflow-wrap: anywhere; }
     <div class="card">
       <h3>Ce que le site ne sait pas encore faire</h3>
       <ul>
-        <li>Les offres à tarifs différenciés (heures pleines/creuses, week-end, saisonniers, Tempo) ne sont pas modélisées, donc absentes des tableaux ou approchées. Octopus saisonnier suppose 58 % de la consommation en hiver.</li>
+        <li>Les heures pleines / creuses sont comparées (choix « Formule » dans l'onglet Électricité, avec votre part de consommation en heures creuses) pour les offres dont les prix sont relevés ; les formules week-end, saisonnières et Tempo ne sont pas modélisées, donc absentes des tableaux ou approchées. Octopus saisonnier suppose 58 % de la consommation en hiver.</li>
         <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, les puissances de 12 à 36 kVA sont estimées sauf grille complète (GEG, Dyneff, Enercoop).</li>
         <li>Pour le gaz, la zone des distributeurs locaux (Bordeaux, Strasbourg, Colmar) n'est pas modélisée.</li>
         <li>Pour l'eau, environ 8 700 communes n'ont pas de prix au SISPEA ; le site le dit et utilise une moyenne indicative. Pour les communes sans assainissement renseigné, seule l'eau potable est comptée.</li>
@@ -770,7 +785,7 @@ code { overflow-wrap: anywhere; }
 
 <section class="panel" id="p-legal" role="tabpanel" aria-labelledby="tab-legal" hidden>
     <h2>Mentions légales</h2>
-    <p class="lede">Dernière mise à jour : 12 octobre 2026.</p>
+    <p class="lede">Dernière mise à jour : 22 octobre 2026.</p>
     <div class="card">
       <h3>Éditeur du site</h3>
       <p>Theret Benoit, particulier non professionnel, France.<br>Adresse postale : non publiée.<br>Contact : benoittheret@gmail.com<br>Directeur de la publication : Theret Benoit</p>
@@ -791,7 +806,7 @@ code { overflow-wrap: anywhere; }
     </div>
     <div class="card">
       <h3>Mise à jour des prix par une IA</h3>
-      <p>Les prix sont contrôlés automatiquement chaque jour du 1er au 10 du mois, puis chaque lundi, par un programme qui lit des pages publiques de sites de comparateurs, de fournisseurs et d'organismes officiels. Les prix de référence (tarif réglementé, prix repère du gaz) et tout changement de prix d'une offre ne sont retenus que si au moins deux sites donnent le même chiffre. Une IA gratuite (Gemini, de Google) en extrait les chiffres, puis le programme vérifie que chaque chiffre figure bien dans la page lue et qu'il reste plausible. L'éditeur relit les changements avant leur publication. Aucune donnée de visiteur n'est envoyée à l'IA : elle ne reçoit que le texte de pages publiques (l'offre gratuite de Google peut réutiliser ces textes pour améliorer ses produits). Malgré ces contrôles, des erreurs restent possibles. La date de chaque relevé est indiquée sur chaque ligne.</p>
+      <p>Les prix sont contrôlés automatiquement chaque jour du 1er au 10 du mois, puis chaque lundi, par un programme qui lit des pages publiques de sites de comparateurs, de fournisseurs et d'organismes officiels. Les prix de référence (tarif réglementé, prix repère du gaz) et tout changement de prix d'une offre ne sont retenus que si au moins deux sites donnent le même chiffre. Une IA gratuite (Gemini, de Google) en extrait les chiffres, puis le programme vérifie que chaque chiffre figure bien dans la page lue et qu'il reste plausible. L'éditeur relit les changements avant leur publication. Aucune donnée de visiteur n'est envoyée à l'IA : elle ne reçoit que le texte de pages publiques (l'offre gratuite de Google peut réutiliser ces textes pour améliorer ses produits). Le programme respecte le fichier robots.txt de chaque site et s'identifie. Les grilles des fournisseurs qui interdisent les robots sont saisies à la main à partir de leurs documents officiels (avec l'aide d'une IA, relues par l'éditeur). Malgré ces contrôles, des erreurs restent possibles. La date de chaque relevé est indiquée sur chaque ligne.</p>
     </div>
     <div class="card">
       <h3>Données personnelles</h3>
@@ -800,6 +815,7 @@ code { overflow-wrap: anywhere; }
         <li><strong>Mémorisation sur votre appareil :</strong> la description de votre logement et vos valeurs saisies à la main sont gardées dans le stockage local de votre navigateur, pour votre prochaine visite. Rien n'est envoyé. Vous les effacez en supprimant les données du site dans votre navigateur.</li>
         <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil et ne charge aucune ressource d'un site tiers.</li>
         <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
+        <li><strong>Signaler une erreur :</strong> le lien en bas de page ouvre votre application de messagerie avec un message prérempli ; rien n'est envoyé tant que vous n'envoyez pas le message vous-même.</li>
         <li><strong>Liens vers d'autres sites :</strong> les sources citées s'ouvrent sur des sites tiers qui ont leurs propres règles.</li>
         <li><strong>Vos droits :</strong> comme le site ne conserve aucune donnée vous concernant, il n'y a rien à consulter ni à supprimer de son côté. Pour toute question : benoittheret@gmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
       </ul>
@@ -969,10 +985,14 @@ var GAS_B0 = { a: 0.1783, abo: 152.46 }, GAS_B1 = { a: 0.1456, abo: 360.79 };
 var CPP = {};
 // Chaque offre dont la grille est publiée par code postal renvoie, par son champ « cpf » dans data.json, à son propre fichier
 // (dossier gaz/prix-cp/). Le fichier doit porter la même clé de fournisseur et le même nom d'offre, sinon il est ignoré.
+var CPP_REQ = {};
 function loadCPP() {
   if (!window.fetch || location.protocol === "file:") return;
+  // Les fichiers (environ 55 ko chacun) ne servent qu'avec un code postal saisi : on ne les télécharge qu'à ce moment-là.
+  if (!/^\d{5}$/.test(($("h-cp") ? $("h-cp").value : "").replace(/\s/g, ""))) return;
   GAS.forEach(function (r) {
-    if (typeof r.cpf !== "string" || !/^gaz\/prix-cp\/[a-z0-9-]+\.json$/.test(r.cpf) || CPP[r.cpf]) return;
+    if (typeof r.cpf !== "string" || !/^gaz\/prix-cp\/[a-z0-9-]+\.json$/.test(r.cpf) || CPP[r.cpf] || CPP_REQ[r.cpf]) return;
+    CPP_REQ[r.cpf] = true;
     fetch("donnees/" + r.cpf).then(function (x) { if (!x.ok) throw 0; return x.json(); }).then(function (j) {
       if (j.type !== "prix-par-code-postal" || j.k !== r.k || j.offre !== r.offer) return;
       var out = {};
@@ -1110,6 +1130,12 @@ function buildFilters(kind) {
     refresh();
   };
 }
+// Barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)
+function miniBar(r) {
+  if (!(r._tot > 0) || !(r._cons >= 0) || !(r._abo >= 0)) return "";
+  var p = Math.round(r._cons / r._tot * 100);
+  return '<span class="mini" role="img" aria-label="Consommation ' + p + ' %, abonnement ' + (100 - p) + ' %"><i style="width:' + p + '%"></i></span>';
+}
 // Indicateur de confiance : ✓ relevé (grille officielle), ≈ estimé (abonnement calculé), ? à vérifier
 function confHtml(r) {
   if (r.ref || (r.niv === "officiel" && !r._est)) return '<span class="conf c-ok" title="Relevé sur la grille officielle" aria-label="Relevé sur la grille officielle">✓</span> ';
@@ -1158,7 +1184,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
     h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
-      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong></td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
+      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong>' + miniBar(r) + '</td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
 }
@@ -1901,6 +1927,7 @@ function refresh() {
     state.eauPrix = parseFloat($("prixeau").value) || 0;
   }
   state.kva = $("kva").value;
+  loadCPP();
   var lstE = ELEC, hpOn = HPHC.length > 0 && $("fmla").value === "hphc";
   if (hpOn) { lstE = hphcRows(state.kva, parseFloat($("hcpart").value)); if (!isFinite(parseFloat($("hcpart").value))) lstE = hphcRows(state.kva, 40); }
   $("f-hc").hidden = !(hpOn && state.tab === "elec");
