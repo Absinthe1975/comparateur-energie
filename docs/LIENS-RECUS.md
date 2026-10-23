@@ -271,3 +271,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ## Reprises de fournisseurs (constat du 21 oct. 2026)
 - Liste des fournisseurs et reprises (Hellowatt) : https://www.hellowatt.fr/electricite-et-gaz/liste-fournisseurs-energie
 - Elmy rejoint Octopus (Selectra) : https://selectra.info/energie/fournisseurs/elmy
+
+- Endesa France (professionnels et entreprises seulement, constat du 23 oct. 2026) : https://www.endesa.fr/
