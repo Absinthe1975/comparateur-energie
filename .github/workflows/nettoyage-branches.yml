@@ -1,0 +1,27 @@
+name: Nettoyage des anciennes branches
+
+# À lancer à la main une seule fois (Actions > Nettoyage des anciennes branches > Run workflow) :
+# supprime toutes les branches sauf main et celles qui ont une demande de fusion ouverte.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Supprimer les branches inutiles
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          ouvertes=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref')
+          gh api "repos/$REPO/branches?per_page=100" --paginate --jq '.[].name' | while read -r b; do
+            [ "$b" = "main" ] && continue
+            if echo "$ouvertes" | grep -qx "$b"; then echo "gardée (demande de fusion ouverte) : $b"; continue; fi
+            enc=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$b")
+            gh api -X DELETE "repos/$REPO/git/refs/heads/$enc" && echo "supprimée : $b"
+          done
