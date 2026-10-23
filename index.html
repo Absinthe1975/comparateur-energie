@@ -129,6 +129,9 @@ tr.ref td { background: var(--ref-bg); }
 .conf { display: inline-block; min-width: 1.3em; text-align: center; font-weight: 700; font-size: 12px; border-radius: 50%; margin-right: 4px; padding: 0 2px; border: 1px solid currentColor; }
 .conf.c-ok { color: var(--accent); } .conf.c-est { color: var(--warn); } .conf.c-chk { color: var(--bad, #b91c1c); }
 .conf-leg { margin: 6px 2px 0; }
+.badge.promo { white-space: normal; display: inline-block; max-width: 34ch; border-radius: 12px; line-height: 1.35; }
+table td:first-child, table th:first-child { max-width: 36ch; overflow-wrap: anywhere; }
+.tablewrap .offer { overflow-wrap: anywhere; }
 .mini { display: block; height: 5px; min-width: 72px; margin-top: 4px; border-radius: 3px; background: var(--line); overflow: hidden; } .mini i { display: block; height: 100%; background: var(--accent); }
 .promo-list { margin: 6px 0; padding-left: 1.2em; } .promo-h { font-size: 16px; margin: 12px 0 4px; } #home-promos { margin: 12px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); }
 .badge.none { background: var(--ref-bg); color: var(--muted); }
@@ -236,8 +239,9 @@ body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; 
 /* Onglets : passage à la ligne plutôt que défilement caché (le dernier onglet restait coupé) */
 .topbar .tabs { flex-wrap: wrap; overflow: visible; }
 
-/* Tableaux en cartes sur petit écran (hors tableau Appareils, déjà adapté) */
-@media (max-width: 700px) {
+/* Tableaux en cartes quand la largeur ne suffit plus (hors tableau Appareils, déjà adapté) ; un peu plus serrés juste avant */
+@media (max-width: 1180px) { .tablewrap table:not(.apps) th, .tablewrap table:not(.apps) td { padding: 10px 6px; font-size: 13.5px; } }
+@media (max-width: 1040px) {
   .tablewrap table:not(.apps), .tablewrap table:not(.apps) tbody, .tablewrap table:not(.apps) tr { display: block; min-width: 0; width: 100%; box-sizing: border-box; }
   .tablewrap table:not(.apps) thead { display: block; }
   .tablewrap table:not(.apps) thead tr { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
