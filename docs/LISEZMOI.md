@@ -160,4 +160,4 @@ Les offres à deux prix du kWh se saisissent dans la rubrique `hphc` de `donnees
 
 ## Communes à prix d'eau très bas
 
-`python3 scripts/eau_a_verifier.py` écrit `docs/EAU-A-VERIFIER.md` : les communes dont le prix complet est sous 2 € par m³, avec une colonne « Résultat » à remplir après vérification sur la fiche SISPEA. Le script ne modifie aucune donnée.
+Décision du 24 octobre 2026 : les prix de l'eau sont ceux de la base publique SISPEA (Eau France), repris tels quels, sans contrôle commune par commune. `python3 scripts/eau_a_verifier.py` écrit tout de même `docs/EAU-A-VERIFIER.md`, à titre d'information : les communes dont le prix complet est sous 2 € par m³ (souvent une part d'assainissement omise ou un service sans assainissement collectif). Le script ne modifie aucune donnée. Exemple : Innimond (INSEE 01190), 1,80 €/m³ (1,34 € eau potable + 0,46 € assainissement), identique sur la page Selectra, qui reprend la même base.
