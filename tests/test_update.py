@@ -191,5 +191,26 @@ class Pdf(unittest.TestCase):
         md = rep.md("1 janv.")
         self.assertEqual(md.count("http://x/a"), 1); self.assertIn("gaz · A", md)
 
+class TestDouceur(unittest.TestCase):
+    def test_espacement_meme_site(self):
+        up._dernier.clear(); dormis = []; t = [100.0]
+        up.espacer("https://octopusenergy.fr/a", delai=10, maintenant=lambda: t[0], dormir=dormis.append)
+        t[0] = 103.0
+        up.espacer("https://octopusenergy.fr/b", delai=10, maintenant=lambda: t[0], dormir=dormis.append)
+        self.assertEqual(len(dormis), 1); self.assertAlmostEqual(dormis[0], 7.0)
+    def test_pas_d_attente_autre_site(self):
+        up._dernier.clear(); dormis = []
+        up.espacer("https://a.fr/x", delai=10, maintenant=lambda: 5.0, dormir=dormis.append)
+        up.espacer("https://b.fr/x", delai=10, maintenant=lambda: 5.0, dormir=dormis.append)
+        self.assertEqual(dormis, [])
+    def test_retry_after(self):
+        import urllib.error, email.message
+        h = email.message.Message(); h["Retry-After"] = "45"
+        self.assertEqual(up.attente_serveur(urllib.error.HTTPError("u", 429, "x", h, None), 0), 45.0)
+        h2 = email.message.Message(); h2["Retry-After"] = "9999"
+        self.assertEqual(up.attente_serveur(urllib.error.HTTPError("u", 429, "x", h2, None), 0), 120.0)
+        self.assertEqual(up.attente_serveur(urllib.error.HTTPError("u", 429, "x", email.message.Message(), None), 1), 60.0)
+
+
 if __name__ == "__main__":
     unittest.main()
