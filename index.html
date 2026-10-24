@@ -129,6 +129,12 @@ tr.ref td { background: var(--ref-bg); }
 .conf { display: inline-block; min-width: 1.3em; text-align: center; font-weight: 700; font-size: 12px; border-radius: 50%; margin-right: 4px; padding: 0 2px; border: 1px solid currentColor; }
 .conf.c-ok { color: var(--accent); } .conf.c-est { color: var(--warn); } .conf.c-chk { color: var(--bad, #b91c1c); }
 .conf-leg { margin: 6px 2px 0; }
+#cmp { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60; max-width: 640px; margin-inline: auto; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 10px 40px -10px rgba(15,23,42,.35); padding: 14px 16px; }
+#cmp[hidden] { display: none; }
+#cmp p { margin: 0 0 10px; font-size: 14px; }
+#cmp .cmp-b { display: flex; flex-wrap: wrap; gap: 8px; }
+#cmp .cmp-b button { flex: 1 1 140px; font: inherit; font-weight: 600; padding: 10px 14px; border-radius: 10px; cursor: pointer; border: 1px solid var(--accent); background: var(--surface); color: var(--accent); }
+@media print { #cmp { display: none !important; } }
 .badge.promo { white-space: normal; display: inline-block; max-width: 34ch; border-radius: 12px; line-height: 1.35; }
 table td:first-child, table th:first-child { max-width: 36ch; overflow-wrap: anywhere; }
 .tablewrap .offer { overflow-wrap: anywhere; }
@@ -238,6 +244,7 @@ body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; 
 }
 /* Onglets : passage à la ligne plutôt que défilement caché (le dernier onglet restait coupé) */
 .topbar .tabs { flex-wrap: wrap; overflow: visible; }
+@media (max-width: 700px) { .topbar { position: static; } }  /* téléphone : la barre d'onglets ne reste pas collée en haut, elle prenait un tiers de l'écran */
 
 /* Tableaux en cartes quand la largeur ne suffit plus (hors tableau Appareils, déjà adapté) ; un peu plus serrés juste avant */
 @media (max-width: 1180px) { .tablewrap table:not(.apps) th, .tablewrap table:not(.apps) td { padding: 10px 6px; font-size: 13.5px; } }
@@ -816,13 +823,14 @@ code { overflow-wrap: anywhere; }
     <div class="card">
       <h3>Données personnelles</h3>
       <ul>
-        <li><strong>Aucune collecte :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni statistiques de visite, ni cookies publicitaires. Ce que vous saisissez (logement, consommation, code postal) reste dans votre navigateur : le code postal n'est envoyé à aucun service.</li>
+        <li><strong>Aucune collecte sans votre accord :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni cookies publicitaires. Ce que vous saisissez (logement, consommation, code postal) reste dans votre navigateur : le code postal n'est envoyé à aucun service. Seule exception, facultative : la mesure d'audience ci-dessous, activée uniquement si vous l'acceptez.</li>
+        <li><strong>Mesure d'audience (Google Analytics, facultative) :</strong> à votre première visite, un bandeau vous demande si vous acceptez la mesure d'audience. <em>Refuser est aussi simple qu'accepter</em>, et le site fonctionne de la même façon. Si vous refusez, rien n'est chargé depuis Google et aucun cookie n'est déposé. Si vous acceptez, le service Google Analytics 4 (Google Ireland Limited et Google LLC, États-Unis) est chargé et dépose des cookies (_ga et _ga_FKWB5WZJW6, conservés 13 mois au plus) pour compter les visites et les pages vues, de façon statistique : adresse IP anonymisée, aucune publicité personnalisée, aucun croisement avec d'autres données Google. L'éditeur n'y voit aucune donnée permettant de vous identifier. Vous pouvez changer d'avis à tout moment avec le lien « Gérer mes cookies » en bas de page : refuser supprime les cookies et arrête la mesure. Base légale : votre consentement. Voir la politique de confidentialité de Google (policies.google.com/privacy).</li>
         <li><strong>Mémorisation sur votre appareil :</strong> la description de votre logement et vos valeurs saisies à la main sont gardées dans le stockage local de votre navigateur, pour votre prochaine visite. Rien n'est envoyé. Vous les effacez en supprimant les données du site dans votre navigateur.</li>
-        <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil et ne charge aucune ressource d'un site tiers.</li>
+        <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil. Elle ne charge aucune ressource d'un site tiers, sauf Google Analytics si vous l'avez accepté.</li>
         <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
         <li><strong>Signaler une erreur :</strong> le lien en bas de page ouvre votre application de messagerie avec un message prérempli ; rien n'est envoyé tant que vous n'envoyez pas le message vous-même.</li>
         <li><strong>Liens vers d'autres sites :</strong> les sources citées s'ouvrent sur des sites tiers qui ont leurs propres règles.</li>
-        <li><strong>Vos droits :</strong> comme le site ne conserve aucune donnée vous concernant, il n'y a rien à consulter ni à supprimer de son côté. Pour toute question : benoittheret@gmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
+        <li><strong>Vos droits :</strong> l'éditeur ne conserve aucune donnée qui vous identifie ; les statistiques de Google Analytics, si vous les avez acceptées, sont anonymisées. Vous pouvez retirer votre accord à tout moment (« Gérer mes cookies »). Pour toute question : benoittheret@gmail.com. Vous pouvez aussi saisir la CNIL (cnil.fr).</li>
       </ul>
     </div>
     <p class="note">Les marques citées appartiennent à leurs propriétaires et servent seulement à identifier les offres. Si vous ajoutez un jour des liens de parrainage rémunérés, de la publicité ou le traitement de documents d'utilisateurs, ce texte devra être revu. Ce texte est un modèle rédigé sans avocat : il n'est pas un avis juridique. Faites-le relire, et adaptez-le si votre situation change.</p>
@@ -833,7 +841,7 @@ code { overflow-wrap: anywhere; }
 
 <footer>
     <div class="foot-brand"><span class="brand-logo" style="width:28px;height:28px;border-radius:9px"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></span>Comparateur énergie</div>
-    <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="sources">Sources</button> · <button type="button" class="linkbtn" data-go="legal">Mentions légales</button> <a href="mailto:benoittheret@gmail.com?subject=Erreur%20sur%20le%20comparateur&amp;body=Offre%20ou%20page%20concern%C3%A9e%20%3A%0AProbl%C3%A8me%20constat%C3%A9%20%3A%0ALien%20ou%20document%20qui%20le%20prouve%20%3A">Une erreur ? Signalez-la</a>.</p>
+    <p>Les prix et les primes changent souvent. Vérifiez-les sur le site du fournisseur avant de souscrire. Ce site n'est pas un conseil de souscription. <button type="button" class="linkbtn" data-go="sources">Sources</button> · <button type="button" class="linkbtn" data-go="legal">Mentions légales</button> · <button type="button" class="linkbtn" id="cmp-open">Gérer mes cookies</button> <a href="mailto:benoittheret@gmail.com?subject=Erreur%20sur%20le%20comparateur&amp;body=Offre%20ou%20page%20concern%C3%A9e%20%3A%0AProbl%C3%A8me%20constat%C3%A9%20%3A%0ALien%20ou%20document%20qui%20le%20prouve%20%3A">Une erreur ? Signalez-la</a>.</p>
   </footer>
 </div>
 
@@ -2269,6 +2277,35 @@ initA11y();
 staleCheck();
 showDates();
 loadData();
+</script>
+<div id="cmp" role="dialog" aria-modal="false" aria-labelledby="cmp-t" hidden>
+  <p id="cmp-t"><strong>Mesure d'audience.</strong> Acceptez-vous que ce site compte les visites avec Google Analytics (cookies, adresse IP anonymisée, aucune publicité) ? Le site fonctionne de la même façon dans les deux cas. <button type="button" class="linkbtn" data-go="legal">En savoir plus</button></p>
+  <div class="cmp-b"><button type="button" id="cmp-no">Refuser</button><button type="button" id="cmp-yes">Accepter</button></div>
+</div>
+<script>
+(function () {
+  var ID = "G-FKWB5WZJW6", KEY = "mesure-audience", box = document.getElementById("cmp");
+  function lire() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function ecrire(v) { try { localStorage.setItem(KEY, v); } catch (e) { /* sans stockage : le choix vaut pour cette page seulement */ } }
+  function charger() {
+    if (window.__gaCharge) return; window.__gaCharge = true; window["ga-disable-" + ID] = false;
+    window.dataLayer = window.dataLayer || []; window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", ID, { anonymize_ip: true, allow_google_signals: false, allow_ad_personalization_signals: false, cookie_expires: 34128000 });
+    var s = document.createElement("script"); s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + ID; document.head.appendChild(s);
+  }
+  function effacer() {
+    window["ga-disable-" + ID] = true;
+    var noms = ["_ga", "_ga_" + ID.replace("G-", ""), "_gid", "_gat"], hotes = [location.hostname, "." + location.hostname];
+    noms.forEach(function (n) { hotes.forEach(function (h) { document.cookie = n + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + h; }); document.cookie = n + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/"; });
+  }
+  function montrer(v) { box.hidden = !v; if (v) document.getElementById("cmp-no").focus(); }
+  document.getElementById("cmp-yes").addEventListener("click", function () { ecrire("oui"); montrer(false); charger(); });
+  document.getElementById("cmp-no").addEventListener("click", function () { ecrire("non"); montrer(false); effacer(); });
+  document.getElementById("cmp-open").addEventListener("click", function () { montrer(true); });
+  var c = lire();
+  if (c === "oui") charger(); else if (c === "non") effacer(); else montrer(true);
+})();
 </script>
 </body>
 </html>
