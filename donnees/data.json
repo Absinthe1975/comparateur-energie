@@ -257,6 +257,21 @@
    "st": "none",
    "s": null,
    "d": ""
+  },
+  "bellenergie": {
+   "name": "La Bellenergie",
+   "en": "Électricité verte",
+   "p": "Programme de parrainage (montant non relevé)",
+   "f": null,
+   "pn": 0,
+   "fn": -1,
+   "valid": "Programme existant, montant à relever sur la page de parrainage",
+   "st": "check",
+   "s": [
+    "La Bellenergie, programme de parrainage",
+    "https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/"
+   ],
+   "d": "24 oct. 2026"
   }
  },
  "duo": [
@@ -534,7 +549,8 @@
   "llum": "https://www.llum.fr/",
   "alpiq": "https://particuliers.alpiq.fr/",
   "enercoop": "https://www.enercoop.fr/",
-  "ilek": "https://www.ilek.fr/"
+  "ilek": "https://www.ilek.fr/",
+  "bellenergie": "https://labellenergie.fr/"
  },
  "promos": [
   {
