@@ -95,13 +95,18 @@ def lire_date(txt):
     m = re.search(r"applicables?\s+au\s+(\d\d/\d\d/\d{4})", txt) or re.search(r"(?:en vigueur|valables?)\s+(?:à partir du|au|depuis le)\s+(\d\d/\d\d/\d{4})", txt)
     return m.group(1) if m else None
 
+def _url_propre(url):
+    """Encode les espaces et caractères spéciaux d'une adresse (ex. « Tarif Part/Grille-… .pdf » chez GEG) sans toucher aux %XX déjà présents."""
+    h = urllib.parse.urlsplit(url)
+    return urllib.parse.urlunsplit((h.scheme, h.netloc, urllib.parse.quote(h.path, safe="/%:@+,;=~"), h.query, h.fragment))
+
 def _telecharger(url, allowed, ouvrir=None, pause=None):
     """Télécharge avec le nom du robot. En cas de « trop de requêtes » (429) ou de panne passagère (503), attend et réessaie."""
     import urllib.request, urllib.error, os, time
     ouvrir = ouvrir or urllib.request.urlopen; pause = pause or time.sleep
     ua = "ComparateurEnergieBot/1.0 (+" + os.environ.get("CONTACT", "mise a jour mensuelle, non lucratif") + ")"
     if not allowed(url, ua): raise RuntimeError("interdit par robots.txt")
-    req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Language": "fr"})
+    req = urllib.request.Request(_url_propre(url), headers={"User-Agent": ua, "Accept-Language": "fr"})
     for attente in (15, 45, 120, None):
         try:
             with ouvrir(req, timeout=60) as r: return r.read()
