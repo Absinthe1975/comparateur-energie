@@ -273,3 +273,23 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Elmy rejoint Octopus (Selectra) : https://selectra.info/energie/fournisseurs/elmy
 
 - Endesa France (professionnels et entreprises seulement, constat du 23 oct. 2026) : https://www.endesa.fr/
+
+## Fournisseurs actifs à ajouter (liste du 24 oct. 2026)
+- La Bellenergie, offre : https://labellenergie.fr/offre-electricite-verte/
+- La Bellenergie, grille Particuliers (PDF) : https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1
+- La Bellenergie, grille Professionnels (PDF) : https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-professionnels.pdf?r=1
+- La Bellenergie, fiche descriptive (PDF) : https://labellenergie.fr/pdf/fiche-descriptive-la-bellenergie.pdf?r=1
+- La Bellenergie, offres Particuliers : https://labellenergie.fr/grilles-tarifaires-des-particuliers/
+- La Bellenergie, parrainage : https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/
+- Urban Solar Energy, mentions légales : https://www.urbansolarenergy.fr/mentions-legales/
+- Urban Solar Energy, CGV ≤ 36 kVA (juin 2026) : https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf
+- Urban Solar Energy, CGV > 36 kVA (janv. 2026) : https://www.urbansolarenergy.fr/wp-content/uploads/2026/04/CGV-SUP-36kVA_01_01_2026.pdf
+- Urban Solar Energy, conditions générales (sept. 2026) : https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf
+- Énergie d'ici, offres Particuliers : https://www.energiedici.fr/nos-offres-pour-les-particuliers.html
+- Énergie d'ici, offres Professionnels : https://www.energiedici.fr/nos-offres-pour-les-professionnels.html
+- Énergie d'ici, conditions générales : https://www.energiedici.fr/assets/documents/conditions-generales_energie-d-ici.pdf?v=1756361289
+- Énergie d'ici, fiche descriptive : https://www.energiedici.fr/assets/documents/fiche-descriptive-offre_energie-d-ici.pdf?v=1632399950
+- Énergie d'ici, bulletin d'adhésion Particuliers : https://www.energiedici.fr/assets/documents/bulletin-adhesion_particuliers_energie-d-ici.pdf
+- Énergie d'ici, paiement en monnaies locales : https://www.energiedici.fr/assets/documents/Paiements_en_monnaie_locale.pdf?v=1738847956
+- Énergie d'ici, catalogue des prestations Enedis : https://www.energiedici.fr/assets/documents/Catalogue_prestations_Enedis_PART.pdf?v=1754060558
+- Jeety Energy (ex-Élecocité) : https://jeety.energy/
