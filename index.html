@@ -239,6 +239,8 @@ body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; 
 /* Onglets : passage à la ligne plutôt que défilement caché (le dernier onglet restait coupé) */
 .topbar .tabs { flex-wrap: wrap; overflow: visible; }
 
+.btn-stats { display: inline-block; padding: 12px 18px; border-radius: 12px; background: var(--surface); color: var(--accent); border: 2px solid var(--accent); font-weight: 600; text-decoration: none; }
+.btn-stats:hover { background: var(--accent-soft); }
 .visites { text-align: center; color: var(--muted); font-size: 13px; margin: 0 0 8px; }
 .visites[hidden] { display: none; }
 @media print { .visites { display: none; } }
@@ -798,9 +800,8 @@ code { overflow-wrap: anywhere; }
     <h2>Statistiques du site</h2>
     <p class="lede">Combien de personnes consultent ce comparateur, et quelles pages. Ces chiffres sont publics et proviennent de GoatCounter, un service de mesure sans cookie.</p>
     <div class="card">
-      <p class="note" id="stats-msg">Chargement des statistiques…</p>
-      <iframe id="stats-frame" title="Statistiques de visites du site (GoatCounter)" referrerpolicy="no-referrer" style="width:100%; height:80vh; min-height:520px; border:1px solid var(--line); border-radius:12px; background:#fff;" hidden></iframe>
-      <p class="note"><a href="https://absinthe1975.goatcounter.com/" target="_blank" rel="noopener noreferrer">Ouvrir les statistiques dans une nouvelle page</a> si l'affichage ci-dessus reste vide. Ouvrir cet onglet charge la page de GoatCounter, qui reçoit alors votre adresse IP, comme décrit dans les Mentions légales.</p>
+      <p><a class="btn-stats" href="https://absinthe1975.goatcounter.com/" target="_blank" rel="noopener noreferrer">Voir les statistiques de visites (nouvel onglet)</a></p>
+      <p class="note">Le tableau de bord de GoatCounter ne peut pas être affiché à l'intérieur de ce site : il s'ouvre sur sa propre page. Rien n'est chargé depuis GoatCounter tant que vous ne cliquez pas sur le bouton.</p>
     </div>
   </section>
 <section class="panel" id="p-legal" role="tabpanel" aria-labelledby="tab-legal" hidden>
@@ -832,7 +833,7 @@ code { overflow-wrap: anywhere; }
       <h3>Données personnelles</h3>
       <ul>
         <li><strong>Aucune collecte vous concernant :</strong> ce site n'a ni compte, ni formulaire envoyé à un serveur, ni cookie, ni publicité. Ce que vous saisissez (logement, consommation, code postal) reste dans votre navigateur : le code postal n'est envoyé à aucun service.</li>
-        <li><strong>Mesure d'audience (GoatCounter) :</strong> le site compte ses visites avec GoatCounter, un service statistique sans cookie et sans suivi entre sites, utilisé uniquement par l'éditeur pour savoir quelles pages sont lues. Votre navigateur appelle pour cela les serveurs de GoatCounter (gc.zgo.at et absinthe1975.goatcounter.com), qui reçoivent comme tout serveur votre adresse IP et des informations techniques (page, navigateur, taille d'écran, provenance). D'après l'éditeur du service, l'adresse IP n'est pas conservée et aucune fiche individuelle n'est constituée ; l'éditeur de ce site ne voit que des totaux. <strong>Vous pouvez vous y opposer à tout moment</strong> avec le bouton « Ne pas être compté dans les statistiques » en bas de page : votre navigateur n'enverra plus rien. L'onglet « Statistiques » affiche la page publique de statistiques de GoatCounter dans le site, seulement si vous ouvrez cet onglet. Le nombre de visites affiché en bas de page est lu chez GoatCounter (rien n'est lu si vous vous êtes opposé). Voir la politique de confidentialité de GoatCounter (goatcounter.com, rubrique « Privacy policy »).</li>
+        <li><strong>Mesure d'audience (GoatCounter) :</strong> le site compte ses visites avec GoatCounter, un service statistique sans cookie et sans suivi entre sites, utilisé uniquement par l'éditeur pour savoir quelles pages sont lues. Votre navigateur appelle pour cela les serveurs de GoatCounter (gc.zgo.at et absinthe1975.goatcounter.com), qui reçoivent comme tout serveur votre adresse IP et des informations techniques (page, navigateur, taille d'écran, provenance). D'après l'éditeur du service, l'adresse IP n'est pas conservée et aucune fiche individuelle n'est constituée ; l'éditeur de ce site ne voit que des totaux. <strong>Vous pouvez vous y opposer à tout moment</strong> avec le bouton « Ne pas être compté dans les statistiques » en bas de page : votre navigateur n'enverra plus rien. L'onglet « Statistiques » contient un lien vers la page publique de statistiques de GoatCounter, qui ne se charge que si vous cliquez dessus. Le nombre de visites affiché en bas de page est lu chez GoatCounter (rien n'est lu si vous vous êtes opposé). Voir la politique de confidentialité de GoatCounter (goatcounter.com, rubrique « Privacy policy »).</li>
         <li><strong>Mémorisation sur votre appareil :</strong> la description de votre logement et vos valeurs saisies à la main sont gardées dans le stockage local de votre navigateur, pour votre prochaine visite. Rien n'est envoyé. Vous les effacez en supprimant les données du site dans votre navigateur.</li>
         <li><strong>Polices de caractères :</strong> la page n'utilise que les polices de votre appareil. Elle ne charge aucune ressource d'un site tiers, hormis le compteur de visites GoatCounter décrit ci-dessus.</li>
         <li><strong>Hébergeur :</strong> le site est hébergé par GitHub (GitHub Pages). GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité, qu'ils aient ou non un compte GitHub. GitHub est une société américaine : ces données peuvent être traitées hors de l'Union européenne. Elle indique s'appuyer sur les clauses contractuelles types de la Commission européenne et sur le cadre de protection des données UE-États-Unis. Voir la déclaration de confidentialité de GitHub (docs.github.com, rubrique « Site policy »). L'éditeur n'a pas accès à ces journaux.</li>
@@ -2133,13 +2134,6 @@ function initReg() {
 
 /* ---------- Accessibilité ---------- */
 var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
-function loadStats() {
-  var f = $("stats-frame");
-  if (f.getAttribute("src")) return;
-  f.addEventListener("load", function () { $("stats-msg").hidden = true; f.hidden = false; });
-  f.setAttribute("src", "https://absinthe1975.goatcounter.com/");
-  setTimeout(function () { if (f.hidden) $("stats-msg").textContent = "Les statistiques ne se sont pas affichées ici. Utilisez le lien ci-dessous."; }, 8000);
-}
 function a11yTabs() {
   TABS.forEach(function (n) { $("tab-" + n).setAttribute("tabindex", n === state.tab ? "0" : "-1"); });
 }
@@ -2194,7 +2188,6 @@ function setTab(t) {
   if (state.tab === "eau") state.eauConso = conso() || state.eauConso;
   state.tab = t;
   if (t === "marche") loadMarche();
-  if (t === "stats") loadStats();
   TABS.forEach(function (n) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
