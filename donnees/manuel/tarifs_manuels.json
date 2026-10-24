@@ -1,10 +1,54 @@
 {
  "_lisez_moi": "Grilles saisies à la main pour les fournisseurs dont le site interdit les robots (robots.txt) ou qui n'ont pas de page lisible. Ce fichier n'est jamais modifié par les programmes automatiques. Chaque offre a les mêmes champs que dans elec/data.json ou gaz/data.json ; une offre déjà présente (même k et même offer) est complétée champ par champ, sinon elle est ajoutée. Remplir 'niv': 'officiel' et 'nivd' (date de la grille) avec le PDF en source ('s'). Les sections abo_e, abo_g et abo_g0 donnent l'abonnement annuel d'un fournisseur nouveau.",
- "_exemple": {"k": "fournisseur", "name": "Nom affiché", "offer": "Nom de l'offre", "a": 0.2000, "b": 0.1990, "ab6": 200.00, "ab9": 250.00, "niv": "officiel", "nivd": "01/10/2026", "d": "20 oct. 2026", "s": ["Grille officielle (1er oct. 2026)", "https://exemple.fr/grille.pdf"], "typ": "fixe"},
+ "_exemple": {
+  "k": "fournisseur",
+  "name": "Nom affiché",
+  "offer": "Nom de l'offre",
+  "a": 0.2,
+  "b": 0.199,
+  "ab6": 200.0,
+  "ab9": 250.0,
+  "niv": "officiel",
+  "nivd": "01/10/2026",
+  "d": "20 oct. 2026",
+  "s": [
+   "Grille officielle (1er oct. 2026)",
+   "https://exemple.fr/grille.pdf"
+  ],
+  "typ": "fixe"
+ },
  "elec": [],
  "gas": [],
  "duo": [],
  "abo_e": {},
  "abo_g": {},
- "abo_g0": {}
+ "abo_g0": {},
+ "hphc": [
+  {
+   "k": "dyneff",
+   "name": "Dyneff",
+   "offer": "Contrat+ Électricité",
+   "hp": 0.19649,
+   "hc": 0.16034,
+   "abo": {
+    "6": 187.8,
+    "9": 234.72,
+    "12": 279.84,
+    "15": 322.08,
+    "18": 365.88,
+    "24": 458.88,
+    "30": 544.44,
+    "36": 630.48
+   },
+   "abo_seul": true,
+   "niv": "officiel",
+   "nivd": "01/08/2026",
+   "d": "23 oct. 2026",
+   "typ": "indexe",
+   "s": [
+    "Grille officielle Dyneff, heures pleines / creuses (1er août 2026)",
+    "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf"
+   ]
+  }
+ ]
 }
