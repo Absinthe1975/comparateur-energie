@@ -119,6 +119,15 @@ class DernierTest(unittest.TestCase):
         l = [("https://x.fr/a-grille.pdf", ""), ("https://x.fr/b-grille.pdf", "")]
         u, why = grilles_pdf.choisir(l, {"contient": ["grille"], "dernier": True}); self.assertIsNone(u); self.assertIn("illisibles", why)
 
+class TestUrlPropre(unittest.TestCase):
+    def test_espaces_encodes(self):
+        u = grilles_pdf._url_propre("https://www.geg.fr/Medias/Tarif Part/2026/Octobre/Grille Mes Offres.pdf")
+        self.assertEqual(u, "https://www.geg.fr/Medias/Tarif%20Part/2026/Octobre/Grille%20Mes%20Offres.pdf")
+    def test_deja_encodee_inchangee(self):
+        u = "https://exemple.fr/a%20b/c.pdf?x=1"
+        self.assertEqual(grilles_pdf._url_propre(u), u)
+
+
 if __name__ == "__main__": unittest.main()
 
 
