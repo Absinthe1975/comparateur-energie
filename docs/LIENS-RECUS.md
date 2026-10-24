@@ -152,6 +152,11 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - source : hellowatt.fr (ÉnRFixe+ Élec + Gaz) : https://www.hellowatt.fr/
 - parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
 
+### La Bellenergie
+- site du fournisseur : https://labellenergie.fr/
+- source : Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er août 2026) (Prudence, prix fixe 1 an) : https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1
+- parrainage : La Bellenergie, programme de parrainage : https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/
+
 ### LLUM
 - site du fournisseur : https://www.llum.fr/
 - grille : Électricité verte, Base compteur non communicant (prix unique) : https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf
