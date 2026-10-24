@@ -67,18 +67,39 @@ def allowed(url, ua):
     rp = _robots[base]
     return True if rp is None else rp.can_fetch(ua, url)
 
+_dernier = {}   # dernier appel par site (pour ne pas enchaîner les requêtes vers le même serveur)
+
+def espacer(url, delai=None, maintenant=time.monotonic, dormir=time.sleep):
+    """Attend, si besoin, pour qu'au moins `delai` secondes (HOST_DELAY, 10 par défaut) séparent deux requêtes vers le même site."""
+    delai = float(os.environ.get("HOST_DELAY", "10")) if delai is None else delai
+    h = urllib.parse.urlsplit(url).netloc
+    reste = _dernier.get(h, -1e9) + delai - maintenant()
+    if reste > 0: dormir(reste)
+    _dernier[h] = maintenant()
+
+def attente_serveur(e, essai):
+    """Durée d'attente après un « trop de requêtes » (429) ou une panne passagère (503) : Retry-After si le site l'indique (plafonné à 120 s), sinon 30 s, 60 s…"""
+    try: ra = float(e.headers.get("Retry-After")) if getattr(e, "headers", None) and e.headers.get("Retry-After") else None
+    except (TypeError, ValueError): ra = None
+    return min(ra, 120.0) if ra is not None else 30.0 * (essai + 1)
+
 def fetch_text(url):
     ua = "ComparateurEnergieBot/1.0 (+" + os.environ.get("CONTACT", "mise a jour mensuelle, non lucratif") + ")"
     if not allowed(url, ua): raise RuntimeError("interdit par robots.txt")
     last = None
-    for attempt in range(2):
+    for attempt in range(3):
         try:
+            espacer(url)
             req = urllib.request.Request(url, headers={"User-Agent": ua, "Accept-Language": "fr"})
             with urllib.request.urlopen(req, timeout=30) as r:
                 raw, ctype = r.read(), (r.headers.get("Content-Type", "") if getattr(r, "headers", None) else "")
             if "pdf" in ctype.lower() or url.lower().split("?")[0].endswith(".pdf") or raw[:5] == b"%PDF-":
                 return pdf_to_text(raw)
             return html_to_text(raw.decode("utf-8", "replace"))
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code in (429, 503) and attempt < 2: time.sleep(attente_serveur(e, attempt))
+            elif e.code not in (429, 503): break
         except Exception as e:
             last = e; time.sleep(3)
     raise RuntimeError(str(last))
