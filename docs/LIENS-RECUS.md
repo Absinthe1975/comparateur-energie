@@ -50,7 +50,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Fiche standardisée : https://www.faq.enercoop.fr/hc/fr/articles/360025264871-Fiche-standardis%C3%A9e (pièces : article_attachments/34107522928914 et 34107551829906)
 
 ## Liste de fournisseurs
-- https://www.choisir.com/energie/fournisseurs (47 fournisseurs ; voir le Mémo pour ceux à ajouter)
 
 <!-- AUTO:DEBUT -->
 ## Liens utilisés par le comparateur (généré automatiquement, ne pas modifier à la main)
@@ -125,6 +124,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - site du fournisseur : https://www.gazdebordeaux.fr/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
+- source : Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
 - parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage
 
 ### GEG
