@@ -244,6 +244,9 @@ body { margin: 0; padding-inline: 0; font-feature-settings: "tnum" 1, "cv11" 1; 
 .visites { text-align: center; color: var(--muted); font-size: 13px; margin: 0 0 8px; }
 .visites[hidden] { display: none; }
 @media print { .visites { display: none; } }
+/* Parrainages : le nom du fournisseur garde sa place, la colonne Détail est plus étroite et passe à la ligne */
+table.tparr td:first-child, table.tparr th:first-child { min-width: 11rem; overflow-wrap: normal; word-break: normal; }
+table.tparr td.det { width: 22%; max-width: 26ch; min-width: 0; font-size: 12.5px; line-height: 1.4; }
 @media (max-width: 700px) { .topbar { position: static; } }  /* téléphone : la barre d'onglets ne reste pas collée en haut, elle prenait un tiers de l'écran */
 
 /* Tableaux en cartes quand la largeur ne suffit plus (hors tableau Appareils, déjà adapté) ; un peu plus serrés juste avant */
@@ -571,7 +574,7 @@ code { overflow-wrap: anywhere; }
   <section class="panel" id="p-prime" role="tabpanel" aria-labelledby="tab-prime" hidden>
     <h2>Primes de parrainage par fournisseur</h2>
     <p class="callout">Cette page indique seulement le montant des primes. Aucun code ni lien de parrainage n'est affiché pour le moment.</p>
-    <div class="tablewrap"><table id="t-prime"></table></div>
+    <div class="tablewrap"><table id="t-prime" class="tparr"></table></div>
     <p class="note">Les primes sont versées une seule fois, en général sous forme de remise sur une des premières factures ou de crédit en cagnotte. Une prime se compare après le prix : un écart de kWh se paie toute l'année, une prime ne se touche qu'une fois. Les montants marqués « à vérifier » ne reposent que sur un comparateur, sur un relevé ancien, ou ne figurent pas sur le site du fournisseur. Les montants « confirmés » viennent de plusieurs comparateurs ou du règlement officiel du fournisseur ; la colonne Source indique lesquels.</p>
   </section>
 
@@ -1235,7 +1238,7 @@ function renderPrimes() {
     h += '<tr><td><div class="prov">' + esc(p.name) + '</div><div class="offer">' + esc(p.en) + '</div></td>'
       + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.p || "—") + '</td>'
       + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.f || "—") + '</td>'
-      + '<td class="offer" style="min-width:14rem">' + esc(p.valid) + '</td><td>' + badge + '</td><td class="src">' + (p.s ? srcLink(p.s) + '<br><span class="offer">' + esc(p.d) + '</span>' : '<span class="offer">Aucun programme relevé</span>') + '</td></tr>';
+      + '<td class="offer det">' + esc(p.valid) + '</td><td>' + badge + '</td><td class="src">' + (p.s ? srcLink(p.s) + '<br><span class="offer">' + esc(p.d) + '</span>' : '<span class="offer">Aucun programme relevé</span>') + '</td></tr>';
   });
   $("t-prime").innerHTML = h + "</tbody>";
 }
