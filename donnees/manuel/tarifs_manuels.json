@@ -101,6 +101,31 @@
         "Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er août 2026)",
         "https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1"
       ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "NovaFixe Élec",
+      "a": 0.18373,
+      "b": 0.18233,
+      "ab6": 190.44,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.44,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "25 oct. 2026",
+      "typ": "fixe",
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
+      ]
     }
   ],
   "gas": [],
@@ -213,6 +238,32 @@
       "s": [
         "Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er août 2026)",
         "https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1"
+      ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "NovaFixe Élec",
+      "hp": 0.19648,
+      "hc": 0.14669,
+      "abo": {
+        "6": 190.44,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.56,
+        "30": 557.52,
+        "36": 646.56
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "25 oct. 2026",
+      "typ": "fixe",
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
     }
   ]
