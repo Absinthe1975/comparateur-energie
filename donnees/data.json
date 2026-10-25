@@ -261,17 +261,17 @@
   "bellenergie": {
    "name": "La Bellenergie",
    "en": "Électricité verte",
-   "p": "Programme de parrainage (montant non relevé)",
-   "f": null,
-   "pn": 0,
-   "fn": -1,
-   "valid": "Programme existant, montant à relever sur la page de parrainage",
-   "st": "check",
+   "p": "30 € de réduction par parrainage validé",
+   "f": "20 € de réduction sur la facture, après 2 mois d'activation",
+   "pn": 30,
+   "fn": 20,
+   "valid": "Réduction déduite de la facture d'électricité (parrain : par parrainage validé ; filleul : après 2 mois d'activation du contrat). Montants lus sur la page officielle",
+   "st": "ok",
    "s": [
-    "La Bellenergie, programme de parrainage",
+    "La Bellenergie, page officielle du parrainage",
     "https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/"
    ],
-   "d": "24 oct. 2026"
+   "d": "page relevée le 24 oct. 2026"
   }
  },
  "duo": [
