@@ -577,7 +577,7 @@ code { overflow-wrap: anywhere; }
 
   <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
     <h2>Mémo : ce qu'il reste à ajouter</h2>
-    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo nettoyé le 21 octobre 2026 : seul ce qui reste à faire y figure, ce qui est terminé est retiré. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer.</p>
+    <p class="lede">Les évolutions prévues, avec ce qui est réalisable et les précautions à prendre. Mémo nettoyé le 21 octobre 2026 : seul ce qui reste à faire y figure, ce qui est terminé est retiré. Le point sur la lecture des factures a été abandonné : trop de formats et de documents à gérer. L'onglet « Pro » (professionnels et entreprises) est aussi abandonné pour le moment : trop de travail (grilles hors taxes, puissances au-delà de 36 kVA).</p>
 
     <div class="card">
       <h3>1. Mise à jour automatique des prix <span class="badge check">À étendre</span></h3>
@@ -595,7 +595,6 @@ code { overflow-wrap: anywhere; }
         
         <li><strong>Sources bloquées :</strong> les comparateurs (fournisseurs-electricite.com, Kelwatt, Selectra…) refusent les robots. Les remplacer, offre par offre, par les grilles officielles des fournisseurs (voir 1 bis : il faut les PDF ou leurs adresses).</li>
         <li><strong>Grilles saisies à la main :</strong> le fichier <code>donnees/manuel/tarifs_manuels.json</code> est en place (vide pour l'instant), fusionné avec les données automatiques. À faire : y saisir, au fil des envois, les fournisseurs qui interdisent les robots (EDF, ilek) ; voir docs/LISEZMOI.md pour le mode d'emploi.</li>
-        <li><strong>Onglet « Pro » (plus tard) :</strong> les offres pour professionnels et entreprises seraient dans un onglet à part, avec leurs propres grilles. Premier fournisseur concerné : <a href="https://www.endesa.fr/" target="_blank" rel="noopener">Endesa</a> (constat du 23 octobre 2026 : offres pour TPE/PME, artisans, copropriétés et grands comptes, aucune offre pour les particuliers).</li>
         <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site (à faire par vous).</li>
         <li><strong>Non automatisé :</strong> consommations par usage, montants de parrainage en kWh ou en cartes cadeaux.</li>
       </ul>
