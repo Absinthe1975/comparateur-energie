@@ -85,7 +85,7 @@
    "f": "40 €",
    "pn": 50,
    "fn": 40,
-   "valid": "Une seule source pour le montant du parrain. Non confirmé sur le site de Plenitude",
+   "valid": "Offre de parrainage non publiée sur le site public ; réservée exclusivement à l'Espace Client connecté. Montants d'une source secondaire (Selectra), jugés cohérents.",
    "st": "check",
    "s": [
     "prix-elec.com",
