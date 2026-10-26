@@ -100,13 +100,13 @@
    "f": "Jusqu'à 25 € (150 kWh offerts)",
    "pn": 0,
    "fn": 25,
-   "valid": "Page officielle : « jusqu'à 25 € offerts sur la première facture du filleul », soit 150 kWh (calcul au prix fixe de février 2026, 6 kVA). Le règlement (janv. 2026) précise que les 150 kWh sont acquis après 2 mois de contrat, sans impayé ni résiliation. Prime du parrain non indiquée",
+   "valid": "Page officielle : « jusqu'à 25 € offerts sur la première facture du filleul », soit 150 kWh (calcul au prix fixe de février 2026, 6 kVA). Le règlement (janv. 2026) précise que les 150 kWh sont acquis après 2 mois de contrat, sans impayé ni résiliation. Le règlement (art. 2) ne prévoit un avantage que pour le filleul : prime du parrain non indiquée",
    "st": "check",
    "s": [
     "Page parrainage Ekwateur",
     "https://ekwateur.fr/notre-ecosysteme-parrainage/",
     "Règlement officiel Ekwateur",
-    "https://ekwateur.fr/documents/reglement-parrainage.pdf"
+    "https://ekwateur.fr/reglements-jeux-concours-operations/"
    ],
    "d": "page et règlement lus le 26 oct. 2026"
   },
