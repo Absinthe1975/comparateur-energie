@@ -155,7 +155,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ### La Bellenergie
 - site du fournisseur : https://labellenergie.fr/
 - source : Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er août 2026) (Prudence, prix fixe 1 an) : https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1
-- parrainage : La Bellenergie, programme de parrainage : https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/
+- parrainage : La Bellenergie, page officielle du parrainage : https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/
 
 ### LLUM
 - site du fournisseur : https://www.llum.fr/
@@ -171,6 +171,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/mint-energie/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/mint-energie/parrainage
 - source : hellowatt.fr (Classic & Green + Biogaz Classic) : https://www.hellowatt.fr/
+- parrainage : Mint Énergie, page officielle du parrainage : https://www.mint-energie.com/nous-decouvrir/parrainage/
 
 ### Octopus Energy
 - site du fournisseur : https://octopusenergy.fr/
