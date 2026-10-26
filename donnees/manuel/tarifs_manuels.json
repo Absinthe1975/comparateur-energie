@@ -265,6 +265,32 @@
         "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
+    },
+    {
+      "k": "enercoop",
+      "name": "Enercoop",
+      "offer": "Flexibilité heures creuses",
+      "hp": 0.27764,
+      "hc": 0.18983,
+      "abo": {
+        "3": 132.72,
+        "6": 217.32,
+        "9": 291.96,
+        "12": 371.04,
+        "15": 424.32,
+        "18": 498.24,
+        "24": 632.4,
+        "30": 776.76,
+        "36": 921.24
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "26 oct. 2026",
+      "s": [
+        "Annexes tarifaires Enercoop, particuliers ≤ 36 kVA (1er août 2026)",
+        "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770"
+      ]
     }
   ]
 }
