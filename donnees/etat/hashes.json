@@ -84,6 +84,14 @@
   "dyneff · Contrat+ Électricité (heures pleines / creuses)": {
    "sha": "ab48c1368500fea44b7d82d8aa042c514700cd4fe311dbd8f5ad2d921eca4d92",
    "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf"
+  },
+  "geg · Élec Verte fixe 3 ans (grille)": {
+   "sha": "6f220fccca1b1dc029107baf1e275cf97dc4e75fcd3a86cfc985e42649074e8e",
+   "url": "https://www.geg.fr/Medias/content-editor/Tarif Part/2026/Octobre/Grille-tarifaire-Mes Offres Elec fixes 3 ans-PART1026.pdf"
+  },
+  "geg · Gaz et biogaz fixe 3 ans (grille)": {
+   "sha": "4720a8ee756ff686f2bcc1be76884da0e252063928b24f6899d21c74fa4a70f7",
+   "url": "https://www.geg.fr/Medias/content-editor/Tarif Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf"
   }
  }
 }
