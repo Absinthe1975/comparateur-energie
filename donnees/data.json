@@ -581,6 +581,20 @@
     "Règlement Gaz de Bordeaux",
     "https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf"
    ]
+  },
+  {
+   "k": "ohm",
+   "texte": "100 € offerts (50 € par contrat) avec l'offre Boost Dual",
+   "debut": "2026-10-02",
+   "fin": "2026-12-31",
+   "offres": [
+    "duo"
+   ],
+   "conditions": "Souscription du 2 octobre au 31 décembre 2026 inclus. Nouveau client, contrats d'électricité et de gaz souscrits en même temps pour un même logement. Remise acquise au 366e jour après l'activation du premier contrat, sous forme d'avoir sur la facture de fin de première année : il faut avoir gardé les deux contrats, ne pas être en impayé ni avoir changé d'offre. Non comptée dans le classement.",
+   "s": [
+    "Conditions Boost Dual OHM Énergie",
+    "https://ohm-energie.com/reglement/conditions-promotion-dual.pdf"
+   ]
   }
  ]
 }
