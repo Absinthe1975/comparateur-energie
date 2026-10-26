@@ -277,4 +277,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - OHM Énergie, conditions de l'offre Boost Dual (100 € : 50 € par contrat, du 02/10 au 31/12/2026) : https://ohm-energie.com/reglement/conditions-promotion-dual.pdf
 - LLUM, parrainage électricité (20 € / 20 €) : https://www.llum.fr/parrainage-electricite
 - Ekwateur, page parrainage : https://ekwateur.fr/notre-ecosysteme-parrainage/
-- Ekwateur, conditions du programme de parrainage (janv. 2026) : https://ekwateur.fr/documents/reglement-parrainage.pdf
+- Ekwateur, conditions du programme de parrainage (janv. 2026) : https://ekwateur.fr/reglements-jeux-concours-operations/
+- Ekwateur, règlement du parrainage (PDF, mise à jour janv. 2026) : page des règlements https://ekwateur.fr/reglements-jeux-concours-operations/
+- LLUM, page parrainage électricité : https://www.llum.fr/parrainage-electricite
