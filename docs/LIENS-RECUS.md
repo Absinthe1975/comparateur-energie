@@ -274,3 +274,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Énergie d'ici, paiement en monnaies locales : https://www.energiedici.fr/assets/documents/Paiements_en_monnaie_locale.pdf?v=1738847956
 - Énergie d'ici, catalogue des prestations Enedis : https://www.energiedici.fr/assets/documents/Catalogue_prestations_Enedis_PART.pdf?v=1754060558
 - Jeety Energy (ex-Élecocité) : https://jeety.energy/
+- OHM Énergie, conditions de l'offre Boost Dual (100 € : 50 € par contrat, du 02/10 au 31/12/2026) : https://ohm-energie.com/reglement/conditions-promotion-dual.pdf
