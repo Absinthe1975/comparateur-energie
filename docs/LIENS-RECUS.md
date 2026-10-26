@@ -103,7 +103,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ekwateur/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ekwateur/tarifs
 - source : hellowatt.fr (Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe) : https://www.hellowatt.fr/
-- parrainage : Règlement officiel Ekwateur : https://ekwateur.fr/documents/reglement-parrainage.pdf
+- parrainage : Page parrainage Ekwateur : https://ekwateur.fr/notre-ecosysteme-parrainage/
 
 ### Enercoop
 - site du fournisseur : https://www.enercoop.fr/
@@ -163,7 +163,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/llum/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/llum/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/llum/parrainage
-- parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
+- parrainage : Page parrainage LLUM : https://www.llum.fr/parrainage-electricite
 
 ### Mint Énergie
 - site du fournisseur : https://www.mint-energie.com/
@@ -275,3 +275,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Énergie d'ici, catalogue des prestations Enedis : https://www.energiedici.fr/assets/documents/Catalogue_prestations_Enedis_PART.pdf?v=1754060558
 - Jeety Energy (ex-Élecocité) : https://jeety.energy/
 - OHM Énergie, conditions de l'offre Boost Dual (100 € : 50 € par contrat, du 02/10 au 31/12/2026) : https://ohm-energie.com/reglement/conditions-promotion-dual.pdf
+- LLUM, parrainage électricité (20 € / 20 €) : https://www.llum.fr/parrainage-electricite
+- Ekwateur, page parrainage : https://ekwateur.fr/notre-ecosysteme-parrainage/
+- Ekwateur, conditions du programme de parrainage (janv. 2026) : https://ekwateur.fr/documents/reglement-parrainage.pdf
