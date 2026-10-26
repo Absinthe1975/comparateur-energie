@@ -96,17 +96,19 @@
   "ekw": {
    "name": "Ekwateur",
    "en": "Électricité et gaz verts",
-   "p": "Non indiqué dans le règlement",
-   "f": "150 kWh offerts",
+   "p": "Non indiqué",
+   "f": "Jusqu'à 25 € (150 kWh offerts)",
    "pn": 0,
    "fn": 25,
-   "valid": "Le règlement officiel donne 150 kWh au filleul après deux mois et renvoie à une page pour la prime du parrain. Le tri utilise 25 € pour 150 kWh (estimation)",
+   "valid": "Page officielle : « jusqu'à 25 € offerts sur la première facture du filleul », soit 150 kWh (calcul au prix fixe de février 2026, 6 kVA). Le règlement (janv. 2026) précise que les 150 kWh sont acquis après 2 mois de contrat, sans impayé ni résiliation. Prime du parrain non indiquée",
    "st": "check",
    "s": [
+    "Page parrainage Ekwateur",
+    "https://ekwateur.fr/notre-ecosysteme-parrainage/",
     "Règlement officiel Ekwateur",
     "https://ekwateur.fr/documents/reglement-parrainage.pdf"
    ],
-   "d": "règlement de janv. 2026, lu le 10 oct. 2026"
+   "d": "page et règlement lus le 26 oct. 2026"
   },
   "mint": {
    "name": "Mint Énergie",
@@ -175,13 +177,13 @@
    "f": "20 €",
    "pn": 20,
    "fn": 20,
-   "valid": "Remise sur la facture d'électricité. Une seule source (Selectra)",
-   "st": "check",
+   "valid": "Remise de 20 € pour le parrain et 20 € pour le filleul, appliquée automatiquement sur la facture d'électricité après 3 mois d'abonnement du filleul (factures réglées). Maximum 10 parrainages par an et par client",
+   "st": "ok",
    "s": [
-    "Selectra",
-    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+    "Page parrainage LLUM",
+    "https://www.llum.fr/parrainage-electricite"
    ],
-   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+   "d": "page officielle lue le 26 oct. 2026"
   },
   "ilek": {
    "name": "ilek",
