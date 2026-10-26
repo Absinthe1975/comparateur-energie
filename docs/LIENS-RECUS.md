@@ -280,3 +280,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Ekwateur, conditions du programme de parrainage (janv. 2026) : https://ekwateur.fr/reglements-jeux-concours-operations/
 - Ekwateur, règlement du parrainage (PDF, mise à jour janv. 2026) : page des règlements https://ekwateur.fr/reglements-jeux-concours-operations/
 - LLUM, page parrainage électricité : https://www.llum.fr/parrainage-electricite
+- BOFiP, tarifs d'accise sur l'électricité et le gaz naturel (taux 2026) : https://bofip.impots.gouv.fr/bofip/14903-PGP.html
