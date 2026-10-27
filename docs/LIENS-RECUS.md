@@ -78,6 +78,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - grille : Contrat+ Électricité (heures pleines / creuses) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/dyneff/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs
+- source : Grille officielle Dyneff, gaz 15 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 15 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf
+- source : Grille officielle Dyneff, gaz 55 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 55 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf
+- source : Grille officielle Dyneff, gaz 100 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 100 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
 
 ### EDF
 - site du fournisseur : https://particulier.edf.fr/
@@ -281,3 +284,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Ekwateur, règlement du parrainage (PDF, mise à jour janv. 2026) : page des règlements https://ekwateur.fr/reglements-jeux-concours-operations/
 - LLUM, page parrainage électricité : https://www.llum.fr/parrainage-electricite
 - BOFiP, tarifs d'accise sur l'électricité et le gaz naturel (taux 2026) : https://bofip.impots.gouv.fr/bofip/14903-PGP.html
+- Dyneff, page du contrat gaz vert : https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/
+- Dyneff, grilles gaz 15 %, 55 %, 100 % renouvelable (oct. 2026) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf · https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf · https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
+- Dyneff, fiche descriptive gaz vert : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/FICHE-DESCRIPTIVE-Mon-contrat-gaz-vert-PART.pdf
+- Dyneff, conditions générales de vente gaz naturel : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/CONDITIONS-GENERALES-VENTES-Gaz-Naturel-PART.pdf
