@@ -325,12 +325,6 @@
    "type": "info"
   },
   {
-   "k": "dyneff",
-   "offre": "Contrat+ Électricité (Base)",
-   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf",
-   "type": "info"
-  },
-  {
    "k": "enercoop",
    "offre": "Offre Base (annexes tarifaires particuliers)",
    "url": "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770",
@@ -338,9 +332,58 @@
   },
   {
    "k": "dyneff",
+   "offre": "Contrat+ Électricité (Base)",
+   "page": "https://www.dyneff-elec-gaz.fr/offres/contrat-electricite/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "base"
+   ],
+   "dernier": true
+  },
+  {
+   "k": "dyneff",
    "offre": "Contrat+ Électricité (heures pleines / creuses)",
-   "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf",
-   "type": "info"
+   "page": "https://www.dyneff-elec-gaz.fr/offres/contrat-electricite/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "pleines"
+   ],
+   "dernier": true
+  },
+  {
+   "k": "dyneff",
+   "offre": "Contrat+ Gaz 15 % Vert",
+   "page": "https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "15% gaz vert"
+   ],
+   "dernier": true
+  },
+  {
+   "k": "dyneff",
+   "offre": "Contrat+ Gaz 55 % Vert",
+   "page": "https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "55% gaz vert"
+   ],
+   "dernier": true
+  },
+  {
+   "k": "dyneff",
+   "offre": "Contrat+ Gaz 100 % Vert",
+   "page": "https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/",
+   "type": "info",
+   "contient": [
+    "grille",
+    "100% gaz vert"
+   ],
+   "dernier": true
   }
  ]
 }
