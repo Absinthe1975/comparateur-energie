@@ -1232,14 +1232,14 @@ function renderPrimes() {
     if (rank[x.st] !== rank[y.st]) return rank[x.st] - rank[y.st];
     return (y.fn + y.pn) - (x.fn + x.pn);
   });
-  var h = "<thead><tr><th>Fournisseur</th><th>Prime parrain</th><th>Prime filleul</th><th>Détail</th><th>Fiabilité</th><th>Source et date</th></tr></thead><tbody>";
+  var h = "<thead><tr><th>Fournisseur</th><th>Prime parrain</th><th>Prime filleul</th><th>Détail</th><th>Fiabilité</th></tr></thead><tbody>";
   keys.forEach(function (k) {
     var p = PRIMES[k];
     var badge = p.st === "ok" ? '<span class="badge">Confirmée en octobre 2026</span>' : p.st === "check" ? '<span class="badge check">À vérifier</span>' : '<span class="badge none">Aucune prime</span>';
     h += '<tr><td><div class="prov">' + nomLienK(k, p.name) + '</div><div class="offer">' + esc(p.en) + '</div></td>'
       + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.p || "—") + '</td>'
       + '<td class="num" style="white-space:normal;font-family:var(--font-body)">' + esc(p.f || "—") + '</td>'
-      + '<td class="offer det">' + esc(p.valid) + '</td><td>' + badge + '</td><td class="src">' + (p.s ? srcLink(p.s) + '<br><span class="offer">' + esc(p.d) + '</span>' : '<span class="offer">Aucun programme relevé</span>') + '</td></tr>';
+      + '<td class="offer det">' + esc(p.valid) + '</td><td>' + badge + '</td></tr>';
   });
   $("t-prime").innerHTML = h + "</tbody>";
 }
