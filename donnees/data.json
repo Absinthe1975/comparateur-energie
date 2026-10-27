@@ -85,13 +85,13 @@
    "f": "40 €",
    "pn": 50,
    "fn": 40,
-   "valid": "Offre de parrainage non publiée sur le site public ; réservée exclusivement à l'Espace Client connecté. Montants d'une source secondaire (Selectra), jugés cohérents.",
+   "valid": "Offre de parrainage non publiée sur le site public ; réservée exclusivement à l'Espace Client connecté. Les montants viennent d'une page d'avril 2026 ; la même page, mise à jour le 16 octobre 2026, indique désormais qu'aucun programme n'est proposé. Montants non confirmés",
    "st": "check",
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/plenitude/parrainage"
    ],
-   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+   "d": "page du 16 oct. 2026, relevé le 27 oct. 2026"
   },
   "ekw": {
    "name": "Ekwateur",
