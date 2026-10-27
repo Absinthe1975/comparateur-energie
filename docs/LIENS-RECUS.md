@@ -286,3 +286,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Dyneff, grilles gaz 15 %, 55 %, 100 % renouvelable (oct. 2026) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf · https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf · https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
 - Dyneff, fiche descriptive gaz vert : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/FICHE-DESCRIPTIVE-Mon-contrat-gaz-vert-PART.pdf
 - Dyneff, conditions générales de vente gaz naturel : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/CONDITIONS-GENERALES-VENTES-Gaz-Naturel-PART.pdf
+- Octopus, OctoSaisons (ex-OctoTempo), article Frandroid d'octobre 2026 : https://www.frandroid.com/survoltes/energie/3299115_16h-creuses-par-jour-et-jours-rouges-a-11-octopus-attaque-fort-le-tempo-dedf
