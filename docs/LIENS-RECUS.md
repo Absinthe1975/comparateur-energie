@@ -181,6 +181,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/octopus-energy/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/octopus-energy/parrainage
 - source : hellowatt.fr (OctoEco Fixe + Gaz Fixe) : https://www.hellowatt.fr/
+- parrainage : Grille tarifaire officielle Octopus (1er août 2026), page 4 : https://octopusenergy.fr/octosaisons
 
 ### OHM Énergie
 - site du fournisseur : https://www.ohm-energie.com/
