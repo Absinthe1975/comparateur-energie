@@ -966,17 +966,6 @@ var SRC = {
   refelec: ["Tarif réglementé, via Selectra", "https://www.fournisseurs-electricite.com/contrat-electricite/prix"]
 };
 function srcLink(a) { return '<a href="' + a[1] + '" target="_blank" rel="noopener">' + esc(a[0]) + "</a>"; }
-function srcCell(kind, r) {
-  var a = r.s || (r.ref ? (kind === "elec" ? SRC.refelec : SRC.refgaz) : SRC[kind]);
-  var dk = r.d || DATA_LABEL;
-  var da = kind === "elec" ? ABO_D[r.k] : null;
-  var d = "relevé le " + dk;
-  if (!r.ref && da && da !== dk) d = "kWh relevé le " + dk + ", abonnement le " + da;
-  if (!r.ref && kind === "gaz") d = "kWh relevé le " + dk + ", abonnement non relu automatiquement";
-  var est = "";
-  if (!r.ref && r._est) est = kind === "elec" ? " · abonnement estimé (écart du tarif réglementé)" : " · prix du kWh estimé d'après le prix repère";
-  return '<div class="offer src" title="' + esc(d + est) + '">Source : ' + srcLink(a) + "</div>";
-}
 function staleCheck() {
   var days = (Date.now() - Date.parse(DATA_DATE)) / 86400000;
   var el = $("stale");
@@ -1219,7 +1208,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else if (Math.round(diff) === 0) d = "0 €";
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
-    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + srcCell(kind, r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
       + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong>' + miniBar(r) + '</td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td></tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
