@@ -162,7 +162,7 @@ table.apps { min-width: 520px; }
 .logt-bar span { min-width: 0; }
 .logt-bar button { flex: none; min-height: 44px; padding: 8px 14px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: #fff; font: inherit; cursor: pointer; }
 .linkbtn { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
-.src { font-size: 13px; min-width: 8rem; }
+.src { font-size: 12.5px; }
 .todo { background: var(--warn-soft); color: var(--warn); padding: 0 4px; border-radius: 3px; }
 .apps td { vertical-align: middle; }
 .apps input { width: 5.5rem; }
@@ -975,7 +975,7 @@ function srcCell(kind, r) {
   if (!r.ref && kind === "gaz") d = "kWh relevé le " + dk + ", abonnement non relu automatiquement";
   var est = "";
   if (!r.ref && r._est) est = kind === "elec" ? " · abonnement estimé (écart du tarif réglementé)" : " · prix du kWh estimé d'après le prix repère";
-  return '<td class="src">' + srcLink(a) + '<br><span class="offer">' + d + est + "</span></td>";
+  return '<div class="offer src" title="' + esc(d + est) + '">Source : ' + srcLink(a) + "</div>";
 }
 function staleCheck() {
   var days = (Date.now() - Date.parse(DATA_DATE)) / 86400000;
@@ -1211,7 +1211,7 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
   if (isFinite(mineV) && mineV > 0) { var eco = mineV - bestRow._tot; mineTxt = eco > 0 ? " Par rapport à votre facture actuelle (" + fmtEur0.format(mineV) + "), vous économiseriez environ " + fmtEur0.format(eco) + " par an." : " Votre facture actuelle (" + fmtEur0.format(mineV) + ") est déjà au niveau de la moins chère, ou en dessous."; }
   if (bel) bel.innerHTML = "<strong>La moins chère : " + nomLien(bestRow) + "</strong> (" + esc(bestRow.offer) + "), " + fmtEur0.format(bestRow._tot) + " par an. "
     + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que " + refName + "." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que " + refName + "." : "C'est le même montant que " + refName + ".") + (bestRow.niv === "officiel" ? "" : " Son prix est à confirmer auprès du fournisseur.") + mineTxt;
-  var h = "<thead><tr><th>Fournisseur et offre</th><th class=\"num\">kWh TTC</th><th class=\"num\">Consommation par an</th><th class=\"num\">Abonnement par an</th><th class=\"num\">" + sortBtn("prix", "Total par an", sortKey) + "</th><th class=\"num\">Écart</th><th>Prime de parrainage<br>" + sortBtn("parrain", "Parrain", sortKey) + " " + sortBtn("filleul", "Filleul", sortKey) + "</th><th>Source et date</th></tr></thead><tbody>";
+  var h = "<thead><tr><th>Fournisseur et offre</th><th class=\"num\">kWh TTC</th><th class=\"num\">Consommation par an</th><th class=\"num\">Abonnement par an</th><th class=\"num\">" + sortBtn("prix", "Total par an", sortKey) + "</th><th class=\"num\">Écart</th><th>Prime de parrainage<br>" + sortBtn("parrain", "Parrain", sortKey) + " " + sortBtn("filleul", "Filleul", sortKey) + "</th></tr></thead><tbody>";
   all.forEach(function (r) {
     var diff = r._tot - refTot;
     var d;
@@ -1219,8 +1219,8 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     else if (Math.round(diff) === 0) d = "0 €";
     else d = (diff < 0 ? "−" : "+") + fmtEur0.format(Math.abs(diff));
     var cls = r.ref || Math.round(diff) === 0 ? "" : diff < 0 ? "delta-good" : "delta-bad";
-    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
-      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong>' + miniBar(r) + '</td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td>' + srcCell(kind, r) + '</tr>';
+    h += '<tr class="' + (r.ref ? "ref" : "") + '"><td><div class="prov">' + nomLien(r) + (r.ref ? '<span class="tag">Repère</span>' : r === bestRow || (r.name === bestRow.name && r.offer === bestRow.offer) ? '<span class="tag best">Moins chère</span>' : "") + '</div><div class="offer">' + esc(r.offer) + '</div>' + nivBadge(r) + tagsLine(r) + srcCell(kind, r) + (r.ref && kind === "elec" && parseInt(kva, 10) >= 9 ? '<div class="offer"><span class="badge check">Fermé à la souscription (clients actuels)</span></div>' : "") + '</td>'
+      + '<td class="num">' + fmtKwh.format(r[field]) + (kind === "gaz" && r._est ? " *" : "") + '</td><td class="num">' + fmtEur0.format(r._cons) + '</td><td class="num">' + fmtEur2.format(r._abo) + (r._est && kind === "elec" ? " *" : "") + '</td><td class="num">' + confHtml(r) + '<strong>' + fmtEur0.format(r._tot) + '</strong>' + miniBar(r) + '</td><td class="num ' + cls + '">' + d + '</td><td>' + (r.ref && !r.k ? '<div class="prime"><span class="none">Sans objet</span></div>' : primeCell(r.k)) + '</td></tr>';
   });
   $(tableId).innerHTML = h + "</tbody>";
 }
