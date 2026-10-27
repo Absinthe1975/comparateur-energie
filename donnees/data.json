@@ -100,13 +100,15 @@
    "f": "Jusqu'à 25 € (150 kWh offerts)",
    "pn": 0,
    "fn": 25,
-   "valid": "Page officielle : « jusqu'à 25 € offerts sur la première facture du filleul », soit 150 kWh (calcul au prix fixe de février 2026, 6 kVA). Le règlement (janv. 2026) précise que les 150 kWh sont acquis après 2 mois de contrat, sans impayé ni résiliation. Le règlement (art. 2) ne prévoit un avantage que pour le filleul : prime du parrain non indiquée",
+   "valid": "Page officielle : « jusqu'à 25 € offerts sur la première facture du filleul », soit 150 kWh (calcul au prix fixe de février 2026, 6 kVA). Le règlement (janv. 2026) précise que les 150 kWh sont acquis après 2 mois de contrat, sans impayé ni résiliation. Le règlement (art. 2) ne prévoit un avantage que pour le filleul. Selectra (mai 2026) annonce pour le parrain 150 Jouls, une monnaie interne utilisable dans la boutique Ekwateur, sans montant en euros",
    "st": "check",
    "s": [
     "Page parrainage Ekwateur",
     "https://ekwateur.fr/notre-ecosysteme-parrainage/",
     "Règlement officiel Ekwateur",
-    "https://ekwateur.fr/reglements-jeux-concours-operations/"
+    "https://ekwateur.fr/reglements-jeux-concours-operations/",
+    "Selectra, parrainage Ekwateur",
+    "https://selectra.info/energie/fournisseurs/ekwateur/parrainage"
    ],
    "d": "page et règlement lus le 26 oct. 2026"
   },
@@ -192,13 +194,13 @@
    "f": "Prime surprise (jusqu'à 60 €)",
    "pn": 0,
    "fn": 0,
-   "valid": "Montant non communiqué, déduit de la facture de régularisation dans la limite de 60 €",
+   "valid": "Montant non communiqué : jusqu'à 60 € à se partager entre parrain et filleul, dans une proportion fixée par ilek. La prime est convertie en kWh et ne peut que réduire la prochaine facture de régularisation (pas de remboursement en cas de trop-perçu). Crédit 1 à 3 mois après l'activation, jusqu'à 50 filleuls par an",
    "st": "check",
    "s": [
     "Selectra",
     "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
    ],
-   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+   "d": "page consultée le 27 oct. 2026"
   },
   "geg": {
    "name": "GEG",
