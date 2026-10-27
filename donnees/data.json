@@ -158,17 +158,17 @@
   "happe": {
    "name": "Happ-e",
    "en": "Électricité et gaz",
-   "p": "20 à 40 € en carte Amazon",
-   "f": "20 à 40 € en carte Amazon",
-   "pn": 40,
-   "fn": 40,
-   "valid": "Le montant varie. Une seule source (Selectra)",
+   "p": "20 € par contrat (chèque-cadeau)",
+   "f": "20 € par contrat (chèque-cadeau)",
+   "pn": 20,
+   "fn": 20,
+   "valid": "Chèque-cadeau électronique de 20 € par contrat signé pour le parrain et pour le filleul (40 € chacun avec un duo électricité + gaz), et non une remise sur la facture. Jusqu'à 10 parrainages par an ; envoi sous 30 jours maximum. Source : un comparateur (Hellowatt), pas la page de Happ-e",
    "st": "check",
    "s": [
-    "Selectra",
-    "https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz"
+    "Hellowatt",
+    "https://www.hellowatt.fr/fournisseurs/happ-e/code-promo-happe"
    ],
-   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+   "d": "page consultée le 27 oct. 2026"
   },
   "llum": {
    "name": "LLUM",

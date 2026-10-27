@@ -74,13 +74,11 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ### Dyneff
 - site du fournisseur : https://www.dyneff.fr/
-- grille : Contrat+ Électricité (Base) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf
-- grille : Contrat+ Électricité (heures pleines / creuses) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf
+- grille : Contrat+ Électricité (Base) : https://www.dyneff-elec-gaz.fr/offres/contrat-electricite/
+- grille : Contrat+ Gaz 15 % Vert : https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/dyneff/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs
-- source : Grille officielle Dyneff, gaz 15 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 15 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf
-- source : Grille officielle Dyneff, gaz 55 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 55 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf
-- source : Grille officielle Dyneff, gaz 100 % renouvelable (1er oct. 2026, valable le mois en cours) (Gaz 100 % renouvelable, prix fixe 1 an) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
+- source : Grille officielle Dyneff (1er août 2026) (Contrat+ Électricité) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf
 
 ### EDF
 - site du fournisseur : https://particulier.edf.fr/
@@ -143,7 +141,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/happ-e/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/happ-e/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/happ-e/parrainage
-- parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
+- parrainage : Hellowatt : https://www.hellowatt.fr/fournisseurs/happ-e/code-promo-happe
 
 ### ilek
 - site du fournisseur : https://www.ilek.fr/
