@@ -70,13 +70,13 @@
    "f": "40 €",
    "pn": 40,
    "fn": 40,
-   "valid": "Montant relevé sur plusieurs comparateurs (Kelwatt, Selectra, Vitepromo), pas sur le site d'Octopus",
+   "valid": "Programme officiel publié dans la grille tarifaire d'Octopus (1er août 2026) : 40 € dans la cagnotte du parrain et 40 € pour le filleul dès l'activation du contrat, sans limite de filleuls",
    "st": "ok",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/octopus-energy/parrainage"
+    "Grille tarifaire officielle Octopus (1er août 2026), page 4",
+    "https://octopusenergy.fr/octosaisons"
    ],
-   "d": "page du 12 mai 2026, relevé le 10 oct. 2026"
+   "d": "grille du 1er août 2026, relevée le 27 oct. 2026"
   },
   "plen": {
    "name": "Plenitude",
