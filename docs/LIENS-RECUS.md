@@ -288,3 +288,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Dyneff, fiche descriptive gaz vert : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/FICHE-DESCRIPTIVE-Mon-contrat-gaz-vert-PART.pdf
 - Dyneff, conditions générales de vente gaz naturel : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/03/CONDITIONS-GENERALES-VENTES-Gaz-Naturel-PART.pdf
 - Octopus, OctoSaisons (ex-OctoTempo), article Frandroid d'octobre 2026 : https://www.frandroid.com/survoltes/energie/3299115_16h-creuses-par-jour-et-jours-rouges-a-11-octopus-attaque-fort-le-tempo-dedf
+- EDF Tempo, prix depuis le 1er août 2026 (source secondaire) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs/tempo/prix
+- Tempo, évolution des jours rouges au 1er novembre 2026 (MoneyVox) : https://www.moneyvox.fr/energie/actualites/110948/electricite-ce-qui-va-changer-pour-les-jours-rouges-de-option-tempo-edf-et-des-eld
+- OHM Énergie, Extra Eco Fixe présentée comme alternative à Tempo (Selectra) : https://selectra.info/energie/actualites/marche/alternative-tempo-offre-0-18-enterre-jours-rouges
