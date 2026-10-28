@@ -491,14 +491,13 @@ code { overflow-wrap: anywhere; }
     <div class="bar" style="position:static">
       <div class="field"><label for="sa-kva">Puissance</label><select id="sa-kva"></select></div>
       <div class="field"><label for="sa-conso">Consommation (kWh par an)</label><input id="sa-conso" type="number" min="500" max="30000" step="100" value="5700"></div>
-      <div class="field"><label for="sa-hiver">Part en hiver, novembre à mars (%)</label><input id="sa-hiver" type="number" min="0" max="100" step="1" value="55"></div>
-      <div class="field"><label for="sa-rouge">Part les jours rouges (%)</label><input id="sa-rouge" type="number" min="0" max="30" step="0.5" value="7"></div>
-      <div class="field"><label for="sa-hce">Part en heures creuses, été (%)</label><input id="sa-hce" type="number" min="0" max="100" step="1" value="50"></div>
-      <div class="field"><label for="sa-blanc">EDF Tempo : part les jours blancs (%)</label><input id="sa-blanc" type="number" min="0" max="40" step="0.5" value="12"></div>
-      <div class="field"><label for="sa-hct">EDF Tempo : part en heures creuses (%)</label><input id="sa-hct" type="number" min="0" max="100" step="1" value="35"></div>
-      <div class="field"><label for="sa-hch">Part en heures creuses, hiver et jours rouges (%)</label><input id="sa-hch" type="number" min="0" max="100" step="1" value="40"></div>
+      <div class="field"><label for="sa-chauf">Chauffage</label><select id="sa-chauf"><option value="elec" selected>Électrique</option><option value="autre">Gaz, bois, autre</option></select></div>
+      <div class="field"><label for="sa-jour">Votre journée</label><select id="sa-jour"><option value="absent" selected>Absent en journée (travail)</option><option value="present">Souvent présent en journée</option></select></div>
+      <div class="field"><label for="sa-ce">Chauffe-eau électrique</label><select id="sa-ce"><option value="non" selected>Non, ou à toute heure</option><option value="nuit">Oui, programmé la nuit</option></select></div>
+      <div class="field"><label for="sa-ve">Voiture électrique</label><select id="sa-ve"><option value="non" selected>Non</option><option value="nuit">Oui, rechargée la nuit</option></select></div>
     </div>
     <div class="callout" id="sa-res" aria-live="polite"></div>
+    <p class="note" id="sa-hyp"></p>
     <div class="tablewrap"><table id="t-saisons"></table></div>
     <h3>Les grilles utilisées</h3>
     <div class="tablewrap"><table id="t-saisons-grille"></table></div>
@@ -514,8 +513,8 @@ code { overflow-wrap: anywhere; }
       <tr><td><div class="prov">Enercoop</div><div class="offer">Flexibilité Nuit &amp; week-end, 2 saisons, jours de pointe</div></td><td class="offer">Heures creuses de 23 h à 6 h, le week-end et les jours fériés ; ou heures creuses variant avec la saison ; ou jours de pointe.</td><td class="offer">Grille officielle du 1er août 2026 reçue, non modélisée ici. L'offre « 2 saisons » est fermée aux nouveaux clients depuis le 4 juin 2025.</td><td class="offer"><a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener noreferrer">Annexes tarifaires Enercoop</a></td></tr>
       <tr><td><div class="prov">OHM Énergie</div><div class="offer">Extra Eco Fixe</div></td><td class="offer">Deux prix (heures pleines et creuses), sans jour rouge ; prix bloqué 1 an. Présentée comme alternative à Tempo.</td><td class="offer">Février 2026, TTC : 0,1824 € en heures pleines, 0,1407 € en heures creuses.</td><td class="offer"><a href="https://selectra.info/energie/actualites/marche/alternative-tempo-offre-0-18-enterre-jours-rouges" target="_blank" rel="noopener noreferrer">Selectra</a></td></tr>
     </tbody></table></div>
-    <p class="note">Hypothèses du calcul d'OctoSaisons : la part en hiver est celle de la consommation hors jours rouges ; la part en heures creuses s'applique à chaque période. Pour un logement chauffé à l'électricité, Octopus et Selectra retiennent environ 7 % de la consommation les jours rouges. Les heures creuses d'OctoSaisons sont plus nombreuses l'été (16 heures par jour) que l'hiver (10 heures par jour). Les plages horaires sont à confirmer sur la fiche de l'offre.</p>
-    <p class="note"><strong>EDF Tempo</strong> (300 jours bleus, 43 blancs, 22 rouges, heures creuses de 22 h à 6 h) : prix TTC en vigueur depuis le 1er août 2026, relevés sur une <a href="https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs/tempo/prix" target="_blank" rel="noopener noreferrer">page de comparateur</a> (source secondaire, la grille officielle d'EDF reste à saisir). Hypothèses propres à Tempo : 12 % de la consommation les jours blancs et 35 % en heures creuses, à ajuster ; le reste est consommé les jours bleus. Les jours rouges d'EDF seront mieux répartis dès le 1er novembre, ce qui peut changer la part réelle. <strong>Source OctoSaisons :</strong> <a href="https://octopusenergy.fr/octosaisons" target="_blank" rel="noopener noreferrer">grille tarifaire officielle d'Octopus Energy du 1er août 2026</a>, prix TTC. Offre de 2 ans, résiliable sans frais, prix hors taxes bloqués pendant 2 ans.</p>
+    <p class="note">Comment le calcul est fait : votre journée type est découpée heure par heure (hypothèse de ce site), puis la part de consommation qui tombe dans les heures creuses de chaque offre est calculée avec ses plages horaires. Un chauffe-eau programmé la nuit est compté pour 12 % de la consommation et une voiture rechargée la nuit pour 20 %, entre 23 h et 5 h. La part en hiver est celle de la consommation hors jours rouges. Pour un logement chauffé à l'électricité, Octopus et Selectra retiennent environ 7 % de la consommation les jours rouges. Les heures creuses d'OctoSaisons sont plus nombreuses l'été (16 heures par jour) que l'hiver (10 heures par jour). Les plages horaires sont à confirmer sur la fiche de l'offre.</p>
+    <p class="note"><strong>EDF Tempo</strong> (300 jours bleus, 43 blancs, 22 rouges, heures creuses de 22 h à 6 h) : prix TTC en vigueur depuis le 1er août 2026, relevés sur une <a href="https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs/tempo/prix" target="_blank" rel="noopener noreferrer">page de comparateur</a> (source secondaire, la grille officielle d'EDF reste à saisir). Le reste de la consommation est supposé les jours bleus. Les jours rouges d'EDF seront mieux répartis dès le 1er novembre, ce qui peut changer la part réelle. <strong>Source OctoSaisons :</strong> <a href="https://octopusenergy.fr/octosaisons" target="_blank" rel="noopener noreferrer">grille tarifaire officielle d'Octopus Energy du 1er août 2026</a>, prix TTC. Offre de 2 ans, résiliable sans frais, prix hors taxes bloqués pendant 2 ans.</p>
   </section>
 
   <section class="panel" id="p-eau" role="tabpanel" aria-labelledby="tab-eau" hidden>
@@ -626,7 +625,7 @@ code { overflow-wrap: anywhere; }
         <li><strong><a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> :</strong> Elec Référence 3 ans à confirmer (pas de grille officielle reçue). Promotion de deux mois d'abonnement offerts, jusqu'au 7 novembre 2026 : affichée sous les offres ENGIE, hors classement ; supprimer sa ligne dans « promos » après cette date.</li>
         <li><strong><a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> :</strong> la grille d'août 2026 est lue (0,19 €/kWh, abonnement 190,32 € en 6 kVA), mais ce prix ne vaut que pour un compteur non communicant. Avec un Linky, LLUM applique une grille par saison et heures pleines / creuses (Base : 0,22276 € en heures pleines, 0,15064 € en heures creuses), non modélisée. À décider : modéliser une moyenne, ou afficher une mention.</li>
         <li><strong><a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a> (Sérénité) :</strong> aucune grille officielle reçue.</li>
-        <li><strong><a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> :</strong> grilles de l'offre Cocon fixe (fiche reçue, sans prix) et d'Intelligent Octopus. Pour l'offre saisonnière, le prix moyen suppose 58 % de la consommation en hiver : à confirmer ou corriger. Nouvelle offre à étudier : OctoSaisons (ex-OctoTempo, renommée le 21 octobre 2026), de type Tempo avec prix par couleur de jour (bleu, blanc, rouge) et heures pleines / creuses, prix hors taxes bloqués 2 ans. La grille officielle du 1er août 2026 est reçue et résumée dans docs/OCTOSAISONS-GRILLE.md (six prix du kWh : hiver, été et jours rouges, en heures pleines et creuses ; abonnement de 1 à 36 kVA). Un onglet provisoire « Saisons (essai) » calcule OctoSaisons et EDF Tempo (prix d'une source secondaire), avec vos réglages (part en hiver, jours rouges, heures creuses) ; il n'est pas dans le classement général. À faire : saisir la grille Tempo officielle d'EDF (remplacer la source secondaire), valider les hypothèses (7 % de jours rouges, 55 % en hiver), puis décider d'intégrer ces offres au classement si d'autres fournisseurs adoptent ce principe.</li>
+        <li><strong><a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> :</strong> grilles de l'offre Cocon fixe (fiche reçue, sans prix) et d'Intelligent Octopus. Pour l'offre saisonnière, le prix moyen suppose 58 % de la consommation en hiver : à confirmer ou corriger. Nouvelle offre à étudier : OctoSaisons (ex-OctoTempo, renommée le 21 octobre 2026), de type Tempo avec prix par couleur de jour (bleu, blanc, rouge) et heures pleines / creuses, prix hors taxes bloqués 2 ans. La grille officielle du 1er août 2026 est reçue et résumée dans docs/OCTOSAISONS-GRILLE.md (six prix du kWh : hiver, été et jours rouges, en heures pleines et creuses ; abonnement de 1 à 36 kVA). Un onglet provisoire « Saisons (essai) » calcule OctoSaisons et EDF Tempo (prix d'une source secondaire) à partir de vos usages (chauffage, journée type, chauffe-eau et voiture électrique la nuit), convertis en parts de consommation par un profil horaire supposé par le site ; il n'est pas dans le classement général. À faire : saisir la grille Tempo officielle d'EDF (remplacer la source secondaire), valider les hypothèses (7 % de jours rouges, 55 % en hiver), puis décider d'intégrer ces offres au classement si d'autres fournisseurs adoptent ce principe.</li>
         <li><strong><a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> :</strong> le prix n'apparaît qu'à la souscription (code postal demandé), sans grille publique. Il faut un PDF de grille, ou renoncer à « Grille officielle » pour cet acteur.</li>
         <li><strong><a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a> (Essentielle Verte) :</strong> le prix est une formule (kWh HT à 95 % du tarif réglementé, abonnement identique). Notre 0,1919 €/kWh en 6 kVA est cohérent mais calculé par nous. À décider : l'afficher comme « calculé selon la formule officielle (tarif réglementé −5 %) » et le recalculer à chaque mise à jour du tarif réglementé, ou le laisser « À confirmer ».</li>
         <li><strong><a href="https://www.dyneff-elec-gaz.fr/offres/contrat-electricite/" target="_blank" rel="noopener">Dyneff</a> :</strong> grille du 1er août 2026 intégrée (prix indexé sur le marché, sans engagement). Gaz intégré (voir Gaz).</li>
@@ -2023,6 +2022,35 @@ function tempoCout(kva, C, r, b, hc) {
   var kwh = r * m(o.hp_r, o.hc_r) + b * m(o.hp_w, o.hc_w) + Math.max(0, 1 - r - b) * m(o.hp_b, o.hc_b);
   return { abo: ab * 12, conso: C * kwh, total: ab * 12 + C * kwh, kwh: kwh };
 }
+// De vos usages à une répartition de la consommation. Hypothèses sans source officielle : ordres de grandeur, détaillés sous le calcul.
+// Profil type d'une journée : poids relatifs de chaque heure (0 h à 23 h) ; le chauffe-eau ou la voiture rechargés la nuit ajoutent une part de la consommation entre 23 h et 5 h.
+var SA_JOUR = {
+  absent:  [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 3, 5, 3, 2, 2, 2, 2, 2, 2, 2, 2, 4, 6, 7, 7, 6, 4, 2],
+  present: [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 3, 4, 4, 4, 4, 5, 5, 4, 4, 4, 4, 5, 6, 7, 7, 6, 4, 2]
+};
+var SA_NUIT = [23, 0, 1, 2, 3, 4];
+function saisonsPoids(jour, ce, ve) {
+  var base = SA_JOUR[jour] || SA_JOUR.absent, tot = base.reduce(function (a, b) { return a + b; }, 0);
+  var plus = (ce ? 0.12 : 0) + (ve ? 0.2 : 0);
+  var out = base.map(function (v) { return (1 - plus) * v / tot; });
+  SA_NUIT.forEach(function (h) { out[h] += plus / SA_NUIT.length; });
+  return out;
+}
+function saisonsPart(poids, heures) { return heures.reduce(function (a, h) { return a + poids[h % 24]; }, 0); }
+function plage(d, f) { var o = []; for (var h = d; h !== f; h = (h + 1) % 24) o.push(h); return o; }
+function saisonsUsage(chauf, jour, ce, ve) {
+  var pd = saisonsPoids(jour, ce, ve);
+  var he = saisonsPart(pd, plage(21, 7).concat(plage(11, 17)));   // OctoSaisons, été : 21 h à 7 h et 11 h à 17 h
+  var hh = saisonsPart(pd, plage(21, 7));                          // OctoSaisons, hiver et jours rouges : 21 h à 7 h
+  var hct = saisonsPart(pd, plage(22, 6));                         // Tempo d'EDF : 22 h à 6 h
+  // Saisons : consommation répartie selon les jours si le chauffage n'est pas électrique ; plus d'hiver et 7 % de jours rouges (valeur citée par Octopus et Selectra) s'il l'est.
+  var elec = chauf === "elec";
+  var w = elec ? 0.55 : 129 / 343, r = elec ? 0.07 : 22 / 365, b = elec ? 0.12 : 43 / 365;
+  var f = function (x) { return Math.round(x * 100) + " %"; };
+  var txt = "<strong>Ce que le site en déduit</strong> (ordres de grandeur, pas une mesure) : " + f(r) + " de votre consommation les 22 jours rouges, " + f(b) + " les jours blancs d'EDF, " + f(w) + " de la consommation hors jours rouges en hiver (novembre à mars). " +
+    "Part en heures creuses : " + f(he) + " pour OctoSaisons l'été, " + f(hh) + " pour OctoSaisons l'hiver et les jours rouges, " + f(hct) + " pour Tempo.";
+  return { w: w, r: r, b: b, he: he, hh: hh, hct: hct, txt: txt };
+}
 function saisonsCout(kva, C, w, r, he, hh) {
   var o = SAISONS, ab = o.abo[kva] * 12;
   var hiv = hh * o.hc_h + (1 - hh) * o.hp_h, ete = he * o.hc_e + (1 - he) * o.hp_e, rou = hh * o.hc_r + (1 - hh) * o.hp_r;
@@ -2039,13 +2067,14 @@ function renderSaisons() {
     sel.innerHTML = ks.map(function (k) { return '<option value="' + k + '"' + (k === "6" ? " selected" : "") + ">" + k + " kVA</option>"; }).join("");
   }
   var kva = sel.value || "6";
-  function pc(id, def) { var v = parseFloat($(id).value); return isFinite(v) ? Math.min(100, Math.max(0, v)) / 100 : def; }
   var C = parseFloat($("sa-conso").value); if (!isFinite(C) || C < 0) C = 0;
-  var w = pc("sa-hiver", 0.55), r = pc("sa-rouge", 0.07), he = pc("sa-hce", 0.5), hh = pc("sa-hch", 0.4);
+  var U = saisonsUsage($("sa-chauf").value, $("sa-jour").value, $("sa-ce").value === "nuit", $("sa-ve").value === "nuit");
+  var w = U.w, r = U.r, he = U.he, hh = U.hh;
   var res = saisonsCout(kva, C, w, r, he, hh);
   var kk = kwhField(kva), trvKwh = ELEC_REF[kk], trvAbo = TRV_ABO[kva];
   var trv = typeof trvAbo === "number" ? trvAbo + C * trvKwh : null;
-  var tp = tempoCout(kva, C, r, pc("sa-blanc", 0.12), pc("sa-hct", 0.35));
+  var tp = tempoCout(kva, C, r, U.b, U.hct);
+  $("sa-hyp").innerHTML = U.txt;
   var rows = [{ n: "OctoSaisons (Octopus Energy)", t: res.total, k: res.kwh }];
   if (tp) rows.push({ n: "Tempo (EDF)", t: tp.total, k: tp.kwh });
   if (trv !== null) rows.push({ n: "Tarif réglementé de base (EDF)", t: trv, k: trvKwh, ref: true });
@@ -2079,7 +2108,7 @@ function renderSaisons() {
   $("t-saisons-grille").innerHTML = g;
   $("t-saisons").innerHTML = t;
 }
-["sa-kva", "sa-conso", "sa-hiver", "sa-rouge", "sa-blanc", "sa-hct", "sa-hce", "sa-hch"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderSaisons); e.addEventListener("change", renderSaisons); } });
+["sa-kva", "sa-conso", "sa-chauf", "sa-jour", "sa-ce", "sa-ve"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderSaisons); e.addEventListener("change", renderSaisons); } });
 
 /* ---------- Chargement de data.json ---------- */
 // Les données intégrées plus haut servent de repli (ouverture du fichier sans serveur, ou data.json absent).
