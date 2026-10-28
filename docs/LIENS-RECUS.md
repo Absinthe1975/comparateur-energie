@@ -291,3 +291,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - EDF Tempo, prix depuis le 1er août 2026 (source secondaire) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs/tempo/prix
 - Tempo, évolution des jours rouges au 1er novembre 2026 (MoneyVox) : https://www.moneyvox.fr/energie/actualites/110948/electricite-ce-qui-va-changer-pour-les-jours-rouges-de-option-tempo-edf-et-des-eld
 - OHM Énergie, Extra Eco Fixe présentée comme alternative à Tempo (Selectra) : https://selectra.info/energie/actualites/marche/alternative-tempo-offre-0-18-enterre-jours-rouges
+- Offres « heures super creuses » : EDF Zen Estival, ENGIE, ilek, Octopus, TotalEnergies (Hellowatt) : https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/
+- Heures super creuses et tarifs saisonniers, rapport du médiateur de l'énergie (MoneyVox) : https://www.moneyvox.fr/energie/actualites/109266/heures-super-creuses-tarifs-saisonniers-ce-quil-faut-savoir-avant-de-souscrire-a-ces-nouvelles-offres-electricite
