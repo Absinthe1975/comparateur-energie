@@ -520,7 +520,7 @@ code { overflow-wrap: anywhere; }
 
   <section class="panel" id="p-pro" role="tabpanel" aria-labelledby="tab-pro" hidden>
     <h2>Offres pour les professionnels (essai)</h2>
-    <p class="lede">Onglet provisoire, pour les professionnels dont la puissance souscrite est de 36 kVA au plus. Les prix sont <strong>hors taxes</strong> : ils additionnent la fourniture, l'acheminement (réseau), les obligations et les garanties d'origine, sans l'accise sur l'électricité, la CTA ni la TVA. Pour l'instant, seules les offres <a class="prov-lien" href="https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels" target="_blank" rel="noopener noreferrer">ENGIE Pro</a> (Référence Pro à prix fixe sur 1, 2 ou 3 ans ; Latitude à prix indexé sur 1 an, avec compteur Linky) sont relevées d'après leurs grilles officielles d'octobre 2026. Les autres fournisseurs s'ajouteront au fil des grilles reçues.</p>
+    <p class="lede">Onglet provisoire, pour les professionnels dont la puissance souscrite est de 36 kVA au plus. Les offres sont classées du prix le plus bas au plus haut. Les prix sont <strong>hors taxes</strong> : ils additionnent la fourniture, l'acheminement (réseau), les obligations et les garanties d'origine, sans l'accise sur l'électricité, la CTA ni la TVA. Pour l'instant, seules les offres <a class="prov-lien" href="https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels" target="_blank" rel="noopener noreferrer">ENGIE Pro</a> (Référence Pro à prix fixe sur 1, 2 ou 3 ans ; Latitude à prix indexé sur 1 an, avec compteur Linky) sont relevées d'après leurs grilles officielles d'octobre 2026. Les autres fournisseurs s'ajouteront au fil des grilles reçues.</p>
     <div class="bar" style="position:static">
       <div class="field"><label for="pro-kva">Puissance</label><select id="pro-kva"></select></div>
       <div class="field"><label for="pro-conso">Consommation (kWh par an)</label><input id="pro-conso" type="number" min="500" max="100000" step="100" value="8000"></div>
@@ -2243,26 +2243,27 @@ function renderPro() {
   rows.forEach(function (r) {
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(r.an === "L" ? "https://pro.engie.fr/electricite-gaz/offre-electricite-prix-indexe-pour-les-professionnels" : PRO_ENGIE.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir l'offre sur le site d'ENGIE Pro (nouvel onglet)\">ENGIE Pro</a></div><div class=\"offer\">" + proNom(r.an) + "</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle d'octobre 2026</span>" + (r.an === "L" ? " <span class=\"badge check\">Prix du mois, il change chaque mois</span>" : "") + "</div>";
-    if (!r.c) t += "<tr><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses pour cette durée.</td></tr>";
-    else t += "<tr><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(r.c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(r.c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(r.c.total) + "</strong></td></tr>";
+    if (!r.c) t += "<tr data-k=\"" + (1e9) + "\"><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses pour cette durée.</td></tr>";
+    else t += "<tr data-k=\"" + (r.c.total) + "\"><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(r.c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(r.c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(r.c.total) + "</strong></td></tr>";
   });
   var cand = ok.filter(function (r) { return r.an !== "L"; }).map(function (r) { return { nom: "ENGIE Pro, " + proNom(r.an), c: r.c }; });
   ["1", "2", "3"].forEach(function (an) {
     var c = belCout(an, kva, C, opt, hc);
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(PRO_BEL.pdf) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir la grille sur le site de La Bellenergie (nouvel onglet)\">La Bellenergie</a></div><div class=\"offer\">" + PRO_BEL.off[an].nom + ", prix fixe, sans engagement</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle du 01/08/2026</span></div>";
-    if (!c) t += "<tr><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
-    else { t += "<tr><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(c.total) + "</strong></td></tr>"; cand.push({ nom: "La Bellenergie, " + PRO_BEL.off[an].nom, c: c }); }
+    if (!c) t += "<tr data-k=\"" + (1e9) + "\"><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
+    else { t += "<tr data-k=\"" + (c.total) + "\"><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(c.total) + "</strong></td></tr>"; cand.push({ nom: "La Bellenergie, " + PRO_BEL.off[an].nom, c: c }); }
   });
   PRO_AUT.forEach(function (o) {
     if (o.opt !== "both" && o.opt !== opt) return;
     var c = autCout(o, kva, C, opt, hc);
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(o.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir la grille sur le site de " + esc(o.four) + " (nouvel onglet)\">" + esc(o.four) + "</a></div><div class=\"offer\">" + esc(o.nom) + "</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle du " + o.date + "</span>" + (o.idx ? " <span class=\"badge check\">Prix indexé, il change avec le tarif réglementé</span>" : "") + "</div>";
-    if (!c) t += "<tr><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
-    else { t += "<tr><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(c.total) + "</strong></td></tr>"; if (!o.idx) cand.push({ nom: o.four + ", " + o.nom, c: c }); }
+    if (!c) t += "<tr data-k=\"" + (1e9) + "\"><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
+    else { t += "<tr data-k=\"" + (c.total) + "\"><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(c.total) + "</strong></td></tr>"; if (!o.idx) cand.push({ nom: o.four + ", " + o.nom, c: c }); }
   });
-  $("t-pro").innerHTML = t + "</tbody>";
+  var trs = (t.match(/<tr data-k="[^"]*">[\s\S]*?<\/tr>/g) || []).sort(function (a, b) { return parseFloat(a.match(/data-k="([^"]*)"/)[1]) - parseFloat(b.match(/data-k="([^"]*)"/)[1]); });
+  $("t-pro").innerHTML = t.slice(0, t.indexOf("<tr data-k=")) + trs.join("") + "</tbody>";
   if (cand.length) {
     var m = cand.reduce(function (a, b) { return b.c.total < a.c.total ? b : a; });
     $("pro-res").innerHTML = "Pour " + fmtInt.format(C) + " kWh par an en " + kva + " kVA (" + (opt === "hphc" ? "heures pleines / creuses, " + fmtInt.format(hc * 100) + " % en heures creuses" : "option Base") + ") : <strong>" + fmtEur2.format(m.c.total) + " par an hors taxes</strong> avec " + m.nom + ", soit " + fmtEur2.format(m.c.total / 12) + " par mois. Seules les offres à prix fixe entrent dans ce calcul, et cinq marques sont relevées : ce n'est pas un classement du marché. Latitude est à prix indexé : son prix de ce mois ne se compare pas à un prix fixe pour toute la durée.";
@@ -2301,7 +2302,7 @@ function renderProGaz() {
   var C = parseFloat($("progaz-conso").value); if (!isFinite(C) || C < 0) C = 0;
   var niv = parseInt($("progaz-niv").value, 10) || 1;
   var t = "<thead><tr><th>Offre</th><th class=\"num\">Prix du kWh hors taxes</th><th class=\"num\">Abonnement par an hors taxes</th><th class=\"num\">Total par an hors taxes</th></tr></thead><tbody>";
-  ["1", "2", "3", "L"].forEach(function (an) {
+  ["1", "2", "3", "L"].sort(function (a, b) { return proGazCout(a, C, niv).total - proGazCout(b, C, niv).total; }).forEach(function (an) {
     var c = proGazCout(an, C, niv), lat = an === "L";
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(lat ? PRO_GAZ.indexe : PRO_GAZ.fixe) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir l'offre sur le site d'ENGIE Pro (nouvel onglet)\">ENGIE Pro</a></div><div class=\"offer\">" + (lat ? "Latitude Gaz, 1 an, prix indexé, compteur Gazpar exigé" : "Activert Gaz, " + an + (an === "1" ? " an" : " ans") + ", prix fixe") + "</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle d'octobre 2026</span>" + (lat ? " <span class=\"badge check\">Prix du mois, il change chaque mois</span>" : "") + "</div>";
