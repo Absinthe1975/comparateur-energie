@@ -362,6 +362,7 @@ code { overflow-wrap: anywhere; }
       <button role="tab" id="tab-gaz" aria-selected="false" tabindex="-1" aria-controls="p-gaz">Gaz</button>
       <button role="tab" id="tab-duo" aria-selected="false" tabindex="-1" aria-controls="p-duo">Élec + Gaz</button>
       <button role="tab" id="tab-saisons" aria-selected="false" tabindex="-1" aria-controls="p-saisons">Saisons (essai)</button>
+      <button role="tab" id="tab-pro" aria-selected="false" tabindex="-1" aria-controls="p-pro">Pro (essai)</button>
       <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
       <button role="tab" id="tab-marche" aria-selected="false" tabindex="-1" aria-controls="p-marche">Marché</button>
@@ -517,6 +518,22 @@ code { overflow-wrap: anywhere; }
     <p class="note"><strong>EDF Tempo</strong> (300 jours bleus, 43 blancs, 22 rouges, heures creuses de 22 h à 6 h) : prix TTC en vigueur depuis le 1er août 2026, relevés sur une <a href="https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs/tempo/prix" target="_blank" rel="noopener noreferrer">page de comparateur</a> (source secondaire, la grille officielle d'EDF reste à saisir). Le reste de la consommation est supposé les jours bleus. Les jours rouges d'EDF seront mieux répartis dès le 1er novembre, ce qui peut changer la part réelle. <strong>Source OctoSaisons :</strong> <a href="https://octopusenergy.fr/octosaisons" target="_blank" rel="noopener noreferrer">grille tarifaire officielle d'Octopus Energy du 1er août 2026</a>, prix TTC. Offre de 2 ans, résiliable sans frais, prix hors taxes bloqués pendant 2 ans.</p>
   </section>
 
+  <section class="panel" id="p-pro" role="tabpanel" aria-labelledby="tab-pro" hidden>
+    <h2>Offres pour les professionnels (essai)</h2>
+    <p class="lede">Onglet provisoire, pour les professionnels dont la puissance souscrite est de 36 kVA au plus. Les prix sont <strong>hors taxes</strong> : ils additionnent la fourniture, l'acheminement (réseau), les obligations et les garanties d'origine, sans l'accise sur l'électricité, la CTA ni la TVA. Pour l'instant, seule l'offre <a class="prov-lien" href="https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels" target="_blank" rel="noopener noreferrer">ENGIE Référence Pro</a> est relevée d'après ses grilles officielles d'octobre 2026. Les autres fournisseurs s'ajouteront au fil des grilles reçues.</p>
+    <div class="bar" style="position:static">
+      <div class="field"><label for="pro-kva">Puissance</label><select id="pro-kva"></select></div>
+      <div class="field"><label for="pro-conso">Consommation (kWh par an)</label><input id="pro-conso" type="number" min="500" max="100000" step="100" value="8000"></div>
+      <div class="field"><label for="pro-opt">Option</label><select id="pro-opt"><option value="base" selected>Base</option><option value="hphc">Heures pleines / heures creuses</option></select></div>
+      <div class="field" id="f-pro-hc" hidden><label for="pro-hc">Part en heures creuses (%)</label><input id="pro-hc" type="number" min="0" max="100" step="5" value="35"></div>
+    </div>
+    <div class="callout" id="pro-res" aria-live="polite"></div>
+    <div class="tablewrap"><table id="t-pro"></table></div>
+    <h3>Détail du calcul, par kWh et par mois</h3>
+    <div class="tablewrap"><table id="t-pro-det"></table></div>
+    <p class="note" id="pro-note"></p>
+  </section>
+
   <section class="panel" id="p-eau" role="tabpanel" aria-labelledby="tab-eau" hidden>
     <h2>Eau</h2>
     <p class="lede">Le prix de l'eau dépend de votre commune. Vous ne pouvez pas changer de fournisseur d'eau : cette page estime un budget, elle ne compare pas des offres. 1 m³ = 1 000 litres ; un foyer de 2 personnes consomme en moyenne une soixantaine de m³ par an.</p>
@@ -620,7 +637,7 @@ code { overflow-wrap: anywhere; }
 
   <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
     <h2>Mémo : ce qu'il reste à faire</h2>
-    <p class="lede">Mémo mis à jour le 27 octobre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Deux sujets sont abandonnés pour le moment : la lecture des factures (trop de formats) et l'onglet « Pro » (grilles hors taxes, puissances au-delà de 36 kVA).</p>
+    <p class="lede">Mémo mis à jour le 27 octobre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Un sujet est abandonné pour le moment : la lecture des factures (trop de formats). L'onglet « Pro » est relancé en essai, avec ENGIE Pro pour commencer.</p>
 
     <div class="card">
       <h3>Électricité <span class="badge check">À faire, au fil de vos envois</span></h3>
@@ -701,6 +718,17 @@ code { overflow-wrap: anywhere; }
         <li><strong><a href="https://www.alterna-energie.fr/" target="_blank" rel="noopener">Alterna</a> :</strong> le duo n'a pas de grille officielle. À décider : retirer ces lignes de l'onglet ou les garder en « À confirmer ».</li>
         <li><strong>Mention « Offre combinée non relevée »</strong> pour les fournisseurs sans duo relevé : proposée, non décidée.</li>
         <li>Les offres combinées ne sont relevées que pour 3, 6 et 9 kVA.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Professionnels (onglet Pro, essai) <span class="badge check">À faire, au fil de vos envois</span></h3>
+      <ul>
+        <li><strong>ENGIE Pro :</strong> Référence Pro 1, 2 et 3 ans saisie d'après les grilles d'octobre 2026 (jusqu'à 36 kVA, hors taxes). À refaire quand ENGIE publie ses grilles de novembre. Le calcul n'inclut pas la réduction de 25 % de la première année (3 ans, jusqu'au 31 octobre 2026).</li>
+        <li><strong>Autres fournisseurs avec une grille Pro déjà repérée, à lire et saisir :</strong> <a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop</a> (grille professionnels de moins de 36 kVA), <a href="https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-professionnels.pdf?r=1" target="_blank" rel="noopener">La Bellenergie</a>, <a href="https://www.gazdebordeaux.fr/documents-contractuels" target="_blank" rel="noopener">Gaz de Bordeaux</a> (CGV Pro), <a href="https://www.energiedici.fr/nos-offres-pour-les-professionnels.html" target="_blank" rel="noopener">Énergie d'ici</a>. Endesa ne propose que des offres professionnelles (à relever).</li>
+        <li><strong>Hors taxes :</strong> l'accise, la CTA et la TVA ne sont pas comptées (le taux d'accise dépend de l'activité). À décider : les ajouter avec un choix « Mon activité », ou laisser le prix hors taxes.</li>
+        <li><strong>Puissances au-delà de 36 kVA</strong> (fiche ENGIE C4, grilles sur devis) : non traitées.</li>
+        <li><strong>Gaz professionnel :</strong> rien relevé pour l'instant.</li>
       </ul>
     </div>
 
@@ -1869,7 +1897,7 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "eau", "abo", "marche", "prime", "memo", "methode", "sources", "stats", "legal"];
+var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "memo", "methode", "sources", "stats", "legal"];
 var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
@@ -2027,6 +2055,7 @@ function refresh() {
   renderDuo();
   renderEau();
   renderSaisons();
+  renderPro();
 }
 
 /* ---------- Offre par saisons (essai) : OctoSaisons ---------- */
@@ -2129,6 +2158,68 @@ function renderSaisons() {
   $("t-saisons").innerHTML = t;
 }
 ["sa-kva", "sa-conso", "sa-chauf", "sa-jour", "sa-ce", "sa-ve"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderSaisons); e.addEventListener("change", renderSaisons); } });
+
+/* ---------- Professionnels (essai) : ENGIE Référence Pro, grilles d'octobre 2026, prix hors taxes ---------- */
+var PRO_ENGIE = {
+  page: "https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels",
+  aboF: 14.08,   // abonnement de la fourniture, €/mois HT, identique pour toutes les puissances
+  four: { "1": { base: 10.497, hp: 11.179, hc: 7.825 }, "2": { base: 9.225, hp: 9.847, hc: 6.893 }, "3": { base: 9.353, hp: 10.080, hc: 7.056 } },   // c€/kWh HT
+  achBase: { abo: { "3": 6.17, "6": 9.02, "9": 11.87, "12": 14.73, "15": 17.58, "18": 20.43, "24": 26.14, "30": 31.84, "36": 37.55 }, kwh: 4.990 },
+  achHphc: { abo: { "3": 6.79, "6": 10.27, "9": 13.74, "12": 17.22, "15": 20.69, "18": 24.17, "24": 31.12, "30": 38.07, "36": 45.02 }, hp: 5.090, hc: 3.610 },
+  oblBase: 1.461, oblHphc: 1.401, go: 0.239
+};
+function proCout(an, kva, C, opt, hc) {
+  var P = PRO_ENGIE, f = P.four[an], ab, kw;
+  if (opt === "hphc") {
+    if (an === "1" && kva === "3") return null;   // heures pleines / creuses non proposées à 3 kVA sur 1 an
+    ab = P.aboF + P.achHphc.abo[kva];
+    kw = (1 - hc) * (f.hp + P.achHphc.hp) + hc * (f.hc + P.achHphc.hc) + P.oblHphc + P.go;
+  } else {
+    ab = P.aboF + P.achBase.abo[kva];
+    kw = f.base + P.achBase.kwh + P.oblBase + P.go;
+  }
+  return { abo: ab * 12, kwh: kw / 100, total: ab * 12 + C * kw / 100, aboMois: ab, kwhFour: opt === "hphc" ? null : f.base };
+}
+var proBuilt = false;
+function renderPro() {
+  if (!$("p-pro")) return;
+  var sel = $("pro-kva");
+  if (!proBuilt) {
+    proBuilt = true;
+    sel.innerHTML = Object.keys(PRO_ENGIE.achBase.abo).sort(function (a, b) { return a - b; }).map(function (k) { return '<option value="' + k + '"' + (k === "6" ? " selected" : "") + ">" + k + " kVA</option>"; }).join("");
+  }
+  var kva = sel.value || "6", opt = $("pro-opt").value === "hphc" ? "hphc" : "base";
+  var C = parseFloat($("pro-conso").value); if (!isFinite(C) || C < 0) C = 0;
+  var hc = parseFloat($("pro-hc").value); if (!isFinite(hc)) hc = 35; hc = Math.min(100, Math.max(0, hc)) / 100;
+  $("f-pro-hc").hidden = opt !== "hphc";
+  var rows = ["1", "2", "3"].map(function (an) { return { an: an, c: proCout(an, kva, C, opt, hc) }; });
+  var ok = rows.filter(function (r) { return r.c; });
+  var t = "<thead><tr><th>Offre</th><th class=\"num\">Prix du kWh hors taxes</th><th class=\"num\">Abonnement par an hors taxes</th><th class=\"num\">Total par an hors taxes</th></tr></thead><tbody>";
+  rows.forEach(function (r) {
+    var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(PRO_ENGIE.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir l'offre sur le site d'ENGIE Pro (nouvel onglet)\">ENGIE Pro</a></div><div class=\"offer\">Référence Pro, " + r.an + (r.an === "1" ? " an" : " ans") + ", prix fixe</div>" +
+      "<div class=\"offer\"><span class=\"badge\">Grille officielle d'octobre 2026</span></div>";
+    if (!r.c) t += "<tr><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses sur 1 an.</td></tr>";
+    else t += "<tr><td>" + nom + "</td><td class=\"num\">" + fmtKwh.format(r.c.kwh) + "</td><td class=\"num\">" + fmtEur2.format(r.c.abo) + "</td><td class=\"num\"><strong>" + fmtEur2.format(r.c.total) + "</strong></td></tr>";
+  });
+  $("t-pro").innerHTML = t + "</tbody>";
+  if (ok.length) {
+    var m = ok.reduce(function (a, b) { return b.c.total < a.c.total ? b : a; });
+    $("pro-res").innerHTML = "Pour " + fmtInt.format(C) + " kWh par an en " + kva + " kVA (" + (opt === "hphc" ? "heures pleines / creuses, " + fmtInt.format(hc * 100) + " % en heures creuses" : "option Base") + ") : <strong>" + fmtEur2.format(m.c.total) + " par an hors taxes</strong> avec Référence Pro " + m.an + (m.an === "1" ? " an" : " ans") + ", soit " + fmtEur2.format(m.c.total / 12) + " par mois. Une seule offre est relevée pour l'instant : ce n'est pas un classement.";
+  } else $("pro-res").textContent = "Aucune formule disponible pour cette puissance et cette option.";
+  var P = PRO_ENGIE, d = "<thead><tr><th>Composante</th><th class=\"num\">Par kWh (c€)</th><th class=\"num\">Par mois (€)</th></tr></thead><tbody>";
+  var a = opt === "hphc" ? P.achHphc : P.achBase;
+  d += "<tr><td>Fourniture : abonnement (fixe pendant le contrat)</td><td class=\"num\">&nbsp;</td><td class=\"num\">" + P.aboF.toFixed(2).replace(".", ",") + "</td></tr>";
+  rows.forEach(function (r) {
+    var f = P.four[r.an], v = opt === "hphc" ? (f.hp.toFixed(3) + " (HP), " + f.hc.toFixed(3) + " (HC)").replace(/\./g, ",") : f.base.toFixed(3).replace(".", ",");
+    d += "<tr><td>Fourniture : kWh, " + r.an + (r.an === "1" ? " an" : " ans") + " (fixe pendant le contrat)</td><td class=\"num\">" + v + "</td><td class=\"num\">&nbsp;</td></tr>";
+  });
+  d += "<tr><td>Acheminement (TURPE, suit le tarif du réseau)</td><td class=\"num\">" + (opt === "hphc" ? (a.hp.toFixed(3) + " (HP), " + a.hc.toFixed(3) + " (HC)").replace(/\./g, ",") : a.kwh.toFixed(3).replace(".", ",")) + "</td><td class=\"num\">" + a.abo[kva].toFixed(2).replace(".", ",") + "</td></tr>";
+  d += "<tr><td>Obligations (varient jusqu'à 3 fois par an, plafonnées)</td><td class=\"num\">" + (opt === "hphc" ? P.oblHphc : P.oblBase).toFixed(3).replace(".", ",") + "</td><td class=\"num\">&nbsp;</td></tr>";
+  d += "<tr><td>Garanties d'origine (électricité verte française, varient jusqu'à 3 fois par an)</td><td class=\"num\">" + P.go.toFixed(3).replace(".", ",") + "</td><td class=\"num\">&nbsp;</td></tr></tbody>";
+  $("t-pro-det").innerHTML = d;
+  $("pro-note").innerHTML = "Sources : grilles de prix Référence Pro de 1, 2 et 3 ans (octobre 2026) et fiches de l'offre, publiées par ENGIE Pro (<a href=\"" + esc(P.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\">page de l'offre</a>), reçues le 29 oct. 2026. Non comptés : l'accise sur l'électricité (son taux dépend de l'activité), la CTA et la TVA, que beaucoup de professionnels récupèrent. Non compté aussi : la réduction de 25 % sur le kWh de la fourniture la première année, pour un changement de fournisseur avec un contrat de 3 ans souscrit jusqu'au 31 octobre 2026. Les obligations et les garanties d'origine peuvent monter jusqu'à un plafond (2,047 et 0,956 c€/kWh en Base). En heures pleines / creuses, la part en heures creuses est une hypothèse de votre part. Un dépôt de garantie peut être demandé si le paiement n'est pas par prélèvement automatique. L'offre n'est pas ouverte aux particuliers.";
+}
+["pro-kva", "pro-conso", "pro-opt", "pro-hc"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderPro); e.addEventListener("change", renderPro); } });
 
 /* ---------- Chargement de data.json ---------- */
 // Les données intégrées plus haut servent de repli (ouverture du fichier sans serveur, ou data.json absent).
@@ -2298,7 +2389,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", saisons: "Saisons (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", saisons: "Saisons (essai)", pro: "Pro (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
 function loadStats() {
   var f = $("stats-frame");
   if (f.getAttribute("src")) return;
@@ -2365,7 +2456,7 @@ function setTab(t) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "saisons" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "saisons" || t === "pro" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
   $("f-kva").hidden = t !== "elec";
   $("f-fmla").hidden = !(t === "elec" && HPHC.length > 0);
   $("f-mine").hidden = !(t === "elec" || t === "gaz");
