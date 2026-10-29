@@ -669,7 +669,19 @@ code { overflow-wrap: anywhere; }
         <li><strong><a href="https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/" target="_blank" rel="noopener">Dyneff</a> :</strong> gaz 15 %, 55 % et 100 % renouvelable déjà intégrés, grilles du 1er octobre 2026 vérifiées (prix et abonnement identiques). Ces grilles sont publiées chaque mois (« fin de l'offre : fin du mois en cours ») : le suivi automatique repère chaque mois le nouveau PDF sur les pages gaz et électricité de Dyneff et le signale dans le rapport (sans rien appliquer) ; il reste à saisir les nouveaux prix.</li>
         <li><strong><a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a> :</strong> non intégrés : Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp. GEG gaz au réseau NTR 0-3 seulement.</li>
         <li><strong>Limites du calcul :</strong> profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie (<a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a>, <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a>) sont à surveiller ; les zones de distribution locales (Bordeaux, Strasbourg, Colmar) ne sont pas modélisées. Prix et abonnements Base et B0 réels pour les offres à grille officielle, estimés (étoile) pour les autres.</li>
-        <li><strong>Zone tarifaire par commune :</strong> aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait.</li>
+        <li><strong>Zone tarifaire par commune :</strong> aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait, mais chaque fournisseur découpe les zones à sa façon (tableau ci-dessous, à vérifier sur les grilles officielles).
+        <div class="tablewrap"><table>
+          <thead><tr><th>Fournisseur</th><th>Système de zones</th><th>Particularités</th></tr></thead>
+          <tbody>
+            <tr><td>GRDF (référence)</td><td>6 zones (1 à 6)</td><td>Système officiel de référence, base de toutes les autres grilles.</td></tr>
+            <tr><td>ENGIE</td><td>6 zones (1 à 6)</td><td>Aligné sur GRDF historiquement, héritage du tarif réglementé.</td></tr>
+            <tr><td>TotalEnergies</td><td>6 zones (modifié)</td><td>Reprend le système GRDF avec quelques reclassifications de communes.</td></tr>
+            <tr><td>Alterna</td><td>6 zones (modifié)</td><td>Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement.</td></tr>
+            <tr><td>ilek</td><td>11 zones (A à K)</td><td>Système propre, plus fin, pour refléter les coûts d'achat du biogaz local.</td></tr>
+            <tr><td>Ekwateur</td><td>Aucune zone</td><td>Tarif national unique.</td></tr>
+          </tbody>
+        </table></div>
+        <span class="note">Source : <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire" target="_blank" rel="noopener">fournisseurs-electricite.com</a> (second comparateur, octobre 2026), consultée le 29 oct. 2026. Source secondaire : les classifications de communes peuvent changer chaque année.</span></li>
         <li><strong>Hausse du gaz de novembre :</strong> volontairement non affichée.</li>
         <li><strong>Historique avant 2024 :</strong> piste <a href="https://www.gazdebordeaux.fr/sites/default/files/2024-12/histo_TRV.pdf" target="_blank" rel="noopener">histo_TRV.pdf</a> (anciens tarifs réglementés du gaz jusqu'en avril 2023) ; dates difficiles à relier aux valeurs, à comparer avec la CRE avant tout usage.</li>
       </ul>
