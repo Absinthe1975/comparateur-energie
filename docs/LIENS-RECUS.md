@@ -126,6 +126,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
 - source : Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
+- source : Gaz de Bordeaux (formule : TRV −5 % sur le kWh HT) (Novaflex Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
 - parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage
 
 ### GEG
@@ -295,3 +296,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Heures super creuses et tarifs saisonniers, rapport du médiateur de l'énergie (MoneyVox) : https://www.moneyvox.fr/energie/actualites/109266/heures-super-creuses-tarifs-saisonniers-ce-quil-faut-savoir-avant-de-souscrire-a-ces-nouvelles-offres-electricite
 - ENGIE, page des offres et promotions (promo d'été, 2 mois d'abonnement offerts), consultée le 28 oct. 2026 : https://particuliers.engie.fr/landing/offres-energie-rs.html
 - Gaz, zones tarifaires GRDF (6 zones historiques, détermination par commune ; exemples indicatifs, source secondaire), consultée le 29 oct. 2026 : https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire
+- Gaz de Bordeaux, Novaflex Élec (prix indexé sur le tarif réglementé, −5 % sur le kWh HT pendant 2 ans), page consultée le 29 oct. 2026 : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
