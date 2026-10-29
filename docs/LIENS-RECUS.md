@@ -299,3 +299,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Enedis, catalogue officiel des prestations (version au 1er août 2026) : https://catalogue-prestations.enedis.fr/pdf/Prestations-Enedis.pdf
 - Enedis, catalogue des prestations pour les responsables d'équilibre (hors sujet pour les particuliers) : https://catalogue-prestations.enedis.fr/pdf/Prestations-Enedis-RE.pdf
 - Gaz de Bordeaux, Novaflex Élec (prix indexé sur le tarif réglementé, −5 % sur le kWh HT pendant 2 ans), page consultée le 29 oct. 2026 : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
+- ENGIE Pro, offre Référence Pro électricité à prix fixe (professionnels jusqu'à 36 kVA, fiches C4/C5 et grilles de prix 1, 2 et 3 ans d'octobre et novembre 2026, reçues le 29 oct. 2026 ; onglet Pro abandonné, donc non intégrées) : https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels
