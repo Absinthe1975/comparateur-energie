@@ -113,6 +113,23 @@
    "typ": "fixe"
   },
   {
+   "k": "gdb",
+   "name": "Gaz de Bordeaux",
+   "offer": "Novaflex Élec",
+   "a": 0.1919,
+   "b": 0.1904,
+   "d": "29 oct. 2026",
+   "niv": "confirmer",
+   "s": [
+    "Gaz de Bordeaux (formule : TRV −5 % sur le kWh HT)",
+    "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
+   ],
+   "typ": "indexe",
+   "vert": true,
+   "eng": 0,
+   "url": "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
+  },
+  {
    "k": "plen",
    "name": "Plenitude",
    "offer": "Pleniweb 1 an Électricité",
