@@ -295,4 +295,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Heures super creuses et tarifs saisonniers, rapport du médiateur de l'énergie (MoneyVox) : https://www.moneyvox.fr/energie/actualites/109266/heures-super-creuses-tarifs-saisonniers-ce-quil-faut-savoir-avant-de-souscrire-a-ces-nouvelles-offres-electricite
 - ENGIE, page des offres et promotions (promo d'été, 2 mois d'abonnement offerts), consultée le 28 oct. 2026 : https://particuliers.engie.fr/landing/offres-energie-rs.html
 - Gaz, zones tarifaires GRDF (6 zones historiques, détermination par commune ; exemples indicatifs, source secondaire), consultée le 29 oct. 2026 : https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire
-- Enedis, prestations et tarifs 2026-2027 (Linky et compteur non communicant, source secondaire), consultée le 29 oct. 2026 : https://www.fournisseurs-electricite.com/enedis/tarifs
+- Enedis, catalogue officiel des prestations (version au 1er août 2026) : https://catalogue-prestations.enedis.fr/pdf/Prestations-Enedis.pdf
+- Enedis, catalogue des prestations pour les responsables d'équilibre (hors sujet pour les particuliers) : https://catalogue-prestations.enedis.fr/pdf/Prestations-Enedis-RE.pdf
