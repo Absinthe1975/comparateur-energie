@@ -15,7 +15,7 @@
    "offer": "Électricité 100 % renouvelable Europe",
    "a": 0.1753,
    "b": 0.1906,
-   "d": "26 oct. 2026",
+   "d": "30 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -228,7 +228,7 @@
    "offer": "Essentielle Verte",
    "a": 0.1919,
    "b": 0.1904,
-   "d": "26 oct. 2026",
+   "d": "30 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -336,7 +336,7 @@
    "offer": "Intelligent Octopus",
    "a": 0.1968,
    "b": 0.1953,
-   "d": "26 oct. 2026",
+   "d": "30 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -409,7 +409,7 @@
    "offer": "Elec Référence 3 ans",
    "a": 0.233,
    "b": 0.2347,
-   "d": "26 oct. 2026",
+   "d": "30 oct. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -484,7 +484,7 @@
   "enercoop": 181.92
  },
  "abo_d": {
-  "ekw": "26 oct. 2026",
+  "ekw": "30 oct. 2026",
   "total": "14 oct. 2026",
   "gdb": "22 oct. 2026",
   "geg": "14 oct. 2026",
@@ -492,12 +492,12 @@
   "ohm": "13 oct. 2026",
   "dyneff": "20 oct. 2026",
   "mint": "14 oct. 2026",
-  "primeo": "26 oct. 2026",
+  "primeo": "30 oct. 2026",
   "edf": "14 oct. 2026",
   "llum": "14 oct. 2026",
   "alterna": "14 oct. 2026",
-  "octo": "26 oct. 2026",
-  "engie": "26 oct. 2026",
+  "octo": "30 oct. 2026",
+  "engie": "30 oct. 2026",
   "alpiq": "10 oct. 2026",
   "happe": "13 oct. 2026",
   "ilek": "19 oct. 2026",
