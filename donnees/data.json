@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "updated": "2026-10-26",
- "updated_label": "26 oct. 2026",
+ "updated": "2026-10-30",
+ "updated_label": "30 oct. 2026",
  "primes": {
   "edf": {
    "name": "EDF",
@@ -73,8 +73,8 @@
    "valid": "Programme officiel publié dans la grille tarifaire d'Octopus (1er août 2026) : 40 € dans la cagnotte du parrain et 40 € pour le filleul dès l'activation du contrat, sans limite de filleuls",
    "st": "ok",
    "s": [
-    "Grille tarifaire officielle Octopus (1er août 2026), page 4",
-    "https://octopusenergy.fr/octosaisons"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/octopus-energy/parrainage"
    ],
    "d": "grille du 1er août 2026, relevée le 27 oct. 2026"
   },
@@ -122,8 +122,8 @@
    "valid": "Réduction sur la facture gaz ou électricité, attribuée 6 mois après l'activation du contrat, si les deux contrats sont toujours actifs. Pas de plafond ni de date de fin indiqués ; non cumulable avec une autre réduction. Clients particuliers, et professionnels de moins de 36 kVA (40 € pour le parrain)",
    "st": "ok",
    "s": [
-    "Mint Énergie, page officielle du parrainage",
-    "https://www.mint-energie.com/nous-decouvrir/parrainage/"
+    "prix-elec.com",
+    "https://prix-elec.com/fournisseurs/mint-energie/parrainage"
    ],
    "d": "page modifiée le 31 mars 2026, lue le 26 oct. 2026"
   },
@@ -534,7 +534,7 @@
    "niv": "confirmer"
   }
  ],
- "updated_time": "13:43",
+ "updated_time": "11:25",
  "liens": {
   "edf": "https://particulier.edf.fr/",
   "total": "https://www.totalenergies.fr/particuliers",
