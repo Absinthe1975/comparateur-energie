@@ -46,6 +46,9 @@ def publier(texte):
 
 if __name__ == "__main__":
     avant = sys.argv[1]; apres = sys.argv[2] if len(sys.argv) > 2 else "HEAD"
-    t = message(changements(avant, apres))
+    if os.environ.get("FB_TEST") == "1":
+        t = "Test de publication automatique (ignorez ce message) : le comparateur publiera ici ses mises à jour de prix officielles.\n" + SITE
+    else:
+        t = message(changements(avant, apres))
     if not t: print("Aucun changement de prix officiel : rien à publier.")
     else: print(t); publier(t)
