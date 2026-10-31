@@ -2,7 +2,7 @@
 Compare donnees/*/data.json entre deux versions git (AVANT et APRÈS). Ne publie jamais les offres « à confirmer ».
 Sans FB_PAGE_ID et FB_PAGE_TOKEN, affiche seulement le message (aucune publication).
 Lancer : python scripts/facebook.py AVANT_SHA [APRES_SHA]"""
-import json, os, subprocess, sys, urllib.parse, urllib.request
+import json, os, subprocess, sys, urllib.error, urllib.parse, urllib.request
 
 SITE = "https://absinthe1975.github.io/comparateur-energie/"
 FICHIERS = (("donnees/elec/data.json", "elec"), ("donnees/gaz/data.json", "gas"))
@@ -41,8 +41,12 @@ def publier(texte):
     if not (pid and tok):
         print("FB_PAGE_ID / FB_PAGE_TOKEN absents : aucune publication."); return
     data = urllib.parse.urlencode({"message": texte, "link": SITE, "access_token": tok}).encode()
-    with urllib.request.urlopen(f"https://graph.facebook.com/v21.0/{pid}/feed", data, timeout=30) as r:
-        print("Publié :", r.read().decode())
+    try:
+        with urllib.request.urlopen(f"https://graph.facebook.com/v21.0/{pid}/feed", data, timeout=30) as r:
+            print("Publié :", r.read().decode())
+    except urllib.error.HTTPError as e:
+        corps = e.read().decode("utf-8", "replace").replace(tok, "***")
+        print(f"ERREUR Facebook {e.code} : {corps}"); sys.exit(1)
 
 if __name__ == "__main__":
     avant = sys.argv[1]; apres = sys.argv[2] if len(sys.argv) > 2 else "HEAD"
