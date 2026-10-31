@@ -1,0 +1,31 @@
+name: Publication Facebook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "donnees/elec/data.json"
+      - "donnees/gaz/data.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Publier les changements de prix officiels (si les secrets Facebook existent)
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+        run: |
+          AVANT="${{ github.event.before }}"
+          if [ -z "$AVANT" ] || [ "$AVANT" = "0000000000000000000000000000000000000000" ]; then AVANT="HEAD~1"; fi
+          python scripts/facebook.py "$AVANT" HEAD
