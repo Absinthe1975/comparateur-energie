@@ -173,7 +173,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/mint-energie/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/mint-energie/parrainage
 - source : hellowatt.fr (Classic & Green + Biogaz Classic) : https://www.hellowatt.fr/
-- parrainage : Mint Énergie, page officielle du parrainage : https://www.mint-energie.com/nous-decouvrir/parrainage/
 
 ### Octopus Energy
 - site du fournisseur : https://octopusenergy.fr/
@@ -182,7 +181,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/octopus-energy/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/octopus-energy/parrainage
 - source : hellowatt.fr (OctoEco Fixe + Gaz Fixe) : https://www.hellowatt.fr/
-- parrainage : Grille tarifaire officielle Octopus (1er août 2026), page 4 : https://octopusenergy.fr/octosaisons
 
 ### OHM Énergie
 - site du fournisseur : https://www.ohm-energie.com/
@@ -308,3 +306,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Mint Énergie, Classic & Green Pro (prix fixe 24 mois, professionnels jusqu'à 36 kVA), grille du 1er août 2026 : https://pro.mint-energie.com/wp-content/uploads/2026/07/MINT_ENERGIE_Fiche_Tarifs_23324_CLASSIC_GREEN_PRO.pdf
 - TotalEnergies, Online professionnels (prix indexé sur le tarif réglementé), grille du 1er octobre 2026 : https://www.totalenergies.fr/fileadmin/Digital/Groupe/PDF/Documents_contractuels/Professionnels/Tarifs_TotalEnergies/fr/grille-tarifaire-online-professionnels.pdf
 - EDF Entreprises, grille de prix HTVA du Contrat Garanti au 1er août 2026 (EDF interdit les robots : à recevoir en fichier) : https://www.edf.fr/sites/entreprise/files/2026-07/20260801-grille_de_prix_HTVA_contrat_garanti.pdf
+- Alterna, page « offre duale gaz + électricité » (pas d'offre combinée : deux contrats séparés, une seule facture), lue le 31 oct. 2026 : https://www.alterna-energie.fr/offre-dual-gaz-electricite
