@@ -70,7 +70,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - grille : Électricité verte 100 % véhicule électrique : https://www.alterna-energie.fr/tarifs-electricite-verte-100-vehicule-electrique
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/alterna/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alterna/tarifs
-- source : hellowatt.fr (Mon électricité française fixe + Mon gaz naturel indexé (duo)) : https://www.hellowatt.fr/
 
 ### Dyneff
 - site du fournisseur : https://www.dyneff.fr/
@@ -207,7 +206,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/totalenergies/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs
 - page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
-- source : hellowatt.fr (Fixe 2 ans Électricité + Gaz) : https://www.hellowatt.fr/
 
 ### Références (tarif réglementé, prix repère du gaz)
 - trv : https://www.hellowatt.fr/contrat-electricite/prix-electricite
@@ -307,3 +305,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - TotalEnergies, Online professionnels (prix indexé sur le tarif réglementé), grille du 1er octobre 2026 : https://www.totalenergies.fr/fileadmin/Digital/Groupe/PDF/Documents_contractuels/Professionnels/Tarifs_TotalEnergies/fr/grille-tarifaire-online-professionnels.pdf
 - EDF Entreprises, grille de prix HTVA du Contrat Garanti au 1er août 2026 (EDF interdit les robots : à recevoir en fichier) : https://www.edf.fr/sites/entreprise/files/2026-07/20260801-grille_de_prix_HTVA_contrat_garanti.pdf
 - Alterna, page « offre duale gaz + électricité » (pas d'offre combinée : deux contrats séparés, une seule facture), lue le 31 oct. 2026 : https://www.alterna-energie.fr/offre-dual-gaz-electricite
+- ENGIE Duo référence 3 ans, fiche descriptive officielle (août 2026) : https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf
+- TotalEnergies Fixe 2 ans Élec + Gaz (offre fermée) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz
