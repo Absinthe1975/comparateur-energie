@@ -280,25 +280,6 @@
  },
  "duo": [
   {
-   "k": "alterna",
-   "name": "Alterna",
-   "offer": "Mon électricité française fixe + Mon gaz naturel indexé (duo)",
-   "ea": 0.1919,
-   "eb": 0.1904,
-   "eabo": 211.92,
-   "ga": 0.129,
-   "gabo": 389.64,
-   "promo": 0,
-   "note": "électricité à prix fixe, gaz indexé",
-   "d": "13 oct. 2026",
-   "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
-   ],
-   "st": "check",
-   "niv": "confirmer"
-  },
-  {
    "k": "edf",
    "name": "EDF",
    "offer": "Zen Fixe + Avantage Gaz 2 ans",
@@ -398,25 +379,6 @@
    "niv": "confirmer"
   },
   {
-   "k": "total",
-   "name": "TotalEnergies",
-   "offer": "Fixe 2 ans Électricité + Gaz",
-   "ea": 0.2267,
-   "eb": 0.2252,
-   "eabo": 190.32,
-   "ga": 0.1394,
-   "gabo": 360.72,
-   "promo": 0,
-   "note": "prix fixes 2 ans",
-   "d": "13 oct. 2026",
-   "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
-   ],
-   "st": "check",
-   "niv": "confirmer"
-  },
-  {
    "k": "engie",
    "name": "ENGIE",
    "offer": "Duo référence 3 ans",
@@ -427,25 +389,6 @@
    "gabo": 360.84,
    "promo": 0,
    "note": "prix fixes 3 ans",
-   "d": "13 oct. 2026",
-   "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
-   ],
-   "st": "check",
-   "niv": "confirmer"
-  },
-  {
-   "k": "alterna",
-   "name": "Alterna",
-   "offer": "Mon électricité du coin + Mon biogaz français",
-   "ea": 0.1968,
-   "eb": 0.1953,
-   "eabo": 211.92,
-   "ga": 0.1706,
-   "gabo": 389.64,
-   "promo": 0,
-   "note": "prix fixes 1 an",
    "d": "13 oct. 2026",
    "s": [
     "hellowatt.fr",
