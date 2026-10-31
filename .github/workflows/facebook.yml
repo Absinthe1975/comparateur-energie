@@ -7,6 +7,11 @@ on:
       - "donnees/elec/data.json"
       - "donnees/gaz/data.json"
   workflow_dispatch:
+    inputs:
+      test:
+        description: "Publier un message de test sur la Page"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -25,6 +30,7 @@ jobs:
         env:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          FB_TEST: ${{ inputs.test && '1' || '' }}
         run: |
           AVANT="${{ github.event.before }}"
           if [ -z "$AVANT" ] || [ "$AVANT" = "0000000000000000000000000000000000000000" ]; then AVANT="HEAD~1"; fi
