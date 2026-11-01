@@ -308,8 +308,8 @@
    "eabo": 188.4,
    "ga": 0.1518,
    "gabo": 360.84,
-   "promo": 48,
-   "note": "tarif indexé, remise de 2 € par mois sur chaque énergie la première année",
+   "promo": 0,
+   "note": "tarif indexé ; la remise de 2 € par mois sur chaque énergie annoncée par un comparateur n'est confirmée par aucune page de Mint : elle n'est pas comptée",
    "d": "13 oct. 2026",
    "s": [
     "hellowatt.fr",
