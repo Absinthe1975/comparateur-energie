@@ -3,7 +3,7 @@
   "k": null,
   "name": "CRE",
   "offer": "Prix repère de vente de gaz (n'est pas une offre)",
-  "a": 0.1456,
+  "a": 0.1576,
   "ref": true,
   "url": "https://www.cre.fr/consommateurs/prix-reperes-et-references/prix-repere-de-vente-de-gaz-naturel-a-destination-des-clients-residentiels.html"
  },
@@ -89,7 +89,7 @@
    "name": "Gaz de Bordeaux",
    "offer": "NovaFixe BioGaz",
    "a": 0.1346,
-   "d": "30 oct. 2026",
+   "d": "1 nov. 2026",
    "niv": "confirmer",
    "s": [
     "prix-elec.com",
@@ -356,11 +356,11 @@
    "k": "mint",
    "name": "Mint Énergie",
    "offer": "Biogaz Online",
-   "a": 0.1456,
+   "a": 0.1576,
    "d": "14 oct. 2026",
    "niv": "officiel",
-   "b0": 0.1783,
-   "nivd": "01/10/2026",
+   "b0": 0.1903,
+   "nivd": "01/11/2026",
    "prg": true,
    "s": [
     "prix-elec.com",
@@ -368,20 +368,20 @@
    ],
    "zones": {
     "b1": [
-     0.1456,
-     0.1463,
-     0.147,
-     0.1477,
-     0.1484,
-     0.1492
+     0.1576,
+     0.1583,
+     0.159,
+     0.1598,
+     0.1605,
+     0.1612
     ],
     "b0": [
-     0.1783,
-     0.1783,
-     0.1783,
-     0.1783,
-     0.1783,
-     0.1783
+     0.1903,
+     0.1903,
+     0.1903,
+     0.1903,
+     0.1903,
+     0.1903
     ]
    },
    "vert": true
@@ -492,11 +492,11 @@
   "ekw": 243.84
  },
  "gas_b0": {
-  "a": 0.1783,
+  "a": 0.1903,
   "abo": 152.46
  },
  "gas_b1": {
-  "a": 0.1456,
+  "a": 0.1576,
   "abo": 360.79
  }
 }
