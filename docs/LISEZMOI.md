@@ -4,7 +4,7 @@ Ce dossier contient le site (`index.html`), ses données (`donnees/elec/data.jso
 
 ## Comment ça marche
 
-1. Chaque jour du 1er au 10 du mois, puis chaque lundi (ou quand vous le lancez à la main), GitHub exécute `scripts/update_prices.py`.
+1. Chaque jour du 1er au 10 du mois, puis chaque lundi (ou quand vous le lancez à la main), GitHub exécute `scripts/update_prices.py`. Les passages sont à 7 h 23 et 14 h 41 (heure UTC) du 1er au 10, et le lundi à 7 h 17 : des minutes « creuses », car GitHub retarde ou saute plus souvent les tâches lancées pile à l'heure. Le second passage de la journée rattrape un passage sauté ; les pages inchangées sont ignorées.
 2. Le programme lit les pages listées dans `donnees/sources.json`.
 3. Pour chaque offre, l'IA (Gemini, gratuite) renvoie les chiffres **et la phrase exacte où elle les a trouvés**.
 4. Le programme refuse un chiffre si la phrase n'est pas dans la page, si le chiffre n'est pas dans la phrase, s'il est hors d'une fourchette plausible, ou s'il s'écarte trop de l'ancienne valeur (alors il est seulement signalé).
