@@ -48,6 +48,7 @@ class T(unittest.TestCase):
 class Integ(unittest.TestCase):
     def run_official(self, today, trv_kwh=0.2001, trv_abo_manquants=False):
         d = __import__("donnees").charger(ROOT)
+        d["gas_b1"]["a"] = d["gas_ref"]["a"] = 0.1456; d["gas_b0"]["a"] = 0.1783   # ces tests partent des prix repère d'octobre, quelles que soient les données du jour
         if trv_abo_manquants:
             for k in ("12", "15", "18", "24", "30", "36"): d["trv_abo"].pop(k, None)
         src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))

@@ -32,6 +32,7 @@ class Maj(unittest.TestCase):
     def setUp(self):
         self.d = __import__("donnees").charger(ROOT); self.src = json.load(open(os.path.join(ROOT, "sources.json"), encoding="utf-8"))
         self.now = datetime.datetime(2026, 10, 14, 7, 0)
+        self.d["gas_b1"]["a"] = 0.1456   # prix repère d'octobre, comme la page de test, quelles que soient les données du jour
         for r in self.d["gas"]:
             if r.get("prg"): r.pop("zones", None)   # data.json peut déjà porter les zones lues par le workflow : on repart de zéro
     def run_(self, post):
