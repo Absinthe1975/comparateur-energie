@@ -307,3 +307,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Alterna, page « offre duale gaz + électricité » (pas d'offre combinée : deux contrats séparés, une seule facture), lue le 31 oct. 2026 : https://www.alterna-energie.fr/offre-dual-gaz-electricite
 - ENGIE Duo référence 3 ans, fiche descriptive officielle (août 2026) : https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf
 - TotalEnergies Fixe 2 ans Élec + Gaz (offre fermée) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz
+- EDF fête ses 80 ans : 80 € TTC remboursés, du 12 octobre au 15 novembre 2026, par téléphone (page officielle, reçue le 1er nov. 2026) : https://particulier.edf.fr/fr/accueil/autres-pages/80ans-80euros.html
