@@ -126,6 +126,35 @@
         "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
+    },
+    {
+      "k": "ilek",
+      "name": "ilek",
+      "offer": "ÉnRFixe+ Elec",
+      "a": 0.2449,
+      "b": 0.2433,
+      "ab6": 301.2,
+      "ab9": 409.2,
+      "abo": {
+        "3": 218.88,
+        "6": 301.2,
+        "9": 409.2,
+        "12": 520.32,
+        "15": 597.0,
+        "18": 655.32,
+        "24": 786.24,
+        "30": 947.04,
+        "36": 1065.0
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "1 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
+        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
+      ]
     }
   ],
   "gas": [],
@@ -290,6 +319,32 @@
       "s": [
         "Annexes tarifaires Enercoop, particuliers ≤ 36 kVA (1er août 2026)",
         "https://www.faq.enercoop.fr/hc/fr/article_attachments/37607556170770"
+      ]
+    },
+    {
+      "k": "ilek",
+      "name": "ilek",
+      "offer": "ÉnRFixe+ Elec",
+      "hp": 0.2607,
+      "hc": 0.1993,
+      "abo": {
+        "6": 341.52,
+        "9": 471.12,
+        "12": 549.96,
+        "15": 627.24,
+        "18": 695.04,
+        "24": 838.32,
+        "30": 897.72,
+        "36": 1068.72
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "1 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
+        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
       ]
     }
   ]

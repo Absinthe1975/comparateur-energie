@@ -148,7 +148,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ilek/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ilek/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/ilek/parrainage
-- source : Grille officielle ilek (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf
+- source : Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026) (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf
 - source : Grille ilek (zone B) (ÉnRFixe+ Gaz) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/357/grille_357.pdf
 - source : hellowatt.fr (ÉnRFixe+ Élec + Gaz) : https://www.hellowatt.fr/
 - parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
@@ -309,3 +309,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - TotalEnergies Fixe 2 ans Élec + Gaz (offre fermée) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz
 - EDF fête ses 80 ans : 80 € TTC remboursés, du 12 octobre au 15 novembre 2026, par téléphone (page officielle, reçue le 1er nov. 2026) : https://particulier.edf.fr/fr/accueil/autres-pages/80ans-80euros.html
 - Duos lus le 1er nov. 2026 (aucune remise propre au duo) : ilek https://www.ilek.fr/offre-dual · Ekwateur https://ekwateur.fr/fournisseur-elecricite-et-gaz/ · Mint https://www.mint-energie.com/contrat-electricite/offre-classic-green/ · GEG https://www.geg.fr/offre-de-marche/ · Octopus https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz
+- ilek, grilles reçues le 1er nov. 2026 : ÉnRFixe+ Élec particuliers (« à partir du 1er novembre 2026 ») https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf · ÉnRFixe+ Gaz particuliers (« du 1er octobre au 1er novembre 2026 ») …/357/grille_357.pdf · professionnels élec …/358/grille_358.pdf · voiture électrique (1er août 2026) …/grille_offre_ve.pdf · fiches descriptives 356, 357, 358 et 275 sur la page https://www.ilek.fr/grilles-tarifaires
+- ilek, offre élec + gaz (aucune remise duo) : https://www.ilek.fr/offre-electricite-et-gaz · fonctionnement ÉnRFixe+ (prix fixe 2 ans, baisse possible de 5 % au plus) : https://www.ilek.fr/aide/l/fr/offres-et-options/tout-savoir-sur-votre-offre-enrfixe · zones gaz (11 zones, recherche par adresse) : https://www.ilek.fr/zone-tarifaire-gaz-vert
