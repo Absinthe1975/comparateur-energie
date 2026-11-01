@@ -516,6 +516,20 @@
    ]
   },
   {
+   "k": "edf",
+   "texte": "80 € TTC remboursés sur la facture pour tout nouveau contrat d'électricité en offre de marché (EDF fête ses 80 ans)",
+   "debut": "2026-10-12",
+   "fin": "2026-11-15",
+   "offres": [
+    "vert électrique"
+   ],
+   "conditions": "Souscription par téléphone au 3404 (lundi au samedi, 8 h à 20 h) du 12 octobre au 15 novembre 2026 inclus, en demandant la remise dès le début de l'appel. Réservée aux 40 000 premières souscriptions d'un contrat d'électricité en offre de marché (hors Zen Online). Un simple changement d'offre de marché dans le même logement n'ouvre pas droit à la remise. Une seule remise par point de livraison et par personne, non cumulable avec d'autres promotions. Non comptée dans le classement.",
+   "s": [
+    "Page officielle EDF",
+    "https://particulier.edf.fr/fr/accueil/autres-pages/80ans-80euros.html"
+   ]
+  },
+  {
    "k": "gdb",
    "texte": "100 € TTC offerts avec l'offre NovaFixe Bonus Élec (même remise de 10 % sur le tarif réglementé)",
    "debut": "2026-10-01",
