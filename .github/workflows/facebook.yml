@@ -6,6 +6,7 @@ on:
     paths:
       - "donnees/elec/data.json"
       - "donnees/gaz/data.json"
+      - "donnees/data.json"
   workflow_dispatch:
     inputs:
       test:
