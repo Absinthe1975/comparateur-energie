@@ -2,8 +2,10 @@ name: Mise à jour des prix
 
 on:
   schedule:
-    - cron: "0 6 1-10 * *"  # chaque jour du 1er au 10 (publication du prix repère, changements des fournisseurs), 6 h UTC
-    - cron: "0 6 * * 1"     # puis chaque lundi pour rattraper un changement en cours de mois
+    # Minutes « creuses » (pas :00 ni :30) : GitHub retarde ou saute plus souvent les tâches lancées pile à l'heure.
+    - cron: "23 7 1-10 * *"  # chaque jour du 1er au 10 (prix repère, changements des fournisseurs), 7 h 23 UTC
+    - cron: "41 14 1-10 * *" # second passage l'après-midi : rattrape un passage sauté ou une publication tardive (les pages inchangées sont ignorées)
+    - cron: "17 7 * * 1"     # puis chaque lundi pour rattraper un changement en cours de mois (avec recoupement)
   workflow_dispatch:       # bouton « Run workflow » pour lancer à la main
     inputs:
       recoupement:
@@ -36,7 +38,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PROVIDER: gemini
-          CROSSCHECK: ${{ (inputs.recoupement || github.event.schedule == '0 6 * * 1') && '1' || '' }}
+          CROSSCHECK: ${{ (inputs.recoupement || github.event.schedule == '17 7 * * 1') && '1' || '' }}
           LLM_DELAY: "4"
           FETCH_DELAY: "1"
           CONTACT: ${{ github.server_url }}/${{ github.repository }}
