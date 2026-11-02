@@ -7,6 +7,7 @@ on:
       - "donnees/elec/data.json"
       - "donnees/gaz/data.json"
       - "donnees/data.json"
+      - "donnees/manuel/tarifs_manuels.json"
   workflow_dispatch:
     inputs:
       test:

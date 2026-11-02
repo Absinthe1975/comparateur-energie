@@ -9,8 +9,10 @@ class T(unittest.TestCase):
         a = {"elec": [off(0.2), {**off(0.3, "confirmer"), "offer": "B"}]}
         b = {"elec": [off(0.21), {**off(0.4, "confirmer"), "offer": "B"}]}
         self.assertEqual(fb.ch_offres(a, b, "elec"), ["• EDF, Zen : 0,2000 → 0,2100 €/kWh"])
-    def test_nouvelle_offre_ignoree(self):
-        self.assertEqual(fb.ch_offres({"elec": []}, {"elec": [off(0.2)]}, "elec"), [])
+    def test_nouvelle_offre_officielle_annoncee(self):
+        self.assertEqual(fb.ch_offres({"elec": []}, {"elec": [off(0.2)]}, "elec"), ["• EDF, Zen : 0,2000 €/kWh (nouvelle offre)"])
+    def test_nouvelle_offre_a_confirmer_ignoree(self):
+        self.assertEqual(fb.ch_offres({"elec": []}, {"elec": [off(0.2, "confirmer")]}, "elec"), [])
     def test_duo(self):
         d = lambda e, g: {"duo": [{"k": "e", "name": "ENGIE", "offer": "Duo", "ea": e, "ga": g, "niv": "officiel"}]}
         r = fb.ch_duo(d(0.2, 0.1), d(0.21, 0.1))
