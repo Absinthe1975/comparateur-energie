@@ -180,7 +180,7 @@
       "d": "2 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
+        "Grille officielle EDF Zen Fixe (PDF « Grille de prix », applicable au 1er octobre 2026)",
         "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
       ]
     },
@@ -208,7 +208,7 @@
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA)",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
     },
@@ -452,7 +452,7 @@
       "d": "2 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
+        "Grille officielle EDF Zen Fixe (PDF « Grille de prix », applicable au 1er octobre 2026)",
         "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
       ]
     },
@@ -477,7 +477,7 @@
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA)",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
     },
