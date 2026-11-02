@@ -239,15 +239,206 @@
         "Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026)",
         "https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf"
       ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Online & Green",
+      "a": 0.2164,
+      "b": 0.2164,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Online & Green, clients résidentiels (applicable au 20/10/2026, réf. 279)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Classic & Green",
+      "a": 0.2246,
+      "b": 0.2246,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Classic & Green, clients résidentiels (applicable au 20/10/2026, réf. 280)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Smart & Green",
+      "a": 0.2327,
+      "b": 0.2327,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Smart & Green, clients résidentiels (applicable au 20/10/2026, réf. 281)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
+      ]
     }
   ],
-  "gas": [],
+  "gas": [
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Biogaz Online",
+      "a": 0.1645,
+      "b0": 0.1988,
+      "zones": {
+        "b1": [
+          0.1645,
+          0.1652,
+          0.166,
+          0.1667,
+          0.1675,
+          0.1683
+        ],
+        "b0": [
+          0.1988,
+          0.1988,
+          0.1988,
+          0.1988,
+          0.1988,
+          0.1988
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle Mint Énergie Biogaz Online (applicable du 1er au 30 novembre 2026, réf. 282)",
+        "https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Biogaz Classic",
+      "a": 0.1714,
+      "b0": 0.2073,
+      "zones": {
+        "b1": [
+          0.1714,
+          0.1721,
+          0.1729,
+          0.1737,
+          0.1745,
+          0.1753
+        ],
+        "b0": [
+          0.2073,
+          0.2073,
+          0.2073,
+          0.2073,
+          0.2073,
+          0.2073
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle Mint Énergie Biogaz Classic (applicable du 1er au 30 novembre 2026, réf. 283)",
+        "https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Biogaz Smart",
+      "a": 0.1782,
+      "b0": 0.2158,
+      "zones": {
+        "b1": [
+          0.1782,
+          0.1791,
+          0.1799,
+          0.1807,
+          0.1815,
+          0.1824
+        ],
+        "b0": [
+          0.2158,
+          0.2158,
+          0.2158,
+          0.2158,
+          0.2158,
+          0.2158
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle Mint Énergie Biogaz Smart (applicable du 1er au 30 novembre 2026, réf. 284)",
+        "https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/"
+      ]
+    }
+  ],
   "duo": [],
   "abo_e": {
     "bellenergie": 184.32
   },
-  "abo_g": {},
-  "abo_g0": {},
+  "abo_g": {
+    "mint": 360.84
+  },
+  "abo_g0": {
+    "mint": 152.52
+  },
   "hphc": [
     {
       "k": "dyneff",
@@ -479,6 +670,84 @@
       "s": [
         "Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026)",
         "https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Online & Green",
+      "hp": 0.232,
+      "hc": 0.1711,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Online & Green, clients résidentiels (applicable au 20/10/2026, réf. 279)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Classic & Green",
+      "hp": 0.2408,
+      "hc": 0.1772,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Classic & Green, clients résidentiels (applicable au 20/10/2026, réf. 280)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
+      ]
+    },
+    {
+      "k": "mint",
+      "name": "Mint Énergie",
+      "offer": "Smart & Green",
+      "hp": 0.2497,
+      "hc": 0.1834,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "niv": "officiel",
+      "nivd": "20/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle Mint Énergie Smart & Green, clients résidentiels (applicable au 20/10/2026, réf. 281)",
+        "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
       ]
     }
   ]
