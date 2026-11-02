@@ -49,7 +49,7 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 - Puissances de 3 à 36 kVA : les offres sans grille complète sont estimées (étoile). Le tarif réglementé de 12 à 36 kVA se ressaisit à la main à chaque changement (février, août) avec la grille EDF. Dès qu'un fournisseur donne sa grille, la saisir dans le champ abo de l'offre. Le prix du kWh à 7 et 8 kVA (Enercoop) et à 21 kVA (Dyneff) n'est pas distingué.
 
-- Abonnement à 3 kVA de [OHM](https://www.ohm-energie.com/), [Mint](https://www.mint-energie.com/) et [Octopus](https://octopusenergy.fr/) : non exact.
+- Abonnement à 3 kVA de [OHM](https://www.ohm-energie.com/) et [Octopus](https://octopusenergy.fr/) : non exact.
 
 - Filtres des offres : prix fixe ou indexé, engagement et offre verte ne sont renseignés que pour environ la moitié des offres (15 sur 29 en électricité, 9 sur 22 en gaz le 30 octobre 2026). À compléter avec la fiche descriptive de chaque offre (champs typ, eng et vert de data.json).
 
@@ -63,7 +63,7 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 - [ilek](https://www.ilek.fr/grilles-tarifaires) : relier la zone gaz (A à K, de 0,1633 à 0,1809 €/kWh en T2) au code postal avec [ilek.fr/zone-tarifaire-gaz-vert](https://www.ilek.fr/zone-tarifaire-gaz-vert) ; nous affichons la zone B (0,1652 €/kWh).
 
-- [Mint Énergie](https://www.mint-energie.com/) : grilles gaz Classic et Smart d'octobre (non en ligne).
+- [Mint Énergie](https://www.mint-energie.com/) : grilles gaz Biogaz Online, Classic et Smart de novembre 2026 saisies. Elles sont mensuelles (indexées sur le prix repère + 5, 10 ou 15 %) : à ressaisir chaque mois avec les PDF du 1er du mois ; la saisie manuelle masque le calcul automatique de Biogaz Online. Électricité : grilles du 20 octobre 2026 saisies (kWh indexé à +10, +15 et +20 % sur le tarif réglementé, abonnement identique au tarif réglementé).
 
 - [TotalEnergies](https://www.totalenergies.fr/particuliers) : gaz « Fixe 2 ans ».
 

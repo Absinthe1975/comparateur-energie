@@ -303,17 +303,17 @@
    "k": "mint",
    "name": "Mint Énergie",
    "offer": "Classic & Green + Biogaz Classic",
-   "ea": 0.1939,
-   "eb": 0.1924,
-   "eabo": 188.4,
-   "ga": 0.1518,
+   "ea": 0.2246,
+   "eb": 0.2246,
+   "eabo": 190.32,
+   "ga": 0.1714,
    "gabo": 360.84,
    "promo": 0,
-   "note": "tarif indexé ; la remise de 2 € par mois sur chaque énergie annoncée par un comparateur n'est confirmée par aucune page de Mint : elle n'est pas comptée",
-   "d": "13 oct. 2026",
+   "note": "somme de deux grilles officielles (électricité du 20/10/2026, gaz Biogaz Classic de novembre 2026), sans remise propre au duo ; prix indexés sur le tarif réglementé et sur le prix repère du gaz",
+   "d": "2 nov. 2026",
    "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
+    "Grilles officielles Mint Énergie",
+    "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
    ],
    "st": "check",
    "niv": "confirmer"
@@ -363,17 +363,17 @@
    "k": "mint",
    "name": "Mint Énergie",
    "offer": "Smart & Green + Biogaz Classic",
-   "ea": 0.2017,
-   "eb": 0.2002,
-   "eabo": 227.28,
-   "ga": 0.1518,
+   "ea": 0.2327,
+   "eb": 0.2327,
+   "eabo": 190.32,
+   "ga": 0.1714,
    "gabo": 360.84,
    "promo": 0,
-   "note": "prix fixes 2 ans",
-   "d": "13 oct. 2026",
+   "note": "somme de deux grilles officielles (électricité du 20/10/2026, gaz Biogaz Classic de novembre 2026), sans remise propre au duo ; prix indexés sur le tarif réglementé et sur le prix repère du gaz",
+   "d": "2 nov. 2026",
    "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
+    "Grilles officielles Mint Énergie",
+    "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
    ],
    "st": "check",
    "niv": "confirmer"
