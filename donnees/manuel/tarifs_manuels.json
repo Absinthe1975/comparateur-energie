@@ -155,6 +155,34 @@
         "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
         "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
       ]
+    },
+    {
+      "k": "edf",
+      "name": "EDF",
+      "offer": "Zen Fixe (prix fixe 2 ans)",
+      "a": 0.2082,
+      "b": 0.2065,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
+        "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
+      ]
     }
   ],
   "gas": [],
@@ -345,6 +373,31 @@
       "s": [
         "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
         "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
+      ]
+    },
+    {
+      "k": "edf",
+      "name": "EDF",
+      "offer": "Zen Fixe (prix fixe 2 ans)",
+      "hp": 0.2231,
+      "hc": 0.165,
+      "abo": {
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "2 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
+        "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
       ]
     }
   ]
