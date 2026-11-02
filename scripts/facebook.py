@@ -96,7 +96,8 @@ def publier(texte):
     data = urllib.parse.urlencode({"message": texte, "link": SITE, "access_token": tok}).encode()
     try:
         with urllib.request.urlopen(f"https://graph.facebook.com/v21.0/{pid}/feed", data, timeout=30) as r:
-            print("Publié :", r.read().decode()); return True
+            rep = r.read().decode(); print("Publié :", rep)
+            print("::notice title=Facebook::Publié sur la Page : " + texte.splitlines()[0] + " " + rep); return True
     except urllib.error.HTTPError as e:
         corps = e.read().decode("utf-8", "replace").replace(tok, "***")
         print(f"ERREUR Facebook {e.code} : {corps}"); return False
@@ -107,7 +108,9 @@ if __name__ == "__main__":
         textes = ["Test de publication automatique (ignorez ce message) : le comparateur publiera ici ses mises à jour de prix officielles.\n" + SITE]
     else:
         textes = messages(avant, apres)
-    if not textes: print("Aucun changement à publier.")
+    if not textes:
+        print("Aucun changement à publier.")
+        print("::notice title=Facebook::Aucun changement de prix officiel à publier.")
     ok = True
     for i, t in enumerate(textes):
         print("---\n" + t)
