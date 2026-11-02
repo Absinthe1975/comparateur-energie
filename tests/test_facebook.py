@@ -11,6 +11,8 @@ class T(unittest.TestCase):
         self.assertEqual(fb.ch_offres(a, b, "elec"), ["• EDF, Zen : 0,2000 → 0,2100 €/kWh"])
     def test_nouvelle_offre_officielle_annoncee(self):
         self.assertEqual(fb.ch_offres({"elec": []}, {"elec": [off(0.2)]}, "elec"), ["• EDF, Zen : 0,2000 €/kWh (nouvelle offre)"])
+    def test_offre_devenue_officielle(self):
+        self.assertEqual(fb.ch_offres({"elec": [off(0.2, "confirmer")]}, {"elec": [off(0.2)]}, "elec"), ["• EDF, Zen : 0,2000 €/kWh (grille officielle)"])
     def test_nouvelle_offre_a_confirmer_ignoree(self):
         self.assertEqual(fb.ch_offres({"elec": []}, {"elec": [off(0.2, "confirmer")]}, "elec"), [])
     def test_duo(self):
