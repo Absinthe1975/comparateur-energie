@@ -96,7 +96,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - grille : Avantage Gaz 2 ans : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Avantage_Gaz_2_ans.pdf
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/edf/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs
-- source : Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026 (Zen Fixe (prix fixe 2 ans)) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html
+- source : Grille officielle EDF Zen Fixe (PDF « Grille de prix », applicable au 1er octobre 2026) (Zen Fixe (prix fixe 2 ans)) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html
 - source : hellowatt.fr (Zen Fixe + Avantage Gaz 2 ans) : https://www.hellowatt.fr/
 - parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/edf/parrainage
 
@@ -173,7 +173,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/mint-energie/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/mint-energie/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/mint-energie/parrainage
-- source : hellowatt.fr (Classic & Green + Biogaz Classic) : https://www.hellowatt.fr/
+- source : Grille officielle Mint Énergie Online & Green, clients résidentiels (applicable au 20/10/2026, réf. 279) (Online & Green) : https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/
+- source : Grille officielle Mint Énergie Biogaz Online (applicable du 1er au 30 novembre 2026, réf. 282) (Biogaz Online) : https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/
 
 ### Octopus Energy
 - site du fournisseur : https://octopusenergy.fr/
@@ -319,3 +320,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - ENGIE Elec Référence 3 ans, prix TTC au 30 oct. 2026 (page Selectra, source secondaire, reçue le 2 nov. 2026) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference
 - Alpiq Sérénité, grille officielle valable à compter du 1er août 2026 (reçue le 2 nov. 2026) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
 - EDF Zen Fixe (grille officielle, applicable au 1er oct. 2026), Zen Estival (grille officielle, applicable au 15 sept. 2026) et ENGIE Elec Référence 3 ans (fiche descriptive, grille octobre 2026), reçus le 2 nov. 2026 : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-estival.html · https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html · https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche_descriptive_elec_reference_3_ans.pdf
+- Mint Énergie, grilles officielles reçues le 2 nov. 2026 : électricité Online/Classic/Smart & Green (applicable au 20/10/2026) https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/ · Biogaz Online/Classic/Smart (du 1er au 30 novembre 2026) https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/ · fiches PDF réf. 279, 280, 281, 282, 283, 284
