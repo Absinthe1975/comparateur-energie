@@ -10,8 +10,8 @@
    "f": "40 €",
    "pn": 20,
    "fn": 40,
-   "valid": "Jusqu'au 31/12/2026",
-   "st": "ok",
+   "valid": "Jusqu'au 31/12/2026. Montant relevé sur un comparateur, sans page ni règlement officiel reçu : à vérifier.",
+   "st": "check",
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/edf/parrainage"
@@ -55,8 +55,8 @@
    "f": "20 €",
    "pn": 20,
    "fn": 20,
-   "valid": "Relevée en octobre 2026, durée de validité à confirmer",
-   "st": "ok",
+   "valid": "Relevée en octobre 2026, durée de validité à confirmer. Montant relevé sur un comparateur, sans page ni règlement officiel reçu : à vérifier.",
+   "st": "check",
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"
@@ -134,8 +134,8 @@
    "f": "15 €",
    "pn": 15,
    "fn": 15,
-   "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo)",
-   "st": "ok",
+   "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo), sans page ni règlement officiel reçu : à vérifier.",
+   "st": "check",
    "s": [
     "prix-elec.com",
     "https://prix-elec.com/fournisseurs/alpiq/parrainage"
