@@ -15,6 +15,14 @@ def lire(sha, chemin):
     except Exception:
         return None
 
+def complet(sha):
+    """Données du site à une version git : fichiers automatiques + grilles saisies à la main (comme le site)."""
+    import donnees
+    d = {}
+    for ch in ("donnees/data.json", "donnees/elec/data.json", "donnees/gaz/data.json"):
+        d.update(lire(sha, ch) or {})
+    return donnees.fusionner_manuels(d, lire(sha, "donnees/manuel/tarifs_manuels.json") or {})
+
 def fr(x, n=4):
     return f"{x:.{n}f}".replace(".", ",")
 
@@ -24,8 +32,11 @@ def officielles(d, cle):
 def ch_offres(a, b, cle):
     """Prix du kWh (clé « a ») des offres officielles présentes avant et après."""
     A, B = officielles(a, cle), officielles(b, cle)
-    return [f"• {o['name']}, {o['offer']} : {fr(A[i]['a'])} → {fr(o['a'])} €/kWh"
-            for i, o in B.items() if i in A and o.get("a") != A[i].get("a")]
+    res = [f"• {o['name']}, {o['offer']} : {fr(A[i]['a'])} → {fr(o['a'])} €/kWh"
+           for i, o in B.items() if i in A and o.get("a") != A[i].get("a")]
+    res += [f"• {o['name']}, {o['offer']} : {fr(o['a'])} €/kWh (nouvelle offre)"
+            for i, o in B.items() if i not in A and isinstance(o.get("a"), (int, float))]
+    return res
 
 def ch_duo(a, b):
     def idx(d): return {(o["k"], o["offer"]): o for o in (d or {}).get("duo", []) if o.get("niv") == "officiel"}
@@ -61,10 +72,8 @@ def ch_abo(ae, be, ag, bg):
     return res
 
 def messages(avant, apres):
-    g = lambda ch: (lire(avant, ch) or {}, lire(apres, ch) or {})
-    ea, eb = g("donnees/elec/data.json")
-    ga, gb = g("donnees/gaz/data.json")
-    da, db = g("donnees/data.json")
+    ea = ga = da = complet(avant)
+    eb = gb = db = complet(apres)
     rub = [
         ("Électricité : mise à jour des prix du kWh", ch_offres(ea, eb, "elec"), "Prix issus des grilles officielles des fournisseurs."),
         ("Gaz : mise à jour des prix du kWh", ch_offres(ga, gb, "gas"), "Prix issus des grilles officielles des fournisseurs."),
