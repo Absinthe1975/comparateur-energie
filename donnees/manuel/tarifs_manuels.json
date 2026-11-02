@@ -211,6 +211,34 @@
         "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
+    },
+    {
+      "k": "alpiq",
+      "name": "Alpiq",
+      "offer": "Sérénité",
+      "a": 0.1992,
+      "b": 0.1977,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026)",
+        "https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf"
+      ]
     }
   ],
   "gas": [],
@@ -451,6 +479,31 @@
       "s": [
         "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
+      ]
+    },
+    {
+      "k": "alpiq",
+      "name": "Alpiq",
+      "offer": "Sérénité",
+      "hp": 0.2133,
+      "hc": 0.1583,
+      "abo": {
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "2 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026)",
+        "https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf"
       ]
     }
   ]
