@@ -367,7 +367,6 @@ code { overflow-wrap: anywhere; }
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
       <button role="tab" id="tab-marche" aria-selected="false" tabindex="-1" aria-controls="p-marche">Marché</button>
       <button role="tab" id="tab-prime" aria-selected="false" tabindex="-1" aria-controls="p-prime">Parrainages</button>
-      <button role="tab" id="tab-memo" aria-selected="false" tabindex="-1" aria-controls="p-memo">Mémo</button>
       <button role="tab" id="tab-methode" aria-selected="false" tabindex="-1" aria-controls="p-methode">Méthode</button>
       <button role="tab" id="tab-sources" aria-selected="false" tabindex="-1" aria-controls="p-sources">Sources</button>
       <button role="tab" id="tab-stats" aria-selected="false" tabindex="-1" aria-controls="p-stats">Statistiques</button>
@@ -641,168 +640,6 @@ code { overflow-wrap: anywhere; }
     <p class="callout">Cette page indique seulement le montant des primes. Aucun code ni lien de parrainage n'est affiché pour le moment.</p>
     <div class="tablewrap"><table id="t-prime" class="tparr"></table></div>
     <p class="note">Les primes sont versées une seule fois, en général sous forme de remise sur une des premières factures ou de crédit en cagnotte. Une prime se compare après le prix : un écart de kWh se paie toute l'année, une prime ne se touche qu'une fois. Les montants marqués « à vérifier » ne reposent que sur un comparateur, sur un relevé ancien, ou ne figurent pas sur le site du fournisseur. Les montants « confirmés » viennent de plusieurs comparateurs ou du règlement officiel du fournisseur ; la colonne Source indique lesquels.</p>
-  </section>
-
-  <section class="panel" id="p-memo" role="tabpanel" aria-labelledby="tab-memo" hidden>
-    <h2>Mémo : ce qu'il reste à faire</h2>
-    <p class="lede">Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Un sujet est abandonné pour le moment : la lecture des factures (trop de formats). L'onglet « Pro » est relancé en essai, avec ENGIE Pro pour commencer.</p>
-
-    <div class="card">
-      <h3>Électricité <span class="badge check">À faire, au fil de vos envois</span></h3>
-
-      <h4>Grilles à saisir ou à confirmer, fournisseur par fournisseur</h4>
-      <ul>
-        <li><strong><a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> :</strong> NovaFixe Élec est saisie (grille d'octobre 2026, Base de 3 à 15 kVA, heures pleines / creuses de 6 à 36 kVA, identique dans toutes les villes testées). Novaflex Élec (indexée, 5 % sous le tarif réglementé sur le kWh HT, pendant 2 ans) est ajoutée : prix calculé par nous d'après cette formule officielle (page du fournisseur reçue le 29 oct. 2026), donc « À confirmer » tant que la fiche descriptive de la zone n'est pas reçue. Le bonus de 100 € de l'offre Bonus Élec suit son <a href="https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf" target="_blank" rel="noopener">règlement</a> (souscription jusqu'au 30 novembre 2026) : il s'affiche sous l'offre, hors classement. Ensuite, supprimer sa ligne dans la rubrique « promos » de donnees/data.json.</li>
-        <li><strong><a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> :</strong> Elec Référence 3 ans à confirmer : prix de novembre 2026 relevés sur Selectra (grille du 30 oct. 2026, TTC : base 0,2403 € de 3 à 6 kVA et 0,2420 € dès 9 kVA ; heures pleines 0,2561 €, creuses 0,2023 € ; abonnement 186,98 € par an à 6 kVA), source secondaire. La fiche descriptive officielle d'octobre 2026 est reçue : elle donne fourniture, acheminement et obligations séparément. L'abonnement de 186,98 € à 6 kVA se retrouve exactement (fourniture 45,79 € + acheminement à 4 plages 141,19 €). Le prix total du kWh dépend de l'acheminement du client (plusieurs options Enedis) : notre total reprend l'hypothèse de Selectra, donc « À confirmer » tant qu'on ne choisit pas la formule d'acheminement. Promotion de deux mois d'abonnement offerts, jusqu'au 7 novembre 2026 : affichée sous les offres ENGIE, hors classement ; supprimer sa ligne dans « promos » après cette date. Page de promotions ENGIE du 28 octobre 2026 lue : elle confirme cette promotion (souscription du 19 octobre au 7 novembre inclus, Elec, Gaz ou Duo Référence 3 ans, ou Happy Week-End) et décrit la « Promo d'été » (50 % de l'électricité consommée de 13 h à 17 h en cagnotte), notée dans l'onglet Saisons.</li>
-        <li><strong><a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> :</strong> la grille d'août 2026 est lue (0,19 €/kWh, abonnement 190,32 € en 6 kVA), mais ce prix ne vaut que pour un compteur non communicant. Avec un Linky, LLUM applique une grille par saison et heures pleines / creuses (Base : 0,22276 € en heures pleines, 0,15064 € en heures creuses), non modélisée. À décider : modéliser une moyenne, ou afficher une mention.</li>
-        <li><strong><a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a> (Sérénité) :</strong> prix indexé (remise de 0,5 % sur le kWh HT du tarif réglementé) : à resaisir à chaque changement du tarif réglementé (février, août), avec la grille PDF d'Alpiq.</li>
-        <li><strong><a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> :</strong> grilles de l'offre Cocon fixe (fiche reçue, sans prix) et d'Intelligent Octopus. Pour l'offre saisonnière, le prix moyen suppose 58 % de la consommation en hiver : à confirmer ou corriger. Nouvelle offre à étudier : OctoSaisons (ex-OctoTempo, renommée le 21 octobre 2026), de type Tempo avec prix par couleur de jour (bleu, blanc, rouge) et heures pleines / creuses, prix hors taxes bloqués 2 ans. La grille officielle du 1er août 2026 est reçue et résumée dans docs/OCTOSAISONS-GRILLE.md (six prix du kWh : hiver, été et jours rouges, en heures pleines et creuses ; abonnement de 1 à 36 kVA). Un onglet provisoire « Saisons (essai) » calcule OctoSaisons et EDF Tempo (grille officielle d'EDF du 1er août 2026) à partir de vos usages (chauffage, journée type, chauffe-eau et voiture électrique la nuit), convertis en parts de consommation par un profil horaire supposé par le site ; il n'est pas dans le classement général. La grille Tempo officielle d'EDF est saisie (2 nov. 2026). À faire : valider les hypothèses (7 % de jours rouges, 55 % en hiver), puis décider d'intégrer ces offres au classement si d'autres fournisseurs adoptent ce principe.</li>
-        <li><strong><a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> :</strong> le prix n'apparaît qu'à la souscription (code postal demandé), sans grille publique. Il faut un PDF de grille, ou renoncer à « Grille officielle » pour cet acteur.</li>
-        <li><strong><a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a> (Essentielle Verte) :</strong> le prix est une formule (kWh HT à 95 % du tarif réglementé, abonnement identique). Notre 0,1919 €/kWh en 6 kVA est cohérent mais calculé par nous. À décider : l'afficher comme « calculé selon la formule officielle (tarif réglementé −5 %) » et le recalculer à chaque mise à jour du tarif réglementé, ou le laisser « À confirmer ».</li>
-        <li><strong><a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop</a> :</strong> grille du 1er août 2026 intégrée (Base et Flexibilité heures creuses). Non modélisées : Nuit &amp; week-end, 2 saisons, jours de pointe (plages horaires et saisons propres à Enercoop). Sa suspension d'accueil, annoncée dans des données sans source datée, n'est pas confirmée par ses pages officielles : à vérifier avant de le retirer.</li>
-        <li><strong><a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> :</strong> ses PDF sont sur un domaine qui interdit les robots : à relire à la main à chaque changement de grille.</li>
-        <li><strong><a href="https://particulier.edf.fr/" target="_blank" rel="noopener">EDF</a> :</strong> Zen Estival : grille officielle reçue, affichée sans calcul dans l'onglet Saisons (trois prix par saison : à modéliser si l'on veut l'ajouter aux comparatifs). Le site interdit les robots (robots.txt) : ses 12 grilles PDF et ses pages de prix restent saisies à la main à chaque changement. Le tarif réglementé, lui, vient de la CRE.</li>
-        <li><strong><a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a> :</strong> le script prend le PDF le plus récent de la <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">page des tarifs</a>. Non intégré : « L'Offre Online » (indexée sur le tarif réglementé −5 %, grille du 1er février 2026 sans doute dépassée : envoyer la grille récente).</li>
-      </ul>
-
-      <h4>Heures pleines / creuses</h4>
-      <ul>
-        <li>Le choix « Formule » apparaît dans l'onglet Électricité dès qu'une offre a ses prix. Déjà saisis : Dyneff, La Bellenergie, Gaz de Bordeaux, Enercoop, ilek, EDF Zen Fixe et Alpiq.</li>
-        <li>À saisir dans la rubrique <code>hphc</code> de donnees/manuel/tarifs_manuels.json (champs <code>hp</code> et <code>hc</code> en €/kWh TTC, <code>abo</code> par puissance) : GEG et LLUM. Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.</li>
-      </ul>
-
-      <h4>Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)</h4>
-      <ul>
-        <li><a href="https://www.urbansolarenergy.fr/mentions-legales/" target="_blank" rel="noopener">Urban Solar Energy</a> (prix fixe, autoconsommation) : pas de grille publique, tarifs par simulation. Documents : <a href="https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf" target="_blank" rel="noopener">CGV ≤ 36 kVA</a>, <a href="https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf" target="_blank" rel="noopener">conditions générales de septembre 2026</a>.</li>
-        <li><a href="https://www.energiedici.fr/nos-offres-pour-les-particuliers.html" target="_blank" rel="noopener">Énergie d'ici</a> (électricité locale, hydroélectricité) : envoyer la fiche descriptive et le bulletin d'adhésion (voir docs/LIENS-RECUS.md).</li>
-        <li><a href="https://jeety.energy/" target="_blank" rel="noopener">Jeety Energy</a> (ex-Élecocité) : aucune grille publique ; tarifs à relever par simulation sur leur site.</li>
-        <li>Entreprises locales de distribution (ES Strasbourg, UEM Metz, Gedia, Séolis, Synelva, Électricité de Provence, Enargia) : section régionale à prévoir.</li>
-      </ul>
-
-      <h4>Limites connues du calcul</h4>
-      <ul>
-        <li><strong>Puissances de 3 à 36 kVA :</strong> les offres sans grille complète sont estimées (étoile). Le tarif réglementé de 12 à 36 kVA se ressaisit à la main à chaque changement (février, août) avec la grille EDF. Dès qu'un fournisseur donne sa grille, la saisir dans le champ <code>abo</code> de l'offre. Le prix du kWh à 7 et 8 kVA (Enercoop) et à 21 kVA (Dyneff) n'est pas distingué.</li>
-        <li><strong>Abonnement à 3 kVA</strong> de <a href="https://www.ohm-energie.com/" target="_blank" rel="noopener">OHM</a>, <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint</a> et <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> : non exact.</li>
-        <li><strong>Filtres des offres :</strong> prix fixe ou indexé, engagement et offre verte ne sont renseignés que pour environ la moitié des offres (15 sur 29 en électricité, 9 sur 22 en gaz le 30 octobre 2026). À compléter avec la fiche descriptive de chaque offre (champs <code>typ</code>, <code>eng</code> et <code>vert</code> de data.json).</li>
-        <li><strong>Autres options des fournisseurs</strong> (à faire plus tard) : formules week-end, jours de pointe, voiture électrique.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Gaz <span class="badge check">À faire, au fil de vos envois</span></h3>
-      <ul>
-        <li><strong><a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> :</strong> relevés du simulateur officiel pour Lille (59000, trois niveaux de consommation) dans docs/GDB-GAZ-RELEVES.md : NovaFixe Biogaz 0,1336 €/kWh (accise comprise) en B1 et 0,1753 en B0, contre 0,1346 aujourd'hui sur le site. Pour savoir si ces prix valent partout, relever une consommation moyenne dans deux ou trois autres codes postaux de zones différentes (par exemple Bordeaux 33000, Paris 75001, Marseille 13001) sur la <a href="https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz" target="_blank" rel="noopener">page gaz</a>.</li>
-        <li><strong><a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> :</strong> Gaz Référence 3 ans à confirmer. Les deux prix vus (0,1414 et 0,1373 €/kWh) sont deux zones de la même grille. Selectra (1er oct. 2026, TTC, 4 001 à 29 999 kWh/an, abonnement 360,79 €/an) donne 8 zones : A 0,13728 · B 0,1383 · C 0,1414 · D 0,14474 · E 0,14835 · F 0,15104 · G 0,15324 · H 0,15326 €/kWh. Nous affichons la zone C. La fiche officielle d'août 2026 recoupe Selectra (à moins de 0,001 €/kWh) : il manque seulement la table code postal → groupe A à H (ENGIE ne la donne que par formulaire).</li>
-        <li><strong><a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> :</strong> relier la zone gaz (A à K, de 0,1633 à 0,1809 €/kWh en T2) au code postal avec <a href="https://www.ilek.fr/zone-tarifaire-gaz-vert" target="_blank" rel="noopener">ilek.fr/zone-tarifaire-gaz-vert</a> ; nous affichons la zone B (0,1652 €/kWh).</li>
-        <li><strong><a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint Énergie</a> :</strong> grilles gaz Classic et Smart d'octobre (non en ligne).</li>
-        <li><strong><a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a> :</strong> gaz « Fixe 2 ans ».</li>
-        <li><strong><a href="https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/" target="_blank" rel="noopener">Dyneff</a> :</strong> gaz 15 %, 55 % et 100 % renouvelable déjà intégrés, grilles du 1er octobre 2026 vérifiées (prix et abonnement identiques). Ces grilles sont publiées chaque mois (« fin de l'offre : fin du mois en cours ») : le suivi automatique repère chaque mois le nouveau PDF sur les pages gaz et électricité de Dyneff et le signale dans le rapport (sans rien appliquer) ; il reste à saisir les nouveaux prix.</li>
-        <li><strong><a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a> :</strong> non intégrés : Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp. GEG gaz au réseau NTR 0-3 seulement.</li>
-        <li><strong>Limites du calcul :</strong> profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie (<a href="https://www.geg.fr/" target="_blank" rel="noopener">GEG</a>, <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a>) sont à surveiller ; les zones de distribution locales (Bordeaux, Strasbourg, Colmar) ne sont pas modélisées. Prix et abonnements Base et B0 réels pour les offres à grille officielle, estimés (étoile) pour les autres.</li>
-        <li><strong>Zone tarifaire par commune :</strong> aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait, mais chaque fournisseur découpe les zones à sa façon (tableau ci-dessous, à vérifier sur les grilles officielles).
-        <div class="tablewrap"><table>
-          <thead><tr><th>Fournisseur</th><th>Système de zones</th><th>Particularités</th></tr></thead>
-          <tbody>
-            <tr><td>GRDF (référence)</td><td>6 zones (1 à 6)</td><td>Système officiel de référence, base de toutes les autres grilles.</td></tr>
-            <tr><td>ENGIE</td><td>6 zones (1 à 6)</td><td>Aligné sur GRDF historiquement, héritage du tarif réglementé.</td></tr>
-            <tr><td>TotalEnergies</td><td>6 zones (modifié)</td><td>Reprend le système GRDF avec quelques reclassifications de communes.</td></tr>
-            <tr><td>Alterna</td><td>6 zones (modifié)</td><td>Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement.</td></tr>
-            <tr><td>ilek</td><td>11 zones (A à K)</td><td>Système propre, plus fin, pour refléter les coûts d'achat du biogaz local.</td></tr>
-            <tr><td>Ekwateur</td><td>Aucune zone</td><td>Tarif national unique.</td></tr>
-          </tbody>
-        </table></div>
-        <span class="note">Source : <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire" target="_blank" rel="noopener">fournisseurs-electricite.com</a> (second comparateur, octobre 2026), consultée le 29 oct. 2026. Source secondaire : les classifications de communes peuvent changer chaque année.</span></li>
-        <li><strong>Hausse du gaz de novembre :</strong> volontairement non affichée.</li>
-        <li><strong>Historique avant 2024 :</strong> piste <a href="https://www.gazdebordeaux.fr/sites/default/files/2024-12/histo_TRV.pdf" target="_blank" rel="noopener">histo_TRV.pdf</a> (anciens tarifs réglementés du gaz jusqu'en avril 2023) ; dates difficiles à relier aux valeurs, à comparer avec la CRE avant tout usage.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Élec + Gaz (offres combinées) <span class="badge check">À faire</span></h3>
-      <ul>
-        <li><strong>Gaz de Bordeaux :</strong> conditions du NovaFixe Duo à obtenir. Le règlement du <a href="https://www.gazdebordeaux.fr/documents-contractuels" target="_blank" rel="noopener">Novafixe Bonus Duo</a> (100 € aussi) n'est pas reçu.</li>
-        <li><strong>Duos lus sur les pages officielles (1er nov. 2026) :</strong> ENGIE (<a href="https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf" target="_blank" rel="noopener">fiche</a>), <a href="https://www.ilek.fr/offre-dual" target="_blank" rel="noopener">ilek</a>, <a href="https://ekwateur.fr/fournisseur-elecricite-et-gaz/" target="_blank" rel="noopener">Ekwateur</a>, <a href="https://www.mint-energie.com/contrat-electricite/offre-classic-green/" target="_blank" rel="noopener">Mint</a>, <a href="https://www.geg.fr/offre-de-marche/" target="_blank" rel="noopener">GEG</a> et <a href="https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz" target="_blank" rel="noopener">Octopus</a> : aucun prix ni remise propre au duo, seulement la somme de deux offres. La remise de 48 € de Mint (2 € par mois et par énergie) vient d'un comparateur et n'est plus comptée. EDF (Zen Fixe + Avantage Gaz, Tarif Bleu + Avantage Gaz Optimisé) : site fermé aux robots, pages à recevoir en fichier.</li>
-        <li><strong>Offres duo retirées de l'onglet Élec + Gaz (31 oct. 2026) :</strong> <a href="https://www.alterna-energie.fr/offre-dual-gaz-electricite" target="_blank" rel="noopener">Alterna</a> (aucune offre combinée : deux contrats séparés, une seule facture) et TotalEnergies Fixe 2 ans Élec + Gaz (<a href="https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz" target="_blank" rel="noopener">offre fermée</a>). Les offres individuelles restent dans les onglets Électricité et Gaz. ENGIE Duo référence 3 ans : la <a href="https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf" target="_blank" rel="noopener">fiche officielle</a> montre deux grilles séparées, sans remise duo. EDF, Mint, Octopus, ilek, Ekwateur, GEG et OHM : page officielle à relever.</li>
-        <li><strong>Mention « Offre combinée non relevée »</strong> pour les fournisseurs sans duo relevé : proposée, non décidée.</li>
-        <li>Les offres combinées ne sont relevées que pour 3, 6 et 9 kVA.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Professionnels (onglet Pro, essai) <span class="badge check">À faire, au fil de vos envois</span></h3>
-      <ul>
-        <li><strong>ENGIE Pro :</strong> Référence Pro 1, 2 et 3 ans et Latitude 1 an (prix indexé sur le marché, qui change chaque mois : la valeur saisie est celle d'octobre) d'après les grilles d'octobre 2026, jusqu'à 36 kVA, hors taxes. À refaire quand ENGIE publie ses grilles de novembre. Le calcul n'inclut pas la réduction de 25 % de la première année (3 ans, jusqu'au 31 octobre 2026).</li>
-        <li><strong>Autres fournisseurs avec une grille Pro déjà repérée, à lire et saisir :</strong> <a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop</a> (offre « 2 saisons », 4 prix, non modélisée), <a href="https://www.energiedici.fr/nos-offres-pour-les-professionnels.html" target="_blank" rel="noopener">Énergie d'ici</a>. Endesa ne propose que des offres professionnelles (à relever).</li>
-        <li><strong><a href="https://www.gazdebordeaux.fr/documents-contractuels" target="_blank" rel="noopener">Gaz de Bordeaux</a> Pro :</strong> écarté pour l'instant. Ses CGV Pro (juillet 2026) et ses documents contractuels, lus le 30 oct. 2026, ne contiennent aucune grille : les prix sont établis par cotation envoyée au client. À reprendre si une grille publique apparaît.</li>
-        <li><strong>Hors taxes :</strong> l'accise, la CTA et la TVA ne sont pas comptées (le taux d'accise dépend de l'activité). À décider : les ajouter avec un choix « Mon activité », ou laisser le prix hors taxes.</li>
-        <li><strong>Puissances au-delà de 36 kVA</strong> (fiche ENGIE C4, grilles sur devis) : non traitées.</li>
-        <li><strong>Gaz professionnel :</strong> ENGIE Pro saisi (Activert Gaz 1, 2 et 3 ans, Latitude Gaz 1 an, consommation jusqu'à 300 MWh, grilles d'octobre 2026). Le prix dépend de la plage de consommation (P1, P2, P3) et d'un « niveau » de 1 à 6 pour les obligations, que l'utilisateur choisit à la main : à relier au code postal quand on aura la table des communes par niveau (zones GRDF). Le terme de débit normalisé lié au compteur (5,73 €/an par Nm³/h, au-delà de 40 Nm³/h) n'est pas compté. Les autres fournisseurs de gaz professionnel restent à relever.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Eau <span class="badge check">À faire</span></h3>
-      <ul>
-        <li><strong>Chaque lundi :</strong> si une demande de fusion « eau » s'ouvre (prix changés, par exemple quand SISPEA publie l'année 2026), elle vous est assignée : relire les lignes « À vérifier » du journal, puis fusionner.</li>
-        <li><strong>Historique :</strong> les variations de plus de 40 % en un an sont signalées sous la courbe (par exemple Antibes) ; reste à vérifier ces communes une à une. Les prix par année ne sont pas toujours comparables (couverture variable, 2025 moins complète).</li>
-        <li><strong>Communes sans prix :</strong> environ 8 700 communes n'ont aucun prix dans SISPEA ; le site le dit et utilise une moyenne indicative (région, ou nationale). À améliorer avec une autre source si elle apparaît.</li>
-        <li><strong>Abonnement estimé :</strong> pour environ 3 400 communes, médiane du département ; 99 € si le département n'a pas assez de données. Décider d'afficher aussi pour lui la mention « Données non communiquées… ».</li>
-        <li><strong>Corse et Provence-Alpes-Côte d'Azur :</strong> moyennes peu fiables, la moyenne nationale est utilisée à la place.</li>
-        <li><strong>Opérateurs</strong> (idée du 10 octobre 2026). Chaque commune a son service, géré par une régie ou par un opérateur (Veolia, Suez, Saur). Deux pistes : les 3 opérateurs les plus présents par région (aucune donnée sourcée trouvée ; sources possibles : rapport de la Fédération professionnelle des entreprises de l'eau, données SISPEA), et l'opérateur de chaque commune dans le tableau des prix (le plus utile, mais à relever commune par commune).</li>
-        <li><strong>Consommations par usage :</strong> les appareils et l'eau reposent sur des ordres de grandeur sans source précise.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Parrainages <span class="badge check">À confirmer</span></h3>
-      <ul>
-        <li><strong>À confirmer sur le site du fournisseur :</strong> <a href="https://eniplenitude.fr/" target="_blank" rel="noopener">Plenitude</a> (offre non publiée sur le site public, réservée à l'Espace Client connecté : à vérifier depuis un compte client), <a href="https://ekwateur.fr/" target="_blank" rel="noopener">Ekwateur</a> (montant du parrain absent du règlement), <a href="https://www.happ-e.fr/" target="_blank" rel="noopener">Happ-e</a> (20 € par contrat d'après Hellowatt : à confirmer sur la page de Happ-e), <a href="https://www.llum.fr/" target="_blank" rel="noopener">LLUM</a> et <a href="https://www.ilek.fr/grilles-tarifaires" target="_blank" rel="noopener">ilek</a> (une seule source).</li>
-        <li><strong>Venant de comparateurs :</strong> <a href="https://particuliers.alpiq.fr/" target="_blank" rel="noopener">Alpiq</a>, <a href="https://particulier.edf.fr/" target="_blank" rel="noopener">EDF</a> et <a href="https://www.gazdebordeaux.fr/" target="_blank" rel="noopener">Gaz de Bordeaux</a> (relevés sur prix-elec.com). Ils s'affichent comme confirmés : à vérifier sur les pages officielles, ou à passer en « À confirmer ».</li>
-        <li><strong>Confirmés par une page ou un règlement officiel :</strong> <a href="https://octopusenergy.fr/" target="_blank" rel="noopener">Octopus</a> (grille du 1er août 2026), <a href="https://particuliers.primeo-energie.fr/" target="_blank" rel="noopener">Primeo</a>, <a href="https://particuliers.engie.fr/" target="_blank" rel="noopener">ENGIE</a> (20 €, plus 5 € avec l'option verte) et <a href="https://www.totalenergies.fr/particuliers" target="_blank" rel="noopener">TotalEnergies</a> (20 €). Ces montants sont saisis à la main, car le script ne lit pas ces pages.</li>
-        <li><strong>Primes ponctuelles</strong> (20, 50, 60 €) : non comptées dans le classement. Parrainages en kWh ou en cartes cadeaux : non automatisés.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Le site <span class="badge check">À faire</span></h3>
-
-      <h4>Mises à jour automatiques</h4>
-      <ul>
-        <li><strong>Après chaque fusion :</strong> lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes <a href="https://www.mint-energie.com/" target="_blank" rel="noopener">Mint</a> et CRE, offres « À relire », premiers repères des PDF suivis). Quand un PDF suivi change, le rapport donne le prix du kWh lu par l'IA (avec citation vérifiée) à côté du nôtre, sans rien appliquer : vous saisissez ensuite la grille à la main.</li>
-        <li><strong>Facebook :</strong> chaque fusion qui change un prix officiel publie un post sur la Page (le résultat est écrit dans l'annotation de l'exécution du workflow). À faire : un message pour l'eau (national, sans code postal), et renouveler le jeton de la Page, qui a transité par la conversation (à stocker uniquement dans le secret GitHub).</li>
-        <li><strong>Grilles saisies à la main :</strong> le fichier <code>donnees/manuel/tarifs_manuels.json</code> est fusionné avec les données automatiques. À y saisir, au fil des envois : les fournisseurs qui interdisent les robots (EDF, ilek). Mode d'emploi dans docs/LISEZMOI.md.</li>
-        <li><strong>Sources bloquées (relevé du 1er nov. 2026, à refaire de temps en temps) :</strong> EDF (particuliers et entreprises), ENGIE particuliers, ilek, Selectra et Kelwatt interdisent la lecture automatique (robots.txt) ; le catalogue des prestations d'Enedis et labellenergie.fr ne s'ouvrent pas depuis l'outil de travail. Pour ces sites, les grilles sont à envoyer en fichier (PDF ou page enregistrée) et à saisir à la main, avec l'étiquette « À confirmer » tant qu'il n'y a pas de grille officielle datée. Pages dont le prix n'est pas lisible par le programme : Alpiq (grille), GEG et TotalEnergies gaz (prix du kWh absent de la page). Fournisseurs relancés sans réponse : à recontacter par le service partenaires ou les réseaux sociaux.</li>
-        <li><strong>Conditions d'utilisation :</strong> le script respecte robots.txt et signale son nom, mais cela ne remplace pas la lecture des conditions de chaque site (à faire par vous).</li>
-      </ul>
-
-      <h4>Mesure d'audience</h4>
-      <ul>
-        <li>Lire la rubrique « Privacy policy » de <a href="https://www.goatcounter.com/" target="_blank" rel="noopener">GoatCounter</a> et vérifier qu'elle correspond aux Mentions légales (adresse IP non conservée, absence de cookie). Google Analytics (identifiant G-FKWB5WZJW6) est en suspens, retiré du site : son ancien code est dans l'historique (PR n° 99).</li>
-      </ul>
-
-      <h4>Avant la mise en ligne</h4>
-      <ul>
-        <li><strong>Mentions légales :</strong> l'identité et le contact sont renseignés, l'adresse postale n'est pas publiée. Pour rester sans adresse publique, vérifier que votre identité figure sur votre compte GitHub (l'hébergeur) ; faire relire le texte par un juriste ou selon les guides de la CNIL ; le décrire à nouveau quand la mise à jour automatique des prix existera. L'adresse e-mail est visible de tous : elle peut recevoir du courrier indésirable, une adresse dédiée est possible.</li>
-        <li><strong>Site sans but lucratif :</strong> si des liens de parrainage rémunérés ou de la publicité sont ajoutés un jour, revoir les Mentions légales (rémunération, identité de l'éditeur, confidentialité).</li>
-        <li><strong>Hébergement GitHub Pages (choisi) :</strong> le dépôt doit être public avec le compte gratuit. Les conditions de GitHub excluent Pages pour une activité commerciale : sans but lucratif, ce n'est pas un obstacle, mais à relire si le site change de nature. Plus tard, un nom de domaine à soi.</li>
-      </ul>
-
-      <h4>Rendre le comparateur plus juste</h4>
-      <ul>
-        <li>Afficher la durée de blocage des prix fixes (le filtre fixe / indexé existe déjà).</li>
-        <li>Historique des prix (onglet « Marché ») : remonter plus loin pour les offres des fournisseurs demande des archives de grilles (PDF datés) à fournir.</li>
-        <li>Simuler la facture sur 12 mois plutôt qu'un total annuel à prix constant.</li>
-        <li>Inclure les frais ponctuels (mise en service, déplacement) dans le total de la première année.</li>
-        <li>Mode « DPE » en plus du mode réaliste, avec des valeurs conventionnelles sourcées, une fois le texte officiel de la méthode 3CL relevé.</li>
-        <li>Graphique du détail des taxes : la barre actuelle sépare seulement consommation et abonnement. Taux relevés sur le BOFiP au 26 octobre 2026 : accise électricité 30,85 €/MWh (ménages, depuis le 1er février 2026), accise gaz naturel 10,73 €/MWh avant majoration. Il reste à vérifier la CTA et la TVA par poste, puis à décomposer chaque offre ; sans cela le graphique serait faux.</li>
-        <li>Prix par code postal : un code postal regroupant des communes à prix différents reçoit la moyenne de ces communes (233 cas chez <a href="https://www.alterna-energie.fr/" target="_blank" rel="noopener">Alterna</a>).</li>
-      </ul>
-
-      <h4>Accessibilité</h4>
-      <ul>
-        <li>Test avec un vrai lecteur d'écran (NVDA, VoiceOver) : seul un humain avec ce logiciel peut le faire. Déjà vérifié automatiquement : ordre des titres, tableaux avec en-têtes, onglets, repères de page, libellés des champs, contrastes.</li>
-      </ul>
-    </div>
   </section>
 
 <section class="panel" id="p-sources" role="tabpanel" aria-labelledby="tab-sources" hidden>
@@ -1906,7 +1743,7 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "memo", "methode", "sources", "stats", "legal"];
+var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
 var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
@@ -2483,7 +2320,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", saisons: "Saisons (essai)", pro: "Pro (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", memo: "Mémo", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", saisons: "Saisons (essai)", pro: "Pro (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
 function loadStats() {
   var f = $("stats-frame");
   if (f.getAttribute("src")) return;
@@ -2550,7 +2387,7 @@ function setTab(t) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "memo" || t === "home" || t === "duo" || t === "saisons" || t === "pro" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "home" || t === "duo" || t === "saisons" || t === "pro" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
   $("f-kva").hidden = t !== "elec";
   $("f-fmla").hidden = !(t === "elec" && HPHC.length > 0);
   $("f-mine").hidden = !(t === "elec" || t === "gaz");
