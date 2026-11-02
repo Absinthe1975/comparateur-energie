@@ -34,7 +34,8 @@ def ch_offres(a, b, cle):
     A, B = officielles(a, cle), officielles(b, cle)
     res = [f"• {o['name']}, {o['offer']} : {fr(A[i]['a'])} → {fr(o['a'])} €/kWh"
            for i, o in B.items() if i in A and o.get("a") != A[i].get("a")]
-    res += [f"• {o['name']}, {o['offer']} : {fr(o['a'])} €/kWh (nouvelle offre)"
+    avant = {(o["k"], o["offer"]) for o in (a or {}).get(cle, [])}
+    res += [f"• {o['name']}, {o['offer']} : {fr(o['a'])} €/kWh ({'grille officielle' if i in avant else 'nouvelle offre'})"
             for i, o in B.items() if i not in A and isinstance(o.get("a"), (int, float))]
     return res
 
