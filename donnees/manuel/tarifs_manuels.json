@@ -183,6 +183,34 @@
         "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
         "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
       ]
+    },
+    {
+      "k": "engie",
+      "name": "ENGIE",
+      "offer": "Elec Référence 3 ans",
+      "a": 0.2403,
+      "b": 0.242,
+      "ab6": 186.98,
+      "ab9": 230.16,
+      "abo": {
+        "3": 143.88,
+        "6": 186.98,
+        "9": 230.16,
+        "12": 273.24,
+        "15": 316.44,
+        "18": 359.52,
+        "24": 445.8,
+        "30": 532.08,
+        "36": 618.36
+      },
+      "niv": "confirmer",
+      "d": "2 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
+        "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
+      ]
     }
   ],
   "gas": [],
@@ -398,6 +426,31 @@
       "s": [
         "Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026",
         "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html"
+      ]
+    },
+    {
+      "k": "engie",
+      "name": "ENGIE",
+      "offer": "Elec Référence 3 ans",
+      "hp": 0.2561,
+      "hc": 0.2023,
+      "abo": {
+        "6": 186.98,
+        "9": 230.16,
+        "12": 273.24,
+        "15": 316.44,
+        "18": 359.52,
+        "24": 445.8,
+        "30": 532.08,
+        "36": 618.36
+      },
+      "niv": "confirmer",
+      "d": "2 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an)",
+        "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
     }
   ]
