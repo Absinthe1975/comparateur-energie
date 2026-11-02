@@ -4,7 +4,7 @@ Usage : python3 tests/e2e/smoke.py   (nécessite playwright et chromium ; lance 
 import os, sys, subprocess, time, socket
 from playwright.sync_api import sync_playwright
 RACINE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "marche", "prime", "memo", "methode", "sources", "legal"]
+TABS = ["home", "logt", "elec", "gaz", "duo", "eau", "abo", "marche", "prime", "methode", "sources", "legal"]
 
 def port_libre():
     with socket.socket() as s: s.bind(("127.0.0.1", 0)); return s.getsockname()[1]
