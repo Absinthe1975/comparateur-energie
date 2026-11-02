@@ -95,6 +95,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - grille : Avantage Gaz 2 ans : https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Avantage_Gaz_2_ans.pdf
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/edf/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs
+- source : Page officielle EDF Zen Fixe, prix TTC à compter du 1er octobre 2026 (Zen Fixe (prix fixe 2 ans)) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html
 - source : hellowatt.fr (Zen Fixe + Avantage Gaz 2 ans) : https://www.hellowatt.fr/
 - parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/edf/parrainage
 
@@ -311,3 +312,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Duos lus le 1er nov. 2026 (aucune remise propre au duo) : ilek https://www.ilek.fr/offre-dual · Ekwateur https://ekwateur.fr/fournisseur-elecricite-et-gaz/ · Mint https://www.mint-energie.com/contrat-electricite/offre-classic-green/ · GEG https://www.geg.fr/offre-de-marche/ · Octopus https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz
 - ilek, grilles reçues le 1er nov. 2026 : ÉnRFixe+ Élec particuliers (« à partir du 1er novembre 2026 ») https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf · ÉnRFixe+ Gaz particuliers (« du 1er octobre au 1er novembre 2026 ») …/357/grille_357.pdf · professionnels élec …/358/grille_358.pdf · voiture électrique (1er août 2026) …/grille_offre_ve.pdf · fiches descriptives 356, 357, 358 et 275 sur la page https://www.ilek.fr/grilles-tarifaires
 - ilek, offre élec + gaz (aucune remise duo) : https://www.ilek.fr/offre-electricite-et-gaz · fonctionnement ÉnRFixe+ (prix fixe 2 ans, baisse possible de 5 % au plus) : https://www.ilek.fr/aide/l/fr/offres-et-options/tout-savoir-sur-votre-offre-enrfixe · zones gaz (11 zones, recherche par adresse) : https://www.ilek.fr/zone-tarifaire-gaz-vert
+- EDF Zen Fixe (prix fixe 2 ans, grille TTC au 1er oct. 2026, reçue le 2 nov. 2026) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html · fiche descriptive Zen Fixe (1er janv. 2026, sans prix) et Zen Estival (31 mars 2026) · ENGIE Gaz Référence 3 ans fiche (grille août 2026, kWh selon groupe A–H) : fiche-descriptive-gaz-reference-3-ans.pdf
