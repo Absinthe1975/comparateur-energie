@@ -59,6 +59,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/alpiq/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alpiq/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/alpiq/parrainage
+- source : Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026) (Sérénité) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
 
 ### Alterna
 - site du fournisseur : https://www.alterna-energie.fr/
@@ -316,3 +317,4 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - EDF Zen Estival, prix de novembre 2026 (page Kelwatt, source secondaire, reçue le 2 nov. 2026) : https://www.kelwatt.fr/fournisseurs/edf/prix/zen-estival
 - EDF Tarif Bleu, grille de prix applicable au 1er août 2026 (base, heures creuses, Tempo), reçue le 2 nov. 2026 : https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html · option Tempo https://particulier.edf.fr/fr/accueil/gestion-contrat/options/tempo/details.html
 - ENGIE Elec Référence 3 ans, prix TTC au 30 oct. 2026 (page Selectra, source secondaire, reçue le 2 nov. 2026) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference
+- Alpiq Sérénité, grille officielle valable à compter du 1er août 2026 (reçue le 2 nov. 2026) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
