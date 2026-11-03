@@ -41,6 +41,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Grille heures pleines/creuses : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_HPHC_260801.pdf
 - Fiche descriptive : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/FICHE-DESCRIPTIVE-Mon-Contrat-electricite-PART.pdf
 - Conditions générales : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/CONDITIONS-GENERALES-VENTES-elec-part-et-pro.pdf ; contrat réseau : .../Enedis-contrat-GRD.pdf
+- Grilles gaz particuliers (mensuelles, « oct-26 », valables jusqu'à fin du mois) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf ; .../Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf ; .../Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
+- Grilles électricité verte (non modélisées) : .../2026/02/ContratElecVerte_BASE_260801.pdf et ContratElecVerte_HPHC_260801.pdf
+- Grilles pro (hors périmètre) : .../ContratProElec_*, ContratProElecVerte_*, Contrat-Pro-gaz-*-oct-26.pdf
 
 ## Enercoop
 - Annexes tarifaires : https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires
@@ -79,6 +82,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/dyneff/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/dyneff/tarifs
 - source : Grille officielle Dyneff (1er août 2026) (Contrat+ Électricité) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf
+- source : Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026) (Contrat+ Gaz 15 % Vert) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf
+- source : Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026) (Contrat+ Gaz 55 % Vert) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf
+- source : Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026) (Contrat+ Gaz 100 % Vert) : https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf
 
 ### EDF
 - site du fournisseur : https://particulier.edf.fr/
