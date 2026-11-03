@@ -773,6 +773,62 @@
         "Grille officielle Mint Énergie Smart & Green, clients résidentiels (applicable au 20/10/2026, réf. 281)",
         "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
       ]
+    },
+    {
+      "k": "geg",
+      "name": "GEG",
+      "offer": "Mon Offre Elec Verte, fixe 3 ans",
+      "hp": 0.1983,
+      "hc": 0.1584,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "05/10/2026",
+      "d": "3 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "eng": 36,
+      "s": [
+        "Grille officielle GEG, heures pleines / creuses (5 oct. 2026) : prix des 6 et 9 kVA ; heures pleines 0,2014 € dès 12 kVA, heures creuses 0,1656 € dès 18 kVA",
+        "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf"
+      ]
+    },
+    {
+      "k": "geg",
+      "name": "GEG",
+      "offer": "Mon Offre Elec Verte Direct Producteur, fixe 3 ans",
+      "hp": 0.1983,
+      "hc": 0.1586,
+      "abo": {
+        "6": 209.76,
+        "9": 263.4,
+        "12": 315.12,
+        "15": 363.72,
+        "18": 413.64,
+        "24": 520.32,
+        "30": 618.24,
+        "36": 717.12
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "05/10/2026",
+      "d": "3 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "eng": 36,
+      "s": [
+        "Grille officielle GEG, heures pleines / creuses (5 oct. 2026) : prix des 6 et 9 kVA ; heures pleines 0,2014 € dès 12 kVA, heures creuses 0,1656 € dès 18 kVA",
+        "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf"
+      ]
     }
   ]
 }
