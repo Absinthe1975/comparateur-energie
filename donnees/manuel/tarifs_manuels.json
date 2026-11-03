@@ -427,6 +427,30 @@
         "Grille officielle Mint Énergie Biogaz Smart (applicable du 1er au 30 novembre 2026, réf. 284)",
         "https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/"
       ]
+    },
+    {
+      "k": "dyneff",
+      "offer": "Contrat+ Gaz 15 % Vert",
+      "s": [
+        "Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026)",
+        "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-15-vert-Prix-fixe-oct-26.pdf"
+      ]
+    },
+    {
+      "k": "dyneff",
+      "offer": "Contrat+ Gaz 55 % Vert",
+      "s": [
+        "Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026)",
+        "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-55-vert-Prix-fixe-oct-26.pdf"
+      ]
+    },
+    {
+      "k": "dyneff",
+      "offer": "Contrat+ Gaz 100 % Vert",
+      "s": [
+        "Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026)",
+        "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf"
+      ]
     }
   ],
   "duo": [],
