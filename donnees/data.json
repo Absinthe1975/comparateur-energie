@@ -10,13 +10,13 @@
    "f": "40 €",
    "pn": 20,
    "fn": 40,
-   "valid": "Jusqu'au 31/12/2026. Montant relevé sur un comparateur, sans page ni règlement officiel reçu : à vérifier.",
-   "st": "check",
+   "valid": "Jusqu'au 31/12/2026, 20 h. Électricité en offre de marché hors Zen Online, souscrite par téléphone ; versé en déduction de la première facture. Jusqu'à 5 filleuls par parrain.",
+   "st": "ok",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/edf/parrainage"
+    "Page officielle EDF + modalités du programme (PDF)",
+    "https://particulier.edf.fr/fr/accueil/electricite-gaz/choisir-edf/parrainage.html"
    ],
-   "d": "relevé le 9 oct. 2026"
+   "d": "pages officielles du 3 nov. 2026"
   },
   "total": {
    "name": "TotalEnergies",
@@ -131,13 +131,13 @@
    "f": "15 €",
    "pn": 15,
    "fn": 15,
-   "valid": "Versé après trois mois. Montant relevé sur deux comparateurs (Selectra, Vitepromo), sans page ni règlement officiel reçu : à vérifier.",
-   "st": "check",
+   "valid": "Versé sous forme d'avoir, environ trois mois après le début du contrat. Conditions en vigueur depuis le 30 avril 2024, modifiables par Alpiq à tout moment.",
+   "st": "ok",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/alpiq/parrainage"
+    "Page officielle Alpiq + conditions du programme (PDF)",
+    "https://particuliers.alpiq.fr/parrainages"
    ],
-   "d": "page du 29 avr. 2026, relevé le 10 oct. 2026"
+   "d": "pages officielles du 3 nov. 2026"
   },
   "primeo": {
    "name": "Primeo Energie",
