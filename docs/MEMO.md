@@ -139,7 +139,7 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 ## Parrainages À confirmer
 
-- À confirmer sur le site du fournisseur : [Plenitude](https://eniplenitude.fr/) (offre non publiée sur le site public, réservée à l'Espace Client connecté : à vérifier depuis un compte client), [Ekwateur](https://ekwateur.fr/) (montant du parrain absent du règlement), [Happ-e](https://www.happ-e.fr/) (20 € par contrat d'après Hellowatt : à confirmer sur la page de Happ-e), [LLUM](https://www.llum.fr/) et [ilek](https://www.ilek.fr/grilles-tarifaires) (une seule source).
+- À confirmer sur le site du fournisseur : [Ekwateur](https://ekwateur.fr/) (montant du parrain absent du règlement), [Happ-e](https://www.happ-e.fr/) (20 € par contrat d'après Hellowatt : à confirmer sur la page de Happ-e), [LLUM](https://www.llum.fr/) et [ilek](https://www.ilek.fr/grilles-tarifaires) (une seule source).
 
 - Passés en « À vérifier » le 2 nov. 2026 (montant relevé seulement sur des comparateurs, aucune page ni règlement officiel reçu) : [Alpiq](https://particuliers.alpiq.fr/), [EDF](https://particulier.edf.fr/) et [Gaz de Bordeaux](https://www.gazdebordeaux.fr/). Pour les confirmer : EDF a une page officielle (particulier.edf.fr/fr/accueil/electricite-gaz/choisir-edf/parrainage.html) et un règlement PDF (particulier.edf.fr/content/dam/2-Actifs/Documents/parrainage/modalites-programme-parrainage-edf.pdf), à enregistrer et m'envoyer (EDF interdit la lecture automatique) ; pour Alpiq et Gaz de Bordeaux, aucune page officielle trouvée, il faut le règlement ou une capture de leur page.
 
