@@ -1,0 +1,50 @@
+name: Auto-fusion
+
+# Fusionne tout seul une demande de fusion (PR) dès que les tests sont au vert.
+# Concerne : les PR ouvertes depuis ce dépôt par Absinthe1975 ou par le robot GitHub (mise à jour des prix).
+# Pour empêcher la fusion d'une PR : lui mettre l'étiquette « ne-pas-fusionner » (ou la passer en brouillon).
+
+on:
+  workflow_run:
+    workflows: ["Tests"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  fusion:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_repository.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fusionner la PR si elle est à nous et testée
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          PRS: ${{ toJson(github.event.workflow_run.pull_requests) }}
+        run: |
+          set -euo pipefail
+          N=$(echo "$PRS" | jq -r '.[0].number // empty')
+          if [ -z "$N" ]; then echo "Aucune PR liée à ce test."; exit 0; fi
+          PR=$(gh api "repos/$REPO/pulls/$N")
+          ETAT=$(echo "$PR" | jq -r .state)
+          BROUILLON=$(echo "$PR" | jq -r .draft)
+          AUTEUR=$(echo "$PR" | jq -r .user.login)
+          TETE=$(echo "$PR" | jq -r .head.sha)
+          BLOQUEE=$(echo "$PR" | jq -r '[.labels[].name] | index("ne-pas-fusionner") != null')
+          echo "PR #$N : état=$ETAT brouillon=$BROUILLON auteur=$AUTEUR bloquée=$BLOQUEE"
+          if [ "$ETAT" != "open" ] || [ "$BROUILLON" = "true" ] || [ "$BLOQUEE" = "true" ]; then echo "Pas de fusion."; exit 0; fi
+          case "$AUTEUR" in Absinthe1975|"github-actions[bot]") ;; *) echo "Auteur non autorisé : pas de fusion."; exit 0;; esac
+          if [ "$TETE" != "$SHA" ]; then echo "La PR a changé depuis le test : on attend le prochain."; exit 0; fi
+          gh pr merge "$N" --repo "$REPO" --merge --match-head-commit "$SHA"
+          echo "::notice::PR #$N fusionnée automatiquement."
+          # Une fusion faite par le robot ne déclenche pas les autres workflows : on lance Facebook à la main.
+          sleep 5
+          gh workflow run facebook.yml --repo "$REPO" --ref main || echo "::warning::Lancement de la publication Facebook impossible."

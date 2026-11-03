@@ -151,6 +151,8 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 ### Mises à jour automatiques
 
+- Auto-fusion (workflow « Auto-fusion », ajouté le 3 nov. 2026) : toute PR ouverte par Absinthe1975 ou par le robot de mise à jour des prix est fusionnée dès que les tests sont au vert, puis la publication Facebook est lancée. Pour empêcher une fusion : étiquette « ne-pas-fusionner » ou PR en brouillon. Les mises à jour de prix ne sont donc plus relues à la main : surveiller les posts Facebook et le rapport.
+
 - Après chaque fusion : lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes [Mint](https://www.mint-energie.com/) et CRE, offres « À relire », premiers repères des PDF suivis). Quand un PDF suivi change, le rapport donne le prix du kWh lu par l'IA (avec citation vérifiée) à côté du nôtre, sans rien appliquer : vous saisissez ensuite la grille à la main.
 
 - Facebook : chaque fusion qui change un prix officiel publie un post sur la Page (le résultat est écrit dans l'annotation de l'exécution du workflow). À faire : un message pour l'eau (national, sans code postal), et renouveler le jeton de la Page, qui a transité par la conversation (à stocker uniquement dans le secret GitHub).
