@@ -63,6 +63,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alpiq/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/alpiq/parrainage
 - source : Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026) (Sérénité) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
+- parrainage : Page officielle Alpiq + conditions du programme (PDF) : https://particuliers.alpiq.fr/parrainages
 
 ### Alterna
 - site du fournisseur : https://www.alterna-energie.fr/
@@ -104,7 +105,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs
 - source : Grille officielle EDF Zen Fixe (PDF « Grille de prix », applicable au 1er octobre 2026) (Zen Fixe (prix fixe 2 ans)) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html
 - source : hellowatt.fr (Zen Fixe + Avantage Gaz 2 ans) : https://www.hellowatt.fr/
-- parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/edf/parrainage
+- parrainage : Page officielle EDF + modalités du programme (PDF) : https://particulier.edf.fr/fr/accueil/electricite-gaz/choisir-edf/parrainage.html
 
 ### Ekwateur
 - site du fournisseur : https://ekwateur.fr/
@@ -134,7 +135,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
 - source : Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
 - source : Gaz de Bordeaux (formule : TRV −5 % sur le kWh HT) (Novaflex Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
-- parrainage : prix-elec.com : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage
+- parrainage : Page officielle Gaz de Bordeaux + règlement du parrainage (PDF) : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
 
 ### GEG
 - site du fournisseur : https://www.geg.fr/
@@ -327,3 +328,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Alpiq Sérénité, grille officielle valable à compter du 1er août 2026 (reçue le 2 nov. 2026) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
 - EDF Zen Fixe (grille officielle, applicable au 1er oct. 2026), Zen Estival (grille officielle, applicable au 15 sept. 2026) et ENGIE Elec Référence 3 ans (fiche descriptive, grille octobre 2026), reçus le 2 nov. 2026 : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-estival.html · https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html · https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche_descriptive_elec_reference_3_ans.pdf
 - Mint Énergie, grilles officielles reçues le 2 nov. 2026 : électricité Online/Classic/Smart & Green (applicable au 20/10/2026) https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/ · Biogaz Online/Classic/Smart (du 1er au 30 novembre 2026) https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/ · fiches PDF réf. 279, 280, 281, 282, 283, 284
+
+## Gaz de Bordeaux, parrainage (3 nov. 2026)
+- Page : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
+- Actualité : https://www.gazdebordeaux.fr/actualites/decouvrez-notre-programme-de-parrainage
+- Règlement (PDF reçu : reglement_parrainage.pdf)
