@@ -31,9 +31,9 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 ### Heures pleines / creuses
 
-- Le choix « Formule » apparaît dans l'onglet Électricité dès qu'une offre a ses prix. Déjà saisis : Dyneff, La Bellenergie, Gaz de Bordeaux, Enercoop, ilek, EDF Zen Fixe et Alpiq.
+- Le choix « Formule » apparaît dans l'onglet Électricité dès qu'une offre a ses prix. Déjà saisis : Dyneff, La Bellenergie, Gaz de Bordeaux, Enercoop, ilek, EDF Zen Fixe, Alpiq, Mint et GEG (Elec Verte et Direct Producteur, grille du 5 oct. 2026, prix des 6 et 9 kVA).
 
-- À saisir dans la rubrique hphc de donnees/manuel/tarifs_manuels.json (champs hp et hc en €/kWh TTC, abo par puissance) : GEG et LLUM. Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.
+- À saisir dans la rubrique hphc de donnees/manuel/tarifs_manuels.json (champs hp et hc en €/kWh TTC, abo par puissance) : LLUM (GEG est fait). Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.
 
 ### Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)
 
