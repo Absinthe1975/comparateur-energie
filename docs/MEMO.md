@@ -141,7 +141,7 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 - À confirmer sur le site du fournisseur : [Ekwateur](https://ekwateur.fr/) (montant du parrain absent du règlement), [Happ-e](https://www.happ-e.fr/) (20 € par contrat d'après Hellowatt : à confirmer sur la page de Happ-e), [LLUM](https://www.llum.fr/) et [ilek](https://www.ilek.fr/grilles-tarifaires) (une seule source).
 
-- Reste « À vérifier » (montant relevé seulement sur un comparateur) : [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) (aucune page officielle trouvée : il faut le règlement ou une capture de leur page). [EDF](https://particulier.edf.fr/) (20 € / 40 €, jusqu'au 31 déc. 2026) et [Alpiq](https://particuliers.alpiq.fr/parrainages) (15 € / 15 €) sont confirmés depuis le 3 nov. 2026 par leur page et leur règlement officiels.
+- Tous les parrainages affichés sont confirmés par une page ou un règlement officiel ([EDF](https://particulier.edf.fr/) 20 € / 40 € jusqu'au 31 déc. 2026, [Alpiq](https://particuliers.alpiq.fr/parrainages) 15 € / 15 €, [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) 20 € / 20 € sans date de fin : confirmés le 3 nov. 2026).
 
 - Confirmés par une page ou un règlement officiel : [Octopus](https://octopusenergy.fr/) (grille du 1er août 2026), [Primeo](https://particuliers.primeo-energie.fr/), [ENGIE](https://particuliers.engie.fr/) (20 €, plus 5 € avec l'option verte) et [TotalEnergies](https://www.totalenergies.fr/particuliers) (20 €). Ces montants sont saisis à la main, car le script ne lit pas ces pages.
 

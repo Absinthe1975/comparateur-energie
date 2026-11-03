@@ -55,13 +55,13 @@
    "f": "20 €",
    "pn": 20,
    "fn": 20,
-   "valid": "Relevée en octobre 2026, durée de validité à confirmer. Montant relevé sur un comparateur, sans page ni règlement officiel reçu : à vérifier.",
-   "st": "check",
+   "valid": "Sans limitation de durée (programme depuis 2018, modifiable par Gaz de Bordeaux). Remise déduite de la facture suivant les trois mois d'ancienneté du filleul ; 10 filleuls au maximum sur douze mois ; non cumulable avec une autre promotion en cours.",
+   "st": "ok",
    "s": [
-    "prix-elec.com",
-    "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/parrainage"
+    "Page officielle Gaz de Bordeaux + règlement du parrainage (PDF)",
+    "https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux"
    ],
-   "d": "relevé le 9 oct. 2026"
+   "d": "pages officielles du 3 nov. 2026"
   },
   "octo": {
    "name": "Octopus Energy",
