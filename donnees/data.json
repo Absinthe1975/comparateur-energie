@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "updated": "2026-11-03",
- "updated_label": "3 nov. 2026",
+ "updated": "2026-11-04",
+ "updated_label": "4 nov. 2026",
  "primes": {
   "edf": {
    "name": "EDF",
@@ -58,7 +58,7 @@
    "valid": "Sans limitation de durée (programme depuis 2018, modifiable par Gaz de Bordeaux). Remise déduite de la facture suivant les trois mois d'ancienneté du filleul ; 10 filleuls au maximum sur douze mois ; non cumulable avec une autre promotion en cours.",
    "st": "ok",
    "s": [
-    "Page officielle Gaz de Bordeaux + règlement du parrainage (PDF)",
+    "gazdebordeaux.fr",
     "https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux"
    ],
    "d": "pages officielles du 3 nov. 2026"
@@ -474,7 +474,7 @@
    "niv": "confirmer"
   }
  ],
- "updated_time": "21:37",
+ "updated_time": "16:36",
  "liens": {
   "edf": "https://particulier.edf.fr/",
   "total": "https://www.totalenergies.fr/particuliers",
