@@ -8,13 +8,13 @@
  "https://prix-elec.com/fournisseurs/primeo/offres|Essentielle Verte": "b908eca7c45ec207",
  "https://prix-elec.com/fournisseurs/alterna/offres|Mon électricité française fixe 1 an": "b43b18bad5ac6c51",
  "https://prix-elec.com/fournisseurs/edf/offres|Zen Online": "4ac3b0a2f68e1f6e",
- "https://prix-elec.com/fournisseurs/octopus-energy/offres|Intelligent Octopus": "b853c38f6a911a48",
+ "https://prix-elec.com/fournisseurs/octopus-energy/offres|Intelligent Octopus": "7d8c7f610c77f5aa",
  "https://prix-elec.com/fournisseurs/engie/offres|Elec Référence 3 ans": "aeec2109cc72efda",
  "https://prix-elec.com/fournisseurs/ilek/offres|ÉnRFixe+ Elec": "007b0658e1790f6e",
  "https://prix-elec.com/fournisseurs/enercoop/offres|Offre Base": "0523077ca17e2909",
  "https://prix-elec.com/fournisseurs/ekwateur/offres|Gaz Naturel 15 % Biogaz Fixe": "635708e93fe3d343",
  "https://prix-elec.com/fournisseurs/edf/offres|Avantage Gaz 2 ans": "590881d001ce551a",
- "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe BioGaz": "465a363cf96565ae",
+ "https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres|NovaFixe BioGaz": "463c72ba62bb43fd",
  "https://prix-elec.com/fournisseurs/ohm-energie/offres|Extra Eco Gaz": "bd87e685b47c0299",
  "https://prix-elec.com/fournisseurs/dyneff/offres|Contrat+ Gaz 15 % Vert": "38182e38e8f48a95",
  "https://prix-elec.com/fournisseurs/mint-energie/offres|Biogaz Online": "5917591679786b54",
@@ -28,8 +28,8 @@
  "https://prix-elec.com/fournisseurs/mint-energie/parrainage|Mint Énergie": "294c2ed8ae106fdd",
  "https://prix-elec.com/fournisseurs/alpiq/parrainage|Alpiq": "07d22f551277b731",
  "https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf|Primeo Energie": "477a73ecc62c70e9",
- "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "acbf13a47a26b4c7",
- "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "5b1b8fc3128d4265",
+ "https://www.hellowatt.fr/contrat-electricite/prix-electricite|tarif réglementé": "b0255802af6f0143",
+ "https://www.hellowatt.fr/contrat-gaz-naturel/prix-repere|prix repère": "faf9f3ae9f770a57",
  "https://jeswitch.fr/energie/actualites/prix-repere-gaz-naturel-cre|prix repère": "995f7e4be237e45b",
  "https://www.energie-info.fr/octobre-2026-publication-du-prix-repere-du-gaz-par-la-cre/|prix repère": "a23855f678729859",
  "grilles": {
@@ -105,5 +105,6 @@
    "sha": "e35d5c611dc1806af0c2b65b26bc9d9343a4e0596a0457360e06b71c1aa829fc",
    "url": "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf"
   }
- }
+ },
+ "https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux|Gaz de Bordeaux": "c0a1c15f46f36f0f"
 }
