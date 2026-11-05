@@ -63,7 +63,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/alpiq/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/alpiq/parrainage
 - source : Grille officielle Alpiq Sérénité, particuliers (valable à compter du 1er août 2026) (Sérénité) : https://particuliers.alpiq.fr/grille-tarifaire/particuliers/PRIX_SERENITE.pdf
-- parrainage : Page officielle Alpiq + conditions du programme (PDF) : https://particuliers.alpiq.fr/parrainages
 
 ### Alterna
 - site du fournisseur : https://www.alterna-energie.fr/
@@ -189,7 +188,10 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/octopus-energy/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/octopus-energy/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/octopus-energy/parrainage
-- source : hellowatt.fr (OctoEco Fixe + Gaz Fixe) : https://www.hellowatt.fr/
+- source : Grille officielle Octopus Energy « Eco fixe Base » (applicable au 12 août 2026) (Eco fixe Base (moyenne hiver/été)) : https://a.storyblok.com/f/151412/x/f9e6edf063/grille-tarifaire-eco-fixe-aout-26-base.pdf
+- source : Grille officielle Octopus Energy « Intelligent Octopus Fixe » (applicable au 1er août 2026) (Intelligent Octopus) : https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf
+- source : Grille officielle Octopus Energy « Gaz Fixe -1 % Novembre 2026 » (applicable au 30 oct. 2026) (Gaz Fixe) : https://a.storyblok.com/f/151412/x/2f8da5bd67/grille-tarifaire-gaz_fixe_1_nov26_b.pdf
+- source : Grilles officielles Octopus Energy (Eco fixe Base, Gaz Fixe) (OctoEco Fixe + Gaz Fixe) : https://octopusenergy.fr/offre-electricite-gaz
 
 ### OHM Énergie
 - site du fournisseur : https://www.ohm-energie.com/
@@ -333,3 +335,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Page : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
 - Actualité : https://www.gazdebordeaux.fr/actualites/decouvrez-notre-programme-de-parrainage
 - Règlement (PDF reçu : reglement_parrainage.pdf)
+
+## Octopus Energy (4-5 nov. 2026)
+- Gaz Fixe, grille de novembre 2026 : https://a.storyblok.com/f/151412/x/2f8da5bd67/grille-tarifaire-gaz_fixe_1_nov26_b.pdf
+- Eco fixe Base (août 2026) : https://a.storyblok.com/f/151412/x/f9e6edf063/grille-tarifaire-eco-fixe-aout-26-base.pdf ; HP/HC : .../d505811345/grille-tarifaire-ecofixe-aout-26-hphc.pdf
+- Fiche « Cocon fixe » (juillet 2026, = OctoEco Fixe) : https://a.storyblok.com/f/151412/x/f0fd4cca9e/fiche-descriptive-de-l-offre-d-electricite-cocon-juillet-26.pdf
+- Intelligent Octopus Fixe (août 2026) : https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf
