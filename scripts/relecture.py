@@ -12,7 +12,8 @@ import sys
 FICHIERS = ["donnees/data.json", "donnees/elec/data.json", "donnees/gaz/data.json",
             "donnees/manuel/tarifs_manuels.json"]
 PRIX = ["a", "b", "b0", "hp", "hc", "hpb", "hcb"]
-SEUIL_PRIX = 0.15     # variation de prix jugée suspecte
+# Un prix officiel avec source et date est toujours accepté, même avec un gros écart.
+SEUIL_PRIX = 0.15     # variation de prix jugée suspecte (offres non officielles)
 SEUIL_ABO = 0.25      # variation d'abonnement jugée suspecte
 SEUIL_PRIME = 0.5
 
@@ -36,6 +37,11 @@ def offres(d, chemin, chemin_liste=""):
                 if isinstance(o, dict) and "k" in o and "offer" in o:
                     out[(chemin + ":" + nom, o["k"], o["offer"])] = o
     return out
+
+
+def officielle_sourcee(o):
+    s = o.get("s")
+    return o.get("niv") == "officiel" and bool(o.get("nivd")) and bool(s) and len(s) > 1 and str(s[1]).startswith("http")
 
 
 def variation(x, y):
@@ -64,6 +70,8 @@ def comparer(base, tete):
                 notes.append("%s : marquée officielle sans date de grille." % nom)
             if not av:
                 continue
+            if officielle_sourcee(o):
+                continue  # prix officiel et sourcé : validé quel que soit l'écart
             for c in PRIX:
                 v = variation(av.get(c), o.get(c))
                 if v is not None and abs(v) > SEUIL_PRIX:

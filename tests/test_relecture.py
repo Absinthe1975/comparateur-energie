@@ -18,6 +18,12 @@ class TestRelecture(unittest.TestCase):
     def test_identique_rien_a_signaler(self):
         self.assertEqual(relecture.comparer("HEAD", "HEAD"), [])
 
+    def test_officiel_source_valide_meme_gros_ecart(self):
+        o = {"niv": "officiel", "nivd": "01/08/2026", "s": ["x", "https://a.fr/g.pdf"]}
+        self.assertTrue(relecture.officielle_sourcee(o))
+        self.assertFalse(relecture.officielle_sourcee(dict(o, nivd=None)))
+        self.assertFalse(relecture.officielle_sourcee(dict(o, niv="confirmer")))
+
 
 if __name__ == "__main__":
     unittest.main()
