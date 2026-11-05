@@ -106,8 +106,8 @@
       "k": "gdb",
       "name": "Gaz de Bordeaux",
       "offer": "NovaFixe Élec",
-      "a": 0.18373,
-      "b": 0.18233,
+      "a": 0.1919,
+      "b": 0.19042,
       "ab6": 190.44,
       "ab9": 238.56,
       "abo": {
@@ -119,11 +119,11 @@
       },
       "abo_seul": true,
       "niv": "officiel",
-      "nivd": "01/10/2026",
-      "d": "25 oct. 2026",
+      "nivd": "01/11/2026",
+      "d": "5 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
     },
@@ -628,8 +628,8 @@
       "k": "gdb",
       "name": "Gaz de Bordeaux",
       "offer": "NovaFixe Élec",
-      "hp": 0.19648,
-      "hc": 0.14669,
+      "hp": 0.20536,
+      "hc": 0.1528,
       "abo": {
         "6": 190.44,
         "9": 238.56,
@@ -642,11 +642,11 @@
       },
       "abo_seul": true,
       "niv": "officiel",
-      "nivd": "01/10/2026",
-      "d": "25 oct. 2026",
+      "nivd": "01/11/2026",
+      "d": "5 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap)",
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
     },
