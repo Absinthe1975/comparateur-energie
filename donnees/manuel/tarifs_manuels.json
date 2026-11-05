@@ -326,6 +326,29 @@
         "Grille officielle Mint Énergie Smart & Green, clients résidentiels (applicable au 20/10/2026, réf. 281)",
         "https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/"
       ]
+    },
+    {
+      "k": "octo",
+      "name": "Octopus Energy",
+      "offer": "Eco fixe Base (moyenne hiver/été)",
+      "d": "4 nov. 2026",
+      "s": [
+        "Grille officielle Octopus Energy « Eco fixe Base » (applicable au 12 août 2026)",
+        "https://a.storyblok.com/f/151412/x/f9e6edf063/grille-tarifaire-eco-fixe-aout-26-base.pdf"
+      ]
+    },
+    {
+      "k": "octo",
+      "name": "Octopus Energy",
+      "offer": "Intelligent Octopus",
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "5 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle Octopus Energy « Intelligent Octopus Fixe » (applicable au 1er août 2026)",
+        "https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf"
+      ]
     }
   ],
   "gas": [
@@ -450,6 +473,39 @@
       "s": [
         "Grille officielle Dyneff gaz (PDF « Prix fixe oct-26 », émise le 1er octobre 2026)",
         "https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/09/Contrat-gaz-100-vert-Prix-fixe-oct-26.pdf"
+      ]
+    },
+    {
+      "k": "octo",
+      "name": "Octopus Energy",
+      "offer": "Gaz Fixe",
+      "a": 0.1543,
+      "b0": 0.1874,
+      "zones": {
+        "b1": [
+          0.1543,
+          0.1562,
+          0.1588,
+          0.1602,
+          0.1611,
+          0.1611
+        ],
+        "b0": [
+          0.1874,
+          0.1886,
+          0.1898,
+          0.1907,
+          0.1912,
+          0.1911
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "30/10/2026",
+      "d": "4 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle Octopus Energy « Gaz Fixe -1 % Novembre 2026 » (applicable au 30 oct. 2026)",
+        "https://a.storyblok.com/f/151412/x/2f8da5bd67/grille-tarifaire-gaz_fixe_1_nov26_b.pdf"
       ]
     }
   ],

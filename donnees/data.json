@@ -342,19 +342,19 @@
    "ea": 0.2019,
    "eb": 0.2053,
    "eabo": 190.32,
-   "ga": 0.1531,
+   "ga": 0.1588,
    "gabo": 360.84,
    "promo": 0,
-   "note": "électricité à prix fixe 2 ans (moyenne hiver/été), gaz à prix fixe 1 an au prix de la zone 3",
-   "d": "13 oct. 2026",
+   "note": "électricité à prix fixe 2 ans (moyenne hiver/été), gaz à prix fixe au prix de la zone 3 (grille de novembre 2026) : somme de deux grilles officielles, sans remise propre au duo",
+   "d": "4 nov. 2026",
    "s": [
-    "hellowatt.fr",
-    "https://www.hellowatt.fr/"
+    "Grilles officielles Octopus Energy (Eco fixe Base, Gaz Fixe)",
+    "https://octopusenergy.fr/offre-electricite-gaz"
    ],
-   "st": "check",
+   "st": "ok",
    "niv": "officiel",
    "eabo9": 238.56,
-   "nivd": "30/09/2026"
+   "nivd": "30/10/2026"
   },
   {
    "k": "mint",
