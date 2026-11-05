@@ -2,6 +2,9 @@ name: Auto-fusion
 
 # Fusionne tout seul une demande de fusion (PR) dès que les tests sont au vert.
 # Concerne : les PR ouvertes depuis ce dépôt par Absinthe1975 ou par le robot GitHub (mise à jour des prix).
+# Avant de fusionner, une relecture automatique (scripts/relecture.py) compare les données avant / après :
+# prix qui bougent de plus de 15 %, offre retirée, offre « officielle » sans source… Si elle signale quelque chose,
+# elle commente la PR, pose l'étiquette « ne-pas-fusionner » et la fusion n'a pas lieu.
 # Pour empêcher la fusion d'une PR : lui mettre l'étiquette « ne-pas-fusionner » (ou la passer en brouillon).
 
 on:
@@ -23,6 +26,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Récupérer le dépôt (scripts de main, historique complet)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - name: Fusionner la PR si elle est à nous et testée
         env:
           GH_TOKEN: ${{ github.token }}
@@ -43,6 +51,16 @@ jobs:
           if [ "$ETAT" != "open" ] || [ "$BROUILLON" = "true" ] || [ "$BLOQUEE" = "true" ]; then echo "Pas de fusion."; exit 0; fi
           case "$AUTEUR" in Absinthe1975|"github-actions[bot]") ;; *) echo "Auteur non autorisé : pas de fusion."; exit 0;; esac
           if [ "$TETE" != "$SHA" ]; then echo "La PR a changé depuis le test : on attend le prochain."; exit 0; fi
+          git fetch -q origin "$SHA" main
+          if python3 scripts/relecture.py "$(git merge-base origin/main "$SHA")" "$SHA" /tmp/relecture.md; then
+            echo "Relecture : rien à signaler."
+          else
+            gh label create ne-pas-fusionner --repo "$REPO" --color B60205 --description "Fusion automatique suspendue" 2>/dev/null || true
+            gh pr edit "$N" --repo "$REPO" --add-label ne-pas-fusionner || true
+            gh pr comment "$N" --repo "$REPO" --body-file /tmp/relecture.md || true
+            echo "::warning::PR #$N : relecture automatique à regarder, pas de fusion."
+            exit 0
+          fi
           gh pr merge "$N" --repo "$REPO" --merge --match-head-commit "$SHA"
           echo "::notice::PR #$N fusionnée automatiquement."
           # Une fusion faite par le robot ne déclenche pas les autres workflows : on lance Facebook à la main.
