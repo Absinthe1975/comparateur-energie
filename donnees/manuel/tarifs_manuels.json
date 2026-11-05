@@ -349,6 +349,32 @@
         "Grille officielle Octopus Energy « Intelligent Octopus Fixe » (applicable au 1er août 2026)",
         "https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf"
       ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "Novaflex Élec",
+      "a": 0.1968,
+      "b": 0.19526,
+      "ab6": 190.44,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.44,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "5 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
+      ]
     }
   ],
   "gas": [
@@ -911,6 +937,33 @@
       "s": [
         "Grille officielle LLUM, heures pleines / creuses, compteurs électroniques et non communicants (1er août 2026)",
         "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf"
+      ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "Novaflex Élec",
+      "hp": 0.21067,
+      "hc": 0.15646,
+      "abo": {
+        "6": 190.44,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.56,
+        "30": 557.52,
+        "36": 646.56
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "5 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
       ]
     }
   ]
