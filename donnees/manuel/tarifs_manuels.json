@@ -885,6 +885,33 @@
         "Grille officielle GEG, heures pleines / creuses (5 oct. 2026) : prix des 6 et 9 kVA ; heures pleines 0,2014 € dès 12 kVA, heures creuses 0,1656 € dès 18 kVA",
         "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Octobre/Grille-tarifaire-Mes%20Offres%20Elec%20fixes%203%20ans-PART1026.pdf"
       ]
+    },
+    {
+      "k": "llum",
+      "name": "LLUM",
+      "offer": "Électricité verte, compteur non communicant",
+      "hp": 0.2071,
+      "hc": 0.154,
+      "abo": {
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 342.6,
+        "18": 400.2,
+        "24": 515.28,
+        "30": 630.36,
+        "36": 745.44
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "5 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle LLUM, heures pleines / creuses, compteurs électroniques et non communicants (1er août 2026)",
+        "https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf"
+      ]
     }
   ]
 }
