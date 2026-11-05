@@ -123,7 +123,7 @@
       "d": "5 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes)",
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
     },
@@ -372,7 +372,7 @@
       "typ": "indexe",
       "vert": true,
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing)",
+        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac pour la Base ; Onnaing seul relevé pour Novaflex)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
       ]
     }
@@ -672,7 +672,7 @@
       "d": "5 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes)",
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec"
       ]
     },
@@ -962,7 +962,7 @@
       "typ": "indexe",
       "vert": true,
       "s": [
-        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing)",
+        "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac pour la Base ; Onnaing seul relevé pour Novaflex)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
       ]
     }
