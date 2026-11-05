@@ -132,9 +132,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - site du fournisseur : https://www.gazdebordeaux.fr/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
-- source : Fiche descriptive officielle Gaz de Bordeaux, Novafixe Bonus Élec (grille annexe, souscriptions d'octobre 2026, identique pour Paris, Marseille, Lille, Clermont-Ferrand, Limoges et Gap) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
+- source : Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
 - source : Gaz de Bordeaux (formule : TRV −5 % sur le kWh HT) (Novaflex Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
-- parrainage : Page officielle Gaz de Bordeaux + règlement du parrainage (PDF) : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
+- parrainage : gazdebordeaux.fr : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
 
 ### GEG
 - site du fournisseur : https://www.geg.fr/
@@ -341,3 +341,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Eco fixe Base (août 2026) : https://a.storyblok.com/f/151412/x/f9e6edf063/grille-tarifaire-eco-fixe-aout-26-base.pdf ; HP/HC : .../d505811345/grille-tarifaire-ecofixe-aout-26-hphc.pdf
 - Fiche « Cocon fixe » (juillet 2026, = OctoEco Fixe) : https://a.storyblok.com/f/151412/x/f0fd4cca9e/fiche-descriptive-de-l-offre-d-electricite-cocon-juillet-26.pdf
 - Intelligent Octopus Fixe (août 2026) : https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf
+
+## Gaz de Bordeaux (5 nov. 2026)
+- Fiche descriptive NovaFixe Élec, souscriptions de novembre 2026 (Onnaing) : fichier reçu (FT_NOVAFIXEE3, 01/11/2026), grille annexe lue
+- Règlement NovaFixe Bonus Élec (100 € TTC, 1er oct. – 30 nov. 2026) : https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf
