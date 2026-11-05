@@ -195,4 +195,4 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 - Test avec un vrai lecteur d'écran (NVDA, VoiceOver) : seul un humain avec ce logiciel peut le faire. Déjà vérifié automatiquement : ordre des titres, tableaux avec en-têtes, onglets, repères de page, libellés des champs, contrastes.
 
-- **Relecture automatique** : avant chaque fusion automatique, `scripts/relecture.py` compare les données (prix > 15 %, offre retirée, « officielle » sans source…). Si elle signale quelque chose, la PR reçoit un commentaire et l'étiquette `ne-pas-fusionner`. À corriger : Alterna gaz (2 offres officielles sans lien de source).
+- **Relecture automatique** : avant chaque fusion automatique, `scripts/relecture.py` compare les données (prix non officiels > 15 % (un prix officiel sourcé est toujours accepté), offre retirée, « officielle » sans source…). Si elle signale quelque chose, la PR reçoit un commentaire et l'étiquette `ne-pas-fusionner`. À corriger : Alterna gaz (2 offres officielles sans lien de source).
