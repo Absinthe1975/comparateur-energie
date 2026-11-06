@@ -57,7 +57,7 @@ Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz,
 
 ## Gaz À faire, au fil de vos envois
 
-- [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) : relevés du simulateur officiel pour Lille (59000, trois niveaux de consommation) dans docs/GDB-GAZ-RELEVES.md : NovaFixe Biogaz 0,1336 €/kWh (accise comprise) en B1 et 0,1753 en B0, contre 0,1346 aujourd'hui sur le site. Pour savoir si ces prix valent partout, relever une consommation moyenne dans deux ou trois autres codes postaux de zones différentes (par exemple Bordeaux 33000, Paris 75001, Marseille 13001) sur la [page gaz](https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz).
+- [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) : fiches officielles de novembre 2026 reçues pour NovaFixe Gaz (Paris, Marseille, Evian, Bordeaux) et NovaFlex Gaz (6 communes) : le prix du kWh varie selon la commune (ex. NovaFixe, plus de 4 000 kWh : Bordeaux 0,1467 · Paris 0,1510 · Marseille 0,1540 · Evian 0,1590 €), voir docs/GDB-GAZ-NOV2026.md. Le site affiche la valeur de Paris en « À confirmer » ; il manque la table commune → zone pour passer en « Grille officielle ».
 
 - [ENGIE](https://particuliers.engie.fr/) : Gaz Référence 3 ans à confirmer. Les deux prix vus (0,1414 et 0,1373 €/kWh) sont deux zones de la même grille. Selectra (1er oct. 2026, TTC, 4 001 à 29 999 kWh/an, abonnement 360,79 €/an) donne 8 zones : A 0,13728 · B 0,1383 · C 0,1414 · D 0,14474 · E 0,14835 · F 0,15104 · G 0,15324 · H 0,15326 €/kWh. Nous affichons la zone C. La fiche officielle d'août 2026 recoupe Selectra (à moins de 0,001 €/kWh) : il manque seulement la table code postal → groupe A à H (ENGIE ne la donne que par formulaire).
 
