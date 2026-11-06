@@ -198,6 +198,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - site du fournisseur : https://www.ohm-energie.com/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ohm-energie/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ohm-energie/tarifs
+- source : Fiche descriptive officielle OHM Sérénité Fixe 1 an (prix applicables au 23 octobre 2026), puissances de 6 à 36 kVA (3 à 5 kVA : kWh Base moins cher pour le 1 an) (OHM Sérénité Fixe 1 an) : https://ohm-energie.com/offre/electricite
 
 ### Plenitude
 - site du fournisseur : https://eniplenitude.fr/
@@ -352,3 +353,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## OHM Prix Réservé (6 nov. 2026)
 - Fiches PDF électricité et gaz « Prix Réservé » (activation avril–mai 2027) et page ohm-energie.com : résumé dans docs/OHM-PRIX-RESERVE.md
+
+## OHM électricité (6 nov. 2026)
+- Fiches descriptives Sérénité Fixe 1 an (23 oct.), Sérénité Fixe 2 ans (16 oct.), Premi'Ohm 3 ans (14 oct.), Week-end (4 sept. 2026) et page https://ohm-energie.com/offre/electricite : fichiers reçus
