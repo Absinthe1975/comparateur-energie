@@ -116,19 +116,15 @@ Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - Zone tarifaire par commune : aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait, mais chaque fournisseur découpe les zones à sa façon (tableau ci-dessous, à vérifier sur les grilles officielles).
 
- | Fournisseur | Système de zones | Particularités | 
+| Fournisseur | Système de zones | Particularités |
+|---|---|---|
+| GRDF (référence) | 6 zones (1 à 6) | Système officiel de référence, base de toutes les autres grilles. |
+| ENGIE | 6 zones (1 à 6) | Aligné sur GRDF historiquement, héritage du tarif réglementé. |
+| TotalEnergies | 6 zones (modifié) | Reprend le système GRDF avec quelques reclassifications de communes. |
+| Alterna | 6 zones (modifié) | Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement. |
+| ilek | 11 zones (A à K) | Système propre, plus fin, pour refléter les coûts d'achat du biogaz local. |
+| Ekwateur | Aucune zone | Tarif national unique. |
 
- | GRDF (référence) | 6 zones (1 à 6) | Système officiel de référence, base de toutes les autres grilles. | 
-
- | ENGIE | 6 zones (1 à 6) | Aligné sur GRDF historiquement, héritage du tarif réglementé. | 
-
- | TotalEnergies | 6 zones (modifié) | Reprend le système GRDF avec quelques reclassifications de communes. | 
-
- | Alterna | 6 zones (modifié) | Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement. | 
-
- | ilek | 11 zones (A à K) | Système propre, plus fin, pour refléter les coûts d'achat du biogaz local. | 
-
- | Ekwateur | Aucune zone | Tarif national unique. | 
 
  Source : [fournisseurs-electricite.com](https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire) (second comparateur, octobre 2026), consultée le 29 oct. 2026. Source secondaire : les classifications de communes peuvent changer chaque année.
 
