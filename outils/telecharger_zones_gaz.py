@@ -76,7 +76,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="https://observatoires.net/zone-gaz")
     ap.add_argument("--pause", type=float, default=3.0)
-    ap.add_argument("--test", action="store_true", help="2 départements seulement")
+    ap.add_argument("--test", action="store_true", help="2 pages seulement")
+    ap.add_argument("--departements", action="store_true", help="seulement les pages de départements (environ 95), sans les pages de communes")
     ap.add_argument("--dossier", default="zones_gaz_pages")
     ap.add_argument("--zip", default="zones_gaz.zip")
     a = ap.parse_args(argv)
@@ -107,8 +108,17 @@ def main(argv=None):
     print("%d pages trouvées (page d'accueil + sitemaps)." % len(urls))
     if not urls:
         print("Aucun lien trouvé : la page d'accueil est enregistrée dans %s, envoyez-la à Claude." % a.dossier)
+    if a.departements:
+        base_p = urllib.parse.urlparse(a.base).path.rstrip("/")
+        urls = [u for u in urls if u.count("/") == (base_p + "/x").count("/") + 2]
+        print("%d pages de départements retenues." % len(urls))
     if a.test:
         urls = urls[:2]
+    delai = rp.crawl_delay(AGENT) or rp.crawl_delay("*")
+    if delai:
+        a.pause = max(a.pause, float(delai))
+        print("Crawl-delay demandé par le site : %s s entre deux pages." % a.pause)
+    print("Durée estimée : environ %d minutes." % (len(urls) * (a.pause + 0.5) / 60))
     faits = refus = 0
     for u in urls:
         nom = urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"
