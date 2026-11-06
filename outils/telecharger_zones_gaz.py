@@ -84,14 +84,28 @@ def main(argv=None):
 
     site = urllib.parse.urlparse(a.base)
     rp = urllib.robotparser.RobotFileParser()
-    rp.set_url("%s://%s/robots.txt" % (site.scheme, site.netloc))
+    url_robots = "%s://%s/robots.txt" % (site.scheme, site.netloc)
     try:
-        rp.read()
+        # robots.txt est lu avec notre propre identité (le lecteur par défaut de Python se présente comme
+        # « Python-urllib », que certains sites refusent, et le module en conclurait à tort « tout est interdit »)
+        txt = lire(url_robots)
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            txt = ""  # pas de robots.txt : aucune restriction annoncée
+            print("Pas de robots.txt (404) : aucune restriction annoncée.")
+        else:
+            print("robots.txt : le site répond %s. Je n'ai donc aucune autorisation claire : j'arrête." % e.code)
+            print("Ouvrez %s dans votre navigateur et envoyez-moi son contenu." % url_robots)
+            return 2
     except Exception as e:
         print("robots.txt illisible (%s) : j'arrête, par prudence." % e)
         return 2
+    rp.parse(txt.splitlines())
+    print("robots.txt lu (%d lignes)." % len(txt.splitlines()))
     if not rp.can_fetch(AGENT, a.base):
-        print("robots.txt interdit la page d'accueil de l'outil : j'arrête.")
+        print("robots.txt interdit la page d'accueil de l'outil à ce programme : j'arrête.")
+        print("Contenu de robots.txt :")
+        print(txt[:1500])
         return 2
 
     os.makedirs(a.dossier, exist_ok=True)
