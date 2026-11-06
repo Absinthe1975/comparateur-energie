@@ -375,6 +375,87 @@
         "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac pour la Base ; Onnaing seul relevé pour Novaflex)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
       ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "OHM Sérénité Fixe 1 an",
+      "a": 0.2212,
+      "b": 0.2212,
+      "ab6": 173.4,
+      "ab9": 217.32,
+      "abo": {
+        "3": 132.48,
+        "6": 173.4,
+        "9": 217.32,
+        "12": 259.8,
+        "15": 299.64,
+        "18": 340.68,
+        "24": 428.16,
+        "30": 508.44,
+        "36": 589.56
+      },
+      "niv": "officiel",
+      "nivd": "23/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle OHM Sérénité Fixe 1 an (prix applicables au 23 octobre 2026), puissances de 6 à 36 kVA (3 à 5 kVA : kWh Base moins cher pour le 1 an)",
+        "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Offre Fixe 2 ans",
+      "a": 0.2249,
+      "b": 0.2249,
+      "ab6": 190.56,
+      "ab9": 238.8,
+      "abo": {
+        "3": 145.8,
+        "6": 190.56,
+        "9": 238.8,
+        "12": 285.36,
+        "15": 329.04,
+        "18": 373.92,
+        "24": 469.92,
+        "30": 557.88,
+        "36": 646.68
+      },
+      "niv": "officiel",
+      "nivd": "16/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle OHM Sérénité Fixe 2 ans (prix applicables au 16 octobre 2026)",
+        "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Premi'Ohm 3 ans",
+      "a": 0.2287,
+      "b": 0.2287,
+      "ab6": 190.56,
+      "ab9": 238.8,
+      "abo": {
+        "3": 145.8,
+        "6": 190.56,
+        "9": 238.8,
+        "12": 285.36,
+        "15": 329.04,
+        "18": 373.92,
+        "24": 469.92,
+        "30": 557.88,
+        "36": 646.68
+      },
+      "niv": "officiel",
+      "nivd": "14/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle Premi'Ohm 3 ans (conditions applicables au 14 octobre 2026)",
+        "https://ohm-energie.com/offre/electricite"
+      ]
     }
   ],
   "gas": [
@@ -1013,6 +1094,78 @@
       "s": [
         "Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac pour la Base ; Onnaing seul relevé pour Novaflex)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "OHM Sérénité Fixe 1 an",
+      "hp": 0.24,
+      "hc": 0.1754,
+      "abo": {
+        "6": 175.68,
+        "9": 220.68,
+        "12": 264.24,
+        "15": 305.28,
+        "18": 347.4,
+        "24": 437.04,
+        "30": 519.6,
+        "36": 603.0
+      },
+      "niv": "officiel",
+      "nivd": "23/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle OHM Sérénité Fixe 1 an (prix applicables au 23 octobre 2026), puissances de 6 à 36 kVA (3 à 5 kVA : kWh Base moins cher pour le 1 an)",
+        "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Offre Fixe 2 ans",
+      "hp": 0.2421,
+      "hc": 0.1771,
+      "abo": {
+        "6": 192.84,
+        "9": 242.16,
+        "12": 289.8,
+        "15": 334.56,
+        "18": 380.64,
+        "24": 478.8,
+        "30": 569.04,
+        "36": 660.12
+      },
+      "niv": "officiel",
+      "nivd": "16/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle OHM Sérénité Fixe 2 ans (prix applicables au 16 octobre 2026)",
+        "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Premi'Ohm 3 ans",
+      "hp": 0.2455,
+      "hc": 0.1799,
+      "abo": {
+        "6": 192.84,
+        "9": 242.16,
+        "12": 289.8,
+        "15": 334.56,
+        "18": 380.64,
+        "24": 478.8,
+        "30": 569.04,
+        "36": 660.12
+      },
+      "niv": "officiel",
+      "nivd": "14/10/2026",
+      "d": "6 nov. 2026",
+      "s": [
+        "Fiche descriptive officielle Premi'Ohm 3 ans (conditions applicables au 14 octobre 2026)",
+        "https://ohm-energie.com/offre/electricite"
       ]
     }
   ]

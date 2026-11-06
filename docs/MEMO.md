@@ -31,11 +31,12 @@ Mémo mis à jour le 6 novembre 2026, classé par énergie : électricité, gaz,
 
 ### Heures pleines / creuses
 
-- Le choix « Formule » apparaît dans l'onglet Électricité dès qu'une offre a ses prix. Déjà saisis : Dyneff, La Bellenergie, Gaz de Bordeaux, Enercoop, ilek, EDF Zen Fixe, Alpiq, Mint et GEG (Elec Verte et Direct Producteur, grille du 5 oct. 2026, prix des 6 et 9 kVA).
+- Le choix « Formule » apparaît dans l'onglet Électricité dès qu'une offre a ses prix. Déjà saisis : Dyneff, La Bellenergie, Gaz de Bordeaux, Enercoop, ilek, EDF Zen Fixe, Alpiq, Mint, GEG, LLUM (compteur non communicant) et OHM (1, 2 et 3 ans) (Elec Verte et Direct Producteur, grille du 5 oct. 2026, prix des 6 et 9 kVA).
 
 - À saisir dans la rubrique hphc de donnees/manuel/tarifs_manuels.json (champs hp et hc en €/kWh TTC, abo par puissance) : LLUM (GEG est fait). Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.
 
 ### Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)
+- [OHM](https://www.ohm-energie.com/) : fiches officielles d'octobre 2026 saisies pour Sérénité 1 an (0,2212 €/kWh Base dès 6 kVA, 0,2001 € à 3-5 kVA non distingué), 2 ans (0,2249 €) et Premi'Ohm 3 ans (0,2287 €), avec heures pleines / creuses. Non modélisée : l'offre Week-end (fiche du 4 sept. 2026 : semaine heures pleines 0,265 € / creuses 0,1737 €, week-end 0,1737 €).
 - [OHM](https://www.ohm-energie.com/) « Prix Réservé » (reçu le 6 nov. 2026) : offre à prix fixe 1 an à réserver maintenant, fourniture à partir d'avril-mai 2027, limitée à 20 000 clients. Non intégrée au comparateur (démarrage différé) : voir docs/OHM-PRIX-RESERVE.md. À décider : mention à part ou rien.
 
 - [Urban Solar Energy](https://www.urbansolarenergy.fr/mentions-legales/) (prix fixe, autoconsommation) : pas de grille publique, tarifs par simulation. Documents : [CGV ≤ 36 kVA](https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf), [conditions générales de septembre 2026](https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf).
