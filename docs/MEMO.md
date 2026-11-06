@@ -36,6 +36,7 @@ Mémo mis à jour le 6 novembre 2026, classé par énergie : électricité, gaz,
 - À saisir dans la rubrique hphc de donnees/manuel/tarifs_manuels.json (champs hp et hc en €/kWh TTC, abo par puissance) : LLUM (GEG est fait). Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.
 
 ### Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)
+- [OHM](https://www.ohm-energie.com/) « Prix Réservé » (reçu le 6 nov. 2026) : offre à prix fixe 1 an à réserver maintenant, fourniture à partir d'avril-mai 2027, limitée à 20 000 clients. Non intégrée au comparateur (démarrage différé) : voir docs/OHM-PRIX-RESERVE.md. À décider : mention à part ou rien.
 
 - [Urban Solar Energy](https://www.urbansolarenergy.fr/mentions-legales/) (prix fixe, autoconsommation) : pas de grille publique, tarifs par simulation. Documents : [CGV ≤ 36 kVA](https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf), [conditions générales de septembre 2026](https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf).
 
