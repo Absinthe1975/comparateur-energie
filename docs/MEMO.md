@@ -1,7 +1,7 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo mis à jour le 2 novembre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Un sujet est abandonné pour le moment : la lecture des factures (trop de formats). L'onglet « Pro » est relancé en essai, avec ENGIE Pro pour commencer.
+Mémo mis à jour le 6 novembre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Un sujet est abandonné pour le moment : la lecture des factures (trop de formats). L'onglet « Pro » est relancé en essai, avec ENGIE Pro pour commencer.
 
 ## Électricité À faire, au fil de vos envois
 
