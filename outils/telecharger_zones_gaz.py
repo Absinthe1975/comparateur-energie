@@ -44,6 +44,34 @@ def liens_departements(html, base):
     return trouves
 
 
+def liens_sitemap(base, rp):
+    """Adresses /zone-gaz/... trouvées dans les sitemaps du site (sitemap.xml et ses sous-fichiers)."""
+    site = urllib.parse.urlparse(base)
+    racine = "%s://%s" % (site.scheme, site.netloc)
+    chemin = site.path.rstrip("/")
+    a_lire = [racine + "/sitemap.xml"]
+    vus, urls = set(), []
+    while a_lire and len(vus) < 20:
+        s = a_lire.pop(0)
+        if s in vus or not rp.can_fetch(AGENT, s):
+            continue
+        vus.add(s)
+        try:
+            xml = lire(s)
+        except Exception as e:
+            print("sitemap illisible (%s) : %s" % (s, e))
+            continue
+        for loc in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", xml):
+            if loc.endswith(".xml"):
+                a_lire.append(loc)
+            elif urllib.parse.urlparse(loc).path.startswith(chemin + "/"):
+                u = loc.split("#")[0].rstrip("/")
+                if u not in urls:
+                    urls.append(u)
+        time.sleep(1)
+    return urls
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="https://observatoires.net/zone-gaz")
@@ -73,14 +101,17 @@ def main(argv=None):
         return 2
     open(os.path.join(a.dossier, "_accueil.html"), "w", encoding="utf-8").write(accueil)
     urls = liens_departements(accueil, a.base)
-    print("%d pages de départements trouvées." % len(urls))
+    for u in liens_sitemap(a.base, rp):
+        if u not in urls:
+            urls.append(u)
+    print("%d pages trouvées (page d'accueil + sitemaps)." % len(urls))
     if not urls:
         print("Aucun lien trouvé : la page d'accueil est enregistrée dans %s, envoyez-la à Claude." % a.dossier)
     if a.test:
         urls = urls[:2]
     faits = refus = 0
     for u in urls:
-        nom = u.rsplit("/", 1)[-1] + ".html"
+        nom = urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"
         chemin = os.path.join(a.dossier, nom)
         if os.path.exists(chemin):
             faits += 1
