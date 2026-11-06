@@ -533,6 +533,37 @@
         "Grille officielle Octopus Energy « Gaz Fixe -1 % Novembre 2026 » (applicable au 30 oct. 2026)",
         "https://a.storyblok.com/f/151412/x/2f8da5bd67/grille-tarifaire-gaz_fixe_1_nov26_b.pdf"
       ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "NovaFixe BioGaz",
+      "a": 0.151,
+      "b0": 0.1928,
+      "niv": "confirmer",
+      "nivd": "01/11/2026",
+      "d": "6 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Gaz (grille annexe de novembre 2026, valeur de Paris 1er : le prix varie selon la commune, voir docs/GDB-GAZ-NOV2026.md)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz"
+      ]
+    },
+    {
+      "k": "gdb",
+      "name": "Gaz de Bordeaux",
+      "offer": "NovaFlex Gaz",
+      "a": 0.1598,
+      "b0": 0.201,
+      "niv": "confirmer",
+      "nivd": "01/11/2026",
+      "d": "6 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Fiche descriptive officielle Gaz de Bordeaux, NovaFlex Gaz (grille annexe de novembre 2026, valeur de Paris 1er : le prix varie selon la commune, voir docs/GDB-GAZ-NOV2026.md)",
+        "https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz"
+      ]
     }
   ],
   "duo": [],

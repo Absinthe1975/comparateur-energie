@@ -132,8 +132,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - site du fournisseur : https://www.gazdebordeaux.fr/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/gaz-de-bordeaux/tarifs
-- source : Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, relevée pour Onnaing ; les grilles d'octobre étaient identiques dans 6 villes) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
-- source : Gaz de Bordeaux (formule : TRV −5 % sur le kWh HT) (Novaflex Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
+- source : Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Élec (grille annexe, souscriptions de novembre 2026, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac) (NovaFixe Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite#telechargement-grille-tarifaire-elec
+- source : Fiche descriptive officielle Gaz de Bordeaux, Novaflex Élec (grille annexe, identique à Onnaing, Lille, Paris 1er, Marseille 01 et Moissac pour la Base ; Onnaing seul relevé pour Novaflex) (Novaflex Élec) : https://www.gazdebordeaux.fr/nos-offres-d-energie/electricite/offre-electricite-verte-prix-indexe
+- source : Fiche descriptive officielle Gaz de Bordeaux, NovaFixe Gaz (grille annexe de novembre 2026, valeur de Paris 1er : le prix varie selon la commune, voir docs/GDB-GAZ-NOV2026.md) (NovaFixe BioGaz) : https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz
 - parrainage : gazdebordeaux.fr : https://www.gazdebordeaux.fr/nos-conseils-energie/mon-contrat-d-energie/parrainage-gaz-de-bordeaux
 
 ### GEG
@@ -345,3 +346,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ## Gaz de Bordeaux (5 nov. 2026)
 - Fiche descriptive NovaFixe Élec, souscriptions de novembre 2026 (Onnaing) : fichier reçu (FT_NOVAFIXEE3, 01/11/2026), grille annexe lue
 - Règlement NovaFixe Bonus Élec (100 € TTC, 1er oct. – 30 nov. 2026) : https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf
+
+## Gaz de Bordeaux gaz (6 nov. 2026)
+- Fiches NovaFixe Gaz et NovaFlex Gaz de novembre 2026, par commune : voir docs/GDB-GAZ-NOV2026.md (fichiers reçus)
