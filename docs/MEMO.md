@@ -1,7 +1,47 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo mis à jour le 6 novembre 2026, classé par énergie : électricité, gaz, offres combinées, eau, parrainages, puis le site lui-même. Seul ce qui reste à faire y figure. Un sujet est abandonné définitivement : la lecture des factures (respect de la vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle). L'onglet « Pro » est relancé en essai, avec ENGIE Pro pour commencer.
+Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+
+## Vue d'ensemble
+
+### 1. Ce que je peux faire seul, sans rien de ta part
+- 8 nov. : retirer la promotion ENGIE (deux mois d'abonnement, valable jusqu'au 7 nov. inclus). 15 nov. : retirer la promotion EDF « 80 ans ». 30 nov. : retirer le bonus Gaz de Bordeaux (100 €). 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
+- Rendre le test de bout en bout plus tolérant, annoncer les parrainages EDF, Alpiq et Gaz de Bordeaux sur Facebook, préparer un post pour l'eau.
+
+### 2. Ce qu'il me faut de toi (documents à m'envoyer)
+- **Tables « commune → zone » du gaz** (le point bloquant n° 1) : Gaz de Bordeaux (prix du gaz différent par commune), ENGIE (groupes A à H), ilek (zones A à K), GRDF (zones 1 à 6). Tant qu'on ne les a pas, ces offres restent « À confirmer » ou affichées pour une seule zone.
+- **ENGIE électricité** : le prix total de l'offre Référence 3 ans (simulateur ou courrier), pour passer de « À confirmer » à « Grille officielle ».
+- **Ekwateur** : un PDF de grille (le prix n'apparaît qu'à la souscription).
+- **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
+- **GEG** : la grille récente de « L'Offre Online ». **Gaz de Bordeaux** : conditions du NovaFixe Duo ; une fiche Novaflex Élec d'une autre ville. **EDF** : pages des offres duo.
+- **Octopus** : confirmer les hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges, plages d'heures creuses).
+- **Fournisseurs à ajouter** : fiches de Urban Solar Energy, Énergie d'ici, Jeety Energy.
+
+### 3. Ce que tu dois trancher
+- **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.
+- **OHM « Prix Réservé »** (fourniture à partir d'avril 2027, 20 000 clients) : mention à part, ou rien.
+- **Primeo** : afficher le prix calculé (tarif réglementé −5 %) comme « calculé selon la formule officielle », ou le laisser « À confirmer ».
+- **Pro** : ajouter les taxes avec un choix « Mon activité », ou rester hors taxes.
+
+### 4. Ce qu'il faut refaire régulièrement
+- **Chaque mois (autour du 1er)** : Dyneff gaz (nouvelle grille mensuelle), Mint gaz (Biogaz Online et Classic), Octopus gaz Fixe, Gaz de Bordeaux (fiches du mois : NovaFixe et NovaFlex, élec et gaz), ENGIE Pro Latitude (prix indexé). Le suivi automatique signale les nouveaux PDF dans son rapport ; c'est toi qui m'envoies les fichiers et moi qui saisis.
+- **Février et août (changement du tarif réglementé)** : EDF Tarif Bleu (grille 12 à 36 kVA), Alpiq (remise de 0,5 % sur le kWh HT), Primeo, Mint, Gaz de Bordeaux Novaflex, puis les grilles d'août de chaque fournisseur (Octopus, LLUM, Enercoop, La Bellenergie, GEG, Dyneff, OHM).
+- **Quand un fournisseur change sa grille** : surtout EDF, ilek, GEG, ENGIE, Dyneff, Octopus (sites qui bloquent les robots, ou PDF que le programme ne sait pas lire) : tu m'envoies le fichier, je saisis, la PR est relue puis fusionnée automatiquement.
+- **À chaque grille saisie** : lien dans docs/LIENS-RECUS.md, puis `python3 scripts/liens.py`.
+
+### 5. Ce qui se fait tout seul
+- Prix du tarif réglementé (CRE) et prix repère du gaz : mise à jour automatique du 1er au 10 de chaque mois, puis chaque lundi.
+- Prix par code postal d'Alterna, historique des prix, vérification des liens fournisseur, eau (chaque lundi : une demande de fusion s'ouvre seulement si des prix changent).
+- Relecture automatique des PR (écarts de prix des offres non officielles, offre retirée, source manquante), fusion automatique quand les tests sont au vert, post Facebook à chaque changement de prix officiel.
+
+### 6. Ce qui est déjà saisi d'après une grille officielle récente
+- Électricité : EDF (Tarif Bleu, Zen), Octopus (Eco fixe, Intelligent), OHM (octobre), Mint, Dyneff, LLUM (compteur non communicant), Enercoop, GEG, Gaz de Bordeaux (novembre), Plenitude, Alterna, Alpiq, La Bellenergie.
+- Gaz : Dyneff (octobre), Mint (novembre), Octopus (novembre), Alterna, GEG.
+- Encore « À confirmer » : ENGIE (élec et gaz), Ekwateur, Primeo (calculé), Gaz de Bordeaux gaz (zone de Paris), ilek gaz (zone B).
+- Parrainages : confirmés par une page officielle, sauf Ekwateur, Happ-e et ilek ; Plenitude n'a aucun programme.
+
+## Détail par sujet
 
 ## Électricité À faire, au fil de vos envois
 
@@ -76,19 +116,15 @@ Mémo mis à jour le 6 novembre 2026, classé par énergie : électricité, gaz,
 
 - Zone tarifaire par commune : aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait, mais chaque fournisseur découpe les zones à sa façon (tableau ci-dessous, à vérifier sur les grilles officielles).
 
- | Fournisseur | Système de zones | Particularités | 
+| Fournisseur | Système de zones | Particularités |
+|---|---|---|
+| GRDF (référence) | 6 zones (1 à 6) | Système officiel de référence, base de toutes les autres grilles. |
+| ENGIE | 6 zones (1 à 6) | Aligné sur GRDF historiquement, héritage du tarif réglementé. |
+| TotalEnergies | 6 zones (modifié) | Reprend le système GRDF avec quelques reclassifications de communes. |
+| Alterna | 6 zones (modifié) | Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement. |
+| ilek | 11 zones (A à K) | Système propre, plus fin, pour refléter les coûts d'achat du biogaz local. |
+| Ekwateur | Aucune zone | Tarif national unique. |
 
- | GRDF (référence) | 6 zones (1 à 6) | Système officiel de référence, base de toutes les autres grilles. | 
-
- | ENGIE | 6 zones (1 à 6) | Aligné sur GRDF historiquement, héritage du tarif réglementé. | 
-
- | TotalEnergies | 6 zones (modifié) | Reprend le système GRDF avec quelques reclassifications de communes. | 
-
- | Alterna | 6 zones (modifié) | Reprend GRDF avec des ajustements ponctuels selon les coûts d'approvisionnement. | 
-
- | ilek | 11 zones (A à K) | Système propre, plus fin, pour refléter les coûts d'achat du biogaz local. | 
-
- | Ekwateur | Aucune zone | Tarif national unique. | 
 
  Source : [fournisseurs-electricite.com](https://www.fournisseurs-electricite.com/contrat-gaz/abonnement/zone-tarifaire) (second comparateur, octobre 2026), consultée le 29 oct. 2026. Source secondaire : les classifications de communes peuvent changer chaque année.
 
