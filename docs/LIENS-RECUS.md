@@ -349,3 +349,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Gaz de Bordeaux gaz (6 nov. 2026)
 - Fiches NovaFixe Gaz et NovaFlex Gaz de novembre 2026, par commune : voir docs/GDB-GAZ-NOV2026.md (fichiers reçus)
+
+## OHM Prix Réservé (6 nov. 2026)
+- Fiches PDF électricité et gaz « Prix Réservé » (activation avril–mai 2027) et page ohm-energie.com : résumé dans docs/OHM-PRIX-RESERVE.md
