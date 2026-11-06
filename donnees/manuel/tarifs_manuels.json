@@ -564,6 +564,24 @@
         "Fiche descriptive officielle Gaz de Bordeaux, NovaFlex Gaz (grille annexe de novembre 2026, valeur de Paris 1er : le prix varie selon la commune, voir docs/GDB-GAZ-NOV2026.md)",
         "https://www.gazdebordeaux.fr/nos-offres-d-energie/gaz-naturel#telechargement-grille-tarifaire-gaz"
       ]
+    },
+    {
+      "k": "alterna",
+      "name": "Alterna",
+      "offer": "Mon gaz naturel indexé",
+      "s": [
+        "Grille officielle Alterna, prix par code postal (page du fournisseur, lue par le suivi automatique)",
+        "https://www.alterna-energie.fr/tarifs-gaz-indexe"
+      ]
+    },
+    {
+      "k": "alterna",
+      "name": "Alterna",
+      "offer": "Mon biogaz français",
+      "s": [
+        "Grille officielle Alterna, prix par code postal (page du fournisseur, lue par le suivi automatique)",
+        "https://www.alterna-energie.fr/tarifs-biogaz"
+      ]
     }
   ],
   "duo": [],
