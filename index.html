@@ -390,6 +390,7 @@ code { overflow-wrap: anywhere; }
     <div class="field" id="f-hc" hidden><label for="hcpart">Part en heures creuses (%)</label><input id="hcpart" type="number" min="0" max="100" step="5" value="40" inputmode="numeric"></div>
     <div class="field" id="f-gopt"><label for="gopt">Option tarifaire gaz</label><select id="gopt"><option value="base">Base (moins de 1 000 kWh)</option><option value="b0">B0 (1 000 à 4 000 kWh environ)</option><option value="b1" selected>B1 (4 000 à 30 000 kWh environ)</option><option value="b2i">B2i (plus de 30 000 kWh)</option></select></div>
     <div class="field" id="f-gzone" hidden><label for="gzone">Zone tarifaire gaz</label><select id="gzone"><option value="1" selected>Zone 1</option><option value="2">Zone 2</option><option value="3">Zone 3</option><option value="4">Zone 4</option><option value="5">Zone 5</option><option value="6">Zone 6</option></select></div>
+    <p class="note" id="gzone-auto"></p>
     <div id="f-cp" hidden><input id="cp" type="hidden"><span id="cp-info"></span></div>
     <div class="field" id="f-loc" hidden><span class="lbl">Localisation</span><span id="eau-loc"></span><button type="button" class="linkbtn" id="eau-loc-edit">Modifier le code postal (accueil)</button></div>
     <div id="f-ville" hidden><select id="ville"></select></div>
@@ -471,7 +472,7 @@ code { overflow-wrap: anywhere; }
     <div class="tablewrap"><table id="t-gaz"></table></div>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-gaz">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
-    <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
+    <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Avec votre code postal saisi à l'accueil, la zone historique de GRDF est déduite automatiquement (liste des communes d'observatoires.net, croisée avec la base des codes postaux de La Poste ; source secondaire) ; vous pouvez la corriger ici. Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
   </section>
@@ -649,7 +650,7 @@ code { overflow-wrap: anywhere; }
     <ul>
       <li><a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffage" target="_blank" rel="noopener">Consommation du chauffage électrique par m² (Selectra, d'après l'ADEME)</a> · <a href="https://www.fournisseurs-electricite.com/compteur/consommation-electrique/chauffe-eau" target="_blank" rel="noopener">Consommation du chauffe-eau (Selectra)</a> · <a href="https://ekwateur.fr/blog/ma-consommation-d-energie/consommation-electrique-maison/" target="_blank" rel="noopener">Consommation d'une maison (Ekwateur)</a></li>
       <li><a href="https://www.services.eaufrance.fr/pro/telechargement" target="_blank" rel="noopener">Prix de l'eau par commune (SISPEA, Office français de la biodiversité, licence ouverte)</a> · <a href="https://www.data.gouv.fr/datasets/base-officielle-des-codes-postaux" target="_blank" rel="noopener">Base officielle des codes postaux (La Poste)</a> · <a href="https://www.geonames.org/" target="_blank" rel="noopener">Orthographe des communes (GeoNames, licence CC BY 4.0)</a> · <a href="https://www.kelwatt.fr/eau/prix-commune" target="_blank" rel="noopener">Prix de l'eau par commune, janvier 2026 (Kelwatt, d'après eaufrance)</a> · <a href="https://www.fournisseurs-electricite.com/eau/prix" target="_blank" rel="noopener">Prix de l'eau et consommation par foyer (Selectra)</a> · <a href="https://www.choisir.com/energie/articles/104208/les-zones-tarifaires-du-gaz" target="_blank" rel="noopener">Zones tarifaires du gaz (Choisir)</a></li>
-      <li><strong>Grilles tarifaires officielles des fournisseurs</strong> (niveau « Grille officielle ») : <a href="https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html" target="_blank" rel="noopener">EDF (tarif réglementé et offres)</a> · <a href="https://www.alterna-energie.fr/tarifs-electricite-francaise" target="_blank" rel="noopener">Alterna</a> · <a href="https://octopusenergy.fr/offre-electricite-tarifs" target="_blank" rel="noopener">Octopus Energy</a> · <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">GEG</a> · <a href="https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf" target="_blank" rel="noopener">Plenitude (Pleniweb)</a> · <a href="https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf" target="_blank" rel="noopener">LLUM</a> · <a href="https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf" target="_blank" rel="noopener">Primeo (formule)</a>. <a href="https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Tarif_Bleu.pdf" target="_blank" rel="noopener">EDF, grille du Tarif Bleu (1er août 2026)</a> · <a href="https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf" target="_blank" rel="noopener">Dyneff (Base, 1er août 2026)</a> · <a href="https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1" target="_blank" rel="noopener">La Bellenergie (Prudence, Constance, Garance)</a> · <a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop (annexes tarifaires)</a> · <a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf" target="_blank" rel="noopener">ilek (ÉnRFixe+)</a> · <a href="https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf" target="_blank" rel="noopener">Gaz de Bordeaux (règlement NovaFixe Bonus Élec, promotion)</a>. Les autres fournisseurs (Mint, OHM, Happ-e, TotalEnergies) sont aussi saisis d'après leurs grilles officielles. Un prix est calculé d'après une formule officielle, sans grille complète : Primeo (il reste « À confirmer »). Gaz de Bordeaux Novaflex Élec (2 % sous le tarif réglementé) est lu sur la fiche officielle de novembre 2026. Onglet Pro (essai), grilles officielles : ENGIE Pro (octobre 2026), La Bellenergie (1er août 2026), Enercoop (1er août 2026), Mint Énergie Classic & Green Pro (1er août 2026), TotalEnergies Online (1er octobre 2026), EDF Entreprises Contrat Garanti (3 août 2026). Frais de l'onglet Abonnement : catalogue des prestations Enedis au 1er août 2026.</li>
+      <li><strong>Grilles tarifaires officielles des fournisseurs</strong> (niveau « Grille officielle ») : <a href="https://particulier.edf.fr/fr/accueil/electricite-gaz/offres-electricite/tarif-bleu.html" target="_blank" rel="noopener">EDF (tarif réglementé et offres)</a> · <a href="https://www.alterna-energie.fr/tarifs-electricite-francaise" target="_blank" rel="noopener">Alterna</a> · <a href="https://octopusenergy.fr/offre-electricite-tarifs" target="_blank" rel="noopener">Octopus Energy</a> · <a href="https://www.geg.fr/aide-et-contact/centre-documentation/particulier/tarifs/" target="_blank" rel="noopener">GEG</a> · <a href="https://www.eniplenitude.fr/content/dam/plenitude-fr/documents/pages-offres/offre-pleniweb/offre-pleniweb_1an_elec.pdf" target="_blank" rel="noopener">Plenitude (Pleniweb)</a> · <a href="https://www.llum.fr/hubfs/grille-tarifaire-particulier_LLUM_-_PART_AOUT_2026_combine.pdf" target="_blank" rel="noopener">LLUM</a> · <a href="https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf" target="_blank" rel="noopener">Primeo (formule)</a>. <a href="https://particulier.edf.fr/content/dam/2-Actifs/Documents/Offres/Grille_prix_Tarif_Bleu.pdf" target="_blank" rel="noopener">EDF, grille du Tarif Bleu (1er août 2026)</a> · <a href="https://www.dyneff-elec-gaz.fr/wp-content/uploads/2026/02/ContratElec_BASE_260801.pdf" target="_blank" rel="noopener">Dyneff (Base, 1er août 2026)</a> · <a href="https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1" target="_blank" rel="noopener">La Bellenergie (Prudence, Constance, Garance)</a> · <a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener">Enercoop (annexes tarifaires)</a> · <a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf" target="_blank" rel="noopener">ilek (ÉnRFixe+)</a> · <a href="https://ressources.gazdebordeaux.fr/DOCUMENTS/REGLEMENT/Reglement_novafixe_bonus_elec.pdf" target="_blank" rel="noopener">Gaz de Bordeaux (règlement NovaFixe Bonus Élec, promotion)</a>. Les autres fournisseurs (Mint, OHM, Happ-e, TotalEnergies) sont aussi saisis d'après leurs grilles officielles. Un prix est calculé d'après une formule officielle, sans grille complète : Primeo (il reste « À confirmer »). Gaz de Bordeaux Novaflex Élec (2 % sous le tarif réglementé) est lu sur la fiche officielle de novembre 2026. Onglet Pro (essai), grilles officielles : ENGIE Pro (octobre 2026), La Bellenergie (1er août 2026), Enercoop (1er août 2026), Mint Énergie Classic & Green Pro (1er août 2026), TotalEnergies Online (1er octobre 2026), EDF Entreprises Contrat Garanti (3 août 2026). Frais de l'onglet Abonnement : catalogue des prestations Enedis au 1er août 2026. Zones tarifaires du gaz par commune (zones historiques de GRDF) : <a href="https://observatoires.net/zone-gaz" target="_blank" rel="noopener">observatoires.net</a> (source secondaire), croisées avec la base officielle des codes postaux de La Poste.</li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/prix" target="_blank" rel="noopener">Prix du kWh d'électricité, octobre 2026 (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-electricite/abonnement" target="_blank" rel="noopener">Abonnement d'électricité par fournisseur et composition (Selectra)</a> · <a href="https://www.fournisseurs-electricite.com/contrat-gaz/abonnement" target="_blank" rel="noopener">Abonnement de gaz (Selectra)</a></li>
       <li><a href="https://www.fournisseurs-electricite.com/contrat-gaz/prix" target="_blank" rel="noopener">Prix du gaz par fournisseur (Selectra)</a></li>
@@ -1442,10 +1443,12 @@ function homeEauLine(ep) {
 }
 function initHome() {
   $("h-cp").addEventListener("input", function () {
+    GZ_MAN = false;
     $("l-cp").value = $("h-cp").value; applyCP("l-"); applyCP("h-");
     saveLogt(); renderLogt(); refresh();
   });
   $("h-ville").addEventListener("change", function () {
+    GZ_MAN = false;
     $("l-ville").value = $("h-ville").value; saveLogt(); renderLogt(); refresh();
   });
   syncHomeFromLogt();
@@ -1565,6 +1568,31 @@ function loadShard(cp) {
       refresh(); renderLogt();
     }).catch(function () { CP_SH[p] = "erreur"; /* repli : liste de 77 communes */ });
   } catch (e) { CP_SH[p] = "erreur"; }
+}
+// Zone tarifaire gaz (zones historiques de GRDF) déduite du code postal : fichiers gaz/zones/NN.json (un par début de code postal),
+// zone par code INSEE de commune (« i ») et par code postal dont toutes les communes ont la même zone (« c »).
+var GZ_I = {}, GZ_C = {}, GZ_SH = {}, GZ_MAN = false;
+function loadGasZones(cp) {
+  var p = cp.slice(0, 2);
+  if (GZ_SH[p]) return;
+  GZ_SH[p] = "chargement";
+  if (!window.fetch || location.protocol === "file:") { GZ_SH[p] = "erreur"; return; }
+  fetch("donnees/gaz/zones/" + p + ".json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    [["i", GZ_I], ["c", GZ_C]].forEach(function (k) {
+      Object.keys(j[k[0]] || {}).forEach(function (z) { j[k[0]][z].split(" ").forEach(function (c) { k[1][c] = parseInt(z, 10); }); });
+    });
+    GZ_SH[p] = "ok"; refresh();
+  }).catch(function () { GZ_SH[p] = "erreur"; });
+}
+function gasZoneAuto() {
+  var cp = $("h-cp") ? $("h-cp").value.replace(/\s/g, "") : "";
+  if (!/^[0-9]{5}$/.test(cp)) return { z: null, msg: "" };
+  loadGasZones(cp);
+  var v = $("h-ville") ? $("h-ville").value : "";
+  if (v && GZ_I[v]) return { z: GZ_I[v], msg: "Zone " + GZ_I[v] + " déduite de votre commune (code postal " + cp + ")." + (GZ_C[cp] ? "" : " Ce code postal couvre plusieurs zones : vérifiez la commune choisie sur l'accueil.") };
+  if (GZ_C[cp]) return { z: GZ_C[cp], msg: "Zone " + GZ_C[cp] + " déduite de votre code postal " + cp + "." };
+  if (GZ_SH[cp.slice(0, 2)] === "ok") return { z: null, msg: "Zone non déduite : ce code postal couvre plusieurs zones ou n'est pas desservi par GRDF. Choisissez votre commune sur l'accueil, ou réglez la zone ci-dessus." };
+  return { z: null, msg: "" };
 }
 function loadCPPlaces() {
   ["cp", "l-cp"].forEach(function (id) {
@@ -1882,6 +1910,9 @@ var fltBuilt = false;
 function refresh() {
   if (!fltBuilt) { fltBuilt = true; buildFilters("elec"); buildFilters("gaz"); }
   syncAuto();
+  var gza = gasZoneAuto();
+  if (!GZ_MAN) $("gzone").value = gza.z ? String(gza.z) : "1";
+  if ($("gzone-auto")) $("gzone-auto").textContent = GZ_MAN ? "" : gza.msg;
   state.gasOpt = $("gopt").value; state.gasZone = parseInt($("gzone").value, 10) || 1;
   if (state.tab === "elec") state.elecConso = conso();
   if (state.tab === "gaz") state.gasConso = conso();
@@ -2460,7 +2491,7 @@ function exportCsv(id) {
 }
 $("hcpart").addEventListener("input", refresh);
 $("gopt").addEventListener("change", refresh);
-$("gzone").addEventListener("change", refresh);
+$("gzone").addEventListener("change", function () { GZ_MAN = true; refresh(); });
 $("eau-loc-edit").addEventListener("click", function () { setTab("home"); window.scrollTo(0, 0); $("h-cp").focus(); });
 $("ville").addEventListener("change", refresh);
 $("prixeau").addEventListener("input", refresh);

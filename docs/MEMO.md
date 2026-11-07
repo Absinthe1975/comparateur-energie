@@ -10,13 +10,15 @@ Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 - Rendre le test de bout en bout plus tolérant, annoncer les parrainages EDF, Alpiq et Gaz de Bordeaux sur Facebook, préparer un post pour l'eau.
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
-- **Tables « commune → zone » du gaz** (le point bloquant n° 1) : Gaz de Bordeaux (prix du gaz différent par commune), ENGIE (groupes A à H), ilek (zones A à K), GRDF (zones 1 à 6). Tant qu'on ne les a pas, ces offres restent « À confirmer » ou affichées pour une seule zone.
+- **Tables « commune → zone » propres à chaque fournisseur** : ENGIE (groupes A à H), ilek (zones A à K), TotalEnergies. Les zones historiques de GRDF sont faites (code postal → zone, voir docs/ZONES-GAZ.md).
 - **ENGIE électricité** : le prix total de l'offre Référence 3 ans (simulateur ou courrier), pour passer de « À confirmer » à « Grille officielle ».
 - **Ekwateur** : un PDF de grille (le prix n'apparaît qu'à la souscription).
 - **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
 - **GEG** : la grille récente de « L'Offre Online ». **Gaz de Bordeaux** : conditions du NovaFixe Duo ; une fiche Novaflex Élec d'une autre ville. **EDF** : pages des offres duo.
 - **Octopus** : confirmer les hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges, plages d'heures creuses).
 - **Fournisseurs à ajouter** : fiches de Urban Solar Energy, Énergie d'ici, Jeety Energy.
+
+- **Zones de gaz par code postal : fait le 7 nov. 2026** pour les zones historiques de GRDF (voir docs/ZONES-GAZ.md). Reste : les découpages propres à ENGIE (A à H), ilek (A à K), TotalEnergies et Alterna, et les prix par zone des offres qui n'en ont pas encore (Gaz de Bordeaux NovaFlex zones 4 à 6, OHM, EDF, Happ-e à vérifier).
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.

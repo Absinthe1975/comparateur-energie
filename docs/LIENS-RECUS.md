@@ -357,3 +357,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ## OHM électricité (6 nov. 2026)
 - Fiches descriptives Sérénité Fixe 1 an (23 oct.), Sérénité Fixe 2 ans (16 oct.), Premi'Ohm 3 ans (14 oct.), Week-end (4 sept. 2026) et page https://ohm-energie.com/offre/electricite : fichiers reçus
 - Simulateur NovaFixe Gaz (captures mhtml Paris, Marseille, Onnaing, 6 nov. 2026) : comparé aux fiches dans docs/GDB-GAZ-NOV2026.md
+
+## Zones de gaz (6-7 nov. 2026)
+- Pages observatoires.net par département (zip du script outils/telecharger_zones_gaz.py) et base La Poste 019HexaSmal : voir docs/ZONES-GAZ.md
