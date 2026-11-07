@@ -4,6 +4,12 @@
 À lancer sur VOTRE ordinateur (Python 3, rien à installer) :
     python3 telecharger_zones_gaz.py            # tout télécharger (environ 100 pages, 3 s entre chaque)
     python3 telecharger_zones_gaz.py --test     # seulement 2 départements, pour vérifier
+    python3 telecharger_zones_gaz.py --communes --departement ain   # pages de communes d'un département (essai)
+    python3 telecharger_zones_gaz.py --communes                     # toutes les communes (plusieurs heures, reprend où il s'est arrêté)
+
+Avec --communes, seuls les tableaux « zone par fournisseur » de chaque page de commune sont gardés (quelques ko
+par commune au lieu de 300 ko) : le zip reste petit. Il faut d'abord avoir lancé le programme sans option, pour
+avoir les pages de départements dans le dossier zones_gaz_pages.
 
 Règles respectées : lecture de robots.txt avant chaque page (une page interdite est sautée), pause entre
 deux demandes, arrêt immédiat en cas de refus (403 / 429), aucun contournement. Le programme reprend où il
@@ -44,6 +50,30 @@ def liens_departements(html, base):
     return trouves
 
 
+def liens_communes(dossier, base, departement=None):
+    """Adresses des pages de communes, lues dans les pages de départements déjà téléchargées."""
+    site = urllib.parse.urlparse(base)
+    racine = "%s://%s" % (site.scheme, site.netloc)
+    chemin = site.path.rstrip("/")
+    urls = []
+    for f in sorted(os.listdir(dossier)):
+        m = re.fullmatch(r"zone-gaz__([a-z0-9-]+)\.html", f)
+        if not m or (departement and m.group(1) != departement):
+            continue
+        t = open(os.path.join(dossier, f), encoding="utf-8", errors="replace").read()
+        for c in re.findall(r'<a href="(' + re.escape(chemin) + r'/' + re.escape(m.group(1)) + r'/[a-z0-9-]+)"', t):
+            u = racine + c
+            if u not in urls:
+                urls.append(u)
+    return urls
+
+
+def tableau_fournisseurs(html):
+    """Garde seulement le tableau « zones tarifaires gaz par fournisseur » (quelques ko)."""
+    m = re.search(r"<table[^>]*>\s*<caption[^>]*>[^<]*par fournisseur.*?</table>", html, re.S)
+    return m.group(0) if m else None
+
+
 def liens_sitemap(base, rp):
     """Adresses /zone-gaz/... trouvées dans les sitemaps du site (sitemap.xml et ses sous-fichiers)."""
     site = urllib.parse.urlparse(base)
@@ -72,6 +102,53 @@ def liens_sitemap(base, rp):
     return urls
 
 
+def telecharger_communes(a, rp):
+    urls = liens_communes(a.dossier, a.base, a.departement)
+    if not urls:
+        print("Aucune commune trouvée : lancez d'abord le programme sans option (pages de départements dans %s)." % a.dossier)
+        return 2
+    if a.test:
+        urls = urls[:3]
+    sous = os.path.join(a.dossier, "communes")
+    os.makedirs(sous, exist_ok=True)
+    delai = rp.crawl_delay(AGENT) or rp.crawl_delay("*")
+    if delai:
+        a.pause = max(a.pause, float(delai))
+    restantes = [u for u in urls if not os.path.exists(os.path.join(sous, urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"))]
+    print("%d communes, dont %d restent à télécharger. Durée estimée : environ %d minutes." % (len(urls), len(restantes), len(restantes) * (a.pause + 0.5) / 60))
+    faits = refus = 0
+    for u in urls:
+        nom = urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"
+        chemin = os.path.join(sous, nom)
+        if os.path.exists(chemin):
+            continue
+        if not rp.can_fetch(AGENT, u):
+            refus += 1
+            continue
+        try:
+            html = lire(u)
+        except urllib.error.HTTPError as e:
+            print("%s : erreur %s" % (u, e.code))
+            if e.code in (403, 429):
+                print("Le site refuse : j'arrête immédiatement (rien n'est contourné).")
+                break
+            continue
+        except Exception as e:
+            print("%s : %s" % (u, e))
+            continue
+        t = tableau_fournisseurs(html)
+        open(chemin, "w", encoding="utf-8").write("<!-- %s -->\n%s\n" % (u, t or "<!-- pas de tableau -->"))
+        faits += 1
+        if faits % 50 == 0:
+            print("%d pages faites" % faits)
+        time.sleep(a.pause)
+    with zipfile.ZipFile(a.zip.replace(".zip", "_communes.zip"), "w", zipfile.ZIP_DEFLATED) as z:
+        for f in sorted(os.listdir(sous)):
+            z.write(os.path.join(sous, f), f)
+    print("Terminé : %d pages téléchargées, %d interdites par robots.txt. Envoyez %s à Claude." % (faits, refus, a.zip.replace(".zip", "_communes.zip")))
+    return 0
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="https://observatoires.net/zone-gaz")
@@ -79,6 +156,8 @@ def main(argv=None):
     ap.add_argument("--test", action="store_true", help="2 pages seulement")
     ap.add_argument("--departements", action="store_true", help="seulement les pages de départements (environ 95), sans les pages de communes")
     ap.add_argument("--dossier", default="zones_gaz_pages")
+    ap.add_argument("--communes", action="store_true", help="télécharger les pages de communes (tableau par fournisseur)")
+    ap.add_argument("--departement", default=None, help="avec --communes : un seul département (ex. ain)")
     ap.add_argument("--zip", default="zones_gaz.zip")
     a = ap.parse_args(argv)
 
@@ -109,6 +188,8 @@ def main(argv=None):
         return 2
 
     os.makedirs(a.dossier, exist_ok=True)
+    if a.communes:
+        return telecharger_communes(a, rp)
     try:
         accueil = lire(a.base)
     except Exception as e:
