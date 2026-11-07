@@ -1,7 +1,7 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
@@ -35,7 +35,7 @@ Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 ### 5. Ce qui se fait tout seul
 - Prix du tarif réglementé (CRE) et prix repère du gaz : mise à jour automatique du 1er au 10 de chaque mois, puis chaque lundi.
 - Prix par code postal d'Alterna, historique des prix, vérification des liens fournisseur, eau (chaque lundi : une demande de fusion s'ouvre seulement si des prix changent).
-- Relecture automatique des PR (écarts de prix des offres non officielles, offre retirée, source manquante), fusion automatique quand les tests sont au vert, post Facebook à chaque changement de prix officiel.
+- Relecture automatique des PR (écarts de prix des offres non officielles, offre retirée, source manquante), fusion automatique quand les tests sont au vert, post Facebook à chaque changement de prix officiel. Depuis le 7 nov., les mises à jour de prix du robot se fusionnent seules (plus d'approbation manuelle des tests) ; une PR bloquée porte l'étiquette « ne-pas-fusionner ».
 
 ### 6. Ce qui est déjà saisi d'après une grille officielle récente
 - Électricité : EDF (Tarif Bleu, Zen), Octopus (Eco fixe, Intelligent), OHM (octobre), Mint, Dyneff, LLUM (compteur non communicant), Enercoop, GEG, Gaz de Bordeaux (novembre), Plenitude, Alterna, Alpiq, La Bellenergie.
@@ -103,7 +103,7 @@ Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) : fiches officielles de novembre 2026 reçues pour NovaFixe Gaz (Paris, Marseille, Evian, Bordeaux) et NovaFlex Gaz (6 communes) : le prix du kWh varie selon la commune (ex. NovaFixe, plus de 4 000 kWh : Bordeaux 0,1467 · Paris 0,1510 · Marseille 0,1540 · Evian 0,1590 €), voir docs/GDB-GAZ-NOV2026.md. Le site affiche la valeur de Paris en « À confirmer » ; il manque la table commune → zone pour passer en « Grille officielle ».
 
-- [ENGIE](https://particuliers.engie.fr/) : Gaz Référence 3 ans à confirmer. Les deux prix vus (0,1414 et 0,1373 €/kWh) sont deux zones de la même grille. Selectra (1er oct. 2026, TTC, 4 001 à 29 999 kWh/an, abonnement 360,79 €/an) donne 8 zones : A 0,13728 · B 0,1383 · C 0,1414 · D 0,14474 · E 0,14835 · F 0,15104 · G 0,15324 · H 0,15326 €/kWh. Nous affichons la zone C. La fiche officielle d'août 2026 recoupe Selectra (à moins de 0,001 €/kWh) : il manque seulement la table code postal → groupe A à H (ENGIE ne la donne que par formulaire).
+- [ENGIE](https://particuliers.engie.fr/) : Gaz Référence 3 ans à confirmer (zone non connue). Fiche et grille officielles de novembre 2026 reçues le 7 nov. (docs/ENGIE-GAZ-ZONES.md) : le groupe A à H ne change que le prix « Obligations », et seulement au-dessus de 4 000 kWh/an. Abonnement 360,79 €/an ; prix total TTC du kWh (4 000 à 29 999 kWh) : A 0,14008 · B 0,14108 · C 0,14419 · D 0,14752 · E 0,15114 · F 0,15383 · G et H 0,15604 €/kWh ; en dessous de 4 000 kWh : 152,46 €/an et 0,16983 €/kWh pour tous les groupes. Ces valeurs remplacent celles de Selectra d'octobre (plus basses). Le site affiche encore 0,1414 : à mettre à jour dès que le groupe se déduit du code postal ; il manque la table code postal → groupe (ENGIE ne la donne que par formulaire).
 
 - [ilek](https://www.ilek.fr/grilles-tarifaires) : relier la zone gaz (A à K, de 0,1633 à 0,1809 €/kWh en T2) au code postal avec [ilek.fr/zone-tarifaire-gaz-vert](https://www.ilek.fr/zone-tarifaire-gaz-vert) ; nous affichons la zone B (0,1652 €/kWh).
 
@@ -117,7 +117,7 @@ Mémo du 6 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - Limites du calcul : profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie ([GEG](https://www.geg.fr/), [Plenitude](https://eniplenitude.fr/)) sont à surveiller ; les zones de distribution locales (Bordeaux, Strasbourg, Colmar) ne sont pas modélisées. Prix et abonnements Base et B0 réels pour les offres à grille officielle, estimés (étoile) pour les autres.
 
-- Zone tarifaire par commune : aucune liste trouvée, donc aucun écart n'est appliqué. Avec le code postal, une table « code postal → zone » suffirait, mais chaque fournisseur découpe les zones à sa façon (tableau ci-dessous, à vérifier sur les grilles officielles).
+- Zone tarifaire : le site déduit maintenant la zone GRDF du code postal (fait le 7 nov., voir docs/ZONES-GAZ.md). Restent les découpages propres à chaque fournisseur, qui n'ont pas de table par commune (tableau ci-dessous, à vérifier sur les grilles officielles). Précision : ENGIE a 8 groupes A à H (et non 6 zones), ce qui corrige la ligne ENGIE du tableau.
 
 | Fournisseur | Système de zones | Particularités |
 |---|---|---|
