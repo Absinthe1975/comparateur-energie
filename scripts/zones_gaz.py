@@ -7,6 +7,7 @@ Sources (à fournir en arguments) :
   - le fichier « Base officielle des codes postaux » de La Poste (CSV « 019HexaSmal », séparateur ;, ISO-8859-1).
 
 Usage : python3 scripts/zones_gaz.py zones_gaz.zip 019HexaSmal.csv
+        python3 scripts/zones_gaz.py zones_gaz.zip 019HexaSmal.csv zones_gaz_communes.zip   (zones par fournisseur)
 Un fichier par début de code postal (comme donnees/eau/cp/) : seul celui du visiteur est téléchargé par le site.
 Format : {"i": {"1": "01004 01007 ...", "2": "..."}, "c": {"1": "01400 ...", ...}}
   i : codes INSEE des communes, regroupés par zone ; c : codes postaux dont toutes les communes sont dans la même zone.
@@ -60,8 +61,9 @@ def lire_poste(chemin):
     return lignes
 
 
-def rapprocher(pages, poste):
-    """Associe chaque commune des pages à un code INSEE. Rend (zone par INSEE, communes non rapprochées)."""
+def rapprocher(pages, poste, ids=None):
+    """Associe chaque commune des pages à un code INSEE. Rend (zone par INSEE, communes non rapprochées, codes postaux).
+    Si `ids` est un dict, il reçoit aussi {(département, commune): INSEE} (pour relier les pages de communes)."""
     parnom = collections.defaultdict(set)
     parinsee = collections.defaultdict(list)
     cp = collections.defaultdict(set)
@@ -87,6 +89,8 @@ def rapprocher(pages, poste):
                 cs = set()
         if len(cs) == 1:
             res[next(iter(cs))] = z
+            if ids is not None:
+                ids[(d, c)] = next(iter(cs))
         else:
             manque.append((d, c, nom))
     return res, manque, cp
@@ -120,7 +124,80 @@ def construire(res, cp):
     return out
 
 
+# --- Zones propres à chaque fournisseur (pages de communes d'observatoires.net, outils/telecharger_zones_gaz.py --communes) ---
+
+FOURNISSEURS = {"grille par defaut grdf engie": "grdf", "ilek": "ilek", "totalenergies": "total", "engie": "engie6",
+                "alterna": "alterna", "engie 8 zones": "engie8", "geg fixe": "geg", "ntr": "ntr"}
+ORDRE = ["ilek", "total", "engie8", "alterna", "geg"]  # colonnes gardées dans les fichiers du site
+
+
+def lire_communes(zf):
+    """{(département, commune): {fournisseur: zone}} d'après les pages (ou tableaux) de communes du zip."""
+    out = {}
+    for n in zf.namelist():
+        m = re.fullmatch(r"(?:.*/)?zone-gaz__([a-z0-9-]+)__([a-z0-9-]+)\.html", n)
+        if not m:
+            continue
+        t = zf.read(n).decode("utf-8", "replace")
+        zones = {}
+        for four, zone in re.findall(r'<td data-label="Fournisseur"[^>]*>(.*?)</td>\s*<td data-label="Zone tarifaire"[^>]*>(.*?)</td>', t, re.S):
+            nom = norm(re.sub(r"<[^>]+>", " ", four)).lower()
+            nom = nom.replace("(", "").replace(")", "")
+            z = re.sub(r"<[^>]+>", " ", html.unescape(zone))
+            z = re.sub(r"^\s*Zone\s+", "", z.replace("\xa0", " ").strip())
+            z = " ".join(z.split())
+            cle = FOURNISSEURS.get(nom)
+            if cle and z:
+                zones[cle] = z
+        if zones:
+            out[(m.group(1), m.group(2))] = zones
+    return out
+
+
+def construire_fournisseurs(ids, communes, cp):
+    """Un fichier par début de code postal : {"t": ["I|5|D|6|NTR 8-10", ...], "i": {INSEE: n° de ligne de t}, "c": {code postal: n°}}.
+    Une ligne de t = zones ilek | TotalEnergies | ENGIE 8 zones | Alterna | GEG (vide si le fournisseur n'a pas de zone ici)."""
+    parinsee = {}
+    for dc, zones in communes.items():
+        i = ids.get(dc)
+        if i:
+            parinsee[i] = "|".join(zones.get(k, "") for k in ORDRE)
+    parcp = collections.defaultdict(set)
+    for i, ligne in parinsee.items():
+        for c in cp.get(i, ()):
+            parcp[c].add(ligne)
+    fich = collections.defaultdict(lambda: {"t": [], "i": {}, "c": {}})
+    def idx(f, ligne):
+        if ligne not in f["t"]:
+            f["t"].append(ligne)
+        return f["t"].index(ligne)
+    for i, ligne in sorted(parinsee.items()):
+        for pre in {c[:2] for c in cp.get(i, ())}:
+            f = fich[pre]
+            f["i"][i] = idx(f, ligne)
+    for c, lignes in sorted(parcp.items()):
+        if len(lignes) == 1:
+            f = fich[c[:2]]
+            f["c"][c] = idx(f, next(iter(lignes)))
+    return dict(fich)
+
+
 def main(argv):
+    if len(argv) == 4:  # zones par fournisseur : zip de départements, CSV de La Poste, zip de communes
+        pages = lire_pages(zipfile.ZipFile(argv[1]))
+        ids = {}
+        res, manque, cp = rapprocher(pages, lire_poste(argv[2]), ids)
+        communes = lire_communes(zipfile.ZipFile(argv[3]))
+        out = construire_fournisseurs(ids, communes, cp)
+        dossier = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "donnees", "gaz", "zones-fournisseurs")
+        os.makedirs(dossier, exist_ok=True)
+        for f in glob.glob(os.path.join(dossier, "*.json")):
+            os.remove(f)
+        for pre, v in out.items():
+            with open(os.path.join(dossier, pre + ".json"), "w", encoding="utf-8") as f:
+                json.dump(v, f, ensure_ascii=False, separators=(",", ":"))
+        print("%d communes avec zones par fournisseur sur %d pages lues, %d fichiers." % (sum(len(v["i"]) for v in out.values()), len(communes), len(out)))
+        return 0
     if len(argv) != 3:
         print(__doc__)
         return 2
