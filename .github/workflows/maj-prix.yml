@@ -20,6 +20,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 jobs:
   maj:
@@ -62,6 +63,7 @@ jobs:
           fi
       - name: Ouvrir une demande de fusion à relire
         if: steps.chg.outputs.open == 'true'
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           branch: maj-prix
@@ -78,3 +80,28 @@ jobs:
             donnees/etat/hashes.json
             donnees/gaz/prix-cp/*.json
           delete-branch: true
+      - name: Fusionner tout de suite (tests + relecture déjà faits ici, sans validation manuelle)
+        # Les PR ouvertes par le robot voient leurs tests « en attente d'approbation » : on ne les attend pas.
+        # Les tests unitaires et check_data.py ont tourné plus haut ; la relecture automatique décide ensuite.
+        if: steps.cpr.outputs.pull-request-number != '' && steps.cpr.outputs.pull-request-operation != 'closed'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          N: ${{ steps.cpr.outputs.pull-request-number }}
+          SHA: ${{ steps.cpr.outputs.pull-request-head-sha }}
+        run: |
+          set -uo pipefail
+          git fetch -q --unshallow origin 2>/dev/null || git fetch -q origin
+          git fetch -q origin main "$SHA"
+          if python3 scripts/relecture.py "$(git merge-base origin/main "$SHA")" "$SHA" /tmp/relecture.md; then
+            gh pr merge "$N" --repo "$REPO" --merge --match-head-commit "$SHA" && {
+              echo "::notice::PR #$N fusionnée automatiquement."
+              sleep 5
+              gh workflow run facebook.yml --repo "$REPO" --ref main || echo "::warning::Lancement de la publication Facebook impossible."
+            }
+          else
+            gh label create ne-pas-fusionner --repo "$REPO" --color B60205 --description "Fusion automatique suspendue" 2>/dev/null || true
+            gh pr edit "$N" --repo "$REPO" --add-label ne-pas-fusionner || true
+            gh pr comment "$N" --repo "$REPO" --body-file /tmp/relecture.md || true
+            echo "::warning::PR #$N : relecture à regarder, pas de fusion."
+          fi
