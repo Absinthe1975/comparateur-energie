@@ -6,7 +6,7 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 ## Vue d'ensemble
 
 ### 1. Ce que je peux faire seul, sans rien de ta part
-- 8 nov. : retirer la promotion ENGIE (deux mois d'abonnement, valable jusqu'au 7 nov. inclus). 15 nov. : retirer la promotion EDF « 80 ans ». 30 nov. : retirer le bonus Gaz de Bordeaux (100 €). 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
+- Fins de promotions : le site masque tout seul une promotion après sa date de fin (ENGIE 7 nov., EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE à partir du 8 nov.). 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
 - Rendre le test de bout en bout plus tolérant, annoncer les parrainages EDF, Alpiq et Gaz de Bordeaux sur Facebook, préparer un post pour l'eau.
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
