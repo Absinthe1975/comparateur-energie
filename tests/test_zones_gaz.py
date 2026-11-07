@@ -16,6 +16,35 @@ def page(dep, communes):
     return "<html>%s<a href=\"/zone-gaz/metz\">Zone tarifaire gaz à Metz</a></html>" % liens
 
 
+def tableau(zones):
+    lignes = "".join('<tr><td data-label="Fournisseur" class="x"> <a href="#"><img alt="x"> <span>%s</span></a> </td>'
+                     '<td data-label="Zone tarifaire" class="y">Zone %s</td></tr>' % (n, z) for n, z in zones)
+    return '<!-- u --><table><caption>Zones tarifaires gaz \xe0 X par fournisseur</caption><tbody>%s</tbody></table>' % lignes
+
+
+AMBRONAY = [("Grille par d\xe9faut (GRDF/Engie)", "6"), ("Ilek", "I"), ("TotalEnergies", "5"), ("Engie", "6"),
+            ("Alterna", "6"), ("Engie 8 zones", "D"), ("GEG Fixe", "NTR 8-10"), ("NTR", "8")]
+
+
+class TestZonesFournisseurs(unittest.TestCase):
+    def test_lecture_et_construction(self):
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as z:
+            z.writestr("zone-gaz__ain__ambronay.html", tableau(AMBRONAY))
+            z.writestr("zone-gaz__ain__arbent.html", tableau([("Ilek", "A"), ("Engie 8 zones", "B")]))
+            z.writestr("zone-gaz__ain__vide.html", "<!-- pas de tableau -->")
+        com = zones_gaz.lire_communes(zipfile.ZipFile(buf))
+        self.assertEqual(com[("ain", "ambronay")], {"grdf": "6", "ilek": "I", "total": "5", "engie6": "6", "alterna": "6",
+                                                    "engie8": "D", "geg": "NTR 8-10", "ntr": "8"})
+        self.assertNotIn(("ain", "vide"), com)
+        ids = {("ain", "ambronay"): "01007", ("ain", "arbent"): "01017"}
+        cp = {"01007": {"01500"}, "01017": {"01100"}}
+        out = zones_gaz.construire_fournisseurs(ids, com, cp)["01"]
+        self.assertEqual(out["t"][out["i"]["01007"]], "I|5|D|6|NTR 8-10")
+        self.assertEqual(out["t"][out["i"]["01017"]], "A||B||")
+        self.assertEqual(out["t"][out["c"]["01500"]], "I|5|D|6|NTR 8-10")
+
+
 class TestZonesGaz(unittest.TestCase):
     def test_pages_et_rapprochement(self):
         buf = io.BytesIO()
