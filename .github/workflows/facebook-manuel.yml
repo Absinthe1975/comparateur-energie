@@ -1,0 +1,39 @@
+name: Publication Facebook manuelle
+
+# Publie sur la Page un brouillon de docs/FACEBOOK-BROUILLONS.md, à la demande (bouton « Run workflow »).
+# Par défaut : aperçu seulement. Cocher « publier » pour envoyer vraiment le message sur la Page.
+
+on:
+  workflow_dispatch:
+    inputs:
+      brouillon:
+        description: "Brouillon à publier"
+        type: choice
+        options:
+          - Parrainage EDF
+          - Parrainage Alpiq
+          - Parrainage Gaz de Bordeaux
+          - Prix de l'eau
+      publier:
+        description: "Publier vraiment sur la Page (sinon : aperçu seulement)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Aperçu ou publication
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
+          BROUILLON: ${{ inputs.brouillon }}
+          PUBLIER: ${{ inputs.publier && '--publier' || '' }}
+        run: python scripts/facebook_manuel.py "$BROUILLON" $PUBLIER
