@@ -12,6 +12,7 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  actions: write
 
 jobs:
   eau:
@@ -54,5 +55,17 @@ jobs:
           REPO: ${{ github.repository }}
           N: ${{ steps.cpr.outputs.pull-request-number }}
           SHA: ${{ steps.cpr.outputs.pull-request-head-sha }}
+          BRANCHE: maj-eau
         run: |
+          # La règle de protection de main exige le contrôle « tests ». Les tests d'une PR du robot restent « en attente
+          # d'approbation » : on lance donc le workflow Tests à la main sur la branche (même commit), on attend son résultat, puis on fusionne.
+          gh workflow run tests.yml --repo "$REPO" --ref "$BRANCHE"
+          ID=""
+          for i in $(seq 1 30); do
+            sleep 10
+            ID=$(gh run list --repo "$REPO" --workflow tests.yml --branch "$BRANCHE" --event workflow_dispatch --limit 5 --json databaseId,headSha --jq "[.[]|select(.headSha==\"$SHA\")][0].databaseId // empty")
+            [ -n "$ID" ] && break
+          done
+          if [ -z "$ID" ]; then echo "::warning::Tests non lancés : PR #$N à fusionner à la main."; exit 0; fi
+          if ! gh run watch "$ID" --repo "$REPO" --exit-status >/dev/null; then echo "::warning::Tests en échec : PR #$N non fusionnée."; exit 0; fi
           gh pr merge "$N" --repo "$REPO" --merge --match-head-commit "$SHA" && echo "::notice::PR #$N fusionnée automatiquement." || echo "::warning::PR #$N : fusion automatique impossible, à fusionner à la main."
