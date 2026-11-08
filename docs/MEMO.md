@@ -163,7 +163,7 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 ## Eau À faire
 
-- Chaque lundi : si une demande de fusion « eau » s'ouvre (prix changés, par exemple quand SISPEA publie l'année 2026), elle vous est assignée : relire les lignes « À vérifier » du journal, puis fusionner.
+- Chaque lundi : si les prix changent (par exemple quand SISPEA publie l'année 2026), la demande de fusion « eau » est maintenant fusionnée toute seule (depuis le 8 nov.), après les tests et les garde-fous du script. Rien à valider ; les lignes « À vérifier » restent dans le journal de l'exécution si vous voulez les relire.
 
 - Historique : les variations de plus de 40 % en un an sont signalées sous la courbe (par exemple Antibes) ; reste à vérifier ces communes une à une. Les prix par année ne sont pas toujours comparables (couverture variable, 2025 moins complète).
 
