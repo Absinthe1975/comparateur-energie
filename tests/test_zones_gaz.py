@@ -27,6 +27,15 @@ AMBRONAY = [("Grille par d\xe9faut (GRDF/Engie)", "6"), ("Ilek", "I"), ("TotalEn
 
 
 class TestZonesFournisseurs(unittest.TestCase):
+    def test_lecture_csv(self):
+        import tempfile
+        with tempfile.NamedTemporaryFile("w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("dep;commune;grdf;ilek;total;engie6;alterna;engie8;geg;ntr\nain;ambronay;6;I;5;6;6;D;NTR 8-10;8\nain;vide;;;;;;;;\n")
+        com = zones_gaz.lire_communes_csv(f.name)
+        os.remove(f.name)
+        self.assertEqual(com, {("ain", "ambronay"): {"grdf": "6", "ilek": "I", "total": "5", "engie6": "6", "alterna": "6",
+                                                     "engie8": "D", "geg": "NTR 8-10", "ntr": "8"}})
+
     def test_lecture_et_construction(self):
         buf = io.BytesIO()
         with zipfile.ZipFile(buf, "w") as z:
