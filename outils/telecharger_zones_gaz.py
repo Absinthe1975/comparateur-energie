@@ -114,13 +114,16 @@ def telecharger_communes(a, rp):
     delai = rp.crawl_delay(AGENT) or rp.crawl_delay("*")
     if delai:
         a.pause = max(a.pause, float(delai))
-    restantes = [u for u in urls if not os.path.exists(os.path.join(sous, urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"))]
+    def deja(u):  # page déjà là, soit dans communes/, soit en page entière dans le dossier principal (lancement sans option)
+        n = urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"
+        return os.path.exists(os.path.join(sous, n)) or os.path.exists(os.path.join(a.dossier, n))
+    restantes = [u for u in urls if not deja(u)]
     print("%d communes, dont %d restent à télécharger. Durée estimée : environ %d minutes." % (len(urls), len(restantes), len(restantes) * (a.pause + 0.5) / 60))
     faits = refus = 0
     for u in urls:
         nom = urllib.parse.urlparse(u).path.strip("/").replace("/", "__") + ".html"
         chemin = os.path.join(sous, nom)
-        if os.path.exists(chemin):
+        if deja(u):
             continue
         if not rp.can_fetch(AGENT, u):
             refus += 1
