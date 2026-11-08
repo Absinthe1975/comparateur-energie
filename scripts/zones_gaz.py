@@ -154,6 +154,19 @@ def lire_communes(zf):
     return out
 
 
+def lire_communes_csv(chemin):
+    """Même résultat que lire_communes, depuis le CSV produit par outils/reduire_communes.py."""
+    out = {}
+    with open(chemin, encoding="utf-8", newline="") as f:
+        lignes = csv.reader(f, delimiter=";")
+        cols = next(lignes)[2:]
+        for r in lignes:
+            z = {c: v for c, v in zip(cols, r[2:]) if v}
+            if z:
+                out[(r[0], r[1])] = z
+    return out
+
+
 def construire_fournisseurs(ids, communes, cp):
     """Un fichier par début de code postal : {"t": ["I|5|D|6|NTR 8-10", ...], "i": {INSEE: n° de ligne de t}, "c": {code postal: n°}}.
     Une ligne de t = zones ilek | TotalEnergies | ENGIE 8 zones | Alterna | GEG (vide si le fournisseur n'a pas de zone ici)."""
@@ -187,7 +200,7 @@ def main(argv):
         pages = lire_pages(zipfile.ZipFile(argv[1]))
         ids = {}
         res, manque, cp = rapprocher(pages, lire_poste(argv[2]), ids)
-        communes = lire_communes(zipfile.ZipFile(argv[3]))
+        communes = lire_communes_csv(argv[3]) if argv[3].endswith(".csv") else lire_communes(zipfile.ZipFile(argv[3]))
         out = construire_fournisseurs(ids, communes, cp)
         dossier = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "donnees", "gaz", "zones-fournisseurs")
         os.makedirs(dossier, exist_ok=True)
