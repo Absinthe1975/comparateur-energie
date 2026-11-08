@@ -16,3 +16,9 @@ ilek (A à K), TotalEnergies (1 à 6), ENGIE 6 zones, Alterna, ENGIE 8 zones (A 
 - Zip trop gros : `python3 outils/reduire_communes.py` (côté utilisateur) crée `zones_gaz_communes.csv` (petit) ; le script de construction accepte le .csv à la place du zip.
 - Construction : `python3 scripts/zones_gaz.py zones_gaz.zip 019HexaSmal.csv zones_gaz_communes.zip` → `donnees/gaz/zones-fournisseurs/NN.json` (format : `t` lignes « ilek|total|engie8|alterna|geg », `i` INSEE → ligne, `c` code postal → ligne si sans ambiguïté).
 - À faire ensuite : brancher ces zones sur les prix (ENGIE par groupe A à H : grille dans docs/ENGIE-GAZ-ZONES.md ; ilek, TotalEnergies : il faudra les grilles par zone).
+
+### Premier lot de données (8 nov. 2026)
+4 562 communes lues (pages du plan du site), 4 524 rattachées à un code INSEE, dans `donnees/gaz/zones-fournisseurs/`.
+Contrôle : la colonne « ENGIE 6 zones » est identique à la zone GRDF des pages de départements pour 4 560 communes sur 4 562
+(les deux exceptions : Druelle et Saint-Maurice-sur-Dargoire). TotalEnergies et Alterna s'écartent souvent de GRDF (environ 70 % des communes), ce qui confirme qu'ils ont leur propre découpage.
+Exemple Onnaing : GRDF 1, ENGIE groupe B, ilek C, TotalEnergies 2, Alterna 2. (Lesfurets annonce « zone 2 » pour Onnaing : probablement le découpage TotalEnergies/Alterna, pas celui de GRDF.)
