@@ -13,5 +13,6 @@ Le site déduit la zone gaz (1 à 6, zones historiques de GRDF) du code postal s
 Chaque page de commune d'observatoires.net (source secondaire, Selectra) contient un tableau « zones tarifaires gaz par fournisseur » :
 ilek (A à K), TotalEnergies (1 à 6), ENGIE 6 zones, Alterna, ENGIE 8 zones (A à H), GEG (NTR). Exemple Ambronay : ilek I, TotalEnergies 5, ENGIE 6, Alterna 6, ENGIE 8 zones D, GEG NTR 8-10.
 - Téléchargement (côté utilisateur) : `python3 telecharger_zones_gaz.py --communes` → `zones_gaz_communes.zip` (tableaux seuls).
+- Zip trop gros : `python3 outils/reduire_communes.py` (côté utilisateur) crée `zones_gaz_communes.csv` (petit) ; le script de construction accepte le .csv à la place du zip.
 - Construction : `python3 scripts/zones_gaz.py zones_gaz.zip 019HexaSmal.csv zones_gaz_communes.zip` → `donnees/gaz/zones-fournisseurs/NN.json` (format : `t` lignes « ilek|total|engie8|alterna|geg », `i` INSEE → ligne, `c` code postal → ligne si sans ambiguïté).
 - À faire ensuite : brancher ces zones sur les prix (ENGIE par groupe A à H : grille dans docs/ENGIE-GAZ-ZONES.md ; ilek, TotalEnergies : il faudra les grilles par zone).
