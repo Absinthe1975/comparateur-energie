@@ -3,6 +3,7 @@
 
 À lancer sur VOTRE ordinateur, dans le dossier qui contient zones_gaz_pages :
     python3 reduire_communes.py
+Lit les pages de communes de zones_gaz_pages et de zones_gaz_pages/communes (pages entières ou tableaux seuls).
 Résultat : zones_gaz_communes.csv (une ligne par commune), à envoyer à Claude.
 Aucune connexion internet : le programme lit seulement les fichiers déjà téléchargés.
 """
@@ -11,7 +12,7 @@ import os
 import re
 import sys
 
-DOSSIER = sys.argv[1] if len(sys.argv) > 1 else os.path.join("zones_gaz_pages", "communes")
+DOSSIERS = [sys.argv[1]] if len(sys.argv) > 1 else ["zones_gaz_pages", os.path.join("zones_gaz_pages", "communes")]
 COLS = ["grdf", "ilek", "total", "engie6", "alterna", "engie8", "geg", "ntr"]
 NOMS = {"grille par defaut (grdf/engie)": "grdf", "ilek": "ilek", "totalenergies": "total", "engie": "engie6",
         "alterna": "alterna", "engie 8 zones": "engie8", "geg fixe": "geg", "ntr": "ntr"}
@@ -35,17 +36,21 @@ def lire(chemin):
 
 
 def main():
-    if not os.path.isdir(DOSSIER):
-        print("Dossier introuvable : %s (lancez ce programme à côté de zones_gaz_pages)." % DOSSIER)
+    dossiers = [d for d in DOSSIERS if os.path.isdir(d)]
+    if not dossiers:
+        print("Dossier introuvable : %s (lancez ce programme à côté de zones_gaz_pages)." % DOSSIERS[0])
         return 2
     n = vides = 0
     with open("zones_gaz_communes.csv", "w", encoding="utf-8", newline="") as out:
         out.write(";".join(["dep", "commune"] + COLS) + "\n")
-        for f in sorted(os.listdir(DOSSIER)):
+        vus = set()
+        fichiers = [(d, f) for d in dossiers for f in sorted(os.listdir(d))]
+        for d, f in fichiers:
             m = re.fullmatch(r"zone-gaz__([a-z0-9-]+)__([a-z0-9-]+)\.html", f)
-            if not m:
+            if not m or f in vus:
                 continue
-            z = lire(os.path.join(DOSSIER, f))
+            vus.add(f)
+            z = lire(os.path.join(d, f))
             if not z:
                 vides += 1
                 continue
