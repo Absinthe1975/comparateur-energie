@@ -704,6 +704,117 @@
         "Fiche descriptive et grille officielle ENGIE Gaz Référence 3 ans (novembre 2026, groupes A à H)",
         "https://particuliers.engie.fr/electricite-gaz/contrat-electricite-gaz-naturel.html"
       ]
+    },
+    {
+      "k": "ilek",
+      "name": "ilek",
+      "offer": "ÉnRFixe+ Gaz",
+      "a": 0.1662,
+      "b0": 0.2007,
+      "ab1": 438.36,
+      "ab0": 218.04,
+      "zsys": "ilek",
+      "zdef": 2,
+      "zg": {
+        "b1": [
+          0.1633,
+          0.1652,
+          0.1662,
+          0.1678,
+          0.1705,
+          0.1714,
+          0.1725,
+          0.1719,
+          0.1771,
+          0.179,
+          0.1809
+        ],
+        "b0": [
+          0.1992,
+          0.2002,
+          0.2007,
+          0.2016,
+          0.2028,
+          0.2036,
+          0.2043,
+          0.2041,
+          0.2065,
+          0.2079,
+          0.209
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "9 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Grille officielle ilek ÉnRFixe+ gaz (prix TTC, 11 zones A à K, disponible du 1er octobre au 1er novembre 2026)",
+        "https://www.ilek.fr/zone-tarifaire-gaz-vert"
+      ]
+    },
+    {
+      "k": "geg",
+      "name": "GEG",
+      "offer": "Mon Offre Gaz, fixe 3 ans",
+      "a": 0.1354,
+      "d": "14 oct. 2026",
+      "niv": "officiel",
+      "b0": 0.2036,
+      "ab1": 499.44,
+      "ab0": 125.64,
+      "nivd": "21/09/2026",
+      "typ": "fixe",
+      "eng": 36,
+      "s": [
+        "Grille officielle GEG (21 sept. 2026)",
+        "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf"
+      ],
+      "zabo": {
+        "zsys": "geg",
+        "b1": {
+          "NTR 0-3": 499.44,
+          "NTR 4-7": 586.56,
+          "NTR 8-10": 651.96
+        },
+        "b0": {
+          "NTR 0-3": 125.64,
+          "NTR 4-7": 131.88,
+          "NTR 8-10": 136.56
+        }
+      }
+    },
+    {
+      "k": "geg",
+      "name": "GEG",
+      "offer": "Mon Offre Biogaz, fixe 3 ans",
+      "a": 0.1642,
+      "d": "14 oct. 2026",
+      "niv": "officiel",
+      "b0": 0.2324,
+      "ab1": 499.44,
+      "ab0": 125.64,
+      "nivd": "21/09/2026",
+      "typ": "fixe",
+      "vert": true,
+      "eng": 36,
+      "s": [
+        "Grille officielle GEG (21 sept. 2026)",
+        "https://www.geg.fr/Medias/content-editor/Tarif%20Part/2026/Septembre/Grille-tarifaire-Offres-Gaz-Prix-fixes-3-ans-21092026.pdf"
+      ],
+      "zabo": {
+        "zsys": "geg",
+        "b1": {
+          "NTR 0-3": 499.44,
+          "NTR 4-7": 586.56,
+          "NTR 8-10": 651.96
+        },
+        "b0": {
+          "NTR 0-3": 125.64,
+          "NTR 4-7": 131.88,
+          "NTR 8-10": 136.56
+        }
+      }
     }
   ],
   "duo": [],
