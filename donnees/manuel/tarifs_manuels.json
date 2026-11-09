@@ -663,6 +663,47 @@
         "Grille officielle Alterna, prix par code postal (page du fournisseur, lue par le suivi automatique)",
         "https://www.alterna-energie.fr/tarifs-biogaz"
       ]
+    },
+    {
+      "k": "engie",
+      "name": "ENGIE",
+      "offer": "Gaz Référence 3 ans",
+      "a": 0.14108,
+      "b0": 0.16983,
+      "ab1": 360.79,
+      "ab0": 152.46,
+      "zsys": "engie8",
+      "zdef": 1,
+      "zg": {
+        "b1": [
+          0.14008,
+          0.14108,
+          0.14419,
+          0.14752,
+          0.15114,
+          0.15383,
+          0.15604,
+          0.15604
+        ],
+        "b0": [
+          0.16983,
+          0.16983,
+          0.16983,
+          0.16983,
+          0.16983,
+          0.16983,
+          0.16983,
+          0.16983
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "9 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Fiche descriptive et grille officielle ENGIE Gaz Référence 3 ans (novembre 2026, groupes A à H)",
+        "https://particuliers.engie.fr/electricite-gaz/contrat-electricite-gaz-naturel.html"
+      ]
     }
   ],
   "duo": [],
