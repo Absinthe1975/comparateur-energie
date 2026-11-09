@@ -889,7 +889,7 @@ var GAS = [
   { k: "mint", name: "Mint Énergie", offer: "Biogaz Online", a: 0.1456 },
   { k: "octo", name: "Octopus Energy", offer: "Gaz Fixe", a: 0.1543 },
   { k: "happe", name: "Happ-e", offer: "Gaz Naturel", a: 0.1504 },
-  { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Gaz", a: 0.1652 }
+  { k: "ilek", name: "ilek", offer: "ÉnRFixe+ Gaz", a: 0.1662, b0: 0.2007, ab1: 438.36, ab0: 218.04, zsys: "ilek", zdef: 2, zg: { b1: [0.1633,0.1652,0.1662,0.1678,0.1705,0.1714,0.1725,0.1719,0.1771,0.1790,0.1809], b0: [0.1992,0.2002,0.2007,0.2016,0.2028,0.2036,0.2043,0.2041,0.2065,0.2079,0.2090] }, niv: "officiel", nivd: "01/10/2026" }
 ];
 
 // Abonnements TTC par an. Électricité : compteur 6 kVA, option Base. Gaz : profil chauffage (B1).
@@ -987,10 +987,14 @@ function gasListFor(opt) {
   var list = GAS.map(function (r) {
     var zn = (state.gasZone || 1) - 1, zp = r.zones && r.zones[opt] && typeof r.zones[opt][zn] === "number" ? r.zones[opt][zn] : null;
     if (r.zg) {  // zones propres au fournisseur (ENGIE : groupes A à H) : le groupe vient de la commune, sinon un groupe par défaut à confirmer
-      var sz = state.sz && state.sz[r.zsys], gi = sz ? "ABCDEFGH".indexOf(sz) : -1, tz = r.zg[opt === "b1" ? "b1" : "b0"] || r.zg.b0;
+      var sz = state.sz && state.sz[r.zsys], gi = sz ? "ABCDEFGHIJK".indexOf(sz) : -1, tz = r.zg[opt === "b1" ? "b1" : "b0"] || r.zg.b0;
       var px = tz[gi >= 0 ? gi : r.zdef || 0], ab2 = opt === "b1" ? r.ab1 : r.ab0;
-      var extra = gi >= 0 ? { zlab: "groupe " + sz } : { niv: "confirmer", nivd: undefined, zlab: "groupe non connu : prix du groupe " + "ABCDEFGH".charAt(r.zdef || 0) };
+      var extra = gi >= 0 ? { zlab: (r.zsys === "ilek" ? "zone " : "groupe ") + sz } : { niv: "confirmer", nivd: undefined, zlab: "zone non connue : prix de la zone " + "ABCDEFGHIJK".charAt(r.zdef || 0) };
       return Object.assign({}, r, extra, { a: px, abo: ab2, est: false });
+    }
+    if (r.zabo && state.sz && state.sz[r.zabo.zsys] && r.zabo[opt === "b1" ? "b1" : "b0"] && typeof r.zabo[opt === "b1" ? "b1" : "b0"][state.sz[r.zabo.zsys]] === "number") {
+      var ao = opt === "b1" ? "b1" : "b0", zn2 = state.sz[r.zabo.zsys];  // abonnement selon la zone du fournisseur (GEG : NTR)
+      return Object.assign({}, r, { a: opt === "b1" ? r.a : (typeof r.b0 === "number" ? r.b0 : r.a), abo: r.zabo[ao][zn2], est: false, zlab: zn2 });
     }
     var cpp = cpGas(r, opt === "b1" ? "b1" : "b0");
     if (cpp) {
@@ -1043,9 +1047,9 @@ function nomLien(r) {
 function nivBadge(r) {
   if (r.ref) return '<div class="offer"><span class="badge">Source officielle (CRE)</span></div>';
   if (r.niv === "officiel") return '<div class="offer"><span class="badge">Grille officielle' + (r.nivd ? " du " + esc(r.nivd) : "") + "</span>"
-    + (r.zlab && r.zsys ? ' <span class="badge">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "")
+    + (r.zlab ? ' <span class="badge">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "")
     + (r.cpk ? ' <span class="badge' + (r.cpk === "cp" ? "" : " check") + '">' + (r.cpk === "cp" ? "Prix du " + esc(r.cpc) : r.cpk === "dep" ? "Code postal absent : moyenne du département" : "Code postal absent : moyenne de la grille") + "</span>" : "") + "</div>";
-  return '<div class="offer"><span class="badge check">À confirmer</span>' + (r.zlab && r.zsys ? ' <span class="offer">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "") + "</div>";
+  return '<div class="offer"><span class="badge check">À confirmer</span>' + (r.zlab ? ' <span class="offer">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "") + "</div>";
 }
 // Promotions en cours (rubrique « promos » de data.json) : une mention sous l'offre tant que la date du jour est dans la période. Elles ne comptent pas dans le classement.
 var PROMOS = [];
