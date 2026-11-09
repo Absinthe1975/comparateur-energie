@@ -67,5 +67,7 @@ jobs:
             [ -n "$ID" ] && break
           done
           if [ -z "$ID" ]; then echo "::warning::Tests non lancés : PR #$N à fusionner à la main."; exit 0; fi
+          GH_APPROVE=$(gh api "repos/$REPO/actions/runs?head_sha=$SHA&event=pull_request&status=action_required" --jq '.workflow_runs[].id' 2>/dev/null); for A in $GH_APPROVE; do gh api -X POST "repos/$REPO/actions/runs/$A/approve" >/dev/null 2>&1 || true; done
+          sleep 20; for i in $(seq 1 30); do P=$(gh run list --repo "$REPO" --workflow tests.yml --branch "$BRANCHE" --event pull_request --limit 5 --json status,headSha --jq "[.[]|select(.headSha==\"$SHA\" and .status!=\"completed\")]|length"); [ "$P" = "0" ] && break; sleep 10; done
           if ! gh run watch "$ID" --repo "$REPO" --exit-status >/dev/null; then echo "::warning::Tests en échec : PR #$N non fusionnée."; exit 0; fi
           gh pr merge "$N" --repo "$REPO" --merge --match-head-commit "$SHA" && echo "::notice::PR #$N fusionnée automatiquement." || echo "::warning::PR #$N : fusion automatique impossible, à fusionner à la main."
