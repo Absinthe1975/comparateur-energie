@@ -25,3 +25,9 @@ Exemple Onnaing : GRDF 1, ENGIE groupe B, ilek C, TotalEnergies 2, Alterna 2. (L
 
 ### ENGIE gaz : branché sur le site (9 nov. 2026)
 Le groupe ENGIE (A à H) de la commune choisit la ligne de prix (`zg` dans `tarifs_manuels.json`, grille officielle de novembre 2026). Sans groupe connu, le site affiche le groupe B (le plus fréquent après A) avec « À confirmer ». Les zones ilek, TotalEnergies, Alterna et GEG sont chargées (`state.sz`) mais pas encore utilisées : il faut leurs grilles par zone.
+
+### ilek et GEG : branchés sur le site (9 nov. 2026)
+- **ilek ÉnRFixe+ Gaz** : 11 zones A à K (`zg`, `zsys: "ilek"`), prix TTC de la grille officielle (0-4 MWh et 4-335 MWh ; abonnement 18,17 et 36,53 €/mois TTC). La grille dit « disponible du 1er octobre au 1er novembre 2026 » : à vérifier si ilek publie une grille de novembre. Zone inconnue : zone C (la plus fréquente), « À confirmer ».
+- **GEG Mon Offre Gaz / Biogaz fixe 3 ans** : le prix du kWh est identique partout ; seul l'abonnement dépend de la zone NTR (0-3, 4-7, 8-10) : `zabo` (B1 : 41,62 / 48,88 / 54,33 €/mois TTC ; B0 : 10,47 / 10,99 / 11,38). Zone inconnue : NTR 0-3 (valeur d'avant).
+- **Pas de grille par zone dans les documents reçus** : TotalEnergies, Dyneff (un seul prix standard, « zones identiques aux anciens tarifs réglementés »), Plenitude (aucune zone), Ekwateur (national).
+- **Déjà par zone GRDF** : EDF, OHM, Octopus, Mint, Happ-e (grilles 6 zones) ; Alterna par code postal.
