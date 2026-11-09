@@ -1,16 +1,16 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 9 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
 ### 1. Ce que je peux faire seul, sans rien de ta part
 - Fins de promotions : le site masque tout seul une promotion après sa date de fin (ENGIE 7 nov., EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE à partir du 8 nov.). 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
-- Rendre le test de bout en bout plus tolérant, annoncer les parrainages EDF, Alpiq et Gaz de Bordeaux sur Facebook, préparer un post pour l'eau.
+- Rendre le test de bout en bout plus tolérant.
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
-- **Tables « commune → zone » propres à chaque fournisseur** : ENGIE (groupes A à H), ilek (zones A à K), TotalEnergies. Les zones historiques de GRDF sont faites (code postal → zone, voir docs/ZONES-GAZ.md).
+- **TotalEnergies gaz** : la grille « Fixe 2 ans Gaz » par zone (1 à 6) ; la zone de chaque commune est déjà chargée, il manque les prix. Les zones de chaque commune pour ilek, TotalEnergies, ENGIE, Alterna et GEG sont faites (voir docs/ZONES-GAZ.md).
 - **ENGIE électricité** : le prix total de l'offre Référence 3 ans (simulateur ou courrier), pour passer de « À confirmer » à « Grille officielle ».
 - **Ekwateur** : un PDF de grille (le prix n'apparaît qu'à la souscription).
 - **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
@@ -18,7 +18,7 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 - **Octopus** : confirmer les hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges, plages d'heures creuses).
 - **Fournisseurs à ajouter** : fiches de Urban Solar Energy, Énergie d'ici, Jeety Energy.
 
-- **Zones de gaz par code postal : fait le 7 nov. 2026** pour les zones historiques de GRDF (voir docs/ZONES-GAZ.md). Reste : les découpages propres à ENGIE (A à H), ilek (A à K), TotalEnergies et Alterna, et les prix par zone des offres qui n'en ont pas encore (Gaz de Bordeaux NovaFlex zones 4 à 6, OHM, EDF, Happ-e à vérifier).
+- **Zones de gaz par code postal : fait.** Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 434 communes (9 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), GEG (abonnement par zone NTR). Déjà par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Reste : TotalEnergies (grille par zone à recevoir), Gaz de Bordeaux NovaFlex zones 4 à 6, 78 communes non rapprochées (zone GRDF utilisée). Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone dans leurs grilles.
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.
@@ -103,9 +103,9 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/) : fiches officielles de novembre 2026 reçues pour NovaFixe Gaz (Paris, Marseille, Evian, Bordeaux) et NovaFlex Gaz (6 communes) : le prix du kWh varie selon la commune (ex. NovaFixe, plus de 4 000 kWh : Bordeaux 0,1467 · Paris 0,1510 · Marseille 0,1540 · Evian 0,1590 €), voir docs/GDB-GAZ-NOV2026.md. Le site affiche la valeur de Paris en « À confirmer » ; il manque la table commune → zone pour passer en « Grille officielle ».
 
-- [ENGIE](https://particuliers.engie.fr/) : Gaz Référence 3 ans à confirmer (zone non connue). Fiche et grille officielles de novembre 2026 reçues le 7 nov. (docs/ENGIE-GAZ-ZONES.md) : le groupe A à H ne change que le prix « Obligations », et seulement au-dessus de 4 000 kWh/an. Abonnement 360,79 €/an ; prix total TTC du kWh (4 000 à 29 999 kWh) : A 0,14008 · B 0,14108 · C 0,14419 · D 0,14752 · E 0,15114 · F 0,15383 · G et H 0,15604 €/kWh ; en dessous de 4 000 kWh : 152,46 €/an et 0,16983 €/kWh pour tous les groupes. Ces valeurs remplacent celles de Selectra d'octobre (plus basses). Le site affiche encore 0,1414 : à mettre à jour dès que le groupe se déduit du code postal ; il manque la table code postal → groupe (ENGIE ne la donne que par formulaire).
+- [ENGIE](https://particuliers.engie.fr/) : Gaz Référence 3 ans en « Grille officielle du 01/11/2026 », par groupe A à H (docs/ENGIE-GAZ-ZONES.md). Le groupe est déduit de la commune (table Selectra) ; sans groupe, le site affiche le groupe B et « À confirmer ». Abonnement 360,79 €/an ; prix TTC du kWh (4 000 à 29 999 kWh) : A 0,14008 · B 0,14108 · C 0,14419 · D 0,14752 · E 0,15114 · F 0,15383 · G et H 0,15604 ; en dessous de 4 000 kWh : 152,46 €/an et 0,16983 €/kWh pour tous.
 
-- [ilek](https://www.ilek.fr/grilles-tarifaires) : relier la zone gaz (A à K, de 0,1633 à 0,1809 €/kWh en T2) au code postal avec [ilek.fr/zone-tarifaire-gaz-vert](https://www.ilek.fr/zone-tarifaire-gaz-vert) ; nous affichons la zone B (0,1652 €/kWh).
+- [ilek](https://www.ilek.fr/grilles-tarifaires) : ÉnRFixe+ Gaz par zone A à K en « Grille officielle du 01/10/2026 » (prix TTC : 0,1633 à 0,1809 €/kWh en 4 à 335 MWh ; 0,1992 à 0,2090 en 0 à 4 MWh), zone déduite de la commune ; sans zone, zone C et « À confirmer ». À vérifier : la grille dit « disponible du 1er octobre au 1er novembre 2026 », voir si ilek en publie une de novembre.
 
 - [Mint Énergie](https://www.mint-energie.com/) : grilles gaz Biogaz Online, Classic et Smart de novembre 2026 saisies. Elles sont mensuelles (indexées sur le prix repère + 5, 10 ou 15 %) : à ressaisir chaque mois avec les PDF du 1er du mois ; la saisie manuelle masque le calcul automatique de Biogaz Online. Électricité : grilles du 20 octobre 2026 saisies (kWh indexé à +10, +15 et +20 % sur le tarif réglementé, abonnement identique au tarif réglementé).
 
@@ -113,7 +113,7 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - [Dyneff](https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/) : gaz 15 %, 55 % et 100 % renouvelable déjà intégrés, grilles du 1er octobre 2026 vérifiées (prix et abonnement identiques). Ces grilles sont publiées chaque mois (« fin de l'offre : fin du mois en cours ») : le suivi automatique repère chaque mois le nouveau PDF sur les pages gaz et électricité de Dyneff et le signale dans le rapport (sans rien appliquer) ; il reste à saisir les nouveaux prix.
 
-- [GEG](https://www.geg.fr/) : non intégrés : Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp. GEG gaz au réseau NTR 0-3 seulement.
+- [GEG](https://www.geg.fr/) : non intégrés : Mon Offre Gaz Indexée (Grenoble et communes voisines seulement, prix mensuel), grilles locales Mont Gaz et Nov'Alp. GEG gaz : le prix du kWh est le même partout, l'abonnement dépend de la zone NTR (0-3, 4-7, 8-10) déduite de la commune.
 
 - Limites du calcul : profil chauffage (B1) pour la comparaison ; les offres dont le seuil varie ([GEG](https://www.geg.fr/), [Plenitude](https://eniplenitude.fr/)) sont à surveiller ; les zones de distribution locales (Bordeaux, Strasbourg, Colmar) ne sont pas modélisées. Prix et abonnements Base et B0 réels pour les offres à grille officielle, estimés (étoile) pour les autres.
 
@@ -195,7 +195,7 @@ Mémo du 7 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 
 - Après chaque fusion : lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes [Mint](https://www.mint-energie.com/) et CRE, offres « À relire », premiers repères des PDF suivis). Quand un PDF suivi change, le rapport donne le prix du kWh lu par l'IA (avec citation vérifiée) à côté du nôtre, sans rien appliquer : vous saisissez ensuite la grille à la main.
 
-- Facebook : chaque fusion qui change un prix officiel publie un post sur la Page (le résultat est écrit dans l'annotation de l'exécution du workflow). À faire : un message pour l'eau (national, sans code postal), et renouveler le jeton de la Page, qui a transité par la conversation (à stocker uniquement dans le secret GitHub).
+- Facebook : quatre brouillons (parrainages EDF, Alpiq, Gaz de Bordeaux, eau) dans docs/FACEBOOK-BROUILLONS.md, à publier avec le workflow « Publication Facebook manuelle » (aperçu par défaut). Chaque fusion qui change un prix officiel publie un post sur la Page (le résultat est écrit dans l'annotation de l'exécution du workflow). À faire : un message pour l'eau (national, sans code postal), et renouveler le jeton de la Page, qui a transité par la conversation (à stocker uniquement dans le secret GitHub).
 
 - Grilles saisies à la main : le fichier donnees/manuel/tarifs_manuels.json est fusionné avec les données automatiques. À y saisir, au fil des envois : les fournisseurs qui interdisent les robots (EDF, ilek). Mode d'emploi dans docs/LISEZMOI.md.
 
