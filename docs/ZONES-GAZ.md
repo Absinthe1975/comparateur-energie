@@ -22,3 +22,6 @@ ilek (A à K), TotalEnergies (1 à 6), ENGIE 6 zones, Alterna, ENGIE 8 zones (A 
 Contrôle : la colonne « ENGIE 6 zones » est identique à la zone GRDF des pages de départements pour 4 560 communes sur 4 562
 (les deux exceptions : Druelle et Saint-Maurice-sur-Dargoire). TotalEnergies et Alterna s'écartent souvent de GRDF (environ 70 % des communes), ce qui confirme qu'ils ont leur propre découpage.
 Exemple Onnaing : GRDF 1, ENGIE groupe B, ilek C, TotalEnergies 2, Alterna 2. (Lesfurets annonce « zone 2 » pour Onnaing : probablement le découpage TotalEnergies/Alterna, pas celui de GRDF.)
+
+### ENGIE gaz : branché sur le site (9 nov. 2026)
+Le groupe ENGIE (A à H) de la commune choisit la ligne de prix (`zg` dans `tarifs_manuels.json`, grille officielle de novembre 2026). Sans groupe connu, le site affiche le groupe B (le plus fréquent après A) avec « À confirmer ». Les zones ilek, TotalEnergies, Alterna et GEG sont chargées (`state.sz`) mais pas encore utilisées : il faut leurs grilles par zone.

@@ -875,7 +875,7 @@ var GAS = [
   { k: "geg", name: "GEG", offer: "Mon Offre Gaz, fixe 3 ans", a: 0.1354, b0: 0.2036, ab1: 499.44, ab0: 125.64 },
   { k: "geg", name: "GEG", offer: "Mon Offre Biogaz, fixe 3 ans", a: 0.1642, b0: 0.2324, ab1: 499.44, ab0: 125.64 },
   { k: "total", name: "TotalEnergies", offer: "Fixe 2 ans Gaz", a: 0.1412 },
-  { k: "engie", name: "ENGIE", offer: "Gaz Référence 3 ans", a: 0.1414 },
+  { k: "engie", name: "ENGIE", offer: "Gaz Référence 3 ans", a: 0.14108, b0: 0.16983, ab1: 360.79, ab0: 152.46, zsys: "engie8", zdef: 1, zg: { b1: [0.14008,0.14108,0.14419,0.14752,0.15114,0.15383,0.15604,0.15604], b0: [0.16983,0.16983,0.16983,0.16983,0.16983,0.16983,0.16983,0.16983] }, niv: "officiel", nivd: "01/11/2026" },
   { k: "alterna", name: "Alterna", offer: "Mon gaz naturel indexé", a: 0.1386, b0: 0.1704, ab1: 389.64, ab0: 174.00, zones: { b0: [0.1704,0.1704,0.1704,0.1704,0.1704,0.1704], b1: [0.1386,0.1393,0.1399,0.1406,0.1413,0.1419] } },
   { k: "alterna", name: "Alterna", offer: "Mon biogaz français", a: 0.1698, b0: 0.2100, ab1: 389.64, ab0: 174.00, zones: { b0: [0.21,0.21,0.21,0.21,0.21,0.21], b1: [0.1698,0.1706,0.1714,0.1724,0.1732,0.1741] } },
   { k: "ohm", name: "OHM Énergie", offer: "Extra Eco Gaz", a: 0.1429 },
@@ -986,6 +986,12 @@ function gasListFor(opt) {
   var base = opt === "b1" ? GAS_B1 : GAS_B0;
   var list = GAS.map(function (r) {
     var zn = (state.gasZone || 1) - 1, zp = r.zones && r.zones[opt] && typeof r.zones[opt][zn] === "number" ? r.zones[opt][zn] : null;
+    if (r.zg) {  // zones propres au fournisseur (ENGIE : groupes A à H) : le groupe vient de la commune, sinon un groupe par défaut à confirmer
+      var sz = state.sz && state.sz[r.zsys], gi = sz ? "ABCDEFGH".indexOf(sz) : -1, tz = r.zg[opt === "b1" ? "b1" : "b0"] || r.zg.b0;
+      var px = tz[gi >= 0 ? gi : r.zdef || 0], ab2 = opt === "b1" ? r.ab1 : r.ab0;
+      var extra = gi >= 0 ? { zlab: "groupe " + sz } : { niv: "confirmer", nivd: undefined, zlab: "groupe non connu : prix du groupe " + "ABCDEFGH".charAt(r.zdef || 0) };
+      return Object.assign({}, r, extra, { a: px, abo: ab2, est: false });
+    }
     var cpp = cpGas(r, opt === "b1" ? "b1" : "b0");
     if (cpp) {
       var ab = opt === "b1" ? (typeof r.ab1 === "number" ? r.ab1 : ABO_G[r.k]) : (typeof r.ab0 === "number" ? r.ab0 : ABO_G0[r.k]);
@@ -1037,8 +1043,9 @@ function nomLien(r) {
 function nivBadge(r) {
   if (r.ref) return '<div class="offer"><span class="badge">Source officielle (CRE)</span></div>';
   if (r.niv === "officiel") return '<div class="offer"><span class="badge">Grille officielle' + (r.nivd ? " du " + esc(r.nivd) : "") + "</span>"
+    + (r.zlab && r.zsys ? ' <span class="badge">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "")
     + (r.cpk ? ' <span class="badge' + (r.cpk === "cp" ? "" : " check") + '">' + (r.cpk === "cp" ? "Prix du " + esc(r.cpc) : r.cpk === "dep" ? "Code postal absent : moyenne du département" : "Code postal absent : moyenne de la grille") + "</span>" : "") + "</div>";
-  return '<div class="offer"><span class="badge check">À confirmer</span></div>';
+  return '<div class="offer"><span class="badge check">À confirmer</span>' + (r.zlab && r.zsys ? ' <span class="offer">' + esc(r.zlab.charAt(0).toUpperCase() + r.zlab.slice(1)) + "</span>" : "") + "</div>";
 }
 // Promotions en cours (rubrique « promos » de data.json) : une mention sous l'offre tant que la date du jour est dans la période. Elles ne comptent pas dans le classement.
 var PROMOS = [];
@@ -1594,6 +1601,30 @@ function gasZoneAuto() {
   if (GZ_SH[cp.slice(0, 2)] === "ok") return { z: null, msg: "Zone non déduite : ce code postal couvre plusieurs zones ou n'est pas desservi par GRDF. Choisissez votre commune sur l'accueil, ou réglez la zone ci-dessus." };
   return { z: null, msg: "" };
 }
+// Zones propres aux fournisseurs (ilek, TotalEnergies, ENGIE 8 groupes, Alterna, GEG) : fichiers gaz/zones-fournisseurs/NN.json
+// {t: lignes « ilek|total|engie8|alterna|geg », i: INSEE → n° de ligne, c: code postal → n° de ligne}. Source secondaire (observatoires.net / Selectra).
+var SZ_I = {}, SZ_C = {}, SZ_SH = {}, SZ_COLS = ["ilek", "total", "engie8", "alterna", "geg"];
+function loadSupplierZones(cp) {
+  var p = cp.slice(0, 2);
+  if (SZ_SH[p]) return;
+  SZ_SH[p] = "chargement";
+  if (!window.fetch || location.protocol === "file:") { SZ_SH[p] = "erreur"; return; }
+  fetch("donnees/gaz/zones-fournisseurs/" + p + ".json").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) {
+    [["i", SZ_I], ["c", SZ_C]].forEach(function (k) { Object.keys(j[k[0]] || {}).forEach(function (c) { k[1][c] = j.t[j[k[0]][c]]; }); });
+    SZ_SH[p] = "ok"; refresh();
+  }).catch(function () { SZ_SH[p] = "erreur"; });
+}
+function supplierZonesAuto() {
+  var cp = $("h-cp") ? $("h-cp").value.replace(/\s/g, "") : "";
+  if (!/^[0-9]{5}$/.test(cp)) return null;
+  loadSupplierZones(cp);
+  var v = $("h-ville") ? $("h-ville").value : "";
+  var ligne = (v && SZ_I[v]) || SZ_C[cp];
+  if (!ligne) return null;
+  var parts = ligne.split("|"), out = {};
+  SZ_COLS.forEach(function (c, n) { if (parts[n]) out[c] = parts[n]; });
+  return out;
+}
 function loadCPPlaces() {
   ["cp", "l-cp"].forEach(function (id) {
     var v = $(id) ? $(id).value.replace(/\s/g, "") : "";
@@ -1913,6 +1944,8 @@ function refresh() {
   var gza = gasZoneAuto();
   if (!GZ_MAN) $("gzone").value = gza.z ? String(gza.z) : "1";
   if ($("gzone-auto")) $("gzone-auto").textContent = GZ_MAN ? "" : gza.msg;
+  state.sz = supplierZonesAuto();
+  if ($("gzone-auto") && !GZ_MAN && state.sz && state.sz.engie8) $("gzone-auto").textContent += " Groupe ENGIE : " + state.sz.engie8 + ".";
   state.gasOpt = $("gopt").value; state.gasZone = parseInt($("gzone").value, 10) || 1;
   if (state.tab === "elec") state.elecConso = conso();
   if (state.tab === "gaz") state.gasConso = conso();
