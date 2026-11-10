@@ -349,6 +349,22 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
   a { color: inherit; text-decoration: none; }
 }
 code { overflow-wrap: anywhere; }
+/* Navigation : 5 rubriques + menu « Plus » + interrupteur Particulier / Professionnel */
+.tabs button[hidden] { display: none; }
+.mode { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--ref-bg); gap: 2px; margin-left: auto; }
+.mode button { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+.mode button[aria-pressed="true"] { background: var(--surface); color: var(--accent); box-shadow: 0 1px 2px rgba(0,0,0,.14); }
+.plus-wrap { position: relative; display: inline-flex; }
+#tab-plus { font: inherit; font-size: 14px; font-weight: 500; border: 0; background: transparent; color: var(--muted); padding: 8px 12px; border-radius: 10px; cursor: pointer; }
+#tab-plus:hover { background: var(--ref-bg); color: var(--fg); }
+#tab-plus.on { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+#plus-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 220px; display: flex; flex-direction: column; gap: 2px; padding: 6px; background: var(--surface); border: 1px solid var(--ref-bg); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.18); }
+#plus-menu[hidden] { display: none; }
+#plus-menu button { text-align: left; width: 100%; }
+.topbar .tabs { flex: 1 1 auto; }
+@media (max-width: 700px) { .topbar { position: relative; } }
+@media (max-width: 860px) { .mode { order: 2; } }
+details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; font-weight: 600; color: var(--muted); }
 </style>
 
 </head>
@@ -410,13 +426,6 @@ code { overflow-wrap: anywhere; }
     </div>
 
     <div class="callout" id="stale" hidden></div>
-    <h3>Comment ça marche</h3>
-    <ol class="steps">
-      <li><strong>Entrez votre code postal</strong> ci-dessous, puis, si vous voulez, décrivez votre logement dans l'onglet Mon logement, ou saisissez directement votre consommation.</li>
-      <li><strong>Consultez les tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
-      <li><strong>Repérez les primes</strong> de parrainage dans l'onglet Parrainages. Ce site n'envoie vers aucun lien pour l'instant : il indique seulement les montants.</li>
-    </ol>
-
     <div class="card" id="h-box">
       <h3>Où habitez-vous ?</h3>
       <div class="grid2">
@@ -428,8 +437,17 @@ code { overflow-wrap: anywhere; }
       <p class="note">Le code postal reste dans votre navigateur. Il sert à estimer le prix de l'eau, et le tarif réglementé de l'électricité est le même partout en métropole. Pour un calcul plus précis de votre consommation, vous pouvez aussi <button type="button" class="linkbtn" data-go="logt">décrire votre logement</button>.</p>
     </div>
 
+    <h3>Comment ça marche</h3>
+    <ol class="steps">
+      <li><strong>Code postal</strong> ci-dessus ; décrire votre logement (onglet Plus, Mon logement) est facultatif.</li>
+      <li><strong>Tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
+      <li><strong>Primes de parrainage</strong> : montants seulement, ce site n'envoie vers aucun lien.</li>
+    </ol>
+
     <p class="note" id="updated"></p>
+    <details class="notes"><summary>Notes sur les prix et les données</summary>
     <p class="note">Prix TTC, France métropolitaine, relevés le <span class="dlong">10 octobre 2026</span>. Les montants marqués d'une étoile sont estimés. Les primes marquées « à vérifier » n'ont pas été confirmées.</p>
+    </details>
   </section>
 
   <section class="panel" id="p-logt" role="tabpanel" aria-labelledby="tab-logt" hidden>
@@ -2445,17 +2463,61 @@ function initA11y() {
   function watch() { Array.prototype.forEach.call(document.querySelectorAll("table"), function (t) { mo.observe(t, { childList: true }); }); }
   a11yTables(); watch();
   $("tab-home").parentNode.addEventListener("keydown", function (ev) {
-    var i = TABS.indexOf(state.tab), k = ev.key, j = -1;
-    if (k === "ArrowRight") j = (i + 1) % TABS.length;
-    else if (k === "ArrowLeft") j = (i - 1 + TABS.length) % TABS.length;
+    var L = NAV[state.mode].main, i = L.indexOf(state.tab), k = ev.key, j = -1;
+    if (i < 0) return;
+    if (k === "ArrowRight") j = (i + 1) % L.length;
+    else if (k === "ArrowLeft") j = (i - 1 + L.length) % L.length;
     else if (k === "Home") j = 0;
-    else if (k === "End") j = TABS.length - 1;
+    else if (k === "End") j = L.length - 1;
     if (j < 0) return;
-    ev.preventDefault(); setTab(TABS[j]); $("tab-" + TABS[j]).focus();
+    ev.preventDefault(); setTab(L[j]); $("tab-" + L[j]).focus();
   });
 }
 
+// Navigation : rubriques principales visibles, le reste dans « Plus », et interrupteur Particulier / Professionnel.
+var NAV = { part: { main: ["home", "elec", "gaz", "duo", "eau"], plus: ["logt", "prime", "saisons", "abo", "marche", "methode", "sources", "stats", "legal"] },
+            pro: { main: ["home", "pro"], plus: ["marche", "methode", "sources", "stats", "legal"] } };
+var PART_ONLY = ["logt", "elec", "gaz", "duo", "eau", "saisons", "abo", "prime"];
+state.mode = "part";
+function navBuild() {
+  var tabs = $("tab-home").parentNode, bar = tabs.parentNode;
+  var wrap = document.createElement("div"); wrap.className = "plus-wrap";
+  var pb = document.createElement("button"); pb.type = "button"; pb.id = "tab-plus"; pb.textContent = "Plus ▾";
+  pb.setAttribute("aria-haspopup", "true"); pb.setAttribute("aria-expanded", "false"); pb.setAttribute("aria-controls", "plus-menu");
+  var menu = document.createElement("div"); menu.id = "plus-menu"; menu.hidden = true; menu.setAttribute("aria-label", "Autres rubriques");
+  TABS.forEach(function (n) { if (NAV.part.plus.indexOf(n) >= 0 || NAV.pro.plus.indexOf(n) >= 0) menu.appendChild($("tab-" + n)); });
+  wrap.appendChild(pb); wrap.appendChild(menu); tabs.appendChild(wrap);
+  var m = document.createElement("div"); m.className = "mode"; m.setAttribute("role", "group"); m.setAttribute("aria-label", "Type de compte");
+  m.innerHTML = '<button type="button" id="mode-part" aria-pressed="true">Particulier</button><button type="button" id="mode-pro" aria-pressed="false">Professionnel</button>';
+  bar.appendChild(m);
+  $("tab-pro").textContent = "Offres pro (essai)"; $("tab-saisons").textContent = "Saisons (essai)";
+  pb.addEventListener("click", function (e) { e.stopPropagation(); navMenu(menu.hidden); });
+  document.addEventListener("click", function (e) { if (!menu.hidden && !(e.target.closest && e.target.closest(".plus-wrap"))) navMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { navMenu(false); pb.focus(); } });
+  menu.addEventListener("click", function () { navMenu(false); });
+  $("mode-part").addEventListener("click", function () { navMode("part"); setTab(state.tab === "home" ? "home" : "elec"); });
+  $("mode-pro").addEventListener("click", function () { navMode("pro"); setTab(state.tab === "home" ? "home" : "pro"); });
+}
+function navMenu(open) { $("plus-menu").hidden = !open; $("tab-plus").setAttribute("aria-expanded", open ? "true" : "false"); }
+function navMode(m) {
+  state.mode = m;
+  $("mode-part").setAttribute("aria-pressed", m === "part" ? "true" : "false");
+  $("mode-pro").setAttribute("aria-pressed", m === "pro" ? "true" : "false");
+  navSync();
+}
+function navSync() {
+  var cur = NAV[state.mode];
+  TABS.forEach(function (n) { $("tab-" + n).hidden = cur.main.indexOf(n) < 0 && cur.plus.indexOf(n) < 0; });
+  $("tab-plus").className = cur.plus.indexOf(state.tab) >= 0 ? "on" : "";
+}
+function navFollow(t) {  // un lien interne vers une rubrique de l'autre mode change l'interrupteur
+  if (t === "pro" && state.mode !== "pro") navMode("pro");
+  else if (PART_ONLY.indexOf(t) >= 0 && state.mode !== "part") navMode("part");
+  else navSync();
+}
+
 function setTab(t) {
+  navFollow(t);
   if (state.tab === "elec" || state.tab === "gaz") { state["mine_" + state.tab] = $("mine").value; }
   if (t === "elec" || t === "gaz") $("mine").value = state["mine_" + t] || "";
   if (state.tab === "elec") state.elecConso = conso() || state.elecConso;
@@ -2491,10 +2553,12 @@ function setTab(t) {
     $("prixeau").value = state.eauPrix > 0 ? state.eauPrix : "";
   }
   a11yTabs();
+  navSync();
   refresh();
 }
 
 document.addEventListener("click", function (e) { var b = e.target.closest ? e.target.closest("[data-go]") : null; if (!b) return; var g = b.getAttribute("data-go"); setTab(g); window.scrollTo(0, 0); var hh = $("p-" + g).querySelector("h2"); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus(); } });
+navBuild(); navSync();
 TABS.forEach(function (n) { $("tab-" + n).addEventListener("click", function () { setTab(n); }); });
 $("conso").addEventListener("input", refresh);
 ["t-elec", "t-gaz"].forEach(function (id) {
