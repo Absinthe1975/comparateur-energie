@@ -20,15 +20,21 @@ def main():
                 pg = b.new_page(viewport={"width": largeur, "height": 800}); erreurs = []
                 pg.on("pageerror", lambda e: erreurs.append(str(e)))
                 pg.goto("http://127.0.0.1:%d/index.html" % port); pg.wait_for_timeout(1500)
+                def aller(t):  # ouvre la rubrique : change de mode (particulier / pro) et ouvre « Plus » si besoin
+                    if not pg.is_visible("#tab-" + t):
+                        pg.click("#mode-pro" if t == "pro" else "#mode-part"); pg.wait_for_timeout(100)
+                        if not pg.is_visible("#tab-" + t):
+                            pg.click("#tab-plus"); pg.wait_for_timeout(100)
+                    pg.click("#tab-" + t)
                 for t in TABS:
-                    pg.click("#tab-" + t); pg.wait_for_timeout(120)
+                    aller(t); pg.wait_for_timeout(120)
                     if not pg.is_visible("#p-" + t): echecs.append("%d px : onglet %s non affiché" % (largeur, t))
                     exces = pg.evaluate("document.documentElement.scrollWidth - innerWidth")
                     if exces > 1: echecs.append("%d px : onglet %s déborde de %d px" % (largeur, t, exces))
                 for t, tableau in (("elec", "#t-elec"), ("gaz", "#t-gaz")):
-                    pg.click("#tab-" + t); pg.wait_for_timeout(200)
+                    aller(t); pg.wait_for_timeout(200)
                     if pg.locator(tableau + " tbody tr").count() < 5: echecs.append("%d px : tableau %s presque vide" % (largeur, t))
-                pg.click("#tab-elec"); pg.select_option("#kva", "9"); pg.wait_for_timeout(200)
+                aller("elec"); pg.select_option("#kva", "9"); pg.wait_for_timeout(200)
                 if pg.locator("#t-elec tbody tr").count() < 5: echecs.append("%d px : tableau électricité vide à 9 kVA" % largeur)
                 echecs += ["%d px : erreur JavaScript : %s" % (largeur, e) for e in erreurs]
                 pg.close()
