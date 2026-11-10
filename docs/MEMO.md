@@ -18,7 +18,7 @@ Mémo du 9 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 - **Octopus** : confirmer les hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges, plages d'heures creuses).
 - **Fournisseurs à ajouter** : fiches de Urban Solar Energy, Énergie d'ici, Jeety Energy.
 
-- **Zones de gaz par code postal : fait.** Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 434 communes (9 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), GEG (abonnement par zone NTR). Déjà par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Reste : TotalEnergies (grille par zone à recevoir), Gaz de Bordeaux NovaFlex zones 4 à 6, 78 communes non rapprochées (zone GRDF utilisée). Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone dans leurs grilles.
+- **Zones de gaz par code postal : fait.** Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 461 communes dont Paris, Lyon, Marseille et Strasbourg (9-10 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), GEG (abonnement par zone NTR). Déjà par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Reste : TotalEnergies (grille par zone à recevoir), Gaz de Bordeaux NovaFlex zones 4 à 6, 41 petites communes non rapprochées (communes nouvelles ou renommées) (zone GRDF utilisée). Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone dans leurs grilles.
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.

@@ -53,6 +53,19 @@ class TestZonesFournisseurs(unittest.TestCase):
         self.assertEqual(out["t"][out["i"]["01017"]], "A||B||")
         self.assertEqual(out["t"][out["c"]["01500"]], "I|5|D|6|NTR 8-10")
 
+    def test_completer_oe_et_arrondissements(self):
+        self.assertEqual(zones_gaz.norm("Bœrsch"), zones_gaz.norm("BOERSCH"))
+        poste = [("67043", "BOERSCH", "67530", "BOERSCH"), ("67482", "STRASBOURG", "67000", "STRASBOURG"),
+                 ("75101", "PARIS 1ER ARRONDISSEMENT", "75001", "PARIS 01")]
+        ids = {("bas-rhin", "x"): "67001"}
+        com = {("bas-rhin", "boersch"): {"ilek": "D"}, ("bas-rhin", "strasbourg"): {"ilek": "E"}, ("paris", "paris"): {"ilek": "C"}}
+        ajoutes, arr = zones_gaz.completer(ids, com, poste)
+        self.assertEqual(ajoutes, 2)
+        self.assertEqual(ids[("bas-rhin", "boersch")], "67043")
+        self.assertEqual(len(arr), 20)
+        out = zones_gaz.construire_fournisseurs(ids, com, {"75101": {"75001"}, "67043": {"67530"}}, arr)
+        self.assertEqual(out["75"]["t"][out["75"]["c"]["75001"]], "C||||")
+
 
 class TestZonesGaz(unittest.TestCase):
     def test_pages_et_rapprochement(self):
