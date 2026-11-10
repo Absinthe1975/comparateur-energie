@@ -439,7 +439,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 
     <h3>Comment ça marche</h3>
     <ol class="steps">
-      <li><strong>Code postal</strong> ci-dessus ; décrire votre logement (onglet Plus, Mon logement) est facultatif.</li>
+      <li><strong>Code postal</strong> ci-dessus ; décrire votre logement (onglet Mon logement) est facultatif.</li>
       <li><strong>Tableaux</strong> d'électricité, de gaz et d'eau : cliquez sur un titre de colonne pour trier.</li>
       <li><strong>Primes de parrainage</strong> : montants seulement, ce site n'envoie vers aucun lien.</li>
     </ol>
@@ -2475,7 +2475,7 @@ function initA11y() {
 }
 
 // Navigation : rubriques principales visibles, le reste dans « Plus », et interrupteur Particulier / Professionnel.
-var NAV = { part: { main: ["home", "elec", "gaz", "duo", "eau"], plus: ["logt", "prime", "saisons", "abo", "marche", "methode", "sources", "stats", "legal"] },
+var NAV = { part: { main: ["home", "logt", "elec", "gaz", "duo", "eau"], plus: ["prime", "saisons", "abo", "marche", "methode", "sources", "stats", "legal"] },
             pro: { main: ["home", "pro"], plus: ["marche", "methode", "sources", "stats", "legal"] } };
 var PART_ONLY = ["logt", "elec", "gaz", "duo", "eau", "saisons", "abo", "prime"];
 state.mode = "part";
@@ -2485,7 +2485,7 @@ function navBuild() {
   var pb = document.createElement("button"); pb.type = "button"; pb.id = "tab-plus"; pb.textContent = "Plus ▾";
   pb.setAttribute("aria-haspopup", "true"); pb.setAttribute("aria-expanded", "false"); pb.setAttribute("aria-controls", "plus-menu");
   var menu = document.createElement("div"); menu.id = "plus-menu"; menu.hidden = true; menu.setAttribute("aria-label", "Autres rubriques");
-  TABS.forEach(function (n) { if (NAV.part.plus.indexOf(n) >= 0 || NAV.pro.plus.indexOf(n) >= 0) menu.appendChild($("tab-" + n)); });
+  TABS.forEach(function (n) { if ((NAV.part.plus.indexOf(n) >= 0 || NAV.pro.plus.indexOf(n) >= 0) && n !== "logt") menu.appendChild($("tab-" + n)); });
   wrap.appendChild(pb); wrap.appendChild(menu); tabs.appendChild(wrap);
   var m = document.createElement("div"); m.className = "mode"; m.setAttribute("role", "group"); m.setAttribute("aria-label", "Type de compte");
   m.innerHTML = '<button type="button" id="mode-part" aria-pressed="true">Particulier</button><button type="button" id="mode-pro" aria-pressed="false">Professionnel</button>';
