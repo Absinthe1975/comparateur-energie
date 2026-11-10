@@ -28,7 +28,7 @@ ART = {"LE", "LES", "LA", "L", "AU", "AUX", "DE", "DES", "DU", "D", "EN", "SUR",
 
 
 def norm(s):
-    s = html.unescape(s)
+    s = html.unescape(s).replace("œ", "oe").replace("Œ", "OE").replace("æ", "ae").replace("Æ", "AE")
     s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode().upper()
     s = re.sub(r"[-'’./]", " ", s)
     s = re.sub(r"\bSAINTE\b", "STE", s)
@@ -167,7 +167,41 @@ def lire_communes_csv(chemin):
     return out
 
 
-def construire_fournisseurs(ids, communes, cp):
+# Villes à arrondissements : (département, commune) des pages → code INSEE « ville » de ALIAS
+VILLES = {("paris", "paris"): "75056", ("bouches-du-rhone", "marseille"): "13055", ("rhone", "lyon"): "69123"}
+
+
+def completer(ids, communes, poste):
+    """Rapproche les communes des pages de communes que les pages de départements n'ont pas fournies (nom seul, dans le
+    département déjà identifié) et étend Paris, Marseille et Lyon à tous leurs arrondissements. Modifie `ids`."""
+    pref = collections.defaultdict(collections.Counter)
+    for (d, c), i in ids.items():
+        pref[d][i[:3] if i[:2] == "97" else i[:2]] += 1
+    parnom = collections.defaultdict(set)
+    for insee, nom, c, lib in poste:
+        parnom[norm(nom)].add(insee)
+        parnom[norm(lib)].add(insee)
+    ajoutes = 0
+    for dc in communes:
+        if dc in ids or dc in VILLES:
+            continue
+        d, c = dc
+        if not pref.get(d):
+            continue
+        p = pref[d].most_common(1)[0][0]
+        cs = {i for i in parnom.get(norm(c), set()) if i.startswith(p)}
+        if len(cs) == 1:
+            ids[dc] = next(iter(cs))
+            ajoutes += 1
+    arr = {}
+    for dc, alias in VILLES.items():
+        if dc in communes:
+            for a in ALIAS[alias]:
+                arr[(dc, a)] = a
+    return ajoutes, arr
+
+
+def construire_fournisseurs(ids, communes, cp, arr=None):
     """Un fichier par début de code postal : {"t": ["I|5|D|6|NTR 8-10", ...], "i": {INSEE: n° de ligne de t}, "c": {code postal: n°}}.
     Une ligne de t = zones ilek | TotalEnergies | ENGIE 8 zones | Alterna | GEG (vide si le fournisseur n'a pas de zone ici)."""
     parinsee = {}
@@ -175,6 +209,8 @@ def construire_fournisseurs(ids, communes, cp):
         i = ids.get(dc)
         if i:
             parinsee[i] = "|".join(zones.get(k, "") for k in ORDRE)
+    for (dc, a), i in (arr or {}).items():
+        parinsee[i] = "|".join(communes[dc].get(k, "") for k in ORDRE)
     parcp = collections.defaultdict(set)
     for i, ligne in parinsee.items():
         for c in cp.get(i, ()):
@@ -201,7 +237,9 @@ def main(argv):
         ids = {}
         res, manque, cp = rapprocher(pages, lire_poste(argv[2]), ids)
         communes = lire_communes_csv(argv[3]) if argv[3].endswith(".csv") else lire_communes(zipfile.ZipFile(argv[3]))
-        out = construire_fournisseurs(ids, communes, cp)
+        poste = lire_poste(argv[2])
+        ajoutes, arr = completer(ids, communes, poste)
+        out = construire_fournisseurs(ids, communes, cp, arr)
         dossier = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "donnees", "gaz", "zones-fournisseurs")
         os.makedirs(dossier, exist_ok=True)
         for f in glob.glob(os.path.join(dossier, "*.json")):
