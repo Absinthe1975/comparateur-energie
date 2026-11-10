@@ -498,21 +498,6 @@
  },
  "promos": [
   {
-   "k": "engie",
-   "texte": "deux mois d'abonnement TTC offerts",
-   "debut": "2026-10-19",
-   "fin": "2026-11-07",
-   "offres": [
-    "référence 3 ans",
-    "duo"
-   ],
-   "conditions": "Souscription du 19 octobre au 7 novembre 2026 inclus : Élec Référence 3 ans, Gaz Référence 3 ans, Duo Référence 3 ans ou Happy Week-End. Montant variable selon l'offre, la puissance et la consommation, versé sur la facture de souscription. Une remise par foyer, métropole hors Corse. Non comptée dans le classement.",
-   "s": [
-    "Conditions ENGIE",
-    "https://particuliers.engie.fr/"
-   ]
-  },
-  {
    "k": "edf",
    "texte": "80 € TTC remboursés sur la facture pour tout nouveau contrat d'électricité en offre de marché (EDF fête ses 80 ans)",
    "debut": "2026-10-12",
