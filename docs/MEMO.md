@@ -1,17 +1,17 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 9 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 10 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
 ### 1. Ce que je peux faire seul, sans rien de ta part
-- Fins de promotions : le site masque tout seul une promotion après sa date de fin (EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps. 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
+- Fins de promotions : le site masque tout seul une promotion après sa date de fin (EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE retirée le 10 nov.). Les branches mortes du dépôt sont supprimées chaque dimanche par le flux « Nettoyage des anciennes branches ». 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
 - Rendre le test de bout en bout plus tolérant.
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
-- **TotalEnergies gaz** : la grille « Fixe 2 ans Gaz » par zone (1 à 6) ; la zone de chaque commune est déjà chargée, il manque les prix. Les zones de chaque commune pour ilek, TotalEnergies, ENGIE, Alterna et GEG sont faites (voir docs/ZONES-GAZ.md).
-- **ENGIE électricité** : le prix total de l'offre Référence 3 ans (simulateur ou courrier), pour passer de « À confirmer » à « Grille officielle ».
+- **TotalEnergies gaz** : fait le 10 nov. (grille « Fixe 2 ans Gaz » du 24 sept., prix par zone 1 à 6, zone déduite de la commune). Les zones de chaque commune pour ilek, TotalEnergies, ENGIE, Alterna et GEG sont faites (voir docs/ZONES-GAZ.md).
+- **ENGIE électricité** : la fiche reçue est la grille d'**août 2026** (fourniture + acheminement + obligations séparés ; en base 6 kVA : 0,14384 + 0,05988 + 0,01804 = 0,2218 €/kWh TTC, abonnement 195,18 €/an), alors que le site affiche 0,2403 (2 nov., source secondaire, « À confirmer »). Décision à prendre : afficher la grille d'août calculée (« Grille officielle du 08/2026 ») ou attendre la grille de novembre.
 - **Ekwateur** : un PDF de grille (le prix n'apparaît qu'à la souscription).
 - **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
 - **GEG** : la grille récente de « L'Offre Online ». **Gaz de Bordeaux** : conditions du NovaFixe Duo ; une fiche Novaflex Élec d'une autre ville. **EDF** : pages des offres duo.
@@ -40,7 +40,7 @@ Mémo du 9 novembre 2026. Il commence par une vue d'ensemble (à lire en premier
 ### 6. Ce qui est déjà saisi d'après une grille officielle récente
 - Électricité : EDF (Tarif Bleu, Zen), Octopus (Eco fixe, Intelligent), OHM (octobre), Mint, Dyneff, LLUM (compteur non communicant), Enercoop, GEG, Gaz de Bordeaux (novembre), Plenitude, Alterna, Alpiq, La Bellenergie.
 - Gaz : Dyneff (octobre), Mint (novembre), Octopus (novembre), Alterna, GEG.
-- Encore « À confirmer » : ENGIE (élec et gaz), Ekwateur, Primeo (calculé), Gaz de Bordeaux gaz (zone de Paris), ilek gaz (zone B).
+- Encore « À confirmer » : ENGIE (élec), Ekwateur, Primeo (calculé), Gaz de Bordeaux gaz (zone de Paris).
 - Parrainages : confirmés par une page officielle, sauf Ekwateur, Happ-e et ilek ; Plenitude n'a aucun programme.
 
 ## Détail par sujet
