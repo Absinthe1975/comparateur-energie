@@ -1,7 +1,7 @@
 name: Nettoyage des anciennes branches
 
 # Chaque dimanche (et à la main : Actions > Nettoyage des anciennes branches > Run workflow) :
-# supprime les branches sauf main, celles qui ont une demande de fusion ouverte et celles modifiées depuis moins de 2 jours.
+# supprime les branches sauf main, celles dont le nom commence par « sauvegarde », celles qui ont une demande de fusion ouverte et celles modifiées depuis moins de 2 jours.
 on:
   schedule:
     - cron: "37 3 * * 0"
@@ -23,6 +23,7 @@ jobs:
           ouvertes=$(gh api "repos/$REPO/pulls?state=open&per_page=100" --jq '.[].head.ref')
           gh api "repos/$REPO/branches?per_page=100" --paginate --jq '.[].name' | while read -r b; do
             [ "$b" = "main" ] && continue
+            case "$b" in sauvegarde*) echo "gardée (sauvegarde) : $b"; continue;; esac
             if echo "$ouvertes" | grep -qx "$b"; then echo "gardée (demande de fusion ouverte) : $b"; continue; fi
             date=$(gh api "repos/$REPO/commits/$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" "$b")" --jq '.commit.committer.date' 2>/dev/null || echo "")
             if [ -n "$date" ] && [ "$(date -d "$date" +%s)" -gt "$(date -d '2 days ago' +%s)" ]; then echo "gardée (récente) : $b"; continue; fi
