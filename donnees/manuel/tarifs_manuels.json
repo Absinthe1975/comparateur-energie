@@ -131,8 +131,8 @@
       "k": "ilek",
       "name": "ilek",
       "offer": "ÉnRFixe+ Elec",
-      "a": 0.2449,
-      "b": 0.2433,
+      "a": 0.2691,
+      "b": 0.2675,
       "ab6": 301.2,
       "ab9": 409.2,
       "abo": {
@@ -147,13 +147,13 @@
         "36": 1065.0
       },
       "niv": "officiel",
-      "nivd": "01/11/2026",
-      "d": "1 nov. 2026",
+      "nivd": "02/11/2026",
+      "d": "2 nov. 2026",
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
-        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
+        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (disponible du 2 au 30 novembre 2026)",
+        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/360/grille_360.pdf"
       ]
     },
     {
@@ -709,48 +709,48 @@
       "k": "ilek",
       "name": "ilek",
       "offer": "ÉnRFixe+ Gaz",
-      "a": 0.1662,
-      "b0": 0.2007,
+      "a": 0.1882,
+      "b0": 0.2212,
       "ab1": 438.36,
       "ab0": 218.04,
       "zsys": "ilek",
       "zdef": 2,
       "zg": {
         "b1": [
-          0.1633,
-          0.1652,
-          0.1662,
-          0.1678,
-          0.1705,
-          0.1714,
-          0.1725,
-          0.1719,
-          0.1771,
-          0.179,
-          0.1809
+          0.1855,
+          0.1873,
+          0.1882,
+          0.1899,
+          0.1926,
+          0.1935,
+          0.1946,
+          0.194,
+          0.1992,
+          0.2011,
+          0.203
         ],
         "b0": [
-          0.1992,
-          0.2002,
-          0.2007,
-          0.2016,
-          0.2028,
-          0.2036,
-          0.2043,
-          0.2041,
-          0.2065,
-          0.2079,
-          0.209
+          0.2197,
+          0.2208,
+          0.2212,
+          0.2222,
+          0.2234,
+          0.2242,
+          0.225,
+          0.2246,
+          0.2271,
+          0.2286,
+          0.2295
         ]
       },
       "niv": "officiel",
-      "nivd": "01/10/2026",
-      "d": "9 nov. 2026",
+      "nivd": "02/11/2026",
+      "d": "2 nov. 2026",
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Grille officielle ilek ÉnRFixe+ gaz (prix TTC, 11 zones A à K, disponible du 1er octobre au 1er novembre 2026)",
-        "https://www.ilek.fr/zone-tarifaire-gaz-vert"
+        "Grille officielle ilek ÉnRFixe+ gaz (prix TTC, 11 zones A à K, disponible du 2 au 30 novembre 2026)",
+        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/361/grille_361.pdf"
       ]
     },
     {
@@ -815,6 +815,43 @@
           "NTR 8-10": 136.56
         }
       }
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 2 ans Gaz",
+      "a": 0.1412,
+      "b0": 0.1772,
+      "ab1": 360.72,
+      "ab0": 152.4,
+      "zsys": "total",
+      "zdef": 1,
+      "zg": {
+        "b1": [
+          0.1394,
+          0.1412,
+          0.1438,
+          0.1478,
+          0.1524,
+          0.1587
+        ],
+        "b0": [
+          0.1761,
+          0.1772,
+          0.1789,
+          0.1807,
+          0.1833,
+          0.1869
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "24/09/2026",
+      "d": "24 sept. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026)",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz"
+      ]
     }
   ],
   "duo": [],
@@ -988,8 +1025,8 @@
       "k": "ilek",
       "name": "ilek",
       "offer": "ÉnRFixe+ Elec",
-      "hp": 0.2607,
-      "hc": 0.1993,
+      "hp": 0.2832,
+      "hc": 0.2279,
       "abo": {
         "6": 341.52,
         "9": 471.12,
@@ -1002,12 +1039,12 @@
       },
       "abo_seul": true,
       "niv": "officiel",
-      "nivd": "01/11/2026",
-      "d": "1 nov. 2026",
+      "nivd": "02/11/2026",
+      "d": "2 nov. 2026",
       "typ": "fixe",
       "s": [
-        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026)",
-        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf"
+        "Grille officielle ilek ÉnRFixe+ Élec, particuliers (disponible du 2 au 30 novembre 2026)",
+        "https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/360/grille_360.pdf"
       ]
     },
     {

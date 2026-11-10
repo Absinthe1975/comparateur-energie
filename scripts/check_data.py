@@ -22,7 +22,7 @@ for r in d["gas"]:
             need(isinstance(z, list) and len(z) == 6 and all(0.08 <= x <= 0.35 for x in z) and all(z[i + 1] >= z[i] - 0.0005 for i in range(5)), f"prix par zone invalides (6 valeurs à peu près croissantes) : {r['name']} {o}")
         need(abs(r["zones"].get("b1", [r["a"]])[0] - r["a"]) < 1e-9, f"le prix de la zone 1 doit égaler le prix affiché : {r['name']}")
     if "zg" in r:
-        nb = {"engie8": 8, "ilek": 11}.get(r.get("zsys"))
+        nb = {"engie8": 8, "ilek": 11, "total": 6}.get(r.get("zsys"))
         need(nb is not None, f"système de zones inconnu : {r['name']}")
         for o, z in r["zg"].items():
             need(isinstance(z, list) and len(z) == nb and all(0.08 <= x <= 0.35 for x in z), f"prix par zone invalides ({nb} valeurs) : {r['name']} {o}")
