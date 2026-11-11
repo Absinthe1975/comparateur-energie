@@ -1,13 +1,15 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 10 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 11 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
 ### 1. Ce que je peux faire seul, sans rien de ta part
 - Fins de promotions : le site masque tout seul une promotion après sa date de fin (EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE retirée le 10 nov.). Les branches mortes du dépôt sont supprimées chaque dimanche par le flux « Nettoyage des anciennes branches ». 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
 - Rendre le test de bout en bout plus tolérant.
+- Mode sombre et clavier sur la nouvelle barre de navigation : à vérifier (non testés).
+- Rapprocher à la main les 41 petites communes sans zone fournisseur (communes nouvelles ou renommées).
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
 - **TotalEnergies gaz** : fait le 10 nov. (grille « Fixe 2 ans Gaz » du 24 sept., prix par zone 1 à 6, zone déduite de la commune). Les zones de chaque commune pour ilek, TotalEnergies, ENGIE, Alterna et GEG sont faites (voir docs/ZONES-GAZ.md).
@@ -33,6 +35,7 @@ Mémo du 10 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - **À chaque grille saisie** : lien dans docs/LIENS-RECUS.md, puis `python3 scripts/liens.py`.
 
 ### 5. Ce qui se fait tout seul
+- Nettoyage des branches du dépôt : chaque dimanche (workflow « Nettoyage des anciennes branches »). Il garde main, les branches « sauvegarde… » et celles avec une demande de fusion ouverte ou modifiées depuis moins de 2 jours. Sauvegarde du site avant la refonte : branche `sauvegarde-2026-11-10`.
 - Prix du tarif réglementé (CRE) et prix repère du gaz : mise à jour automatique du 1er au 10 de chaque mois, puis chaque lundi.
 - Prix par code postal d'Alterna, historique des prix, vérification des liens fournisseur, eau (chaque lundi : une demande de fusion s'ouvre seulement si des prix changent).
 - Relecture automatique des PR (écarts de prix des offres non officielles, offre retirée, source manquante), fusion automatique quand les tests sont au vert, post Facebook à chaque changement de prix officiel. Depuis le 7 nov., les mises à jour de prix du robot se fusionnent seules (plus d'approbation manuelle des tests) ; une PR bloquée porte l'étiquette « ne-pas-fusionner ».
@@ -189,8 +192,17 @@ Mémo du 10 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 ## Le site À faire
 
+### Navigation et accueil (refonte du 10-11 nov. 2026)
+
+- En-tête centré sur 3 lignes : interrupteur Particulier / Professionnel, nom du site, rubriques. Rubriques principales (particulier) : Accueil, Mon logement, Électricité, Gaz, Élec + Gaz, Eau, puis un menu « Plus » (Parrainages, Saisons, Abonnement, Marché, Méthode, Sources, Statistiques, Mentions légales). Mode professionnel : Accueil, Offres pro (essai) et « Plus ».
+- Accueil : code postal d'abord, promotions repliées sur une ligne (conditions au clic), « Comment ça marche » en 3 cases, notes sur les prix repliées.
+- Tableaux électricité, gaz et duo : le repère (tarif réglementé ou prix repère CRE) est toujours en première ligne ; le bouton « Total par an » inverse l'ordre (▲ moins cher d'abord, ▼ l'inverse).
+- Aperçu privé d'une maquette avant fusion : page publiée par Claude dans l'espace Claude (données de 5 départements seulement : 13, 33, 59, 69, 75). Une branche en PR marquée `ne-pas-fusionner` n'est pas fusionnée par l'auto-fusion.
+- Idée non faite : aperçu permanent dans un dossier /apercu/ du site GitHub (avec noindex).
+
 ### Mises à jour automatiques
 
+- Fusion des PR du robot (prix, eau) : le contrôle « tests » de la PR reste « en attente d'approbation » ; les workflows maj-prix et maj-eau l'approuvent maintenant avant de fusionner (10 nov.). Si une PR reste bloquée : approuver le run Tests en attente, puis fusionner.
 - Auto-fusion (workflow « Auto-fusion », ajouté le 3 nov. 2026) : toute PR ouverte par Absinthe1975 ou par le robot de mise à jour des prix est fusionnée dès que les tests sont au vert, puis la publication Facebook est lancée. Pour empêcher une fusion : étiquette « ne-pas-fusionner » ou PR en brouillon. Les mises à jour de prix ne sont donc plus relues à la main : surveiller les posts Facebook et le rapport.
 
 - Après chaque fusion : lancer « Run workflow » et lire le rapport (section « Liens fournisseur en échec », lignes [Mint](https://www.mint-energie.com/) et CRE, offres « À relire », premiers repères des PDF suivis). Quand un PDF suivi change, le rapport donne le prix du kWh lu par l'IA (avec citation vérifiée) à côté du nôtre, sans rien appliquer : vous saisissez ensuite la grille à la main.
