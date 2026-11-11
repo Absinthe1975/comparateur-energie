@@ -24,7 +24,7 @@ Mémo du 11 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.
-- **OHM « Prix Réservé »** (fourniture à partir d'avril 2027, 20 000 clients) : mention à part, ou rien.
+- **OHM « Prix Réservé »** : décidé le 11 nov. (mention hors classement sous les tableaux élec et gaz, jusqu'au 31 mai 2027) et fait.
 - **Primeo** : afficher le prix calculé (tarif réglementé −5 %) comme « calculé selon la formule officielle », ou le laisser « À confirmer ».
 - **Pro** : ajouter les taxes avec un choix « Mon activité », ou rester hors taxes.
 
@@ -82,7 +82,7 @@ Mémo du 11 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 ### Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)
 - [OHM](https://www.ohm-energie.com/) : fiches officielles d'octobre 2026 saisies pour Sérénité 1 an (0,2212 €/kWh Base dès 6 kVA, 0,2001 € à 3-5 kVA non distingué), 2 ans (0,2249 €) et Premi'Ohm 3 ans (0,2287 €), avec heures pleines / creuses. Non modélisée : l'offre Week-end (fiche du 4 sept. 2026 : semaine heures pleines 0,265 € / creuses 0,1737 €, week-end 0,1737 €).
-- [OHM](https://www.ohm-energie.com/) « Prix Réservé » (reçu le 6 nov. 2026) : offre à prix fixe 1 an à réserver maintenant, fourniture à partir d'avril-mai 2027, limitée à 20 000 clients. Non intégrée au comparateur (démarrage différé) : voir docs/OHM-PRIX-RESERVE.md. À décider : mention à part ou rien.
+- [OHM](https://www.ohm-energie.com/) « Prix Réservé » (reçu le 6 nov. 2026) : offre à prix fixe 1 an à réserver maintenant, fourniture à partir d'avril-mai 2027, limitée à 20 000 clients. Non intégrée au comparateur (démarrage différé) : voir docs/OHM-PRIX-RESERVE.md. Affichée en mention hors classement depuis le 11 nov. 2026 (grille du 21 oct. 2026).
 
 - [Urban Solar Energy](https://www.urbansolarenergy.fr/mentions-legales/) (prix fixe, autoconsommation) : pas de grille publique, tarifs par simulation. Documents : [CGV ≤ 36 kVA](https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf), [conditions générales de septembre 2026](https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf).
 
