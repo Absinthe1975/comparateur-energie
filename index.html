@@ -376,6 +376,29 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 #home-promos li { border-top: 1px solid var(--line); padding: 6px 0; } #home-promos li:first-child { border-top: 0; }
 #home-promos summary { cursor: pointer; } #home-promos .until { color: var(--muted); white-space: nowrap; }
 #home-promos .promo-h { font-size: 1rem; margin: 0 0 4px; }
+/* Filtres en panneau latéral (puces cliquables) */
+.fgrid { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 8px; }
+.fmain { min-width: 0; }
+.fpanel { position: sticky; top: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 12px; display: flex; flex-direction: column; gap: 12px; font-size: 14px; max-height: calc(100vh - 24px); overflow-y: auto; }
+.fhead { display: flex; align-items: baseline; gap: 6px; } .fhead strong { font-size: 1.05rem; } .fnb { color: var(--muted); font-size: .85rem; }
+.fclose { display: none; margin-left: auto; font: inherit; font-size: 1.4rem; line-height: 1; background: none; border: 0; color: var(--muted); cursor: pointer; }
+.fcount { margin: 0; color: var(--muted); } .fcount strong { color: var(--fg); }
+.fsec h3 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; font-weight: 700; }
+.fsec summary { cursor: pointer; list-style: none; } .fsec summary::-webkit-details-marker { display: none; } .fsec summary h3 { display: inline; }
+.fsec summary::after { content: " ▾"; color: var(--muted); font-size: 11px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; min-height: 32px; }
+.chip:hover { border-color: var(--accent); }
+.chip.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.fsup { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; max-height: 220px; overflow-y: auto; }
+.fsup label { display: flex; gap: 8px; align-items: center; }
+.fbtn { display: none; font: inherit; font-weight: 600; background: var(--surface); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 8px 16px; cursor: pointer; margin-bottom: 10px; min-height: 44px; }
+@media (max-width: 900px) {
+  .fgrid { grid-template-columns: minmax(0, 1fr); }
+  .fbtn { display: inline-block; }
+  .fpanel { display: none; position: static; max-height: none; margin-bottom: 12px; } .fpanel.open { display: flex; } .fclose { display: block; }
+}
+@media print { .fpanel, .fbtn { display: none !important; } .fgrid { display: block; } }
 </style>
 
 </head>
@@ -485,7 +508,10 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 <section class="panel" id="p-elec" role="tabpanel" aria-labelledby="tab-elec" hidden>
     <h2>Électricité, option Base</h2>
     <p class="lede">Les offres classées pour votre consommation et la puissance de votre compteur, abonnement compris. Le repère reste en première ligne. Cliquez sur « Total par an » pour inverser l'ordre (du moins cher au plus cher, ou l'inverse).</p>
-    <div class="flt" id="flt-elec"></div>
+    <div class="fgrid">
+    <aside class="fpanel" id="flt-elec" aria-label="Filtres des offres"></aside>
+    <div class="fmain">
+    <button type="button" class="fbtn noprint" data-fopen="elec" aria-expanded="false">Filtrer <span class="fn" id="fbn-elec"></span></button>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
     <p class="note reserve" id="res-elec" hidden></p>
@@ -493,12 +519,17 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
+      </div>
+    </div>
   </section>
 
   <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
     <h2>Gaz naturel</h2>
     <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Le repère reste en première ligne. Cliquez sur « Total par an » pour inverser l'ordre (du moins cher au plus cher, ou l'inverse).</p>
-    <div class="flt" id="flt-gaz"></div>
+    <div class="fgrid">
+    <aside class="fpanel" id="flt-gaz" aria-label="Filtres des offres"></aside>
+    <div class="fmain">
+    <button type="button" class="fbtn noprint" data-fopen="gaz" aria-expanded="false">Filtrer <span class="fn" id="fbn-gaz"></span></button>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
     <p class="note reserve" id="res-gaz" hidden></p>
@@ -507,6 +538,8 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Avec votre code postal saisi à l'accueil, la zone historique de GRDF est déduite automatiquement (liste des communes d'observatoires.net, croisée avec la base des codes postaux de La Poste ; source secondaire) ; vous pouvez la corriger ici. Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
     <p class="note">L'option tarifaire dépend de la consommation annuelle. Base : moins de 1 000 kWh, cuisson seule. B0 : environ 1 000 à 4 000 kWh, cuisson et eau chaude. B1 : environ 4 000 à 30 000 kWh, chauffage compris. La CRE place la limite à 6 000 kWh, mais la plupart des offres changent de grille vers 4 000 kWh : le site retient 4 000 par défaut, et vous pouvez choisir l'autre option. B2i : 30 000 à 150 000 kWh, petit chauffage collectif, sur devis. Chaque fournisseur peut fixer ses propres seuils : pour la CRE, entre 4 000 et 6 000 kWh par an, un foyer peut relever de la grille « cuisson et eau chaude » ou de la grille « chauffage » selon les offres. <span id="gaz-ref-txt">Prix repère de la CRE en octobre 2026 : 0,1783 €/kWh et 152,46 € d'abonnement en Base et B0, 0,1456 €/kWh et 360,79 € en B1.</span> Le total par an comprend l'abonnement et le kWh. En B1, les prix des fournisseurs sont relevés et les abonnements vont de 341 € à 517 €. En Base et B0, les abonnements sont relevés mais le prix du kWh est estimé (étoile) en reprenant l'écart entre le prix repère B0 et B1. Les offres à prix fixe ne suivent pas les hausses du prix repère pendant leur durée de blocage.</p>
+      </div>
+    </div>
   </section>
 
   <section class="panel" id="p-duo" role="tabpanel" aria-labelledby="tab-duo" hidden>
@@ -1127,21 +1160,46 @@ function fltPass(r, f) {
   if (f.typ && r.typ !== f.typ) return false;
   if (f.vert && !r.vert) return false;
   if (f.eng !== "" && !(typeof r.eng === "number" && r.eng <= parseInt(f.eng, 10))) return false;
+  if (f.off && r.niv !== "officiel") return false;
+  if (f.promo && !promoHtml(r.k, r.offer)) return false;
+  if (f.sup && f.sup.length && f.sup.indexOf(r.name) < 0) return false;
   return true;
 }
-function fltActive(f) { return !!(f.typ || f.vert || f.eng !== ""); }
+function fltCount(f) { return (f.typ ? 1 : 0) + (f.vert ? 1 : 0) + (f.eng !== "" ? 1 : 0) + (f.off ? 1 : 0) + (f.promo ? 1 : 0) + (f.sup && f.sup.length ? 1 : 0); }
+function fltActive(f) { return fltCount(f) > 0; }
+// Panneau de filtres : puces cliquables par rubrique, compteur d'offres, bouton pour tout effacer
 function buildFilters(kind) {
   var el = $("flt-" + kind); if (!el) return;
-  var f = state.flt[kind];
-  function opt(v, t, cur) { return '<option value="' + v + '"' + (cur === v ? " selected" : "") + ">" + t + "</option>"; }
-  el.innerHTML = '<label>Prix <select data-k="typ">' + opt("", "Tous", f.typ) + opt("fixe", "Prix fixe", f.typ) + opt("indexe", "Prix indexé", f.typ) + "</select></label>"
-    + '<label>Engagement <select data-k="eng">' + opt("", "Tous", f.eng) + opt("0", "Sans engagement", f.eng) + opt("12", "12 mois maximum", f.eng) + opt("24", "24 mois maximum", f.eng) + "</select></label>"
-    + '<label><input type="checkbox" data-k="vert"' + (f.vert ? " checked" : "") + "> Offres vertes ou biogaz</label>"
-    + '<span class="note" id="flt-n-' + kind + '"></span>';
+  var f = state.flt[kind], n = fltCount(f);
+  function chip(k, v, t, on, ico) { return '<button type="button" class="chip' + (on ? " on" : "") + '" data-fk="' + k + '" data-fv="' + v + '" aria-pressed="' + (on ? "true" : "false") + '">' + (ico ? '<span aria-hidden="true">' + ico + "</span> " : "") + t + "</button>"; }
+  var names = {}, list = kind === "elec" ? ELEC : GAS;
+  list.forEach(function (r) { if (r.name) names[r.name] = 1; });
+  var sup = Object.keys(names).sort(function (a, b) { return a.localeCompare(b, "fr"); });
+  var supOn = f.sup.length;
+  el.innerHTML = '<div class="fhead"><strong>Filtrer</strong><span class="fnb">' + (n ? "· " + n + " filtre" + (n > 1 ? "s" : "") + " actif" + (n > 1 ? "s" : "") : "· aucun filtre") + '</span><button type="button" class="fclose noprint" data-fclose aria-label="Fermer les filtres">×</button></div>'
+    + '<p class="fcount" id="fc-' + kind + '" role="status" aria-live="polite"></p>'
+    + '<div class="fsec"><h3>Type de prix</h3><div class="chips">' + chip("typ", "", "Tous", !f.typ) + chip("typ", "fixe", "Fixe", f.typ === "fixe", "🔒") + chip("typ", "indexe", "Indexé", f.typ === "indexe", "↗") + "</div></div>"
+    + '<div class="fsec"><h3>Énergie verte</h3><div class="chips">' + chip("vert", "1", kind === "gaz" ? "Verte ou biogaz" : "Offres vertes", f.vert, "🍃") + "</div></div>"
+    + '<div class="fsec"><h3>Engagement</h3><div class="chips">' + chip("eng", "", "Tous", f.eng === "") + chip("eng", "0", "Sans", f.eng === "0") + chip("eng", "12", "12 mois max", f.eng === "12") + chip("eng", "24", "24 mois max", f.eng === "24") + "</div></div>"
+    + '<div class="fsec"><h3>Fiabilité du prix</h3><div class="chips">' + chip("off", "", "Toutes", !f.off) + chip("off", "1", "Grille officielle", f.off, "✓") + "</div></div>"
+    + '<div class="fsec"><h3>Promotion</h3><div class="chips">' + chip("promo", "1", "Promotion en cours", f.promo, "★") + "</div></div>"
+    + '<div class="fsec"><details' + (supOn ? " open" : "") + '><summary><h3>Fournisseur' + (supOn ? " (" + supOn + ")" : "") + '</h3></summary><div class="fsup">' + sup.map(function (nm) { return '<label><input type="checkbox" data-fk="sup" value="' + esc(nm) + '"' + (f.sup.indexOf(nm) >= 0 ? " checked" : "") + "> " + esc(nm) + "</label>"; }).join("") + "</div></details></div>"
+    + '<button type="button" class="linkbtn" data-freset>Réinitialiser les filtres</button>'
+    + '<p class="note" id="flt-n-' + kind + '"></p>';
+  var b = $("fbn-" + kind); if (b) b.textContent = n ? "(" + n + ")" : "";
+  el.onclick = function (ev) {
+    var t = ev.target.closest ? ev.target.closest("[data-fk],[data-freset],[data-fclose]") : null; if (!t) return;
+    if (t.hasAttribute("data-fclose")) { el.classList.remove("open"); var fb = document.querySelector('[data-fopen="' + kind + '"]'); if (fb) fb.setAttribute("aria-expanded", "false"); return; }
+    if (t.hasAttribute("data-freset")) { f.typ = ""; f.vert = false; f.eng = ""; f.off = false; f.promo = false; f.sup = []; buildFilters(kind); refresh(); return; }
+    var k = t.getAttribute("data-fk"), v = t.getAttribute("data-fv");
+    if (k === "sup") return;  // géré par onchange
+    if (k === "vert" || k === "off" || k === "promo") f[k] = !f[k]; else f[k] = v;
+    buildFilters(kind); refresh();
+  };
   el.onchange = function (ev) {
-    var k = ev.target.getAttribute("data-k"); if (!k) return;
-    f[k] = k === "vert" ? ev.target.checked : ev.target.value;
-    refresh();
+    var t = ev.target; if (t.getAttribute("data-fk") !== "sup") return;
+    f.sup = Array.prototype.map.call(el.querySelectorAll('input[data-fk="sup"]:checked'), function (x) { return x.value; });
+    buildFilters(kind); refresh();
   };
 }
 // Barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)
@@ -1173,7 +1231,9 @@ function renderPrices(tableId, list, ref, field, conso, sortKey, kind, kva) {
     all = all.filter(function (r) { if (!r) sansGrille++; return !!r; });
   }
   var fk = kind === "elec" ? "elec" : "gaz", fl = state.flt[fk], hidden = 0;
+  var avant = all.filter(function (r) { return !r.ref; }).length;
   if (fltActive(fl)) { var before = all.length; all = all.filter(function (r) { return r.ref || fltPass(r, fl); }); hidden = before - all.length; }
+  var fcn = $("fc-" + fk); if (fcn) { var ap = all.filter(function (r) { return !r.ref; }).length; fcn.innerHTML = "<strong>" + ap + "</strong> offre" + (ap > 1 ? "s" : "") + " sur " + avant; }
   var fn_ = $("flt-n-" + fk); if (fn_) fn_.textContent = (fltActive(fl) ? hidden + " offre(s) masquée(s) : caractéristique différente ou non relevée. " : "") + (sansGrille ? sansGrille + " offre(s) absente(s) : abonnement à " + kva + " kVA non disponible." : "");
   if (all.filter(function (r) { return !r.ref; }).length === 0) {
     var be0 = $("best-" + kind); if (be0) be0.textContent = "Aucune offre ne correspond à ces filtres (les offres dont la caractéristique n'est pas relevée sont masquées).";
@@ -1851,7 +1911,7 @@ function initEau() {
 
 /* ---------- Interface ---------- */
 var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
-var state = { rev: false, duoRev: false, eauRev: false, regRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
+var state = { rev: false, duoRev: false, eauRev: false, regRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [] }, gaz: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [] } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -2615,6 +2675,7 @@ function setTab(t) {
   refresh();
 }
 
+document.addEventListener("click", function (e) { var o = e.target.closest ? e.target.closest("[data-fopen]") : null; if (!o) return; var p = $("flt-" + o.getAttribute("data-fopen")), on = !p.classList.contains("open"); p.classList.toggle("open", on); o.setAttribute("aria-expanded", on ? "true" : "false"); });
 document.addEventListener("click", function (e) { var b = e.target.closest ? e.target.closest("[data-go]") : null; if (!b) return; var g = b.getAttribute("data-go"); setTab(g); window.scrollTo(0, 0); var hh = $("p-" + g).querySelector("h2"); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus(); } });
 navBuild(); navSync();
 TABS.forEach(function (n) { $("tab-" + n).addEventListener("click", function () { setTab(n); }); });
