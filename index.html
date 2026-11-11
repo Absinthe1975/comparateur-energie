@@ -371,11 +371,6 @@ code { overflow-wrap: anywhere; }
 @media (max-width: 860px) { #plus-menu { left: auto; right: 0; } }
 details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; font-weight: 600; color: var(--muted); }
 /* Accueil : cartes de départ et promotions repliées (maquette) */
-.home-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 16px 0; }
-.hcard { text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; position: relative; }
-.hcard:hover, .hcard:focus-visible { border-color: var(--accent); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
-.hcard strong { font-size: 1.1rem; } .hcard span:last-child { color: var(--muted); font-size: .92rem; }
-.hcard .dot { width: 10px; height: 10px; border-radius: 50%; margin-bottom: 6px; }
 #home-promos { margin: 14px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); text-align: left; }
 #home-promos .promo-list { list-style: none; padding: 0; margin: 4px 0; }
 #home-promos li { border-top: 1px solid var(--line); padding: 6px 0; } #home-promos li:first-child { border-top: 0; }
@@ -452,12 +447,6 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
       <p class="note">Le code postal reste dans votre navigateur. Il sert à estimer le prix de l'eau, et le tarif réglementé de l'électricité est le même partout en métropole. Pour un calcul plus précis de votre consommation, vous pouvez aussi <button type="button" class="linkbtn" data-go="logt">décrire votre logement</button>.</p>
     </div>
 
-    <div class="home-cards" role="group" aria-label="Que voulez-vous comparer ?">
-      <button type="button" class="hcard" data-go="elec"><span class="dot" style="background:var(--elec)"></span><strong>Électricité</strong><span>Prix du kWh et abonnement, toutes les offres</span></button>
-      <button type="button" class="hcard" data-go="gaz"><span class="dot" style="background:var(--gas)"></span><strong>Gaz</strong><span>Prix par zone, déduit de votre commune</span></button>
-      <button type="button" class="hcard" data-go="duo"><span class="dot" style="background:#dc2626"></span><strong>Élec + Gaz</strong><span>Offres combinées</span></button>
-      <button type="button" class="hcard" data-go="eau"><span class="dot" style="background:var(--water)"></span><strong>Eau</strong><span>Prix par commune et classement</span></button>
-    </div>
     <div id="home-promos" hidden></div>
 
     <h3>Comment ça marche</h3>
