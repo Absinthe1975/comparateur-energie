@@ -2,11 +2,11 @@
 
 Offre de réservation : on souscrit maintenant, la fourniture démarre **entre le 1er avril et le 31 mai 2027**, prix fixe 1 an à partir du démarrage, réservée aux 20 000 premiers clients, sans engagement. Prix « applicables au 21 octobre 2026 » (fiches PDF électricité et gaz, page https://www.ohm-energie.com, jusqu'à −16 % sur le kWh HT par rapport au TRV d'octobre 2026).
 
-**Non intégrée au comparateur** : la fourniture ne commence pas avant avril 2027, le prix n'est donc pas comparable à une offre qui démarre aujourd'hui. À décider : l'afficher comme une mention à part (comme une promotion), ou l'ignorer.
+**Affichée à part depuis le 11 nov. 2026 (décision de Benoit : mention hors classement)** sous les tableaux Électricité et Gaz, calculée avec la puissance, l'option et la zone choisies, jusqu'au 31 mai 2027. Elle n'entre ni dans le classement ni dans « Moins chère » : la fourniture ne commence pas avant avril 2027. (Ancienne note : **non intégrée au comparateur** : la fourniture ne commence pas avant avril 2027, le prix n'est donc pas comparable à une offre qui démarre aujourd'hui. À décider : l'afficher comme une mention à part (comme une promotion), ou l'ignorer.
 
 ## Électricité (TTC, ≤ 36 kVA)
 - Abonnement Base : 3 kVA 12,15 €/mois · 6 kVA 15,88 · 9 kVA 19,90 · 12 kVA 23,78 · 15 kVA 27,42 · 18 kVA 31,16 · 24 kVA 39,16 · 30 kVA 46,49 · 36 kVA 53,89.
-- Prix du kWh Base : 17,39 c€ et 18,07 c€ (selon la puissance : le tableau du PDF ne permet pas de lire avec certitude quelles puissances).
+- Prix du kWh Base : 17,39 c€ TTC pour 3 à 6 kVA et 18,07 c€ TTC pour 7 kVA et plus (lu sur le PDF du 21 oct. 2026, grille HTT 11,43 et 12,00 c€). L'abonnement TTC par an (×12) est le même que celui de l'offre Fixe 2 ans.
 - Heures pleines / creuses : 19,47 c€ / 14,55 c€ (Linky, selon les puissances).
 - Option électricité d'origine renouvelable disponible.
 
