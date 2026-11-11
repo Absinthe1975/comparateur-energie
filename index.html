@@ -488,6 +488,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="flt" id="flt-elec"></div>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
+    <p class="note reserve" id="res-elec" hidden></p>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-elec">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
@@ -500,6 +501,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="flt" id="flt-gaz"></div>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
+    <p class="note reserve" id="res-gaz" hidden></p>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-gaz">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Avec votre code postal saisi à l'accueil, la zone historique de GRDF est déduite automatiquement (liste des communes d'observatoires.net, croisée avec la base des codes postaux de La Poste ; source secondaire) ; vous pouvez la corriger ici. Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
@@ -1981,6 +1983,31 @@ function renderDuo() {
 }
 
 var fltBuilt = false;
+// OHM Prix Réservé : prix fixes 1 an (grille officielle du 21 octobre 2026), contrat à activer entre le 1er avril et le 31 mai 2027.
+// Affiché sous les tableaux, hors classement : on ne peut pas y souscrire pour une activation immédiate.
+var OHM_RES = { fin: "2027-05-31",
+  elec: { kwh3a6: 0.1739, kwh7: 0.1807, abo: { "3": 145.80, "6": 190.56, "9": 238.80, "12": 285.36, "15": 329.04, "18": 373.92, "24": 469.92, "30": 557.88, "36": 646.68 } },
+  gaz: { opt: { base: [0.1716, 153.48], b0: [0.1716, 156.36] }, b1: [0.1312, 0.1334, 0.1370, 0.1381, 0.1425, 0.1459], b1abo: 366.72 } };
+function renderReserves() {
+  var re = $("res-elec"), rg = $("res-gaz"); if (!re || !rg) return;
+  if (new Date() > new Date(OHM_RES.fin + "T23:59:59")) { re.hidden = true; rg.hidden = true; return; }
+  var kva = $("kva").value, E = OHM_RES.elec, ek = parseInt(kva, 10) <= 6 ? E.kwh3a6 : E.kwh7, ea = E.abo[kva];
+  var lien = ' <a href="https://ohm-energie.com/" target="_blank" rel="noopener">OHM Énergie</a>';
+  var fin = ' <span class="badge">Grille officielle du 21/10/2026</span>';
+  if (ea) {
+    var t = ek * ((state.tab === "elec" ? conso() : state.elecConso) || 0) + ea;
+    re.innerHTML = '<strong>À réserver pour le printemps 2027, hors classement :</strong>' + lien + ' Prix Réservé électricité (option Base, ' + kva + ' kVA), prix fixe 1 an : ' + fmtKwh.format(ek) + ' € le kWh TTC et ' + fmtEur2.format(ea) + ' d\'abonnement par an, soit environ ' + fmtEur0.format(t) + ' par an pour votre consommation. Le contrat ne peut démarrer qu\'entre le 1er avril et le 31 mai 2027, donc il ne se compare pas aux offres souscrites aujourd\'hui.' + fin;
+    re.hidden = false;
+  } else re.hidden = true;
+  var opt = state.gasOpt, z = (state.gasZone || 1) - 1, G = OHM_RES.gaz, gp = null;
+  if (opt === "b1") gp = [G.b1[z], G.b1abo]; else if (G.opt[opt]) gp = G.opt[opt];
+  if (gp) {
+    var tg = gp[0] * ((state.tab === "gaz" ? conso() : state.gasConso) || 0) + gp[1];
+    rg.innerHTML = '<strong>À réserver pour le printemps 2027, hors classement :</strong>' + lien + ' Prix Réservé gaz (option ' + (opt === "b1" ? "B1" : opt === "b0" ? "B0" : "Base") + (opt === "b1" ? ", zone " + (z + 1) : "") + '), prix fixe 1 an : ' + fmtKwh.format(gp[0]) + ' € le kWh TTC et ' + fmtEur2.format(gp[1]) + ' d\'abonnement par an, soit environ ' + fmtEur0.format(tg) + ' par an pour votre consommation. Activation du contrat entre le 1er avril et le 31 mai 2027 ; les plages d\'OHM sont Base jusqu\'à 1 000 kWh, B0 de 1 000 à 6 000, B1 au-delà.' + fin;
+    rg.hidden = false;
+  } else rg.hidden = true;
+}
+
 function refresh() {
   if (!fltBuilt) { fltBuilt = true; buildFilters("elec"); buildFilters("gaz"); }
   syncAuto();
@@ -2015,6 +2042,7 @@ function refresh() {
   renderSaisons();
   renderPro();
   renderProGaz();
+  renderReserves();
 }
 
 /* ---------- Offre par saisons (essai) : OctoSaisons ---------- */

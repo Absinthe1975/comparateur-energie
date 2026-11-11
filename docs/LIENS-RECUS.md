@@ -360,3 +360,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Zones de gaz (6-7 nov. 2026)
 - Pages observatoires.net par département (zip du script outils/telecharger_zones_gaz.py) et base La Poste 019HexaSmal : voir docs/ZONES-GAZ.md
+
+## OHM Prix Réservé (11 nov. 2026)
+- Grilles OHM Prix Réservé électricité et gaz (prix applicables au 21 octobre 2026, activation du 1er avril au 31 mai 2027) et page https://www.ohm-energie.com/ (prix réservé, mhtml) : voir docs/OHM-PRIX-RESERVE.md
