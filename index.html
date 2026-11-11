@@ -351,7 +351,7 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 code { overflow-wrap: anywhere; }
 /* Navigation : 5 rubriques + menu « Plus » + interrupteur Particulier / Professionnel */
 .tabs button[hidden] { display: none; }
-.mode { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--ref-bg); gap: 2px; margin-left: auto; }
+.mode { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--ref-bg); gap: 2px; }
 .mode button { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
 .mode button[aria-pressed="true"] { background: var(--surface); color: var(--accent); box-shadow: 0 1px 2px rgba(0,0,0,.14); }
 .plus-wrap { position: relative; display: inline-flex; }
@@ -361,9 +361,14 @@ code { overflow-wrap: anywhere; }
 #plus-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 220px; display: flex; flex-direction: column; gap: 2px; padding: 6px; background: var(--surface); border: 1px solid var(--ref-bg); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.18); }
 #plus-menu[hidden] { display: none; }
 #plus-menu button { text-align: left; width: 100%; }
-.topbar .tabs { flex: 1 1 auto; }
+.topbar .tabs { flex: 1 1 100%; justify-content: center; }
+/* En-tête sur 3 lignes, centré : 1) Particulier / Professionnel, 2) nom du site, 3) rubriques */
+.topbar-in { justify-content: center; row-gap: 6px; }
+.topbar-in .mode { order: -2; }
+.topbar-in .brand { order: -1; flex: 0 0 100%; justify-content: center; }
+.topbar-in .tabs { order: 0; }
 @media (max-width: 700px) { .topbar { position: relative; } }
-@media (max-width: 860px) { .mode { order: 2; } }
+@media (max-width: 860px) { #plus-menu { left: auto; right: 0; } }
 details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; font-weight: 600; color: var(--muted); }
 </style>
 
