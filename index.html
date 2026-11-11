@@ -370,6 +370,17 @@ code { overflow-wrap: anywhere; }
 @media (max-width: 700px) { .topbar { position: relative; } }
 @media (max-width: 860px) { #plus-menu { left: auto; right: 0; } }
 details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+/* Accueil : cartes de départ et promotions repliées (maquette) */
+.home-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 16px 0; }
+.hcard { text-align: left; font: inherit; color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 4px; cursor: pointer; position: relative; }
+.hcard:hover, .hcard:focus-visible { border-color: var(--accent); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+.hcard strong { font-size: 1.1rem; } .hcard span:last-child { color: var(--muted); font-size: .92rem; }
+.hcard .dot { width: 10px; height: 10px; border-radius: 50%; margin-bottom: 6px; }
+#home-promos { margin: 14px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); text-align: left; }
+#home-promos .promo-list { list-style: none; padding: 0; margin: 4px 0; }
+#home-promos li { border-top: 1px solid var(--line); padding: 6px 0; } #home-promos li:first-child { border-top: 0; }
+#home-promos summary { cursor: pointer; } #home-promos .until { color: var(--muted); white-space: nowrap; }
+#home-promos .promo-h { font-size: 1rem; margin: 0 0 4px; }
 </style>
 
 </head>
@@ -425,8 +436,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="hero">
       <span class="pill">Gratuit · sans but lucratif · sans lien d'affiliation</span>
       <h1>Comparez l'<span class="grad">électricité, le gaz et l'eau</span></h1>
-      <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal : décrire votre logement est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
-      <div id="home-promos" hidden></div>
+      <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal.</p>
       <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
     </div>
 
@@ -441,6 +451,14 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
       <p id="h-eau" class="note" role="status" aria-live="polite"></p>
       <p class="note">Le code postal reste dans votre navigateur. Il sert à estimer le prix de l'eau, et le tarif réglementé de l'électricité est le même partout en métropole. Pour un calcul plus précis de votre consommation, vous pouvez aussi <button type="button" class="linkbtn" data-go="logt">décrire votre logement</button>.</p>
     </div>
+
+    <div class="home-cards" role="group" aria-label="Que voulez-vous comparer ?">
+      <button type="button" class="hcard" data-go="elec"><span class="dot" style="background:var(--elec)"></span><strong>Électricité</strong><span>Prix du kWh et abonnement, toutes les offres</span></button>
+      <button type="button" class="hcard" data-go="gaz"><span class="dot" style="background:var(--gas)"></span><strong>Gaz</strong><span>Prix par zone, déduit de votre commune</span></button>
+      <button type="button" class="hcard" data-go="duo"><span class="dot" style="background:#dc2626"></span><strong>Élec + Gaz</strong><span>Offres combinées</span></button>
+      <button type="button" class="hcard" data-go="eau"><span class="dot" style="background:var(--water)"></span><strong>Eau</strong><span>Prix par commune et classement</span></button>
+    </div>
+    <div id="home-promos" hidden></div>
 
     <h3>Comment ça marche</h3>
     <ol class="steps">
@@ -1096,7 +1114,7 @@ function renderPromos() {
     var d0 = new Date(p.debut + "T00:00:00"), d1 = new Date(p.fin + "T23:59:59");
     if (isNaN(d0) || isNaN(d1) || now < d0 || now > d1) return;
     var nom = (PRIMES[p.k] && PRIMES[p.k].name) || p.k, f = d1.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-    h += '<li><strong>' + nomLienK(p.k, nom) + '</strong> : ' + esc(p.texte) + ' (jusqu\'au ' + esc(f) + ')' + (p.conditions ? '<br><span class="offer">' + esc(p.conditions) + '</span>' : "") + '</li>';
+    h += '<li><details><summary><strong>' + esc(nom) + '</strong> : ' + esc(p.texte) + ' <span class="until">jusqu\'au ' + esc(f) + '</span></summary>' + (p.conditions ? '<p class="offer">' + esc(p.conditions) + '</p>' : "") + '<p class="offer">' + nomLienK(p.k, "Page du fournisseur") + '</p></details></li>';
   });
   box.hidden = !h;
   box.innerHTML = h ? '<h2 class="promo-h">Promotions en cours</h2><ul class="promo-list">' + h + '</ul><p class="offer">Ces promotions ne comptent pas dans le classement : seul le prix de l\'offre est comparé.</p>' : "";
