@@ -358,7 +358,7 @@ code { overflow-wrap: anywhere; }
 #tab-plus { font: inherit; font-size: 14px; font-weight: 500; border: 0; background: transparent; color: var(--muted); padding: 8px 12px; border-radius: 10px; cursor: pointer; }
 #tab-plus:hover { background: var(--ref-bg); color: var(--fg); }
 #tab-plus.on { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
-#plus-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 220px; display: flex; flex-direction: column; gap: 2px; padding: 6px; background: var(--surface); border: 1px solid var(--ref-bg); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.18); }
+#plus-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 220px; display: flex; flex-direction: column; gap: 2px; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px rgba(0,0,0,.18); }
 #plus-menu[hidden] { display: none; }
 #plus-menu button { text-align: left; width: 100%; }
 .topbar .tabs { flex: 1 1 100%; justify-content: center; }
@@ -1796,7 +1796,8 @@ function renderEau() {
   $("eau-res").innerHTML = eauSummary(V, ep);
   eauHist();
   var rows = CITIES.slice().sort(function (a, b) { return a.p - b.p; });
-  var h = '<thead><tr><th>Commune</th><th>Département</th><th class="num">Prix par m³ TTC</th><th class="num">Total par an</th><th class="num">Écart avec vous</th></tr></thead><tbody>';
+  if (state.eauRev) rows.reverse();
+  var h = '<thead><tr><th>Commune</th><th>Département</th><th class="num">' + sortBtn("duo", "Prix par m³ TTC", "duo", state.eauRev) + '</th><th class="num">Total par an</th><th class="num">Écart avec vous</th></tr></thead><tbody>';
   h += '<tr class="ref"><td><div class="prov">Votre prix<span class="tag">Vous</span></div><div class="offer">' + esc(ep.src) + '</div></td><td>' + (state.eauDept ? esc(deptLabel(state.eauDept)) : "—") + '</td><td class="num">' + fmtNum2.format(ep.p) + ' €</td><td class="num"><strong>' + fmtInt.format(me) + ' €</strong></td><td class="num">référence</td></tr>';
   rows.forEach(function (c) {
     var t = eauCost(c.p, V), diff = t - me;
@@ -1806,7 +1807,8 @@ function renderEau() {
   });
   $("t-eau").innerHTML = h + "</tbody>";
   var regs = Object.keys(REGIONS).sort(function (a, b) { return REGIONS[a][1] - REGIONS[b][1]; });
-  var g = '<thead><tr><th>Région</th><th class="num">Prix moyen par m³</th><th class="num">Total par an</th><th>Fiabilité</th></tr></thead><tbody>';
+  if (state.regRev) regs.reverse();
+  var g = '<thead><tr><th>Région</th><th class="num">' + sortBtn("duo", "Prix moyen par m³", "duo", state.regRev) + '</th><th class="num">Total par an</th><th>Fiabilité</th></tr></thead><tbody>';
   regs.forEach(function (k) {
     var r = REGIONS[k];
     g += '<tr><td class="prov">' + esc(r[0]) + '</td><td class="num">' + fmtNum2.format(r[1]) + ' €</td><td class="num">' + fmtInt.format(eauCost(r[1], V)) + ' €</td><td>' + (r[2] ? '<span class="badge">Cohérente avec les communes</span>' : '<span class="badge check">Peu fiable, non utilisée</span>') + "</td></tr>";
@@ -1847,7 +1849,7 @@ function initEau() {
 
 /* ---------- Interface ---------- */
 var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
-var state = { rev: false, duoRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
+var state = { rev: false, duoRev: false, eauRev: false, regRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -2514,10 +2516,19 @@ function navBuild() {
   document.addEventListener("click", function (e) { if (!menu.hidden && !(e.target.closest && e.target.closest(".plus-wrap"))) navMenu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { navMenu(false); pb.focus(); } });
   menu.addEventListener("click", function () { navMenu(false); });
+  menu.addEventListener("keydown", function (e) {  // flèches haut et bas dans le menu « Plus »
+    var it = navMenuItems(), i = it.indexOf(document.activeElement);
+    if (e.key === "ArrowDown") { e.preventDefault(); it[(i + 1) % it.length].focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); it[(i - 1 + it.length) % it.length].focus(); }
+  });
   $("mode-part").addEventListener("click", function () { navMode("part"); setTab(state.tab === "home" ? "home" : "elec"); });
   $("mode-pro").addEventListener("click", function () { navMode("pro"); setTab(state.tab === "home" ? "home" : "pro"); });
 }
-function navMenu(open) { $("plus-menu").hidden = !open; $("tab-plus").setAttribute("aria-expanded", open ? "true" : "false"); }
+function navMenuItems() { return Array.prototype.filter.call($("plus-menu").querySelectorAll("button"), function (x) { return !x.hidden; }); }
+function navMenu(open) {
+  $("plus-menu").hidden = !open; $("tab-plus").setAttribute("aria-expanded", open ? "true" : "false");
+  if (open) { var it = navMenuItems(); it.forEach(function (x) { x.setAttribute("tabindex", "0"); }); if (it[0]) it[0].focus(); }
+}
 function navMode(m) {
   state.mode = m;
   $("mode-part").setAttribute("aria-pressed", m === "part" ? "true" : "false");
@@ -2631,6 +2642,8 @@ var gasOptTouched = false;   // vrai si l'utilisateur a choisi lui-même l'optio
   }, true);
 });
 $("duo-sep").addEventListener("change", function () { renderDuo(); });
+$("t-eau").addEventListener("click", function (ev) { if (ev.target.closest && ev.target.closest("[data-sort]")) { state.eauRev = !state.eauRev; renderEau(); } });
+$("t-reg").addEventListener("click", function (ev) { if (ev.target.closest && ev.target.closest("[data-sort]")) { state.regRev = !state.regRev; renderEau(); } });
 $("t-duo").addEventListener("click", function (ev) { if (ev.target.closest && ev.target.closest("[data-sort]")) { state.duoRev = !state.duoRev; renderDuo(); } });
 $("auto-back").addEventListener("click", function () { gasOptTouched = false; setAuto(true); refresh(); });
 
