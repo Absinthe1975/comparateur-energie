@@ -370,6 +370,12 @@ code { overflow-wrap: anywhere; }
 @media (max-width: 700px) { .topbar { position: relative; } }
 @media (max-width: 860px) { #plus-menu { left: auto; right: 0; } }
 details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; font-weight: 600; color: var(--muted); }
+/* Accueil : cartes de départ et promotions repliées (maquette) */
+#home-promos { margin: 14px 0; padding: 10px 14px; border-radius: 12px; background: var(--warn-soft); color: var(--fg); text-align: left; }
+#home-promos .promo-list { list-style: none; padding: 0; margin: 4px 0; }
+#home-promos li { border-top: 1px solid var(--line); padding: 6px 0; } #home-promos li:first-child { border-top: 0; }
+#home-promos summary { cursor: pointer; } #home-promos .until { color: var(--muted); white-space: nowrap; }
+#home-promos .promo-h { font-size: 1rem; margin: 0 0 4px; }
 </style>
 
 </head>
@@ -425,8 +431,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="hero">
       <span class="pill">Gratuit · sans but lucratif · sans lien d'affiliation</span>
       <h1>Comparez l'<span class="grad">électricité, le gaz et l'eau</span></h1>
-      <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal : décrire votre logement est facultatif, mais cela remplit la consommation toute seule dans les autres onglets.</p>
-      <div id="home-promos" hidden></div>
+      <p class="lede">Estimez votre facture, comparez les offres et repérez les primes de parrainage. Commencez par votre code postal.</p>
       <span class="stamp">Données relevées le <span class="dlong">10 octobre 2026</span> · France métropolitaine · prix TTC</span>
     </div>
 
@@ -441,6 +446,8 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
       <p id="h-eau" class="note" role="status" aria-live="polite"></p>
       <p class="note">Le code postal reste dans votre navigateur. Il sert à estimer le prix de l'eau, et le tarif réglementé de l'électricité est le même partout en métropole. Pour un calcul plus précis de votre consommation, vous pouvez aussi <button type="button" class="linkbtn" data-go="logt">décrire votre logement</button>.</p>
     </div>
+
+    <div id="home-promos" hidden></div>
 
     <h3>Comment ça marche</h3>
     <ol class="steps">
@@ -477,7 +484,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 
 <section class="panel" id="p-elec" role="tabpanel" aria-labelledby="tab-elec" hidden>
     <h2>Électricité, option Base</h2>
-    <p class="lede">Les offres classées pour votre consommation et la puissance de votre compteur, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
+    <p class="lede">Les offres classées pour votre consommation et la puissance de votre compteur, abonnement compris. Le repère reste en première ligne. Cliquez sur « Total par an » pour inverser l'ordre (du moins cher au plus cher, ou l'inverse).</p>
     <div class="flt" id="flt-elec"></div>
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
@@ -489,7 +496,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 
   <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
     <h2>Gaz naturel</h2>
-    <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Cliquez sur un titre de colonne pour trier.</p>
+    <p class="lede">Les offres classées pour votre consommation, avec l'option tarifaire qui correspond, abonnement compris. Le repère reste en première ligne. Cliquez sur « Total par an » pour inverser l'ordre (du moins cher au plus cher, ou l'inverse).</p>
     <div class="flt" id="flt-gaz"></div>
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
@@ -954,7 +961,7 @@ function primeCell(k) {
 }
 
 function sortRows(rows, key) {
-  var out = rows.slice();
+  var tete = rows.filter(function (r) { return r.ref; }), out = rows.filter(function (r) { return !r.ref; });
   out.sort(function (x, y) {
     if (key === "prix") return x._tot - y._tot;
     var px = x.k && PRIMES[x.k] ? PRIMES[x.k] : { fn: -1, pn: -1 };
@@ -962,7 +969,8 @@ function sortRows(rows, key) {
     var d = key === "filleul" ? py.fn - px.fn : py.pn - px.pn;
     return d !== 0 ? d : x._tot - y._tot;
   });
-  return out;
+  if (state.rev) out.reverse();
+  return tete.concat(out);  // le repère (tarif réglementé ou prix repère) reste toujours en première ligne
 }
 
 var ABO_G0 = { edf: 120.00, ohm: 152.04, gdb: 152.40, total: 152.40, engie: 152.46, mint: 152.40, octo: 152.40, plen: 179.10, happe: 152.46, alterna: 174.00, ilek: 218.04, dyneff: 163.44, geg: 125.64, ekw: 243.84 };
@@ -1041,8 +1049,12 @@ function renderGas() {
 
 var TRV_ABO = { "3": 145.56, "6": 190.32, "9": 238.56 };
 
-function sortBtn(key, label, cur) {
-  return '<button type="button" class="sortbtn' + (cur === key ? " on" : "") + '" data-sort="' + key + '" aria-pressed="' + (cur === key ? "true" : "false") + '">' + label + "</button>";
+function sortBtn(key, label, cur, rev) {
+  if (rev === undefined) rev = state.rev;
+  var on = cur === key, prix = key === "prix" || key === "duo";
+  var fleche = on ? (prix ? (rev ? " ▼" : " ▲") : (rev ? " ▲" : " ▼")) : "";
+  var aide = prix ? (on && rev ? "Du plus cher au moins cher : cliquer pour inverser" : "Du moins cher au plus cher : cliquer pour inverser") : (on && rev ? "Du plus petit au plus grand : cliquer pour inverser" : "Du plus grand au plus petit : cliquer pour inverser");
+  return '<button type="button" class="sortbtn' + (on ? " on" : "") + '" data-sort="' + key + '" aria-pressed="' + (on ? "true" : "false") + '" title="' + aide + '">' + label + fleche + "</button>";
 }
 
 // Champ du prix du kWh : « a » jusqu'à 6 kVA, « b » à partir de 9 kVA
@@ -1096,7 +1108,7 @@ function renderPromos() {
     var d0 = new Date(p.debut + "T00:00:00"), d1 = new Date(p.fin + "T23:59:59");
     if (isNaN(d0) || isNaN(d1) || now < d0 || now > d1) return;
     var nom = (PRIMES[p.k] && PRIMES[p.k].name) || p.k, f = d1.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-    h += '<li><strong>' + nomLienK(p.k, nom) + '</strong> : ' + esc(p.texte) + ' (jusqu\'au ' + esc(f) + ')' + (p.conditions ? '<br><span class="offer">' + esc(p.conditions) + '</span>' : "") + '</li>';
+    h += '<li><details><summary><strong>' + esc(nom) + '</strong> : ' + esc(p.texte) + ' <span class="until">jusqu\'au ' + esc(f) + '</span></summary>' + (p.conditions ? '<p class="offer">' + esc(p.conditions) + '</p>' : "") + '<p class="offer">' + nomLienK(p.k, "Page du fournisseur") + '</p></details></li>';
   });
   box.hidden = !h;
   box.innerHTML = h ? '<h2 class="promo-h">Promotions en cours</h2><ul class="promo-list">' + h + '</ul><p class="offer">Ces promotions ne comptent pas dans le classement : seul le prix de l\'offre est comparé.</p>' : "";
@@ -1835,7 +1847,7 @@ function initEau() {
 
 /* ---------- Interface ---------- */
 var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
-var state = { tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
+var state = { rev: false, duoRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "" }, gaz: { typ: "", vert: false, eng: "" } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -1950,18 +1962,20 @@ function renderDuo() {
   var ref = refE + gl.ref.a * I.gk + gl.ref.abo;
   if (!rows.length) { el.innerHTML = "<tbody><tr><td>Aucun fournisseur ne propose les deux énergies dans les données actuelles pour cette puissance (les offres combinées ne sont relevées que pour 3, 6 et 9 kVA).</td></tr></tbody>"; $("best-duo").hidden = true; return; }
   var b = rows[0], bd = b.tot - ref;
+  if (state.duoRev) rows.reverse();
   $("best-duo").innerHTML = "<strong>La moins chère : " + nomLien(b) + "</strong> (" + (b.duo ? "offre duo " + esc(b.eo) : esc(b.eo) + " + " + esc(b.go)) + "), " + fmtEur0.format(b.tot) + " par an. "
     + (Math.round(bd) < 0 ? "C'est " + fmtEur0.format(Math.abs(bd)) + " de moins que le tarif réglementé et le prix repère du gaz réunis." : Math.round(bd) > 0 ? "C'est " + fmtEur0.format(bd) + " de plus que le tarif réglementé et le prix repère du gaz réunis." : "C'est le même montant que le tarif réglementé et le prix repère du gaz réunis.");
-  var h = '<thead><tr><th>Fournisseur et offres</th><th class="num">Électricité par an</th><th class="num">Gaz par an</th><th class="num">Total par an</th><th class="num">Écart</th><th>Prime de parrainage</th></tr></thead><tbody>';
+  var h = '<thead><tr><th>Fournisseur et offres</th><th class="num">Électricité par an</th><th class="num">Gaz par an</th><th class="num">' + sortBtn("duo", "Total par an", "duo", state.duoRev) + '</th><th class="num">Écart</th><th>Prime de parrainage</th></tr></thead><tbody>';
+  var hTete = h; h = "";
   rows.forEach(function (r, i) {
     var d = r.tot - ref;
     var dtxt = Math.round(d) === 0 ? "0 €" : (d < 0 ? "−" : "+") + fmtEur0.format(Math.abs(d));
     var cls = Math.round(d) === 0 ? "" : d < 0 ? "delta-good" : "delta-bad";
-    h += '<tr><td><div class="prov">' + nomLien(r) + (i === 0 ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '.</div>' + nivBadge(r.duo) : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv })) + promoHtml(r.k, r.eo + " " + r.go) + '</td>'
+    h += '<tr><td><div class="prov">' + nomLien(r) + (r === b ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag">Offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '.</div>' + nivBadge(r.duo) : '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv })) + promoHtml(r.k, r.eo + " " + r.go) + '</td>'
       + '<td class="num">' + fmtEur0.format(r.ec) + '</td><td class="num">' + fmtEur0.format(r.gc) + (r.est ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r.tot) + '</strong></td><td class="num ' + cls + '">' + dtxt + '</td><td>' + primeCell(r.k) + '</td></tr>';
   });
-  h += '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
-  el.innerHTML = h + "</tbody>";
+  var hRef = '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
+  el.innerHTML = hTete + hRef + h + "</tbody>";
 }
 
 var fltBuilt = false;
@@ -2569,7 +2583,7 @@ $("conso").addEventListener("input", refresh);
 ["t-elec", "t-gaz"].forEach(function (id) {
   $(id).addEventListener("click", function (ev) {
     var b = ev.target.closest ? ev.target.closest("[data-sort]") : null;
-    if (b) { state.sort = b.getAttribute("data-sort"); refresh(); }
+    if (b) { var k = b.getAttribute("data-sort"); if (k === state.sort) state.rev = !state.rev; else { state.sort = k; state.rev = false; } refresh(); }
   });
 });
 $("kva").addEventListener("change", refresh);
@@ -2617,6 +2631,7 @@ var gasOptTouched = false;   // vrai si l'utilisateur a choisi lui-même l'optio
   }, true);
 });
 $("duo-sep").addEventListener("change", function () { renderDuo(); });
+$("t-duo").addEventListener("click", function (ev) { if (ev.target.closest && ev.target.closest("[data-sort]")) { state.duoRev = !state.duoRev; renderDuo(); } });
 $("auto-back").addEventListener("click", function () { gasOptTouched = false; setAuto(true); refresh(); });
 
 document.querySelector("[data-brand]").addEventListener("click", function (ev) { ev.preventDefault(); setTab("home"); window.scrollTo(0, 0); });
