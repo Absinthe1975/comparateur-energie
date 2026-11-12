@@ -8,7 +8,6 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 ### 1. Ce que je peux faire seul, sans rien de ta part
 - Fins de promotions : le site masque tout seul une promotion après sa date de fin (EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE retirée le 10 nov.). Les branches mortes du dépôt sont supprimées chaque dimanche par le flux « Nettoyage des anciennes branches ». 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
 - Rendre le test de bout en bout plus tolérant.
-- Mode sombre et clavier sur la barre de navigation : vérifiés le 11 nov. (fait).
 - Rapprocher à la main les 41 petites communes sans zone fournisseur (communes nouvelles ou renommées).
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
@@ -25,11 +24,9 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.
-- **OHM « Prix Réservé »** : décidé le 11 nov. (mention hors classement sous les tableaux élec et gaz, jusqu'au 31 mai 2027) et fait.
 - **Primeo** : afficher le prix calculé (tarif réglementé −5 %) comme « calculé selon la formule officielle », ou le laisser « À confirmer ».
 - **ENGIE électricité, prix du kWh** : (a) garder 0,2403 « À confirmer » (Selectra) ; (b) afficher la grille officielle de novembre calculée avec l'acheminement sans différenciation (6 kVA : 0,2493 € le kWh, 195,18 €/an), en « Grille officielle du 11/2026 » mais plus cher que Selectra ; (c) attendre le prix total d'ENGIE (simulateur). Ma préférence : (c) en gardant (a) d'ici là.
 - **Pro** : ajouter les taxes avec un choix « Mon activité », ou rester hors taxes.
-- **Alterna en Élec + Gaz** : décidé le 12 nov. : on additionne ses deux offres (case « Ajouter les offres séparées ») avec la mention « Deux contrats, une seule facture, aucune remise connue à ce jour » ; fait (PR 276). La même mention pour les autres fournisseurs additionnés : non décidée.
 
 ### 4. Ce qu'il faut refaire régulièrement
 - **Chaque mois (autour du 1er)** : Dyneff gaz (nouvelle grille mensuelle), Mint gaz (Biogaz Online et Classic), Octopus gaz Fixe, Gaz de Bordeaux (fiches du mois : NovaFixe et NovaFlex, élec et gaz), ENGIE Pro Latitude (prix indexé). Le suivi automatique signale les nouveaux PDF dans son rapport ; c'est toi qui m'envoies les fichiers et moi qui saisis.
@@ -49,6 +46,7 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - Électricité TotalEnergies « Fixe 2 ans » : ajoutée le 12 nov. (grille officielle du 24 sept. 2026, Base 0,2270 € de 3 à 6 kVA et 0,2252 € dès 7 kVA, heures pleines / creuses 0,2435 / 0,1791 €, page de souscription ouverte le 12 nov. ; Hello Watt donne les mêmes prix, mis à jour le 6 nov.). Le titre de la page (« -17 % vs TRV ») est périmé : au prix de la grille, l'offre est plus chère que le tarif réglementé.
 - Gaz TotalEnergies « Fixe 2 ans » : fait le 10 nov. (grille du 24 sept., prix par zone 1 à 6, zone déduite de la commune), reconfirmé le 12 nov. avec la grille et la page de souscription.
 - Zones de gaz par code postal : fait. Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 461 communes dont Paris, Lyon, Marseille et Strasbourg (9-10 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), TotalEnergies (zones 1 à 6), GEG (abonnement par zone NTR) ; par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone. Reste à faire seul : 41 petites communes non rapprochées (zone GRDF utilisée).
+- Fait ces derniers jours : mode sombre et clavier du menu vérifiés (11 nov.) ; OHM « Prix Réservé » en mention hors classement jusqu'au 31 mai 2027 (11 nov.) ; Alterna additionnée en Élec + Gaz avec la mention « deux contrats, une seule facture, aucune remise connue à ce jour » (12 nov.).
 - Encore « À confirmer » : ENGIE (élec), Ekwateur, Primeo (calculé), Gaz de Bordeaux gaz (zone de Paris).
 - Parrainages : confirmés par une page officielle, sauf Ekwateur, Happ-e et ilek ; Plenitude n'a aucun programme.
 
