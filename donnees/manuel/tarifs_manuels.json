@@ -208,7 +208,7 @@
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA)",
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA) ; fiche descriptive officielle de novembre 2026 reçue le 12 nov. : fourniture 0,17110 €/kWh TTC et abonnement de fourniture 45,79 € par an confirmés ; le prix total du kWh dépend de la formule d'acheminement (sans différenciation temporelle : 0,05988 € ; 4 plages : de 0,0144 à 0,0926 €), donc non vérifié",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
     },
@@ -455,6 +455,35 @@
       "s": [
         "Fiche descriptive officielle Premi'Ohm 3 ans (conditions applicables au 14 octobre 2026)",
         "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 2 ans Électricité",
+      "a": 0.227,
+      "b": 0.2252,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "24/09/2026",
+      "d": "12 nov. 2026",
+      "typ": "fixe",
+      "eng": 24,
+      "s": [
+        "Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris »",
+        "https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite"
       ]
     }
   ],
@@ -1355,6 +1384,33 @@
       "s": [
         "Fiche descriptive officielle Premi'Ohm 3 ans (conditions applicables au 14 octobre 2026)",
         "https://ohm-energie.com/offre/electricite"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 2 ans Électricité",
+      "hp": 0.2435,
+      "hc": 0.1791,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "24/09/2026",
+      "d": "12 nov. 2026",
+      "typ": "fixe",
+      "eng": 24,
+      "s": [
+        "Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris »",
+        "https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite"
       ]
     }
   ]
