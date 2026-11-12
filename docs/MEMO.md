@@ -1,14 +1,14 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 11 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
 ### 1. Ce que je peux faire seul, sans rien de ta part
 - Fins de promotions : le site masque tout seul une promotion après sa date de fin (EDF « 80 ans » 15 nov., Gaz de Bordeaux 30 nov.). Il n'y a rien d'urgent à faire ; je supprime les lignes périmées de `data.json` dans un nettoyage de temps en temps (ENGIE retirée le 10 nov.). Les branches mortes du dépôt sont supprimées chaque dimanche par le flux « Nettoyage des anciennes branches ». 31 déc. : retirer la prime OHM / EDF et la fin du parrainage EDF.
 - Rendre le test de bout en bout plus tolérant.
-- Mode sombre et clavier sur la nouvelle barre de navigation : à vérifier (non testés).
+- Mode sombre et clavier sur la barre de navigation : vérifiés le 11 nov. (fait).
 - Rapprocher à la main les 41 petites communes sans zone fournisseur (communes nouvelles ou renommées).
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
@@ -199,6 +199,16 @@ Mémo du 11 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - Tableaux électricité, gaz et duo : le repère (tarif réglementé ou prix repère CRE) est toujours en première ligne ; le bouton « Total par an » inverse l'ordre (▲ moins cher d'abord, ▼ l'inverse).
 - Aperçu privé d'une maquette avant fusion : page publiée par Claude dans l'espace Claude (données de 5 départements seulement : 13, 33, 59, 69, 75). Une branche en PR marquée `ne-pas-fusionner` n'est pas fusionnée par l'auto-fusion.
 - Idée non faite : aperçu permanent dans un dossier /apercu/ du site GitHub (avec noindex).
+
+- Filtres en panneau latéral à puces, style Selectra (fusionné le 11 nov., PR 273), sur Électricité et Gaz : type de prix, énergie verte, engagement, fiabilité (grille officielle), promotion, liste de fournisseurs, compteur « n offres sur N », réinitialisation ; sur mobile, bouton « Filtrer » qui ouvre le panneau. Pas encore sur Élec + Gaz. Non repris de Selectra : option tarifaire (déjà dans « Formule »), note client, Selectra Score.
+
+### Comparaison avec Selectra (12 nov. 2026)
+- Selectra (page « speciales=1 », enregistrée le 11 nov.) : 21 fournisseurs, 61 offres d'électricité (44 en option Base à Lyon sans les offres spéciales). Nous : 33 offres d'électricité (18 fournisseurs), 25 en gaz. Leur liste n'est lisible dans le fichier enregistré que si la page est chargée en entier (fichier de 10 Mo).
+- Fournisseurs absents chez nous : Frank Énergie, Papernest Énergie, Sobry, Symphonics, Urban Solar Energy, La Bellenergie (6 offres), mylight150.
+- Formules absentes de fournisseurs déjà présents : EDF (Zen Fixe, Zen Estival, Zen Week-End x3, Vert Électrique Week-End), TotalEnergies (Fixe 3 ans, Heures Eco, Heures Eco+, Spéciale), Octopus (Eco Fixe 2 ans, Eco Fixe Plus, Octopus Go, SolarPlus, SolarBoost), Enercoop (3 offres Flexibilité), ENGIE (Happy Week-end, Elec'Car 1 an), Gaz de Bordeaux (NovaFixe Bonus Élec dans la liste de Selectra), Dyneff (Contrat+ Verte), Happ-e (Option Vertelec), OHM (Week-End), Plenitude (Plenifix 1 an).
+- Chez nous mais pas chez eux : Ekwateur, Mint, Alterna, Primeo Essentielle Verte.
+- Méthode retenue : pour chaque offre, tu enregistres la page ou la grille du fournisseur (pas celle de Selectra, source secondaire), je vérifie les prix puis je saisis. Ordre proposé pour les prix fixes : EDF Zen Fixe, TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus. Comparaison de prix possible avec leur réglage 5 360 kWh, 9 kVA, Base.
+- EDF Tempo : la grille « Tarif Bleu » applicable au 1er août 2026 (reçue à nouveau le 12 nov.) est identique à nos prix (onglet Saisons) ; le tarif réglementé ne change qu'en février et août, prochaine révision probable le 1er février 2027.
 
 ### Mises à jour automatiques
 
