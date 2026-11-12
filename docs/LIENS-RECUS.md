@@ -125,6 +125,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/engie/parrainage
+- source : Fiche descriptive et grille officielle ENGIE Gaz Référence 3 ans (novembre 2026, groupes A à H) (Gaz Référence 3 ans) : https://particuliers.engie.fr/electricite-gaz/contrat-electricite-gaz-naturel.html
 - source : hellowatt.fr (Duo référence 3 ans) : https://www.hellowatt.fr/
 - parrainage : Site officiel ENGIE : https://particuliers.engie.fr/parrainage.html
 
@@ -157,8 +158,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ilek/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ilek/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/ilek/parrainage
-- source : Grille officielle ilek ÉnRFixe+ Élec, particuliers (à partir du 1er novembre 2026) (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/356/grille_356.pdf
-- source : Grille ilek (zone B) (ÉnRFixe+ Gaz) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/357/grille_357.pdf
+- source : Grille officielle ilek ÉnRFixe+ Élec, particuliers (disponible du 2 au 30 novembre 2026) (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/360/grille_360.pdf
+- source : Grille officielle ilek ÉnRFixe+ gaz (prix TTC, 11 zones A à K, disponible du 2 au 30 novembre 2026) (ÉnRFixe+ Gaz) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/361/grille_361.pdf
 - source : hellowatt.fr (ÉnRFixe+ Élec + Gaz) : https://www.hellowatt.fr/
 - parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
 
@@ -220,6 +221,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/totalenergies/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs
 - page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
+- source : Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris » (Fixe 2 ans Électricité) : https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite
+- source : Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026) (Fixe 2 ans Gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz
 
 ### Références (tarif réglementé, prix repère du gaz)
 - trv : https://www.hellowatt.fr/contrat-electricite/prix-electricite
@@ -363,3 +366,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## OHM Prix Réservé (11 nov. 2026)
 - Grilles OHM Prix Réservé électricité et gaz (prix applicables au 21 octobre 2026, activation du 1er avril au 31 mai 2027) et page https://www.ohm-energie.com/ (prix réservé, mhtml) : voir docs/OHM-PRIX-RESERVE.md
+
+## TotalEnergies, ENGIE, Octopus (12 nov. 2026)
+- TotalEnergies Fixe 2 ans : grille tarifaire (24 sept. 2026), fiche descriptive électricité et gaz, CGV, pages de souscription électricité et gaz (12 nov.) et page Hello Watt des tarifs (secondaire, 6 nov.) : électricité saisie le 12 nov.
+- ENGIE Elec Référence 3 ans : fiche descriptive avec grille tarifaire de novembre 2026 : composantes vérifiées, prix du kWh Base encore à trancher (formule d'acheminement)
+- Octopus OctoSaisons : fiche descriptive, grille applicable au 30/10/2026 (mêmes prix qu'au 1er août), pages officielle et Selectra : voir docs/OCTOSAISONS-GRILLE.md
+- GEG : page des tarifs (12 nov.) : aucune grille nouvelle depuis octobre (électricité) et septembre (gaz)
