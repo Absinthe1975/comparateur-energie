@@ -12,7 +12,8 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - Rapprocher à la main les 41 petites communes sans zone fournisseur (communes nouvelles ou renommées).
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
-- **TotalEnergies gaz** : fait le 10 nov. (grille « Fixe 2 ans Gaz » du 24 sept., prix par zone 1 à 6, zone déduite de la commune). Les zones de chaque commune pour ilek, TotalEnergies, ENGIE, Alterna et GEG sont faites (voir docs/ZONES-GAZ.md).
+- **TotalEnergies électricité « Fixe 2 ans »** : la grille officielle du 24 sept. est reçue (Base 0,2270 € de 3 à 6 kVA, 0,2252 € dès 7 kVA ; heures pleines / creuses 0,2435 / 0,1791 €), mais l'offre semblait fermée le 31 oct. et Selectra ne la liste pas. À m'envoyer : la page d'électricité « Fixe 2 ans » enregistrée (Ctrl+S) ; si elle propose « Je souscris », je l'ajoute.
+- **Gaz de Bordeaux gaz** : fiches NovaFlex des zones 4 à 6 et table commune → zone.
 - **ENGIE électricité** : la fiche reçue est la grille d'**août 2026** (fourniture + acheminement + obligations séparés ; en base 6 kVA : 0,14384 + 0,05988 + 0,01804 = 0,2218 €/kWh TTC, abonnement 195,18 €/an), alors que le site affiche 0,2403 (2 nov., source secondaire, « À confirmer »). Décision à prendre : afficher la grille d'août calculée (« Grille officielle du 08/2026 ») ou attendre la grille de novembre.
 - **Ekwateur** : un PDF de grille (le prix n'apparaît qu'à la souscription).
 - **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
@@ -22,7 +23,6 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - **Offres à prix fixe manquantes (une à la fois, grille du fournisseur et non celle de Selectra)** : EDF Zen Fixe (autres variantes), TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus.
 - **Fiches descriptives pour les filtres** : type de prix, durée de blocage et énergie verte manquent pour plusieurs offres (voir « Limites connues »), donc elles disparaissent dès qu'on active le filtre correspondant.
 
-- **Zones de gaz par code postal : fait.** Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 461 communes dont Paris, Lyon, Marseille et Strasbourg (9-10 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), GEG (abonnement par zone NTR). Déjà par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Reste : TotalEnergies (grille par zone à recevoir), Gaz de Bordeaux NovaFlex zones 4 à 6, 41 petites communes non rapprochées (communes nouvelles ou renommées) (zone GRDF utilisée). Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone dans leurs grilles.
 
 ### 3. Ce que tu dois trancher
 - **LLUM avec un Linky** : afficher une moyenne des prix par saison, ou seulement une mention.
@@ -46,6 +46,8 @@ Mémo du 12 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 ### 6. Ce qui est déjà saisi d'après une grille officielle récente
 - Électricité : EDF (Tarif Bleu, Zen), Octopus (Eco fixe, Intelligent), OHM (octobre), Mint, Dyneff, LLUM (compteur non communicant), Enercoop, GEG, Gaz de Bordeaux (novembre), Plenitude, Alterna, Alpiq, La Bellenergie.
 - Gaz : Dyneff (octobre), Mint (novembre), Octopus (novembre), Alterna, GEG.
+- Gaz TotalEnergies « Fixe 2 ans » : fait le 10 nov. (grille du 24 sept., prix par zone 1 à 6, zone déduite de la commune), reconfirmé le 12 nov. avec la grille et la page de souscription.
+- Zones de gaz par code postal : fait. Zones GRDF (7 nov.), puis zones propres aux fournisseurs pour 9 461 communes dont Paris, Lyon, Marseille et Strasbourg (9-10 nov., source secondaire observatoires.net / Selectra, voir docs/ZONES-GAZ.md). Prix par zone branchés : ENGIE (groupes A à H), ilek (zones A à K), TotalEnergies (zones 1 à 6), GEG (abonnement par zone NTR) ; par zone GRDF : EDF, OHM, Octopus, Mint, Happ-e ; Alterna par code postal. Dyneff, Plenitude, Ekwateur n'ont pas de prix par zone. Reste à faire seul : 41 petites communes non rapprochées (zone GRDF utilisée).
 - Encore « À confirmer » : ENGIE (élec), Ekwateur, Primeo (calculé), Gaz de Bordeaux gaz (zone de Paris).
 - Parrainages : confirmés par une page officielle, sauf Ekwateur, Happ-e et ilek ; Plenitude n'a aucun programme.
 
