@@ -1,6 +1,10 @@
-# Octopus Energy : offre OctoSaisons (ex-OctoTempo), grille du 1er août 2026
+# Octopus Energy : offre OctoSaisons (ex-OctoTempo), grille du 1er août 2026 (reconduite au 30 octobre 2026)
 
 Source : grille tarifaire officielle d'Octopus (PDF « grille-tarifaire-octotempo_aout26 », applicable au 01/08/2026) et fiche descriptive de l'offre (août 2026). Offre renommée OctoSaisons le 21 octobre 2026 ; le nom seul change. Pas encore dans le comparateur : il ne sait pas traiter six prix par kWh (voir le Mémo).
+
+## Mise à jour du 12 novembre 2026
+- Grille officielle « applicable au 30/10/2026 » reçue : prix identiques (kWh et abonnement) à ceux du 1er août ; l'accise y est indiquée à 0,03062 €/kWh depuis le 1er août 2026.
+- Page officielle d'Octopus (12 nov.) : 16 h d'heures creuses par jour en été, 10 h en hiver ; 22 jours rouges, de novembre à mars, jamais le week-end ; 214 jours d'été (avril à octobre), 128 jours d'hiver (novembre à mars). Les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) restent celles de l'article de Selectra du 21 oct. 2026 : à confirmer.
 
 ## Principe
 - Contrat de 2 ans, résiliable à tout moment sans frais ; prix hors taxes de l'abonnement et du kWh bloqués 2 ans.
