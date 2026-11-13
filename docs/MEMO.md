@@ -201,10 +201,11 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 ### Navigation et accueil (refonte du 10-11 nov. 2026)
 
-- En-tête centré sur 3 lignes : interrupteur Particulier / Professionnel, nom du site, rubriques. Rubriques principales (particulier) : Accueil, Mon logement, Électricité, Gaz, Élec + Gaz, Eau, puis un menu « Plus » (Parrainages, Saisons, Abonnement, Marché, Méthode, Sources, Statistiques, Mentions légales). Mode professionnel : Accueil, Offres pro (essai) et « Plus ».
+- En-tête centré sur 3 lignes : interrupteur Particulier / Professionnel, nom du site, rubriques. Rubriques principales (particulier) : Accueil, Mon logement, Électricité, Gaz, Élec + Gaz, Eau, puis un menu « Plus » (Parrainages, Abonnement, Marché, Méthode, Sources, Statistiques, Mentions légales). Mode professionnel : Accueil, Offres pro (essai) et « Plus ».
 - Accueil : code postal d'abord, promotions repliées sur une ligne (conditions au clic), « Comment ça marche » en 3 cases, notes sur les prix repliées.
 - Tableaux électricité, gaz et duo : le repère (tarif réglementé ou prix repère CRE) est toujours en première ligne ; le bouton « Total par an » inverse l'ordre (▲ moins cher d'abord, ▼ l'inverse).
 - Aperçu privé d'une maquette avant fusion : page publiée par Claude dans l'espace Claude (données de 5 départements seulement : 13, 33, 59, 69, 75). Une branche en PR marquée `ne-pas-fusionner` n'est pas fusionnée par l'auto-fusion.
+- Offres à prix variable (OctoSaisons, Tempo, Zen Estival) : onglet Saisons supprimé le 13 nov. (PR 283), elles s'affichent dans l'onglet Électricité avec le filtre « Prix variable selon le jour ou l'heure » ; grilles et autres offres dans la section dépliante sous le tableau.
 - Filtres en panneau : pas encore sur l'onglet Élec + Gaz ; à décider.
 - Idée non faite : aperçu permanent dans un dossier /apercu/ du site GitHub (avec noindex).
 
