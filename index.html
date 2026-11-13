@@ -797,7 +797,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
         <li>L'abonnement à 3 kVA de certains fournisseurs n'est pas exact, les puissances de 12 à 36 kVA sont estimées sauf grille complète (GEG, Dyneff, Enercoop).</li>
         <li>Pour le gaz, la zone des distributeurs locaux (Bordeaux, Strasbourg, Colmar) n'est pas modélisée.</li>
         <li>Pour l'eau, environ 8 700 communes n'ont pas de prix au SISPEA ; le site le dit et utilise une moyenne indicative. Pour les communes sans assainissement renseigné, seule l'eau potable est comptée.</li>
-        <li>Les filtres « prix fixe / indexé », « engagement » et « offres vertes » ne reposent que sur ce qui est écrit dans le nom ou la grille de l'offre. Quand la caractéristique n'est pas relevée, l'offre disparaît dès que vous activez le filtre. La qualité du service n'est pas comparée.</li>
+        <li>Les filtres « prix fixe / indexé », « durée du prix » et « offres vertes » ne reposent que sur ce qui est écrit dans le nom ou la grille de l'offre. Quand la caractéristique n'est pas relevée, l'offre disparaît dès que vous activez le filtre. Aucune de ces offres n'a de frais de résiliation : la durée indiquée est celle pendant laquelle le prix est garanti. La qualité du service n'est pas comparée.</li>
       </ul>
     </div>
 
@@ -1152,7 +1152,7 @@ function tagsLine(r) {
   if (r.ref) return "";
   var t = [];
   if (r.typ === "fixe") t.push("Prix fixe"); else if (r.typ === "indexe") t.push("Prix indexé");
-  if (r.eng === 0) t.push("Sans engagement"); else if (typeof r.eng === "number") t.push("Engagement " + r.eng + " mois");
+  if (r.eng === 0) t.push("Prix non bloqué"); else if (typeof r.eng === "number") t.push("Prix bloqué " + r.eng + " mois");
   if (r.vert) t.push("Verte ou biogaz");
   return (t.length ? '<div class="tags">' + t.map(function (x) { return '<span class="badge">' + esc(x) + "</span>"; }).join("") + "</div>" : "") + promoHtml(r.k, r.offer);
 }
@@ -1180,7 +1180,7 @@ function buildFilters(kind) {
     + '<p class="fcount" id="fc-' + kind + '" role="status" aria-live="polite"></p>'
     + '<div class="fsec"><h3>Type de prix</h3><div class="chips">' + chip("typ", "", "Tous", !f.typ) + chip("typ", "fixe", "Fixe", f.typ === "fixe", "🔒") + chip("typ", "indexe", "Indexé", f.typ === "indexe", "↗") + "</div></div>"
     + '<div class="fsec"><h3>Énergie verte</h3><div class="chips">' + chip("vert", "1", kind === "gaz" ? "Verte ou biogaz" : "Offres vertes", f.vert, "🍃") + "</div></div>"
-    + '<div class="fsec"><h3>Engagement</h3><div class="chips">' + chip("eng", "", "Tous", f.eng === "") + chip("eng", "0", "Sans", f.eng === "0") + chip("eng", "12", "12 mois max", f.eng === "12") + chip("eng", "24", "24 mois max", f.eng === "24") + "</div></div>"
+    + '<div class="fsec"><h3>Durée du prix</h3><div class="chips">' + chip("eng", "", "Tous", f.eng === "") + chip("eng", "0", "Non bloqué", f.eng === "0") + chip("eng", "12", "12 mois max", f.eng === "12") + chip("eng", "24", "24 mois max", f.eng === "24") + "</div></div>"
     + '<div class="fsec"><h3>Fiabilité du prix</h3><div class="chips">' + chip("off", "", "Toutes", !f.off) + chip("off", "1", "Grille officielle", f.off, "✓") + "</div></div>"
     + '<div class="fsec"><h3>Promotion</h3><div class="chips">' + chip("promo", "1", "Promotion en cours", f.promo, "★") + "</div></div>"
     + '<div class="fsec"><details' + (supOn ? " open" : "") + '><summary><h3>Fournisseur' + (supOn ? " (" + supOn + ")" : "") + '</h3></summary><div class="fsup">' + sup.map(function (nm) { return '<label><input type="checkbox" data-fk="sup" value="' + esc(nm) + '"' + (f.sup.indexOf(nm) >= 0 ? " checked" : "") + "> " + esc(nm) + "</label>"; }).join("") + "</div></details></div>"
