@@ -339,6 +339,10 @@ footer .foot-brand { display: flex; align-items: center; gap: 10px; color: #fff;
 
 /* Impression : seul l'onglet affiché, sans barre ni filtres */
 @media print {
+  .fu { display: block; margin-top: 8px; font-size: .88rem; }
+  .fu select { display: block; width: 100%; margin-top: 2px; }
+  .saisons-det { margin-top: 20px; }
+  .saisons-det > summary { cursor: pointer; padding: 8px 0; }
   .topbar, .bar, .noprint, .conf-leg + p, footer nav, #flt-elec, #flt-gaz, details.filters, .linkbtn { display: none !important; }
   body { background: #fff; color: #000; }
   .wrap { max-width: none; padding: 0; }
@@ -412,7 +416,6 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
       <button role="tab" id="tab-elec" aria-selected="false" tabindex="-1" aria-controls="p-elec">Électricité</button>
       <button role="tab" id="tab-gaz" aria-selected="false" tabindex="-1" aria-controls="p-gaz">Gaz</button>
       <button role="tab" id="tab-duo" aria-selected="false" tabindex="-1" aria-controls="p-duo">Élec + Gaz</button>
-      <button role="tab" id="tab-saisons" aria-selected="false" tabindex="-1" aria-controls="p-saisons">Saisons (essai)</button>
       <button role="tab" id="tab-pro" aria-selected="false" tabindex="-1" aria-controls="p-pro">Pro (essai)</button>
       <button role="tab" id="tab-eau" aria-selected="false" tabindex="-1" aria-controls="p-eau">Eau</button>
       <button role="tab" id="tab-abo" aria-selected="false" tabindex="-1" aria-controls="p-abo">Abonnement</button>
@@ -521,6 +524,24 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="note">Le total par an est la somme de deux parties séparées : la consommation (prix du kWh × vos kWh) et l'abonnement. Le prix du kWh est le même pour 3 et 6 kVA. L'abonnement change avec la puissance : au tarif réglementé, 145,56 € à 3 kVA, 190,32 € à 6 kVA et 238,56 € à 9 kVA. Les abonnements relevés chez les fournisseurs sont ceux de 6 kVA. Une étoile signale un montant estimé : pour 3 et 9 kVA, l'écart du tarif réglementé entre deux puissances est appliqué à l'abonnement de 6 kVA du fournisseur. Pour 9 kVA, le prix du kWh est celui publié par la source ; quand elle n'en publie qu'un (LLUM, Dyneff, OHM Énergie, Happ-e), c'est ce prix unique qui est utilisé.</p>
       </div>
     </div>
+    <details class="saisons-det" id="sa-det"><summary><strong>Prix variable selon le jour ou l'heure : grilles, calcul et autres offres</strong></summary>
+    <p class="note">Certaines offres (OctoSaisons d'Octopus Energy, option Tempo et offre Zen Estival d'EDF) n'ont pas un prix du kWh mais plusieurs : types de jours et heures pleines ou creuses. Le filtre « Prix variable selon le jour ou l'heure » les ajoute au tableau avec un prix moyen estimé d'après vos usages (chauffage, journée, chauffe-eau, voiture). Zen Estival suit la répartition publiée par EDF (3,6 MWh par an, sans chauffage électrique) : elle n'apparaît que si le chauffage n'est pas électrique. Ces offres ne sont pas comptées dans les classements des autres tableaux.</p>
+<h3>Les grilles utilisées</h3>
+    <div class="tablewrap"><table id="t-saisons-grille"></table></div>
+    <h3>Autres offres à horaires ou à saisons particuliers (relevé sans calcul)</h3>
+    <p class="note">Offres repérées dans la presse spécialisée en juin 2026. Quand le prix n'est pas relevé, c'est écrit ; aucune de ces offres n'est calculée ni classée. Le médiateur de l'énergie prévient que, pour ces offres, l'abonnement peut être nettement plus cher que celui du tarif réglementé, et que les foyers chauffés à l'électricité dans un logement mal isolé n'y gagnent pas forcément, l'hiver coûtant plus cher.</p>
+    <div class="tablewrap"><table id="t-saisons-autres"><thead><tr><th>Fournisseur et offre</th><th>Principe</th><th>Prix relevés</th><th>Source</th></tr></thead><tbody>
+      <tr><td><div class="prov" data-k="ohm">OHM Énergie</div><div class="offer">Modulo</div></td><td class="offer">Heures « solaires » moins chères de 11 h à 16 h pendant 7 mois par an, et 15 journées à prix très bas.</td><td class="offer">Prix non relevé.</td><td class="offer"><a href="https://www.moneyvox.fr/energie/actualites/109266/heures-super-creuses-tarifs-saisonniers-ce-quil-faut-savoir-avant-de-souscrire-a-ces-nouvelles-offres-electricite" target="_blank" rel="noopener noreferrer">MoneyVox</a></td></tr>
+      <tr><td><div class="prov" data-k="engie">ENGIE</div><div class="offer">Elec'Car+</div></td><td class="offer">Heures creuses à −60 % par rapport aux heures pleines, de 2 h à 6 h, la différence étant versée en cagnotte.</td><td class="offer">Prix non relevé pour Elec'Car+. Elec'Car 1 an (12 kVA) : 0,1518 € en heures creuses, 0,2668 € en heures pleines.</td><td class="offer"><a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
+      <tr><td><div class="prov" data-k="engie">ENGIE</div><div class="offer">Promo d'été (Elec ou Duo Référence 3 ans)</div></td><td class="offer">50 % du prix de l'électricité consommée entre 13 h et 17 h, tous les jours, hors abonnement. Le montant est calculé par ENGIE et crédité en euros dans une cagnotte de l'Espace Client ; la promotion s'active depuis l'Espace Client.</td><td class="offer">Cagnotte versée automatiquement, sous un mois, dès qu'elle atteint 25 € TTC. Prix de l'offre Elec Référence 3 ans (Hellowatt) : 0,2445 € en heures pleines, 0,1946 € en heures creuses ; abonnement de 17,01 € par mois à 6 kVA à 60,10 € à 36 kVA. Date de fin non indiquée sur la page.</td><td class="offer"><a href="https://particuliers.engie.fr/landing/offres-energie-rs.html" target="_blank" rel="noopener noreferrer">Page ENGIE</a> (consultée le 28 oct. 2026), <a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
+      <tr><td><div class="prov" data-k="total">TotalEnergies</div><div class="offer">Charge'Heures</div></td><td class="offer">Heures « super » creuses de 2 h à 6 h, pensées pour la recharge d'un véhicule électrique à domicile.</td><td class="offer">0,1337 € en heures super creuses, 0,2305 € en heures pleines. Abonnement non relevé.</td><td class="offer"><a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
+      <tr><td><div class="prov" data-k="ilek">ilek</div><div class="offer">Offre voiture électrique</div></td><td class="offer">Heures « super » creuses de 3 h 01 à 7 h, heures creuses de 1 h 01 à 3 h et de 13 h 01 à 15 h, heures pleines le reste de la journée ; réservée aux possesseurs d'une voiture électrique avec un compteur Linky communiquant ; indexée sur la part variable du tarif réglementé.</td><td class="offer">Grille officielle ilek du 1er août 2026, TTC : super heures creuses 0,1064 €, heures creuses 0,1589 €, heures pleines 0,2142 €. Abonnement plus élevé que le tarif réglementé : 28,45 € par mois à 6 kVA, 39,26 € à 9 kVA, 89,05 € à 36 kVA.</td><td class="offer"><a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/275/grille_offre_ve.pdf" target="_blank" rel="noopener noreferrer">Grille ilek</a></td></tr>
+      <tr><td><div class="prov" data-k="enercoop">Enercoop</div><div class="offer">Flexibilité Nuit &amp; week-end, 2 saisons, jours de pointe</div></td><td class="offer">Heures creuses de 23 h à 6 h, le week-end et les jours fériés ; ou heures creuses variant avec la saison ; ou jours de pointe.</td><td class="offer">Grille officielle du 1er août 2026 reçue, non modélisée ici. L'offre « 2 saisons » est fermée aux nouveaux clients depuis le 4 juin 2025.</td><td class="offer"><a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener noreferrer">Annexes tarifaires Enercoop</a></td></tr>
+      <tr><td><div class="prov" data-k="ohm">OHM Énergie</div><div class="offer">Extra Eco Fixe</div></td><td class="offer">Deux prix (heures pleines et creuses), sans jour rouge ; prix bloqué 1 an. Présentée comme alternative à Tempo.</td><td class="offer">Février 2026, TTC : 0,1824 € en heures pleines, 0,1407 € en heures creuses.</td><td class="offer"><a href="https://selectra.info/energie/actualites/marche/alternative-tempo-offre-0-18-enterre-jours-rouges" target="_blank" rel="noopener noreferrer">Selectra</a></td></tr>
+    </tbody></table></div>
+    <p class="note">Comment le calcul est fait : votre journée type est découpée heure par heure (hypothèse de ce site), puis la part de consommation qui tombe dans les heures creuses de chaque offre est calculée avec ses plages horaires. Un chauffe-eau programmé la nuit est compté pour 12 % de la consommation et une voiture rechargée la nuit pour 20 %, entre 23 h et 5 h. La part en hiver est celle de la consommation hors jours rouges. Pour un logement chauffé à l'électricité, Octopus et Selectra retiennent environ 7 % de la consommation les jours rouges. Les heures creuses d'OctoSaisons sont plus nombreuses l'été (16 heures par jour) que l'hiver (10 heures par jour), ce que confirme la page officielle d'Octopus (12 nov. 2026). Les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) viennent d'un article de Selectra du 21 oct. 2026 et ne figurent pas dans la fiche de l'offre : à confirmer.</p>
+    <p class="note"><strong>EDF Tempo</strong> (300 jours bleus, 43 blancs, 22 rouges, heures creuses de 22 h à 6 h) : prix TTC en vigueur depuis le 1er août 2026, vérifiés sur la grille officielle « Tarif Bleu » d'EDF (applicable au 1er août 2026, reçue le 2 nov. 2026 : option Tempo de 6 à 36 kVA, abonnement mensuel TTC compris). Le reste de la consommation est supposé les jours bleus. Les jours rouges d'EDF seront mieux répartis dès le 1er novembre, ce qui peut changer la part réelle. <strong>Source OctoSaisons :</strong> <a href="https://octopusenergy.fr/octosaisons" target="_blank" rel="noopener noreferrer">grille tarifaire officielle d'Octopus Energy applicable au 30 octobre 2026</a> (mêmes prix que celle du 1er août 2026), prix TTC. Offre de 2 ans, résiliable sans frais, prix hors taxes bloqués pendant 2 ans.</p>
+    </details>
   </section>
 
   <section class="panel" id="p-gaz" role="tabpanel" aria-labelledby="tab-gaz" hidden>
@@ -552,36 +573,6 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="note">Les offres duo relevées viennent du comparateur Hello Watt (relevé du 13 octobre 2026, pour 3 710 kWh d'électricité et 5 211 kWh de gaz) : Leurs prix et leurs promotions changent souvent, ne sont pas mis à jour automatiquement et sont à confirmer chez le fournisseur ; le prix du gaz de certaines offres dépend de la tranche de consommation. Elles sont calculées avec le prix du gaz en option B1 (chauffage) ; avec une autre option, le gaz est estimé (astérisque). La prime de parrainage est celle du fournisseur : son montant peut être différent pour un contrat combiné.</p>
   </section>
 
-  <section class="panel" id="p-saisons" role="tabpanel" aria-labelledby="tab-saisons" hidden>
-    <h2>Offres par saisons : OctoSaisons, EDF Tempo et Zen Estival (essai)</h2>
-    <p class="lede">Onglet provisoire. Certaines offres, comme OctoSaisons d'Octopus Energy (ex-OctoTempo) et l'option Tempo et l'offre Zen Estival d'EDF, n'ont pas un prix du kWh mais six : trois types de jours (été, hiver et 22 jours rouges pour Octopus ; bleus, blancs et rouges pour EDF), chacun en heures pleines et heures creuses. Le résultat dépend donc de votre façon de consommer. Réglez les champs ci-dessous : le total annuel est comparé au tarif réglementé de base. Zen Estival suit la répartition de consommation publiée par EDF (3,6 MWh par an, sans chauffage électrique) : elle n'apparaît donc que si le chauffage n'est pas électrique, car l'offre est faite pour un autre profil. Ces offres ne sont pas comptées dans les autres tableaux ni dans les classements.</p>
-    <div class="bar" style="position:static">
-      <div class="field"><label for="sa-kva">Puissance</label><select id="sa-kva"></select></div>
-      <div class="field"><label for="sa-conso">Consommation (kWh par an)</label><input id="sa-conso" type="number" min="500" max="30000" step="100" value="5700"></div>
-      <div class="field"><label for="sa-chauf">Chauffage</label><select id="sa-chauf"><option value="elec" selected>Électrique</option><option value="autre">Gaz, bois, autre</option></select></div>
-      <div class="field"><label for="sa-jour">Votre journée</label><select id="sa-jour"><option value="absent" selected>Absent en journée (travail)</option><option value="present">Souvent présent en journée</option></select></div>
-      <div class="field"><label for="sa-ce">Chauffe-eau électrique</label><select id="sa-ce"><option value="non" selected>Non, ou à toute heure</option><option value="nuit">Oui, programmé la nuit</option></select></div>
-      <div class="field"><label for="sa-ve">Voiture électrique</label><select id="sa-ve"><option value="non" selected>Non</option><option value="nuit">Oui, rechargée la nuit</option></select></div>
-    </div>
-    <div class="callout" id="sa-res" aria-live="polite"></div>
-    <p class="note" id="sa-hyp"></p>
-    <div class="tablewrap"><table id="t-saisons"></table></div>
-    <h3>Les grilles utilisées</h3>
-    <div class="tablewrap"><table id="t-saisons-grille"></table></div>
-    <h3>Autres offres à horaires ou à saisons particuliers (relevé sans calcul)</h3>
-    <p class="note">Offres repérées dans la presse spécialisée en juin 2026. Quand le prix n'est pas relevé, c'est écrit ; aucune de ces offres n'est calculée ni classée. Le médiateur de l'énergie prévient que, pour ces offres, l'abonnement peut être nettement plus cher que celui du tarif réglementé, et que les foyers chauffés à l'électricité dans un logement mal isolé n'y gagnent pas forcément, l'hiver coûtant plus cher.</p>
-    <div class="tablewrap"><table id="t-saisons-autres"><thead><tr><th>Fournisseur et offre</th><th>Principe</th><th>Prix relevés</th><th>Source</th></tr></thead><tbody>
-      <tr><td><div class="prov" data-k="ohm">OHM Énergie</div><div class="offer">Modulo</div></td><td class="offer">Heures « solaires » moins chères de 11 h à 16 h pendant 7 mois par an, et 15 journées à prix très bas.</td><td class="offer">Prix non relevé.</td><td class="offer"><a href="https://www.moneyvox.fr/energie/actualites/109266/heures-super-creuses-tarifs-saisonniers-ce-quil-faut-savoir-avant-de-souscrire-a-ces-nouvelles-offres-electricite" target="_blank" rel="noopener noreferrer">MoneyVox</a></td></tr>
-      <tr><td><div class="prov" data-k="engie">ENGIE</div><div class="offer">Elec'Car+</div></td><td class="offer">Heures creuses à −60 % par rapport aux heures pleines, de 2 h à 6 h, la différence étant versée en cagnotte.</td><td class="offer">Prix non relevé pour Elec'Car+. Elec'Car 1 an (12 kVA) : 0,1518 € en heures creuses, 0,2668 € en heures pleines.</td><td class="offer"><a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
-      <tr><td><div class="prov" data-k="engie">ENGIE</div><div class="offer">Promo d'été (Elec ou Duo Référence 3 ans)</div></td><td class="offer">50 % du prix de l'électricité consommée entre 13 h et 17 h, tous les jours, hors abonnement. Le montant est calculé par ENGIE et crédité en euros dans une cagnotte de l'Espace Client ; la promotion s'active depuis l'Espace Client.</td><td class="offer">Cagnotte versée automatiquement, sous un mois, dès qu'elle atteint 25 € TTC. Prix de l'offre Elec Référence 3 ans (Hellowatt) : 0,2445 € en heures pleines, 0,1946 € en heures creuses ; abonnement de 17,01 € par mois à 6 kVA à 60,10 € à 36 kVA. Date de fin non indiquée sur la page.</td><td class="offer"><a href="https://particuliers.engie.fr/landing/offres-energie-rs.html" target="_blank" rel="noopener noreferrer">Page ENGIE</a> (consultée le 28 oct. 2026), <a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
-      <tr><td><div class="prov" data-k="total">TotalEnergies</div><div class="offer">Charge'Heures</div></td><td class="offer">Heures « super » creuses de 2 h à 6 h, pensées pour la recharge d'un véhicule électrique à domicile.</td><td class="offer">0,1337 € en heures super creuses, 0,2305 € en heures pleines. Abonnement non relevé.</td><td class="offer"><a href="https://www.hellowatt.fr/blog/octotempo-zen-offres-electricite/" target="_blank" rel="noopener noreferrer">Hellowatt</a></td></tr>
-      <tr><td><div class="prov" data-k="ilek">ilek</div><div class="offer">Offre voiture électrique</div></td><td class="offer">Heures « super » creuses de 3 h 01 à 7 h, heures creuses de 1 h 01 à 3 h et de 13 h 01 à 15 h, heures pleines le reste de la journée ; réservée aux possesseurs d'une voiture électrique avec un compteur Linky communiquant ; indexée sur la part variable du tarif réglementé.</td><td class="offer">Grille officielle ilek du 1er août 2026, TTC : super heures creuses 0,1064 €, heures creuses 0,1589 €, heures pleines 0,2142 €. Abonnement plus élevé que le tarif réglementé : 28,45 € par mois à 6 kVA, 39,26 € à 9 kVA, 89,05 € à 36 kVA.</td><td class="offer"><a href="https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/275/grille_offre_ve.pdf" target="_blank" rel="noopener noreferrer">Grille ilek</a></td></tr>
-      <tr><td><div class="prov" data-k="enercoop">Enercoop</div><div class="offer">Flexibilité Nuit &amp; week-end, 2 saisons, jours de pointe</div></td><td class="offer">Heures creuses de 23 h à 6 h, le week-end et les jours fériés ; ou heures creuses variant avec la saison ; ou jours de pointe.</td><td class="offer">Grille officielle du 1er août 2026 reçue, non modélisée ici. L'offre « 2 saisons » est fermée aux nouveaux clients depuis le 4 juin 2025.</td><td class="offer"><a href="https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires" target="_blank" rel="noopener noreferrer">Annexes tarifaires Enercoop</a></td></tr>
-      <tr><td><div class="prov" data-k="ohm">OHM Énergie</div><div class="offer">Extra Eco Fixe</div></td><td class="offer">Deux prix (heures pleines et creuses), sans jour rouge ; prix bloqué 1 an. Présentée comme alternative à Tempo.</td><td class="offer">Février 2026, TTC : 0,1824 € en heures pleines, 0,1407 € en heures creuses.</td><td class="offer"><a href="https://selectra.info/energie/actualites/marche/alternative-tempo-offre-0-18-enterre-jours-rouges" target="_blank" rel="noopener noreferrer">Selectra</a></td></tr>
-    </tbody></table></div>
-    <p class="note">Comment le calcul est fait : votre journée type est découpée heure par heure (hypothèse de ce site), puis la part de consommation qui tombe dans les heures creuses de chaque offre est calculée avec ses plages horaires. Un chauffe-eau programmé la nuit est compté pour 12 % de la consommation et une voiture rechargée la nuit pour 20 %, entre 23 h et 5 h. La part en hiver est celle de la consommation hors jours rouges. Pour un logement chauffé à l'électricité, Octopus et Selectra retiennent environ 7 % de la consommation les jours rouges. Les heures creuses d'OctoSaisons sont plus nombreuses l'été (16 heures par jour) que l'hiver (10 heures par jour), ce que confirme la page officielle d'Octopus (12 nov. 2026). Les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) viennent d'un article de Selectra du 21 oct. 2026 et ne figurent pas dans la fiche de l'offre : à confirmer.</p>
-    <p class="note"><strong>EDF Tempo</strong> (300 jours bleus, 43 blancs, 22 rouges, heures creuses de 22 h à 6 h) : prix TTC en vigueur depuis le 1er août 2026, vérifiés sur la grille officielle « Tarif Bleu » d'EDF (applicable au 1er août 2026, reçue le 2 nov. 2026 : option Tempo de 6 à 36 kVA, abonnement mensuel TTC compris). Le reste de la consommation est supposé les jours bleus. Les jours rouges d'EDF seront mieux répartis dès le 1er novembre, ce qui peut changer la part réelle. <strong>Source OctoSaisons :</strong> <a href="https://octopusenergy.fr/octosaisons" target="_blank" rel="noopener noreferrer">grille tarifaire officielle d'Octopus Energy applicable au 30 octobre 2026</a> (mêmes prix que celle du 1er août 2026), prix TTC. Offre de 2 ans, résiliable sans frais, prix hors taxes bloqués pendant 2 ans.</p>
-  </section>
 
   <section class="panel" id="p-pro" role="tabpanel" aria-labelledby="tab-pro" hidden>
     <h2>Offres pour les professionnels (essai)</h2>
@@ -1154,6 +1145,7 @@ function tagsLine(r) {
   if (r.typ === "fixe") t.push("Prix fixe"); else if (r.typ === "indexe") t.push("Prix indexé");
   if (r.eng === 0) t.push("Prix non bloqué"); else if (typeof r.eng === "number") t.push("Prix bloqué " + r.eng + " mois");
   if (r.vert) t.push("Verte ou biogaz");
+  if (r.vari) t.unshift("Prix variable, estimé selon vos usages");
   return (t.length ? '<div class="tags">' + t.map(function (x) { return '<span class="badge">' + esc(x) + "</span>"; }).join("") + "</div>" : "") + promoHtml(r.k, r.offer);
 }
 function fltPass(r, f) {
@@ -1167,6 +1159,22 @@ function fltPass(r, f) {
 }
 function fltCount(f) { return (f.typ ? 1 : 0) + (f.vert ? 1 : 0) + (f.eng !== "" ? 1 : 0) + (f.off ? 1 : 0) + (f.promo ? 1 : 0) + (f.sup && f.sup.length ? 1 : 0); }
 function fltActive(f) { return fltCount(f) > 0; }
+// Filtre « Prix variable selon le jour ou l'heure » (électricité) : ajoute OctoSaisons, Tempo et Zen Estival, estimés selon les usages
+function variSection(f) {
+  var u = f.use;
+  function ch(v, t, on) { return '<button type="button" class="chip' + (on ? " on" : "") + '" data-fk="vari" data-fv="' + v + '" aria-pressed="' + (on ? "true" : "false") + '">' + t + "</button>"; }
+  function sel(k, opts, cur) { return '<select data-fu="' + k + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === cur ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select>"; }
+  var h = '<div class="fsec"><h3>Prix variable selon le jour ou l\'heure</h3><div class="chips">' + ch("0", "Masquer", !f.vari) + ch("1", "Afficher", f.vari) + "</div>";
+  if (f.vari) {
+    h += '<p class="note">OctoSaisons, Tempo et Zen Estival : prix moyen estimé d\'après vos usages (ordres de grandeur, pas une mesure).</p>'
+      + '<label class="fu">Chauffage ' + sel("chauf", [["elec", "Électrique"], ["autre", "Gaz, bois, autre"]], u.chauf) + "</label>"
+      + '<label class="fu">Votre journée ' + sel("jour", [["absent", "Absent en journée"], ["present", "Souvent présent"]], u.jour) + "</label>"
+      + '<label class="fu">Chauffe-eau électrique ' + sel("ce", [["non", "Non, ou à toute heure"], ["nuit", "Oui, la nuit"]], u.ce ? "nuit" : "non") + "</label>"
+      + '<label class="fu">Voiture électrique ' + sel("ve", [["non", "Non"], ["nuit", "Oui, rechargée la nuit"]], u.ve ? "nuit" : "non") + "</label>"
+      + '<p class="note"><a href="#sa-det" data-sadet>Grilles, calcul et hypothèses</a></p>';
+  }
+  return h + "</div>";
+}
 // Panneau de filtres : puces cliquables par rubrique, compteur d'offres, bouton pour tout effacer
 function buildFilters(kind) {
   var el = $("flt-" + kind); if (!el) return;
@@ -1183,21 +1191,26 @@ function buildFilters(kind) {
     + '<div class="fsec"><h3>Durée du prix</h3><div class="chips">' + chip("eng", "", "Tous", f.eng === "") + chip("eng", "0", "Non bloqué", f.eng === "0") + chip("eng", "12", "12 mois max", f.eng === "12") + chip("eng", "24", "24 mois max", f.eng === "24") + "</div></div>"
     + '<div class="fsec"><h3>Fiabilité du prix</h3><div class="chips">' + chip("off", "", "Toutes", !f.off) + chip("off", "1", "Grille officielle", f.off, "✓") + "</div></div>"
     + '<div class="fsec"><h3>Promotion</h3><div class="chips">' + chip("promo", "1", "Promotion en cours", f.promo, "★") + "</div></div>"
+    + (kind === "elec" ? variSection(f) : "")
     + '<div class="fsec"><details' + (supOn ? " open" : "") + '><summary><h3>Fournisseur' + (supOn ? " (" + supOn + ")" : "") + '</h3></summary><div class="fsup">' + sup.map(function (nm) { return '<label><input type="checkbox" data-fk="sup" value="' + esc(nm) + '"' + (f.sup.indexOf(nm) >= 0 ? " checked" : "") + "> " + esc(nm) + "</label>"; }).join("") + "</div></details></div>"
     + '<button type="button" class="linkbtn" data-freset>Réinitialiser les filtres</button>'
     + '<p class="note" id="flt-n-' + kind + '"></p>';
   var b = $("fbn-" + kind); if (b) b.textContent = n ? "(" + n + ")" : "";
   el.onclick = function (ev) {
+    var da = ev.target.closest ? ev.target.closest("[data-sadet]") : null;
+    if (da) { ev.preventDefault(); var dd = $("sa-det"); if (dd) { dd.open = true; dd.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
     var t = ev.target.closest ? ev.target.closest("[data-fk],[data-freset],[data-fclose]") : null; if (!t) return;
     if (t.hasAttribute("data-fclose")) { el.classList.remove("open"); var fb = document.querySelector('[data-fopen="' + kind + '"]'); if (fb) fb.setAttribute("aria-expanded", "false"); return; }
-    if (t.hasAttribute("data-freset")) { f.typ = ""; f.vert = false; f.eng = ""; f.off = false; f.promo = false; f.sup = []; buildFilters(kind); refresh(); return; }
+    if (t.hasAttribute("data-freset")) { f.typ = ""; f.vert = false; f.eng = ""; f.off = false; f.promo = false; f.sup = []; if (kind === "elec") { f.vari = false; f.use = { chauf: "elec", jour: "absent", ce: false, ve: false }; } buildFilters(kind); refresh(); return; }
     var k = t.getAttribute("data-fk"), v = t.getAttribute("data-fv");
     if (k === "sup") return;  // géré par onchange
-    if (k === "vert" || k === "off" || k === "promo") f[k] = !f[k]; else f[k] = v;
+    if (k === "vari") f.vari = v === "1"; else if (k === "vert" || k === "off" || k === "promo") f[k] = !f[k]; else f[k] = v;
     buildFilters(kind); refresh();
   };
   el.onchange = function (ev) {
-    var t = ev.target; if (t.getAttribute("data-fk") !== "sup") return;
+    var t = ev.target;
+    if (t.getAttribute("data-fu")) { var u = t.getAttribute("data-fu"); f.use[u] = (u === "ce" || u === "ve") ? t.value === "nuit" : t.value; buildFilters(kind); refresh(); return; }
+    if (t.getAttribute("data-fk") !== "sup") return;
     f.sup = Array.prototype.map.call(el.querySelectorAll('input[data-fk="sup"]:checked'), function (x) { return x.value; });
     buildFilters(kind); refresh();
   };
@@ -1910,8 +1923,8 @@ function initEau() {
 }
 
 /* ---------- Interface ---------- */
-var TABS = ["home", "logt", "elec", "gaz", "duo", "saisons", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
-var state = { rev: false, duoRev: false, eauRev: false, regRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [] }, gaz: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [] } } };
+var TABS = ["home", "logt", "elec", "gaz", "duo", "pro", "eau", "abo", "marche", "prime", "methode", "sources", "stats", "legal"];
+var state = { rev: false, duoRev: false, eauRev: false, regRev: false, tab: "home", elecConso: 5700, gasConso: 10000, eauConso: 90, kva: "6", sort: "prix", autoElec: true, autoGaz: true, autoEau: true, gasOpt: "b1", eauCp: "", eauDept: "", eauVille: "", eauPrix: 0, flt: { elec: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [], vari: false, use: { chauf: "elec", jour: "absent", ce: false, ve: false } }, gaz: { typ: "", vert: false, eng: "", off: false, promo: false, sup: [] } } };
 
 function conso() { var v = parseFloat($("conso").value); return isFinite(v) && v > 0 ? v : 0; }
 
@@ -2092,6 +2105,7 @@ function refresh() {
   if (hpOn) { lstE = hphcRows(state.kva, parseFloat($("hcpart").value)); if (!isFinite(parseFloat($("hcpart").value))) lstE = hphcRows(state.kva, 40); }
   $("f-hc").hidden = !(hpOn && state.tab === "elec");
   $("f-fmla").hidden = !(HPHC.length > 0 && state.tab === "elec");
+  if (state.flt.elec.vari) lstE = lstE.concat(saisonsRows(state.kva, state.elecConso));
   if (hpOn && lstE.length === 0) {
     $("t-elec").innerHTML = ""; $("flt-n-elec").textContent = "";
     $("best-elec").textContent = "Aucune offre heures pleines / creuses n'est relevée à " + state.kva + " kVA. Choisissez une autre puissance ou la formule Base.";
@@ -2099,7 +2113,7 @@ function refresh() {
   renderGas();
   renderDuo();
   renderEau();
-  renderSaisons();
+  renderSaisonsGrille();
   renderPro();
   renderProGaz();
   renderReserves();
@@ -2156,46 +2170,22 @@ function saisonsCout(kva, C, w, r, he, hh) {
   var kwh = r * rou + (1 - r) * (w * hiv + (1 - w) * ete);
   return { abo: ab, conso: C * kwh, total: ab + C * kwh, kwh: kwh, rou: rou, hiv: hiv, ete: ete };
 }
-var saisonsBuilt = false;
-function renderSaisons() {
-  if (!$("p-saisons")) return;
-  var sel = $("sa-kva");
-  if (!saisonsBuilt) {
-    saisonsBuilt = true;
-    var ks = Object.keys(TRV_ABO).filter(function (k) { return typeof SAISONS.abo[k] === "number"; }).sort(function (a, b) { return a - b; });
-    sel.innerHTML = ks.map(function (k) { return '<option value="' + k + '"' + (k === "6" ? " selected" : "") + ">" + k + " kVA</option>"; }).join("");
-  }
-  var kva = sel.value || "6";
-  var C = parseFloat($("sa-conso").value); if (!isFinite(C) || C < 0) C = 0;
-  var U = saisonsUsage($("sa-chauf").value, $("sa-jour").value, $("sa-ce").value === "nuit", $("sa-ve").value === "nuit");
-  var w = U.w, r = U.r, he = U.he, hh = U.hh;
-  var res = saisonsCout(kva, C, w, r, he, hh);
-  var kk = kwhField(kva), trvKwh = ELEC_REF[kk], trvAbo = TRV_ABO[kva];
-  var trv = typeof trvAbo === "number" ? trvAbo + C * trvKwh : null;
-  var tp = tempoCout(kva, C, r, U.b, U.hct);
-  $("sa-hyp").innerHTML = U.txt;
-  var rows = [{ n: "OctoSaisons (Octopus Energy)", pk: "octo", pn: "Octopus Energy", o: "OctoSaisons", u: "https://octopusenergy.fr/octosaisons", t: res.total, k: res.kwh, ab: res.abo }];
-  if (tp) rows.push({ n: "Tempo (EDF)", pk: "edf", pn: "EDF", o: "Tempo", t: tp.total, k: tp.kwh, ab: tp.abo });
-  if (typeof trvAbo === "number" && $("sa-chauf").value !== "elec") { var ek = estivalKwh(); rows.push({ n: "Zen Estival (EDF)", pk: "edf", pn: "EDF", o: "Zen Estival", u: "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-estival.html", t: trvAbo + C * ek, k: ek, ab: trvAbo }); }
-  if (trv !== null) rows.push({ n: "Tarif réglementé de base (EDF)", pk: "edf", pn: "EDF", o: "Tarif réglementé de base", u: LIENS.edf, t: trv, k: trvKwh, ref: true });
-  rows.sort(function (a, b) { return a.t - b.t; });
-  var h = "<strong>" + esc(rows[0].n) + " revient le moins cher avec vos réglages : " + fmtEur0.format(rows[0].t) + " par an</strong> à " + kva + " kVA.";
-  if (trv !== null) {
-    // part de jours rouges à partir de laquelle OctoSaisons coûte plus que le tarif réglementé (le coût est linéaire en r)
-    var c0 = saisonsCout(kva, C, w, 0, he, hh).total, c1 = saisonsCout(kva, C, w, 1, he, hh).total;
-    var seuil = c1 > c0 ? (trv - c0) / (c1 - c0) : null;
-    if (seuil !== null && seuil > 0) h += " OctoSaisons reste moins chère que le tarif réglementé tant que la part des jours rouges ne dépasse pas " + (Math.min(seuil, 1) * 100).toFixed(1).replace(".", ",") + " %.";
-    else if (seuil !== null) h += " Avec ces réglages, OctoSaisons est plus chère que le tarif réglementé même sans jour rouge.";
-  }
-  if (!tp) h += " EDF Tempo n'est proposé qu'à partir de 6 kVA.";
-  $("sa-res").innerHTML = h;
-  var t = "<thead><tr><th>Offre</th><th class=\"num\">Prix moyen du kWh</th><th class=\"num\">Abonnement par an</th><th class=\"num\">Total par an</th><th class=\"num\">Écart</th></tr></thead><tbody>";
-  rows.forEach(function (x) {
-    var ab = x.ref ? trvAbo : x.ab;
-    var ec = trv === null || x.ref ? "référence" : (Math.round(x.t - trv) === 0 ? "0 €" : (x.t < trv ? "−" : "+") + fmtEur0.format(Math.abs(x.t - trv)));
-    t += '<tr' + (x.ref ? ' class="ref"' : "") + "><td><div class=\"prov\">" + nomLien({ k: x.pk, name: x.pn, url: x.u }) + '</div><div class="offer">' + esc(x.o) + '</div></td><td class="num">' + fmtKwh.format(x.k) + '</td><td class="num">' + fmtEur2.format(ab) + '</td><td class="num"><strong>' + fmtEur0.format(x.t) + '</strong></td><td class="num ' + (x.ref || trv === null ? "" : x.t < trv ? "delta-good" : "delta-bad") + '">' + ec + "</td></tr>";
-  });
-  t += "</tbody>";
+// Lignes ajoutées au tableau Électricité quand le filtre « Prix variable » est sur Afficher : prix moyen du kWh estimé selon les usages, abonnement annuel par puissance
+function saisonsRows(kva, C) {
+  var f = state.flt.elec, u = f.use, U = saisonsUsage(u.chauf, u.jour, u.ce, u.ve), out = [], k;
+  var oa = {}; for (k in SAISONS.abo) oa[k] = SAISONS.abo[k] * 12;
+  var o = saisonsCout(kva, C, U.w, U.r, U.he, U.hh);
+  out.push({ k: "octo", name: "Octopus Energy", offer: "OctoSaisons (prix selon les saisons, les jours rouges et les heures)", url: "https://octopusenergy.fr/octosaisons", a: o.kwh, b: o.kwh, abo: oa, abo_seul: true, niv: "officiel", nivd: "30/10/2026", eng: 24, vari: true });
+  var ta = {}; for (k in TEMPO.abo) ta[k] = TEMPO.abo[k] * 12;
+  var tp = tempoCout(kva, C, U.r, U.b, U.hct);
+  if (tp) out.push({ k: "edf", name: "EDF", offer: "Option Tempo (jours bleus, blancs et rouges)", a: tp.kwh, b: tp.kwh, abo: ta, abo_seul: true, niv: "officiel", nivd: "01/08/2026", vari: true });
+  if (u.chauf !== "elec" && typeof TRV_ABO[kva] === "number") { var ek = estivalKwh(), ea = {}; ea[kva] = TRV_ABO[kva]; out.push({ k: "edf", name: "EDF", offer: "Zen Estival (prix selon la saison et l'heure)", url: "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-estival.html", a: ek, b: ek, abo: ea, abo_seul: true, niv: "officiel", nivd: "15/09/2026", vari: true }); }
+  return out;
+}
+// Grilles de prix des offres à prix variable (dans la section dépliante sous le tableau Électricité)
+function renderSaisonsGrille() {
+  if (!$("t-saisons-grille")) return;
+  var kva = state.kva, tp = typeof TEMPO.abo[kva] === "number";
   var g = "<thead><tr><th>Prix du kWh TTC</th><th class=\"num\">Heures pleines</th><th class=\"num\">Heures creuses</th></tr></thead><tbody>" +
     "<tr class=\"ref\"><td colspan=\"3\"><strong>OctoSaisons</strong> (abonnement à " + kva + " kVA : " + fmtEur2.format(SAISONS.abo[kva]) + " par mois)</td></tr>" +
     "<tr><td>Hiver (novembre à mars)</td><td class=\"num\">" + fmtKwh.format(SAISONS.hp_h) + "</td><td class=\"num\">" + fmtKwh.format(SAISONS.hc_h) + "</td></tr>" +
@@ -2210,9 +2200,7 @@ function renderSaisons() {
     "<tr><td>Hiver, novembre à mars</td><td class=\"num\">pleines " + fmtKwh.format(ESTIVAL.prix.hp_h) + "</td><td class=\"num\">creuses " + fmtKwh.format(ESTIVAL.prix.hc_h) + ", super creuses " + fmtKwh.format(ESTIVAL.prix.sc_h) + "</td></tr></tbody>";
   $("t-saisons-grille").innerHTML = g;
   Array.prototype.forEach.call(document.querySelectorAll("#t-saisons-autres [data-k]"), function (e) { if (!e.getAttribute("data-ok")) { e.innerHTML = nomLienK(e.getAttribute("data-k"), e.textContent); if (e.querySelector("a")) e.setAttribute("data-ok", "1"); } });
-  $("t-saisons").innerHTML = t;
 }
-["sa-kva", "sa-conso", "sa-chauf", "sa-jour", "sa-ce", "sa-ve"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderSaisons); e.addEventListener("change", renderSaisons); } });
 
 /* ---------- Professionnels (essai) : ENGIE Référence Pro, grilles d'octobre 2026, prix hors taxes ---------- */
 var PRO_ENGIE = {
@@ -2528,7 +2516,7 @@ function initReg() {
 }
 
 /* ---------- Accessibilité ---------- */
-var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", saisons: "Saisons (essai)", pro: "Pro (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
+var TAB_NAMES = { home: "Accueil", logt: "Mon logement", elec: "Électricité", gaz: "Gaz", duo: "Élec + Gaz", pro: "Pro (essai)", eau: "Eau", abo: "Abonnement", marche: "Marché", prime: "Parrainages", methode: "Méthode", sources: "Sources", stats: "Statistiques", legal: "Mentions légales" };
 function loadStats() {
   var f = $("stats-frame");
   if (f.getAttribute("src")) return;
@@ -2584,9 +2572,9 @@ function initA11y() {
 }
 
 // Navigation : rubriques principales visibles, le reste dans « Plus », et interrupteur Particulier / Professionnel.
-var NAV = { part: { main: ["home", "logt", "elec", "gaz", "duo", "eau"], plus: ["prime", "saisons", "abo", "marche", "methode", "sources", "stats", "legal"] },
+var NAV = { part: { main: ["home", "logt", "elec", "gaz", "duo", "eau"], plus: ["prime", "abo", "marche", "methode", "sources", "stats", "legal"] },
             pro: { main: ["home", "pro"], plus: ["marche", "methode", "sources", "stats", "legal"] } };
-var PART_ONLY = ["logt", "elec", "gaz", "duo", "eau", "saisons", "abo", "prime"];
+var PART_ONLY = ["logt", "elec", "gaz", "duo", "eau", "abo", "prime"];
 state.mode = "part";
 function navBuild() {
   var tabs = $("tab-home").parentNode, bar = tabs.parentNode;
@@ -2599,7 +2587,7 @@ function navBuild() {
   var m = document.createElement("div"); m.className = "mode"; m.setAttribute("role", "group"); m.setAttribute("aria-label", "Type de compte");
   m.innerHTML = '<button type="button" id="mode-part" aria-pressed="true">Particulier</button><button type="button" id="mode-pro" aria-pressed="false">Professionnel</button>';
   bar.appendChild(m);
-  $("tab-pro").textContent = "Offres pro (essai)"; $("tab-saisons").textContent = "Saisons (essai)";
+  $("tab-pro").textContent = "Offres pro (essai)";
   pb.addEventListener("click", function (e) { e.stopPropagation(); navMenu(menu.hidden); });
   document.addEventListener("click", function (e) { if (!menu.hidden && !(e.target.closest && e.target.closest(".plus-wrap"))) navMenu(false); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !menu.hidden) { navMenu(false); pb.focus(); } });
@@ -2648,7 +2636,7 @@ function setTab(t) {
     $("p-" + n).hidden = n !== t;
     $("tab-" + n).setAttribute("aria-selected", n === t ? "true" : "false");
   });
-  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "home" || t === "duo" || t === "saisons" || t === "pro" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
+  $("f-conso").hidden = t === "prime" || t === "abo" || t === "marche" || t === "logt" || t === "home" || t === "duo" || t === "pro" || t === "sources" || t === "methode" || t === "legal" || t === "stats";
   $("f-kva").hidden = t !== "elec";
   $("f-fmla").hidden = !(t === "elec" && HPHC.length > 0);
   $("f-mine").hidden = !(t === "elec" || t === "gaz");
