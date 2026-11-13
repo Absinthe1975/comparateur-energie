@@ -372,3 +372,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - ENGIE Elec Référence 3 ans : fiche descriptive avec grille tarifaire de novembre 2026 : composantes vérifiées, prix du kWh Base encore à trancher (formule d'acheminement)
 - Octopus OctoSaisons : fiche descriptive, grille applicable au 30/10/2026 (mêmes prix qu'au 1er août), pages officielle et Selectra : voir docs/OCTOSAISONS-GRILLE.md
 - GEG : page des tarifs (12 nov.) : aucune grille nouvelle depuis octobre (électricité) et septembre (gaz)
+
+## GEG (13 nov. 2026)
+- Fiches descriptives Mon Offre Elec Verte, Direct Producteur, Gaz, Biogaz (fixes 3 ans), Gaz Indexée (Grenoble) et Tarif Bleu GEG ; pages https://www.geg.fr/offre-de-marche/ , /tarif-reglemente-de-vente-d-electricite/ et /nos-offres/particuliers/offres-d-energies/ (12 nov.) : confirment type de prix, durée de 3 ans, énergie verte ; « sans engagement ».
