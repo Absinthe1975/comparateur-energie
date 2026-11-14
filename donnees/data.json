@@ -283,6 +283,21 @@
    "s": null,
    "d": ""
   },
+  "edici": {
+   "name": "Énergie d'ici",
+   "en": "Électricité",
+   "p": "20 €",
+   "f": "20 €",
+   "pn": 20,
+   "fn": 20,
+   "valid": "Remise de 20 € TTC sur la prochaine facture du parrain et sur la première facture du filleul ; Énergie d'ici peut modifier ou arrêter l'opération à tout moment.",
+   "st": "ok",
+   "s": [
+    "Règlement de l'opération de parrainage Énergie d'ici",
+    "https://www.energiedici.fr/"
+   ],
+   "d": "règlement officiel reçu le 14 nov. 2026"
+  },
   "dyneff": {
    "name": "Dyneff",
    "en": "Électricité et gaz",
@@ -546,6 +561,7 @@
   "mint": "https://www.mint-energie.com/",
   "alterna": "https://www.alterna-energie.fr/",
   "dyneff": "https://www.dyneff.fr/",
+  "edici": "https://www.energiedici.fr/",
   "papernest": "https://www.papernest.com/papernest-energie/",
   "frank": "https://www.frankenergie.fr/",
   "sobry": "https://www.sobry.co/particulier",
