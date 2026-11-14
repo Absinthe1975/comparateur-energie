@@ -184,6 +184,10 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - source : Grille officielle Mint Énergie Online & Green, clients résidentiels (applicable au 20/10/2026, réf. 279) (Online & Green) : https://www.mint-energie.com/contrat-electricite/comparaison-offres-electricite/
 - source : Grille officielle Mint Énergie Biogaz Online (applicable du 1er au 30 novembre 2026, réf. 282) (Biogaz Online) : https://www.mint-energie.com/contrat-gaz/comparaison-offres-gaz/
 
+### mylight150
+- site du fournisseur : https://www.mylight150.com/
+- source : Grille officielle mylight150, offre Vert France (1er octobre 2026 pour les nouveaux clients) : prix de bienvenue pendant 12 mois, puis 0,2336 € le kWh Base de 3 à 6 kVA, 0,2320 € de 9 à 36 kVA, 0,2540 € en heures pleines et 0,19 € en heures creuses (TTC) ; réservée aux foyers équipés de panneaux solaires (Vert France, prix de bienvenue 12 mois (foyers équipés de panneaux solaires)) : https://www.mylight150.com/offres-d-energie
+
 ### Octopus Energy
 - site du fournisseur : https://octopusenergy.fr/
 - grille : Eco fixe Base : https://octopusenergy.fr/offre-electricite-tarifs
@@ -215,6 +219,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/primeo/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/primeo/tarifs
 - parrainage : particuliers.primeo-energie.fr : https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf
+
+### Symphonics
+- site du fournisseur : https://symphonics.fr/
 
 ### TotalEnergies
 - site du fournisseur : https://www.totalenergies.fr/particuliers
@@ -378,6 +385,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## La Bellenergie, mylight150, Symphonics (14 nov. 2026)
 - La Bellenergie : grille tarifaire particuliers ≤ 36 kVA applicable au 1er novembre 2026 (Prudence 1 an, Constance 2 ans, Garance 3 ans, Base et heures pleines / creuses) : saisie le 14 nov. (kWh Base 0,2001 / 0,1985 €, HP / HC 0,2142 / 0,1589 € ; abonnements en hausse de 6 € par an à 6 kVA)
-- mylight150 : grille tarifaire d'octobre 2026 (scan, applicable aux nouveaux clients dès le 1er oct. et aux clients actuels dès le 1er nov.) et grille d'août 2026, CGV d'octobre 2026, synthèses DGARD Enedis, pages « Nos tarifs », « Tarifs et CGV » et « Autoconsommation solaire » : offre réservée aux foyers équipés de panneaux solaires, non saisie
-- Symphonics : CGV fourniture C3 (1er juin 2026), conditions d'achat du surplus (11 sept. 2026) et fiche descriptive « -50 % sur les Heures Creuses » (1er avril 2026) : offre réservée aux foyers avec compteur Linky niveau 2 et équipement de production, stockage ou pilotable ; prix calculés d'après le tarif réglementé à la date de souscription, aucune grille chiffrée reçue : non saisie
+- mylight150 : grille tarifaire d'octobre 2026 (scan, applicable aux nouveaux clients dès le 1er oct. et aux clients actuels dès le 1er nov.) et grille d'août 2026, CGV d'octobre 2026, synthèses DGARD Enedis, pages « Nos tarifs », « Tarifs et CGV » et « Autoconsommation solaire » : offre réservée aux foyers équipés de panneaux solaires : saisie le 14 nov. (grille d'octobre 2026)
+- Symphonics : CGV fourniture C3 (1er juin 2026), conditions d'achat du surplus (11 sept. 2026) et fiche descriptive « -50 % sur les Heures Creuses » (1er avril 2026) : offre réservée aux foyers avec compteur Linky niveau 2 et équipement de production, stockage ou pilotable ; prix calculés d'après le tarif réglementé à la date de souscription, grille « -50 % heures creuses » du 1er nov. 2026 reçue ensuite (fiche et grille V261029, pages symphonics.fr) : saisie le 14 nov.
 - Enedis : annexe 2bis et synthèse DGARD (accès au réseau), trois modèles de mandat : documents contractuels sans prix, aucune donnée à saisir
+
+## Symphonics, suite (14 nov. 2026)
+- Fiche descriptive et grille tarifaire particulier V261029 (1er nov. 2026), pages symphonics.fr (CGV, grille, offre), CGV flexibilité A13, conditions B2B d'achat de surplus, injection totale et marché d'ajustement, accords NEBCO (rattachement de site) et mandat Enedis : seule la grille -50 % heures creuses contient des prix de fourniture ; le reste (production, surplus, professionnels) ne concerne pas le comparateur
