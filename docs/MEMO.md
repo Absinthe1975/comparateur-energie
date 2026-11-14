@@ -1,7 +1,7 @@
 <!-- Mémo retiré du site le 2 novembre 2026, conservé ici. Ne l'oublie pas : à relire avant chaque session. -->
 # Mémo : ce qu'il reste à faire
 
-Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
+Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premier), puis donne le détail fournisseur par fournisseur. Un sujet est abandonné définitivement : la lecture des factures (vie privée : le site ne demande, ne lit et ne conserve aucune facture ni donnée personnelle).
 
 ## Vue d'ensemble
 
@@ -17,7 +17,7 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
 - **Gaz de Bordeaux** : conditions du NovaFixe Duo et règlement du Novafixe Bonus Duo (le règlement du Bonus Élec est reçu et lu le 12 nov. ; la page Duo ne publie aucun prix) ; une fiche Novaflex Élec d'une autre ville. **EDF** : pages des offres duo.
 - **Octopus** : hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges) à valider ; durées d'heures creuses confirmées le 12 nov. par la page officielle (16 h l'été, 10 h l'hiver, 22 jours rouges de novembre à mars, jamais le week-end), mais les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) ne viennent encore que de Selectra. La grille du 30 oct. 2026 reçue donne les mêmes prix qu'en août.
-- **Fournisseurs à ajouter** : Jeety Energy (la grille reçue est celle de l'outre-mer : il faut la grille de métropole) ; Papernest Énergie gaz (page sans grille) ; et, d'après la liste de Selectra du 11 nov., La Bellenergie (autres offres).
+- **Fournisseurs à compléter** : Jeety Energy (la grille reçue est celle de l'outre-mer : il faut la grille de métropole) ; Papernest Énergie gaz (page sans grille) ; Énergie d'ici : option heures creuses (MU 4) du bulletin, à modéliser ; Frank Énergie : grille complète (seul le forfait de 6 € par mois est connu) ; La Bellenergie : autres offres de la liste de Selectra.
 - **Offres à prix fixe manquantes (une à la fois, grille du fournisseur et non celle de Selectra)** : EDF Zen Fixe (autres variantes), TotalEnergies Fixe 3 ans (TotalEnergies Fixe 2 ans électricité est faite), Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus.
 - **Fiches descriptives pour les filtres** : type de prix, durée de blocage et énergie verte manquent pour plusieurs offres (voir « Limites connues »), donc elles disparaissent dès qu'on active le filtre correspondant.
 
@@ -85,15 +85,15 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 - À saisir dans la rubrique hphc de donnees/manuel/tarifs_manuels.json (champs hp et hc en €/kWh TTC, abo par puissance) : LLUM (GEG est fait). Je ne peux pas lire ces PDF d'ici : envoyez les chiffres ou les fichiers.
 
-### Fournisseurs à ajouter (liste du 24 octobre 2026, à confirmer sur leurs sites)
+### Fournisseurs à ajouter ou à compléter (état au 14 novembre 2026)
 - [OHM](https://www.ohm-energie.com/) : fiches officielles d'octobre 2026 saisies pour Sérénité 1 an (0,2212 €/kWh Base dès 6 kVA, 0,2001 € à 3-5 kVA non distingué), 2 ans (0,2249 €) et Premi'Ohm 3 ans (0,2287 €), avec heures pleines / creuses. Non modélisée : l'offre Week-end (fiche du 4 sept. 2026 : semaine heures pleines 0,265 € / creuses 0,1737 €, week-end 0,1737 €).
 - [OHM](https://www.ohm-energie.com/) « Prix Réservé » (reçu le 6 nov. 2026) : offre à prix fixe 1 an à réserver maintenant, fourniture à partir d'avril-mai 2027, limitée à 20 000 clients. Non intégrée au comparateur (démarrage différé) : voir docs/OHM-PRIX-RESERVE.md. Affichée en mention hors classement depuis le 11 nov. 2026 (grille du 21 oct. 2026).
 
-- [Urban Solar Energy](https://www.urbansolarenergy.fr/mentions-legales/) (prix fixe, autoconsommation) : pas de grille publique, tarifs par simulation. Documents : [CGV ≤ 36 kVA](https://www.urbansolarenergy.fr/wp-content/uploads/2026/07/CGV-inferieures-ou-egales-a-36kVA_01_06_2026.pdf), [conditions générales de septembre 2026](https://www.urbansolarenergy.fr/wp-content/uploads/2026/09/GC-01.09.2026.pdf).
+- Urban Solar Energy : offre « Essentielle SMB » saisie le 14 nov. ; non saisies : offres avec centrale photovoltaïque et stockage virtuel (clients équipés) et offres professionnelles.
 
-- [Énergie d'ici](https://www.energiedici.fr/nos-offres-pour-les-particuliers.html) (électricité locale, hydroélectricité) : envoyer la fiche descriptive et le bulletin d'adhésion (voir docs/LIENS-RECUS.md).
+- [Énergie d'ici](https://www.energiedici.fr/nos-offres-pour-les-particuliers.html) : Energie Bleue (Base) saisie le 14 nov. ; reste l'option heures creuses (MU 4), le bulletin PLMO (deux communes des Côtes-d'Armor) et l'offre Riverains de Libaros ; offre du bulletin valable jusqu'au 31 déc. 2026.
 
-- [Jeety Energy](https://jeety.energy/) (ex-Élecocité) : aucune grille publique ; tarifs à relever par simulation sur leur site.
+- [Jeety Energy](https://jeety.energy/) (ex-Élecocité) : la grille reçue est celle de l'outre-mer (ELEC-DOM, 1er fév. 2026) : il faut la grille de métropole.
 
 - Entreprises locales de distribution (ES Strasbourg, UEM Metz, Gedia, Séolis, Synelva, Électricité de Provence, Enargia) : section régionale à prévoir.
 
@@ -103,7 +103,7 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 - Abonnement à 3 kVA de [OHM](https://www.ohm-energie.com/) et [Octopus](https://octopusenergy.fr/) : non exact.
 
-- Filtres des offres (panneau latéral ; « Engagement » renommé « Durée du prix » le 13 nov., car aucune offre n'a de frais de résiliation et la durée est celle du prix garanti) : le type de prix est renseigné pour 24 offres sur 33 en électricité et 14 sur 25 en gaz (12 nov. 2026) ; la durée de blocage pour environ 8 offres en électricité et 5 en gaz ; l'offre verte pour 13 et 10. Une offre dont l'information manque disparaît quand le filtre correspondant est actif (la note sous le panneau indique combien sont masquées). À compléter avec la fiche descriptive de chaque offre (champs typ, eng et vert de data.json). Selectra publie un type de prix pour chaque offre, mais c'est une source secondaire : non reprise.
+- Filtres des offres (panneau latéral ; « Engagement » renommé « Durée du prix » le 13 nov., car aucune offre n'a de frais de résiliation et la durée est celle du prix garanti) : le type de prix est renseigné pour 28 offres sur 37 en électricité et 14 sur 25 en gaz (14 nov. 2026) ; la durée de blocage pour 10 offres en électricité et 5 en gaz ; l'offre verte pour 16 et 10. Une offre dont l'information manque disparaît quand le filtre correspondant est actif (la note sous le panneau indique combien sont masquées). À compléter avec la fiche descriptive de chaque offre (champs typ, eng et vert de data.json). Selectra publie un type de prix pour chaque offre, mais c'est une source secondaire : non reprise.
 
 - Autres options des fournisseurs (à faire plus tard) : formules week-end, jours de pointe, voiture électrique.
 
@@ -161,7 +161,7 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 - ENGIE Pro : Référence Pro 1, 2 et 3 ans et Latitude 1 an (prix indexé sur le marché, qui change chaque mois : la valeur saisie est celle d'octobre) d'après les grilles d'octobre 2026, jusqu'à 36 kVA, hors taxes. À refaire quand ENGIE publie ses grilles de novembre. Le calcul n'inclut pas la réduction de 25 % de la première année (3 ans, jusqu'au 31 octobre 2026).
 
-- Autres fournisseurs avec une grille Pro déjà repérée, à lire et saisir : [Enercoop](https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires) (offre « 2 saisons », 4 prix, non modélisée), [Énergie d'ici](https://www.energiedici.fr/nos-offres-pour-les-professionnels.html). Endesa ne propose que des offres professionnelles (à relever).
+- Autres fournisseurs avec une grille Pro déjà repérée, à lire et saisir : [Enercoop](https://www.faq.enercoop.fr/hc/fr/articles/360024967152-Annexes-tarifaires) (offre « 2 saisons », 4 prix, non modélisée), [Énergie d'ici](https://www.energiedici.fr/nos-offres-pour-les-professionnels.html) (bulletin professionnels reçu le 14 nov., non saisi). Endesa ne propose que des offres professionnelles (à relever).
 
 - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/documents-contractuels) Pro : écarté pour l'instant. Ses CGV Pro (juillet 2026) et ses documents contractuels, lus le 30 oct. 2026, ne contiennent aucune grille : les prix sont établis par cotation envoyée au client. À reprendre si une grille publique apparaît.
 
@@ -212,8 +212,8 @@ Mémo du 13 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - Filtres en panneau latéral à puces, style Selectra (fusionné le 11 nov., PR 273), sur Électricité et Gaz : type de prix, énergie verte, engagement, fiabilité (grille officielle), promotion, liste de fournisseurs, compteur « n offres sur N », réinitialisation ; sur mobile, bouton « Filtrer » qui ouvre le panneau. Pas encore sur Élec + Gaz. Non repris de Selectra : option tarifaire (déjà dans « Formule »), note client, Selectra Score.
 
 ### Comparaison avec Selectra (12 nov. 2026)
-- Selectra (page « speciales=1 », enregistrée le 11 nov.) : 21 fournisseurs, 61 offres d'électricité (44 en option Base à Lyon sans les offres spéciales). Nous : 33 offres d'électricité (18 fournisseurs), 25 en gaz. Leur liste n'est lisible dans le fichier enregistré que si la page est chargée en entier (fichier de 10 Mo).
-- Fournisseurs absents chez nous : Frank Énergie, Papernest Énergie, Sobry, Symphonics, Urban Solar Energy, La Bellenergie (6 offres), mylight150.
+- Selectra (page « speciales=1 », enregistrée le 11 nov.) : 21 fournisseurs, 61 offres d'électricité (44 en option Base à Lyon sans les offres spéciales). Nous (14 nov.) : 37 offres d'électricité (22 fournisseurs), plus 4 à prix variable dans le filtre « Prix variable » (OctoSaisons, Tempo, Zen Estival, Énergie d'ici), 25 en gaz. Leur liste n'est lisible dans le fichier enregistré que si la page est chargée en entier (fichier de 10 Mo).
+- Fournisseurs de Selectra encore absents chez nous : Jeety Energy (grille de métropole manquante). Ajoutés depuis le 11 nov. : Papernest Énergie, Symphonics, Urban Solar Energy, mylight150, Énergie d'ici ; Frank Énergie et Sobry relevés sans calcul (prix du marché heure par heure).
 - Formules absentes de fournisseurs déjà présents : EDF (Zen Fixe, Zen Estival, Zen Week-End x3, Vert Électrique Week-End), TotalEnergies (Fixe 3 ans, Heures Eco, Heures Eco+, Spéciale), Octopus (Eco Fixe 2 ans, Eco Fixe Plus, Octopus Go, SolarPlus, SolarBoost), Enercoop (3 offres Flexibilité), ENGIE (Happy Week-end, Elec'Car 1 an), Gaz de Bordeaux (NovaFixe Bonus Élec dans la liste de Selectra), Dyneff (Contrat+ Verte), Happ-e (Option Vertelec), OHM (Week-End), Plenitude (Plenifix 1 an).
 - Chez nous mais pas chez eux : Ekwateur, Mint, Alterna, Primeo Essentielle Verte.
 - Méthode retenue : pour chaque offre, tu enregistres la page ou la grille du fournisseur (pas celle de Selectra, source secondaire), je vérifie les prix puis je saisis. Ordre proposé pour les prix fixes : EDF Zen Fixe, TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus. Comparaison de prix possible avec leur réglage 5 360 kWh, 9 kVA, Base.
