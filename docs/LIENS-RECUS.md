@@ -241,6 +241,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - source : Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris » (Fixe 2 ans Électricité) : https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite
 - source : Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026) (Fixe 2 ans Gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz
 
+### Énergie d'ici
+- site du fournisseur : https://www.energiedici.fr/
+
 ### Références (tarif réglementé, prix repère du gaz)
 - trv : https://www.hellowatt.fr/contrat-electricite/prix-electricite
 - trv : https://particulier.edf.fr/fr/accueil/guide-energie/electricite/prix-kwh-electricite.html
@@ -407,4 +410,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Sobry : grille tarifaire du 1er oct. 2026 (scan) et page particulier : prix du marché de gros, relevé sans calcul
 - Frank Énergie : page de tarification dynamique : relevé sans calcul (grille complète non reçue)
 - Jeety Energy : grille ELEC-DOM du 1er fév. 2026 (outre-mer) et page des tarifs : hors périmètre (métropole seulement) ; offres métropole non reçues
-- Énergie d'ici : page « Dombes » et bulletin d'adhésion professionnels : aucune grille particuliers reçue
+
+## Énergie d'ici (14 nov. 2026)
+- Bulletin d'adhésion particuliers « Energie Bleue » (tarifs TTC du 1er août 2026, offre valable jusqu'au 31 déc. 2026), fiche descriptive, conditions générales, règlement du parrainage (20 € / 20 € TTC), pages du site (particuliers, riverains, accueil), synthèse DGARD Enedis, paiements en monnaie locale : option Base (CU 4) saisie le 14 nov. dans le filtre « Prix variable » (prix par saison et plage horaire)
+- Non saisis : option Heures Creuses (MU 4) du même bulletin, bulletin PLMO (deux communes des Côtes-d'Armor, grille du 1er janv. au 31 juil. 2026), offres Riverains (Libaros, 30 premiers souscripteurs), bulletins professionnels, catalogues de prestations Enedis (sans prix de fourniture)
