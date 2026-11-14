@@ -485,6 +485,35 @@
         "Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris »",
         "https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite"
       ]
+    },
+    {
+      "k": "mylight",
+      "name": "mylight150",
+      "offer": "Vert France, prix de bienvenue 12 mois (foyers équipés de panneaux solaires)",
+      "a": 0.2001,
+      "b": 0.1985,
+      "ab6": 204.96,
+      "ab9": 253.8,
+      "abo": {
+        "3": 159.72,
+        "6": 204.96,
+        "9": 253.8,
+        "12": 300.84,
+        "15": 345.0,
+        "18": 390.48,
+        "24": 487.44,
+        "30": 576.6,
+        "36": 666.48
+      },
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "14 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle mylight150, offre Vert France (1er octobre 2026 pour les nouveaux clients) : prix de bienvenue pendant 12 mois, puis 0,2336 € le kWh Base de 3 à 6 kVA, 0,2320 € de 9 à 36 kVA, 0,2540 € en heures pleines et 0,19 € en heures creuses (TTC) ; réservée aux foyers équipés de panneaux solaires",
+        "https://www.mylight150.com/offres-d-energie"
+      ]
     }
   ],
   "gas": [
@@ -885,7 +914,8 @@
   ],
   "duo": [],
   "abo_e": {
-    "bellenergie": 184.32
+    "bellenergie": 190.32,
+    "mylight": 204.96
   },
   "abo_g": {
     "mint": 360.84
@@ -1411,6 +1441,61 @@
       "s": [
         "Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris »",
         "https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite"
+      ]
+    },
+    {
+      "k": "mylight",
+      "name": "mylight150",
+      "offer": "Vert France, prix de bienvenue 12 mois (foyers équipés de panneaux solaires)",
+      "hp": 0.2142,
+      "hc": 0.1589,
+      "abo": {
+        "6": 248.4,
+        "9": 297.48,
+        "12": 354.72,
+        "15": 390.6,
+        "18": 443.64,
+        "24": 556.44,
+        "30": 651.12,
+        "36": 747.12
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/10/2026",
+      "d": "14 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle mylight150, offre Vert France (1er octobre 2026 pour les nouveaux clients) : prix de bienvenue pendant 12 mois, puis 0,2336 € le kWh Base de 3 à 6 kVA, 0,2320 € de 9 à 36 kVA, 0,2540 € en heures pleines et 0,19 € en heures creuses (TTC) ; réservée aux foyers équipés de panneaux solaires",
+        "https://www.mylight150.com/offres-d-energie"
+      ]
+    },
+    {
+      "k": "symphonics",
+      "name": "Symphonics",
+      "offer": "-50 % sur les heures creuses (Linky niveau 2 et équipement pilotable ; heures creuses 0 h-6 h et 14 h-16 h)",
+      "hp": 0.3007,
+      "hc": 0.1687,
+      "abo": {
+        "6": 203.88,
+        "9": 252.24,
+        "12": 298.68,
+        "15": 342.36,
+        "18": 387.24,
+        "24": 483.24,
+        "30": 571.2,
+        "36": 660.12
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "14 nov. 2026",
+      "typ": "fixe",
+      "eng": 12,
+      "vert": true,
+      "s": [
+        "Grille officielle Symphonics, offre -50 % sur les heures creuses, particuliers (1er novembre 2026), de 6 à 36 kVA",
+        "https://symphonics.fr/grille-tarifaire-particulier/"
       ]
     }
   ]
