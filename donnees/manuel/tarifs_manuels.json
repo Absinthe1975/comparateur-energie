@@ -544,6 +544,35 @@
         "Grille officielle papernest energie, électricité (prix applicables à partir du 22 sept. 2026), offre verte à prix fixe 1 an, sans engagement",
         "https://www.papernest.com/papernest-energie-electricite/"
       ]
+    },
+    {
+      "k": "urbansolar",
+      "name": "Urban Solar Energy",
+      "offer": "Essentielle SMB, 100 % renouvelable, prix fixe (clients sans centrale photovoltaïque)",
+      "a": 0.218,
+      "b": 0.218,
+      "ab6": 191.4,
+      "ab9": 240.24,
+      "abo": {
+        "3": 146.04,
+        "6": 191.4,
+        "9": 240.24,
+        "12": 287.28,
+        "15": 331.44,
+        "18": 376.92,
+        "24": 473.88,
+        "30": 563.04,
+        "36": 652.92
+      },
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "14 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Grille officielle Urban Solar Energy, tarifs particuliers sans centrale photovoltaïque (1er août 2026) et fiche descriptive Essentielle SMB (offre à prix fixe, 100 % renouvelable, sans engagement)",
+        "https://www.urbansolarenergy.fr/tarifs"
+      ]
     }
   ],
   "gas": [
@@ -946,7 +975,8 @@
   "abo_e": {
     "bellenergie": 190.32,
     "mylight": 204.96,
-    "papernest": 387.72
+    "papernest": 387.72,
+    "urbansolar": 191.4
   },
   "abo_g": {
     "mint": 360.84
@@ -1555,6 +1585,33 @@
       "s": [
         "Grille officielle papernest energie, électricité (prix applicables à partir du 22 sept. 2026), offre verte à prix fixe 1 an, sans engagement",
         "https://www.papernest.com/papernest-energie-electricite/"
+      ]
+    },
+    {
+      "k": "urbansolar",
+      "name": "Urban Solar Energy",
+      "offer": "Essentielle SMB, 100 % renouvelable, prix fixe (clients sans centrale photovoltaïque)",
+      "hp": 0.2377,
+      "hc": 0.175,
+      "abo": {
+        "6": 194.16,
+        "9": 244.2,
+        "12": 299.52,
+        "15": 357.0,
+        "18": 414.6,
+        "24": 529.68,
+        "30": 644.76,
+        "36": 759.84
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "14 nov. 2026",
+      "typ": "fixe",
+      "vert": true,
+      "s": [
+        "Grille officielle Urban Solar Energy, tarifs particuliers sans centrale photovoltaïque (1er août 2026) et fiche descriptive Essentielle SMB (offre à prix fixe, 100 % renouvelable, sans engagement)",
+        "https://www.urbansolarenergy.fr/tarifs"
       ]
     }
   ]
