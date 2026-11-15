@@ -427,3 +427,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## ENGIE Elec Référence 3 ans, pages de comparateurs (15 nov. 2026)
 - Selectra (selectra.info/energie/fournisseurs/engie/tarifs/elec-reference), Kelwatt (kelwatt.fr/fournisseurs/engie/prix, 2 exemplaires) et JeChange (jechange.fr/energie/engie/tarifs/elec-reference, 3 exemplaires) : sources secondaires, prix du kWh en désaccord (Selectra / Kelwatt 0,2403 € en Base ; JeChange 0,20992 €) : aucun changement des données
+
+## Ekwateur (15 nov. 2026)
+- Pages de comparateurs Selectra, Papernest et LesFurets (tarifs Ekwateur) : sources secondaires, aucun prix officiel ; mention « Prix sur devis, variable selon profil » ajoutée sur les offres
