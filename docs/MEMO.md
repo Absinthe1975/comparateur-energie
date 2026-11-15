@@ -18,9 +18,6 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 - **Ekwateur** : pas de prix officiel, donc je me fie aux comparateurs quand deux donnent les mêmes prix. Aujourd'hui ils ne concordent pas. Envoie-moi la page **Selectra** d'Ekwateur (électricité, puis gaz) après avoir cliqué sur « Voir toutes les puissances et options », et une **deuxième page** d'un autre comparateur (Kelwatt ou Hello Watt).
 
 **Pour compléter des fournisseurs**
-- **Jeety Energy** : la grille de **métropole** (celle reçue est pour l'outre-mer).
-- **Papernest Énergie gaz** : la grille gaz.
-- **Frank Énergie** : la grille complète (seul le forfait de 6 € par mois est connu).
 - **La Bellenergie** : les autres offres de la liste de Selectra.
 - **Énergie d'ici** : rien à envoyer, c'est moi qui dois modéliser l'option heures creuses.
 - **Gaz de Bordeaux** : les fiches NovaFlex des zones 4 à 6, les conditions du NovaFixe Duo, et la fiche d'une autre ville.
@@ -105,7 +102,6 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 
 - [Énergie d'ici](https://www.energiedici.fr/nos-offres-pour-les-particuliers.html) : Energie Bleue (Base) saisie le 14 nov. ; reste l'option heures creuses (MU 4), le bulletin PLMO (deux communes des Côtes-d'Armor) et l'offre Riverains de Libaros ; offre du bulletin valable jusqu'au 31 déc. 2026.
 
-- [Jeety Energy](https://jeety.energy/) (ex-Élecocité) : la grille reçue est celle de l'outre-mer (ELEC-DOM, 1er fév. 2026) : il faut la grille de métropole.
 
 - Entreprises locales de distribution (ES Strasbourg, UEM Metz, Gedia, Séolis, Synelva, Électricité de Provence, Enargia) : section régionale à prévoir.
 
@@ -225,7 +221,7 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 
 ### Comparaison avec Selectra (12 nov. 2026)
 - Selectra (page « speciales=1 », enregistrée le 11 nov.) : 21 fournisseurs, 61 offres d'électricité (44 en option Base à Lyon sans les offres spéciales). Nous (14 nov.) : 37 offres d'électricité (22 fournisseurs), plus 4 à prix variable dans le filtre « Prix variable » (OctoSaisons, Tempo, Zen Estival, Énergie d'ici), 25 en gaz. Leur liste n'est lisible dans le fichier enregistré que si la page est chargée en entier (fichier de 10 Mo).
-- Fournisseurs de Selectra encore absents chez nous : Jeety Energy (grille de métropole manquante). Ajoutés depuis le 11 nov. : Papernest Énergie, Symphonics, Urban Solar Energy, mylight150, Énergie d'ici ; Frank Énergie et Sobry relevés sans calcul (prix du marché heure par heure).
+- Fournisseurs de Selectra encore absents chez nous : aucun à traiter (Jeety Energy, Papernest gaz et Frank Énergie abandonnés le 15 nov.). Ajoutés depuis le 11 nov. : Papernest Énergie, Symphonics, Urban Solar Energy, mylight150, Énergie d'ici ; Frank Énergie et Sobry relevés sans calcul (prix du marché heure par heure).
 - Formules absentes de fournisseurs déjà présents : EDF (Zen Fixe, Zen Estival, Zen Week-End x3, Vert Électrique Week-End), TotalEnergies (Fixe 3 ans, Heures Eco, Heures Eco+, Spéciale), Octopus (Eco Fixe 2 ans, Eco Fixe Plus, Octopus Go, SolarPlus, SolarBoost), Enercoop (3 offres Flexibilité), Gaz de Bordeaux (NovaFixe Bonus Élec dans la liste de Selectra), Dyneff (Contrat+ Verte), Happ-e (Option Vertelec), OHM (Week-End), Plenitude (Plenifix 1 an).
 - Chez nous mais pas chez eux : Ekwateur, Mint, Alterna, Primeo Essentielle Verte.
 - Méthode retenue : pour chaque offre, tu enregistres la page ou la grille du fournisseur (pas celle de Selectra, source secondaire), je vérifie les prix puis je saisis. Ordre proposé pour les prix fixes : EDF Zen Fixe, TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus. Comparaison de prix possible avec leur réglage 5 360 kWh, 9 kVA, Base.
