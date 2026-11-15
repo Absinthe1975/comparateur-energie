@@ -516,36 +516,6 @@
       ]
     },
     {
-      "k": "papernest",
-      "name": "Papernest Énergie",
-      "offer": "papernest energie, électricité verte, prix fixe 1 an",
-      "a": 0.29841,
-      "b": 0.29841,
-      "ab6": 387.72,
-      "ab9": 582.84,
-      "abo": {
-        "3": 196.68,
-        "6": 387.72,
-        "9": 582.84,
-        "12": 731.88,
-        "15": 861.24,
-        "18": 968.76,
-        "24": 1269.0,
-        "30": 1504.2,
-        "36": 1803.36
-      },
-      "niv": "officiel",
-      "nivd": "22/09/2026",
-      "d": "14 nov. 2026",
-      "typ": "fixe",
-      "eng": 12,
-      "vert": true,
-      "s": [
-        "Grille officielle papernest energie, électricité (prix applicables à partir du 22 sept. 2026), offre verte à prix fixe 1 an, sans engagement",
-        "https://www.papernest.com/papernest-energie-electricite/"
-      ]
-    },
-    {
       "k": "urbansolar",
       "name": "Urban Solar Energy",
       "offer": "Essentielle SMB, 100 % renouvelable, prix fixe (clients sans centrale photovoltaïque)",
@@ -975,7 +945,6 @@
   "abo_e": {
     "bellenergie": 190.32,
     "mylight": 204.96,
-    "papernest": 387.72,
     "urbansolar": 191.4
   },
   "abo_g": {
@@ -1557,34 +1526,6 @@
       "s": [
         "Grille officielle Symphonics, offre -50 % sur les heures creuses, particuliers (1er novembre 2026), de 6 à 36 kVA",
         "https://symphonics.fr/grille-tarifaire-particulier/"
-      ]
-    },
-    {
-      "k": "papernest",
-      "name": "Papernest Énergie",
-      "offer": "papernest energie, électricité verte, prix fixe 1 an",
-      "hp": 0.32023,
-      "hc": 0.24528,
-      "abo": {
-        "6": 464.4,
-        "9": 674.76,
-        "12": 753.24,
-        "15": 861.24,
-        "18": 968.76,
-        "24": 1269.0,
-        "30": 1504.2,
-        "36": 1803.36
-      },
-      "abo_seul": true,
-      "niv": "officiel",
-      "nivd": "22/09/2026",
-      "d": "14 nov. 2026",
-      "typ": "fixe",
-      "eng": 12,
-      "vert": true,
-      "s": [
-        "Grille officielle papernest energie, électricité (prix applicables à partir du 22 sept. 2026), offre verte à prix fixe 1 an, sans engagement",
-        "https://www.papernest.com/papernest-energie-electricite/"
       ]
     },
     {
