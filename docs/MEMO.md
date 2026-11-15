@@ -11,15 +11,28 @@ Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 - Rapprocher à la main les 41 petites communes sans zone fournisseur (communes nouvelles ou renommées).
 
 ### 2. Ce qu'il me faut de toi (documents à m'envoyer)
-- **Gaz de Bordeaux gaz** : fiches NovaFlex des zones 4 à 6 et table commune → zone.
-- **ENGIE électricité** : la fiche descriptive de **novembre 2026** est reçue le 12 nov. (fourniture 0,17110 €/kWh TTC et 45,79 €/an, obligations 0,01834 € à 6 kVA et 0,02005 € dès 9 kVA ; acheminement : sans différenciation 0,05988 € le kWh et 149,39 €/an à 6 kVA, ou 4 plages de 0,0144 à 0,0926 € et 141,19 €/an). Le site garde 0,2403 et 186,98 €/an (Selectra, 4 plages, « À confirmer ») : l'abonnement est confirmé, pas le prix du kWh, qui dépend de la formule d'acheminement du client. Décision du 15 nov. : option c, le site garde 0,2403 € « À confirmer » jusqu'à ce que tu m'envoies le prix total d'ENGIE (résultat du simulateur ENGIE ou courrier avec ton code postal et ta formule d'acheminement, en Base). Pages de comparateurs reçues le 15 nov. : Selectra et Kelwatt (même groupe) donnent encore 0,2403 € en Base, HP 0,2561 € et HC 0,2023 € (abonnement 186,98 €) ; JeChange donne 0,20992 € en Base, HP 0,22166 € et HC 0,17403 € (même abonnement). Le HC de JeChange est sous le minimum que permet la fiche officielle (0,2146 €) : écarté. Aucune source officielle du prix total : le choix reste à faire. Ancienne note : la fiche reçue était la grille d'**août 2026** (fourniture + acheminement + obligations séparés ; en base 6 kVA : 0,14384 + 0,05988 + 0,01804 = 0,2218 €/kWh TTC, abonnement 195,18 €/an), alors que le site affiche 0,2403 (2 nov., source secondaire, « À confirmer »). Décision à prendre : afficher la grille d'août calculée (« Grille officielle du 08/2026 ») ou attendre la grille de novembre.
-- **Ekwateur** (pas de prix officiel public : règle retenue le 15 nov., se fier aux comparateurs quand au moins deux donnent les mêmes prix, en « À confirmer », avec la mention « Prix sur devis, variable selon profil » déjà affichée) : comparaison faite le 15 nov. sur les pages reçues. Électricité : LesFurets donne 0,1838 € en Base de 3 à 6 kVA et 0,1906 € dès 9 kVA, HP 0,2173 € et HC 0,1732 €, abonnement identique au tarif réglementé ; le site affiche 0,1753 € (3-6 kVA) et 0,1906 € (9 kVA et plus) : seul le prix dès 9 kVA concorde ; Selectra : grille absente du fichier enregistré (elle s'ouvre par « Voir toutes les puissances et options ») ; Papernest : prix non affichés. Gaz : LesFurets (offre 100 % renouvelable) 0,1740 € en Base et B0 et 0,1381 € en B1 ; Papernest (offre 100 % locale) 0,1639 € en Base et environ 0,13 € en B1 : désaccord ; offre à 15 % de biogaz : Papernest 0,14 € (Base, B0) et 0,11 € (B1), le site affiche 0,1246 € ; abonnements non donnés par Papernest. Aucun prix modifié. Il me faut : la page Selectra enregistrée après avoir cliqué sur « Voir toutes les puissances et options » pour chaque offre (électricité et gaz), et si possible une deuxième page de comparateur (par exemple hellowatt ou Kelwatt) pour Ekwateur.
-- **Enercoop** : preuve de la suspension des nouvelles souscriptions (la page d'accueil affiche toujours « Je souscris », donc il reste affiché).
-- **Gaz de Bordeaux** : conditions du NovaFixe Duo et règlement du Novafixe Bonus Duo (le règlement du Bonus Élec est reçu et lu le 12 nov. ; la page Duo ne publie aucun prix) ; une fiche Novaflex Élec d'une autre ville. **EDF** : pages des offres duo.
-- **Octopus** : hypothèses d'OctoSaisons (55 % de la consommation en hiver, 7 % de jours rouges) à valider ; durées d'heures creuses confirmées le 12 nov. par la page officielle (16 h l'été, 10 h l'hiver, 22 jours rouges de novembre à mars, jamais le week-end), mais les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) ne viennent encore que de Selectra. La grille du 30 oct. 2026 reçue donne les mêmes prix qu'en août.
-- **Fournisseurs à compléter** : Jeety Energy (la grille reçue est celle de l'outre-mer : il faut la grille de métropole) ; Papernest Énergie gaz (page sans grille) ; Énergie d'ici : option heures creuses (MU 4) du bulletin, à modéliser ; Frank Énergie : grille complète (seul le forfait de 6 € par mois est connu) ; La Bellenergie : autres offres de la liste de Selectra.
-- **Offres à prix fixe manquantes (une à la fois, grille du fournisseur et non celle de Selectra)** : EDF Zen Fixe (autres variantes), TotalEnergies Fixe 3 ans (TotalEnergies Fixe 2 ans électricité est faite), Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus.
-- **Fiches descriptives pour les filtres** : type de prix, durée de blocage et énergie verte manquent pour plusieurs offres (voir « Limites connues »), donc elles disparaissent dès qu'on active le filtre correspondant.
+Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à chaque fois.
+
+**À envoyer en priorité**
+- **ENGIE électricité** : le prix total en Base, avec ton code postal (résultat du simulateur ENGIE, ou courrier). Sans lui, le site garde 0,2403 € « À confirmer ».
+- **Ekwateur** : pas de prix officiel, donc je me fie aux comparateurs quand deux donnent les mêmes prix. Aujourd'hui ils ne concordent pas. Envoie-moi la page **Selectra** d'Ekwateur (électricité, puis gaz) après avoir cliqué sur « Voir toutes les puissances et options », et une **deuxième page** d'un autre comparateur (Kelwatt ou Hello Watt).
+
+**Pour compléter des fournisseurs**
+- **Jeety Energy** : la grille de **métropole** (celle reçue est pour l'outre-mer).
+- **Papernest Énergie gaz** : la grille gaz.
+- **Frank Énergie** : la grille complète (seul le forfait de 6 € par mois est connu).
+- **La Bellenergie** : les autres offres de la liste de Selectra.
+- **Énergie d'ici** : rien à envoyer, c'est moi qui dois modéliser l'option heures creuses.
+- **Gaz de Bordeaux** : les fiches NovaFlex des zones 4 à 6, les conditions du NovaFixe Duo, et la fiche d'une autre ville.
+- **EDF** : les pages des offres duo.
+- **Enercoop** : une preuve que les nouvelles souscriptions sont suspendues (sa page d'accueil affiche encore « Je souscris », donc l'offre reste affichée).
+- **Octopus** : confirmer que l'offre saisonnière suppose bien 55 % de la consommation en hiver et 7 % de jours rouges, et les plages d'heures creuses (21 h à 7 h, plus 11 h à 17 h l'été, aujourd'hui tirées de Selectra seulement).
+
+**Offres à prix fixe manquantes** (la grille du fournisseur, pas celle de Selectra, une offre à la fois)
+- EDF Zen Fixe (autres variantes), TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus.
+
+**Fiches descriptives pour les filtres**
+- Pour plusieurs offres, le type de prix, la durée de blocage et l'énergie verte manquent : elles disparaissent dès qu'on active le filtre correspondant (voir « Limites connues »).
 
 
 ### 3. Ce que tu dois trancher
@@ -66,7 +79,7 @@ Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 
 - [Octopus](https://octopusenergy.fr/) : « Cocon fixe » est le nom du contrat (fiche descriptive de juillet 2026) de l'offre vendue sous le nom « OctoEco Fixe » (« Eco fixe » dans ses grilles) : la page officielle des tarifs relie bien ces trois noms, confirmé le 4 nov. 2026. Eco fixe Base (grille du 12 août 2026) vérifiée : conforme. Gaz Fixe : grille mensuelle de novembre 2026 (applicable au 30 oct.) saisie, à ressaisir chaque mois. Intelligent Octopus Fixe : grille officielle du 1er août 2026 vérifiée (0,1968 € jusqu'à 8 kVA, 0,1953 € au-delà), passée en « Grille officielle ». Pour l'offre saisonnière, le prix moyen suppose 58 % de la consommation en hiver : à confirmer ou corriger. OctoSaisons (ex-OctoTempo, renommée le 21 octobre 2026) : grille officielle du 1er août 2026 reçue (docs/OCTOSAISONS-GRILLE.md) et calculée dans l’onglet Électricité (filtre « Prix variable selon le jour ou l’heure »), avec EDF Tempo et Zen Estival, à partir de vos usages (profil horaire supposé par le site, hors classement général). Les plages d'heures creuses d'OctoSaisons (21 h à 7 h, plus 11 h à 17 h l'été) viennent d'un article de presse et ne figurent pas dans la fiche officielle : à confirmer auprès d'Octopus. Hypothèses des saisons à valider (7 % de jours rouges, 55 % en hiver) ; puis décider d'intégrer ces offres au classement si d'autres fournisseurs adoptent ce principe.
 
-- [Ekwateur](https://ekwateur.fr/) : le prix n'apparaît qu'à la souscription (code postal demandé), sans grille publique. Il faut un PDF de grille, ou renoncer à « Grille officielle » pour cet acteur.
+- [Ekwateur](https://ekwateur.fr/) : le prix n'apparaît qu'à la souscription (code postal demandé), sans grille publique. Règle du 15 nov. : se fier aux comparateurs quand au moins deux donnent les mêmes prix (voir « Ce qu'il me faut de toi »).
 
 - [Primeo](https://particuliers.primeo-energie.fr/) (Essentielle Verte) : le prix est une formule (kWh HT à 95 % du tarif réglementé, abonnement identique). Notre 0,1919 €/kWh en 6 kVA est cohérent mais calculé par nous. À décider : l'afficher comme « calculé selon la formule officielle (tarif réglementé −5 %) » et le recalculer à chaque mise à jour du tarif réglementé, ou le laisser « À confirmer ».
 
