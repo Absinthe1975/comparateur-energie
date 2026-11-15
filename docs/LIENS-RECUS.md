@@ -129,9 +129,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - source : hellowatt.fr (Duo référence 3 ans) : https://www.hellowatt.fr/
 - parrainage : Site officiel ENGIE : https://particuliers.engie.fr/parrainage.html
 
-### Frank Énergie
-- site du fournisseur : https://www.frankenergie.fr/
-
 ### Gaz de Bordeaux
 - site du fournisseur : https://www.gazdebordeaux.fr/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/gaz-de-bordeaux/offres
@@ -207,10 +204,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ohm-energie/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ohm-energie/tarifs
 - source : Fiche descriptive officielle OHM Sérénité Fixe 1 an (prix applicables au 23 octobre 2026), puissances de 6 à 36 kVA (3 à 5 kVA : kWh Base moins cher pour le 1 an) (OHM Sérénité Fixe 1 an) : https://ohm-energie.com/offre/electricite
-
-### Papernest Énergie
-- site du fournisseur : https://www.papernest.com/papernest-energie/
-- source : Grille officielle papernest energie, électricité (prix applicables à partir du 22 sept. 2026), offre verte à prix fixe 1 an, sans engagement (papernest energie, électricité verte, prix fixe 1 an) : https://www.papernest.com/papernest-energie-electricite/
 
 ### Plenitude
 - site du fournisseur : https://eniplenitude.fr/
@@ -313,7 +306,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Énergie d'ici, bulletin d'adhésion Particuliers : https://www.energiedici.fr/assets/documents/bulletin-adhesion_particuliers_energie-d-ici.pdf
 - Énergie d'ici, paiement en monnaies locales : https://www.energiedici.fr/assets/documents/Paiements_en_monnaie_locale.pdf?v=1738847956
 - Énergie d'ici, catalogue des prestations Enedis : https://www.energiedici.fr/assets/documents/Catalogue_prestations_Enedis_PART.pdf?v=1754060558
-- Jeety Energy (ex-Élecocité) : https://jeety.energy/
 - OHM Énergie, conditions de l'offre Boost Dual (100 € : 50 € par contrat, du 02/10 au 31/12/2026) : https://ohm-energie.com/reglement/conditions-promotion-dual.pdf
 - LLUM, parrainage électricité (20 € / 20 €) : https://www.llum.fr/parrainage-electricite
 - Ekwateur, page parrainage : https://ekwateur.fr/notre-ecosysteme-parrainage/
@@ -409,11 +401,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ## Symphonics, suite (14 nov. 2026)
 - Fiche descriptive et grille tarifaire particulier V261029 (1er nov. 2026), pages symphonics.fr (CGV, grille, offre), CGV flexibilité A13, conditions B2B d'achat de surplus, injection totale et marché d'ajustement, accords NEBCO (rattachement de site) et mandat Enedis : seule la grille -50 % heures creuses contient des prix de fourniture ; le reste (production, surplus, professionnels) ne concerne pas le comparateur
 
-## Papernest, Sobry, Frank, Jeety, Énergie d'ici (14 nov. 2026)
-- Papernest Énergie : grille tarifaire électricité applicable dès le 22 sept. 2026 (envoyée en 4 exemplaires identiques) et pages papernest.com (électricité, gaz, pricing) : électricité Base et heures pleines / creuses saisie le 14 nov. (prix fixe 1 an, sans engagement, verte) ; gaz : page sans grille, à obtenir
+## Sobry (14 nov. 2026)
 - Sobry : grille tarifaire du 1er oct. 2026 (scan) et page particulier : prix du marché de gros, relevé sans calcul
-- Frank Énergie : page de tarification dynamique : relevé sans calcul (grille complète non reçue)
-- Jeety Energy : grille ELEC-DOM du 1er fév. 2026 (outre-mer) et page des tarifs : hors périmètre (métropole seulement) ; offres métropole non reçues
 
 ## Énergie d'ici (14 nov. 2026)
 - Bulletin d'adhésion particuliers « Energie Bleue » (tarifs TTC du 1er août 2026, offre valable jusqu'au 31 déc. 2026), fiche descriptive, conditions générales, règlement du parrainage (20 € / 20 € TTC), pages du site (particuliers, riverains, accueil), synthèse DGARD Enedis, paiements en monnaie locale : option Base (CU 4) saisie le 14 nov. dans le filtre « Prix variable » (prix par saison et plage horaire)
