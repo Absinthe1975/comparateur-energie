@@ -1613,6 +1613,33 @@
         "Grille officielle Urban Solar Energy, tarifs particuliers sans centrale photovoltaïque (1er août 2026) et fiche descriptive Essentielle SMB (offre à prix fixe, 100 % renouvelable, sans engagement)",
         "https://www.urbansolarenergy.fr/tarifs"
       ]
+    },
+    {
+      "k": "engie",
+      "name": "ENGIE",
+      "offer": "Elec'Car 1 an (propriétaires d'un véhicule électrique ou hybride rechargeable)",
+      "hp": 0.26682,
+      "hc": 0.15179,
+      "abo": {
+        "6": 192.59,
+        "9": 241.96,
+        "12": 289.6,
+        "15": 334.36,
+        "18": 380.41,
+        "24": 478.57,
+        "30": 568.82,
+        "36": 659.92
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "01/08/2026",
+      "d": "15 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "s": [
+        "Grille officielle ENGIE, fiche descriptive Elec'Car 1 an (grille d'août 2026, prix TTC) : indexée sur le tarif réglementé, réservée aux propriétaires d'un véhicule électrique ou hybride rechargeable avec comptage heures pleines / creuses",
+        "https://particuliers.engie.fr/"
+      ]
     }
   ]
 }
