@@ -430,3 +430,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Ekwateur (15 nov. 2026)
 - Pages de comparateurs Selectra, Papernest et LesFurets (tarifs Ekwateur) : sources secondaires en désaccord (voir le mémo), aucun prix officiel ; mention « Prix sur devis, variable selon profil » ajoutée sur les offres
+
+## Souscriptions suspendues (15 nov. 2026)
+- Ekwateur, Mint Énergie, Alterna : Selectra, https://selectra.info/energie/actualites/marche/ekwateur-mint-alterna-suspendent-souscriptions (9 nov. 2026) ; Bourse Inside, https://bourseinside.fr/economie/electricite-ekwateur-mint-et-alterna-ferment-leurs-portes-pourquoi-il-est-desormais-impossible-de-souscrire-un-nouveau-contrat-chez-eux/ (mis à jour le 12 nov. 2026) : sources secondaires.
