@@ -518,6 +518,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="callout" id="best-elec" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-elec"></table></div>
     <p class="note reserve" id="res-elec" hidden></p>
+    <p class="note reserve" id="susp-elec" hidden></p>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-elec">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note niv-note"><strong>Fiabilité des prix.</strong> « Grille officielle » : prix lu dans la grille publiée par le fournisseur, avec sa date. « À confirmer » : prix relevé sur une source tierce et pas encore recoupé avec la grille du fournisseur : vérifiez-le avant de souscrire.</p>
@@ -556,6 +557,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <div class="callout" id="best-gaz" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-gaz"></table></div>
     <p class="note reserve" id="res-gaz" hidden></p>
+    <p class="note reserve" id="susp-gaz" hidden></p>
     <p class="noprint"><button type="button" class="linkbtn" data-print>Imprimer ou enregistrer en PDF</button> · <button type="button" class="linkbtn" data-csv="t-gaz">Exporter le tableau (fichier CSV pour tableur)</button></p>
     <p class="offer conf-leg"><span class="conf c-ok">✓</span> relevé sur la grille officielle · <span class="conf c-est">≈</span> estimé (abonnement calculé, voir l'étoile) · <span class="conf c-chk">?</span> à vérifier (prix non confirmé par une grille officielle) · barre sous le total : part de la consommation (foncé) et de l'abonnement (clair)</p>
     <p class="note" id="gzone-note">Zone tarifaire : le prix du kWh varie selon la zone (1 à 6, indiquée sur votre facture ou dans votre espace client). Avec votre code postal saisi à l'accueil, la zone historique de GRDF est déduite automatiquement (liste des communes d'observatoires.net, croisée avec la base des codes postaux de La Poste ; source secondaire) ; vous pouvez la corriger ici. Seules les offres dont la grille officielle donne les prix par zone changent ici ; les autres sont affichées au prix de la zone 1. Quand vous avez saisi votre code postal, les offres dont la grille est publiée par commune (Alterna) sont affichées au prix exact de votre code postal ; s'il n'y figure pas, c'est la moyenne du département.</p>
@@ -570,6 +572,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="lede">Un seul fournisseur pour les deux énergies. Sur les pages officielles lues (ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), une offre « duo » est la somme de deux offres, avec un seul interlocuteur ou une seule facture, mais sans prix ni remise propre au duo. Seules les promotions indiquées (par exemple OHM Boost Dual) donnent un vrai avantage. Vous pouvez ajouter, avec la case ci-dessous, les offres d'électricité et de gaz d'un même fournisseur additionnées.</p>
     <p class="note" id="duo-hint"></p>
     <p class="note"><label><input type="checkbox" id="duo-sep"> Ajouter les offres séparées d'un même fournisseur (deux contrats, additionnés)</label></p>
+    <p class="note reserve" id="susp-duo" hidden></p>
     <div class="callout" id="best-duo" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-duo"></table></div>
     <p class="note">Les offres duo relevées viennent du comparateur Hello Watt (relevé du 13 octobre 2026, pour 3 710 kWh d'électricité et 5 211 kWh de gaz) : Leurs prix et leurs promotions changent souvent, ne sont pas mis à jour automatiquement et sont à confirmer chez le fournisseur ; le prix du gaz de certaines offres dépend de la tranche de consommation. Elles sont calculées avec le prix du gaz en option B1 (chauffage) ; avec une autre option, le gaz est estimé (astérisque). La prime de parrainage est celle du fournisseur : son montant peut être différent pour un contrat combiné.</p>
@@ -2127,6 +2130,7 @@ function refresh() {
   renderPro();
   renderProGaz();
   renderReserves();
+  renderSusp();
 }
 
 /* ---------- Offre par saisons (essai) : OctoSaisons ---------- */
@@ -2374,6 +2378,34 @@ function renderProGaz() {
 }
 ["progaz-conso", "progaz-niv"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderProGaz); e.addEventListener("change", renderProGaz); } });
 
+/* ---------- Souscriptions suspendues (presse, 9-12 nov. 2026) : offres sorties du classement ---------- */
+// Source secondaire (Selectra, Bourse Inside), aucune communication officielle relevée : mention « À confirmer ». Pour réintégrer un fournisseur, retirer sa ligne ici.
+var SUSP = {
+  ekw:    { nom: "Ekwateur", elec: 1, gas: 1, duo: 1, depuis: "début novembre 2026" },
+  mint:   { nom: "Mint Énergie", elec: 1, duo: 1, depuis: "le 5 novembre 2026" },
+  alterna: { nom: "Alterna", elec: 1, depuis: "le 9 novembre 2026" }
+};
+function applySusp() {
+  function keep(list, kind) { return list.filter(function (r) { var x = SUSP[r.k]; return !(x && x[kind]); }); }
+  ELEC = keep(ELEC, "elec"); GAS = keep(GAS, "gas"); DUO = keep(DUO, "duo");
+  if (HPHC && HPHC.filter) HPHC = keep(HPHC, "elec");
+}
+applySusp();
+function renderSusp() {
+  function liste(kind) {
+    var out = [];
+    Object.keys(SUSP).forEach(function (k) { var x = SUSP[k]; if (x[kind]) out.push(x.nom + " (depuis " + x.depuis + ")"); });
+    return out;
+  }
+  [["elec", "électricité"], ["gas", "gaz"], ["duo", "offres combinées"]].forEach(function (t) {
+    var el = $("susp-" + (t[0] === "gas" ? "gaz" : t[0])); if (!el) return;
+    var l = liste(t[0]);
+    if (!l.length) { el.hidden = true; return; }
+    el.innerHTML = '<strong>Souscriptions suspendues, hors classement (' + t[1] + ') :</strong> ' + esc(l.join(", ")) + '. Les contrats en cours continuent. <span class="badge">À confirmer</span> Source : presse (Selectra, Bourse Inside, 9 au 12 nov. 2026), pas de communiqué officiel relevé.';
+    el.hidden = false;
+  });
+}
+
 /* ---------- Chargement de data.json ---------- */
 // Les données intégrées plus haut servent de repli (ouverture du fichier sans serveur, ou data.json absent).
 function applyData(d) {
@@ -2381,6 +2413,7 @@ function applyData(d) {
   ELEC_REF = d.elec_ref; HPHC = d.hphc || []; ELEC = d.elec; GAS_REF = d.gas_ref; GAS = d.gas;
   ABO_E = d.abo_e; ABO_G = d.abo_g; ABO_G0 = d.abo_g0 || ABO_G0; ABO_D = d.abo_d || {};
   DUO = Array.isArray(d.duo) ? d.duo : DUO; LIENS = d.liens || {};
+  applySusp();
   GAS_B0 = d.gas_b0 || GAS_B0; GAS_B1 = d.gas_b1 || GAS_B1; TRV_ABO = d.trv_abo || TRV_ABO; PRIMES = d.primes; PROMOS = d.promos || []; renderPromos();
   if (d.updated) DATA_DATE = d.updated;
   if (d.updated_label) DATA_LABEL = d.updated_label;
