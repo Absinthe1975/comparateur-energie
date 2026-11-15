@@ -421,3 +421,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Urban Solar Energy (14 nov. 2026)
 - Grilles tarifaires particuliers du 1er août 2026 (Base et heures pleines / creuses, clients sans centrale photovoltaïque ; versions avec centrale et stockage virtuel), fiches descriptives Essentielle SMB et Stockage virtuel (particuliers et professionnels), CGV (1er janv. et 1er juin 2026), conditions générales, grilles professionnelles (non saisies), pages du site : offre Essentielle SMB sans centrale saisie le 14 nov. ; offres avec centrale photovoltaïque et stockage virtuel non saisies (clients équipés)
+
+## ENGIE (15 nov. 2026)
+- Fiches descriptives Elec'Car 1 an (grille d'août 2026), Elec Happy Week-end 3 ans (grille de novembre 2026) et Elec Référence 3 ans (grille d'août 2026, déjà connue) : Elec'Car et Happy Week-end saisis le 15 nov.
