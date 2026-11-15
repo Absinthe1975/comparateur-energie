@@ -2137,6 +2137,9 @@ var TEMPO = { hp_b: 0.1654, hc_b: 0.1356, hp_w: 0.1921, hc_w: 0.1536, hp_r: 0.72
 // Plages d'été (avril à octobre) : super creuses 11 h à 18 h, creuses 22 h à 7 h. Les plages d'hiver ne figurent pas dans les documents reçus : la part de chaque tarif est donc celle de l'exemple publié par EDF (3,6 MWh par an, 6 kVA, logement sans chauffage électrique).
 // Énergie d'ici, Energie Bleue, option Base (CU 4) : prix TTC en €/kWh par saison et plage horaire (bulletin d'adhésion du 1er août 2026, offre valable jusqu'au 31 déc. 2026) ; abonnement TTC en € par mois. Saison haute : novembre à mars.
 var EDICI = { hph: 0.2328, hch: 0.1893, hpb: 0.1607, hcb: 0.1546, abo: {"3": 12.15, "6": 15.75, "9": 19.34, "12": 22.94, "15": 26.53, "18": 30.13, "24": 37.32, "30": 44.51, "36": 51.70} };
+// ENGIE Elec Happy Week-end 3 ans (grille de novembre 2026, fiche descriptive) : prix TTC en €/kWh en semaine et le week-end (samedis, dimanches et jours fériés) ; abonnement TTC en € par an.
+var HWE = { sem: 0.24739, we: 0.1842, abo: {"3": 146.09, "6": 191.42, "9": 240.21, "12": 287.26, "15": 331.44, "18": 376.91, "24": 473.91, "30": 562.98, "36": 652.92} };
+var HWE_PART = 0.315;   // part de la consommation un samedi, un dimanche ou un jour férié : hypothèse (115 jours sur 365), sans source officielle
 var ESTIVAL = { prix: { sc_e: 0.0991, hc_e: 0.1405, hp_e: 0.1588, sc_h: 0.1992, hc_h: 0.2131, hp_h: 0.2722 }, part: { sc_e: 0.283, hc_e: 0.103, hp_e: 0.162, sc_h: 0.222, hc_h: 0.096, hp_h: 0.134 } };
 function estivalKwh() { var k = 0; for (var c in ESTIVAL.prix) k += ESTIVAL.prix[c] * ESTIVAL.part[c]; return k; }
 function tempoCout(kva, C, r, b, hc) {
@@ -2190,6 +2193,8 @@ function saisonsRows(kva, C) {
   var ta = {}; for (k in TEMPO.abo) ta[k] = TEMPO.abo[k] * 12;
   var tp = tempoCout(kva, C, U.r, U.b, U.hct);
   if (tp) out.push({ k: "edf", name: "EDF", offer: "Option Tempo (jours bleus, blancs et rouges)", a: tp.kwh, b: tp.kwh, abo: ta, abo_seul: true, niv: "officiel", nivd: "01/08/2026", vari: true });
+  var hk = HWE.sem * (1 - HWE_PART) + HWE.we * HWE_PART;
+  out.push({ k: "engie", name: "ENGIE", offer: "Elec Happy Week-end 3 ans (week-ends et jours fériés moins chers)", a: hk, b: hk, abo: HWE.abo, abo_seul: true, niv: "officiel", nivd: "01/11/2026", typ: "fixe", vert: true, vari: true });
   var wh = U.r + (1 - U.r) * U.w, E = EDICI, ea0 = {}; for (k in E.abo) ea0[k] = E.abo[k] * 12;
   var ekw = wh * (U.hct * E.hch + (1 - U.hct) * E.hph) + (1 - wh) * (U.hct * E.hcb + (1 - U.hct) * E.hpb);
   out.push({ k: "edici", name: "Énergie d'ici", offer: "Energie Bleue, électricité locale et verte (prix selon la saison et l'heure)", url: "https://www.energiedici.fr/nos-offres-pour-les-particuliers.html", a: ekw, b: ekw, abo: ea0, abo_seul: true, niv: "officiel", nivd: "01/08/2026", vert: true, vari: true });
@@ -2212,6 +2217,9 @@ function renderSaisonsGrille() {
     "<tr class=\"ref\"><td colspan=\"3\"><strong>Énergie d'ici, Energie Bleue (Base)</strong> (abonnement à " + kva + " kVA : " + fmtEur2.format(EDICI.abo[kva]) + " par mois ; heures creuses fixées par le gestionnaire du réseau)</td></tr>" +
     "<tr><td>Saison haute, novembre à mars</td><td class=\"num\">" + fmtKwh.format(EDICI.hph) + "</td><td class=\"num\">" + fmtKwh.format(EDICI.hch) + "</td></tr>" +
     "<tr><td>Saison basse, avril à octobre</td><td class=\"num\">" + fmtKwh.format(EDICI.hpb) + "</td><td class=\"num\">" + fmtKwh.format(EDICI.hcb) + "</td></tr>" +
+    "<tr class=\"ref\"><td colspan=\"3\"><strong>ENGIE Elec Happy Week-end 3 ans</strong> (abonnement à " + kva + " kVA : " + fmtEur2.format(HWE.abo[kva]) + " par an ; part du week-end et des jours fériés supposée à " + Math.round(HWE_PART * 100) + " % de la consommation)</td></tr>" +
+    "<tr><td>Semaine (lundi au vendredi hors jours fériés)</td><td class=\"num\">" + fmtKwh.format(HWE.sem) + "</td><td class=\"num\">&nbsp;</td></tr>" +
+    "<tr><td>Week-end et jours fériés</td><td class=\"num\">" + fmtKwh.format(HWE.we) + "</td><td class=\"num\">&nbsp;</td></tr>" +
     "<tr class=\"ref\"><td colspan=\"3\"><strong>Zen Estival d'EDF</strong> (abonnement identique au tarif réglementé)</td></tr>" +
     "<tr><td>Été, avril à octobre (super creuses 11 h à 18 h, creuses 22 h à 7 h)</td><td class=\"num\">pleines " + fmtKwh.format(ESTIVAL.prix.hp_e) + "</td><td class=\"num\">creuses " + fmtKwh.format(ESTIVAL.prix.hc_e) + ", super creuses " + fmtKwh.format(ESTIVAL.prix.sc_e) + "</td></tr>" +
     "<tr><td>Hiver, novembre à mars</td><td class=\"num\">pleines " + fmtKwh.format(ESTIVAL.prix.hp_h) + "</td><td class=\"num\">creuses " + fmtKwh.format(ESTIVAL.prix.hc_h) + ", super creuses " + fmtKwh.format(ESTIVAL.prix.sc_h) + "</td></tr></tbody>";
