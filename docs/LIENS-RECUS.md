@@ -424,3 +424,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## ENGIE (15 nov. 2026)
 - Fiches descriptives Elec'Car 1 an (grille d'août 2026), Elec Happy Week-end 3 ans (grille de novembre 2026) et Elec Référence 3 ans (grille d'août 2026, déjà connue) : Elec'Car et Happy Week-end saisis le 15 nov.
+
+## ENGIE Elec Référence 3 ans, pages de comparateurs (15 nov. 2026)
+- Selectra (selectra.info/energie/fournisseurs/engie/tarifs/elec-reference), Kelwatt (kelwatt.fr/fournisseurs/engie/prix, 2 exemplaires) et JeChange (jechange.fr/energie/engie/tarifs/elec-reference, 3 exemplaires) : sources secondaires, prix du kWh en désaccord (Selectra / Kelwatt 0,2403 € en Base ; JeChange 0,20992 €) : aucun changement des données
