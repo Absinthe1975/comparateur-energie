@@ -14,7 +14,7 @@ Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à chaque fois.
 
 **À envoyer en priorité**
-- **ENGIE électricité** : le prix total en Base, avec ton code postal (résultat du simulateur ENGIE, ou courrier). Sans lui, le site garde 0,2403 € « À confirmer ».
+- **ENGIE électricité** : fait le 16 nov. : ta capture du simulateur ENGIE (6 kVA, Base, 2 104 kWh par an) donne 0,2403 € le kWh TTC et 186,98 € par an, ce qui confirme le prix du site à 6 kVA. Il reste « À confirmer » (c'est un simulateur, pas une grille publiée ; l'acheminement dépend du profil). Dès 9 kVA : 0,2420 € non confirmé (Hello Watt donne 0,2389 €).
 - **Ekwateur, Mint, Alterna** : souscriptions suspendues d'après la presse (Selectra et Bourse Inside, 9-12 nov.), donc sorties du classement depuis le 15 nov. (Ekwateur : tout ; Mint : électricité et offres combinées, son gaz reste affiché faute de confirmation ; Alterna : électricité seulement). Si tu vois sur leur site officiel que la souscription est ouverte ou fermée, dis-le-moi. Prix Ekwateur : aucune grille lisible chez les comparateurs, rien à envoyer pour l'instant.
 
 **Pour compléter des fournisseurs**
