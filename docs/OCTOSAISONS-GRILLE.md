@@ -4,7 +4,7 @@ Source : grille tarifaire officielle d'Octopus (PDF « grille-tarifaire-octotemp
 
 ## Mise à jour du 12 novembre 2026
 - Grille officielle « applicable au 30/10/2026 » reçue : prix identiques (kWh et abonnement) à ceux du 1er août ; l'accise y est indiquée à 0,03062 €/kWh depuis le 1er août 2026.
-- Page officielle d'Octopus (12 nov.) : 16 h d'heures creuses par jour en été, 10 h en hiver ; 22 jours rouges, de novembre à mars, jamais le week-end ; 214 jours d'été (avril à octobre), 128 jours d'hiver (novembre à mars). Les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) restent celles de l'article de Selectra du 21 oct. 2026 : à confirmer.
+- Page officielle d'Octopus (12 nov.) : 16 h d'heures creuses par jour en été, 10 h en hiver ; 22 jours rouges, de novembre à mars, jamais le week-end ; 214 jours d'été (avril à octobre), 128 jours d'hiver (novembre à mars). Les plages exactes (21 h à 7 h, plus 11 h à 17 h l'été) sont confirmées le 16 nov. par le tableau comparatif OctoSaisons / Tempo de la page officielle d'Octopus (hiver 21 h à 7 h, été 21 h à 7 h et 11 h à 17 h). Grille « applicable au 30/10/2026 » et fiche descriptive reçues de nouveau le 16 nov. : prix identiques (TTC : hiver 0,1921 / 0,1615, été 0,1615 / 0,1356, jours rouges 0,6465 / 0,1615 €), contrat de 2 ans, prix fixe, sans engagement, offre 100 % verte et française, réservée aux compteurs Linky de moins de 36 kVA.
 
 ## Principe
 - Contrat de 2 ans, résiliable à tout moment sans frais ; prix hors taxes de l'abonnement et du kWh bloqués 2 ans.
