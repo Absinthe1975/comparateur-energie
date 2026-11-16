@@ -1,7 +1,7 @@
 {
  "schema": 1,
- "updated": "2026-11-10",
- "updated_label": "10 nov. 2026",
+ "updated": "2026-11-16",
+ "updated_label": "16 nov. 2026",
  "primes": {
   "edf": {
    "name": "EDF",
@@ -537,7 +537,7 @@
    "niv": "confirmer"
   }
  ],
- "updated_time": "21:59",
+ "updated_time": "07:09",
  "liens": {
   "edf": "https://particulier.edf.fr/",
   "total": "https://www.totalenergies.fr/particuliers",
