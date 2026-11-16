@@ -23,7 +23,7 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 - **Gaz de Bordeaux** : les fiches NovaFlex des zones 4 à 6, les conditions du NovaFixe Duo, et la fiche d'une autre ville.
 - **EDF** : les pages des offres duo.
 - **Enercoop** : une preuve que les nouvelles souscriptions sont suspendues (sa page d'accueil affiche encore « Je souscris », donc l'offre reste affichée).
-- **Octopus** : confirmer que l'offre saisonnière suppose bien 55 % de la consommation en hiver et 7 % de jours rouges, et les plages d'heures creuses (21 h à 7 h, plus 11 h à 17 h l'été, aujourd'hui tirées de Selectra seulement).
+- **Octopus** : confirmer que l'offre saisonnière suppose bien 55 % de la consommation en hiver et 7 % de jours rouges. Les plages d'heures creuses sont confirmées le 16 nov. par la page officielle d'Octopus ; ces deux parts (55 % et 7 %) sont des hypothèses du site, Octopus ne les publie pas.
 
 **Offres à prix fixe manquantes** (la grille du fournisseur, pas celle de Selectra, une offre à la fois)
 - EDF Zen Fixe (autres variantes), TotalEnergies Fixe 3 ans, Octopus Eco Fixe 2 ans, Plenitude Plenifix 1 an, Gaz de Bordeaux NovaFixe Bonus.
