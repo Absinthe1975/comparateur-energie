@@ -425,3 +425,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Comparateur officiel du médiateur national de l'énergie (16 nov. 2026)
 - Page enregistrée : Onnaing (59264), 6 kVA, Linky, 2 163 kWh par an, données du 10 nov. 2026 (15 offres sur 50 dans le fichier) : source publique officielle utilisée pour recouper les prix Base TTC. Concordent avec le site : Dyneff Contrat+ Électricité 0,1907 €, GdB NovaFixe 0,1919 € et Novaflex 0,1968 €, EDF Zen Online 0,1925 €, Intelligent Octopus 0,1968 €, Plenitude Pleniweb 0,1837 €, Alpiq Sérénité 0,1992 €, tarif réglementé 0,2001 €. Octopus Cocon Fixe : 0,1984 € (moyenne hiver/été pondérée à environ 51 %, le site utilise 58 % : 0,2019 €, grille officielle hiver 0,2245 € et été 0,1707 €). Ekwateur, Alterna, Primeo, LLUM, Symphonics et mylight ne figurent pas dans la liste des fournisseurs.
+
+## Énergie d'ici, option heures creuses (16 nov. 2026)
+- Bulletin de souscription (tarifs TTC au 1er août 2026) : option Heures Creuses (MU 4) saisie : abonnement de 12,87 € par mois à 3 kVA jusqu'à 60,27 € à 36 kVA ; saison haute 0,2267 € (pleines) et 0,1863 € (creuses), saison basse 0,1601 € et 0,1539 €.
