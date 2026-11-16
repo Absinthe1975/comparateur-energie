@@ -15,6 +15,7 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 
 **À envoyer en priorité**
 - **ENGIE électricité** : fait le 16 nov. : ta capture du simulateur ENGIE (6 kVA, Base, 2 104 kWh par an) donne 0,2403 € le kWh TTC et 186,98 € par an, ce qui confirme le prix du site à 6 kVA. Il reste « À confirmer » (c'est un simulateur, pas une grille publiée ; l'acheminement dépend du profil). Dès 9 kVA : 0,2420 € non confirmé (Hello Watt donne 0,2389 €).
+- **Comparateur officiel du médiateur de l'énergie** : très utile pour vérifier les prix en Base. Sur la page reçue le 16 nov., 8 offres concordent avec le site (voir docs/LIENS-RECUS.md). Si tu veux plus de recoupements, refais la recherche en cliquant « Afficher plus de résultats » jusqu'au bout avant de sauvegarder (le fichier ne contient que 15 offres sur 50), puis une page pour le gaz et une pour chaque puissance (9 kVA, HP/HC).
 - **Ekwateur, Mint, Alterna** : souscriptions suspendues d'après la presse (Selectra et Bourse Inside, 9-12 nov.), donc sorties du classement depuis le 15 nov. (Ekwateur : tout ; Mint : électricité et offres combinées, son gaz reste affiché faute de confirmation ; Alterna : électricité seulement). Si tu vois sur leur site officiel que la souscription est ouverte ou fermée, dis-le-moi. Prix Ekwateur : aucune grille lisible chez les comparateurs, rien à envoyer pour l'instant.
 
 **Pour compléter des fournisseurs**
