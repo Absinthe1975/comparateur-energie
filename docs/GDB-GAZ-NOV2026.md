@@ -6,6 +6,7 @@ Fiches descriptives officielles reçues le 6 nov. 2026 (souscriptions du 1er au 
 |---|---|---|---|---|
 | Paris 1er | 0,1928 | 0,1510 | 0,2010 | 0,1598 |
 | Marseille 01 | 0,1957 | 0,1540 | 0,2010 | 0,1591 |
+| Onnaing (fiche reçue le 17 nov.) | 0,1918 | 0,1500 | non reçue | non reçue |
 | Lille | non reçue | non reçue | 0,2010 | 0,1591 |
 | Evian-les-Bains | 0,2008 | 0,1590 | 0,2010 | 0,1605 |
 | Moissac | non reçue | non reçue | 0,2010 | 0,1605 |
@@ -21,6 +22,6 @@ Prix du kWh (hors accise) + accise 0,0200 € = prix TTC du kWh jusqu'à 4 000 k
 |---|---|---|---|
 | Paris 1er | 0,1728 | 0,1928 | 0,1928 ✓ |
 | Marseille | 0,1757 | 0,1957 | 0,1957 ✓ |
-| Onnaing | 0,1718 | 0,1918 | non reçue (nouvelle valeur) |
+| Onnaing | 0,1718 | 0,1918 | 0,1918 ✓ (fiche reçue le 17 nov.) |
 
-Le simulateur et les fiches concordent à Paris et à Marseille : les fiches sont donc bien les prix affichés au public. Abonnement identique : 11,28 € + CTA 1,42 € = 12,70 € par mois. Le simulateur ne dit pas à quelle zone appartient la commune.
+Le simulateur et les fiches concordent à Paris, à Marseille et à Onnaing : les fiches sont donc bien les prix affichés au public. Abonnement identique : 11,28 € + CTA 1,42 € = 12,70 € par mois. Le simulateur ne dit pas à quelle zone appartient la commune.
