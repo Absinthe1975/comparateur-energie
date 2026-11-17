@@ -431,3 +431,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## EDF, offres duo (17 nov. 2026)
 - Page officielle https://particulier.edf.fr/fr/accueil/fournisseur-electricite-gaz.html : 10 offres d'électricité et 2 offres de gaz (Avantage Gaz 2 ans, Avantage Gaz Optimisé) ; aucune offre combinée ni remise duo, seulement un interlocuteur et une facture.
+
+## ENGIE : remise de fin d'année, 200 € sur le Duo (17 nov. 2026)
+- Pages reçues le 17 nov. 2026 (page « Électricité et gaz » + parcours de souscription) et fiche descriptive Duo Référence 3 ans : 100 € TTC offerts sur Elec Référence 3 ans, Gaz Référence 3 ans ou Happy Week-end, 200 € TTC offerts sur l'offre Duo Référence 3 ans, du 16 novembre au 20 décembre 2026 ; inscription avant le 31 janvier 2027 sur www.magie-des-fetes.engie.fr ; versement 2 à 8 semaines ; une participation par foyer ; non cumulable. Fiche : https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf
