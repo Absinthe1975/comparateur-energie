@@ -428,3 +428,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Énergie d'ici, option heures creuses (16 nov. 2026)
 - Bulletin de souscription (tarifs TTC au 1er août 2026) : option Heures Creuses (MU 4) saisie : abonnement de 12,87 € par mois à 3 kVA jusqu'à 60,27 € à 36 kVA ; saison haute 0,2267 € (pleines) et 0,1863 € (creuses), saison basse 0,1601 € et 0,1539 €.
+
+## EDF, offres duo (17 nov. 2026)
+- Page officielle https://particulier.edf.fr/fr/accueil/fournisseur-electricite-gaz.html : 10 offres d'électricité et 2 offres de gaz (Avantage Gaz 2 ans, Avantage Gaz Optimisé) ; aucune offre combinée ni remise duo, seulement un interlocuteur et une facture.
