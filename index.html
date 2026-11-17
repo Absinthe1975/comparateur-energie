@@ -573,7 +573,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="note" id="duo-hint"></p>
     <div class="note" id="duo-sep-box" hidden><label><input type="checkbox" id="duo-sep" checked> <strong>Inclure aussi les fournisseurs d'électricité et de gaz sans offre duo</strong></label><br>Leur électricité et leur gaz sont deux contrats, souscrits séparément au même prix que dans les onglets Électricité et Gaz, et simplement additionnés ici. Décochez pour ne voir que les offres duo proprement dites.</div>
     <div class="callout" id="best-duo" aria-live="polite"></div>
-    <p class="note" id="duo-legend"><span class="badge sim">Combiné calculé par le site</span> : deux contrats séparés, additionnés ici, au même prix qu'en les souscrivant à part. <span class="tag best">Vraie offre duo</span> : offre combinée du fournisseur, avec son propre prix ou sa propre remise.</p>
+    <p class="note" id="duo-legend"><span class="badge sim">Combiné calculé par le site</span> : deux contrats séparés, additionnés ici, au même prix qu'en les souscrivant à part. <span class="tag best">Vraie offre duo</span> : offre combinée commercialisée par le fournisseur (son prix est la somme des deux offres, sauf remise indiquée).</p>
     <div class="tablewrap"><table id="t-duo"></table></div>
     <p class="note reserve" id="susp-duo" hidden></p>
     <details class="note" id="duo-why"><summary>Pourquoi une addition et pas des offres duo ?</summary><p>Sur les pages officielles lues (EDF, ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), aucune offre « duo » n'a de prix ni de remise propre : c'est la somme de deux offres, avec un seul interlocuteur ou une seule facture. On peut donc souscrire l'électricité et le gaz séparément, au même prix. Une vraie offre duo, avec un prix ou une remise propre, serait affichée telle quelle. Les promotions (par exemple OHM Boost Dual) sont indiquées sous l'offre, hors classement.</p></details>
@@ -2020,6 +2020,13 @@ function duoInputs() {
     gopt: gAuto ? lastLogt.gopt : (state.gasOpt || gasOptionFor(gk))
   };
 }
+/* Offres duo que le fournisseur commercialise (pages et fiches officielles reçues) : la ligne additionnée correspond à la composition du duo. */
+var DUO_REEL = [
+  { k: "engie", eo: /Elec Référence 3 ans/, go: /Gaz Référence 3 ans/, nom: "Duo Référence 3 ans", av: "Fiche officielle : deux grilles séparées, aucune remise propre au duo." },
+  { k: "gdb", eo: /NovaFixe Élec/, go: /NovaFixe BioGaz/, nom: "Offre duale gaz + électricité", av: "Page officielle du 12 novembre : prix fixes 3 ans ; avec le Bonus Duo, 100 € TTC sur la facture d'électricité la première année (conditions du Bonus Duo à confirmer)." },
+  { k: "ilek", eo: /ÉnRFixe\+ Elec/, go: /ÉnRFixe\+ Gaz/, nom: "Offre duo ilek (ÉnRFixe+)", av: "Page officielle : offre combinée électricité + gaz, aucune remise propre au duo relevée." }
+];
+function duoReel(r) { for (var i = 0; i < DUO_REEL.length; i++) { var d = DUO_REEL[i]; if (d.k === r.k && d.eo.test(r.eo || "") && d.go.test(r.go || "")) return d; } return null; }
 function renderDuo() {
   var el = $("t-duo"); if (!el) return;
   var I = duoInputs();
@@ -2047,6 +2054,16 @@ function renderDuo() {
     var gc = gcost(g);
     rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, niv: (e.niv === "officiel" && g.niv === "officiel") ? "officiel" : "confirmer", est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
   });
+  DUO_REEL.forEach(function (d) {   // composition de chaque vraie offre duo, même si ce n'est pas la moins chère du fournisseur
+    var e = null, g = null;
+    ELEC.forEach(function (x) { if (x.k === d.k && d.eo.test(x.offer)) e = x; });
+    gl.list.forEach(function (x) { if (x.k === d.k && d.go.test(x.offer)) g = x; });
+    if (!e || !g) return;
+    var ec = elecCostFor(e, I.kva, I.ek); if (ec === null) return;
+    for (var i = rows.length - 1; i >= 0; i--) if (rows[i].k === d.k && rows[i].eo === e.offer && rows[i].go === g.offer) rows.splice(i, 1);
+    var gc = gcost(g);
+    rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, niv: (e.niv === "officiel" && g.niv === "officiel") ? "officiel" : "confirmer", est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
+  });
   DUO.forEach(function (D) {
     if (I.kva !== "3" && I.kva !== "6" && I.kva !== "9") return;   // les offres combinées ne sont relevées que pour 3, 6 et 9 kVA
     var abo = (I.kva === "9" && D.eabo9) ? D.eabo9 : D.eabo + ((TRV_ABO[I.kva] || TRV_ABO["6"]) - TRV_ABO["6"]);
@@ -2069,7 +2086,7 @@ function renderDuo() {
     var d = r.tot - ref;
     var dtxt = Math.round(d) === 0 ? "0 €" : (d < 0 ? "−" : "+") + fmtEur0.format(Math.abs(d));
     var cls = Math.round(d) === 0 ? "" : d < 0 ? "delta-good" : "delta-bad";
-    h += '<tr><td><div class="prov">' + nomLien(r) + (r === b ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag best" title="Offre combinée proposée par le fournisseur, avec son propre prix">Vraie offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '.</div>' + nivBadge(r.duo) : '<div class="offer"><span class="badge sim" title="Ce n\'est pas une offre duo du fournisseur : le site additionne deux offres souscrites séparément, au même prix">Combiné calculé par le site</span></div><div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv }))  + (r.k === "ekw" ? '<div class="offer"><span class="badge check">Prix sur devis, variable selon profil</span></div>' : '') + promoHtml(r.k, r.eo + " " + r.go) + '</td>'
+    h += '<tr><td><div class="prov">' + nomLien(r) + (r === b ? '<span class="tag best">Moins chère</span>' : "") + '</div>' + (r.duo ? '<div class="offer"><span class="tag best" title="Offre combinée proposée par le fournisseur, avec son propre prix">Vraie offre duo</span> ' + esc(r.eo) + '</div><div class="offer">' + esc(r.duo.note) + (r.duo.promo ? ' (remise de ' + fmtEur0.format(r.duo.promo) + ' déjà déduite du gaz)' : '') + '.</div>' + nivBadge(r.duo) : (duoReel(r) ? '<div class="offer"><span class="tag best" title="Offre combinée commercialisée par le fournisseur">Vraie offre duo</span> ' + esc(duoReel(r).nom) + '</div><div class="offer">' + esc(duoReel(r).av) + '</div>' : '<div class="offer"><span class="badge sim" title="Ce n\'est pas une offre duo du fournisseur : le site additionne deux offres souscrites séparément, au même prix">Combiné calculé par le site</span></div>') + '<div class="offer">Élec : ' + esc(r.eo) + '</div><div class="offer">Gaz : ' + esc(r.go) + '</div>' + nivBadge({ niv: r.niv }))  + (r.k === "ekw" ? '<div class="offer"><span class="badge check">Prix sur devis, variable selon profil</span></div>' : '') + promoHtml(r.k, r.eo + " " + r.go) + '</td>'
       + '<td class="num">' + fmtEur0.format(r.ec) + '</td><td class="num">' + fmtEur0.format(r.gc) + (r.est ? " *" : "") + '</td><td class="num"><strong>' + fmtEur0.format(r.tot) + '</strong></td><td class="num ' + cls + '">' + dtxt + '</td><td>' + primeCell(r.k) + '</td></tr>';
   });
   var hRef = '<tr class="ref"><td><div class="prov">Références<span class="tag">Repère</span></div><div class="offer">Tarif réglementé + prix repère du gaz</div></td><td class="num">' + fmtEur0.format(elecCostFor(ELEC_REF, I.kva, I.ek)) + '</td><td class="num">' + fmtEur0.format(gl.ref.a * I.gk + gl.ref.abo) + '</td><td class="num"><strong>' + fmtEur0.format(ref) + '</strong></td><td class="num">référence</td><td></td></tr>';
