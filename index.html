@@ -568,13 +568,14 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 
   <section class="panel" id="p-duo" role="tabpanel" aria-labelledby="tab-duo" hidden>
     <h2>Offres combinées : électricité + gaz</h2>
-    <p class="lede">Un seul fournisseur pour les deux énergies. Sur les pages officielles lues (EDF, ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), une offre « duo » est la somme de deux offres, avec un seul interlocuteur ou une seule facture, mais sans prix ni remise propre au duo : on peut aussi bien souscrire l'électricité et le gaz séparément, au même prix. Le tableau additionne donc, pour chaque fournisseur, sa meilleure offre d'électricité et sa meilleure offre de gaz. Une vraie offre duo, avec un prix ou une remise propre, serait affichée telle quelle. Seules les promotions indiquées (par exemple OHM Boost Dual) donnent un vrai avantage. Vous pouvez ajouter, avec la case ci-dessous, les offres d'électricité et de gaz d'un même fournisseur additionnées.</p>
+    <p class="lede">Un seul fournisseur pour les deux énergies : pour chacun, le tableau additionne sa meilleure offre d'électricité et sa meilleure offre de gaz.</p>
     <p class="note" id="duo-hint"></p>
-    <div class="note" id="duo-sep-box"><label><input type="checkbox" id="duo-sep" checked> <strong>Inclure aussi les fournisseurs d'électricité et de gaz sans offre duo</strong></label><br>Leur électricité et leur gaz sont deux contrats, souscrits séparément au même prix que dans les onglets Électricité et Gaz, et simplement additionnés ici. Décochez pour ne voir que les offres duo proprement dites.</div>
-    <p class="note reserve" id="susp-duo" hidden></p>
+    <div class="note" id="duo-sep-box" hidden><label><input type="checkbox" id="duo-sep" checked> <strong>Inclure aussi les fournisseurs d'électricité et de gaz sans offre duo</strong></label><br>Leur électricité et leur gaz sont deux contrats, souscrits séparément au même prix que dans les onglets Électricité et Gaz, et simplement additionnés ici. Décochez pour ne voir que les offres duo proprement dites.</div>
     <div class="callout" id="best-duo" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-duo"></table></div>
-    <p class="note">Les offres duo relevées viennent du comparateur Hello Watt (relevé du 13 octobre 2026, pour 3 710 kWh d'électricité et 5 211 kWh de gaz) : Leurs prix et leurs promotions changent souvent, ne sont pas mis à jour automatiquement et sont à confirmer chez le fournisseur ; le prix du gaz de certaines offres dépend de la tranche de consommation. Elles sont calculées avec le prix du gaz en option B1 (chauffage) ; avec une autre option, le gaz est estimé (astérisque). La prime de parrainage est celle du fournisseur : son montant peut être différent pour un contrat combiné.</p>
+    <p class="note reserve" id="susp-duo" hidden></p>
+    <details class="note" id="duo-why"><summary>Pourquoi une addition et pas des offres duo ?</summary><p>Sur les pages officielles lues (EDF, ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), aucune offre « duo » n'a de prix ni de remise propre : c'est la somme de deux offres, avec un seul interlocuteur ou une seule facture. On peut donc souscrire l'électricité et le gaz séparément, au même prix. Une vraie offre duo, avec un prix ou une remise propre, serait affichée telle quelle. Les promotions (par exemple OHM Boost Dual) sont indiquées sous l'offre, hors classement.</p></details>
+    <p class="note">Le gaz est calculé avec l'option choisie dans l'onglet Gaz (B1 par défaut, chauffage) ; avec une autre option, certains prix sont estimés (astérisque). La prime de parrainage est celle du fournisseur : son montant peut être différent pour un contrat combiné.</p>
   </section>
 
 
