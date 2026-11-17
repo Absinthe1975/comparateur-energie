@@ -381,6 +381,10 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 #home-promos summary { cursor: pointer; } #home-promos .until { color: var(--muted); white-space: nowrap; }
 #home-promos .promo-h { font-size: 1rem; margin: 0 0 4px; }
 .badge.sim { background: transparent; color: var(--muted); border: 1px solid var(--line); font-weight: 600; }
+.duo-legend { display: grid; gap: 8px; margin: 12px 0 16px; font-size: 13px; color: var(--muted); }
+.duo-legend > div { display: grid; grid-template-columns: 210px 1fr; gap: 12px; align-items: center; }
+.duo-legend .tag, .duo-legend .badge { justify-self: start; margin: 0; }
+@media (max-width: 600px) { .duo-legend > div { grid-template-columns: 1fr; gap: 4px; } }
 /* Filtres en panneau latéral (puces cliquables) */
 .fgrid { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 8px; }
 .fmain { min-width: 0; }
@@ -573,7 +577,10 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <p class="note" id="duo-hint"></p>
     <div class="note" id="duo-sep-box" hidden><label><input type="checkbox" id="duo-sep" checked> <strong>Inclure aussi les fournisseurs d'électricité et de gaz sans offre duo</strong></label><br>Leur électricité et leur gaz sont deux contrats, souscrits séparément au même prix que dans les onglets Électricité et Gaz, et simplement additionnés ici. Décochez pour ne voir que les offres duo proprement dites.</div>
     <div class="callout" id="best-duo" aria-live="polite"></div>
-    <p class="note" id="duo-legend"><span class="badge sim">Combiné calculé par le site</span> : deux contrats séparés, additionnés ici, au même prix qu'en les souscrivant à part. <span class="tag best">Vraie offre duo</span> : offre combinée commercialisée par le fournisseur (son prix est la somme des deux offres, sauf remise indiquée).</p>
+    <div class="duo-legend" id="duo-legend">
+      <div><span class="tag best">Vraie offre duo</span><span>Offre combinée commercialisée par le fournisseur. Son prix est la somme des deux offres, sauf remise indiquée.</span></div>
+      <div><span class="badge sim">Combiné calculé par le site</span><span>Deux contrats séparés, additionnés ici, au même prix qu'en les souscrivant à part.</span></div>
+    </div>
     <div class="tablewrap"><table id="t-duo"></table></div>
     <p class="note reserve" id="susp-duo" hidden></p>
     <details class="note" id="duo-why"><summary>Pourquoi une addition et pas des offres duo ?</summary><p>Sur les pages officielles lues (EDF, ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), aucune offre « duo » n'a de prix ni de remise propre : c'est la somme de deux offres, avec un seul interlocuteur ou une seule facture. On peut donc souscrire l'électricité et le gaz séparément, au même prix. Une vraie offre duo, avec un prix ou une remise propre, serait affichée telle quelle. Les promotions (par exemple OHM Boost Dual) sont indiquées sous l'offre, hors classement.</p></details>
