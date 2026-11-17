@@ -570,7 +570,7 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
     <h2>Offres combinées : électricité + gaz</h2>
     <p class="lede">Un seul fournisseur pour les deux énergies. Sur les pages officielles lues (EDF, ENGIE, ilek, Ekwateur, Mint, GEG, Octopus), une offre « duo » est la somme de deux offres, avec un seul interlocuteur ou une seule facture, mais sans prix ni remise propre au duo. Seules les promotions indiquées (par exemple OHM Boost Dual) donnent un vrai avantage. Vous pouvez ajouter, avec la case ci-dessous, les offres d'électricité et de gaz d'un même fournisseur additionnées.</p>
     <p class="note" id="duo-hint"></p>
-    <p class="note"><label><input type="checkbox" id="duo-sep"> Ajouter les offres séparées d'un même fournisseur (deux contrats, additionnés)</label></p>
+    <div class="note" id="duo-sep-box"><label><input type="checkbox" id="duo-sep" checked> <strong>Inclure aussi les fournisseurs d'électricité et de gaz sans offre duo</strong></label><br>Leur électricité et leur gaz sont deux contrats, souscrits séparément au même prix que dans les onglets Électricité et Gaz, et simplement additionnés ici. Décochez pour ne voir que les offres duo proprement dites.</div>
     <p class="note reserve" id="susp-duo" hidden></p>
     <div class="callout" id="best-duo" aria-live="polite"></div>
     <div class="tablewrap"><table id="t-duo"></table></div>
@@ -2028,12 +2028,18 @@ function renderDuo() {
   }
   $("best-duo").hidden = false;
   var gl = gasListFor(I.gopt), gmap = {};
-  gl.list.forEach(function (g) { gmap[g.k] = g; });
+  function gcost(g) { return g.a * I.gk + (typeof g.abo === "number" ? g.abo : 0); }
+  gl.list.forEach(function (g) { if (!gmap[g.k] || gcost(g) < gcost(gmap[g.k])) gmap[g.k] = g; });   // meilleure offre de gaz de chaque fournisseur
   var rows = [];
+  var best = {};   // meilleure offre d'électricité de chaque fournisseur, à la puissance choisie
   (($("duo-sep") && $("duo-sep").checked) ? ELEC : []).forEach(function (e) {
-    var g = gmap[e.k]; if (!g) return;
-    var ec = elecCostFor(e, I.kva, I.ek); if (ec === null) return;
-    var gc = g.a * I.gk + (typeof g.abo === "number" ? g.abo : 0);
+    if (!gmap[e.k]) return;
+    var ec0 = elecCostFor(e, I.kva, I.ek); if (ec0 === null) return;
+    if (!best[e.k] || ec0 < best[e.k].ec) best[e.k] = { e: e, ec: ec0 };
+  });
+  Object.keys(best).forEach(function (k) {
+    var e = best[k].e, g = gmap[k], ec = best[k].ec;
+    var gc = gcost(g);
     rows.push({ k: e.k, name: e.name, eo: e.offer, go: g.offer, ec: ec, gc: gc, tot: ec + gc, niv: (e.niv === "officiel" && g.niv === "officiel") ? "officiel" : "confirmer", est: !!g.est || typeof ABO_E[e.k] !== "number" || I.kva !== "6" });
   });
   DUO.forEach(function (D) {
