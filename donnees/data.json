@@ -408,6 +408,21 @@
     "Conditions Boost Dual OHM Énergie",
     "https://ohm-energie.com/reglement/conditions-promotion-dual.pdf"
    ]
+  },
+  {
+   "k": "engie",
+   "texte": "100 € TTC offerts (Elec Référence 3 ans, Gaz Référence 3 ans ou Happy Week-end), 200 € TTC offerts avec l'offre Duo Référence 3 ans",
+   "debut": "2026-11-16",
+   "fin": "2026-12-20",
+   "offres": [
+    "référence 3 ans",
+    "happy week-end"
+   ],
+   "conditions": "Souscription du 16 novembre au 20 décembre 2026, sur le site ENGIE, chez ses partenaires (Hello Watt, Papernest, Choisir.com, Bemove, J'économise, Selectra), par téléphone ou auprès d'un vendeur ENGIE. Inscription avant le 31 janvier 2027 sur magie-des-fetes.engie.fr ; montant versé 2 à 8 semaines plus tard si l'offre est active au jour du versement. Une participation par foyer (point de livraison) sur toute l'opération, particuliers en France métropolitaine hors Corse, non cumulable avec une autre opération ENGIE sauf mention expresse. Non comptée dans le classement.",
+   "s": [
+    "Conditions « Remise de fin d'année » ENGIE (page reçue le 17 nov.)",
+    "https://particuliers.engie.fr/"
+   ]
   }
  ]
 }
