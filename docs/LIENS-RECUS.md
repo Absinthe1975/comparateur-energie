@@ -433,7 +433,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## TotalEnergies : offres duales (18 nov. 2026)
 - Offre Fixe 3 ans Électricité & Gaz (page) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz — fiche descriptive et grille du 26 oct. 2026 reçues, saisies (électricité Base et heures pleines / creuses, gaz zones 1 à 6).
-- Offre Spéciale (-10 % sur le kWh HT pendant 3 ans, prix indexés sur le TRV et le prix repère du gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz — fiche et grille du 1er nov. 2026 reçues, pas encore saisies.
+- Offre Spéciale (-10 % sur le kWh HT pendant 3 ans, prix indexés sur le TRV et le prix repère du gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz — fiche et grille du 1er nov. 2026 reçues, saisies le 18 nov. (grille moins 10 % sur le kWh HT, « À confirmer »).
 - Offre Heures Eco+ (électricité heures pleines / creuses, Linky niveau 2, jours Éclair) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-heures-eco-plus-electricite-et-gaz — fiche et grille du 1er nov. 2026 reçues, pas encore saisies.
 - Offre Fixe 2 ans duale : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz — la page indique « n'est plus disponible ».
 

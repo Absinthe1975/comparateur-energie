@@ -516,6 +516,33 @@
       ]
     },
     {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Spéciale Électricité (-10 % sur le kWh)",
+      "a": 0.1838,
+      "b": 0.1823,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 376.92,
+        "24": 473.88,
+        "30": 563.04,
+        "36": 652.92
+      },
+      "niv": "confirmer",
+      "d": "18 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle TotalEnergies « Offre Spéciale » (électricité, option Base, 1er novembre 2026) moins la remise de 10 % sur le kWh HT pendant 3 ans (prix calculé par le site : taxes de la grille conservées, TVA 20 %) ; page et fiche reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz"
+      ]
+    },
+    {
       "k": "mylight",
       "name": "mylight150",
       "offer": "Vert France, prix de bienvenue 12 mois (foyers équipés de panneaux solaires)",
@@ -1004,6 +1031,42 @@
       "s": [
         "Grille officielle TotalEnergies « Offre Fixe 3 ans » (prix TTC, 6 zones, gaz, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026",
         "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Spéciale Gaz (-10 % sur le kWh)",
+      "a": 0.1412,
+      "b0": 0.1719,
+      "ab1": 360.84,
+      "ab0": 152.4,
+      "zsys": "total",
+      "zdef": 1,
+      "zg": {
+        "b1": [
+          0.1397,
+          0.1412,
+          0.1435,
+          0.1469,
+          0.1509,
+          0.1562
+        ],
+        "b0": [
+          0.1711,
+          0.1719,
+          0.1734,
+          0.175,
+          0.1771,
+          0.1801
+        ]
+      },
+      "niv": "confirmer",
+      "d": "18 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle TotalEnergies « Offre Spéciale » (gaz, 6 zones, prix indexé sur le prix repère de la CRE, 1er novembre 2026) moins la remise de 10 % sur le kWh HT pendant 3 ans (prix calculé par le site : taxes de la grille conservées, TVA 20 %) ; page et fiche reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz"
       ]
     }
   ],
@@ -1564,6 +1627,31 @@
       "s": [
         "Grille officielle TotalEnergies « Offre Fixe 3 ans » (électricité, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026",
         "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Spéciale Électricité (-10 % sur le kWh)",
+      "hp": 0.1965,
+      "hc": 0.1467,
+      "abo": {
+        "6": 190.32,
+        "9": 241.92,
+        "12": 292.68,
+        "15": 338.16,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 646.56
+      },
+      "abo_seul": true,
+      "niv": "confirmer",
+      "d": "18 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle TotalEnergies « Offre Spéciale » (électricité, heures pleines / creuses, 1er novembre 2026) moins la remise de 10 % sur le kWh HT pendant 3 ans (prix calculé par le site : taxes de la grille conservées, TVA 20 %) ; page et fiche reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz"
       ]
     },
     {
