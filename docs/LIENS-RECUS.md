@@ -103,14 +103,12 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/edf/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/edf/tarifs
 - source : Grille officielle EDF Zen Fixe (PDF « Grille de prix », applicable au 1er octobre 2026) (Zen Fixe (prix fixe 2 ans)) : https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html
-- source : hellowatt.fr (Zen Fixe + Avantage Gaz 2 ans) : https://www.hellowatt.fr/
 - parrainage : Page officielle EDF + modalités du programme (PDF) : https://particulier.edf.fr/fr/accueil/electricite-gaz/choisir-edf/parrainage.html
 
 ### Ekwateur
 - site du fournisseur : https://ekwateur.fr/
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/ekwateur/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/ekwateur/tarifs
-- source : hellowatt.fr (Électricité 100 % verte + Gaz 15 % renouvelable, prix fixe) : https://www.hellowatt.fr/
 - parrainage : Page parrainage Ekwateur : https://ekwateur.fr/notre-ecosysteme-parrainage/
 
 ### Enercoop
@@ -126,7 +124,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs
 - page de parrainage : https://prix-elec.com/fournisseurs/engie/parrainage
 - source : Fiche descriptive et grille officielle ENGIE Gaz Référence 3 ans (novembre 2026, groupes A à H) (Gaz Référence 3 ans) : https://particuliers.engie.fr/electricite-gaz/contrat-electricite-gaz-naturel.html
-- source : hellowatt.fr (Duo référence 3 ans) : https://www.hellowatt.fr/
 - parrainage : Site officiel ENGIE : https://particuliers.engie.fr/parrainage.html
 
 ### Gaz de Bordeaux
@@ -160,7 +157,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de parrainage : https://prix-elec.com/fournisseurs/ilek/parrainage
 - source : Grille officielle ilek ÉnRFixe+ Élec, particuliers (disponible du 2 au 30 novembre 2026) (ÉnRFixe+ Elec) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/360/grille_360.pdf
 - source : Grille officielle ilek ÉnRFixe+ gaz (prix TTC, 11 zones A à K, disponible du 2 au 30 novembre 2026) (ÉnRFixe+ Gaz) : https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/361/grille_361.pdf
-- source : hellowatt.fr (ÉnRFixe+ Élec + Gaz) : https://www.hellowatt.fr/
 - parrainage : Selectra : https://www.fournisseurs-electricite.com/fournisseurs/code-promo-electricite-gaz
 
 ### La Bellenergie
@@ -197,7 +193,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - source : Grille officielle Octopus Energy « Eco fixe Base » (applicable au 12 août 2026) (Eco fixe Base (moyenne hiver/été)) : https://a.storyblok.com/f/151412/x/f9e6edf063/grille-tarifaire-eco-fixe-aout-26-base.pdf
 - source : Grille officielle Octopus Energy « Intelligent Octopus Fixe » (applicable au 1er août 2026) (Intelligent Octopus) : https://a.storyblok.com/f/151412/x/fd25b7bad3/grille-tarifaire-intelligent_octopus_fixe_fevrier_aout26.pdf
 - source : Grille officielle Octopus Energy « Gaz Fixe -1 % Novembre 2026 » (applicable au 30 oct. 2026) (Gaz Fixe) : https://a.storyblok.com/f/151412/x/2f8da5bd67/grille-tarifaire-gaz_fixe_1_nov26_b.pdf
-- source : Grilles officielles Octopus Energy (Eco fixe Base, Gaz Fixe) (OctoEco Fixe + Gaz Fixe) : https://octopusenergy.fr/offre-electricite-gaz
 
 ### OHM Énergie
 - site du fournisseur : https://www.ohm-energie.com/
@@ -232,6 +227,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/totalenergies/tarifs
 - page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
 - source : Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris » (Fixe 2 ans Électricité) : https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite
+- source : Grille officielle TotalEnergies « Offre Fixe 3 ans » (électricité, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026 (Fixe 3 ans Électricité) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz
 - source : Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026) (Fixe 2 ans Gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz
 
 ### Urban Solar Energy
@@ -434,3 +430,12 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## ENGIE : remise de fin d'année, 200 € sur le Duo (17 nov. 2026)
 - Pages reçues le 17 nov. 2026 (page « Électricité et gaz » + parcours de souscription) et fiche descriptive Duo Référence 3 ans : 100 € TTC offerts sur Elec Référence 3 ans, Gaz Référence 3 ans ou Happy Week-end, 200 € TTC offerts sur l'offre Duo Référence 3 ans, du 16 novembre au 20 décembre 2026 ; inscription avant le 31 janvier 2027 sur www.magie-des-fetes.engie.fr ; versement 2 à 8 semaines ; une participation par foyer ; non cumulable. Fiche : https://particuliers.engie.fr/content/dam/pdf/fiches-descriptives/fiche-descriptive-duo-reference-3-ans.pdf
+
+## TotalEnergies : offres duales (18 nov. 2026)
+- Offre Fixe 3 ans Électricité & Gaz (page) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz — fiche descriptive et grille du 26 oct. 2026 reçues, saisies (électricité Base et heures pleines / creuses, gaz zones 1 à 6).
+- Offre Spéciale (-10 % sur le kWh HT pendant 3 ans, prix indexés sur le TRV et le prix repère du gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz — fiche et grille du 1er nov. 2026 reçues, pas encore saisies.
+- Offre Heures Eco+ (électricité heures pleines / creuses, Linky niveau 2, jours Éclair) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-heures-eco-plus-electricite-et-gaz — fiche et grille du 1er nov. 2026 reçues, pas encore saisies.
+- Offre Fixe 2 ans duale : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-2-ans-electricite-et-gaz — la page indique « n'est plus disponible ».
+
+## Gaz de Bordeaux : NovaFixe Duo et Bonus Duo (18 nov. 2026)
+- Pages officielles reçues : le Bonus Duo (100 € TTC sur l'électricité, du 1er oct. au 30 nov. 2026, titulaire du contrat au 11e mois, non cumulable avec le parrainage) est le même bonus que NovaFixe Bonus Élec, valable aussi en électricité seule.
