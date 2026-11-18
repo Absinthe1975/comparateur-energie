@@ -487,6 +487,35 @@
       ]
     },
     {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 3 ans Électricité",
+      "a": 0.227,
+      "b": 0.2252,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "26/10/2026",
+      "d": "18 nov. 2026",
+      "typ": "fixe",
+      "eng": 36,
+      "s": [
+        "Grille officielle TotalEnergies « Offre Fixe 3 ans » (électricité, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz"
+      ]
+    },
+    {
       "k": "mylight",
       "name": "mylight150",
       "offer": "Vert France, prix de bienvenue 12 mois (foyers équipés de panneaux solaires)",
@@ -938,6 +967,43 @@
       "s": [
         "Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026)",
         "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 3 ans Gaz",
+      "a": 0.1518,
+      "b0": 0.1929,
+      "ab1": 360.72,
+      "ab0": 152.4,
+      "zsys": "total",
+      "zdef": 1,
+      "zg": {
+        "b1": [
+          0.1498,
+          0.1518,
+          0.1545,
+          0.1586,
+          0.1634,
+          0.17
+        ],
+        "b0": [
+          0.1918,
+          0.1929,
+          0.1947,
+          0.1966,
+          0.1994,
+          0.2031
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "26/10/2026",
+      "d": "18 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle TotalEnergies « Offre Fixe 3 ans » (prix TTC, 6 zones, gaz, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz"
       ]
     }
   ],
@@ -1471,6 +1537,33 @@
       "s": [
         "Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris »",
         "https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite"
+      ]
+    },
+    {
+      "k": "total",
+      "name": "TotalEnergies",
+      "offer": "Fixe 3 ans Électricité",
+      "hp": 0.2435,
+      "hc": 0.1791,
+      "abo": {
+        "6": 192.6,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "26/10/2026",
+      "d": "18 nov. 2026",
+      "typ": "fixe",
+      "eng": 36,
+      "s": [
+        "Grille officielle TotalEnergies « Offre Fixe 3 ans » (électricité, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026",
+        "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz"
       ]
     },
     {

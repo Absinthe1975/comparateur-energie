@@ -2030,7 +2030,8 @@ function duoInputs() {
 /* Offres duo que le fournisseur commercialise (pages et fiches officielles reçues) : la ligne additionnée correspond à la composition du duo. */
 var DUO_REEL = [
   { k: "engie", eo: /Elec Référence 3 ans/, go: /Gaz Référence 3 ans/, nom: "Duo Référence 3 ans", av: "Fiche officielle : deux grilles séparées. Remise de fin d'année : 200 € TTC offerts avec le duo, contre 100 € pour une seule énergie (du 16 novembre au 20 décembre, voir la promotion ci-dessous)." },
-  { k: "gdb", eo: /NovaFixe Élec/, go: /NovaFixe BioGaz/, nom: "Offre duale gaz + électricité", av: "Page officielle du 12 novembre : prix fixes 3 ans ; avec le Bonus Duo, 100 € TTC sur la facture d'électricité la première année (conditions du Bonus Duo à confirmer)." },
+  { k: "gdb", eo: /NovaFixe Élec/, go: /NovaFixe BioGaz/, nom: "NovaFixe Duo", av: "Pages officielles : électricité 100 % verte et gaz avec 20 % de biogaz, prix fixes 3 ans, un seul espace client. Le Bonus de 100 € TTC (souscription jusqu'au 30 novembre) porte sur l'électricité et vaut aussi pour l'électricité seule : ce n'est pas une remise propre au duo." },
+  { k: "total", eo: /Fixe 3 ans Électricité/, go: /Fixe 3 ans Gaz/, nom: "Offre Fixe 3 ans Électricité et Gaz", av: "Page et fiche descriptive officielles : une seule offre pour les deux énergies, prix fixes 3 ans (grille du 26 octobre 2026). Aucune remise propre au duo relevée." },
   { k: "ilek", eo: /ÉnRFixe\+ Elec/, go: /ÉnRFixe\+ Gaz/, nom: "Offre duo ilek (ÉnRFixe+)", av: "Page officielle : offre combinée électricité + gaz, aucune remise propre au duo relevée." }
 ];
 function duoReel(r) { for (var i = 0; i < DUO_REEL.length; i++) { var d = DUO_REEL[i]; if (d.k === r.k && d.eo.test(r.eo || "") && d.go.test(r.go || "")) return d; } return null; }
