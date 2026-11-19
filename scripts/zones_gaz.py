@@ -52,12 +52,18 @@ def lire_pages(zf):
     return [(d, c, v[0], v[1]) for (d, c), v in sorted(out.items())]
 
 
+ANCIENS = []   # (INSEE, nom, code postal, ancien nom) : utilisés seulement quand le nom de la page ne correspond à aucune commune actuelle
+
+
 def lire_poste(chemin):
+    del ANCIENS[:]
     lignes = []
     with open(chemin, encoding="latin-1", newline="") as f:
         for r in csv.reader(f, delimiter=";"):
             if r and not r[0].startswith("#"):
                 lignes.append((r[0], r[1], r[2], r[3] if len(r) > 3 else r[1]))
+                if len(r) > 4 and r[4].strip():   # ligne 5 : ancien nom d'une commune devenue « commune nouvelle » (ex. MAY SUR ORNE dans ST MARTIN DE MAY)
+                    ANCIENS.append((r[0], r[1], r[2], r[4].strip()))
     return lignes
 
 
@@ -93,7 +99,21 @@ def rapprocher(pages, poste, ids=None):
                 ids[(d, c)] = next(iter(cs))
         else:
             manque.append((d, c, nom))
-    return res, manque, cp
+    # second passage : ancien nom d'une commune nouvelle (ligne 5 de La Poste), sans jamais écraser un rapprochement déjà fait
+    anc = collections.defaultdict(set)
+    for insee, nm, c2, lib in ANCIENS:
+        anc[norm(lib)].add(insee)
+    reste = []
+    for d, c, nom in manque:
+        p = dep.get(d)
+        cs = {i for i in anc.get(norm(nom), set()) if p and i.startswith(p)}
+        if len(cs) == 1 and next(iter(cs)) not in res:
+            res[next(iter(cs))] = dict(((dd, cc), zz) for dd, cc, nn, zz in pages)[(d, c)]
+            if ids is not None:
+                ids[(d, c)] = next(iter(cs))
+        else:
+            reste.append((d, c, nom))
+    return res, reste, cp
 
 
 # Codes INSEE utilisés par la base de l'eau pour les villes à arrondissements (même zone pour tous les arrondissements)
@@ -167,6 +187,22 @@ def lire_communes_csv(chemin):
     return out
 
 
+# Rapprochements faits à la main (18-19 nov. 2026) : communes dont le nom des pages d'observatoires.net ne se retrouve pas tel quel
+# dans la base de La Poste (orthographe, nom complété depuis). (département, commune) des pages → code INSEE.
+MANUEL = {
+    ("gironde", "cadillac"): "33081",                     # Cadillac-sur-Garonne
+    ("haute-savoie", "etaux"): "74116",                   # Éteaux
+    ("loire-atlantique", "grandchamps-des-fontaines"): "44066",   # Grandchamp-des-Fontaines
+    ("saone-et-loire", "louhans"): "71263",               # Louhans-Châteaurenaud
+    ("ariege", "montgaillard"): "09207",                  # Montgaillhard (orthographe de La Poste)
+    ("charente", "saint-medard"): "16338",                # Saint-Médard (Barbezieux)
+    ("haut-rhin", "waldighofen"): "68355",                # Waldighoffen
+    ("nord", "aix"): "59004",                             # Aix-en-Pévèle
+    ("puy-de-dome", "montaigut"): "63233",                # Montaigut-en-Combraille
+    ("seine-et-marne", "montcourt-fromonville"): "77302", # Moncourt-Fromonville
+    ("seine-maritime", "trouville"): "76715",             # Trouville-Alliquerville
+}
+
 # Villes à arrondissements : (département, commune) des pages → code INSEE « ville » de ALIAS
 VILLES = {("paris", "paris"): "75056", ("bouches-du-rhone", "marseille"): "13055", ("rhone", "lyon"): "69123"}
 
@@ -182,6 +218,10 @@ def completer(ids, communes, poste):
         parnom[norm(nom)].add(insee)
         parnom[norm(lib)].add(insee)
     ajoutes = 0
+    for dc, i in MANUEL.items():
+        if dc in communes and dc not in ids:
+            ids[dc] = i
+            ajoutes += 1
     for dc in communes:
         if dc in ids or dc in VILLES:
             continue
@@ -190,6 +230,9 @@ def completer(ids, communes, poste):
             continue
         p = pref[d].most_common(1)[0][0]
         cs = {i for i in parnom.get(norm(c), set()) if i.startswith(p)}
+        if not cs:   # dernier recours : ancien nom d'une commune nouvelle, si cette commune n'est pas déjà prise par une autre page
+            pris = set(ids.values())
+            cs = {i for i, nm, c2, lib in ANCIENS if norm(lib) == norm(c) and i.startswith(p) and i not in pris}
         if len(cs) == 1:
             ids[dc] = next(iter(cs))
             ajoutes += 1
