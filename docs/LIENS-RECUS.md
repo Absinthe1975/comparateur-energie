@@ -228,6 +228,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - page de parrainage : https://www.totalenergies.fr/particuliers/pourquoi-nous-choisir/5-bonnes-raisons-de-nous-choisir/parrainer-ses-proches
 - source : Grille officielle TotalEnergies « Offre Fixe 2 ans » (électricité, 24 septembre 2026) ; page de souscription relevée le 12 nov. 2026 avec le bouton « Je souscris » (Fixe 2 ans Électricité) : https://www.totalenergies.fr/particuliers/affiliation-offre-fixe-2-ans-electricite
 - source : Grille officielle TotalEnergies « Offre Fixe 3 ans » (électricité, 26 octobre 2026) et fiche descriptive Fixe 3 ans Électricité & Gaz reçues le 18 nov. 2026 (Fixe 3 ans Électricité) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-fixe-3-ans-electricite-et-gaz
+- source : Grille officielle TotalEnergies « Offre Spéciale » (électricité, option Base, 1er novembre 2026) moins la remise de 10 % sur le kWh HT pendant 3 ans (prix calculé par le site : taxes de la grille conservées, TVA 20 %) ; page et fiche reçues le 18 nov. 2026 (Spéciale Électricité (-10 % sur le kWh)) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz
 - source : Grille officielle TotalEnergies Offre Fixe 2 ans particuliers (prix TTC, 6 zones, grille du 24 septembre 2026) (Fixe 2 ans Gaz) : https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-de-gaz/offre-fixe-2-ans-gaz
 
 ### Urban Solar Energy
@@ -439,3 +440,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## Gaz de Bordeaux : NovaFixe Duo et Bonus Duo (18 nov. 2026)
 - Pages officielles reçues : le Bonus Duo (100 € TTC sur l'électricité, du 1er oct. au 30 nov. 2026, titulaire du contrat au 11e mois, non cumulable avec le parrainage) est le même bonus que NovaFixe Bonus Élec, valable aussi en électricité seule.
+
+## La Bellenergie : option VertVolt (19 nov. 2026)
+- Page VertVolt : https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/ : label « Engagé » à +0,01 € TTC le kWh sur les offres à prix fixe Prudence (1 an), Constance (2 ans) et Garance (3 ans) ; liens vers les grilles particuliers et professionnels de labellenergie.fr.
