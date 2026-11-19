@@ -103,6 +103,90 @@
       ]
     },
     {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Prudence avec Producteur EnR (VertVolt), prix fixe 1 an",
+      "a": 0.2101,
+      "b": 0.2085,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.64,
+        "36": 646.56
+      },
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
+    },
+    {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Constance avec Producteur EnR (VertVolt), prix fixe 2 ans",
+      "a": 0.2101,
+      "b": 0.2085,
+      "ab6": 232.44,
+      "ab9": 280.68,
+      "abo": {
+        "3": 187.56,
+        "6": 232.44,
+        "9": 280.68,
+        "12": 327.24,
+        "15": 370.8,
+        "18": 415.8,
+        "24": 511.68,
+        "30": 599.64,
+        "36": 688.56
+      },
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
+    },
+    {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Garance avec Producteur EnR (VertVolt), prix fixe 3 ans",
+      "a": 0.2101,
+      "b": 0.2085,
+      "ab6": 250.44,
+      "ab9": 298.68,
+      "abo": {
+        "3": 205.56,
+        "6": 250.44,
+        "9": 298.68,
+        "12": 345.24,
+        "15": 388.8,
+        "18": 433.8,
+        "24": 529.68,
+        "30": 617.64,
+        "36": 706.56
+      },
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
+    },
+    {
       "k": "gdb",
       "name": "Gaz de Bordeaux",
       "offer": "NovaFixe Élec",
@@ -1186,6 +1270,84 @@
         "Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er novembre 2026, TURPE 7 du 1er août 2026)",
         "https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1"
       ]
+    },
+    {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Prudence avec Producteur EnR (VertVolt), prix fixe 1 an",
+      "hp": 0.2242,
+      "hc": 0.1689,
+      "abo": {
+        "6": 190.32,
+        "9": 241.92,
+        "12": 289.56,
+        "15": 334.32,
+        "18": 380.4,
+        "24": 478.56,
+        "30": 568.8,
+        "36": 659.88
+      },
+      "abo_seul": true,
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
+    },
+    {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Constance avec Producteur EnR (VertVolt), prix fixe 2 ans",
+      "hp": 0.2242,
+      "hc": 0.1689,
+      "abo": {
+        "6": 232.44,
+        "9": 284.04,
+        "12": 331.68,
+        "15": 376.44,
+        "18": 422.52,
+        "24": 520.68,
+        "30": 610.92,
+        "36": 702.0
+      },
+      "abo_seul": true,
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
+    },
+    {
+      "k": "bellenergie",
+      "name": "La Bellenergie",
+      "offer": "Garance avec Producteur EnR (VertVolt), prix fixe 3 ans",
+      "hp": 0.2242,
+      "hc": 0.1689,
+      "abo": {
+        "6": 250.44,
+        "9": 302.04,
+        "12": 349.68,
+        "15": 394.44,
+        "18": 440.52,
+        "24": 538.68,
+        "30": 628.92,
+        "36": 720.0
+      },
+      "abo_seul": true,
+      "niv": "confirmer",
+      "d": "19 nov. 2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA)",
+        "https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/"
+      ],
+      "vert": true
     },
     {
       "k": "gdb",
