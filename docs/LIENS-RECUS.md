@@ -162,6 +162,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ### La Bellenergie
 - site du fournisseur : https://labellenergie.fr/
 - source : Grille officielle La Bellenergie, particuliers ≤ 36 kVA (1er novembre 2026, TURPE 7 du 1er août 2026) (Prudence, prix fixe 1 an) : https://labellenergie.fr/pdf/grille-tarifaire-la-bellenergie-particuliers.pdf?r=1
+- source : Grille officielle La Bellenergie (1er novembre 2026) + option VertVolt à 0,01 € TTC le kWh de plus (page officielle) ; prix calculé par le site, même écart que sur Selectra (0,2085 € à 9 kVA) (Prudence avec Producteur EnR (VertVolt), prix fixe 1 an) : https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/
 - parrainage : La Bellenergie, page officielle du parrainage : https://labellenergie.fr/notre-programme-de-parrainage-partagez-lenergie-verte-et-economisez-ensemble/
 
 ### LLUM
@@ -443,3 +444,5 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## ENGIE Elec Référence 3 ans : simulateur (16 nov. 2026)
 - Simulateur ENGIE (capture reçue, adresse non relevée ; point d'entrée : https://particuliers.engie.fr/electricite-gaz.html) : 6 kVA, Base, 2 104 kWh par an → 0,2403 € le kWh TTC, 186,98 € par an.
+## La Bellenergie : option VertVolt (19 nov. 2026)
+- Page VertVolt : https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/ : label « Engagé » à +0,01 € TTC le kWh sur les offres à prix fixe Prudence (1 an), Constance (2 ans) et Garance (3 ans) ; liens vers les grilles particuliers et professionnels de labellenergie.fr. Saisies le 19 nov. comme « avec Producteur EnR (VertVolt) », « À confirmer » (prix = grille + 0,01 €, 0,2085 € à 9 kVA comme sur Selectra).
