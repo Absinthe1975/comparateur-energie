@@ -446,3 +446,8 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Simulateur ENGIE (capture reçue, adresse non relevée ; point d'entrée : https://particuliers.engie.fr/electricite-gaz.html) : 6 kVA, Base, 2 104 kWh par an → 0,2403 € le kWh TTC, 186,98 € par an.
 ## La Bellenergie : option VertVolt (19 nov. 2026)
 - Page VertVolt : https://labellenergie.fr/vertvolt-lelectricite-verte-dont-vous-connaissez-le-producteur/ : label « Engagé » à +0,01 € TTC le kWh sur les offres à prix fixe Prudence (1 an), Constance (2 ans) et Garance (3 ans) ; liens vers les grilles particuliers et professionnels de labellenergie.fr. Saisies le 19 nov. comme « avec Producteur EnR (VertVolt) », « À confirmer » (prix = grille + 0,01 €, 0,2085 € à 9 kVA comme sur Selectra).
+
+## Souscriptions suspendues : constat sur les sites officiels (20 nov. 2026)
+- Ekwateur (fenêtre « Souscription momentanément indisponible » sur la page d'accueil) : https://ekwateur.fr/
+- Mint Énergie (« Les nouvelles souscriptions sont momentanément fermées ») : https://souscription.mint-energie.com/Pages/Souscription/fermeture.aspx
+- Alterna (« nos offres d'électricité sont momentanément indisponibles à la souscription », gaz toujours proposé) : https://souscrire.alterna-energie.fr/

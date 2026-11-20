@@ -2423,7 +2423,7 @@ function renderProGaz() {
 // Source secondaire (Selectra, Bourse Inside), aucune communication officielle relevée : mention « À confirmer ». Pour réintégrer un fournisseur, retirer sa ligne ici.
 var SUSP = {
   ekw:    { nom: "Ekwateur", elec: 1, gas: 1, duo: 1, depuis: "début novembre 2026" },
-  mint:   { nom: "Mint Énergie", elec: 1, duo: 1, depuis: "le 5 novembre 2026" },
+  mint:   { nom: "Mint Énergie", elec: 1, gas: 1, duo: 1, depuis: "le 5 novembre 2026" },
   alterna: { nom: "Alterna", elec: 1, depuis: "le 9 novembre 2026" }
 };
 function applySusp() {
@@ -2442,7 +2442,7 @@ function renderSusp() {
     var el = $("susp-" + (t[0] === "gas" ? "gaz" : t[0])); if (!el) return;
     var l = liste(t[0]);
     if (!l.length) { el.hidden = true; return; }
-    el.innerHTML = '<strong>Souscriptions suspendues, hors classement (' + t[1] + ') :</strong> ' + esc(l.join(", ")) + '. Les contrats en cours continuent. <span class="badge">À confirmer</span> Source : presse (Selectra, Bourse Inside, 9 au 12 nov. 2026), pas de communiqué officiel relevé.';
+    el.innerHTML = '<strong>Souscriptions suspendues, hors classement (' + t[1] + ') :</strong> ' + esc(l.join(", ")) + '. Les contrats en cours continuent. <span class="badge">Constaté sur les sites officiels le 20 nov. 2026</span> Ekwateur : « souscription momentanément indisponible » ; Mint Énergie : « les nouvelles souscriptions sont momentanément fermées » ; Alterna : offres d\'électricité « momentanément indisponibles à la souscription » (son gaz reste ouvert). Presse : Selectra, Bourse Inside (9 au 12 nov. 2026).';
     el.hidden = false;
   });
 }
