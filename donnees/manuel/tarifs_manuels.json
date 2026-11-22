@@ -288,11 +288,11 @@
         "36": 618.36
       },
       "niv": "confirmer",
-      "d": "16 nov. 2026",
+      "d": "22 nov. 2026",
       "typ": "fixe",
       "vert": true,
       "s": [
-        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA) ; fiche descriptive officielle de novembre 2026 reçue le 12 nov. : fourniture 0,17110 €/kWh TTC et abonnement de fourniture 45,79 € par an confirmés ; le prix total du kWh dépend de la formule d'acheminement (sans différenciation temporelle : 0,05988 € ; 4 plages : de 0,0144 à 0,0926 €), donc non vérifié ; simulateur ENGIE du 16 nov. 2026 (capture envoyée, 6 kVA, Base, 2 104 kWh par an) : fourniture 0,171 € et obligations 0,018 € le kWh, acheminement 106,92 € par an, abonnement 186,98 € par an, soit (359,99 + 38,59 + 106,92) / 2 104 = 0,2403 € le kWh TTC : prix confirmé à 6 kVA (l'acheminement dépend du profil de consommation)",
+        "Selectra / electricite.com, prix TTC de la grille mise à jour le 30 octobre 2026 (source secondaire ; abonnements annuels déduits des montants mensuels, 6 kVA : 186,98 € par an) ; fiche descriptive officielle ENGIE (grille d'octobre 2026) reçue : abonnement vérifié (45,79 € fourniture + 141,19 € acheminement = 186,98 € par an à 6 kVA) ; fiche descriptive officielle de novembre 2026 reçue le 12 nov. : fourniture 0,17110 €/kWh TTC et abonnement de fourniture 45,79 € par an confirmés ; le prix total du kWh dépend de la formule d'acheminement (sans différenciation temporelle : 0,05988 € ; 4 plages : de 0,0144 à 0,0926 €), donc non vérifié ; simulateur ENGIE du 16 nov. 2026 (capture envoyée, 6 kVA, Base, 2 104 kWh par an) : fourniture 0,171 € et obligations 0,018 € le kWh, acheminement 106,92 € par an, abonnement 186,98 € par an, soit (359,99 + 38,59 + 106,92) / 2 104 = 0,2403 € le kWh TTC : prix confirmé à 6 kVA (l'acheminement dépend du profil de consommation) ; simulateur ENGIE du 22 nov. 2026 (capture envoyée, 9 kVA, Base, 5 000 kWh par an) : abonnement 45,79 + 184,33 = 230,12 € par an, fourniture 0,171 €, obligations 0,020 € le kWh, acheminement 254,08 € par an, soit 0,050816 € le kWh, exactement comme à 6 kVA (106,92 / 2 104) : l'acheminement par kWh est donc le même quels que soient la puissance et la consommation, et le prix à partir de 9 kVA vaut 0,17110 + 0,02005 + 0,05082 = 0,2420 € le kWh TTC : confirmé par le simulateur",
         "https://www.fournisseurs-electricite.com/fournisseurs/engie/tarifs/elec-reference"
       ]
     },
