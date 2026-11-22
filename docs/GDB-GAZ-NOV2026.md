@@ -10,6 +10,9 @@ Fiches descriptives officielles reçues le 6 nov. 2026 (souscriptions du 1er au 
 | Lille | non reçue | non reçue | 0,2010 | 0,1591 |
 | Evian-les-Bains | 0,2008 | 0,1590 | 0,2010 | 0,1605 |
 | Moissac | non reçue | non reçue | 0,2010 | 0,1605 |
+| Gap 05000 (zone 4, fiche du 22 nov.) | non reçue | non reçue | 0,2010 | 0,1613 |
+| Aurillac 15000 (zone 5, fiche du 22 nov.) | non reçue | non reçue | 0,2010 | 0,1620 |
+| Chamonix 74400 (zone 6, fiche du 22 nov.) | non reçue | non reçue | 0,2010 | 0,1627 |
 | Bordeaux | 0,1996 | 0,1467 | 0,1964 | 0,1542 |
 
 Le prix du kWh change donc avec la commune (zone du réseau de distribution). Le site affiche pour l'instant la valeur de Paris 1er, en « À confirmer », tant qu'il n'y a pas de table « commune → zone ». NovaFlex est indexée sur le prix repère de vente de gaz (PRVG) de la CRE : prix et abonnement évoluent chaque mois.
