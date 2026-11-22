@@ -212,6 +212,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ### Primeo Energie
 - site du fournisseur : https://particuliers.primeo-energie.fr/
 - grille : Essentielle Verte : https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf
+- grille : Fixe Sereine : https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf
 - page de prix (comparateur) : https://prix-elec.com/fournisseurs/primeo/offres
 - page de prix (second comparateur) : https://www.fournisseurs-electricite.com/fournisseurs/primeo/tarifs
 - parrainage : particuliers.primeo-energie.fr : https://particuliers.primeo-energie.fr/wp-content/uploads/Reglement-du-programme-de-parrainage-Primeo-Energie-2026.pdf

@@ -683,6 +683,124 @@
         "Grille officielle Urban Solar Energy, tarifs particuliers sans centrale photovoltaïque (1er août 2026) et fiche descriptive Essentielle SMB (offre à prix fixe, 100 % renouvelable, sans engagement)",
         "https://www.urbansolarenergy.fr/tarifs"
       ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Essentielle Verte",
+      "a": 0.1919,
+      "b": 0.1904,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.76,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "14/09/2026",
+      "d": "22 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie, Offre Essentielle Verte (PDF « Grille tarifaire », applicable au 14/09/2026 : kWh HT à 95 % du tarif réglementé du 01/08/2026, abonnement identique)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Fixe Sereine",
+      "a": 0.2475,
+      "b": 0.2464,
+      "ab6": 259.44,
+      "ab9": 328.2,
+      "abo": {
+        "3": 195.72,
+        "6": 259.44,
+        "9": 328.2,
+        "12": 393.96,
+        "15": 456.0,
+        "18": 519.84,
+        "24": 656.16,
+        "30": 781.08,
+        "36": 907.32
+      },
+      "niv": "officiel",
+      "nivd": "04/11/2026",
+      "d": "22 nov. 2026",
+      "typ": "fixe",
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie, Offre Fixe Sereine (PDF « Grille tarifaire », applicable à partir du 04/11/2026 ; prix HT du kWh et de l'abonnement fixes jusqu'au 31/07/2029, hors TURPE, taxes et CEE ; option énergie verte : +2 € TTC par mois)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Essentielle Verte",
+      "a": 0.1919,
+      "b": 0.1904,
+      "ab6": 190.32,
+      "ab9": 238.56,
+      "abo": {
+        "3": 145.56,
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.76,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "14/09/2026",
+      "d": "22 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie Essentielle Verte, particuliers ≤ 36 kVA (applicable au 14/09/2026)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Fixe Sereine",
+      "a": 0.2475,
+      "b": 0.2464,
+      "ab6": 259.44,
+      "ab9": 328.2,
+      "abo": {
+        "3": 195.72,
+        "6": 259.44,
+        "9": 328.2,
+        "12": 393.96,
+        "15": 456.0,
+        "18": 519.84,
+        "24": 656.16,
+        "30": 781.08,
+        "36": 907.32
+      },
+      "niv": "officiel",
+      "nivd": "04/11/2026",
+      "d": "22 nov. 2026",
+      "typ": "fixe",
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie Fixe Sereine, particuliers ≤ 36 kVA (applicable à partir du 4/11/2026, prix bloqués jusqu'au 31/07/2029)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf"
+      ]
     }
   ],
   "gas": [
@@ -1923,6 +2041,114 @@
       "s": [
         "Grille officielle ENGIE, fiche descriptive Elec'Car 1 an (grille d'août 2026, prix TTC) : indexée sur le tarif réglementé, réservée aux propriétaires d'un véhicule électrique ou hybride rechargeable avec comptage heures pleines / creuses",
         "https://particuliers.engie.fr/"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Essentielle Verte",
+      "hp": 0.2054,
+      "hc": 0.1528,
+      "abo": {
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.76,
+        "36": 646.56
+      },
+      "niv": "officiel",
+      "nivd": "14/09/2026",
+      "d": "22 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie, Offre Essentielle Verte (PDF « Grille tarifaire », applicable au 14/09/2026 : kWh HT à 95 % du tarif réglementé du 01/08/2026, abonnement identique)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Fixe Sereine",
+      "hp": 0.2559,
+      "hc": 0.2053,
+      "abo": {
+        "6": 259.44,
+        "9": 328.2,
+        "12": 393.96,
+        "15": 456.0,
+        "18": 519.96,
+        "24": 656.16,
+        "30": 781.32,
+        "36": 907.32
+      },
+      "niv": "officiel",
+      "nivd": "04/11/2026",
+      "d": "22 nov. 2026",
+      "typ": "fixe",
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie, Offre Fixe Sereine (PDF « Grille tarifaire », applicable à partir du 04/11/2026 ; prix HT du kWh et de l'abonnement fixes jusqu'au 31/07/2029, hors TURPE, taxes et CEE ; option énergie verte : +2 € TTC par mois)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Essentielle Verte",
+      "hp": 0.2054,
+      "hc": 0.1528,
+      "abo": {
+        "6": 190.32,
+        "9": 238.56,
+        "12": 285.12,
+        "15": 328.8,
+        "18": 373.68,
+        "24": 469.68,
+        "30": 557.76,
+        "36": 646.56
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "14/09/2026",
+      "d": "22 nov. 2026",
+      "typ": "indexe",
+      "vert": true,
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie Essentielle Verte, particuliers ≤ 36 kVA (applicable au 14/09/2026)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD-Offre-Essentielle-Verte.pdf"
+      ]
+    },
+    {
+      "k": "primeo",
+      "name": "Primeo Energie",
+      "offer": "Fixe Sereine",
+      "hp": 0.2559,
+      "hc": 0.2053,
+      "abo": {
+        "6": 259.44,
+        "9": 328.2,
+        "12": 393.96,
+        "15": 456.0,
+        "18": 519.96,
+        "24": 656.16,
+        "30": 781.32,
+        "36": 907.32
+      },
+      "abo_seul": true,
+      "niv": "officiel",
+      "nivd": "04/11/2026",
+      "d": "22 nov. 2026",
+      "typ": "fixe",
+      "eng": 0,
+      "s": [
+        "Grille officielle Primeo Energie Fixe Sereine, particuliers ≤ 36 kVA (applicable à partir du 4/11/2026, prix bloqués jusqu'au 31/07/2029)",
+        "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf"
       ]
     }
   ]
