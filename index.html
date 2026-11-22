@@ -1186,7 +1186,7 @@ function variSection(f) {
   function sel(k, opts, cur) { return '<select data-fu="' + k + '">' + opts.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === cur ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select>"; }
   var h = '<div class="fsec"><h3>Prix variable selon le jour ou l\'heure</h3><div class="chips">' + ch("0", "Masquer", !f.vari) + ch("1", "Afficher", f.vari) + "</div>";
   if (f.vari) {
-    h += '<p class="note">OctoSaisons, Tempo et Zen Estival : prix moyen estimé d\'après vos usages (ordres de grandeur, pas une mesure).</p>'
+    h += '<p class="note">OctoSaisons, Tempo, Zen Estival, Energie Bleue, Happy Week-end et LLUM avec Linky : prix moyen estimé d\'après vos usages (ordres de grandeur, pas une mesure).</p>'
       + '<label class="fu">Chauffage ' + sel("chauf", [["elec", "Électrique"], ["autre", "Gaz, bois, autre"]], u.chauf) + "</label>"
       + '<label class="fu">Votre journée ' + sel("jour", [["absent", "Absent en journée"], ["present", "Souvent présent"]], u.jour) + "</label>"
       + '<label class="fu">Chauffe-eau électrique ' + sel("ce", [["non", "Non, ou à toute heure"], ["nuit", "Oui, la nuit"]], u.ce ? "nuit" : "non") + "</label>"
@@ -2178,6 +2178,9 @@ var TEMPO = { hp_b: 0.1654, hc_b: 0.1356, hp_w: 0.1921, hc_w: 0.1536, hp_r: 0.72
 var EDICI = { hph: 0.2328, hch: 0.1893, hpb: 0.1607, hcb: 0.1546, abo: {"3": 12.15, "6": 15.75, "9": 19.34, "12": 22.94, "15": 26.53, "18": 30.13, "24": 37.32, "30": 44.51, "36": 51.70} };
 // Énergie d'ici, option heures creuses (MU 4) : bulletin de souscription, tarifs TTC applicables à partir du 1er août 2026 ; abonnement TTC en € par mois.
 var EDICI_HC = { hph: 0.2267, hch: 0.1863, hpb: 0.1601, hcb: 0.1539, abo: {"3": 12.87, "6": 17.18, "9": 21.49, "12": 25.8, "15": 30.11, "18": 34.41, "24": 43.03, "30": 51.65, "36": 60.27} };
+// LLUM, électricité verte avec compteur Linky (grille officielle du 1er août 2026, indexée sur le tarif réglementé) : prix TTC en €/kWh par saison (haute : novembre à mars) et plage horaire ; abonnement TTC en € par mois.
+var LLUM_L = { hph: 0.22276, hch: 0.17920, hpb: 0.15064, hcb: 0.14452, abo: {"3": 12.13, "6": 15.86, "9": 19.88, "12": 23.76, "15": 27.40, "18": 31.14, "24": 39.14, "30": 46.47, "36": 53.88} };
+var LLUM_LHC = { hph: 0.23254, hch: 0.15677, hpb: 0.16594, hcb: 0.12437, abo: {"6": 15.86, "9": 19.88, "12": 23.76, "15": 27.40, "18": 31.14, "24": 39.14, "30": 47.67, "36": 56.28} };
 // ENGIE Elec Happy Week-end 3 ans (grille de novembre 2026, fiche descriptive) : prix TTC en €/kWh en semaine et le week-end (samedis, dimanches et jours fériés) ; abonnement TTC en € par an.
 var HWE = { sem: 0.24739, we: 0.1842, abo: {"3": 146.09, "6": 191.42, "9": 240.21, "12": 287.26, "15": 331.44, "18": 376.91, "24": 473.91, "30": 562.98, "36": 652.92} };
 var HWE_PART = 0.315;   // part de la consommation un samedi, un dimanche ou un jour férié : hypothèse (115 jours sur 365), sans source officielle
@@ -2242,6 +2245,11 @@ function saisonsRows(kva, C) {
   var H = EDICI_HC, ha0 = {}; for (k in H.abo) ha0[k] = H.abo[k] * 12;
   var hkw = wh * (U.hct * H.hch + (1 - U.hct) * H.hph) + (1 - wh) * (U.hct * H.hcb + (1 - U.hct) * H.hpb);
   out.push({ k: "edici", name: "Énergie d'ici", offer: "Energie Bleue, option heures creuses MU 4 (prix selon la saison et l'heure)", url: "https://www.energiedici.fr/nos-offres-pour-les-particuliers.html", a: hkw, b: hkw, abo: ha0, abo_seul: true, niv: "officiel", nivd: "01/08/2026", vert: true, vari: true });
+  [[LLUM_L, "Électricité verte, compteur Linky, option Base (prix selon la saison et l'heure)"], [LLUM_LHC, "Électricité verte, compteur Linky, option heures pleines / creuses (prix selon la saison et l'heure)"]].forEach(function (L) {
+    var G = L[0], ga = {}, kk; for (kk in G.abo) ga[kk] = G.abo[kk] * 12;
+    var gkw = wh * (U.hct * G.hch + (1 - U.hct) * G.hph) + (1 - wh) * (U.hct * G.hcb + (1 - U.hct) * G.hpb);
+    out.push({ k: "llum", name: "LLUM", offer: L[1], url: "https://www.llum.fr/nos-offres-pour-particuliers", a: gkw, b: gkw, abo: ga, abo_seul: true, niv: "officiel", nivd: "01/08/2026", typ: "indexe", vert: true, vari: true });
+  });
   if (u.chauf !== "elec" && typeof TRV_ABO[kva] === "number") { var ek = estivalKwh(), ea = {}; ea[kva] = TRV_ABO[kva]; out.push({ k: "edf", name: "EDF", offer: "Zen Estival (prix selon la saison et l'heure)", url: "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-estival.html", a: ek, b: ek, abo: ea, abo_seul: true, niv: "officiel", nivd: "15/09/2026", vari: true }); }
   return out;
 }
@@ -2264,6 +2272,12 @@ function renderSaisonsGrille() {
     "<tr class=\"ref\"><td colspan=\"3\"><strong>Énergie d'ici, Energie Bleue, option heures creuses MU 4</strong> (abonnement à " + kva + " kVA : " + fmtEur2.format(EDICI_HC.abo[kva]) + " par mois ; heures creuses fixées par le gestionnaire du réseau)</td></tr>" +
     "<tr><td>Saison haute, novembre à mars</td><td class=\"num\">" + fmtKwh.format(EDICI_HC.hph) + "</td><td class=\"num\">" + fmtKwh.format(EDICI_HC.hch) + "</td></tr>" +
     "<tr><td>Saison basse, avril à octobre</td><td class=\"num\">" + fmtKwh.format(EDICI_HC.hpb) + "</td><td class=\"num\">" + fmtKwh.format(EDICI_HC.hcb) + "</td></tr>" +
+    "<tr class=\"ref\"><td colspan=\"3\"><strong>LLUM, compteur Linky, option Base</strong> (abonnement à " + kva + " kVA : " + (typeof LLUM_L.abo[kva] === "number" ? fmtEur2.format(LLUM_L.abo[kva]) : "non proposé") + " par mois ; indexé sur le tarif réglementé ; heures creuses fixées par le gestionnaire du réseau)</td></tr>" +
+    "<tr><td>Saison haute, novembre à mars</td><td class=\"num\">" + fmtKwh.format(LLUM_L.hph) + "</td><td class=\"num\">" + fmtKwh.format(LLUM_L.hch) + "</td></tr>" +
+    "<tr><td>Saison basse, avril à octobre</td><td class=\"num\">" + fmtKwh.format(LLUM_L.hpb) + "</td><td class=\"num\">" + fmtKwh.format(LLUM_L.hcb) + "</td></tr>" +
+    "<tr class=\"ref\"><td colspan=\"3\"><strong>LLUM, compteur Linky, option heures pleines / creuses</strong> (abonnement à " + kva + " kVA : " + (typeof LLUM_LHC.abo[kva] === "number" ? fmtEur2.format(LLUM_LHC.abo[kva]) : "non proposé") + " par mois)</td></tr>" +
+    "<tr><td>Saison haute, novembre à mars</td><td class=\"num\">" + fmtKwh.format(LLUM_LHC.hph) + "</td><td class=\"num\">" + fmtKwh.format(LLUM_LHC.hch) + "</td></tr>" +
+    "<tr><td>Saison basse, avril à octobre</td><td class=\"num\">" + fmtKwh.format(LLUM_LHC.hpb) + "</td><td class=\"num\">" + fmtKwh.format(LLUM_LHC.hcb) + "</td></tr>" +
     "<tr class=\"ref\"><td colspan=\"3\"><strong>ENGIE Elec Happy Week-end 3 ans</strong> (abonnement à " + kva + " kVA : " + fmtEur2.format(HWE.abo[kva]) + " par an ; part du week-end et des jours fériés supposée à " + Math.round(HWE_PART * 100) + " % de la consommation)</td></tr>" +
     "<tr><td>Semaine (lundi au vendredi hors jours fériés)</td><td class=\"num\">" + fmtKwh.format(HWE.sem) + "</td><td class=\"num\">&nbsp;</td></tr>" +
     "<tr><td>Week-end et jours fériés</td><td class=\"num\">" + fmtKwh.format(HWE.we) + "</td><td class=\"num\">&nbsp;</td></tr>" +
