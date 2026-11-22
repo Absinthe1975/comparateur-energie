@@ -590,11 +590,12 @@ details.notes { margin: 14px 0; } details.notes > summary { cursor: pointer; fon
 
   <section class="panel" id="p-pro" role="tabpanel" aria-labelledby="tab-pro" hidden>
     <h2>Offres pour les professionnels (essai)</h2>
-    <p class="lede">Onglet provisoire, pour les professionnels dont la puissance souscrite est de 36 kVA au plus. Les offres sont classées du prix le plus bas au plus haut. Les prix sont <strong>hors taxes</strong> : ils additionnent la fourniture, l'acheminement (réseau), les obligations et les garanties d'origine, sans l'accise sur l'électricité, la CTA ni la TVA. Pour l'instant, seules les offres <a class="prov-lien" href="https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels" target="_blank" rel="noopener noreferrer">ENGIE Pro</a> (Référence Pro à prix fixe sur 1, 2 ou 3 ans ; Latitude à prix indexé sur 1 an, avec compteur Linky) sont relevées d'après leurs grilles officielles d'octobre 2026. Les autres fournisseurs s'ajouteront au fil des grilles reçues.</p>
+    <p class="lede">Onglet provisoire, pour les professionnels dont la puissance souscrite est de 36 kVA au plus. Les offres sont classées du prix le plus bas au plus haut. Les prix sont <strong>hors taxes</strong> par défaut : ils additionnent la fourniture, l'acheminement (réseau), les obligations et les garanties d'origine, sans l'accise sur l'électricité, la CTA ni la TVA. Le choix « Prix affichés » ajoute ces taxes pour l'électricité (si votre TVA n'est pas récupérable) ; le gaz reste hors taxes. Pour l'instant, seules les offres <a class="prov-lien" href="https://pro.engie.fr/electricite-gaz/offre-electricite-prix-fixe-pour-les-professionnels" target="_blank" rel="noopener noreferrer">ENGIE Pro</a> (Référence Pro à prix fixe sur 1, 2 ou 3 ans ; Latitude à prix indexé sur 1 an, avec compteur Linky) sont relevées d'après leurs grilles officielles d'octobre 2026. Les autres fournisseurs s'ajouteront au fil des grilles reçues.</p>
     <div class="bar" style="position:static">
       <div class="field"><label for="pro-kva">Puissance</label><select id="pro-kva"></select></div>
       <div class="field"><label for="pro-conso">Consommation (kWh par an)</label><input id="pro-conso" type="number" min="500" max="100000" step="100" value="8000"></div>
       <div class="field"><label for="pro-opt">Option</label><select id="pro-opt"><option value="base" selected>Base</option><option value="hphc">Heures pleines / heures creuses</option></select></div>
+      <div class="field"><label for="pro-tax">Prix affichés</label><select id="pro-tax"><option value="ht" selected>Hors taxes (TVA récupérable)</option><option value="ttc">Toutes taxes comprises (TVA non récupérable)</option></select></div>
       <div class="field" id="f-pro-hc" hidden><label for="pro-hc">Part en heures creuses (%)</label><input id="pro-hc" type="number" min="0" max="100" step="5" value="35"></div>
     </div>
     <div class="callout" id="pro-res" aria-live="polite"></div>
@@ -2339,12 +2340,20 @@ function renderPro() {
     sel.innerHTML = Object.keys(PRO_ENGIE.achBase.abo).sort(function (a, b) { return a - b; }).map(function (k) { return '<option value="' + k + '"' + (k === "6" ? " selected" : "") + ">" + k + " kVA</option>"; }).join("");
   }
   var kva = sel.value || "6", opt = $("pro-opt").value === "hphc" ? "hphc" : "base";
+  var ttc = $("pro-tax") && $("pro-tax").value === "ttc", TX = ttc ? "toutes taxes comprises" : "hors taxes";
   var C = parseFloat($("pro-conso").value); if (!isFinite(C) || C < 0) C = 0;
   var hc = parseFloat($("pro-hc").value); if (!isFinite(hc)) hc = 35; hc = Math.min(100, Math.max(0, hc)) / 100;
   $("f-pro-hc").hidden = opt !== "hphc";
-  var rows = ["1", "2", "3", "L"].map(function (an) { return { an: an, c: proCout(an, kva, C, opt, hc) }; });
+  // Toutes taxes comprises : accise 0,03085 €/kWh (activité économique, 36 kVA au plus, depuis le 1er févr. 2026), CTA 15 % de la part fixe du réseau, puis TVA 20 % sur le tout
+  var PA = (opt === "hphc" ? PRO_ENGIE.achHphc : PRO_ENGIE.achBase).abo[kva] * 12;
+  function adj(c) {
+    if (!c || !ttc) return c;
+    var kw = (c.kwh + 0.03085) * 1.2, ab = (c.abo + 0.15 * PA) * 1.2;
+    return { abo: ab, kwh: kw, total: ab + C * kw };
+  }
+  var rows = ["1", "2", "3", "L"].map(function (an) { return { an: an, c: adj(proCout(an, kva, C, opt, hc)) }; });
   var ok = rows.filter(function (r) { return r.c; });
-  var t = "<thead><tr><th>Offre</th><th class=\"num\">Prix du kWh hors taxes</th><th class=\"num\">Abonnement par an hors taxes</th><th class=\"num\">Total par an hors taxes</th></tr></thead><tbody>";
+  var t = "<thead><tr><th>Offre</th><th class=\"num\">Prix du kWh " + TX + "</th><th class=\"num\">Abonnement par an " + TX + "</th><th class=\"num\">Total par an " + TX + "</th></tr></thead><tbody>";
   rows.forEach(function (r) {
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(r.an === "L" ? "https://pro.engie.fr/electricite-gaz/offre-electricite-prix-indexe-pour-les-professionnels" : PRO_ENGIE.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir l'offre sur le site d'ENGIE Pro (nouvel onglet)\">ENGIE Pro</a></div><div class=\"offer\">" + proNom(r.an) + "</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle d'octobre 2026</span>" + (r.an === "L" ? " <span class=\"badge check\">Prix du mois, il change chaque mois</span>" : "") + "</div>";
@@ -2353,7 +2362,7 @@ function renderPro() {
   });
   var cand = ok.filter(function (r) { return r.an !== "L"; }).map(function (r) { return { nom: "ENGIE Pro, " + proNom(r.an), c: r.c }; });
   ["1", "2", "3"].forEach(function (an) {
-    var c = belCout(an, kva, C, opt, hc);
+    var c = adj(belCout(an, kva, C, opt, hc));
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(PRO_BEL.pdf) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir la grille sur le site de La Bellenergie (nouvel onglet)\">La Bellenergie</a></div><div class=\"offer\">" + PRO_BEL.off[an].nom + ", prix fixe, sans engagement</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle du 01/08/2026</span></div>";
     if (!c) t += "<tr data-k=\"" + (1e9) + "\"><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
@@ -2361,7 +2370,7 @@ function renderPro() {
   });
   PRO_AUT.forEach(function (o) {
     if (o.opt !== "both" && o.opt !== opt) return;
-    var c = autCout(o, kva, C, opt, hc);
+    var c = adj(autCout(o, kva, C, opt, hc));
     var nom = "<div class=\"prov\"><a class=\"prov-lien\" href=\"" + esc(o.url) + "\" target=\"_blank\" rel=\"noopener noreferrer\" title=\"Voir la grille sur le site de " + esc(o.four) + " (nouvel onglet)\">" + esc(o.four) + "</a></div><div class=\"offer\">" + esc(o.nom) + "</div>" +
       "<div class=\"offer\"><span class=\"badge\">Grille officielle du " + o.date + "</span>" + (o.idx ? " <span class=\"badge check\">Prix indexé, il change avec le tarif réglementé</span>" : "") + "</div>";
     if (!c) t += "<tr data-k=\"" + (1e9) + "\"><td>" + nom + "</td><td colspan=\"3\" class=\"offer\">Non proposée à 3 kVA en heures pleines / creuses.</td></tr>";
@@ -2371,7 +2380,7 @@ function renderPro() {
   $("t-pro").innerHTML = t.slice(0, t.indexOf("<tr data-k=")) + trs.join("") + "</tbody>";
   if (cand.length) {
     var m = cand.reduce(function (a, b) { return b.c.total < a.c.total ? b : a; });
-    $("pro-res").innerHTML = "Pour " + fmtInt.format(C) + " kWh par an en " + kva + " kVA (" + (opt === "hphc" ? "heures pleines / creuses, " + fmtInt.format(hc * 100) + " % en heures creuses" : "option Base") + ") : <strong>" + fmtEur2.format(m.c.total) + " par an hors taxes</strong> avec " + m.nom + ", soit " + fmtEur2.format(m.c.total / 12) + " par mois. Seules les offres à prix fixe entrent dans ce calcul, et cinq marques sont relevées : ce n'est pas un classement du marché. Latitude est à prix indexé : son prix de ce mois ne se compare pas à un prix fixe pour toute la durée.";
+    $("pro-res").innerHTML = "Pour " + fmtInt.format(C) + " kWh par an en " + kva + " kVA (" + (opt === "hphc" ? "heures pleines / creuses, " + fmtInt.format(hc * 100) + " % en heures creuses" : "option Base") + ") : <strong>" + fmtEur2.format(m.c.total) + " par an " + TX + "</strong> avec " + m.nom + ", soit " + fmtEur2.format(m.c.total / 12) + " par mois. Seules les offres à prix fixe entrent dans ce calcul, et cinq marques sont relevées : ce n'est pas un classement du marché. Latitude est à prix indexé : son prix de ce mois ne se compare pas à un prix fixe pour toute la durée.";
   } else $("pro-res").textContent = "Aucune formule disponible pour cette puissance et cette option.";
   var P = PRO_ENGIE, d = "<thead><tr><th>Composante</th><th class=\"num\">Par kWh (c€)</th><th class=\"num\">Par mois (€)</th></tr></thead><tbody>";
   var a = opt === "hphc" ? P.achHphc : P.achBase;
@@ -2384,9 +2393,9 @@ function renderPro() {
   d += "<tr><td>Obligations (varient jusqu'à 3 fois par an, plafonnées)</td><td class=\"num\">" + (opt === "hphc" ? P.oblHphc : P.oblBase).toFixed(3).replace(".", ",") + "</td><td class=\"num\">&nbsp;</td></tr>";
   d += "<tr><td>Garanties d'origine (électricité verte française, varient jusqu'à 3 fois par an)</td><td class=\"num\">" + P.go.toFixed(3).replace(".", ",") + "</td><td class=\"num\">&nbsp;</td></tr></tbody>";
   $("t-pro-det").innerHTML = d;
-  $("pro-note").innerHTML = "Sources : grilles de prix Référence Pro de 1, 2 et 3 ans et Latitude de 1 an (octobre 2026) et fiches des offres, publiées par ENGIE Pro (<a href=\"" + esc(P.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\">page de l'offre</a>), reçues le 29 oct. 2026. Non comptés : l'accise sur l'électricité (son taux dépend de l'activité), la CTA et la TVA, que beaucoup de professionnels récupèrent. Non compté aussi : la réduction de 25 % sur le kWh de la fourniture la première année, pour un changement de fournisseur avec un contrat de 3 ans souscrit jusqu'au 31 octobre 2026. Les obligations et les garanties d'origine peuvent monter jusqu'à un plafond (2,047 et 0,956 c€/kWh en Base). En heures pleines / creuses, la part en heures creuses est une hypothèse de votre part. Un dépôt de garantie peut être demandé si le paiement n'est pas par prélèvement automatique. L'offre n'est pas ouverte aux particuliers. Enercoop (grille des professionnels de moins de 36 kVA du 1er août 2026), Mint Énergie (Classic & Green Pro du 1er août 2026, engagement de 24 mois) et TotalEnergies (Online du 1er octobre 2026, indexé sur le tarif réglementé) sont lues sur leurs grilles officielles ; leurs prix « HTT » comprennent l'acheminement, sans accise, CTA ni TVA. Non relevées chez Enercoop : l'offre « 2 saisons » (compteur Linky). La Bellenergie : grille du 1er août 2026 (<a href=\"" + esc(PRO_BEL.pdf) + "\" target=\"_blank\" rel=\"noopener noreferrer\">PDF officiel</a>), réservée aux nouveaux clients professionnels de moins de 10 salariés et de moins de 2 millions d'euros de chiffre d'affaires ; ses prix « HTT » comprennent déjà l'acheminement, sans accise, CTA ni TVA, donc ils se comparent aux totaux d'ENGIE Pro ; les prix ne changent pas pendant la durée du contrat, sauf l'acheminement.";
+  $("pro-note").innerHTML = "Sources : grilles de prix Référence Pro de 1, 2 et 3 ans et Latitude de 1 an (octobre 2026) et fiches des offres, publiées par ENGIE Pro (<a href=\"" + esc(P.page) + "\" target=\"_blank\" rel=\"noopener noreferrer\">page de l'offre</a>), reçues le 29 oct. 2026. " + (ttc ? "Toutes taxes comprises : accise de 0,03085 € par kWh (taux des activités économiques jusqu'à 36 kVA depuis le 1er février 2026), CTA de 15 % de la part fixe du réseau et TVA de 20 % sur l'ensemble, calculées par le site. Vérifiez le taux d'accise de votre activité sur votre facture." : "Hors taxes : sans l'accise sur l'électricité, la CTA ni la TVA, que beaucoup de professionnels récupèrent. Choisissez « Toutes taxes comprises » si votre TVA n'est pas récupérable.") + " Non compté aussi : la réduction de 25 % sur le kWh de la fourniture la première année, pour un changement de fournisseur avec un contrat de 3 ans souscrit jusqu'au 31 octobre 2026. Les obligations et les garanties d'origine peuvent monter jusqu'à un plafond (2,047 et 0,956 c€/kWh en Base). En heures pleines / creuses, la part en heures creuses est une hypothèse de votre part. Un dépôt de garantie peut être demandé si le paiement n'est pas par prélèvement automatique. L'offre n'est pas ouverte aux particuliers. Enercoop (grille des professionnels de moins de 36 kVA du 1er août 2026), Mint Énergie (Classic & Green Pro du 1er août 2026, engagement de 24 mois) et TotalEnergies (Online du 1er octobre 2026, indexé sur le tarif réglementé) sont lues sur leurs grilles officielles ; leurs prix « HTT » comprennent l'acheminement, sans accise, CTA ni TVA. Non relevées chez Enercoop : l'offre « 2 saisons » (compteur Linky). La Bellenergie : grille du 1er août 2026 (<a href=\"" + esc(PRO_BEL.pdf) + "\" target=\"_blank\" rel=\"noopener noreferrer\">PDF officiel</a>), réservée aux nouveaux clients professionnels de moins de 10 salariés et de moins de 2 millions d'euros de chiffre d'affaires ; ses prix « HTT » comprennent déjà l'acheminement, sans accise, CTA ni TVA, donc ils se comparent aux totaux d'ENGIE Pro ; les prix ne changent pas pendant la durée du contrat, sauf l'acheminement.";
 }
-["pro-kva", "pro-conso", "pro-opt", "pro-hc"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderPro); e.addEventListener("change", renderPro); } });
+["pro-kva", "pro-conso", "pro-opt", "pro-hc", "pro-tax"].forEach(function (id) { var e = $(id); if (e) { e.addEventListener("input", renderPro); e.addEventListener("change", renderPro); } });
 
 var PRO_GAZ = {
   fixe: "https://pro.engie.fr/electricite-gaz/offre-gaz-naturel-prix-fixe-pour-les-professionnels",
