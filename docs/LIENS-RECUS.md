@@ -452,3 +452,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Ekwateur (fenêtre « Souscription momentanément indisponible » sur la page d'accueil) : https://ekwateur.fr/
 - Mint Énergie (« Les nouvelles souscriptions sont momentanément fermées ») : https://souscription.mint-energie.com/Pages/Souscription/fermeture.aspx
 - Alterna (« nos offres d'électricité sont momentanément indisponibles à la souscription », gaz toujours proposé) : https://souscrire.alterna-energie.fr/
+
+## ENGIE (22 nov. 2026)
+- Fiches descriptives de nouveau reçues : Elec Référence 3 ans (grille de novembre 2026), Happy Week-end 3 ans (novembre 2026), Elec'Car 1 an (août 2026), Duo Référence 3 ans (août 2026), Gaz Référence 3 ans (novembre 2026) : aucun changement de prix. https://particuliers.engie.fr/
