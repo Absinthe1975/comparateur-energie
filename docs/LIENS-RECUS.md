@@ -455,3 +455,10 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 
 ## ENGIE (22 nov. 2026)
 - Fiches descriptives de nouveau reçues : Elec Référence 3 ans (grille de novembre 2026), Happy Week-end 3 ans (novembre 2026), Elec'Car 1 an (août 2026), Duo Référence 3 ans (août 2026), Gaz Référence 3 ans (novembre 2026) : aucun changement de prix. https://particuliers.engie.fr/
+
+## Comparateur du médiateur (24 nov. 2026) : Onnaing 59264, 6 kVA, Linky, 6 000 kWh
+- Page enregistrée, 30 offres sur 46 : https://comparateur-offres.energie-info.fr/
+- Concordent avec le site : NovaFixe 0,1919 ; NovaFlex 0,1968 ; Zen Online 0,1925 ; Alpiq Sérénité 0,1992 ; Alpiq Sérénité 100 % verte 0,2052 ; Tarif Bleu 0,2001 ; Vert Électrique 0,2022 ; Régional 0,2037 ; Zen Fixe 0,2082 ; Essentielle SMB 0,2179 ; Ohm Sérénité Fixe 1 an 0,2212 (abonnement 173,16 contre 173,40 sur le site).
+- Écart : La Bellenergie, offres « avec Producteur EnR » (option à +0,01 €/kWh : 0,2100) et abonnements du médiateur plus élevés que la grille PDF (Prudence 233,56 contre 190,32 ; Constance 262,36 contre 232,44 ; Garance 291,16 contre 250,44). Le site garde la grille PDF officielle du fournisseur.
+- Non présentes sur le site : Elec Adapt 1 an 0,2100, Zen Fixe 3 ans 0,2107, Octopus Eco-fixe novembre 2026 0,2099 et OctoEco Fixe (hiver 0,2278 / été 0,1756), Intelligent Octopus véhicule électrique, Zen Week-End Plus, VertVolt Très Engagé (abonnement 189,00 / 197,20).
+
