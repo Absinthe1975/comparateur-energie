@@ -462,3 +462,9 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Écart : La Bellenergie, offres « avec Producteur EnR » (option à +0,01 €/kWh : 0,2100) et abonnements du médiateur plus élevés que la grille PDF (Prudence 233,56 contre 190,32 ; Constance 262,36 contre 232,44 ; Garance 291,16 contre 250,44). Le site garde la grille PDF officielle du fournisseur.
 - Non présentes sur le site : Elec Adapt 1 an 0,2100, Zen Fixe 3 ans 0,2107, Octopus Eco-fixe novembre 2026 0,2099 et OctoEco Fixe (hiver 0,2278 / été 0,1756), Intelligent Octopus véhicule électrique, Zen Week-End Plus, VertVolt Très Engagé (abonnement 189,00 / 197,20).
 
+## Comparateur du médiateur (24 nov. 2026) : Onnaing 59264, 9 kVA, Linky, 6 000 kWh
+- Page enregistrée, 45 offres sur 46 (comparaison faite sur le total annuel TTC, ±3 €) : https://comparateur-offres.energie-info.fr/
+- Concordent avec le site : NovaFixe 1 381 ; NovaFlex 1 410 ; Alpiq Sérénité 1 425 ; EDF Zen Fixe 1 478 ; Ohm Sérénité Fixe 1 an 1 544 (site 1 545) ; Ohm Fixe 2 ans 1 588 ; Ohm Premi'Ohm 1 611 ; ENGIE Elec Référence 3 ans 1 682 (confirme la grille officielle) ; Enercoop Base 1 790 ; Primeo Fixe Sereine 1 806 (site 1 807) ; ilek ÉnRFixe+ 2 014.
+- Écart La Bellenergie, identique à 6 kVA (donc indépendant de la puissance) : Prudence 1 473 contre 1 430 sur le site, Constance 1 502 contre 1 472, Garance 1 530 contre 1 490. Le site garde la grille PDF du fournisseur.
+- Non présentes sur le site : Plenifix 1 an 1 460, Alpiq Sérénité 100 % verte 1 461, Zen Fixe 3 ans 1 494, Elec Adapt 1 an 1 489, Eco-fixe novembre 2026 1 488, Zen Week-End 1 503 et Week-End Plus 1 430, Vert Électrique Week-End 1 437, Elec Happy Week-end 3 ans 1 571, Mon Offre Elec Verte fixe 3 ans 1 623 et Direct Producteur 1 629, Offre Fixe 3 ans Électricité 1 624, happ-e 1 an 1 789 (et option Vertelec+ 1 825), All Inclusive 1 818, Drive Pack 1 950, Mon Contrat Elec Vert Fixe 1 963.
+
