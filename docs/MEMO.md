@@ -12,7 +12,18 @@ Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à chaque fois.
 
 **À envoyer en priorité**
-- **Comparateur officiel du médiateur de l'énergie** : électricité (Base 6 et 9 kVA, heures pleines/creuses) et gaz (12 000 kWh) faits le 24-25 nov., résultats dans docs/LIENS-RECUS.md. Gaz : plusieurs grilles du site sont plus anciennes que le médiateur (Ohm, Octopus, happ-e, Dyneff, Alterna, ilek, Gaz de Bordeaux, TotalEnergies Spéciale, EDF Optimisé de décembre) : renvoie-moi leurs grilles de novembre ou décembre pour les mettre à jour. Règle : grilles officielles d'abord, médiateur seulement sans grille officielle. Restent à placer : Mon Contrat Elec Vert Fixe (0,2899, fournisseur inconnu) ; happ-e 1 an (0,2602 chez le médiateur, 0,2032 sur le site) à vérifier ; GEG et TotalEnergies Fixe 3 ans (prix du médiateur plus élevés) à confirmer avec une grille récente. Pas de script possible (robots.txt de l'interface : « Disallow: / »).
+- **Comparateur officiel du médiateur de l'énergie** : électricité et gaz faits le 24-25 nov. (résultats dans docs/LIENS-RECUS.md). Règle : grilles officielles d'abord. Restent à placer : Mon Contrat Elec Vert Fixe (0,2899, fournisseur inconnu), happ-e électricité 1 an (0,2602 chez le médiateur, 0,2032 sur le site), GEG et TotalEnergies Fixe 3 ans (prix du médiateur plus élevés). Pas de script possible (robots.txt : « Disallow: / »).
+- **Grilles gaz à renvoyer** (grille de novembre ou décembre 2026 en PDF ou .mhtml ; le médiateur est plus récent que le site) :
+  - [EDF](https://particulier.edf.fr/) : Avantage Gaz Optimisé de décembre (0,1668 chez le médiateur) ; Gaz Adapt 1 an (absent du site).
+  - [OHM](https://www.ohm-energie.com/) : Extra Eco Gaz et Classique Gaz.
+  - [Octopus](https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz) : Gaz Fixe -1 % novembre 2026.
+  - [Happ-e](https://www.happ-e.fr/) : Gaz Naturel.
+  - [Dyneff](https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/) : Contrat+ Gaz 55 % et 100 % vert.
+  - [Alterna](https://www.alterna-energie.fr/) : Mon gaz naturel indexé et Mon biogaz français.
+  - [ilek](https://www.ilek.fr/grilles-tarifaires) : ÉnRFixe+ Gaz.
+  - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/documents-contractuels) : NovaFixe BioGaz et NovaFlex Gaz.
+  - [TotalEnergies](https://www.totalenergies.fr/particuliers) : Offre Spéciale Gaz (0,1662 chez le médiateur, 0,1412 sur le site).
+  - [Plenitude](https://eniplenitude.fr/) : Plenifix 1 an Gaz (absent du site).
 - **Ekwateur, Mint, Alterna** : fermeture des souscriptions constatée sur leurs sites officiels le 20 nov. 2026 (tes captures) : Ekwateur « souscription momentanément indisponible » (pause des nouveaux contrats), Mint « les nouvelles souscriptions sont momentanément fermées » ([page de fermeture](https://souscription.mint-energie.com/Pages/Souscription/fermeture.aspx)), Alterna offres d'électricité « momentanément indisponibles à la souscription » (le gaz reste ouvert). Le site les garde hors classement ; Mint gaz est maintenant retiré aussi. À revérifier de temps en temps pour les rouvrir. Prix Ekwateur : aucune grille lisible chez les comparateurs, rien à envoyer pour l'instant.
 
 **Pour compléter des fournisseurs**
