@@ -495,3 +495,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Absentes du site : Plenitude Plenifix 1 an gaz 0,1576 (abonnement 387,43) ; EDF Gaz Adapt 1 an 0,1675 ; Objectif Gaz 0,1625 (fournisseur à identifier) ; All Inclusive Gaz = Gedia, Dreux seulement (0,1676 ; abonnement 534,74 à 12 000 kWh).
 - Rien n'a été modifié sur le site : les grilles officielles restent, le médiateur n'est utilisé que sans grille officielle.
 
+## happ-e et Plenitude gaz (25 nov. 2026)
+- happ-e, offre Électricité 1 an, annexe prix du 1er nov. 2026 : https://www.happ-e.fr/ . Fourniture 0,20942 €/kWh TTC en Base (heures pleines 0,21751, heures creuses 0,18829), abonnement de fourniture 44,35 € par an ; l'acheminement est une grille séparée. Avec l'acheminement d'ENGIE (0,050816 €/kWh), le prix Base 0,2602 est celui du comparateur du médiateur. Le site passe de 0,2032 (octobre) à 0,2602 ; heures pleines / creuses reprises du médiateur (0,2766 / 0,2214).
+- Plenitude Plenifix 1 an Gaz, souscription du 3 nov. au 1er déc. 2026 : https://eniplenitude.fr/ . Plus de 4 MWh : 0,1576 €/kWh et 387,43 € par an ; moins de 4 MWh : 0,19027 €/kWh et 179,10 € par an. Ajouté au site en grille officielle.
+

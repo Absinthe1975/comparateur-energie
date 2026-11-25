@@ -12,7 +12,7 @@ Mémo du 14 novembre 2026. Il commence par une vue d'ensemble (à lire en premie
 Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à chaque fois.
 
 **À envoyer en priorité**
-- **Comparateur officiel du médiateur de l'énergie** : électricité et gaz faits le 24-25 nov. (résultats dans docs/LIENS-RECUS.md). Règle : grilles officielles d'abord. Restent à placer : Mon Contrat Elec Vert Fixe (0,2899, fournisseur inconnu), happ-e électricité 1 an (0,2602 chez le médiateur, 0,2032 sur le site), GEG et TotalEnergies Fixe 3 ans (prix du médiateur plus élevés). Pas de script possible (robots.txt : « Disallow: / »).
+- **Comparateur officiel du médiateur de l'énergie** : électricité et gaz faits le 24-25 nov. (résultats dans docs/LIENS-RECUS.md). Règle : grilles officielles d'abord. Restent à placer : Mon Contrat Elec Vert Fixe (0,2899, fournisseur inconnu), GEG et TotalEnergies Fixe 3 ans (prix du médiateur plus élevés). Pas de script possible (robots.txt : « Disallow: / »).
 - **Grilles gaz à renvoyer** (grille de novembre ou décembre 2026 en PDF ou .mhtml ; le médiateur est plus récent que le site) :
   - [EDF](https://particulier.edf.fr/) : Avantage Gaz Optimisé de décembre (0,1668 chez le médiateur) ; Gaz Adapt 1 an (absent du site).
   - [OHM](https://www.ohm-energie.com/) : Extra Eco Gaz et Classique Gaz.
@@ -23,7 +23,6 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
   - [ilek](https://www.ilek.fr/grilles-tarifaires) : ÉnRFixe+ Gaz.
   - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/documents-contractuels) : NovaFixe BioGaz et NovaFlex Gaz.
   - [TotalEnergies](https://www.totalenergies.fr/particuliers) : Offre Spéciale Gaz (0,1662 chez le médiateur, 0,1412 sur le site).
-  - [Plenitude](https://eniplenitude.fr/) : Plenifix 1 an Gaz (absent du site).
 - **Ekwateur, Mint, Alterna** : fermeture des souscriptions constatée sur leurs sites officiels le 20 nov. 2026 (tes captures) : Ekwateur « souscription momentanément indisponible » (pause des nouveaux contrats), Mint « les nouvelles souscriptions sont momentanément fermées » ([page de fermeture](https://souscription.mint-energie.com/Pages/Souscription/fermeture.aspx)), Alterna offres d'électricité « momentanément indisponibles à la souscription » (le gaz reste ouvert). Le site les garde hors classement ; Mint gaz est maintenant retiré aussi. À revérifier de temps en temps pour les rouvrir. Prix Ekwateur : aucune grille lisible chez les comparateurs, rien à envoyer pour l'instant.
 
 **Pour compléter des fournisseurs**
