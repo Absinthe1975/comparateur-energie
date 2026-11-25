@@ -743,6 +743,84 @@
         "Grille officielle Primeo Energie, Offre Fixe Sereine (PDF « Grille tarifaire », applicable à partir du 04/11/2026 ; prix HT du kWh et de l'abonnement fixes jusqu'au 31/07/2029, hors TURPE, taxes et CEE ; option énergie verte : +2 € TTC par mois)",
         "https://particuliers.primeo-energie.fr/wp-content/uploads/GT-FD_Offre-Fixe-Sereine.pdf"
       ]
+    },
+    {
+      "k": "edf",
+      "name": "EDF",
+      "offer": "Elec Adapt 1 an",
+      "a": 0.21,
+      "b": 0.2084,
+      "d": "25 nov. 2026",
+      "niv": "confirmer",
+      "typ": "indexe",
+      "s": [
+        "Comparateur du médiateur national de l'énergie (6 et 9 kVA, 6 000 kWh, Onnaing, 24-25 nov. 2026) : prix du kWh TTC lus tels quels, pas de grille officielle du fournisseur reçue",
+        "https://comparateur-offres.energie-info.fr/"
+      ]
+    },
+    {
+      "k": "edf",
+      "name": "EDF",
+      "offer": "Zen Fixe 3 ans",
+      "a": 0.2107,
+      "b": 0.2092,
+      "d": "25 nov. 2026",
+      "niv": "confirmer",
+      "typ": "fixe",
+      "s": [
+        "Comparateur du médiateur national de l'énergie (6 et 9 kVA, 6 000 kWh, Onnaing, 24-25 nov. 2026) : prix du kWh TTC lus tels quels, pas de grille officielle du fournisseur reçue",
+        "https://comparateur-offres.energie-info.fr/"
+      ]
+    },
+    {
+      "k": "octo",
+      "name": "Octopus Energy",
+      "offer": "Eco-fixe novembre 2026",
+      "a": 0.2099,
+      "b": 0.2082,
+      "d": "25 nov. 2026",
+      "niv": "confirmer",
+      "typ": "fixe",
+      "s": [
+        "Comparateur du médiateur national de l'énergie (6 et 9 kVA, 6 000 kWh, Onnaing, 24-25 nov. 2026) : prix du kWh TTC lus tels quels, pas de grille officielle du fournisseur reçue",
+        "https://comparateur-offres.energie-info.fr/"
+      ]
+    },
+    {
+      "k": "alpiq",
+      "name": "Alpiq",
+      "offer": "Sérénité 100 % verte",
+      "a": 0.2052,
+      "b": 0.2037,
+      "d": "25 nov. 2026",
+      "niv": "confirmer",
+      "typ": "indexe",
+      "s": [
+        "Comparateur du médiateur national de l'énergie (6 et 9 kVA, 6 000 kWh, Onnaing, 24-25 nov. 2026) : prix du kWh TTC lus tels quels, pas de grille officielle du fournisseur reçue",
+        "https://comparateur-offres.energie-info.fr/"
+      ],
+      "vert": true
+    },
+    {
+      "k": "plen",
+      "name": "Plenitude",
+      "offer": "Plenifix 1 an",
+      "a": 0.2001,
+      "b": 0.1985,
+      "d": "25 nov. 2026",
+      "niv": "confirmer",
+      "typ": "fixe",
+      "s": [
+        "Comparateur du médiateur national de l'énergie (6 et 9 kVA, 6 000 kWh, Onnaing, 24-25 nov. 2026) : prix du kWh TTC lus tels quels, pas de grille officielle du fournisseur reçue",
+        "https://comparateur-offres.energie-info.fr/"
+      ],
+      "vert": true,
+      "abo": {
+        "6": 219.61,
+        "9": 268.63
+      },
+      "ab6": 219.61,
+      "ab9": 268.63
     }
   ],
   "gas": [
