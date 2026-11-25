@@ -821,6 +821,34 @@
       },
       "ab6": 219.61,
       "ab9": 268.63
+    },
+    {
+      "k": "happe",
+      "name": "Happ-e",
+      "offer": "Électricité 1 an",
+      "a": 0.2602,
+      "b": 0.2602,
+      "ab6": 185.54,
+      "ab9": 228.68,
+      "abo": {
+        "3": 142.4,
+        "6": 185.54,
+        "9": 228.68,
+        "12": 271.82,
+        "15": 314.95,
+        "18": 358.09,
+        "24": 444.37,
+        "30": 530.65,
+        "36": 616.93
+      },
+      "d": "25 nov. 2026",
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle happ-e, offre Électricité 1 an, annexe prix en vigueur au 01/11/2026 (reçue le 25 nov. 2026) : fourniture 0,20942 €/kWh TTC en Base (heures pleines 0,21751, creuses 0,18829) et abonnement de fourniture 44,35 € par an ; l'acheminement n'est pas dans la grille : ajouté 0,050816 €/kWh (même acheminement qu'ENGIE, courte utilisation) et abonnement d'acheminement courte utilisation 4 plages (6 kVA : 141,19 € par an), soit 0,2602 €/kWh et 185,54 € par an à 6 kVA, prix retrouvé dans le comparateur du médiateur le 24 nov. 2026 (0,2602 €/kWh ; abonnement 185,03 € à 6 kVA et 228,00 € à 9 kVA, soit 0,5 € de moins). Heures pleines / creuses : prix du comparateur du médiateur (0,2766 / 0,2214 €/kWh à 6 kVA, acheminement différencié), car la grille ne donne pas le total.",
+        "https://www.happ-e.fr/"
+      ]
     }
   ],
   "gas": [
@@ -1289,6 +1317,23 @@
       "s": [
         "Grille officielle TotalEnergies « Offre Spéciale » (gaz, 6 zones, prix indexé sur le prix repère de la CRE, 1er novembre 2026) moins la remise de 10 % sur le kWh HT pendant 3 ans (prix calculé par le site : taxes de la grille conservées, TVA 20 %) ; page et fiche reçues le 18 nov. 2026",
         "https://www.totalenergies.fr/particuliers/electricite-et-gaz/offres-d-electricite-et-gaz/offre-speciale-electricite-et-gaz"
+      ]
+    },
+    {
+      "k": "plen",
+      "name": "Plenitude",
+      "offer": "Plenifix 1 an Gaz",
+      "a": 0.1576,
+      "b0": 0.19027,
+      "ab1": 387.43,
+      "ab0": 179.1,
+      "d": "25 nov. 2026",
+      "niv": "officiel",
+      "nivd": "03/11/2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle Plenitude Plenifix 1 an Gaz (souscription du 03/11 au 01/12/2026 non inclus, reçue le 25 nov. 2026) : à partir de 4 MWh 0,1576 €/kWh TTC et 387,43 € par an ; moins de 4 MWh 0,19027 €/kWh et 179,10 € par an ; prix de 0,1576 € retrouvé dans le comparateur du médiateur le 25 nov.",
+        "https://eniplenitude.fr/"
       ]
     }
   ],
@@ -2143,6 +2188,33 @@
         "https://particuliers.engie.fr/electricite-gaz.html"
       ],
       "nivd": "01/11/2026"
+    },
+    {
+      "k": "happe",
+      "name": "Happ-e",
+      "offer": "Électricité 1 an",
+      "hp": 0.2766,
+      "hc": 0.2214,
+      "abo": {
+        "3": 142.4,
+        "6": 185.54,
+        "9": 228.68,
+        "12": 271.82,
+        "15": 314.95,
+        "18": 358.09,
+        "24": 444.37,
+        "30": 530.65,
+        "36": 616.93
+      },
+      "abo_seul": true,
+      "d": "25 nov. 2026",
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "typ": "fixe",
+      "s": [
+        "Grille officielle happ-e, offre Électricité 1 an, annexe prix en vigueur au 01/11/2026 (reçue le 25 nov. 2026) : fourniture 0,20942 €/kWh TTC en Base (heures pleines 0,21751, creuses 0,18829) et abonnement de fourniture 44,35 € par an ; l'acheminement n'est pas dans la grille : ajouté 0,050816 €/kWh (même acheminement qu'ENGIE, courte utilisation) et abonnement d'acheminement courte utilisation 4 plages (6 kVA : 141,19 € par an), soit 0,2602 €/kWh et 185,54 € par an à 6 kVA, prix retrouvé dans le comparateur du médiateur le 24 nov. 2026 (0,2602 €/kWh ; abonnement 185,03 € à 6 kVA et 228,00 € à 9 kVA, soit 0,5 € de moins). Heures pleines / creuses : prix du comparateur du médiateur (0,2766 / 0,2214 €/kWh à 6 kVA, acheminement différencié), car la grille ne donne pas le total.",
+        "https://www.happ-e.fr/"
+      ]
     }
   ]
 }
