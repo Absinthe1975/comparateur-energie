@@ -488,3 +488,10 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Non ajouté au tableau national : offre réservée à Dreux, prix hebdomadaires. À placer dans la future section des entreprises locales de distribution.
 - SÉLIA (pages pour professionnels, offre Intégrall Expert) : aucun prix pour les particuliers, rien à intégrer.
 
+## Comparateur du médiateur, gaz (25 nov. 2026) : Onnaing 59264 (zone GRDF 1), 12 000 kWh, chauffage
+- 2 pages reçues, 24 offres : https://comparateur-offres.energie-info.fr/ . Prix repère de la CRE : 0,1576 €/kWh en novembre, 0,1690 en décembre (abonnement 360,79 €).
+- Concordent avec le site : EDF Avantage Gaz 2 ans 0,1336 ; GEG Mon Offre Gaz 0,1354 et Biogaz 0,1642 ; TotalEnergies Fixe 3 ans 0,1518 ; Ohm Fixe 2 ans 0,1554 et Premi'Ohm 0,1617 ; ENGIE Gaz Référence 3 ans 0,1411 (site 0,1414).
+- Plus récents que la grille du site (à renvoyer si possible) : EDF Avantage Gaz Optimisé de décembre 0,1668 (site 0,1437, octobre) ; Ohm Extra Eco 0,1471 (site 0,1429) et Classique 0,154 (site 0,1492) ; Octopus Gaz Fixe -1 % novembre 2026 0,1543 (site 0,1487) ; happ-e Gaz 0,1624 (site 0,1504) ; Dyneff Contrat+ 55 % 0,1751 et 100 % 0,1891 (site 0,1552 et 0,1687) ; Alterna T2 0,1615 et biogaz 0,1988 (site 0,15 et 0,1842) ; ilek ÉnRFixe+ 0,1882 (site 0,1652) ; Gaz de Bordeaux NovaFixe BioGaz 0,15 (site 0,1346) ; TotalEnergies Offre Spéciale Gaz 0,1662 (site 0,1412).
+- Absentes du site : Plenitude Plenifix 1 an gaz 0,1576 (abonnement 387,43) ; EDF Gaz Adapt 1 an 0,1675 ; Objectif Gaz 0,1625 (fournisseur à identifier) ; All Inclusive Gaz = Gedia, Dreux seulement (0,1676 ; abonnement 534,74 à 12 000 kWh).
+- Rien n'a été modifié sur le site : les grilles officielles restent, le médiateur n'est utilisé que sans grille officielle.
+
