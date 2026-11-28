@@ -1370,6 +1370,55 @@
         "Grille officielle happ-e, offre gaz naturel 1 an indexée sur le barème de référence ENGIE, en vigueur au 1er novembre 2026 (fiche descriptive reçue le 28 nov. 2026) : de 0 à 3 999 kWh 0,19972 €/kWh TTC et 152,46 € par an ; de 4 000 à 29 999 kWh abonnement 387,85 € par an et kWh de 0,16244 (niveau 1) à 0,16604 (niveau 6). Les niveaux 1 à 6 de la grille sont rangés comme les zones GRDF 1 à 6 (même ordre croissant ; niveau 1 retrouvé à Onnaing, zone 1, dans le comparateur du médiateur le 25 nov. : 0,1624 €/kWh, abonnement 387,85 €). Prix indexé : il change chaque mois.",
         "https://www.happ-e.fr/"
       ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Extra Eco Gaz",
+      "a": 0.1471,
+      "b0": 0.1836,
+      "zones": {
+        "b1": [
+          0.1471,
+          0.1495,
+          0.1532,
+          0.1544,
+          0.159,
+          0.1624
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "29/10/2026",
+      "d": "28 nov. 2026",
+      "s": [
+        "Grille officielle OHM Énergie, offre Extra Eco Gaz (prix plafonnés), prix applicables à compter du 29/10/2026 (PDF reçu le 28 nov. 2026) : B1 zone 1 à 6, abonnement 29,96 € par mois (359,52 € par an), prix variable (jusqu'à 4 changements par an)",
+        "https://www.ohm-energie.com/"
+      ]
+    },
+    {
+      "k": "ohm",
+      "name": "OHM Énergie",
+      "offer": "Classique Gaz 10 % biogaz",
+      "a": 0.154,
+      "b0": 0.1908,
+      "zones": {
+        "b1": [
+          0.154,
+          0.1562,
+          0.1598,
+          0.161,
+          0.1653,
+          0.1687
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "02/11/2026",
+      "d": "28 nov. 2026",
+      "s": [
+        "Grille officielle OHM Énergie, offre Classique Gaz (10 % de biogaz), prix applicables à partir du 2 novembre 2026 (PDF reçu le 28 nov. 2026) : B1 zone 1 à 6, abonnement 29,96 € par mois (359,52 € par an), prix variable (jusqu'à 4 changements par an)",
+        "https://www.ohm-energie.com/"
+      ],
+      "vert": true
     }
   ],
   "duo": [],

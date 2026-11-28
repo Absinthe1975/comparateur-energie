@@ -514,3 +514,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 ## happ-e gaz (28 nov. 2026)
 - Fiche descriptive de l'offre gaz naturel 1 an (indexée, grille du 1er nov. 2026) et grille électricité du 1er nov. (déjà au site) : https://www.happ-e.fr/ . Gaz de 4 000 à 29 999 kWh : abonnement 387,85 € par an, kWh de 0,16244 (niveau 1) à 0,16604 (niveau 6) ; moins de 4 000 kWh : 152,46 € et 0,19972. Au site : 0,1504 (octobre) remplacé par la grille de novembre ; niveaux 1 à 6 rangés comme les zones GRDF 1 à 6 (hypothèse vérifiée à Onnaing seulement).
 
+## OHM Énergie gaz (28 nov. 2026)
+- Quatre PDF de grilles gaz particuliers : https://www.ohm-energie.com/ . Extra Eco Gaz (à compter du 29/10/2026) : B1 zone 1 0,1471 €/kWh, B0 0,1836 ; Classique Gaz 10 % biogaz (à partir du 2 nov. 2026) : 0,1540 et 0,1908 ; ces deux prix remplacent ceux du 27/08 et correspondent au comparateur du médiateur. Fixe 2 ans Gaz (0,1554) et Premi'Ohm 3 ans Gaz (0,1617), grilles du 1er sept. 2026 : déjà au site, inchangés. Page de l'offre (.mhtml) : sans nouveau prix.
+
