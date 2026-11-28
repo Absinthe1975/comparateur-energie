@@ -511,3 +511,6 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - ÉnRFixe+ particuliers (grille 360, du 2 au 30 nov. 2026) et Offre voiture électrique (grille du 1er août 2026) : déjà sur le site, mêmes prix. https://www.ilek.fr/grilles-tarifaires
 - ÉnRFixe+ professionnels (grille 362, du 2 au 30 nov. 2026) : ajouté à l'onglet Pro, hors taxes : Base 0,1893 €/kWh, abonnement 18,53 € par mois à 6 kVA ; heures pleines 0,1982, creuses 0,1574. https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/362/grille_362.pdf
 
+## happ-e gaz (28 nov. 2026)
+- Fiche descriptive de l'offre gaz naturel 1 an (indexée, grille du 1er nov. 2026) et grille électricité du 1er nov. (déjà au site) : https://www.happ-e.fr/ . Gaz de 4 000 à 29 999 kWh : abonnement 387,85 € par an, kWh de 0,16244 (niveau 1) à 0,16604 (niveau 6) ; moins de 4 000 kWh : 152,46 € et 0,19972. Au site : 0,1504 (octobre) remplacé par la grille de novembre ; niveaux 1 à 6 rangés comme les zones GRDF 1 à 6 (hypothèse vérifiée à Onnaing seulement).
+

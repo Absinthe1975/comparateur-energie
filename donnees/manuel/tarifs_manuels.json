@@ -1335,6 +1335,41 @@
         "Grille officielle Plenitude Plenifix 1 an Gaz (souscription du 03/11 au 01/12/2026 non inclus, reçue le 25 nov. 2026) : à partir de 4 MWh 0,1576 €/kWh TTC et 387,43 € par an ; moins de 4 MWh 0,19027 €/kWh et 179,10 € par an ; prix de 0,1576 € retrouvé dans le comparateur du médiateur le 25 nov.",
         "https://eniplenitude.fr/"
       ]
+    },
+    {
+      "k": "happe",
+      "name": "Happ-e",
+      "offer": "Gaz Naturel",
+      "a": 0.16244,
+      "b0": 0.19972,
+      "ab1": 387.85,
+      "ab0": 152.46,
+      "zones": {
+        "b1": [
+          0.16244,
+          0.16316,
+          0.16388,
+          0.1646,
+          0.16532,
+          0.16604
+        ],
+        "b0": [
+          0.19972,
+          0.19972,
+          0.19972,
+          0.19972,
+          0.19972,
+          0.19972
+        ]
+      },
+      "niv": "officiel",
+      "nivd": "01/11/2026",
+      "d": "28 nov. 2026",
+      "typ": "indexe",
+      "s": [
+        "Grille officielle happ-e, offre gaz naturel 1 an indexée sur le barème de référence ENGIE, en vigueur au 1er novembre 2026 (fiche descriptive reçue le 28 nov. 2026) : de 0 à 3 999 kWh 0,19972 €/kWh TTC et 152,46 € par an ; de 4 000 à 29 999 kWh abonnement 387,85 € par an et kWh de 0,16244 (niveau 1) à 0,16604 (niveau 6). Les niveaux 1 à 6 de la grille sont rangés comme les zones GRDF 1 à 6 (même ordre croissant ; niveau 1 retrouvé à Onnaing, zone 1, dans le comparateur du médiateur le 25 nov. : 0,1624 €/kWh, abonnement 387,85 €). Prix indexé : il change chaque mois.",
+        "https://www.happ-e.fr/"
+      ]
     }
   ],
   "duo": [],
