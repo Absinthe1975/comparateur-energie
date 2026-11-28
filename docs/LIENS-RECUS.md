@@ -507,3 +507,7 @@ Ce fichier garde tous les liens qui servent au site, pour ne jamais les perdre. 
 - Dyneff Contrat+ Gaz 15 %, 55 % et 100 % vert : https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/ . Les trois PDF reçus sont ceux d'octobre 2026 (émission le 01/10/2026, « fin du mois en cours ») : B1 0,14324 / 0,15524 / 0,1687 €/kWh TTC, identiques au site. Le comparateur du médiateur affiche 0,1751 (55 %) et 0,1891 (100 %) : la grille du mois en cours est à renvoyer.
 - Alterna Mon gaz naturel indexé et Mon biogaz français : https://www.alterna-energie.fr/tarifs-gaz-indexe . Grilles du 01/11/2026 conformes au site (Onnaing B1 TTC 0,1507 et 0,1851). Grilles du 01/12/2026 reçues : Onnaing B1 TTC 0,1615 (gaz) et 0,1988 (biogaz), B0 0,1925 et 0,2378 ; ce sont les prix du médiateur. À appliquer le 1er déc. avec scripts/cp_prix.py ; les fichiers sont à renvoyer ce jour-là s'ils ne sont plus disponibles.
 
+## ilek (28 nov. 2026)
+- ÉnRFixe+ particuliers (grille 360, du 2 au 30 nov. 2026) et Offre voiture électrique (grille du 1er août 2026) : déjà sur le site, mêmes prix. https://www.ilek.fr/grilles-tarifaires
+- ÉnRFixe+ professionnels (grille 362, du 2 au 30 nov. 2026) : ajouté à l'onglet Pro, hors taxes : Base 0,1893 €/kWh, abonnement 18,53 € par mois à 6 kVA ; heures pleines 0,1982, creuses 0,1574. https://ilek.s3.amazonaws.com/uploads/producer/price_list_file/362/grille_362.pdf
+
