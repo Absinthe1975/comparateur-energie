@@ -15,7 +15,6 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
 - **Comparateur officiel du médiateur de l'énergie** : électricité et gaz faits le 24-25 nov. (résultats dans docs/LIENS-RECUS.md). Règle : grilles officielles d'abord. Restent à placer : Mon Contrat Elec Vert Fixe (0,2899, fournisseur inconnu), GEG et TotalEnergies Fixe 3 ans (prix du médiateur plus élevés). Pas de script possible (robots.txt : « Disallow: / »).
 - **Grilles gaz à renvoyer** (grille de novembre ou décembre 2026 en PDF ou .mhtml ; le médiateur est plus récent que le site) :
   - [EDF](https://particulier.edf.fr/) : Avantage Gaz Optimisé de décembre (0,1668 chez le médiateur) ; Gaz Adapt 1 an (absent du site).
-  - [OHM](https://www.ohm-energie.com/) : Extra Eco Gaz et Classique Gaz.
   - [Octopus](https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz) : Gaz Fixe -1 % novembre 2026.
   - [Dyneff](https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/) : Contrat+ Gaz 55 % et 100 % vert, grille de novembre ou décembre (les PDF d'octobre reçus sont déjà sur le site).
   - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/documents-contractuels) : NovaFixe BioGaz et NovaFlex Gaz.
