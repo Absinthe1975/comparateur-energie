@@ -18,7 +18,7 @@ Par ordre d'utilité. Un fichier enregistré (PDF ou .mhtml, Ctrl+S) suffit à c
   - [OHM](https://www.ohm-energie.com/) : Extra Eco Gaz et Classique Gaz.
   - [Octopus](https://octopusenergy.fr/aide-faq/offres-tarifs/comprendre-nos-offres/souscrire-contrat-gaz) : Gaz Fixe -1 % novembre 2026.
   - [Happ-e](https://www.happ-e.fr/) : Gaz Naturel.
-  - [Dyneff](https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/) : grille de novembre ou décembre (celle d'octobre reçue le 25 nov. est déjà sur le site ; le médiateur est plus élevé).
+  - [Dyneff](https://www.dyneff-elec-gaz.fr/offres/contrat-gaz-vert/) : Contrat+ Gaz 55 % et 100 % vert, grille de novembre ou décembre (les PDF d'octobre reçus sont déjà sur le site).
   - [ilek](https://www.ilek.fr/grilles-tarifaires) : ÉnRFixe+ Gaz.
   - [Gaz de Bordeaux](https://www.gazdebordeaux.fr/documents-contractuels) : NovaFixe BioGaz et NovaFlex Gaz.
   - [TotalEnergies](https://www.totalenergies.fr/particuliers) : Offre Spéciale Gaz (0,1662 chez le médiateur, 0,1412 sur le site).
